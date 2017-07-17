@@ -1,0 +1,18 @@
+{
+  "name": "cronapp-framework-js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/technecloud/cronapp-framework-js",
+  "authors": [
+    "Arthemus Cicotti Moreira <arthemus.moreira@gmail.com>"
+  ],
+  "description": "Javascript library for CronApp's projects",
+  "main": "cronapp.framework.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

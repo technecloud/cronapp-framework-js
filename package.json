@@ -1,0 +1,31 @@
+{
+  "name": "cronapp-framework-js",
+  "version": "0.0.2",
+  "description": "Javascript library for CronApp's projects",
+  "main": "cronapp.framework.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technecloud/cronapp-framework-js.git"
+  },
+  "author": "Arthemus Cicotti Moreira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/technecloud/cronapp-framework-js/issues"
+  },
+  "homepage": "https://github.com/technecloud/cronapp-framework-js#readme",
+  "keywords": [
+    "cronapp",
+    "cronapp-framework",
+    "javascript"
+  ],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-notify": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2"
+  }
+}
