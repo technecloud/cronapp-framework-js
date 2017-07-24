@@ -50,7 +50,7 @@ gulp.task('minify-components-templates', function() {
 });
 
 gulp.task('i18n', function() {
-  return gulp.src('i18n/').pipe(gulp.dest('i18n/'));
+  return gulp.src('i18n/**').pipe(gulp.dest('dist/i18n/'));
 });
 
 gulp.task('build', [
