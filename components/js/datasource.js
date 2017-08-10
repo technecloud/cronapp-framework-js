@@ -535,7 +535,7 @@ angular.module('datasourcejs', [])
           if (cursor >= 0)
             this.active = this.data[cursor];
           else
-            this.active = {};
+            this.retrieveDefaultValues();
         }
         if (this.editing) {
           this.active = this.lastActive;
@@ -548,13 +548,30 @@ angular.module('datasourcejs', [])
           });
         }
       };
+      
+      
+      this.retrieveDefaultValues = function(){
+        // Get an ajax promise
+        this.$promise = $http({
+          method: "GET",
+          url: resourceURL,
+          params: props.params,
+          headers: this.headers
+        }).success(function(data, status, headers, config) {
+          this.active = data;
+        }.bind(this)).error(function(data, status, headers, config) {
+          this.active = {};
+        }.bind(this));
+      };
 
       /**
        * Put the datasource into the inserting state
        */
       this.startInserting = function() {
         this.inserting = true;
-        this.active = {};
+        
+        this.retrieveDefaultValues();
+        
         if (this.onStartInserting) {
           this.onStartInserting();
         }
@@ -903,7 +920,7 @@ angular.module('datasourcejs', [])
         this.offset = 0;
         this.data.length = 0;
         this.cursor = -1;
-        this.active = {};
+        this.retrieveDefaultValues();
         hasMoreResults = false;
       }
 
@@ -1034,7 +1051,7 @@ angular.module('datasourcejs', [])
                 this.active = data[0];
                 cursor = 0;
               } else {
-                this.active = {};
+                this.retrieveDefaultValues();
                 cursor = -1;
               }
             }
