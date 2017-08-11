@@ -69,19 +69,25 @@
           });
 
           ngModel.$render = function() {
-            if (ngModel.$viewValue) {
-              var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
-              var momentDate = moment(dateInMilliseconds);
-              if (momentDate.isValid()) {
-                element.val(momentDate.format(patternFormat(element)));
-              } else {
-                element.val('');
-              }
-            } else {
-              element.data("DateTimePicker").clear();
-              element.val('');
-            }
-          }
+			if(ngModel.$viewValue){
+			  var momentDate = moment(ngModel.$viewValue);
+			  
+			  if(momentDate.isValid()){
+				element.val( momentDate.format(patternFormat(element)));
+			  }else{
+				var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
+				momentDate = moment(dateInMilliseconds);
+				if(momentDate.isValid()){
+				  element.val( momentDate.format(patternFormat(element)));
+				}else{
+				  element.val('');
+				}
+			  }
+			}else{
+			  element.data("DateTimePicker").clear();
+			  element.val('');
+			}
+		  }
 
           read();
 
