@@ -535,7 +535,7 @@ angular.module('datasourcejs', [])
                 if (cursor >= 0)
                     this.active = this.data[cursor];
                 else
-                    this.retrieveDefaultValues();
+                    this.active = {};
             }
             if (this.editing) {
                 this.active = this.lastActive;
@@ -553,9 +553,11 @@ angular.module('datasourcejs', [])
         this.retrieveDefaultValues = function() {
             if (this.entity.indexOf('query') >= 0) {
                 // Get an ajax promise
+                var url = this.entity;
+                url += (this.entity.endsWith('/')) ? '__new__' : '/__new__';
                 this.$promise = $http({
                     method: "GET",
-                    url: this.entity + '/__new__',
+                    url: url,
                     headers: this.headers
                 }).success(function(data, status, headers, config) {
                     this.active = data;
@@ -921,7 +923,7 @@ angular.module('datasourcejs', [])
             this.offset = 0;
             this.data.length = 0;
             this.cursor = -1;
-            this.retrieveDefaultValues();
+            this.active = {};
             hasMoreResults = false;
         }
 
@@ -1052,7 +1054,7 @@ angular.module('datasourcejs', [])
                             this.active = data[0];
                             cursor = 0;
                         } else {
-                            this.retrieveDefaultValues();
+                            this.active = {};
                             cursor = -1;
                         }
                     }
