@@ -1,4 +1,4 @@
-<div class="form-group upload-image-component" ngf-drop ngf-change="datasource.setImage($file, datasource.active.image)" ngf-pattern="'image/*'">
+<div class="form-group upload-image-component" data-groupable="grouped" ngf-drop ngf-change="datasource.setImage($file, datasource.active.image)" ngf-pattern="'image/*'">
   <label>Image Upload</label>
   <img style="max-height: 128px; max-width: 128px;"
        ng-if="datasource.active.image"
