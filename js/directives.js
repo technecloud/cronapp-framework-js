@@ -13,6 +13,52 @@
     return 'DD/MM/YYYY';
   }
 
+  var parsePermission = function(perm) {
+    var result = {
+      get: {
+        public: true
+      },
+      post: {
+        public: true
+      },
+      put: {
+        public: true
+      },
+      delete: {
+        public: true
+      },
+      filter: {
+        public: true
+      }
+    }
+
+    if (perm) {
+      var perms = perm.toLowerCase().trim().split(",");
+      for (var i=0;i<perms.length;i++) {
+        var p = perms[i].trim();
+        if (p) {
+          var pair = p.split(":");
+          if (pair.length == 2) {
+            var key = pair[0].trim();
+            var value = pair[1].trim();
+            if (value) {
+              var values = value.split(";");
+              var json = {};
+              for (var j=0;j<values.length;j++) {
+                var v = values[j].trim();
+                if (v) {
+                  json[v] = true;
+                }
+              }
+              result[key] = json;
+            }
+          }
+        }
+      }
+    }
+    return result;
+  }
+
   /**
    * Em todo elemento que possuir o atibuto as-date será
    * aplicado o componente Datetimepicker (http://eonasdan.github.io/bootstrap-datetimepicker/)
@@ -158,6 +204,37 @@
             }
             return (fieldValid || !value);
           };
+        }
+      }
+    })
+
+    .directive('cronappSecurity', function() {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          var roles = [];
+          if (scope.session && scope.session.roles) {
+            roles = scope.session.roles.toLowerCase().split(",");
+          }
+
+          var perms = parsePermission(attrs.cronappSecurity);
+          var show = false;
+          for (var i=0;i<roles.length;i++) {
+            var role = roles[i].trim();
+            if (role) {
+              if (perms.get[role]) {
+                show = true;
+                break;
+              }
+            }
+          }
+
+          if (!show) {
+            element.hide();
+          }
+          console.log(roles);
+          console.log(parsePermission(attrs.cronappSecurity));
+          console.log(show);
         }
       }
     })
