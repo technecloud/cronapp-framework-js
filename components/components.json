@@ -960,7 +960,7 @@
             "text_en_US": "Multiselect",
             "dependences": {
                 "editor": [
-                    "components/css/multiselect-editor.css"
+                    "src/main/webapp/plugins/cronapp-framework-js/components/css/multiselect-editor.css"
                 ]
             },
             "class": "adjust-icon mdi mdi-format-list-bulleted",
