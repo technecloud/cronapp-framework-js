@@ -687,32 +687,13 @@ angular.module('datasourcejs', [])
             var keyValues = {};
             for (var i = 0; i < this.keys.length; i++) {
                 var key = this.keys[i];
-                var rowKey = rowData[key];
-                if (rowKey) {
-                    keyValues[key] = rowData[key];
-                } else {
-                    /*
-                     [Arthemus]
-                     Supondo que a chave da entidade é também uma FK (JoinColumn), deve-se buscar o sub-atributo desse objeto.
-
-                     Ex:
-                     key = 'object_id'
-                     complexKey = [object, id]
-                     */
-                    var complexKey = key.split("_");
-                    for (var j = 0; j < complexKey.length; j++) {
-                        var field = complexKey[j];
-                        var _instance = rowData[field];
-                        if (_instance) {
-                            var _attribute = complexKey[j + 1];
-                            if (_attribute) {
-                                var realKey = _instance[_attribute];
-                                if (realKey)
-                                    keyValues[field] = realKey;
-                            }
-                        }
-                    }
+                var rowKey = null;
+                try {
+                  rowKey = eval("rowData."+key);
+                } catch(e){
+                  //
                 }
+                keyValues[key] = rowKey;
             }
 
             return keyValues;
