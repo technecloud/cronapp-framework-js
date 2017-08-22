@@ -15,19 +15,10 @@
 
   var parsePermission = function(perm) {
     var result = {
-      get: {
+      view: {
         public: true
       },
-      post: {
-        public: true
-      },
-      put: {
-        public: true
-      },
-      delete: {
-        public: true
-      },
-      filter: {
+      enabled: {
         public: true
       }
     }
@@ -70,172 +61,175 @@
    * @see http://eonasdan.github.io/bootstrap-datetimepicker/
    */
   app.directive('asDate', function() {
-      return {
-        require: '^ngModel',
-        restrict: 'A',
-        link: function(scope, element, attrs, ngModel) {
-          if (!ngModel) {
-            return;
-          }
-
-          var format = patternFormat(element);
-
-          var options = {
-            format: format,
-            locale: 'pt-BR',
-            showTodayButton: true,
-            useStrict: true,
-            tooltips: {
-              today: 'Hoje',
-              clear: 'Limpar seleção',
-              close: 'Fechar',
-              selectMonth: 'Selecionar mês',
-              prevMonth: 'Mês anterior',
-              nextMonth: 'Próximo mês',
-              selectYear: 'Selecionar ano',
-              prevYear: 'Ano anterior',
-              nextYear: 'Próximo ano',
-              selectDecade: 'Selecionar década',
-              prevDecade: 'Década anterior',
-              nextDecade: 'Próxima década',
-              prevCentury: 'Século anterior',
-              nextCentury: 'Próximo século'
-            }
-          };
-
-          if (format != 'DD/MM/YYYY') {
-            options.sideBySide = true;
-          }
-
-          element.datetimepicker(options);
-
-          element.on('dp.change', function() {
-            if ($(this).is(":visible"))
-              scope.$apply(read);
-          });
-
-          ngModel.$render = function() {
-			if(ngModel.$viewValue){
-			  var momentDate = moment(ngModel.$viewValue);
-			  
-			  if(momentDate.isValid()){
-				element.val( momentDate.format(patternFormat(element)));
-			  }else{
-				var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
-				momentDate = moment(dateInMilliseconds);
-				if(momentDate.isValid()){
-				  element.val( momentDate.format(patternFormat(element)));
-				}else{
-				  element.val('');
-				}
-			  }
-			}else{
-			  element.data("DateTimePicker").clear();
-			  element.val('');
-			}
-		  }
-
-          read();
-
-          function read() {
-            var value = element.val();
-            var momentDate = moment(value, patternFormat(element));
-            if (momentDate.isValid())
-              ngModel.$setViewValue(momentDate.toDate());
-          }
+    return {
+      require: '^ngModel',
+      restrict: 'A',
+      link: function(scope, element, attrs, ngModel) {
+        if (!ngModel) {
+          return;
         }
-      };
-    })
 
-    .directive('ngDestroy', function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs, ctrl) {
-          element.on('$destroy', function() {
-            if (attrs.ngDestroy && attrs.ngDestroy.length > 0)
-              if (attrs.ngDestroy.indexOf('app.') > -1 || attrs.ngDestroy.indexOf('blockly.') > -1)
-                scope.$eval(attrs.ngDestroy);
-              else
-                eval(attrs.ngDestroy);
-          });
-        }
-      }
-    })
+        var format = patternFormat(element);
 
-    .directive('pwCheck', [function() {
-      'use strict';
-      return {
-        require: 'ngModel',
-        link: function(scope, elem, attrs, ctrl) {
-          var firstPassword = '#' + attrs.pwCheck;
-          elem.add(firstPassword).on('keyup', function() {
-            scope.$apply(function() {
-              var v = elem.val() === $(firstPassword).val();
-              ctrl.$setValidity('pwmatch', v);
-            });
-          });
-        }
-      }
-    }])
-
-
-    /**
-     * Validação de campos CPF e CNPJ,
-     * para utilizar essa diretiva, adicione o atributo valid com o valor
-     * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
-     */
-    .directive('valid', function() {
-      return {
-        require: '^ngModel',
-        restrict: 'A',
-        link: function(scope, element, attrs, ngModel) {
-          var validator = {
-            'cpf': CPF,
-            'cnpj': CNPJ
-          };
-
-          ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
-            var value = modelValue || viewValue;
-            var fieldValid = validator[attrs.valid].isValid(value);
-            if (!fieldValid) {
-              element[0].setCustomValidity(element[0].dataset['errorMessage']);
-            } else {
-              element[0].setCustomValidity("");
-            }
-            return (fieldValid || !value);
-          };
-        }
-      }
-    })
-
-    .directive('cronappSecurity', function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          var roles = [];
-          if (scope.session && scope.session.roles) {
-            roles = scope.session.roles.toLowerCase().split(",");
+        var options = {
+          format: format,
+          locale: 'pt-BR',
+          showTodayButton: true,
+          useStrict: true,
+          tooltips: {
+            today: 'Hoje',
+            clear: 'Limpar seleção',
+            close: 'Fechar',
+            selectMonth: 'Selecionar mês',
+            prevMonth: 'Mês anterior',
+            nextMonth: 'Próximo mês',
+            selectYear: 'Selecionar ano',
+            prevYear: 'Ano anterior',
+            nextYear: 'Próximo ano',
+            selectDecade: 'Selecionar década',
+            prevDecade: 'Década anterior',
+            nextDecade: 'Próxima década',
+            prevCentury: 'Século anterior',
+            nextCentury: 'Próximo século'
           }
+        };
 
-          var perms = parsePermission(attrs.cronappSecurity);
-          var show = false;
-          for (var i=0;i<roles.length;i++) {
-            var role = roles[i].trim();
-            if (role) {
-              if (perms.get[role]) {
-                show = true;
-                break;
+        if (format != 'DD/MM/YYYY') {
+          options.sideBySide = true;
+        }
+
+        element.datetimepicker(options);
+
+        element.on('dp.change', function() {
+          if ($(this).is(":visible"))
+            scope.$apply(read);
+        });
+
+        ngModel.$render = function() {
+          if(ngModel.$viewValue){
+            var momentDate = moment(ngModel.$viewValue);
+
+            if(momentDate.isValid()){
+              element.val( momentDate.format(patternFormat(element)));
+            }else{
+              var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
+              momentDate = moment(dateInMilliseconds);
+              if(momentDate.isValid()){
+                element.val( momentDate.format(patternFormat(element)));
+              }else{
+                element.val('');
               }
             }
+          }else{
+            element.data("DateTimePicker").clear();
+            element.val('');
           }
+        }
 
-          if (!show) {
-            element.hide();
-          }
-          console.log(roles);
-          console.log(parsePermission(attrs.cronappSecurity));
-          console.log(show);
+        read();
+
+        function read() {
+          var value = element.val();
+          var momentDate = moment(value, patternFormat(element));
+          if (momentDate.isValid())
+            ngModel.$setViewValue(momentDate.toDate());
         }
       }
-    })
+    };
+  })
+
+      .directive('ngDestroy', function() {
+        return {
+          restrict: 'A',
+          link: function(scope, element, attrs, ctrl) {
+            element.on('$destroy', function() {
+              if (attrs.ngDestroy && attrs.ngDestroy.length > 0)
+                if (attrs.ngDestroy.indexOf('app.') > -1 || attrs.ngDestroy.indexOf('blockly.') > -1)
+                  scope.$eval(attrs.ngDestroy);
+                else
+                  eval(attrs.ngDestroy);
+            });
+          }
+        }
+      })
+
+      .directive('pwCheck', [function() {
+        'use strict';
+        return {
+          require: 'ngModel',
+          link: function(scope, elem, attrs, ctrl) {
+            var firstPassword = '#' + attrs.pwCheck;
+            elem.add(firstPassword).on('keyup', function() {
+              scope.$apply(function() {
+                var v = elem.val() === $(firstPassword).val();
+                ctrl.$setValidity('pwmatch', v);
+              });
+            });
+          }
+        }
+      }])
+
+
+      /**
+       * Validação de campos CPF e CNPJ,
+       * para utilizar essa diretiva, adicione o atributo valid com o valor
+       * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
+       */
+      .directive('valid', function() {
+        return {
+          require: '^ngModel',
+          restrict: 'A',
+          link: function(scope, element, attrs, ngModel) {
+            var validator = {
+              'cpf': CPF,
+              'cnpj': CNPJ
+            };
+
+            ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
+              var value = modelValue || viewValue;
+              var fieldValid = validator[attrs.valid].isValid(value);
+              if (!fieldValid) {
+                element[0].setCustomValidity(element[0].dataset['errorMessage']);
+              } else {
+                element[0].setCustomValidity("");
+              }
+              return (fieldValid || !value);
+            };
+          }
+        }
+      })
+
+      .directive('cronappSecurity', function() {
+        return {
+          restrict: 'A',
+          link: function(scope, element, attrs) {
+            var roles = [];
+            if (scope.session && scope.session.roles) {
+              roles = scope.session.roles.toLowerCase().split(",");
+            }
+
+            var perms = parsePermission(attrs.cronappSecurity);
+            var show = false;
+            var enabled = false;
+            for (var i=0;i<roles.length;i++) {
+              var role = roles[i].trim();
+              if (role) {
+                if (perms.visible[role]) {
+                  show = true;
+                }
+                if (perms.enabled[role]) {
+                  enabled = true;
+                }
+              }
+            }
+
+            if (!show) {
+              element.hide();
+            }
+            console.log(roles);
+            console.log(parsePermission(attrs.cronappSecurity));
+            console.log(show);
+          }
+        }
+      })
 }(app));
