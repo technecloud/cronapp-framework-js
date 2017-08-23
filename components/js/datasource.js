@@ -884,6 +884,64 @@ angular.module('datasourcejs', [])
             });
         };
 
+        this.doSearchAll = function(terms) {
+            this.searchTimeout = null;
+            var oldoffset = this.offset;
+            this.offset = 0;
+            this.fetch({
+                params: {
+                  filter: "%"+terms+"%"
+                }
+            }, {
+                beforeFill: function(oldData) {
+                    this.cleanup();
+                },
+                error: function(error) {
+                    this.offset = oldoffset;
+                }
+            });
+        }
+
+        this.searchAll = function(terms) {
+          if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout = null;
+          }
+
+          this.searchTimeout = setTimeout(function() {
+            this.doSearchAll(terms);
+          }.bind(this), 500);
+        };
+
+        this.doSearch = function(terms) {
+            this.searchTimeout = null;
+            var oldoffset = this.offset;
+            this.offset = 0;
+            this.fetch({
+                params: {
+                  filter: terms
+                }
+            }, {
+                beforeFill: function(oldData) {
+                    this.cleanup();
+                },
+                error: function(error) {
+                    this.offset = oldoffset;
+                }
+            });
+        }
+
+        this.search = function(terms) {
+          if (this.searchTimeout) {
+            clearTimeout(this.searchTimeout);
+            this.searchTimeout = null;
+          }
+
+          this.searchTimeout = setTimeout(function() {
+            this.doSearch(terms);
+          }.bind(this), 500);
+        };
+
         /**
          *  refresh dataset by URL and queryParams,
          */
@@ -1000,6 +1058,8 @@ angular.module('datasourcejs', [])
 
             // Success Handler
             var sucessHandler = function(data) {
+                var springVersion = false;
+
                 if (this.entity.indexOf('//') > -1 && this.entity.indexOf('://') < 0)
                     data = [];
                 if (data) {
@@ -1007,6 +1067,7 @@ angular.module('datasourcejs', [])
                         if (data && data.links && Object.prototype.toString.call(data.content) === '[object Array]') {
                             this.links = data.links;
                             data = data.content;
+                            springVersion = true;
                         } else {
                             data = [data];
                         }
@@ -1052,7 +1113,7 @@ angular.module('datasourcejs', [])
 
                 hasMoreResults = (data.length >= this.rowsPerPage);
 
-                if (this.apiVersion == 2) {
+                if (springVersion) {
                     hasMoreResults = this.getLink("next") != null;
                 }
 
