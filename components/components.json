@@ -83,10 +83,7 @@
 				},
 				"xattr-theme": {
 					"displayName": "Theme"
-				},
-				"xattr-type": {
-					"displayName": "Style Type"
-				},
+				}
 				"xattr-size": {
 					"displayName": "Size"
 				}
@@ -398,6 +395,40 @@
 					"type": "event"
 				}
 			}
+		},
+		{
+			"name": "crn-input",
+			"text_pt_BR": "Entrada de texto",
+			"text_en_US": "Input",
+			"class": "adjust-icon mdi mdi-label-outline",
+			"pallete": false,
+			"template": "<input type=\"text\" ng-model=\"\" class=\"form-control\"  placeholder=\"Placeholder text\">  ",
+			"properties": {
+				"onchange": {
+					"removable": true,
+					"type": "event"
+				}
+			},
+			"type": {
+				"displayName": "Type"
+			},
+			"attributesForPreview": [
+				{
+					"name": "type",
+					"type": "options",
+					"target": "type",
+					"values": [
+						{
+							"key": "text",
+							"value": "Text"
+						},
+						{
+							"key": "number",
+							"value": "Number"
+						}
+					]
+				}
+			]
 		},
 		{
 			"name": "crn-image",
