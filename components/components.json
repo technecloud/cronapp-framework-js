@@ -449,8 +449,9 @@
 			"name": "crn-vertical-container",
 			"text_pt_BR": "Grade vertical",
 			"text_en_US": "Vertical Grid",
+			"wrapper": false,
 			"class": "adjust-icon mdi mdi-drag-vertical",
-			"template": "<div class=\"crn-layout-container\" data-container=\"true\" draggable=\"true\"><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div></div>",
+			"template": "<div class=\"crn-layout-container\"><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div></div>",
 			"handleRules": {
 				"canOrder": false,
 				"canActivate": false,
@@ -458,7 +459,7 @@
 				"rules": [
 					{
 						"sourceHTML": "<div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div>",
-						"targetSelector": "div.crn-layout-container"
+						"targetSelector": ":self"
 					}
 				]
 			}
@@ -467,16 +468,17 @@
 			"name": "crn-horizontal-container",
 			"text_pt_BR": "Grade horizontal",
 			"text_en_US": "Horizontal Grid",
+			"wrapper": false,
 			"class": "adjust-icon mdi mdi-drag-horizontal",
-			"template": "<div class=\"row\" data-container=\"true\" draggable=\"true\">\r\n        <div class=\"column col-md-4 col-sm-4 col-xs-4\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n        <div class=\"column col-md-4 col-sm-4 col-xs-4\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n      </div>",
+			"template": "<div class=\"row\">\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n      </div>",
 			"handleRules": {
 				"canOrder": false,
 				"canActivate": false,
 				"canIncrement": true,
 				"rules": [
 					{
-						"sourceHTML": "<div class=\"column col-md-4 col-sm-4 col-xs-4\" data-container=\"true\">Content </div>",
-						"targetSelector": "div.row"
+						"sourceHTML": "<div class=\"column col-xs-1\" data-container=\"true\">Content </div>",
+						"targetSelector": ":self"
 					}
 				]
 			}
