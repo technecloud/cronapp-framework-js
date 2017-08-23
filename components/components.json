@@ -394,7 +394,17 @@
 					"removable": true,
 					"type": "event"
 				}
-			}
+			},
+			"groupedChildren" : [
+			  {
+			    "text_pt_BR": "Rótulo",
+			    "selector" : "label"
+			  },
+			  {
+			    "text_pt_BR": "Campo",
+			    "selector" : "input"
+			  }
+			]
 		},
 		{
 			"name": "crn-input",
