@@ -113,8 +113,15 @@ var app = (function() {
       $translateProvider.useMissingTranslationHandlerLog();
 
       $translateProvider.useStaticFilesLoader({
-        prefix: 'i18n/locale_',
-        suffix: '.json'
+        files: [
+          {
+            prefix: 'i18n/locale_',
+            suffix: '.json'
+          },
+          {
+            prefix: 'plugins/cronapp-framework-js/i18n/locale_',
+            suffix: '.json'
+          }]
       });
 
       $translateProvider.registerAvailableLanguageKeys(
