@@ -767,12 +767,6 @@
                     "displayName_en_US": "Field"
                 },
                 {
-                    "name": "repeat",
-                    "selector": "ui-select-choices",
-                    "displayName_pt_BR": "Repetir",
-                    "displayName_en_US": "Repeat"
-                },
-                {
                     "name": "content",
                     "selector": "ui-select-match",
                     "displayName_pt_BR": "Valor da opção",
@@ -815,12 +809,6 @@
                     "selector": "ui-select",
                     "displayName_pt_BR": "Fonte de dados",
                     "displayName_en_US": "Datasource"
-                },
-                {
-                    "name": "repeat",
-                    "selector": "ui-select-choices",
-                    "displayName_pt_BR": "Repetir",
-                    "displayName_en_US": "Repeat"
                 },
                 {
                     "name": "ng-model",
