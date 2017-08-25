@@ -82,5 +82,6 @@
 	"changeValueOfField": "Change field value",
 	"functionToChangeValueOfField": "Function to change field value",
 	"field": "Field",
-	"Value": "Value"
+	"Value": "Value",
+    "WhatsRemove": "Want to remove?"
 }

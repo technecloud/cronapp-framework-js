@@ -82,5 +82,6 @@
   "changeValueOfField":"Alterar valor do campo",
   "functionToChangeValueOfField": "Função para alterar valor do campo",
   "field": "Campo",
-  "value": "Valor"
+  "value": "Valor",
+  "WhatsRemove": "Deseja remover?"
 }
