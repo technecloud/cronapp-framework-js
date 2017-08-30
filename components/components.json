@@ -384,7 +384,9 @@
                 "dependent-by": {
                     "removable": false,
                     "global": true,
-                    "type": "pageDatasourceObject"
+                    "type": "pageDatasourceObject",
+                    "onSave": "{{$select.selected.{value}}}",
+                    "onDisplay": "\\{\\{\\$select\\.selected\\.\\s*(.*?)\\s*\\}\\}"
                 },
                 "dependent-lazy-post": {
                     "removable": false,
