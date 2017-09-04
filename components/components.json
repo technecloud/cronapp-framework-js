@@ -408,6 +408,10 @@
                 "onchange": {
                     "removable": true,
                     "type": "event"
+                },
+                "ng-model": {
+                  "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+                  "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
                 }
             },
             "groupedChildren": [{
