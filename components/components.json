@@ -431,36 +431,58 @@
             ]
         },
         {
-            "name": "crn-input",
-            "text_pt_BR": "Entrada de texto",
-            "text_en_US": "Input",
-            "class": "adjust-icon mdi mdi-label-outline",
-            "pallete": false,
-            "template": "<input type=\"text\" ng-model=\"\" class=\"form-control\"  placeholder=\"Placeholder text\">  ",
-            "properties": {
-                "onchange": {
-                    "removable": true,
-                    "type": "event"
-                }
-            },
-            "type": {
-                "displayName": "Type"
-            },
-            "attributesForPreview": [{
-                "name": "type",
-                "type": "options",
-                "target": "type",
-                "values": [{
-                        "key": "text",
-                        "value": "Text"
-                    },
-                    {
-                        "key": "number",
-                        "value": "Number"
-                    }
-                ]
-            }]
-        },
+			"name": "crn-textinput",
+			"text_pt_BR": "Entrada de texto",
+			"text_en_US": "input",
+			"class": "adjust-icon mdi mdi-label-outline",
+			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinput.template.html",
+			"properties": {
+				"onchange": {
+					"removable": true,
+					"type": "event"
+				},
+				"ng-model": {
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+				}
+			},
+			"type": {
+				"displayName": "Type"
+			},
+			"attributesForPreview": [
+				{
+					"name": "type",
+					"type": "options",
+					"target": "type",
+					"values": [
+						{
+							"key": "text",
+							"value": "Text"
+						},
+						{
+							"key": "number",
+							"value": "Number"
+						},
+						{
+							"key": "password",
+							"value": "Password"
+						}
+					]
+				}
+			],
+			"groupedChildren": [
+				{
+					"text_pt_BR": "Rótulo",
+					"text_en_US": "Label",
+					"selector": "label"
+				},
+				{
+					"text_pt_BR": "Campo",
+					"text_en_US": "Field",
+					"selector": "input"
+				}
+			]
+		},
         {
             "name": "crn-image",
             "text_pt_BR": "Imagem",
@@ -807,6 +829,12 @@
             "text_en_US": "Dynamic Combobox",
             "class": "adjust-icon mdi mdi-nutrition",
             "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/combobox-dynamic.template.html",
+			"properties": {
+				"ng-model": {
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+				}
+			},
             "handleRules": {
                 "canToggle": true,
                 "rules": [{
