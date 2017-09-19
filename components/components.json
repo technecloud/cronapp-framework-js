@@ -58,117 +58,116 @@
             }]
         },
         {
-            "name": "crn-button",
-            "text_pt_BR": "Botão",
-            "text_en_US": "Button",
-            "class": "adjust-icon mdi mdi-stop",
-            "wrapper": false,
-            "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
-            "properties": {
-                "ng-click": {
-                    "removable": true,
-                    "type": "event"
-                },
-                "onmouseover": {
-                    "removable": true,
-                    "type": "event"
-                },
-                "xattr-fullsize": {
-                    "displayName": "Width"
-                },
-                "xattr-theme": {
-                    "displayName": "Theme"
-                },
-                "xattr-size": {
-                    "displayName": "Size"
-                }
-            },
-            "attributesForPreview": [{
-                    "name": "xattr-size",
-                    "type": "options",
-                    "target": "class",
-                    "values": [{
-                            "key": "",
-                            "value": "Standard"
-                        },
-                        {
-                            "key": "btn-lg",
-                            "value": "Large"
-                        },
-                        {
-                            "key": "btn-sm",
-                            "value": "Small"
-                        }
-                    ]
-                },
-                {
-                    "name": "xattr-fullsize",
-                    "type": "options",
-                    "target": "class",
-                    "values": [{
-                            "key": "btn-block",
-                            "value": "Block"
-                        },
-                        {
-                            "key": "",
-                            "value": "Inline"
-                        }
-                    ]
-                },
-                {
-                    "name": "xattr-theme",
-                    "type": "options",
-                    "target": "class",
-                    "values": [{
-                            "key": "btn-default",
-                            "value": "Default",
-                            "color": "#fff"
-                        },
-                        {
-                            "key": "btn-primary",
-                            "value": "Primary",
-                            "color": "#0275d8"
-                        },
-                        {
-                            "key": "btn-success",
-                            "value": "Success",
-                            "color": "#5cb85c"
-                        },
-                        {
-                            "key": "btn-info",
-                            "value": "Info",
-                            "color": "#5bc0de"
-                        },
-                        {
-                            "key": "btn-warning",
-                            "value": "Warning",
-                            "color": "#f0ad4e"
-                        },
-                        {
-                            "key": "btn-danger",
-                            "value": "Danger",
-                            "color": "#d9534f"
-                        },
-                        {
-                            "key": "btn-link",
-                            "value": "Link",
-                            "color": "#fff"
-                        }
-                    ]
-                }
-            ],
-            "groupedChildren": [{
-                    "text_pt_BR": "Rótulo",
-                    "text_en_US": "Label",
-                    "selector": "span"
-                },
-                {
-                    "text_pt_BR": "Ícone",
-                    "text_en_US": "Icon",
-                    "selector": "i"
-                }
-            ]
-        },
+			"name": "crn-button",
+			"text_pt_BR": "Botão",
+			"text_en_US": "Button",
+			"class": "adjust-icon mdi mdi-stop",
+			"wrapper": false,
+			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
+			"properties": {
+				"ng-click": {
+					"removable": true,
+					"type": "event"
+				},
+				"onmouseover": {
+					"removable": true,
+					"type": "event"
+				},
+				"xattr-fullsize": {
+					"displayName": "Width"
+				},
+				"xattr-theme": {
+					"displayName": "Theme"
+				},
+				"xattr-size": {
+					"displayName": "Size"
+				}
+			},
+			"attributesForPreview": [
+				{
+					"name": "xattr-size",
+					"type": "options",
+					"target": "class",
+					"values": [
+						{
+							"key": "",
+							"value": "Standard"
+						},
+						{
+							"key": "btn-lg",
+							"value": "Large"
+						},
+						{
+							"key": "btn-sm",
+							"value": "Small"
+						}
+					]
+				},
+				{
+					"name": "xattr-fullsize",
+					"type": "options",
+					"target": "class",
+					"values": [
+						{
+							"key": "btn-block",
+							"value": "Block"
+						},
+						{
+							"key": "",
+							"value": "Inline"
+						}
+					]
+				},
+				{
+					"name": "xattr-theme",
+					"type": "options",
+					"target": "class",
+					"values": [
+						{
+							"key": "btn-default",
+							"value": "Default"
+						},
+						{
+							"key": "btn-primary",
+							"value": "Primary"
+						},
+						{
+							"key": "btn-success",
+							"value": "Success"
+						},
+						{
+							"key": "btn-info",
+							"value": "Info"
+						},
+						{
+							"key": "btn-warning",
+							"value": "Warning"
+						},
+						{
+							"key": "btn-danger",
+							"value": "Danger"
+						},
+						{
+							"key": "btn-link",
+							"value": "Link"
+						}
+					]
+				}
+			],
+			"groupedChildren": [
+				{
+					"text_pt_BR": "Rótulo",
+					"text_en_US": "Label",
+					"selector": "span"
+				},
+				{
+					"text_pt_BR": "Ícone",
+					"text_en_US": "Icon",
+					"selector": "i"
+				}
+			]
+		
+		},
         {
             "name": "crn-icon",
             "displayName": "icon",
