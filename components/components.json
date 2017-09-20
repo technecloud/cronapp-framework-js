@@ -774,55 +774,50 @@
             }
         },
         {
-            "name": "crn-combobox",
-            "text_pt_BR": "Caixa de seleção",
-            "text_en_US": "Combobox",
-            "class": "adjust-icon mdi mdi-equal-box",
-            "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/combobox.template.html",
-            "handleRules": {
-                "canToggle": true,
-                "rules": [{
-                    "toggleSelector": "ui-select-choices",
-                    "toggleClass": "invisible"
-                }]
-            },
-            "childrenProperties": [{
-                    "name": "crn-datasource",
-                    "selector": "ui-select",
-                    "displayName_pt_BR": "Items",
-                    "displayName_en_US": "Items"
-                },
-                {
-                    "name": "ng-model",
-                    "selector": "ui-select",
-                    "displayName_pt_BR": "Campo",
-                    "displayName_en_US": "Field"
-                },
-                {
-                    "name": "content",
-                    "selector": "ui-select-match",
-                    "displayName_pt_BR": "Valor da opção",
-                    "displayName_en_US": "Option value",
-                    "type": "datasourceFieldList",
-                    "onSave": "{{$select.selected.{value}}}",
-                    "onDisplay": "\\{\\{\\$select\\.selected\\.\\s*(.*?)\\s*\\}\\}"
-                },
-                {
-                    "name": "content",
-                    "selector": "ui-select-choices > div:eq(0)",
-                    "displayName_pt_BR": "Texto da opção",
-                    "displayName_en_US": "Option text",
-                    "type": "datasourceFieldList",
-                    "onSave": "{{rowData.{value}}}",
-                    "onDisplay": "\\{\\{rowData\\.\\s*(.*?)\\s*\\}\\}"
-                }
-            ],
-            "groupedChildren": [{
-                "text_pt_BR": "Rótulo",
-                "text_en_US": "Label",
-                "selector": "label"
-            }]
-        },
+			"name": "crn-combobox",
+			"text_pt_BR": "Caixa de seleção",
+			"text_en_US": "Combobox",
+			"class": "adjust-icon mdi mdi-equal-box",
+			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/combobox.template.html",
+			"properties": {
+				"onchange": {
+					"removable": true,
+					"type": "event"
+				}
+			},
+			"handleRules": {
+				"canToggle": true,
+				"rules": [
+					{
+						"toggleSelector": "ui-select-choices",
+						"toggleClass": "invisible"
+					}
+				]
+			},
+			"childrenProperties": [
+				{
+					"name": "crn-datasource",
+					"selector": "ui-select",
+					"displayName_pt_BR": "Items",
+					"displayName_en_US": "Items"
+				},
+				{
+					"name": "ng-model",
+					"selector": "ui-select",
+					"displayName_pt_BR": "Campo",
+					"displayName_en_US": "Field",
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+				}
+			],
+			"groupedChildren": [
+				{
+					"text_pt_BR": "Rótulo",
+					"text_en_US": "Label",
+					"selector": "label"
+				}
+			]
+		},
         {
             "name": "crn-combobox-dynamic",
             "text_pt_BR": "Caixa de seleção dinâmica",
