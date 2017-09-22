@@ -224,11 +224,11 @@
           }
 
           if (!show) {
-            element.hide();
+            $(element).hide();
           }
 
           if (!enabled) {
-            element.find('*').attr('disabled', true);
+            $(element).find('*').addBack().attr('disabled', true);
           }
         }
       }
