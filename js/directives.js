@@ -152,7 +152,64 @@
         }
       }
     })
-
+    
+    .directive('dynamicImage', function($compile) {
+      var template = '';
+      return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            label: '@',
+            ngModel: '@',
+            width: '@',
+            height: '@'
+        },
+        require: 'ngModel',
+        template: '<div></div>',
+        init: function(s) {
+          if (!s.ngModel)
+            s.ngModel = '';
+          if (!s.width)
+            s.width = '128';
+          if (!s.height)
+            s.height = '128';
+          if (!this.containsLetter(s.width))
+            s.width += 'px';
+          if (!this.containsLetter(s.height))
+            s.height += 'px';
+        },
+        containsLetter: function(value) {
+          var containsLetter;
+          for (var i=0; i<value.length; i++) {
+            containsLetter = true;
+            for (var number = 0; number <10; number++)
+              if (parseInt(value[i]) == number)
+                containsLetter = false;
+            if (containsLetter)
+              break;
+          }
+          return containsLetter;
+        },
+        link: function(scope, element, attr) {
+          this.init(scope);
+          var s = scope;
+          
+          var templateDyn    = '<div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover">\
+                                  <img style="max-height: $height$; max-width: $width$;" ng-if="$ngModel$" data-ng-src="{{\'data:image/png;base64,\' + $ngModel$}}">\
+                                  <img style="max-height: $height$; max-width: $width$;" ng-if="!$ngModel$" data-ng-src="{{datasource.noImageUpload}}" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*">\
+                                  <div class="remove btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
+                                    <span class="glyphicon glyphicon-remove"></span>\
+                                  </div>\
+                                </div>';
+          element.append(templateDyn
+                          .split('$height$').join(s.height)
+                          .split('$width$').join(s.width)
+                          .split('$ngModel$').join(s.ngModel)
+                          );
+          $compile(element)(element.scope());
+      }
+    }
+  })
     .directive('pwCheck', [function() {
       'use strict';
       return {
