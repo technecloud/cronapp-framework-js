@@ -1193,8 +1193,7 @@
                     "type": "event"
                 }
             }
-        }
-    ],
+        },
 	{
 		"name": "crn-textarea",
 		"text_pt_BR": "Área de texto",
@@ -1251,4 +1250,4 @@
 			}
 		]
 	}
-}
+]}
