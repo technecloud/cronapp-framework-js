@@ -999,7 +999,12 @@
 				{
 					"text_pt_BR": "Rótulo",
 					"text_en_US": "Label",
-					"selector": "a"
+					"selector": "span"
+				},
+				{
+					"text_pt_BR": "Ícone",
+					"text_en_US": "Icon",
+					"selector": "i"
 				}
 			]
 		},
