@@ -615,6 +615,12 @@
 			"text_en_US": "Date",
 			"class": "adjust-icon mdi mdi-calendar",
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/date.template.html",
+			"properties": {
+				"ng-model": {
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+				}
+			},
 			"groupedChildren": [
 				{
 					"text_pt_BR": "Rótulo",
@@ -634,6 +640,12 @@
 			"text_en_US": "Time",
 			"class": "adjust-icon mdi mdi-timer",
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/time.template.html",
+			"properties": {
+				"ng-model": {
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+				}
+			},
 			"groupedChildren": [
 				{
 					"text_pt_BR": "Rótulo",
@@ -653,6 +665,12 @@
 			"text_en_US": "DateTime",
 			"class": "adjust-icon mdi mdi-calendar-clock",
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datetime.template.html",
+			"properties": {
+				"ng-model": {
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+				}
+			},
 			"groupedChildren": [
 				{
 					"text_pt_BR": "Rótulo",
