@@ -6,9 +6,10 @@ var gulp = require('gulp'),
   uglifycss = require('gulp-uglifycss'),
   imagemin = require('gulp-imagemin'),
   htmlmin = require('gulp-htmlmin')
-
+  ngAnnotate = require('gulp-ng-annotate')
 gulp.task('minify-js', function() {
   return gulp.src('js/**')
+  	.pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(gulp.dest('dist/js/'));
 });
