@@ -162,7 +162,9 @@
             label: '@',
             ngModel: '@',
             width: '@',
-            height: '@'
+            height: '@',
+            style: '@',
+            class: '@'
         },
         require: 'ngModel',
         template: '<div></div>',
@@ -173,6 +175,10 @@
             s.width = '128';
           if (!s.height)
             s.height = '128';
+          if (!s.style)
+            s.style = '';
+          if (!s.class)
+            s.class = '';
           if (!this.containsLetter(s.width))
             s.width += 'px';
           if (!this.containsLetter(s.height))
@@ -193,18 +199,22 @@
         link: function(scope, element, attr) {
           this.init(scope);
           var s = scope;
-          
           var templateDyn    = '<div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover">\
-                                  <img style="max-height: $height$; max-width: $width$;" ng-if="$ngModel$" data-ng-src="{{\'data:image/png;base64,\' + $ngModel$}}">\
-                                  <img style="max-height: $height$; max-width: $width$;" ng-if="!$ngModel$" data-ng-src="{{datasource.noImageUpload}}" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*">\
+                                  <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
+                                  <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="!$ngModel$" data-ng-src="/plugins/cronapp-framework-js/img/selectImg.svg" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*;capture=camera">\
                                   <div class="remove btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
                                     <span class="glyphicon glyphicon-remove"></span>\
+                                  </div>\
+                                  <div class="btn btn-info btn-xs start-camera-button" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\',\'$style$\',\'$width$\',\'$height$\')">\
+                                    <span class="glyphicon glyphicon-facetime-video"></span>\
                                   </div>\
                                 </div>';
           element.append(templateDyn
                           .split('$height$').join(s.height)
                           .split('$width$').join(s.width)
                           .split('$ngModel$').join(s.ngModel)
+                          .split('$style$').join(s.style)
+                          .split('$class$').join(s.class)
                           );
           $compile(element)(element.scope());
       }

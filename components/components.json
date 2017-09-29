@@ -472,8 +472,8 @@
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicimage.template.html",
 			"properties": {
 				"ng-model": {
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			},
 			"groupedChildren": [
