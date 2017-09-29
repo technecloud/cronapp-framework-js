@@ -1,6 +1,6 @@
 {
     "name": "cronapp-framework-js",
-    "version": "0.0.31-develop",
+    "version": "0.0.32-develop",
     "description": "Javascript library for CronApp's projects",
     "main": "cronapp.framework.js",
     "scripts": {
@@ -30,6 +30,6 @@
         "gulp-rename": "^1.2.2",
         "gulp-uglify": "^2.1.2",
         "gulp-uglifycss": "^1.0.8",
-        "gulp-ng-annotate": "^2.0.0"
+		"gulp-ng-annotate": "^2.0.0"
     }
 }
