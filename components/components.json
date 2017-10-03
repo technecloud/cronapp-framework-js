@@ -477,6 +477,11 @@
 				}
 			},
 			"groupedChildren": [
+			  {
+            "text_pt_BR": "Rótulo",
+            "text_en_US": "Label",
+            "selector": "label"
+        },
 				{
 					"text_pt_BR": "Campo",
 					"text_en_US": "Field",
