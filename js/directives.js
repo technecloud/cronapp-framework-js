@@ -205,7 +205,7 @@
                                   <div class="remove btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
                                     <span class="glyphicon glyphicon-remove"></span>\
                                   </div>\
-                                  <div class="btn btn-info btn-xs start-camera-button" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\',\'$style$\',\'$width$\',\'$height$\')">\
+                                  <div class="btn btn-info btn-xs start-camera-button" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
                                     <span class="glyphicon glyphicon-facetime-video"></span>\
                                   </div>\
                                 </div>';
