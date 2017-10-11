@@ -161,7 +161,19 @@ var app = (function() {
         }
       };
     }])
-
+    .decorator("$xhrFactory", [
+    	"$delegate", "$injector",
+    	function($delegate, $injector) {
+    		return function(method, url) {
+    			var xhr = $delegate(method, url);
+    			var $http = $injector.get("$http");
+    			var callConfig = $http.pendingRequests[$http.pendingRequests.length - 1];
+    			if (angular.isFunction(callConfig.onProgress))
+    				xhr.upload.addEventListener("progress",callConfig.onProgress);
+    			return xhr;
+    		};
+    	}
+    ])
     // General controller
     .controller('PageController', ["$scope", "$stateParams", "$location", "$http", "$rootScope", "$translate", function($scope, $stateParams, $location, $http, $rootScope, $translate) {
 

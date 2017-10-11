@@ -159,7 +159,6 @@
         restrict: 'E',
         replace: true,
         scope: {
-            label: '@',
             ngModel: '@',
             width: '@',
             height: '@',
@@ -215,6 +214,54 @@
                           .split('$ngModel$').join(s.ngModel)
                           .split('$style$').join(s.style)
                           .split('$class$').join(s.class)
+                          );
+          $compile(element)(element.scope());
+      }
+    }
+  })
+  .directive('dynamicFile', function($compile) {
+      var template = '';
+      return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            ngModel: '@',
+        },
+        require: 'ngModel',
+        template: '<div></div>',
+        init: function(s) {
+          if (!s.ngModel)
+            s.ngModel = '';
+        },
+        link: function(scope, element, attr) {
+          this.init(scope);
+          var s = scope;
+          
+          var splitedNgModel = s.ngModel.split('.');
+          var datasource = splitedNgModel[0];
+          var field = splitedNgModel[splitedNgModel.length-1];
+          var number = Math.floor((Math.random() * 1000) + 20);
+          
+          var templateDyn    = '<div ng-show="!$ngModel$">\
+                                  <div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover"> \
+                                    <img class="ng-scope" style="height: 128px; width: 128px;" ng-if="!$ngModel$" data-ng-src="/plugins/cronapp-framework-js/img/selectFile.png" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" accept="*">\
+                                    <progress id="uploadprogress$number$" max="100" value="0" style="position: absolute; width: 128px; margin-top: -134px;">0</progress>\
+                                  </div>\
+                                </div> \
+                                <div ng-show="$ngModel$" class="form-group upload-image-component"> \
+                                  <div class="btn btn-danger btn-xs ng-scope" style="float:right;" ng-if="$ngModel$" ng-click="$ngModel$=null"> \
+                                    <span class="glyphicon glyphicon-remove"></span> \
+                                  </div> \
+                                  <div> \
+                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
+                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">download</a> \
+                                  </div> \
+                                </div> ';
+          element.append(templateDyn
+                          .split('$ngModel$').join(s.ngModel)
+                          .split('$datasource$').join(datasource)
+                          .split('$field$').join(field)
+                          .split('$number$').join(number)
                           );
           $compile(element)(element.scope());
       }
