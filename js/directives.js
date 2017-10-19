@@ -101,11 +101,13 @@
           element.datetimepicker(options);
 
           element.on('dp.change', function() {
-            if ($(this).is(":visible"))
+            if ($(this).is(":visible")) {
+              $(this).trigger('change');
               scope.$apply(read);
+            }
           });
 
-          ngModel.$render = function() {
+      ngModel.$render = function() {
 			if(ngModel.$viewValue){
 			  var momentDate = moment(ngModel.$viewValue);
 
@@ -344,6 +346,62 @@
           if (!enabled) {
             $(element).find('*').addBack().attr('disabled', true);
           }
+        }
+      }
+    })
+    .directive('cronappFilter', function() {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          var typeElement = $(element).attr('type');
+          if (attrs.asDate != undefined)
+            typeElement = 'date';
+          
+          var filterTemplate = '';
+          var filtersSplited = attrs.cronappFilter.split(';');
+          $(filtersSplited).each(function() {
+            if (this.length > 0) {
+              //Se for do tipo text passa parametro como like
+              if (typeElement == 'text')
+                filterTemplate+=this+'@=%{value}%;';
+              //Senão passa parametro como valor exato
+              else
+                filterTemplate+=this+'={value};';
+            }
+          });
+          if (filterTemplate.length > 0)
+            filterTemplate = filterTemplate.substr(0, filterTemplate.length-1);
+          else
+            filterTemplate = '%{value}%';
+          
+          if (typeElement == 'text') {
+            $(element).on("keyup", function() {
+              var datasource = eval(attrs.crnDatasource);
+              var bindedFilter = filterTemplate.split('{value}').join(this.value);
+              if (this.value.length == 0)
+                bindedFilter = '';
+                
+              datasource.search(bindedFilter);
+            });
+          }
+          else {
+            $(element).on("change", function() {
+              var datasource = eval(attrs.crnDatasource);
+              
+              var value = undefined;
+              var typeElement = $(this).attr('type');
+              if (typeElement == 'checkbox')
+                value = $(this).is(':checked');
+              else
+                value = this.value;
+              
+              var bindedFilter = filterTemplate.split('{value}').join(value);
+              if (value.toString().length == 0)
+                bindedFilter = '';
+              datasource.search(bindedFilter);
+            });
+          }
+          
         }
       }
     })
