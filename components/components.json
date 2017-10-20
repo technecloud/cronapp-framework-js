@@ -265,6 +265,7 @@
 			"text_pt_BR": "Acordeão",
 			"text_en_US": "Accordion",
 			"class": "adjust-icon mdi mdi-view-day",
+			"forcedGroup":true,
 			"handleRules": {
 				"canOrder": true,
 				"canActivate": true,
