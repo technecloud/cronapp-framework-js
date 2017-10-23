@@ -1208,6 +1208,11 @@ angular.module('datasourcejs', [])
                     to[key] = this.copy(from[key]);
                 }
             }
+            //Verificando os campos que não existem mais no registro (Significa que foi setado para nulo)
+            for (var key in to) {
+              if (from[key] == undefined)
+                delete to[key];        
+            }
 
             return to;
         };
