@@ -266,7 +266,10 @@ angular.module('datasourcejs', [])
         }
 
         this.openImage = function(data) {
-            $window.open(data, '_blank', 'height=300,width=400');
+            var value = data;
+            if (value.indexOf('https://') == -1 && value.indexOf('http://') == -1) 
+              value = 'data:image/png;base64,' + data;
+            $window.open(value, '_blank', 'height=300,width=400');
         };
 
         this.byteSize = function(base64String) {
