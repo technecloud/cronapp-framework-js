@@ -266,7 +266,7 @@ angular.module('datasourcejs', [])
         }
 
         this.openImage = function(data) {
-            $window.open('data:image/png;base64,' + data, '_blank', 'height=300,width=400');
+            $window.open(data, '_blank', 'height=300,width=400');
         };
 
         this.byteSize = function(base64String) {
