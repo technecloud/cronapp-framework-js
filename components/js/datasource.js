@@ -266,10 +266,13 @@ angular.module('datasourcejs', [])
         }
 
         this.openImage = function(data) {
-            var value = data;
-            if (value.indexOf('https://') == -1 && value.indexOf('http://') == -1) 
-              value = 'data:image/png;base64,' + data;
-            $window.open(value, '_blank', 'height=300,width=400');
+          if (data.indexOf('https://') == -1 && data.indexOf('http://') == -1)  {
+            var  value = 'data:image/png;base64,' + data;
+            var w = $window.open("", '_blank', 'height=300,width=400');
+            w.document.write('<img src="'+ value + '"/>');
+          } else {
+             $window.open(data, '_blank', 'height=300,width=400');
+          }
         };
 
         this.byteSize = function(base64String) {
