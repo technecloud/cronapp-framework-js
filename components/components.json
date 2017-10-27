@@ -1015,7 +1015,7 @@
 							"value": "Block"
 						},
 						{
-							"key": "display:inline",
+							"key": "display:inline;",
 							"value": "Inline"
 						}
 					]
