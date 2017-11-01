@@ -229,12 +229,41 @@ app.userEvents = {};
 app.config = {};
 app.config.datasourceApiVersion = 2;
 
-//Components personalization jquery
-var registerComponentScripts = function() {
-  //carousel slider
-  $('.carousel-indicators li').on('click', function() {
-    var currentCarousel = '#' + $(this).parent().parent().parent().attr('id');
-    var index = $(currentCarousel + ' .carousel-indicators li').index(this);
-    $(currentCarousel + ' #carousel-example-generic').carousel(index);
-  });
-}
+app.registerEventsCronapi = function($scope, $translate) {
+  for (var x in app.userEvents)
+    $scope[x] = app.userEvents[x].bind($scope);
+
+  $scope.vars = {};
+
+  try {
+    if (cronapi) {
+      $scope['cronapi'] = cronapi;
+      $scope['cronapi'].$scope = $scope;
+      $scope.safeApply = safeApply;
+      if ($translate) {
+        $scope['cronapi'].$translate = $translate;
+      }
+    }
+  } catch (e) {
+    console.info('Not loaded cronapi functions');
+    console.info(e);
+  }
+  try {
+    if (blockly)
+      $scope['blockly'] = blockly;
+  } catch (e) {
+    console.info('Not loaded blockly functions');
+    console.info(e);
+  }
+};
+
+window.safeApply = function(fn) {
+  var phase = this.$root.$$phase;
+  if (phase == '$apply' || phase == '$digest') {
+    if (fn && (typeof(fn) === 'function')) {
+      fn();
+    }
+  } else {
+    this.$apply(fn);
+  }
+};
