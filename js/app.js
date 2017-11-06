@@ -267,3 +267,13 @@ window.safeApply = function(fn) {
     this.$apply(fn);
   }
 };
+
+//Components personalization jquery
+var registerComponentScripts = function() {
+  //carousel slider
+  $('.carousel-indicators li').on('click', function() {
+    var currentCarousel = '#' + $(this).parent().parent().parent().attr('id');
+    var index = $(currentCarousel + ' .carousel-indicators li').index(this);
+    $(currentCarousel + ' #carousel-example-generic').carousel(index);
+  });
+}
