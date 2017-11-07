@@ -990,16 +990,23 @@
 			"name": "crn-checkbox",
 			"text_pt_BR": "Caixa de checagem",
 			"text_en_US": "Checkbox",
-			"wrapper": false,
-			"class": " adjust-icon mdi mdi-checkbox-marked-outline",
+			"class": "adjust-icon mdi mdi-label-outline",
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/checkbox.template.html",
 			"properties": {
-				"ng-model": {
-					"displayName": "Field"
-				},
-				"xattr-fullsize": {
+			  "xattr-fullsize": {
 					"displayName": "Width"
+				},
+				"onchange": {
+					"removable": true,
+					"type": "event"
+				},
+				"ng-model": {
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
+			},
+			"type": {
+				"displayName": "Type"
 			},
 			"attributesForPreview": [
 				{
@@ -1020,14 +1027,14 @@
 			],
 			"groupedChildren": [
 				{
-					"text_pt_BR": "Caixa",
-					"text_en_US": "Checkbox",
-					"selector": ":checkbox"
-				},
-				{
 					"text_pt_BR": "Rótulo",
 					"text_en_US": "Label",
-					"selector": "span"
+					"selector": "label"
+				},
+				{
+					"text_pt_BR": "Caixa",
+					"text_en_US": "Checkbox",
+					"selector": "input"
 				}
 			]
 		},

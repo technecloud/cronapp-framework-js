@@ -1,22 +1,28 @@
+var cronappModules = [
+  'ui.router',
+  'ui.select',
+  'ui-select-infinity',
+  'ngResource',
+  'ngSanitize',
+  'custom.controllers',
+  'custom.services',
+  'datasourcejs',
+  'chart.js',
+  'ngMask',
+  'ngJustGage',
+  'pascalprecht.translate',
+  'tmh.dynamicLocale',
+  'ui-notification',
+  'ui.bootstrap',
+  'ngFileUpload'
+];
+
+if (window.customModules) {
+  cronappModules = cronappModules.concat(window.customModules);
+}
+
 var app = (function() {
-  return angular.module('MyApp', [
-      'ui.router',
-      'ui.select',
-      'ui-select-infinity',
-      'ngResource',
-      'ngSanitize',
-      'custom.controllers',
-      'custom.services',
-      'datasourcejs',
-      'chart.js',
-      'ngMask',
-      'ngJustGage',
-      'pascalprecht.translate',
-      'tmh.dynamicLocale',
-      'ui-notification',
-      'ui.bootstrap',
-      'ngFileUpload'
-    ])
+  return angular.module('MyApp', cronappModules)
 
     .constant('LOCALES', {
       'locales': {
@@ -267,3 +273,13 @@ window.safeApply = function(fn) {
     this.$apply(fn);
   }
 };
+
+//Components personalization jquery
+var registerComponentScripts = function() {
+  //carousel slider
+  $('.carousel-indicators li').on('click', function() {
+    var currentCarousel = '#' + $(this).parent().parent().parent().attr('id');
+    var index = $(currentCarousel + ' .carousel-indicators li').index(this);
+    $(currentCarousel + ' #carousel-example-generic').carousel(index);
+  });
+}
