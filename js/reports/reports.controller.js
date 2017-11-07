@@ -28,13 +28,13 @@
             function next() {
                 if (index < parameters.length) {
                     var parameter = parameters[index++];  
-                    $.get("plugins/cronapp-framework-js/js/reports/templates/" + parameter.type + ".parameter.html").done(function (result) {
+                    $.get("plugins/cronapp-framework-js/components/reports/" + parameter.type + ".parameter.html").done(function (result) {
                         htmlParameters.push(replaceAll(result, "_field_", parameter.name));
                         next();
                     });
                 } else if (htmlParameters.length > 0) {
                     $modal.open({
-                        templateUrl: 'plugins/cronapp-framework-js/js/reports/reports.parameters.html',
+                        templateUrl: 'plugins/cronapp-framework-js/components/reports/reports.parameters.html',
                         controller: 'ParameterController',
                         resolve: {
                             report: function () {
