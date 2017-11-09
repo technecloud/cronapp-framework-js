@@ -618,7 +618,7 @@
 				"canIncrement": true,
 				"rules": [
 					{
-						"sourceHTML": "<div class=\"column col-xs-1\" data-container=\"true\">Content </div>",
+						"sourceHTML": "<div class=\"column col-xs-1\" data-container=\"true\" data-replace=\"true\">Content </div>",
 						"targetSelector": ":self"
 					}
 				]
