@@ -1,0 +1,1 @@
+!function(){"use strict";function r(r){function e(e){var t={url:"api/rest/report",method:"POST",data:angular.toJson({reportName:e})};return r(t)}function t(e){var t={url:"api/rest/report/pdf",method:"POST",responseType:"arraybuffer",data:angular.toJson(e)};return r(t)}return{getReport:e,getPDF:t}}angular.module("custom.services").service("ReportService",r),r.$inject=["$http"]}();
