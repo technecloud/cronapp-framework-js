@@ -4,6 +4,9 @@
   app.controller('LoginController', ['$scope', '$http', '$location', '$rootScope', '$window', '$state', '$translate', 'Notification', function($scope, $http, $location, $rootScope, $window, $state, $translate, Notification) {
 
     app.registerEventsCronapi($scope, $translate);
+	
+	$rootScope.http = $http;
+    $rootScope.Notification = Notification;
 
     $scope.message = {};
     $scope.login = function() {
