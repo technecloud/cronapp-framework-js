@@ -424,8 +424,8 @@
 					"type": "event"
 				},
 				"ng-model": {
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			},
 			"type": {
@@ -673,8 +673,8 @@
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/date.template.html",
 			"properties": {
 				"ng-model": {
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			},
 			"groupedChildren": [
@@ -698,8 +698,8 @@
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/time.template.html",
 			"properties": {
 				"ng-model": {
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			},
 			"groupedChildren": [
@@ -723,8 +723,8 @@
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datetime.template.html",
 			"properties": {
 				"ng-model": {
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			},
 			"groupedChildren": [
@@ -900,8 +900,8 @@
 					"selector": "ui-select",
 					"displayName_pt_BR": "Campo",
 					"displayName_en_US": "Field",
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			],
 			"groupedChildren": [
@@ -1374,8 +1374,8 @@
 			"template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"none\"class=\"form-control\" rows=\"5\"></textarea></div>",
 			"properties": {
 				"ng-model": {
-					"_onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
-					"_onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+					"onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
+					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				}
 			},
 			"rows": {
