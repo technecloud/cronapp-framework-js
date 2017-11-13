@@ -390,8 +390,18 @@
               
               var value = undefined;
               var typeElement = $(this).attr('type');
+              if (attrs.asDate != undefined)
+                typeElement = 'date';
+                
               if (typeElement == 'checkbox')
                 value = $(this).is(':checked');
+              else if (typeElement == 'date') {
+                value = this.value;
+                if (this.value.length > 0) {
+                  var momentDate = moment(this.value, patternFormat(this));
+                  value = momentDate.toDate().toISOString();
+                }
+              }
               else
                 value = this.value;
               
