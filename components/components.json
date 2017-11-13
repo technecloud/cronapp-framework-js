@@ -944,6 +944,7 @@
 					"onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
 				},
 				{
+				  "editExpression": false,
 					"name": "option-selected",
 					"selector": "ui-select-match",
 					"displayName_pt_BR": "Opção selecionada",
@@ -953,6 +954,7 @@
 					"onDisplay": "\\{\\{\\$select\\.selected\\.\\s*(.*?)\\s*\\}\\}"
 				},
 				{
+				  "editExpression": false,
 					"name": "option-text",
 					"selector": "ui-select-choices > div:eq(0)",
 					"displayName_pt_BR": "Opção texto",
