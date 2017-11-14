@@ -195,6 +195,7 @@
 			"text_pt_BR": "Botão de Relatório",
 			"text_en_US": "Button Report",
 			"class": "adjust-icon mdi mdi-code-equal",
+			"wrapper": false,
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button-report.template.html",
 			"properties": {
 				"ng-click": {
