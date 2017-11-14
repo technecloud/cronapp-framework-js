@@ -399,8 +399,8 @@
 					"removable": false,
 					"global": true,
 					"type": "pageDatasourceObject",
-					"onSave": "{{$select.selected.{value}}}",
-					"onDisplay": "\\{\\{\\$select\\.selected\\.\\s*(.*?)\\s*\\}\\}"
+					"onSave": "{{{value}}}",
+					"onDisplay": "\\{\\{(.*?)\\}\\}"
 				},
 				"dependent-lazy-post": {
 					"removable": false,
