@@ -30,10 +30,20 @@
             return $http(req);
         }
 
-        return {
-            getReport: getReport,
-            getPDF: getPDF
-        };
+        function getPDFAsFile(report) {
+          var req = {
+              url: 'api/rest/report/pdfasfile',
+              method: 'POST',
+              data: angular.toJson(report)
+          };
+          return $http(req);
+      }
+
+      return {
+          getReport: getReport,
+          getPDF: getPDF,
+          getPDFAsFile: getPDFAsFile
+      };
     }
 
 })();

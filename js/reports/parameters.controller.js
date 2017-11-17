@@ -69,7 +69,7 @@
       
       frame.attr('height', h - 200);
       frame.attr('width','100%');
-      frame.attr('src', url); 
+      frame.attr('src', url + "?download=false"); 
       $('#reportView .modal-body').html(frame);
       $('#reportViewContext .modal-dialog').css('width' , '95%');
       
@@ -82,6 +82,11 @@
       
     }
 
+    function openPDFAsFile(result) {
+      // Abrir no modal
+      openURLContent(result.data);
+    }
+    
     function openPDF(result) {
       var blob = new Blob([result.data], {
         type : 'application/pdf'
@@ -103,7 +108,7 @@
     }
 
     $scope.onPrint = function() {
-      ReportService.getPDF($scope.report).then(openPDF);
+      ReportService.openPDFAsFile($scope.report).then(openPDF);
     };
 
     $scope.onCancel = function() {
