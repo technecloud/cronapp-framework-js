@@ -339,6 +339,7 @@
 		},
 		{
 			"name": "crn-datasource",
+			"wrapper": false,
 			"text_pt_BR": "Fonte de dados",
 			"text_en_US": "Datasource",
 			"class": "adjust-icon mdi mdi-table-large",
