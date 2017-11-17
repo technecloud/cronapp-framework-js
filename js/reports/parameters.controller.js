@@ -108,7 +108,7 @@
     }
 
     $scope.onPrint = function() {
-      ReportService.openPDFAsFile($scope.report).then(openPDF);
+      ReportService.getPDFAsFile($scope.report).then(openPDFAsFile);
     };
 
     $scope.onCancel = function() {
