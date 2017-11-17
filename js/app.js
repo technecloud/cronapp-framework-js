@@ -235,6 +235,24 @@ app.userEvents = {};
 app.config = {};
 app.config.datasourceApiVersion = 2;
 
+app.bindScope = function($scope, obj) {
+  var newObj = {};
+      
+  for (var x in obj) {
+    // var name = parentName+'.'+x;
+    // console.log(name);
+    if (typeof obj[x] == 'string')
+      newObj[x] = obj[x];
+    else if (typeof obj[x] == 'function')
+      newObj[x] = obj[x].bind($scope);
+    else {
+      newObj[x] = app.bindScope($scope, obj[x]);
+    }
+  }
+  
+  return newObj;
+};
+
 app.registerEventsCronapi = function($scope, $translate) {
   for (var x in app.userEvents)
     $scope[x] = app.userEvents[x].bind($scope);
@@ -243,7 +261,7 @@ app.registerEventsCronapi = function($scope, $translate) {
 
   try {
     if (cronapi) {
-      $scope['cronapi'] = cronapi;
+      $scope['cronapi'] = app.bindScope($scope, cronapi);
       $scope['cronapi'].$scope = $scope;
       $scope.safeApply = safeApply;
       if ($translate) {
@@ -256,7 +274,7 @@ app.registerEventsCronapi = function($scope, $translate) {
   }
   try {
     if (blockly)
-      $scope['blockly'] = blockly;
+      $scope['blockly'] = app.bindScope($scope, blockly);
   } catch (e) {
     console.info('Not loaded blockly functions');
     console.info(e);
