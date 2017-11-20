@@ -349,6 +349,21 @@
         }
       }
     })
+	
+	.directive('uiSelect', function ($compile) {
+      return {
+          restrict: 'E',
+          require: 'ngModel',
+          link: function (scope, element, attrs, ngModelCtrl) {
+              if (attrs.required != undefined || attrs.ngRequired === "true") {
+                $(element).append("<input autocomplete=\"off\" tabindex=\"-1\" class=\"uiSelectRequired ui-select-offscreen\" style=\"left: 50%!important; top: 100%!important;\" type=text ng-model=\""+attrs.ngModel+"\" required>");
+                var input = $(element).find("input.uiSelectRequired");
+                $compile(input)(element.scope());
+              }
+          }
+      };
+    })
+	
     .directive('cronappFilter', function() {
       return {
         restrict: 'A',
