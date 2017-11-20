@@ -47,14 +47,22 @@
                     });
                 }
             }
-
+            
             next();
         }
 
         $scope.getReport = function (reportName) {
             ReportService.getReport(reportName).then(function (result) {
                 if (result && result.data) {
-                    showParameters(JSON.parse(JSON.stringify(result.data)));
+                    // Abrir direto o relatorio , caso não haja parametros
+                    if(result.data.parameters.length == 0 ||  
+                      (result.data.parameters.length == 1 && result.data.parameters[0].name == 'DATA_LIMIT')) {
+                       ReportService.getPDFAsFile(result.data.reportName).then(function(obj){
+                         ReportService.openURLContent(obj.data);
+                       });
+                    } else {
+                     showParameters(JSON.parse(JSON.stringify(result.data)));
+                    }
                 }
             });
         };
