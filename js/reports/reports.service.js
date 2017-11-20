@@ -52,6 +52,8 @@
           $('#reportViewContext .modal-dialog').css('width' , '95%');
 
           setTimeout(function() {
+            var ctx = $('#reportViewContext');
+            $('body').append(ctx);
             $('#reportView').modal();
           }, 100);
           
