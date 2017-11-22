@@ -68,6 +68,7 @@
 			"text_en_US": "Button",
 			"class": "adjust-icon mdi mdi-stop",
 			"wrapper": false,
+			"autoWrapper": true,
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
 			"properties": {
 				"ng-click": {
@@ -196,6 +197,7 @@
 			"text_en_US": "Button Report",
 			"class": "adjust-icon mdi mdi-code-equal",
 			"wrapper": false,
+			"autoWrapper": true,
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button-report.template.html",
 			"properties": {
 				"ng-click": {
@@ -548,6 +550,7 @@
 			"text_en_US": "Image",
 			"class": "adjust-icon mdi mdi-image",
 			"wrapper": false,
+			"autoWrapper": true,
 			"template": "<img src=\"http://placehold.it/50x50\" class=\"\" style=\"display:block; width:100px; height: 100px;\"  xattr-position=\"\"/>",
 			"properties": {
 				"src": {
@@ -593,6 +596,7 @@
 			"text_pt_BR": "Grade vertical",
 			"text_en_US": "Vertical Grid",
 			"wrapper": false,
+			"autoWrapper": true,
 			"class": "adjust-icon mdi mdi-drag-vertical",
 			"template": "<div class=\"crn-layout-container\"><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div></div>",
 			"handleRules": {
@@ -612,6 +616,7 @@
 			"text_pt_BR": "Grade horizontal",
 			"text_en_US": "Horizontal Grid",
 			"wrapper": false,
+			"autoWrapper": true,
 			"class": "adjust-icon mdi mdi-drag-horizontal",
 			"template": "<div class=\"row\">\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n      </div>",
 			"handleRules": {
@@ -747,6 +752,7 @@
 			"text_pt_BR": "Envio de arquivo",
 			"text_en_US": "File Upload",
 			"wrapper": false,
+			"autoWrapper": true,
 			"class": "adjust-icon mdi mdi-cloud-upload",
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/fileupload.template.html",
 			"groupedChildren": [
@@ -1181,6 +1187,7 @@
 			"class": "adjust-icon mdi mdi-gauge",
 			"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/chart-gauge.template.html",
 			"wrapper":false,
+			"autoWrapper": true,
 			"forcedGroup":true
 		},
 		{
