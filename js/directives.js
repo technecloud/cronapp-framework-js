@@ -448,7 +448,7 @@
               
               if (textMask) {
                 
-                $(element).mask(mask, {reverse: true});
+                $(element).mask(mask);
               
                 if (removeMask) { 
                   ngModelCtrl.$formatters.push(function(value) {
