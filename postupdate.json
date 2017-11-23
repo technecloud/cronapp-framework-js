@@ -1,19 +1,19 @@
 {
   "includes": [
     {
-      "file": "index.xml",
+      "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/components/js/jquery.mask.min.js",
       "type": "script"
     },
     {
-      "file": "index.xml",
+      "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/components/js/jquery.maskMoney.js",
       "type": "script"
     }
   ],
   "removes": [
     {
-      "file": "index.xml",
+      "file": "index.html",
       "script": "plugins/ngMask/dist/ngMask.min.js",
       "type": "script"
     }
