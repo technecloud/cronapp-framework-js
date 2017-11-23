@@ -364,6 +364,108 @@
       };
     })
 	
+	.directive('mask', function ($compile) {
+      return {
+          restrict: 'A',
+          require: 'ngModel',
+          link: function (scope, element, attrs, ngModelCtrl) {
+            
+            var type = $(element).attr("type");
+            
+            $(element).attr("type", "text");
+            ngModelCtrl.$formatters = [];
+            ngModelCtrl.$parsers = [];
+            
+            var textMask = true;
+              
+            var removeMask = false;
+            
+            if (attrs.mask.endsWith(";0")) {
+              removeMask = true;
+            } 
+            
+            var mask = attrs.mask.replace(';1', '').replace(';0', '').trim();
+              
+            if (type == 'number') {
+                removeMask = true;
+                textMask = false;
+                
+                var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, ''); 
+                
+                var prefix = '';
+                var suffix = '';
+                var thousands = '';
+                var decimal = ',';
+                var precision = 0;
+                
+                if (mask.startsWith(currency)) {
+                  prefix = currency;
+                }
+                
+                else if (mask.endsWith(currency)) {
+                  suffix = currency;
+                }
+                
+                var pureMask = mask.trim().replace(prefix, '').replace(suffix, '').trim();
+                
+                if (pureMask.startsWith("#.")) {
+                  thousands = '.'; 
+                }
+                else if (pureMask.startsWith("#,")) {
+                  thousands = ','; 
+                }
+                
+                var dMask = null;
+                
+                if (pureMask.indexOf(",0") != -1) {
+                  decimal = ','; 
+                  dMask = ",0";
+                }
+                else if (pureMask.indexOf(".0") != -1) {
+                  decimal = '.'; 
+                  dMask = ".0";
+                }
+                
+                if (dMask != null) {
+                  var strD = pureMask.substring(pureMask.indexOf(dMask)+1);
+                  precision = strD.length;
+                }
+                
+                
+                $(element).maskMoney({'allowZero': false, 'prefix':prefix, 'suffix':suffix, 'allowNegative': true, 'thousands':thousands, 'decimal':decimal, 'precision': precision});
+              
+                ngModelCtrl.$formatters.push(function(value) {
+                  $(element).maskMoney('mask', value);
+                  var num = $(element).val();
+                  return num;
+                });
+              
+                ngModelCtrl.$parsers.push(function(value) {
+                 return $(element).maskMoney('unmasked')[0];
+                });
+                
+              }
+              
+              if (textMask) {
+                
+                $(element).mask(mask, {reverse: true});
+              
+                if (removeMask) { 
+                  ngModelCtrl.$formatters.push(function(value) {
+                    var v = $(element).masked(value);
+                    return v;
+                  });
+                
+                  ngModelCtrl.$parsers.push(function(value) {
+                    var v = $(element).cleanVal();
+                    return v;
+                  });
+                }
+              }
+          }
+      };
+    })
+	
     .directive('cronappFilter', function() {
       return {
         restrict: 'A',
