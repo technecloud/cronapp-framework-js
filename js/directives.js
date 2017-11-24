@@ -61,146 +61,147 @@
    * @see http://eonasdan.github.io/bootstrap-datetimepicker/
    */
   app.directive('asDate', function() {
-      return {
-        require: '^ngModel',
-        restrict: 'A',
-        link: function(scope, element, attrs, ngModel) {
-          if (!ngModel) {
-            return;
+    return {
+      require: '^ngModel',
+      restrict: 'A',
+      link: function(scope, element, attrs, ngModel) {
+        debugger;
+        if (!ngModel) {
+          return;
+        }
+
+        var format = patternFormat(element);
+
+        var options = {
+          format: format,
+          locale: 'pt-BR',
+          showTodayButton: true,
+          useStrict: true,
+          tooltips: {
+            today: 'Hoje',
+            clear: 'Limpar seleção',
+            close: 'Fechar',
+            selectMonth: 'Selecionar mês',
+            prevMonth: 'Mês anterior',
+            nextMonth: 'Próximo mês',
+            selectYear: 'Selecionar ano',
+            prevYear: 'Ano anterior',
+            nextYear: 'Próximo ano',
+            selectDecade: 'Selecionar década',
+            prevDecade: 'Década anterior',
+            nextDecade: 'Próxima década',
+            prevCentury: 'Século anterior',
+            nextCentury: 'Próximo século'
           }
+        };
 
-          var format = patternFormat(element);
+        if (format != 'DD/MM/YYYY') {
+          options.sideBySide = true;
+        }
 
-          var options = {
-            format: format,
-            locale: 'pt-BR',
-            showTodayButton: true,
-            useStrict: true,
-            tooltips: {
-              today: 'Hoje',
-              clear: 'Limpar seleção',
-              close: 'Fechar',
-              selectMonth: 'Selecionar mês',
-              prevMonth: 'Mês anterior',
-              nextMonth: 'Próximo mês',
-              selectYear: 'Selecionar ano',
-              prevYear: 'Ano anterior',
-              nextYear: 'Próximo ano',
-              selectDecade: 'Selecionar década',
-              prevDecade: 'Década anterior',
-              nextDecade: 'Próxima década',
-              prevCentury: 'Século anterior',
-              nextCentury: 'Próximo século'
-            }
-          };
+        element.datetimepicker(options);
 
-          if (format != 'DD/MM/YYYY') {
-            options.sideBySide = true;
+        element.on('dp.change', function() {
+          if ($(this).is(":visible")) {
+            $(this).trigger('change');
+            scope.$apply(read);
           }
+        });
 
-          element.datetimepicker(options);
+        ngModel.$render = function() {
+          if(ngModel.$viewValue){
+            var momentDate = moment(ngModel.$viewValue);
 
-          element.on('dp.change', function() {
-            if ($(this).is(":visible")) {
-              $(this).trigger('change');
-              scope.$apply(read);
+            if(momentDate.isValid()){
+              element.val( momentDate.format(patternFormat(element)));
+            }else{
+              var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
+              momentDate = moment(dateInMilliseconds);
+              if(momentDate.isValid()){
+                element.val( momentDate.format(patternFormat(element)));
+              }else{
+                element.val('');
+              }
             }
-          });
-
-      ngModel.$render = function() {
-			if(ngModel.$viewValue){
-			  var momentDate = moment(ngModel.$viewValue);
-
-			  if(momentDate.isValid()){
-				element.val( momentDate.format(patternFormat(element)));
-			  }else{
-				var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
-				momentDate = moment(dateInMilliseconds);
-				if(momentDate.isValid()){
-				  element.val( momentDate.format(patternFormat(element)));
-				}else{
-				  element.val('');
-				}
-			  }
-			}else{
-			  element.data("DateTimePicker").clear();
-			  element.val('');
-			}
-		  }
-
-          read();
-
-          function read() {
-            var value = element.val();
-            var momentDate = moment(value, patternFormat(element));
-            if (momentDate.isValid())
-              ngModel.$setViewValue(momentDate.toDate());
+          }else{
+            element.data("DateTimePicker").clear();
+            element.val('');
           }
         }
-      };
-    })
 
-    .directive('ngDestroy', function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs, ctrl) {
-          element.on('$destroy', function() {
-            if (attrs.ngDestroy && attrs.ngDestroy.length > 0)
-              if (attrs.ngDestroy.indexOf('app.') > -1 || attrs.ngDestroy.indexOf('blockly.') > -1)
-                scope.$eval(attrs.ngDestroy);
-              else
-                eval(attrs.ngDestroy);
-          });
+        read();
+
+        function read() {
+          var value = element.val();
+          var momentDate = moment(value, patternFormat(element));
+          if (momentDate.isValid())
+            ngModel.$setViewValue(momentDate.toDate());
         }
       }
-    })
-    
-    .directive('dynamicImage', function($compile) {
-      var template = '';
-      return {
-        restrict: 'E',
-        replace: true,
-        scope: {
+    };
+  })
+
+      .directive('ngDestroy', function() {
+        return {
+          restrict: 'A',
+          link: function(scope, element, attrs, ctrl) {
+            element.on('$destroy', function() {
+              if (attrs.ngDestroy && attrs.ngDestroy.length > 0)
+                if (attrs.ngDestroy.indexOf('app.') > -1 || attrs.ngDestroy.indexOf('blockly.') > -1)
+                  scope.$eval(attrs.ngDestroy);
+                else
+                  eval(attrs.ngDestroy);
+            });
+          }
+        }
+      })
+
+      .directive('dynamicImage', function($compile) {
+        var template = '';
+        return {
+          restrict: 'E',
+          replace: true,
+          scope: {
             ngModel: '@',
             width: '@',
             height: '@',
             style: '@',
             class: '@'
-        },
-        require: 'ngModel',
-        template: '<div></div>',
-        init: function(s) {
-          if (!s.ngModel)
-            s.ngModel = '';
-          if (!s.width)
-            s.width = '128';
-          if (!s.height)
-            s.height = '128';
-          if (!s.style)
-            s.style = '';
-          if (!s.class)
-            s.class = '';
-          if (!this.containsLetter(s.width))
-            s.width += 'px';
-          if (!this.containsLetter(s.height))
-            s.height += 'px';
-        },
-        containsLetter: function(value) {
-          var containsLetter;
-          for (var i=0; i<value.length; i++) {
-            containsLetter = true;
-            for (var number = 0; number <10; number++)
-              if (parseInt(value[i]) == number)
-                containsLetter = false;
-            if (containsLetter)
-              break;
-          }
-          return containsLetter;
-        },
-        link: function(scope, element, attr) {
-          this.init(scope);
-          var s = scope;
-          var templateDyn    = '<div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover">\
+          },
+          require: 'ngModel',
+          template: '<div></div>',
+          init: function(s) {
+            if (!s.ngModel)
+              s.ngModel = '';
+            if (!s.width)
+              s.width = '128';
+            if (!s.height)
+              s.height = '128';
+            if (!s.style)
+              s.style = '';
+            if (!s.class)
+              s.class = '';
+            if (!this.containsLetter(s.width))
+              s.width += 'px';
+            if (!this.containsLetter(s.height))
+              s.height += 'px';
+          },
+          containsLetter: function(value) {
+            var containsLetter;
+            for (var i=0; i<value.length; i++) {
+              containsLetter = true;
+              for (var number = 0; number <10; number++)
+                if (parseInt(value[i]) == number)
+                  containsLetter = false;
+              if (containsLetter)
+                break;
+            }
+            return containsLetter;
+          },
+          link: function(scope, element, attr) {
+            this.init(scope);
+            var s = scope;
+            var templateDyn    = '<div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover">\
                                   <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
                                   <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="!$ngModel$" data-ng-src="/plugins/cronapp-framework-js/img/selectImg.svg" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*;capture=camera">\
                                   <div class="remove btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
@@ -210,41 +211,41 @@
                                     <span class="glyphicon glyphicon-facetime-video"></span>\
                                   </div>\
                                 </div>';
-          element.append(templateDyn
-                          .split('$height$').join(s.height)
-                          .split('$width$').join(s.width)
-                          .split('$ngModel$').join(s.ngModel)
-                          .split('$style$').join(s.style)
-                          .split('$class$').join(s.class)
-                          );
-          $compile(element)(element.scope());
-      }
-    }
-  })
-  .directive('dynamicFile', function($compile) {
-      var template = '';
-      return {
-        restrict: 'E',
-        replace: true,
-        scope: {
+            element.append(templateDyn
+                .split('$height$').join(s.height)
+                .split('$width$').join(s.width)
+                .split('$ngModel$').join(s.ngModel)
+                .split('$style$').join(s.style)
+                .split('$class$').join(s.class)
+            );
+            $compile(element)(element.scope());
+          }
+        }
+      })
+      .directive('dynamicFile', function($compile) {
+        var template = '';
+        return {
+          restrict: 'E',
+          replace: true,
+          scope: {
             ngModel: '@',
-        },
-        require: 'ngModel',
-        template: '<div></div>',
-        init: function(s) {
-          if (!s.ngModel)
-            s.ngModel = '';
-        },
-        link: function(scope, element, attr) {
-          this.init(scope);
-          var s = scope;
-          
-          var splitedNgModel = s.ngModel.split('.');
-          var datasource = splitedNgModel[0];
-          var field = splitedNgModel[splitedNgModel.length-1];
-          var number = Math.floor((Math.random() * 1000) + 20);
-          
-          var templateDyn    = '<div ng-show="!$ngModel$">\
+          },
+          require: 'ngModel',
+          template: '<div></div>',
+          init: function(s) {
+            if (!s.ngModel)
+              s.ngModel = '';
+          },
+          link: function(scope, element, attr) {
+            this.init(scope);
+            var s = scope;
+
+            var splitedNgModel = s.ngModel.split('.');
+            var datasource = splitedNgModel[0];
+            var field = splitedNgModel[splitedNgModel.length-1];
+            var number = Math.floor((Math.random() * 1000) + 20);
+
+            var templateDyn    = '<div ng-show="!$ngModel$">\
                                   <div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover"> \
                                     <img class="ng-scope" style="height: 128px; width: 128px;" ng-if="!$ngModel$" data-ng-src="/plugins/cronapp-framework-js/img/selectFile.png" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" accept="*">\
                                     <progress id="uploadprogress$number$" max="100" value="0" style="position: absolute; width: 128px; margin-top: -134px;">0</progress>\
@@ -259,175 +260,341 @@
                                     <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">download</a> \
                                   </div> \
                                 </div> ';
-          element.append(templateDyn
-                          .split('$ngModel$').join(s.ngModel)
-                          .split('$datasource$').join(datasource)
-                          .split('$field$').join(field)
-                          .split('$number$').join(number)
-                          );
-          $compile(element)(element.scope());
-      }
-    }
-  })
-    .directive('pwCheck', [function() {
-      'use strict';
-      return {
-        require: 'ngModel',
-        link: function(scope, elem, attrs, ctrl) {
-          var firstPassword = '#' + attrs.pwCheck;
-          elem.add(firstPassword).on('keyup', function() {
-            scope.$apply(function() {
-              var v = elem.val() === $(firstPassword).val();
-              ctrl.$setValidity('pwmatch', v);
+            element.append(templateDyn
+                .split('$ngModel$').join(s.ngModel)
+                .split('$datasource$').join(datasource)
+                .split('$field$').join(field)
+                .split('$number$').join(number)
+            );
+            $compile(element)(element.scope());
+          }
+        }
+      })
+      .directive('pwCheck', [function() {
+        'use strict';
+        return {
+          require: 'ngModel',
+          link: function(scope, elem, attrs, ctrl) {
+            var firstPassword = '#' + attrs.pwCheck;
+            elem.add(firstPassword).on('keyup', function() {
+              scope.$apply(function() {
+                var v = elem.val() === $(firstPassword).val();
+                ctrl.$setValidity('pwmatch', v);
+              });
             });
-          });
-        }
-      }
-    }])
-
-
-    /**
-     * Validação de campos CPF e CNPJ,
-     * para utilizar essa diretiva, adicione o atributo valid com o valor
-     * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
-     */
-    .directive('valid', function() {
-      return {
-        require: '^ngModel',
-        restrict: 'A',
-        link: function(scope, element, attrs, ngModel) {
-          var validator = {
-            'cpf': CPF,
-            'cnpj': CNPJ
-          };
-
-          ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
-            var value = modelValue || viewValue;
-            var fieldValid = validator[attrs.valid].isValid(value);
-            if (!fieldValid) {
-              element[0].setCustomValidity(element[0].dataset['errorMessage']);
-            } else {
-              element[0].setCustomValidity("");
-            }
-            return (fieldValid || !value);
-          };
-        }
-      }
-    })
-
-    .directive('cronappSecurity', function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          var roles = [];
-          if (scope.session && scope.session.roles) {
-            roles = scope.session.roles.toLowerCase().split(",");
           }
+        }
+      }])
 
-          var perms = parsePermission(attrs.cronappSecurity);
-          var show = false;
-          var enabled = false;
-          for (var i=0;i<roles.length;i++) {
-            var role = roles[i].trim();
-            if (role) {
-              if (perms.visible[role]) {
-                show = true;
+
+      /**
+       * Validação de campos CPF e CNPJ,
+       * para utilizar essa diretiva, adicione o atributo valid com o valor
+       * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
+       */
+      .directive('valid', function() {
+        return {
+          require: '^ngModel',
+          restrict: 'A',
+          link: function(scope, element, attrs, ngModel) {
+            var validator = {
+              'cpf': CPF,
+              'cnpj': CNPJ
+            };
+
+            ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
+              var value = modelValue || viewValue;
+              var fieldValid = validator[attrs.valid].isValid(value);
+              if (!fieldValid) {
+                element[0].setCustomValidity(element[0].dataset['errorMessage']);
+              } else {
+                element[0].setCustomValidity("");
               }
-              if (perms.enabled[role]) {
-                enabled = true;
-              }
-            }
-          }
-
-          if (!show) {
-            $(element).hide();
-          }
-
-          if (!enabled) {
-            $(element).find('*').addBack().attr('disabled', true);
+              return (fieldValid || !value);
+            };
           }
         }
-      }
-    })
-	
-	.directive('uiSelect', function ($compile) {
-      return {
+      })
+
+      .directive('cronappSecurity', function() {
+        return {
+          restrict: 'A',
+          link: function(scope, element, attrs) {
+            var roles = [];
+            if (scope.session && scope.session.roles) {
+              roles = scope.session.roles.toLowerCase().split(",");
+            }
+
+            var perms = parsePermission(attrs.cronappSecurity);
+            var show = false;
+            var enabled = false;
+            for (var i=0;i<roles.length;i++) {
+              var role = roles[i].trim();
+              if (role) {
+                if (perms.visible[role]) {
+                  show = true;
+                }
+                if (perms.enabled[role]) {
+                  enabled = true;
+                }
+              }
+            }
+
+            if (!show) {
+              $(element).hide();
+            }
+
+            if (!enabled) {
+              $(element).find('*').addBack().attr('disabled', true);
+            }
+          }
+        }
+      })
+
+      .directive('uiSelect', function ($compile) {
+        return {
           restrict: 'E',
           require: 'ngModel',
           link: function (scope, element, attrs, ngModelCtrl) {
-              if (attrs.required != undefined || attrs.ngRequired === "true") {
-                $(element).append("<input autocomplete=\"off\" tabindex=\"-1\" class=\"uiSelectRequired ui-select-offscreen\" style=\"left: 50%!important; top: 100%!important;\" type=text ng-model=\""+attrs.ngModel+"\" required>");
-                var input = $(element).find("input.uiSelectRequired");
-                $compile(input)(element.scope());
-              }
-          }
-      };
-    })
-	
-    .directive('cronappFilter', function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          var typeElement = $(element).attr('type');
-          if (attrs.asDate != undefined)
-            typeElement = 'date';
-          
-          var filterTemplate = '';
-          var filtersSplited = attrs.cronappFilter.split(';');
-          $(filtersSplited).each(function() {
-            if (this.length > 0) {
-              //Se for do tipo text passa parametro como like
-              if (typeElement == 'text')
-                filterTemplate+=this+'@=%{value}%;';
-              //Senão passa parametro como valor exato
-              else
-                filterTemplate+=this+'={value};';
+            if (attrs.required != undefined || attrs.ngRequired === "true") {
+              $(element).append("<input autocomplete=\"off\" tabindex=\"-1\" class=\"uiSelectRequired ui-select-offscreen\" style=\"left: 50%!important; top: 100%!important;\" type=text ng-model=\""+attrs.ngModel+"\" required>");
+              var input = $(element).find("input.uiSelectRequired");
+              $compile(input)(element.scope());
             }
-          });
-          if (filterTemplate.length > 0)
-            filterTemplate = filterTemplate.substr(0, filterTemplate.length-1);
-          else
-            filterTemplate = '%{value}%';
-          
-          if (typeElement == 'text') {
-            $(element).on("keyup", function() {
-              var datasource = eval(attrs.crnDatasource);
-              var bindedFilter = filterTemplate.split('{value}').join(this.value);
-              if (this.value.length == 0)
-                bindedFilter = '';
-                
-              datasource.search(bindedFilter);
-            });
           }
-          else {
-            $(element).on("change", function() {
-              var datasource = eval(attrs.crnDatasource);
-              
-              var value = undefined;
-              var typeElement = $(this).attr('type');
-              if (attrs.asDate != undefined)
-                typeElement = 'date';
-                
-              if (typeElement == 'checkbox')
-                value = $(this).is(':checked');
-              else if (typeElement == 'date') {
-                value = this.value;
-                if (this.value.length > 0) {
-                  var momentDate = moment(this.value, patternFormat(this));
-                  value = momentDate.toDate().toISOString();
+        };
+      })
+
+      .filter('mask',function() {
+        return function(value, maskValue) {
+          var input = $("<input type=\"text\">");
+          if (value instanceof Date) {
+            return moment(value).format(maskValue);
+          } else {
+            input.mask(maskValue);
+            return input.masked(value);;
+          }
+        };
+      })
+
+      .directive('mask', function ($compile) {
+        return {
+          restrict: 'A',
+          require: 'ngModel',
+          link: function (scope, element, attrs, ngModelCtrl) {
+
+            var $element = $(element);
+
+            var type = $element.attr("type");
+
+            $element.attr("type", "text");
+            ngModelCtrl.$formatters = [];
+            ngModelCtrl.$parsers = [];
+
+            var textMask = true;
+
+            var removeMask = false;
+
+            if (attrs.mask.endsWith(";0")) {
+              removeMask = true;
+            }
+
+            var mask = attrs.mask.replace(';1', '').replace(';0', '').trim();
+            if (type == 'date' || type == 'datetime-local') {
+
+              var options = {
+                format: mask,
+                locale: 'pt-BR',
+                showTodayButton: true,
+                useStrict: true,
+                tooltips: {
+                  today: 'Hoje',
+                  clear: 'Limpar seleção',
+                  close: 'Fechar',
+                  selectMonth: 'Selecionar mês',
+                  prevMonth: 'Mês anterior',
+                  nextMonth: 'Próximo mês',
+                  selectYear: 'Selecionar ano',
+                  prevYear: 'Ano anterior',
+                  nextYear: 'Próximo ano',
+                  selectDecade: 'Selecionar década',
+                  prevDecade: 'Década anterior',
+                  nextDecade: 'Próxima década',
+                  prevCentury: 'Século anterior',
+                  nextCentury: 'Próximo século'
                 }
+              };
+
+              if (mask != 'DD/MM/YYYY') {
+                options.sideBySide = true;
               }
-              else
-                value = this.value;
-              
-              var bindedFilter = filterTemplate.split('{value}').join(value);
-              if (value.toString().length == 0)
-                bindedFilter = '';
-              datasource.search(bindedFilter);
-            });
+
+              $element.datetimepicker(options);
+
+              $element.on('dp.change', function() {
+                if ($(this).is(":visible")) {
+                  $(this).trigger('change');
+                  scope.$apply(function() {
+                    var value = $element.val();
+                    var momentDate = moment(value, mask);
+                    if (momentDate.isValid())
+                      ngModelCtrl.$setViewValue(momentDate.toDate());
+                  });
+                }
+              });
+
+              ngModelCtrl.$formatters.push(function(value) {
+                return moment(value).format(mask);
+              });
+
+              ngModelCtrl.$parsers.push(function(value) {
+                return moment(value, mask).toDate();
+              });
+
+            } else if (type == 'number') {
+              removeMask = true;
+              textMask = false;
+
+              var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, '');
+
+              var prefix = '';
+              var suffix = '';
+              var thousands = '';
+              var decimal = ',';
+              var precision = 0;
+
+              if (mask.startsWith(currency)) {
+                prefix = currency;
+              }
+
+              else if (mask.endsWith(currency)) {
+                suffix = currency;
+              }
+
+              var pureMask = mask.trim().replace(prefix, '').replace(suffix, '').trim();
+
+              if (pureMask.startsWith("#.")) {
+                thousands = '.';
+              }
+              else if (pureMask.startsWith("#,")) {
+                thousands = ',';
+              }
+
+              var dMask = null;
+
+              if (pureMask.indexOf(",0") != -1) {
+                decimal = ',';
+                dMask = ",0";
+              }
+              else if (pureMask.indexOf(".0") != -1) {
+                decimal = '.';
+                dMask = ".0";
+              }
+
+              if (dMask != null) {
+                var strD = pureMask.substring(pureMask.indexOf(dMask)+1);
+                precision = strD.length;
+              }
+
+
+              $(element).maskMoney({'allowZero': false, 'prefix':prefix, 'suffix':suffix, 'allowNegative': true, 'thousands':thousands, 'decimal':decimal, 'precision': precision});
+
+              ngModelCtrl.$formatters.push(function(value) {
+                $element.maskMoney('mask', value);
+                var num = $element.val();
+                return num;
+              });
+
+              ngModelCtrl.$parsers.push(function(value) {
+                return $element.maskMoney('unmasked')[0];
+              });
+
+            }
+
+            else if (type == 'text') {
+
+              $element.mask(mask);
+
+              if (removeMask) {
+                ngModelCtrl.$formatters.push(function(value) {
+                  var v = $element.masked(value);
+                  return v;
+                });
+
+                ngModelCtrl.$parsers.push(function(value) {
+                  var v = $element.cleanVal();
+                  return v;
+                });
+              }
+            }
           }
-          
+        };
+      })
+
+      .directive('cronappFilter', function() {
+        return {
+          restrict: 'A',
+          link: function(scope, element, attrs) {
+            var typeElement = $(element).attr('type');
+            if (attrs.asDate != undefined)
+              typeElement = 'date';
+
+            var filterTemplate = '';
+            var filtersSplited = attrs.cronappFilter.split(';');
+            $(filtersSplited).each(function() {
+              if (this.length > 0) {
+                //Se for do tipo text passa parametro como like
+                if (typeElement == 'text')
+                  filterTemplate+=this+'@=%{value}%;';
+                //Senão passa parametro como valor exato
+                else
+                  filterTemplate+=this+'={value};';
+              }
+            });
+            if (filterTemplate.length > 0)
+              filterTemplate = filterTemplate.substr(0, filterTemplate.length-1);
+            else
+              filterTemplate = '%{value}%';
+
+            if (typeElement == 'text') {
+              $(element).on("keyup", function() {
+                var datasource = eval(attrs.crnDatasource);
+                var bindedFilter = filterTemplate.split('{value}').join(this.value);
+                if (this.value.length == 0)
+                  bindedFilter = '';
+
+                datasource.search(bindedFilter);
+              });
+            }
+            else {
+              $(element).on("change", function() {
+                var datasource = eval(attrs.crnDatasource);
+
+                var value = undefined;
+                var typeElement = $(this).attr('type');
+                if (attrs.asDate != undefined)
+                  typeElement = 'date';
+
+                if (typeElement == 'checkbox')
+                  value = $(this).is(':checked');
+                else if (typeElement == 'date') {
+                  value = this.value;
+                  if (this.value.length > 0) {
+                    var momentDate = moment(this.value, patternFormat(this));
+                    value = momentDate.toDate().toISOString();
+                  }
+                }
+                else
+                  value = this.value;
+
+                var bindedFilter = filterTemplate.split('{value}').join(value);
+                if (value.toString().length == 0)
+                  bindedFilter = '';
+                datasource.search(bindedFilter);
+              });
+            }
+
+          }
         }
-      }
-    })
+      })
 }(app));

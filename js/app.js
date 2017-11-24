@@ -8,7 +8,6 @@ var cronappModules = [
   'custom.services',
   'datasourcejs',
   'chart.js',
-  'ngMask',
   'ngJustGage',
   'pascalprecht.translate',
   'tmh.dynamicLocale',
