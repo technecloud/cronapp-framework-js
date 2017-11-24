@@ -940,8 +940,8 @@
           "displayName_pt_BR": "Opção selecionada",
           "displayName_en_US": "Option selected",
           "type": "datasourceFieldList",
-          "onSave": "{{$select.selected.{value}}}",
-          "onDisplay": "\\{\\{\\$select\\.selected\\.\\s*(.*?)\\s*\\}\\}"
+          "onSave": "javascript:function() { var result = ''; var splited = arguments[0].split('+'); for (var i = 0; i<splited.length; i++) { if (splited[i].trim().startsWith(\"'\") || splited[i].trim().startsWith('\"')) result += splited[i].trim() + ' + '; else result += '$select.selected.' + splited[i].trim() + ' + ';  } result = result.substr(0, result.length - 2); return '{{'+result.trim()+'}}'; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace(/select.selected./g,'').replace('{{','').replace('}}','').replace(/\\$/g,''); }"
         },
         {
           "editExpression": false,
@@ -950,8 +950,8 @@
           "displayName_pt_BR": "Opção texto",
           "displayName_en_US": "Option text",
           "type": "datasourceFieldList",
-          "onSave": "{{rowData.{value}}}",
-          "onDisplay": "\\{\\{rowData\\.\\s*(.*?)\\s*\\}\\}"
+          "onSave": "javascript:function() { var result = ''; var splited = arguments[0].split('+'); for (var i = 0; i<splited.length; i++) { if (splited[i].trim().startsWith(\"'\") || splited[i].trim().startsWith('\"')) result += splited[i].trim() + ' + '; else result += 'rowData.' + splited[i].trim() + ' + ';  } result = result.substr(0, result.length - 2); return '{{'+result.trim()+'}}'; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace(/rowData./g,'').replace('{{','').replace('}}','').replace(/\\$/g,''); }"
         }
       ],
       "groupedChildren": [
