@@ -45,7 +45,7 @@
           var context = $('#reportViewContext');
           
           if (!context.get(0)) {
-            console.log('ng-include[#reportViewContext]');
+            console.log('include[#reportViewContext]');
             var body = $('body');
             body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
             var scope = angular.element(body.get(0)).scope();
@@ -60,13 +60,19 @@
             frame.attr('height', h - 200);
             frame.attr('width','100%');
             frame.attr('src', url + "?download=false"); 
-            $('#reportView .modal-body').html(frame);
-            $('#reportViewContext .modal-dialog').css('width' , '95%');
-  
-            setTimeout(function() {
-              $('body').append(context);
-              $('#reportView').modal();
-            }, 100);
+            var m = $('#reportView .modal-body');
+            if (m.get(0)) {
+              m.html(frame);
+              $('#reportViewContext .modal-dialog').css('width' , '95%');
+              setTimeout(function() {
+                console.log('open[#reportViewContext]');
+                $('body').append(context);
+                $('#reportView').modal();
+              }, 100);
+            } else {
+              console.log('wait[#reportViewContext]');
+              setTimeout(include, 200);
+            }
           }
           
           setTimeout(include, 200);
