@@ -428,29 +428,11 @@
           "type": "event"
         },
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
-        "mask": {
+        "mask-placeholder": {
           "selector" : "input"
-        },
-        "type": {
-          "name": "type",
-          "type": "list",
-          "options": [
-            {
-              "key": "text",
-              "value": "Text"
-            },
-            {
-              "key": "number",
-              "value": "Number"
-            },
-            {
-              "key": "password",
-              "value": "Password"
-            }
-          ]
         }
       },
       "type": {
@@ -477,7 +459,7 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicimage.template.html",
       "properties": {
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
@@ -502,7 +484,7 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicfile.template.html",
       "properties": {
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
@@ -680,7 +662,7 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/date.template.html",
       "properties": {
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
@@ -705,7 +687,7 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/time.template.html",
       "properties": {
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
@@ -730,7 +712,7 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datetime.template.html",
       "properties": {
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
@@ -908,7 +890,7 @@
           "selector": "ui-select",
           "displayName_pt_BR": "Campo",
           "displayName_en_US": "Field",
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       ],
@@ -948,7 +930,7 @@
           "displayName_pt_BR": "Campo",
           "displayName_en_US": "Field",
           "type": "allDatasourceFields",
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
@@ -1011,7 +993,7 @@
           "type": "event"
         },
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
@@ -1383,7 +1365,7 @@
       "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"none\"class=\"form-control\" rows=\"5\"></textarea></div>",
       "properties": {
         "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
