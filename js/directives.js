@@ -411,6 +411,7 @@ function maskDirective($compile, $translate) {
           options.sideBySide = true;
         }
 
+        $element.wrap("<div style=\"position:relative\"></div>")
         $element.datetimepicker(options);
 
         $element.on('dp.change', function () {
