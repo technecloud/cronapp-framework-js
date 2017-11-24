@@ -88,5 +88,10 @@
   "Print" : "Print",
   "Cancel" : "Cancel",
   "GeneratePDF" : "Generate report PDF file",
-  "Close" : "Close"
+  "Close" : "Close",
+  "Format.DateTime" : "MM/DD/YYYY h:mm:ss a",
+  "Format.Date" : "MM/DD/YYYY",
+  "Format.Hour" : "h:mm:ss a",
+  "Format.Money" : "#,#00.00",
+  "Format.Decimal" : "0.00"
 }
