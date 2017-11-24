@@ -50,96 +50,7 @@
     return result;
   }
 
-  /**
-   * Em todo elemento que possuir o atibuto as-date será
-   * aplicado o componente Datetimepicker (http://eonasdan.github.io/bootstrap-datetimepicker/)
-   *
-   * O componente se adequa de acordo com o formato, definido através do atributo format
-   * espeficado no elemento.
-   * Para data simples use format="DD/MMM/YYYY", para data e hora use format="DD/MM/YYYY HH:mm:ss"
-   *
-   * @see http://eonasdan.github.io/bootstrap-datetimepicker/
-   */
-  app.directive('asDate', function() {
-    return {
-      require: '^ngModel',
-      restrict: 'A',
-      link: function(scope, element, attrs, ngModel) {
-        debugger;
-        if (!ngModel) {
-          return;
-        }
-
-        var format = patternFormat(element);
-
-        var options = {
-          format: format,
-          locale: 'pt-BR',
-          showTodayButton: true,
-          useStrict: true,
-          tooltips: {
-            today: 'Hoje',
-            clear: 'Limpar seleção',
-            close: 'Fechar',
-            selectMonth: 'Selecionar mês',
-            prevMonth: 'Mês anterior',
-            nextMonth: 'Próximo mês',
-            selectYear: 'Selecionar ano',
-            prevYear: 'Ano anterior',
-            nextYear: 'Próximo ano',
-            selectDecade: 'Selecionar década',
-            prevDecade: 'Década anterior',
-            nextDecade: 'Próxima década',
-            prevCentury: 'Século anterior',
-            nextCentury: 'Próximo século'
-          }
-        };
-
-        if (format != 'DD/MM/YYYY') {
-          options.sideBySide = true;
-        }
-
-        element.datetimepicker(options);
-
-        element.on('dp.change', function() {
-          if ($(this).is(":visible")) {
-            $(this).trigger('change');
-            scope.$apply(read);
-          }
-        });
-
-        ngModel.$render = function() {
-          if(ngModel.$viewValue){
-            var momentDate = moment(ngModel.$viewValue);
-
-            if(momentDate.isValid()){
-              element.val( momentDate.format(patternFormat(element)));
-            }else{
-              var dateInMilliseconds = parseInt(ngModel.$viewValue, 10);
-              momentDate = moment(dateInMilliseconds);
-              if(momentDate.isValid()){
-                element.val( momentDate.format(patternFormat(element)));
-              }else{
-                element.val('');
-              }
-            }
-          }else{
-            element.data("DateTimePicker").clear();
-            element.val('');
-          }
-        }
-
-        read();
-
-        function read() {
-          var value = element.val();
-          var momentDate = moment(value, patternFormat(element));
-          if (momentDate.isValid())
-            ngModel.$setViewValue(momentDate.toDate());
-        }
-      }
-    };
-  })
+  app.directive('asDate', maskDirective)
 
       .directive('ngDestroy', function() {
         return {
@@ -365,8 +276,11 @@
         };
       })
 
-      .filter('mask',function() {
+      .filter('mask',function($translate) {
         return function(value, maskValue) {
+          maskValue = parseMaskType(maskValue, $translate);
+          if (!maskValue)
+            return value;
           var input = $("<input type=\"text\">");
           if (value instanceof Date) {
             return moment(value).format(maskValue);
@@ -377,159 +291,7 @@
         };
       })
 
-      .directive('mask', function ($compile) {
-        return {
-          restrict: 'A',
-          require: 'ngModel',
-          link: function (scope, element, attrs, ngModelCtrl) {
-
-            var $element = $(element);
-
-            var type = $element.attr("type");
-
-            $element.attr("type", "text");
-            ngModelCtrl.$formatters = [];
-            ngModelCtrl.$parsers = [];
-
-            var textMask = true;
-
-            var removeMask = false;
-
-            if (attrs.mask.endsWith(";0")) {
-              removeMask = true;
-            }
-
-            var mask = attrs.mask.replace(';1', '').replace(';0', '').trim();
-            if (type == 'date' || type == 'datetime-local') {
-
-              var options = {
-                format: mask,
-                locale: 'pt-BR',
-                showTodayButton: true,
-                useStrict: true,
-                tooltips: {
-                  today: 'Hoje',
-                  clear: 'Limpar seleção',
-                  close: 'Fechar',
-                  selectMonth: 'Selecionar mês',
-                  prevMonth: 'Mês anterior',
-                  nextMonth: 'Próximo mês',
-                  selectYear: 'Selecionar ano',
-                  prevYear: 'Ano anterior',
-                  nextYear: 'Próximo ano',
-                  selectDecade: 'Selecionar década',
-                  prevDecade: 'Década anterior',
-                  nextDecade: 'Próxima década',
-                  prevCentury: 'Século anterior',
-                  nextCentury: 'Próximo século'
-                }
-              };
-
-              if (mask != 'DD/MM/YYYY') {
-                options.sideBySide = true;
-              }
-
-              $element.datetimepicker(options);
-
-              $element.on('dp.change', function() {
-                if ($(this).is(":visible")) {
-                  $(this).trigger('change');
-                  scope.$apply(function() {
-                    var value = $element.val();
-                    var momentDate = moment(value, mask);
-                    if (momentDate.isValid())
-                      ngModelCtrl.$setViewValue(momentDate.toDate());
-                  });
-                }
-              });
-
-              ngModelCtrl.$formatters.push(function(value) {
-                return moment(value).format(mask);
-              });
-
-              ngModelCtrl.$parsers.push(function(value) {
-                return moment(value, mask).toDate();
-              });
-
-            } else if (type == 'number') {
-              removeMask = true;
-              textMask = false;
-
-              var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, '');
-
-              var prefix = '';
-              var suffix = '';
-              var thousands = '';
-              var decimal = ',';
-              var precision = 0;
-
-              if (mask.startsWith(currency)) {
-                prefix = currency;
-              }
-
-              else if (mask.endsWith(currency)) {
-                suffix = currency;
-              }
-
-              var pureMask = mask.trim().replace(prefix, '').replace(suffix, '').trim();
-
-              if (pureMask.startsWith("#.")) {
-                thousands = '.';
-              }
-              else if (pureMask.startsWith("#,")) {
-                thousands = ',';
-              }
-
-              var dMask = null;
-
-              if (pureMask.indexOf(",0") != -1) {
-                decimal = ',';
-                dMask = ",0";
-              }
-              else if (pureMask.indexOf(".0") != -1) {
-                decimal = '.';
-                dMask = ".0";
-              }
-
-              if (dMask != null) {
-                var strD = pureMask.substring(pureMask.indexOf(dMask)+1);
-                precision = strD.length;
-              }
-
-
-              $(element).maskMoney({'allowZero': false, 'prefix':prefix, 'suffix':suffix, 'allowNegative': true, 'thousands':thousands, 'decimal':decimal, 'precision': precision});
-
-              ngModelCtrl.$formatters.push(function(value) {
-                $element.maskMoney('mask', value);
-                var num = $element.val();
-                return num;
-              });
-
-              ngModelCtrl.$parsers.push(function(value) {
-                return $element.maskMoney('unmasked')[0];
-              });
-
-            }
-
-            else if (type == 'text') {
-
-              $element.mask(mask);
-
-              if (removeMask) {
-                ngModelCtrl.$formatters.push(function(value) {
-                  var v = $element.masked(value);
-                  return v;
-                });
-
-                ngModelCtrl.$parsers.push(function(value) {
-                  var v = $element.cleanVal();
-                  return v;
-                });
-              }
-            }
-          }
-        };
-      })
+      .directive('mask', maskDirective)
 
       .directive('cronappFilter', function() {
         return {
@@ -598,3 +360,206 @@
         }
       })
 }(app));
+
+function maskDirective($compile, $translate) {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function (scope, element, attrs, ngModelCtrl) {
+
+      if (!ngModelCtrl)
+        return;
+
+      var $element = $(element);
+
+      var type = $element.attr("type");
+
+      $element.attr("type", "text");
+      ngModelCtrl.$formatters = [];
+      ngModelCtrl.$parsers = [];
+
+      if (attrs.asDate !== undefined)
+        type = "date";
+
+      var textMask = true;
+
+      var removeMask = false;
+
+      var attrMask = attrs.mask || attrs.format;
+
+      if (!attrMask) {
+        attrMask = parseMaskType(type, $translate);
+      } else {
+        attrMask = parseMaskType(attrMask, $translate);
+      }
+
+      if (attrMask.endsWith(";0")) {
+        removeMask = true;
+      }
+
+      var mask = attrMask.replace(';1', '').replace(';0', '').trim();
+      if (type == 'date' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'week') {
+
+        var options = {
+          format: mask,
+          locale: $translate.use(),
+          showTodayButton: true,
+          useStrict: true,
+        };
+
+        if (mask != 'DD/MM/YYYY' && mask != 'MM/DD/YYYY') {
+          options.sideBySide = true;
+        }
+
+        $element.datetimepicker(options);
+
+        $element.on('dp.change', function () {
+          if ($(this).is(":visible")) {
+            $(this).trigger('change');
+            scope.$apply(function () {
+              var value = $element.val();
+              var momentDate = moment(value, mask);
+              if (momentDate.isValid())
+                ngModelCtrl.$setViewValue(momentDate.toDate());
+            });
+          }
+        });
+
+        ngModelCtrl.$formatters.push(function (value) {
+          if (value)
+            return moment(value).format(mask);
+        });
+
+        ngModelCtrl.$parsers.push(function (value) {
+          if (value)
+            return moment(value, mask).toDate();
+        });
+
+      } else if (type == 'number' || type == 'money' || type == 'integer') {
+        removeMask = true;
+        textMask = false;
+
+        var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, '');
+
+        var prefix = '';
+        var suffix = '';
+        var thousands = '';
+        var decimal = ',';
+        var precision = 0;
+
+        if (mask.startsWith(currency)) {
+          prefix = currency;
+        }
+
+        else if (mask.endsWith(currency)) {
+          suffix = currency;
+        }
+
+        var pureMask = mask.trim().replace(prefix, '').replace(suffix, '').trim();
+
+        if (pureMask.startsWith("#.")) {
+          thousands = '.';
+        }
+        else if (pureMask.startsWith("#,")) {
+          thousands = ',';
+        }
+
+        var dMask = null;
+
+        if (pureMask.indexOf(",0") != -1) {
+          decimal = ',';
+          dMask = ",0";
+        }
+        else if (pureMask.indexOf(".0") != -1) {
+          decimal = '.';
+          dMask = ".0";
+        }
+
+        if (dMask != null) {
+          var strD = pureMask.substring(pureMask.indexOf(dMask) + 1);
+          precision = strD.length;
+        }
+
+
+        $(element).maskMoney({
+          'allowZero': false,
+          'prefix': prefix,
+          'suffix': suffix,
+          'allowNegative': true,
+          'thousands': thousands,
+          'decimal': decimal,
+          'precision': precision
+        });
+
+        ngModelCtrl.$formatters.push(function (value) {
+          $element.maskMoney('mask', value);
+          var num = $element.val();
+          return num;
+        });
+
+        ngModelCtrl.$parsers.push(function (value) {
+          return $element.maskMoney('unmasked')[0];
+        });
+
+      }
+
+      else if (type == 'text') {
+
+        var options = {};
+        if (attrs.maskPlaceholder) {
+          options.placeholder = attrs.maskPlaceholder
+        }
+
+        $element.mask(mask, options);
+
+        if (removeMask) {
+          ngModelCtrl.$formatters.push(function (value) {
+            var v = $element.masked(value);
+            return v;
+          });
+
+          ngModelCtrl.$parsers.push(function (value) {
+            var v = $element.cleanVal();
+            return v;
+          });
+        }
+      }
+    }
+  }
+}
+
+function parseMaskType(type, $translate) {
+  if (type == "datetime" || type == "datetime-local") {
+    return $translate.instant('Format.DateTime');
+  }
+
+  else if (type == "date") {
+    return $translate.instant('Format.Date');
+  }
+
+  else if (type == "time") {
+    return $translate.instant('Format.Hour');
+  }
+
+  else if (type == "month") {
+    return 'MMMM';
+  }
+
+  else if (type == "number") {
+    return $translate.instant('Format.Decimal');
+  }
+
+  else if (type == "money") {
+    return $translate.instant('Format.Money');
+  }
+
+  else if (type == "integer") {
+    return '0';
+  }
+
+  else if (type == "week") {
+    return 'dddd';
+  }
+
+  return type;
+}
