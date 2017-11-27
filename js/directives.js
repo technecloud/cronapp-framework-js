@@ -494,25 +494,41 @@ function maskDirective($compile, $translate, attrName) {
         }
 
 
-        $(element).maskMoney({
-          'allowZero': false,
+        var inputmaskType = 'numeric';
+
+        if (precision == 0)
+          inputmaskType = 'integer';
+
+        var ipOptions = {
+          'rightAlign':  (type == 'money'),
+          'unmaskAsNumber': true,
+          'allowMinus': true,
           'prefix': prefix,
           'suffix': suffix,
-          'allowNegative': true,
-          'thousands': thousands,
-          'decimal': decimal,
-          'precision': precision
-        });
+          'radixPoint': decimal,
+          'digits': precision
+        };
+
+        if (thousands) {
+          ipOptions['autoGroup'] = true;
+          ipOptions['groupSeparator'] = thousands;
+        }
+
+        $(element).inputmask(inputmaskType, ipOptions);
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            $element.maskMoney('mask', value);
-            var num = $element.val();
-            return num;
+            if (value != undefined && value != null) {
+              $element.inputmask('setvalue', value);
+              var num = $element.val();
+              return num;
+            }
           });
 
           ngModelCtrl.$parsers.push(function (value) {
-            return $element.maskMoney('unmasked')[0];
+            if (value != undefined && value != null) {
+              return $element.inputmask('unmaskedvalue');
+            }
           });
         }
 
@@ -529,13 +545,15 @@ function maskDirective($compile, $translate, attrName) {
 
         if (removeMask && ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            var v = $element.masked(value);
-            return v;
+            if (value) {
+              return $element.masked(value);
+            }
           });
 
           ngModelCtrl.$parsers.push(function (value) {
-            var v = $element.cleanVal();
-            return v;
+            if (value) {
+              return $element.cleanVal();
+            }
           });
         }
       }
