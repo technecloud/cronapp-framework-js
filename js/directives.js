@@ -534,35 +534,45 @@ function maskDirective($compile, $translate) {
 
 function parseMaskType(type, $translate) {
   if (type == "datetime" || type == "datetime-local") {
-    return $translate.instant('Format.DateTime');
+    type = $translate.instant('Format.DateTime');
+    if (type == 'Format.DateTime')
+      type = 'DD/MM/YYYY HH:mm:ss'
   }
 
   else if (type == "date") {
-    return $translate.instant('Format.Date');
+    type = $translate.instant('Format.Date');
+    if (type == 'Format.Date')
+      type = 'DD/MM/YYYY'
   }
 
   else if (type == "time") {
-    return $translate.instant('Format.Hour');
+    type = $translate.instant('Format.Hour');
+    if (type == 'Format.Hour')
+      type = 'HH:mm:ss'
   }
 
   else if (type == "month") {
-    return 'MMMM';
+    type = 'MMMM';
   }
 
   else if (type == "number") {
-    return $translate.instant('Format.Decimal');
+    type = $translate.instant('Format.Decimal');
+    if (type == 'Format.Decimal')
+      type = '0,00'
   }
 
   else if (type == "money") {
-    return $translate.instant('Format.Money');
+    type = $translate.instant('Format.Money');
+    if (type == 'Format.Money')
+      type = '#.#00,00'
   }
 
   else if (type == "integer") {
-    return '0';
+    type = '0';
   }
 
   else if (type == "week") {
-    return 'dddd';
+    type = 'dddd';
   }
 
   return type;
