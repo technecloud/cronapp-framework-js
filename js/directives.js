@@ -410,11 +410,28 @@ function maskDirective($compile, $translate, attrName) {
       var mask = attrMask.replace(';1', '').replace(';0', '').trim();
       if (type == 'date' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'week') {
 
+        moment.locale($translate.use());
         var options = {
           format: mask,
           locale: $translate.use(),
           showTodayButton: true,
           useStrict: true,
+          tooltips: {
+            today: $translate.instant('DatePicker.today'),
+            clear: $translate.instant('DatePicker.clear'),
+            close: $translate.instant('DatePicker.close'),
+            selectMonth: $translate.instant('DatePicker.selectMonth'),
+            prevMonth: $translate.instant('DatePicker.prevMonth'),
+            nextMonth: $translate.instant('DatePicker.nextMonth'),
+            selectYear: $translate.instant('DatePicker.selectYear'),
+            prevYear: $translate.instant('DatePicker.prevYear'),
+            nextYear: $translate.instant('DatePicker.nextYear'),
+            selectDecade: $translate.instant('DatePicker.selectDecade'),
+            prevDecade: $translate.instant('DatePicker.prevDecade'),
+            nextDecade: $translate.instant('DatePicker.nextDecade'),
+            prevCentury: $translate.instant('DatePicker.prevCentury'),
+            nextCentury: $translate.instant('DatePicker.nextCentury')
+          }
         };
 
         if (mask != 'DD/MM/YYYY' && mask != 'MM/DD/YYYY') {

@@ -93,5 +93,19 @@
   "Format.Date" : "DD/MM/YYYY",
   "Format.Hour" : "HH:mm:ss",
   "Format.Money" : "#.#00,00",
-  "Format.Decimal" : "0,00"
+  "Format.Decimal" : "0,00",
+  "DatePicker.today": "Hoje",
+  "DatePicker.clear": "Limpar seleção",
+  "DatePicker.close": "Fechar",
+  "DatePicker.selectMonth": "Selecionar mês",
+  "DatePicker.prevMonth": "Mês anterior",
+  "DatePicker.nextMonth": "Próximo mês",
+  "DatePicker.selectYear": "Selecionar ano",
+  "DatePicker.prevYear": "Ano anterior",
+  "DatePicker.nextYear": "Próximo ano",
+  "DatePicker.selectDecade": "Selecionar década",
+  "DatePicker.prevDecade": "Década anterior",
+  "DatePicker.nextDecade": "Próxima década",
+  "DatePicker.prevCentury": "Século anterior",
+  "DatePicker.nextCentury": "Próximo século"
 }
