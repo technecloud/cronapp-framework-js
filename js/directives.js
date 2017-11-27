@@ -364,19 +364,18 @@
 function maskDirective($compile, $translate) {
   return {
     restrict: 'A',
-    require: 'ngModel',
+    require: '?ngModel',
     link: function (scope, element, attrs, ngModelCtrl) {
-
-      if (!ngModelCtrl)
-        return;
 
       var $element = $(element);
 
       var type = $element.attr("type");
 
       $element.attr("type", "text");
-      ngModelCtrl.$formatters = [];
-      ngModelCtrl.$parsers = [];
+      if (ngModelCtrl) {
+        ngModelCtrl.$formatters = [];
+        ngModelCtrl.$parsers = [];
+      }
 
       if (attrs.asDate !== undefined)
         type = "date";
@@ -420,21 +419,23 @@ function maskDirective($compile, $translate) {
             scope.$apply(function () {
               var value = $element.val();
               var momentDate = moment(value, mask);
-              if (momentDate.isValid())
+              if (momentDate.isValid() && ngModelCtrl)
                 ngModelCtrl.$setViewValue(momentDate.toDate());
             });
           }
         });
 
-        ngModelCtrl.$formatters.push(function (value) {
-          if (value)
-            return moment(value).format(mask);
-        });
+        if (ngModelCtrl) {
+          ngModelCtrl.$formatters.push(function (value) {
+            if (value)
+              return moment(value).format(mask);
+          });
 
-        ngModelCtrl.$parsers.push(function (value) {
-          if (value)
-            return moment(value, mask).toDate();
-        });
+          ngModelCtrl.$parsers.push(function (value) {
+            if (value)
+              return moment(value, mask).toDate();
+          });
+        }
 
       } else if (type == 'number' || type == 'money' || type == 'integer') {
         removeMask = true;
@@ -492,15 +493,17 @@ function maskDirective($compile, $translate) {
           'precision': precision
         });
 
-        ngModelCtrl.$formatters.push(function (value) {
-          $element.maskMoney('mask', value);
-          var num = $element.val();
-          return num;
-        });
+        if (ngModelCtrl) {
+          ngModelCtrl.$formatters.push(function (value) {
+            $element.maskMoney('mask', value);
+            var num = $element.val();
+            return num;
+          });
 
-        ngModelCtrl.$parsers.push(function (value) {
-          return $element.maskMoney('unmasked')[0];
-        });
+          ngModelCtrl.$parsers.push(function (value) {
+            return $element.maskMoney('unmasked')[0];
+          });
+        }
 
       }
 
@@ -513,7 +516,7 @@ function maskDirective($compile, $translate) {
 
         $element.mask(mask, options);
 
-        if (removeMask) {
+        if (removeMask && ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
             var v = $element.masked(value);
             return v;
