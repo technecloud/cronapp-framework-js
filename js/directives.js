@@ -281,10 +281,10 @@
           maskValue = parseMaskType(maskValue, $translate);
           if (!maskValue)
             return value;
-          var input = $("<input type=\"text\">");
           if (value instanceof Date) {
             return moment(value).format(maskValue);
           } else {
+            var input = $("<input type=\"text\">");
             input.mask(maskValue);
             return input.masked(value);;
           }
