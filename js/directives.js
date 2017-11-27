@@ -50,7 +50,7 @@
     return result;
   }
 
-  app.directive('asDate', maskDirective)
+  app.directive('asDate', maskDirectiveAsDate)
 
       .directive('ngDestroy', function() {
         return {
@@ -291,7 +291,7 @@
         };
       })
 
-      .directive('mask', maskDirective)
+      .directive('mask', maskDirectiveMask)
 
       .directive('cronappFilter', function() {
         return {
@@ -361,11 +361,22 @@
       })
 }(app));
 
-function maskDirective($compile, $translate) {
+function maskDirectiveAsDate($compile, $translate) {
+  return maskDirective($compile, $translate, 'as-date');
+}
+
+function maskDirectiveMask($compile, $translate) {
+  return maskDirective($compile, $translate, 'mask');
+}
+
+function maskDirective($compile, $translate, attrName) {
   return {
     restrict: 'A',
     require: '?ngModel',
     link: function (scope, element, attrs, ngModelCtrl) {
+
+      if(attrName == 'as-date' && attrs.mask !== undefined)
+        return;
 
       var $element = $(element);
 
@@ -377,7 +388,7 @@ function maskDirective($compile, $translate) {
         ngModelCtrl.$parsers = [];
       }
 
-      if (attrs.asDate !== undefined)
+      if (attrs.asDate !== undefined && type == 'text')
         type = "date";
 
       var textMask = true;
@@ -507,7 +518,7 @@ function maskDirective($compile, $translate) {
 
       }
 
-      else if (type == 'text') {
+      else if (type == 'text' || type == 'tel') {
 
         var options = {};
         if (attrs.maskPlaceholder) {
@@ -573,6 +584,10 @@ function parseMaskType(type, $translate) {
 
   else if (type == "week") {
     type = 'dddd';
+  }
+
+  else if (type == "tel") {
+    type = '(00) 0000-0000;0';
   }
 
   return type;
