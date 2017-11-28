@@ -1,89 +1,137 @@
-(function () {
-    'use strict';
+(function($app) {
+  angular.module('report.services', []).service('ReportService', function($http, $compile, $modal) {
 
-    angular
-        .module('custom.services')
-        .service('ReportService', ReportService);
+    var body = $('body');
+    var scope = angular.element(body.get(0)).scope();
 
-    ReportService.$inject = ['$http','$compile'];
+    // data
+    this.getReport = function(reportName) {
+      var req = {
+        url : 'api/rest/report',
+        method : 'POST',
+        data : angular.toJson({
+          'reportName' : reportName
+        })
+      };
+      return $http(req);
+    };
 
-    function ReportService($http, $compile) {
+    // bytes[]
+    this.getPDF = function(report) {
+      var req = {
+        url : 'api/rest/report/pdf',
+        method : 'POST',
+        responseType : 'arraybuffer',
+        data : angular.toJson(report)
+      };
+      return $http(req);
+    };
 
-        function getReport(reportName) {
-            var req = {
-                url: 'api/rest/report',
-                method: 'POST',
-                data: angular.toJson({
-                    'reportName': reportName
-                })
-            };
-            return $http(req);
+    // file
+    this.getPDFAsFile = function(report) {
+      var req = {
+        url : 'api/rest/report/pdfasfile',
+        method : 'POST',
+        data : angular.toJson(report)
+      };
+      return $http(req);
+    };
+
+    // open report
+    this.openURLContent = function(url) {
+
+      // Retrocompatibilidade
+      var context = $('#reportViewContext');
+
+      if(!context.get(0)) {
+        console.log('include[#reportViewContext]');
+        body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
+        $compile(body)(scope);
+      }
+
+      var include = function() {
+        var frame = $('<iframe/>');
+        frame.attr('frameborder', 0);
+        var h = parseInt($(window).height());
+
+        frame.attr('height', h - 200);
+        frame.attr('width', '100%');
+        frame.attr('src', url + "?download=false");
+        var m = $('#reportView .modal-body');
+        if(m.get(0)) {
+          m.html(frame);
+          $('#reportViewContext .modal-dialog').css('width', '95%');
+          setTimeout(function() {
+            console.log('open[#reportViewContext]');
+            $('body').append(context);
+            $('#reportView').modal();
+          }, 100);
         }
-
-        function getPDF(report) {
-            var req = {
-                url: 'api/rest/report/pdf',
-                method: 'POST',
-                responseType: 'arraybuffer',
-                data: angular.toJson(report)
-            };
-            return $http(req);
-        }
-        
-        function getPDFAsFile(report) {
-            var req = {
-                url: 'api/rest/report/pdfasfile',
-                method: 'POST',
-                data: angular.toJson(report)
-            };
-            return $http(req);
-        }
-        
-        function openURLContent(url) {
-             
-          // Retrocompatibilidade    
-          var context = $('#reportViewContext');
-          
-          if (!context.get(0)) {
-            console.log('include[#reportViewContext]');
-            var body = $('body');
-            body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
-            var scope = angular.element(body.get(0)).scope();
-            $compile(body)(scope);
-          }
-
-          var include = function() {
-            var frame = $('<iframe/>');
-            frame.attr('frameborder',0);
-            var h = parseInt($(window).height());
-            
-            frame.attr('height', h - 200);
-            frame.attr('width','100%');
-            frame.attr('src', url + "?download=false"); 
-            var m = $('#reportView .modal-body');
-            if (m.get(0)) {
-              m.html(frame);
-              $('#reportViewContext .modal-dialog').css('width' , '95%');
-              setTimeout(function() {
-                console.log('open[#reportViewContext]');
-                $('body').append(context);
-                $('#reportView').modal();
-              }, 100);
-            } else {
-              console.log('wait[#reportViewContext]');
-              setTimeout(include, 200);
-            }
-          }
-          
+        else {
+          console.log('wait[#reportViewContext]');
           setTimeout(include, 200);
         }
+      }
 
-        return {
-            getReport: getReport,
-            getPDF: getPDF,
-            getPDFAsFile: getPDFAsFile,
-            openURLContent : openURLContent
-        };
-    }
+      setTimeout(include, 200);
+    };
 
-})();
+    this.showParameters = function(report) {
+
+      var parameters = report.parameters;
+      var htmlParameters = [];
+      var index = 0;
+      var escapeRegExp = function(str) {
+        return str.replace(/([.*+?^=!:()|\[\]\/\\])/g, "\\$1");
+      };
+      var replaceAll = function(str, find, replace) {
+        return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+      };
+
+      var next = function() {
+        if(index < parameters.length) {
+          var parameter = parameters[index++];
+          $.get("plugins/cronapp-framework-js/components/reports/" + parameter.type + ".parameter.html").done(function(result) {
+            htmlParameters.push(replaceAll(result, "_field_", parameter.name));
+            next();
+          });
+        }
+        else if(htmlParameters.length > 0) {
+          $modal.open({
+            templateUrl : 'plugins/cronapp-framework-js/components/reports/reports.parameters.html',
+            controller : 'ParameterController',
+            resolve : {
+              report : function() {
+                return JSON.parse(JSON.stringify(report));
+              },
+              htmlParameters : function() {
+                return JSON.parse(JSON.stringify(htmlParameters));
+              }
+            }
+          });
+        }
+      }.bind(this);
+      next();
+    };
+
+    this.openReport = function(reportName) {
+      this.getReport(reportName).then(function(result) {
+        if(result && result.data) {
+          // Abrir direto o relatorio , caso não haja parametros
+          if(result.data.parameters.length == 0 || (result.data.parameters.length == 1 && result.data.parameters[0].name == 'DATA_LIMIT')) {
+            this.getPDFAsFile(result.data.reportName).then(function(obj) {
+              this.openURLContent(obj.data);
+            }.bind(this), function(data) {
+              var message = cronapi.internal.getErrorMessage(data, data.statusText);
+              scope.Notification.error(message);
+            }.bind(this));
+          }
+          else {
+            this.showParameters(JSON.parse(JSON.stringify(result.data)));
+          }
+        }
+      }.bind(this));
+    };
+
+  });
+}(app));

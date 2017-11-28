@@ -13,7 +13,8 @@ var cronappModules = [
   'tmh.dynamicLocale',
   'ui-notification',
   'ui.bootstrap',
-  'ngFileUpload'
+  'ngFileUpload',
+  'report.services' 
 ];
 
 if (window.customModules) {
