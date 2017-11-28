@@ -934,6 +934,12 @@
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
+          "name": "ng-required",
+          "selector": "ui-select",
+          "displayName_pt_BR": "Requerido",
+          "displayName_en_US": "Required"
+        },
+        {
           "editExpression": false,
           "name": "option-selected",
           "selector": "ui-select-match",

@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="">Label</label>
-    <ui-select crn-datasource="[{'key': 1,'value':'Value 1'},{'key': 2,'value':'Value 2'},{'key': 3,'value':'Value 3'}]" ng-model="vars.combobox${RANDOM}" ng-disabled="disabled" theme="bootstrap" class="crn-select">
+    <ui-select crn-datasource="[{'key': 1,'value':'Value 1'},{'key': 2,'value':'Value 2'},{'key': 3,'value':'Value 3'}]" ng-model="vars.combobox${RANDOM}" ng-required="false" ng-disabled="disabled" theme="bootstrap" class="crn-select">
         <ui-select-match placeholder="Select..." class="">
             {{$select.selected.value}}
         </ui-select-match>
