@@ -123,21 +123,25 @@
         };
 
         $scope.changePassword = function() {
+          
 
-          var user = {
-            oldPassword : oldPassword.value,
-            newPassword : newPassword.value,
-            newPasswordConfirmation : newPasswordConfirmation.value
-          };
+          if(verifyCredentials()) {
+            var user = {
+                oldPassword : oldPassword.value,
+                newPassword : newPassword.value,
+                newPasswordConfirmation : newPasswordConfirmation.value
+            };
+            
+            $http({
+              method : 'POST',
+              url : 'changePassword',
+              data : $.param(user),
+              headers : {
+                'Content-Type' : 'application/x-www-form-urlencoded'
+              }
+            }).success(changeSuccess).error(changeError);
+          }
 
-          $http({
-            method : 'POST',
-            url : 'changePassword',
-            data : $.param(user),
-            headers : {
-              'Content-Type' : 'application/x-www-form-urlencoded'
-            }
-          }).success(changeSuccess).error(changeError);
 
           function changeSuccess(data, status, headers, config) {
             Notification.info($translate.instant('Home.view.passwordChanged'));
@@ -154,6 +158,22 @@
             newPassword.value = "";
             newPasswordConfirmation.value = "";
             $("#modalPassword").modal("hide");
+          }
+          
+          function verifyCredentials() {
+            if(oldPassword.value === "" || newPassword.value === "" || newPasswordConfirmation.value === "") {
+              if(newPasswordConfirmation.value === "") {
+                Notification.error($translate.instant('Home.view.ConfirmationPasswordCanNotBeEmpty'));
+              }
+              if(newPassword.value === "") {
+                Notification.error($translate.instant('Home.view.NewPasswordCanNotBeEmpty'));
+              }
+              if(oldPassword.value === "") {
+                Notification.error($translate.instant('Home.view.PreviousPasswordCanNotBeEmpty'));
+              }
+              return false;
+            }
+            return true;
           }
         };
 
