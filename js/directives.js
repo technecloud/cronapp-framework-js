@@ -306,7 +306,7 @@
       .directive('cronappFilter', function() {
         return {
           restrict: 'A',
-          require: 'ngModel',
+          require: '?ngModel',
           link: function(scope, element, attrs, ngModelCtrl) {
             var typeElement = $(element).data('type') || $(element).attr('type');
             if (attrs.asDate != undefined)
