@@ -492,7 +492,12 @@ function maskDirective($compile, $translate, attrName) {
             $(this).trigger('change');
             scope.$apply(function () {
               var value = $element.val();
-              var momentDate = moment(value, mask);
+              var momentDate = null;
+              if (mask.toLowerCase().indexOf("h") == -1) {
+                momentDate = moment.utc(value, mask);
+              } else {
+                momentDate = moment(value, mask);
+              }
               if (momentDate.isValid() && ngModelCtrl)
                 ngModelCtrl.$setViewValue(momentDate.toDate());
             });
@@ -501,13 +506,29 @@ function maskDirective($compile, $translate, attrName) {
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            if (value)
-              return moment(value).format(mask);
+            if (value) {
+              var momentDate = null;
+
+              if (mask.toLowerCase().indexOf("h") == -1) {
+                momentDate = moment.utc(value);
+              } else {
+                momentDate = moment(value);
+              }
+
+              return momentDate.format(mask);
+            }
           });
 
           ngModelCtrl.$parsers.push(function (value) {
-            if (value)
-              return moment(value, mask).toDate();
+            if (value) {
+              var momentDate = null;
+              if (mask.toLowerCase().indexOf("h") == -1) {
+                momentDate = moment.utc(value, mask);
+              } else {
+                momentDate = moment(value, mask);
+              }
+              return momentDate.toDate();
+            }
           });
         }
 
