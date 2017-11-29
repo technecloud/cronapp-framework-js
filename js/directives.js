@@ -668,7 +668,7 @@ function parseMaskType(type, $translate) {
   }
 
   else if (type == "tel") {
-    type = '(00) 0000-0000;0';
+    type = '(00) 00000-0000;0';
   }
 
   else if (type == "text") {
