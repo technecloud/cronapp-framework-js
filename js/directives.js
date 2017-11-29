@@ -112,7 +112,7 @@
           link: function(scope, element, attr) {
             this.init(scope);
             var s = scope;
-            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":""); 
+            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
             var templateDyn    = '<div class="form-group upload-image-component" ngf-drop="" ngf-drag-over-class="dragover">\
                                   <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
                                   <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="!$ngModel$" data-ng-src="/plugins/cronapp-framework-js/img/selectImg.svg" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*;capture=camera">\
@@ -132,8 +132,8 @@
                 .split('$class$').join(s.class)
                 .split('$required$').join(required)
             );
-            
-            
+
+
             $compile(element)(element.scope());
           }
         }
@@ -155,8 +155,8 @@
           link: function(scope, element, attr) {
             this.init(scope);
             var s = scope;
-            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":""); 
-            
+            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
+
             var splitedNgModel = s.ngModel.split('.');
             var datasource = splitedNgModel[0];
             var field = splitedNgModel[splitedNgModel.length-1];
@@ -312,8 +312,6 @@
             if (attrs.asDate != undefined)
               typeElement = 'date';
 
-            // var selfNgModelCtrl = ngModelCtrl;
-
             var filterTemplate = '';
             var filtersSplited = attrs.cronappFilter.split(';');
             $(filtersSplited).each(function() {
@@ -331,14 +329,16 @@
             else
               filterTemplate = '%{value}%';
 
-            if (attrs.ngModel != undefined && attrs.ngModel.length > 0) {
+            if (ngModelCtrl) {
               scope.$watch(attrs.ngModel, function(newVal, oldVal) {
                 if (angular.equals(newVal, oldVal)) { return; }
+
                 var datasource = eval(attrs.crnDatasource);
                 var value = ngModelCtrl.$modelValue;
-                if ((typeElement.startsWith('date') || typeElement.startsWith('time')) && value != undefined) 
+
+                if (value instanceof Date)
                   value = value.toISOString();
-                
+
                 var bindedFilter = filterTemplate.split('{value}').join(value);
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
@@ -349,7 +349,7 @@
               if (typeElement == 'text') {
                 $(element).on("keyup", function() {
                   var value = undefined;
-                  if (ngModelCtrl && ngModelCtrl != undefined) 
+                  if (ngModelCtrl && ngModelCtrl != undefined)
                     value = ngModelCtrl.$viewValue;
                   else
                     value = this.value;
@@ -357,19 +357,19 @@
                   var bindedFilter = filterTemplate.split('{value}').join(value);
                   if (this.value.length == 0)
                     bindedFilter = '';
-  
+
                   datasource.search(bindedFilter);
                 });
               }
               else {
                 $(element).on("change", function() {
                   var datasource = eval(attrs.crnDatasource);
-  
+
                   var value = undefined;
                   var typeElement = $(this).attr('type');
                   if (attrs.asDate != undefined)
                     typeElement = 'date';
-  
+
                   if (ngModelCtrl && ngModelCtrl != undefined) {
                     value = ngModelCtrl.$viewValue;
                   }
@@ -419,12 +419,12 @@ function maskDirective($compile, $translate, attrName) {
 
       var type = $element.attr("type");
       $element.data("type", type);
-      
+
       if (type == "checkbox")
         $element.attr("type", "checkbox");
       else
         $element.attr("type", "text");
-      
+
       if (ngModelCtrl) {
         ngModelCtrl.$formatters = [];
         ngModelCtrl.$parsers = [];
@@ -448,13 +448,13 @@ function maskDirective($compile, $translate, attrName) {
       if (attrMask.endsWith(";0")) {
         removeMask = true;
       }
-        
+
       var mask = attrMask.replace(';1', '').replace(';0', '').trim();
       if (mask == undefined || mask.length == 0) {
         return;
       }
-      
-      if (type == 'date' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'week') {
+
+      if (type == 'date' || type == 'datetime' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'week') {
 
         moment.locale($translate.use());
         var options = {
@@ -670,7 +670,7 @@ function parseMaskType(type, $translate) {
   else if (type == "tel") {
     type = '(00) 0000-0000;0';
   }
-  
+
   else if (type == "text") {
     type = '';
   }
