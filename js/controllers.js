@@ -7,9 +7,11 @@
         $rootScope.http = $http;
         $rootScope.Notification = Notification;
 
-        $rootScope.getReport = function(reportName) {
-          ReportService.openReport(reportName);
+
+        $rootScope.getReport = function(reportName, params) {
+          ReportService.openReport(reportName, params);
         }
+        
         app.registerEventsCronapi($scope, $translate);
 
         for( var x in app.userEvents)

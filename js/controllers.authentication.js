@@ -9,8 +9,8 @@
         $rootScope.http = $http;
         $rootScope.Notification = Notification;
 
-        $rootScope.getReport = function(reportName) {
-          ReportService.openReport(reportName);
+        $rootScope.getReport = function(reportName, params) {
+          ReportService.openReport(reportName, params);
         }
 
         $scope.message = {};
@@ -63,9 +63,9 @@
 
         $rootScope.http = $http;
         $rootScope.Notification = Notification;
-
-        $rootScope.getReport = function(reportName) {
-          ReportService.openReport(reportName);
+        
+        $rootScope.getReport = function(reportName, params) {
+          ReportService.openReport(reportName, params);
         }
 
         $scope.message = {};

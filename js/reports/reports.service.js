@@ -77,7 +77,6 @@
     };
 
     this.showParameters = function(report) {
-
       var parameters = report.parameters;
       var htmlParameters = [];
       var index = 0;
@@ -113,8 +112,37 @@
       }.bind(this);
       next();
     };
+    
+    this.mergeParam = function(parameters, params) {
+      var getValue = function(key, json) {
+        for (var i in Object.keys(json)) {
+           var k = Object.keys(json[i])[0];
+           if (key == k)
+            return Object.values(json[i])[0];
+        }
+      };
+      for (var i in Object.keys(parameters)) { 
+        var k = parameters[i].name;
+        var v = parameters[i].value;
+        var valueParam = getValue(k, params);
+        if (valueParam) {
+          parameters[i].value = valueParam;
+        }
+      }
+      return parameters;
+    };
+    
+    this.hasParameterWithOutValue = function(parameters) {
+      var hasWithOutValue = false;
+      for (var i in Object.keys(parameters)) { 
+        if (!parameters[i].value) {
+          return true;
+        }
+      }
+      return hasWithOutValue;
+    };
 
-    this.openReport = function(reportName) {
+    this.openReport = function(reportName, params) {
       this.getReport(reportName).then(function(result) {
         if(result && result.data) {
           // Abrir direto o relatorio , caso não haja parametros
@@ -127,7 +155,14 @@
             }.bind(this));
           }
           else {
-            this.showParameters(JSON.parse(JSON.stringify(result.data)));
+            result.data.parameters = this.mergeParam(result.data.parameters, params);
+            if (this.hasParameterWithOutValue(result.data.parameters)) {
+              this.showParameters(JSON.parse(JSON.stringify(result.data)));
+            } else {
+              this.getPDFAsFile(result.data).then(function(obj) {
+                this.openURLContent(obj.data);
+              }.bind(this));
+            }
           }
         }
       }.bind(this));

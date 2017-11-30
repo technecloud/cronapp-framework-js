@@ -49,8 +49,19 @@
       return name;
     };
     
-    $scope.isDataLimit = function(param) {
-      return (param.name == 'DATA_LIMIT');
+    $scope.cloneElement = function(el) {
+      return angular.copy(el);
+    };
+    
+    $scope.isVisibleParam = function(param) {
+      if (param.name == 'DATA_LIMIT')
+        return false;
+      else if (param.value === "")
+        return true;
+      else if (param.value != "")
+        return false;  
+        
+      return true;
     };
 
 
