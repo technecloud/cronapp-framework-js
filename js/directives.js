@@ -415,15 +415,17 @@ function maskDirective($compile, $translate, attrName) {
       if(attrName == 'as-date' && attrs.mask !== undefined)
         return;
 
+
       var $element = $(element);
 
       var type = $element.attr("type");
+
+      if (type == "checkbox" || type == "password")
+        return;
+
       $element.data("type", type);
 
-      if (type == "checkbox")
-        $element.attr("type", "checkbox");
-      else
-        $element.attr("type", "text");
+      $element.attr("type", "text");
 
       if (ngModelCtrl) {
         ngModelCtrl.$formatters = [];
@@ -454,7 +456,7 @@ function maskDirective($compile, $translate, attrName) {
         return;
       }
 
-      if (type == 'date' || type == 'datetime' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'week') {
+      if (type == 'date' || type == 'datetime' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'time-local' || type == 'week') {
 
         moment.locale($translate.use());
         var options = {
@@ -487,13 +489,15 @@ function maskDirective($compile, $translate, attrName) {
         $element.wrap("<div style=\"position:relative\"></div>")
         $element.datetimepicker(options);
 
+        var useUTC = type == 'date' || type == 'datetime' || type == 'time';
+
         $element.on('dp.change', function () {
           if ($(this).is(":visible")) {
             $(this).trigger('change');
             scope.$apply(function () {
               var value = $element.val();
               var momentDate = null;
-              if (mask.toLowerCase().indexOf("h") == -1) {
+              if (useUTC) {
                 momentDate = moment.utc(value, mask);
               } else {
                 momentDate = moment(value, mask);
@@ -509,7 +513,7 @@ function maskDirective($compile, $translate, attrName) {
             if (value) {
               var momentDate = null;
 
-              if (mask.toLowerCase().indexOf("h") == -1) {
+              if (useUTC) {
                 momentDate = moment.utc(value);
               } else {
                 momentDate = moment(value);
@@ -517,18 +521,22 @@ function maskDirective($compile, $translate, attrName) {
 
               return momentDate.format(mask);
             }
+
+            return null;
           });
 
           ngModelCtrl.$parsers.push(function (value) {
             if (value) {
               var momentDate = null;
-              if (mask.toLowerCase().indexOf("h") == -1) {
+              if (useUTC) {
                 momentDate = moment.utc(value, mask);
               } else {
                 momentDate = moment(value, mask);
               }
               return momentDate.toDate();
             }
+
+            return null;
           });
         }
 
@@ -607,12 +615,16 @@ function maskDirective($compile, $translate, attrName) {
               var num = $element.val();
               return num;
             }
+
+            return null;
           });
 
           ngModelCtrl.$parsers.push(function (value) {
             if (value != undefined && value != null) {
               return $element.inputmask('unmaskedvalue');
             }
+
+            return null;
           });
         }
 
@@ -632,12 +644,16 @@ function maskDirective($compile, $translate, attrName) {
             if (value) {
               return $element.masked(value);
             }
+
+            return null;
           });
 
           ngModelCtrl.$parsers.push(function (value) {
             if (value) {
               return $element.cleanVal();
             }
+
+            return null;
           });
         }
       }
@@ -658,7 +674,7 @@ function parseMaskType(type, $translate) {
       type = 'DD/MM/YYYY'
   }
 
-  else if (type == "time") {
+  else if (type == "time" || type == "time-local") {
     type = $translate.instant('Format.Hour');
     if (type == 'Format.Hour')
       type = 'HH:mm:ss'
