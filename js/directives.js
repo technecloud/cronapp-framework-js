@@ -308,7 +308,9 @@
           restrict: 'A',
           require: '?ngModel',
           link: function(scope, element, attrs, ngModelCtrl) {
-            var typeElement = $(element).data('type') || $(element).attr('type');
+            var $element = $(element);
+
+            var typeElement = $element.data('type') || $element.attr('type');
             if (attrs.asDate != undefined)
               typeElement = 'date';
 
@@ -332,12 +334,31 @@
             if (ngModelCtrl) {
               scope.$watch(attrs.ngModel, function(newVal, oldVal) {
                 if (angular.equals(newVal, oldVal)) { return; }
+                var eType = $(element).data('type') || $(element).attr('type');
 
                 var datasource = eval(attrs.crnDatasource);
                 var value = ngModelCtrl.$modelValue;
 
-                if (value instanceof Date)
+                if (value instanceof Date) {
                   value = value.toISOString();
+                  if (eType == "date") {
+                    value = value + "@@date";
+                  }
+                  else if (eType == "time" || eType == "time-local") {
+                    value = value + "@@time";
+                  }
+                  else {
+                    value = value + "@@datetime";
+                  }
+                }
+
+                else if (typeof value == "number") {
+                  value = value + "@@number";
+                }
+
+                else if (typeof value == "boolean") {
+                  value = value + "@@boolean";
+                }
 
                 var bindedFilter = filterTemplate.split('{value}').join(value);
                 if (ngModelCtrl.$viewValue.length == 0)
@@ -362,7 +383,7 @@
                 });
               }
               else {
-                $(element).on("change", function() {
+                $element.on("change", function() {
                   var datasource = eval(attrs.crnDatasource);
 
                   var value = undefined;
