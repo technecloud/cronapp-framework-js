@@ -155,7 +155,8 @@
             }.bind(this));
           }
           else {
-            result.data.parameters = this.mergeParam(result.data.parameters, params);
+            if (params)
+              result.data.parameters = this.mergeParam(result.data.parameters, params);
             if (this.hasParameterWithOutValue(result.data.parameters)) {
               this.showParameters(JSON.parse(JSON.stringify(result.data)));
             } else {
