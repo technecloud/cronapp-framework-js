@@ -1,3 +1,5 @@
+var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
+
 (function($app) {
 
   /**
@@ -291,7 +293,12 @@
           maskValue = parseMaskType(maskValue, $translate);
           if (!maskValue)
             return value;
-          if (value instanceof Date) {
+
+          moment.locale($translate.use());
+
+          if (typeof value == "string" && value.match(isoDate)) {
+            return moment(value).format(maskValue);
+          } else if (value instanceof Date) {
             return moment(value).format(maskValue);
           } else {
             var input = $("<input type=\"text\">");
@@ -479,7 +486,6 @@ function maskDirective($compile, $translate, attrName) {
 
       if (type == 'date' || type == 'datetime' || type == 'datetime-local' || type == 'month' || type == 'time' || type == 'time-local' || type == 'week') {
 
-        moment.locale($translate.use());
         var options = {
           format: mask,
           locale: $translate.use(),
