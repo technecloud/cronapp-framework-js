@@ -440,6 +440,46 @@
           "displayName_en_US": "Datasource",
           "removable": false,
           "type": "pageDatasource"
+        },
+        "cronapp-filter-autopost": {
+          "removable": false,
+          "type": "list",
+          "options": [
+            {
+              "value": "Sim",
+              "key": "true"
+            },
+            {
+              "value": "Não",
+              "key": "false"
+            }
+          ]
+        },
+        "cronapp-filter-operator": {
+          "removable": false,
+          "type": "list",
+          "options": [
+            {
+              "value": "=",
+              "key": "="
+            },
+            {
+              "value": ">",
+              "key": ">"
+            },
+            {
+              "value": ">=",
+              "key": ">="
+            },
+            {
+              "value": "<",
+              "key": "<"
+            },
+            {
+              "value": "<=",
+              "key": "<="
+            }
+          ]
         }
       },
       "groupedChildren": [{
@@ -451,6 +491,135 @@
           "text_pt_BR": "Campo",
           "text_en_US": "Field",
           "selector": "input"
+        }
+      ]
+    },
+    {
+      "name": "crn-datasource-filter-complex",
+      "text_pt_BR": "Filtro Complexo",
+      "text_en_US": "Complex Filter",
+      "class": "adjust-icon mdi mdi-filter",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datasourcefiltercomplex.template.html"
+    },
+    {
+      "name": "crn-button-filter",
+      "text_pt_BR": "Botão do Filtro",
+      "text_en_US": "Button of Filter",
+      "class": "adjust-icon mdi mdi-stop",
+      "wrapper": false,
+      "autoWrapper": true,
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/buttonfilter.template.html",
+      "properties": {
+        "crn-datasource": {
+          "displayName_pt_BR": "Fonte de dados",
+          "displayName_en_US": "Datasource",
+          "removable": false,
+          "type": "pageDatasource"
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "onmouseover": {
+          "removable": true,
+          "type": "event"
+        },
+        "xattr-fullsize": {
+          "displayName": "Width"
+        },
+        "xattr-theme": {
+          "displayName": "Theme"
+        },
+        "xattr-size": {
+          "displayName": "Size"
+        }
+      },
+      "attributesForPreview": [
+        {
+          "name": "xattr-size",
+          "type": "options",
+          "target": "class",
+          "values": [
+            {
+              "key": "",
+              "value": "Standard"
+            },
+            {
+              "key": "btn-lg",
+              "value": "Large"
+            },
+            {
+              "key": "btn-sm",
+              "value": "Small"
+            }
+          ]
+        },
+        {
+          "name": "crn-datasource",
+          "type": "pageDatasource",
+          "target": "button"
+        },
+        {
+          "name": "xattr-fullsize",
+          "type": "options",
+          "target": "class",
+          "values": [
+            {
+              "key": "btn-block",
+              "value": "Block"
+            },
+            {
+              "key": "",
+              "value": "Inline"
+            }
+          ]
+        },
+        {
+          "name": "xattr-theme",
+          "type": "options",
+          "target": "class",
+          "values": [
+            {
+              "key": "btn-default",
+              "value": "Default"
+            },
+            {
+              "key": "btn-primary",
+              "value": "Primary"
+            },
+            {
+              "key": "btn-success",
+              "value": "Success"
+            },
+            {
+              "key": "btn-info",
+              "value": "Info"
+            },
+            {
+              "key": "btn-warning",
+              "value": "Warning"
+            },
+            {
+              "key": "btn-danger",
+              "value": "Danger"
+            },
+            {
+              "key": "btn-link",
+              "value": "Link"
+            }
+          ]
+        }
+      ],
+      "groupedChildren": [
+        {
+          "text_pt_BR": "Rótulo",
+          "text_en_US": "Label",
+          "selector": "span"
+        },
+        {
+          "text_pt_BR": "Ícone",
+          "text_en_US": "Icon",
+          "selector": "i"
         }
       ]
     },

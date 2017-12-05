@@ -314,23 +314,42 @@
         return {
           restrict: 'A',
           require: '?ngModel',
-          link: function(scope, element, attrs, ngModelCtrl) {
-            var $element = $(element);
-
-            var typeElement = $element.data('type') || $element.attr('type');
-            if (attrs.asDate != undefined)
-              typeElement = 'date';
-
+          setFilterInButton: function($element, bindedFilter, operator) {
+            var fieldset = $element.closest('fieldset');
+            if (!fieldset)
+              return;
+            var button = fieldset.find('button[cronapp-filter]');
+            if (!button)
+              return;
+            
+            var filters = button.data('filters');
+            if (!filters)
+              filters = [];
+            
+            var index = -1;
+            var field = bindedFilter.split(operator)[0];
+            $(filters).each(function(idx) {
+              if (this.startsWith(field)) {
+                index = idx;
+              }
+            });
+            
+            if (index > -1)
+              filters.splice(index, 1);
+            filters.push(bindedFilter);
+            button.data('filters', filters);
+          },
+          inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
             var filterTemplate = '';
             var filtersSplited = attrs.cronappFilter.split(';');
             $(filtersSplited).each(function() {
               if (this.length > 0) {
                 //Se for do tipo text passa parametro como like
                 if (typeElement == 'text')
-                  filterTemplate+=this+'@=%{value}%;';
+                  filterTemplate += this + '@' + operator + '%{value}%;';
                 //Senão passa parametro como valor exato
                 else
-                  filterTemplate+=this+'={value};';
+                  filterTemplate += this + operator + '{value};';
               }
             });
             if (filterTemplate.length > 0)
@@ -338,13 +357,13 @@
             else
               filterTemplate = '%{value}%';
 
+            var selfDirective = this;
             if (ngModelCtrl) {
               scope.$watch(attrs.ngModel, function(newVal, oldVal) {
                 if (angular.equals(newVal, oldVal)) { return; }
-                var eType = $(element).data('type') || $(element).attr('type');
-
-                var datasource = eval(attrs.crnDatasource);
+                var eType = $element.data('type') || $element.attr('type');
                 var value = ngModelCtrl.$modelValue;
+                var datasource = eval(attrs.crnDatasource);
 
                 if (value instanceof Date) {
                   value = value.toISOString();
@@ -370,29 +389,35 @@
                 var bindedFilter = filterTemplate.split('{value}').join(value);
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
-                datasource.search(bindedFilter);
+                if (autopost)
+                  datasource.search(bindedFilter);
+                else 
+                  selfDirective.setFilterInButton($element, bindedFilter, operator);
+                
               });
             }
             else {
               if (typeElement == 'text') {
-                $(element).on("keyup", function() {
+                $element.on("keyup", function() {
+                  var datasource = eval(attrs.crnDatasource);
                   var value = undefined;
                   if (ngModelCtrl && ngModelCtrl != undefined)
                     value = ngModelCtrl.$viewValue;
                   else
                     value = this.value;
-                  var datasource = eval(attrs.crnDatasource);
                   var bindedFilter = filterTemplate.split('{value}').join(value);
                   if (this.value.length == 0)
                     bindedFilter = '';
 
-                  datasource.search(bindedFilter);
+                  if (autopost)
+                    datasource.search(bindedFilter);
+                  else 
+                    selfDirective.setFilterInButton($element, bindedFilter, operator);
                 });
               }
               else {
                 $element.on("change", function() {
                   var datasource = eval(attrs.crnDatasource);
-
                   var value = undefined;
                   var typeElement = $(this).attr('type');
                   if (attrs.asDate != undefined)
@@ -417,11 +442,50 @@
                   var bindedFilter = filterTemplate.split('{value}').join(value);
                   if (value.toString().length == 0)
                     bindedFilter = '';
-                  datasource.search(bindedFilter);
+                  
+                  if (autopost)
+                    datasource.search(bindedFilter);
+                  else 
+                    selfDirective.setFilterInButton($element, bindedFilter, operator);
                 });
               }
             }
+          },
+          buttonBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
+            $element.on('click', function() {
+              var $this = $(this);
+              var datasourceName = '';
+              if (attrs.crnDatasource)
+                datasourceName = attrs.crnDatasource;
+              else 
+                datasourceName = $element.parent().attr('crn-datasource')
 
+              var filters = $this.data('filters');
+              if (datasourceName && datasourceName.length > 0 && filters && filters.length > 0) {
+                var bindedFilter = filters.join(';');
+                var datasourceToFilter = eval(datasourceName);
+                datasourceToFilter.search(bindedFilter);
+              }
+            });
+          },
+          link: function(scope, element, attrs, ngModelCtrl) {
+            var $element = $(element);
+            var typeElement = $element.data('type') || $element.attr('type');
+            if (attrs.asDate != undefined)
+              typeElement = 'date';
+            
+            var operator = '=';
+            if (attrs.cronappFilterOperator && attrs.cronappFilterOperator.length > 0)
+              operator = attrs.cronappFilterOperator;
+            
+            var autopost = true;
+            if (attrs.cronappFilterAutopost && attrs.cronappFilterAutopost == "false")
+              autopost = false;
+            
+            if ($element[0].tagName == "INPUT") 
+              this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+            else 
+              this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
           }
         }
       })
