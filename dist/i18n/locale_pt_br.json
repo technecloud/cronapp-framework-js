@@ -107,5 +107,9 @@
   "DatePicker.prevDecade": "Década anterior",
   "DatePicker.nextDecade": "Próxima década",
   "DatePicker.prevCentury": "Século anterior",
-  "DatePicker.nextCentury": "Próximo século"
+  "DatePicker.nextCentury": "Próximo século",
+  "Upload.sending": "Enviando...",
+  "Upload.oneFile": "Selecione ou arraste um arquivo",
+  "Upload.multipleFile": "Selecione ou arraste um ou mais arquivos",
+  "Upload.errorValidation": "Seleção inválida: Tamanho máximo %s e Tipos permitidos: %s"
 }

@@ -56,6 +56,10 @@
           $scope.message = $translate.instant('Upload.multipleFile');
         }
 
+        if (data.description) {
+          $scope.message = data.description;
+        }
+
         $scope.safeApply = safeApply;
 
         $scope.uploadFile = function(files) {
