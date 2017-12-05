@@ -297,9 +297,9 @@
           maskValue = maskValue.replace(';1', '').replace(';0', '').trim();
 
           if (typeof value == "string" && value.match(isoDate)) {
-            return moment(value).format(maskValue);
+            return moment.utc(value).format(maskValue);
           } else if (value instanceof Date) {
-            return moment(value).format(maskValue);
+            return moment.utc(value).format(maskValue);
           } else {
             var input = $("<input type=\"text\">");
             input.mask(maskValue);
