@@ -14,7 +14,8 @@ var cronappModules = [
   'ui-notification',
   'ui.bootstrap',
   'ngFileUpload',
-  'report.services'
+  'report.services',
+  'upload.services'
 ];
 
 if (window.customModules) {

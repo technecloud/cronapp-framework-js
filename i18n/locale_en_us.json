@@ -107,5 +107,10 @@
   "DatePicker.prevDecade": "Previous decate",
   "DatePicker.nextDecade": "Next decade",
   "DatePicker.prevCentury": "Previous century",
-  "DatePicker.nextCentury": "Next century"
+  "DatePicker.nextCentury": "Next century",
+  "Upload.title": "File upload",
+  "Upload.sending": "Uploading...",
+  "Upload.oneFile": "Select or drop one file",
+  "Upload.multipleFile": "Select or drop files",
+  "Upload.errorValidation": "Invalid selection: Max size %s e Allowed types: %s"
 }

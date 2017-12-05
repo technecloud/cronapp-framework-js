@@ -1,13 +1,14 @@
 (function($app) {
   angular.module('custom.controllers', []);
 
-  app.controller('LoginController', [ '$scope', '$http', '$location', '$rootScope', '$window', '$state', '$translate', 'Notification', 'ReportService',
-      function($scope, $http, $location, $rootScope, $window, $state, $translate, Notification, ReportService) {
+  app.controller('LoginController', [ '$scope', '$http', '$location', '$rootScope', '$window', '$state', '$translate', 'Notification', 'ReportService', 'UploadService',
+      function($scope, $http, $location, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService) {
 
         app.registerEventsCronapi($scope, $translate);
 
         $rootScope.http = $http;
         $rootScope.Notification = Notification;
+        $rootScope.UploadService = UploadService;
 
         $rootScope.getReport = function(reportName, params) {
           ReportService.openReport(reportName, params);
@@ -56,13 +57,14 @@
         }
       } ]);
 
-  app.controller('HomeController', [ '$scope', '$http', '$rootScope', '$state', '$translate', 'Notification', 'ReportService',
-      function($scope, $http, $rootScope, $state, $translate, Notification, ReportService) {
+  app.controller('HomeController', [ '$scope', '$http', '$rootScope', '$state', '$translate', 'Notification', 'ReportService', 'UploadService',
+      function($scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
 
         app.registerEventsCronapi($scope, $translate);
 
         $rootScope.http = $http;
         $rootScope.Notification = Notification;
+        $rootScope.UploadService = UploadService;
         
         $rootScope.getReport = function(reportName, params) {
           ReportService.openReport(reportName, params);
