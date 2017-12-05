@@ -1,0 +1,6 @@
+<div class="form-group">
+    <label for="imgFor">Arquivo</label>
+    <dynamic-file ng-model="vars.input${RANDOM}">
+        <img src="http://placehold.it/50x50" style="display:block; width:100px; height: 100px;">
+    </dynamic-file>
+</div>

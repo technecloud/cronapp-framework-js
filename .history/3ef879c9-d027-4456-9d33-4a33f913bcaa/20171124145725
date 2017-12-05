@@ -1,6 +1,6 @@
 {
     "name": "cronapp-framework-js",
-    "version": "0.0.93-d" ,
+    "version": "0.0.68-develop" ,
     "homepage": "https://github.com/technecloud/cronapp-framework-js",
     "authors": [
         "Techne Engenharia e Sistemas <contato@techne.com.br>"
