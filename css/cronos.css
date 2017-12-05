@@ -277,3 +277,10 @@ div[data-component="crn-button"] {
     box-shadow: none !important;
 }
 
+.modal-upload {
+    min-height: 100px;
+    width: 100%;
+    line-height: 100px;
+    text-align: center;
+    cursor: pointer;
+}
