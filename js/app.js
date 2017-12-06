@@ -184,7 +184,7 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', ["$scope", "$stateParams", "$location", "$http", "$rootScope", function($scope, $stateParams, $location, $http, $rootScope) {
+      .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
 
         for (var x in app.userEvents)
           $scope[x] = app.userEvents[x].bind($scope);
@@ -216,7 +216,9 @@ var app = (function() {
           }
         }
         registerComponentScripts();
-      }])
+
+        try { $controller('AfterPageController', { $scope: $scope }); } catch(e) {};
+      })
 
       .run(function($rootScope, $state) {
         $rootScope.$on('$stateChangeError', function() {

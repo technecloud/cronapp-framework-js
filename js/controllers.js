@@ -1,23 +1,24 @@
 (function($app) {
   angular.module('custom.controllers', []);
 
-  app.controller('HomeController', [ '$scope', '$http', '$rootScope', '$state', '$translate', 'Notification', 'ReportService', 'UploadService',
-      function($scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
+  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
 
-        $rootScope.http = $http;
-        $rootScope.Notification = Notification;
-        $rootScope.UploadService = UploadService;
+    $rootScope.http = $http;
+    $rootScope.Notification = Notification;
+    $rootScope.UploadService = UploadService;
 
-        $rootScope.getReport = function(reportName, params) {
-          ReportService.openReport(reportName, params);
-        }
-        
-        app.registerEventsCronapi($scope, $translate);
+    $rootScope.getReport = function(reportName, params) {
+      ReportService.openReport(reportName, params);
+    }
 
-        for( var x in app.userEvents)
-          $scope[x] = app.userEvents[x].bind($scope);
+    app.registerEventsCronapi($scope, $translate);
 
-        $scope.message = {};
+    for( var x in app.userEvents)
+      $scope[x] = app.userEvents[x].bind($scope);
 
-      } ]);
+    $scope.message = {};
+
+    try { $controller('AfterHomeController', { $scope: $scope }); } catch(e) {};
+
+  });
 }(app));

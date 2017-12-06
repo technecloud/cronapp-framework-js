@@ -185,8 +185,7 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', ["$scope", "$stateParams", "$location", "$http", "$rootScope", "$translate", function($scope, $stateParams, $location, $http, $rootScope, $translate) {
-
+      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate) {
         app.registerEventsCronapi($scope, $translate);
 
         // save state params into scope
@@ -212,7 +211,9 @@ var app = (function() {
         }
 
         $scope.registerComponentScripts();
-      }])
+
+        try { $controller('AfterPageController', { $scope: $scope }); } catch(e) {};
+      })
 
       .run(function($rootScope, $state) {
         $rootScope.$on('$stateChangeError', function() {
