@@ -251,7 +251,22 @@ div[data-component="crn-button"] {
   margin-left: -17px;
   margin-top: -8px;
 }
- 
+
+.start-camera-button-attribute {
+  right: 1px;
+  bottom: 1px;
+}
+
+.remove-image-button {
+  position: absolute;
+  margin-top: -23px;
+  right: 19px;
+}
+
+.dynamic-image-container {
+  border-style: dashed;
+}
+
 .camera-container {
   position: fixed; 
   z-index: 999998;

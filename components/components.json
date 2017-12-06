@@ -400,7 +400,7 @@
         {
           "text_pt_BR": "Campo",
           "text_en_US": "Field",
-          "selector": "dynamic-image"
+          "selector": "dynamic-image|div[dynamic-image]"
         }
       ]
     },
