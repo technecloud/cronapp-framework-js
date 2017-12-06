@@ -2,3 +2,5 @@
 /bower_components/**
 .project
 package-lock.json
+/node_modules
+/.history

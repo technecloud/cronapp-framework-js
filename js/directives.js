@@ -140,6 +140,40 @@
           }
         }
       })
+      .directive('dynamicImage', function($compile) {
+        var template = '';
+        return {
+          restrict: 'A',
+          scope: true,
+          require: 'ngModel',
+          link: function(scope, element, attr) {
+            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
+            var content = element.html();
+            var templateDyn    = 
+                               '<div ngf-drop="" ngf-drag-over-class="dragover">\
+                                  <img style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
+                                  <input ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+                                  <div class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*;capture=camera">\
+                                    $userHtml$\
+                                  </div>\
+                                  <div class="remove-image-button btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
+                                    <span class="glyphicon glyphicon-remove"></span>\
+                                  </div>\
+                                  <div class="btn btn-info btn-xs start-camera-button-attribute" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
+                                    <span class="glyphicon glyphicon-facetime-video"></span>\
+                                  </div>\
+                                </div>';
+                                
+            templateDyn = $(templateDyn
+                .split('$ngModel$').join(attr.ngModel)
+                .split('$required$').join(required)
+                .split('$userHtml$').join(content));
+            
+            element.html(templateDyn);
+            $compile(templateDyn)(element.scope());
+          }
+        }
+      })
       .directive('dynamicFile', function($compile) {
         var template = '';
         return {
