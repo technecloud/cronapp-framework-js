@@ -29,7 +29,7 @@
       "file": "index.html",
       "script": "js/customModules.js",
       "type": "script",
-      "onTop": "true"
+      "onTop": true
     },
     {
       "file": "index.html",
