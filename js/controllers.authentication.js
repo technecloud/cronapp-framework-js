@@ -121,7 +121,7 @@
         // save the user data on localStorage
         sessionStorage.removeItem("_u");
       }
-      $state.go("login");
+      window.location.href = "logout";
     };
 
     $scope.changePassword = function() {
