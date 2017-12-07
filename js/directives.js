@@ -149,31 +149,31 @@
           link: function(scope, element, attr) {
             var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
             var content = element.html();
-            var templateDyn    = 
-                               '<div ngf-drop="" ngf-drag-over-class="dragover">\
-                                  <img style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
-                                  <input ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-                                  <div class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
-                                    $userHtml$\
-                                  </div>\
-                                  <div class="remove-image-button btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
-                                    <span class="glyphicon glyphicon-remove"></span>\
-                                  </div>\
-                                  <div class="btn btn-info btn-xs start-camera-button-attribute" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
-                                    <span class="glyphicon glyphicon-facetime-video"></span>\
-                                  </div>\
-                                </div>';
+            var templateDyn    =
+                '<div ngf-drop="" ngf-drag-over-class="dragover">\
+                   <img style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
+                   <input ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+                   <div class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
+                     $userHtml$\
+                   </div>\
+                   <div class="remove-image-button btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
+                     <span class="glyphicon glyphicon-remove"></span>\
+                   </div>\
+                   <div class="btn btn-info btn-xs start-camera-button-attribute" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
+                     <span class="glyphicon glyphicon-facetime-video"></span>\
+                   </div>\
+                 </div>';
             var maxFileSize = "";
             if (attr.maxFileSize)
               maxFileSize = attr.maxFileSize;
-              
+
             templateDyn = $(templateDyn
                 .split('$ngModel$').join(attr.ngModel)
                 .split('$required$').join(required)
                 .split('$userHtml$').join(content)
                 .split('$maxFileSize$').join(maxFileSize)
-                );
-            
+            );
+
             element.html(templateDyn);
             $compile(templateDyn)(element.scope());
           }
@@ -339,10 +339,14 @@
             return moment.utc(value).format(maskValue);
           } else if (value instanceof Date) {
             return moment.utc(value).format(maskValue);
-          } else {
+          } else if (typeof value == 'number') {
+            return format(maskValue, value);
+          }  else if (value != undefined && value != null && value != "") {
             var input = $("<input type=\"text\">");
             input.mask(maskValue);
-            return input.masked(value);;
+            return input.masked(value);
+          } else {
+            return value;
           }
         };
       })
@@ -360,11 +364,11 @@
             var button = fieldset.find('button[cronapp-filter]');
             if (!button)
               return;
-            
+
             var filters = button.data('filters');
             if (!filters)
               filters = [];
-            
+
             var index = -1;
             var field = bindedFilter.split(operator)[0];
             $(filters).each(function(idx) {
@@ -372,7 +376,7 @@
                 index = idx;
               }
             });
-            
+
             if (index > -1)
               filters.splice(index, 1);
             filters.push(bindedFilter);
@@ -430,9 +434,9 @@
                   bindedFilter = '';
                 if (autopost)
                   datasource.search(bindedFilter);
-                else 
+                else
                   selfDirective.setFilterInButton($element, bindedFilter, operator);
-                
+
               });
             }
             else {
@@ -450,7 +454,7 @@
 
                   if (autopost)
                     datasource.search(bindedFilter);
-                  else 
+                  else
                     selfDirective.setFilterInButton($element, bindedFilter, operator);
                 });
               }
@@ -481,10 +485,10 @@
                   var bindedFilter = filterTemplate.split('{value}').join(value);
                   if (value.toString().length == 0)
                     bindedFilter = '';
-                  
+
                   if (autopost)
                     datasource.search(bindedFilter);
-                  else 
+                  else
                     selfDirective.setFilterInButton($element, bindedFilter, operator);
                 });
               }
@@ -496,7 +500,7 @@
               var datasourceName = '';
               if (attrs.crnDatasource)
                 datasourceName = attrs.crnDatasource;
-              else 
+              else
                 datasourceName = $element.parent().attr('crn-datasource')
 
               var filters = $this.data('filters');
@@ -512,18 +516,18 @@
             var typeElement = $element.data('type') || $element.attr('type');
             if (attrs.asDate != undefined)
               typeElement = 'date';
-            
+
             var operator = '=';
             if (attrs.cronappFilterOperator && attrs.cronappFilterOperator.length > 0)
               operator = attrs.cronappFilterOperator;
-            
+
             var autopost = true;
             if (attrs.cronappFilterAutopost && attrs.cronappFilterAutopost == "false")
               autopost = false;
-            
-            if ($element[0].tagName == "INPUT") 
+
+            if ($element[0].tagName == "INPUT")
               this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
-            else 
+            else
               this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
           }
         }
@@ -740,18 +744,18 @@ function maskDirective($compile, $translate, attrName) {
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            if (value != undefined && value != null) {
-              $element.inputmask('setvalue', value);
-              var num = $element.val();
-              return num;
+            if (value != undefined && value != null && value != '') {
+              return format(mask, value);
             }
 
             return null;
           });
 
           ngModelCtrl.$parsers.push(function (value) {
-            if (value != undefined && value != null) {
-              return $element.inputmask('unmaskedvalue');
+            if (value != undefined && value != null && value != '') {
+              var unmaskedvalue = $element.inputmask('unmaskedvalue');
+              if (unmaskedvalue != '')
+                return unmaskedvalue;
             }
 
             return null;
