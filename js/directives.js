@@ -182,6 +182,64 @@
       .directive('dynamicFile', function($compile) {
         var template = '';
         return {
+          restrict: 'A',
+          scope: true,
+          require: 'ngModel',
+          link: function(scope, element, attr) {
+            var s = scope;
+            var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
+
+            var splitedNgModel = attr.ngModel.split('.');
+            var datasource = splitedNgModel[0];
+            var field = splitedNgModel[splitedNgModel.length-1];
+            var number = Math.floor((Math.random() * 1000) + 20);
+            var content = element.html();
+            
+            var maxFileSize = "";
+            if (attr.maxFileSize)
+              maxFileSize = attr.maxFileSize;
+
+            var templateDyn    = '\
+                                <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
+                                  <input ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+                                  <div class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                    $userHtml$\
+                                  </div>\
+                                  <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">\
+                                      <span class="sr-only"></span>\
+                                    </div>\
+                                  </div>\
+                                </div> \
+                                <div ng-show="$ngModel$" class="upload-image-component-attribute"> \
+                                  <div class="btn btn-danger btn-xs ng-scope" style="float:right;" ng-if="$ngModel$" ng-click="$ngModel$=null"> \
+                                    <span class="glyphicon glyphicon-remove"></span> \
+                                  </div> \
+                                  <div> \
+                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
+                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">download</a> \
+                                  </div> \
+                                </div> \
+                                ';
+            templateDyn = $(templateDyn
+                .split('$ngModel$').join(attr.ngModel)
+                .split('$datasource$').join(datasource)
+                .split('$field$').join(field)
+                .split('$number$').join(number)
+                .split('$required$').join(required)
+                .split('$userHtml$').join(content)
+                .split('$maxFileSize$').join(maxFileSize)
+                
+                );            
+                                
+            element.html(templateDyn);
+            $compile(templateDyn)(element.scope());
+          }
+        }
+      })
+      .directive('dynamicFile', function($compile) {
+        var template = '';
+        return {
           restrict: 'E',
           replace: true,
           scope: {

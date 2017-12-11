@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="imgFor">Arquivo</label>
-    <dynamic-file ng-model="vars.input${RANDOM}" ng-required="false">
-        <img src="http://placehold.it/50x50" style="display:block; width:100px; height: 100px;">
-    </dynamic-file>
+    <div dynamic-file="" ng-model="vars.input${RANDOM}" class="dynamic-image-container" ng-required="false" max-file-size="5MB">
+      {{"template.crud.clickOrDragAnFile" | translate}}
+    </div>
 </div>

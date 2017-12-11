@@ -424,7 +424,7 @@
         {
           "text_pt_BR": "Campo",
           "text_en_US": "Field",
-          "selector": "dynamic-file"
+          "selector": "dynamic-file|div[dynamic-file]"
         }
       ]
     },

@@ -223,6 +223,22 @@ div[data-component="crn-button"] {
   margin-top: 3px;
 }
 
+.upload-image-component-attribute {
+  width: 100%;
+  background-color: #ccc;
+  display: table;
+}
+
+.upload-image-component-attribute .remove {
+  position: absolute;
+  margin-top: -8px;
+  margin-left: -18px;
+}
+
+.upload-image-component-attribute .remove span {
+  margin-top: 3px;
+}
+
 .drop-box {
   background: #F8F8F8;
   border: 2px dashed #DDD;
