@@ -40,7 +40,18 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/components/js/format.min.js",
       "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/reports/reports.service.js",
+      "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/reports/parameters.controller.js",
+      "type": "script"
     }
+	
   ],
   "removes": [
     {
