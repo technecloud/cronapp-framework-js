@@ -1231,7 +1231,18 @@
       "text_en_US": "Chart Doughnut",
       "class": "adjust-icon mdi mdi-chart-arc",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/chart-doughnut.template.html",
-      "wrapper":false
+	  "properties": {
+		"chart-data": {
+		"type": "pageDatasource",
+		"onSave": "javascript:function() { var result = arguments[0]; if (result.length > 0) result = result+'.columns[0]'; return result; }",
+		"onDisplay": "javascript:function() { return arguments[0].replace('.columns[0]',''); }"
+		},
+		"chart-labels": {
+		"type": "pageDatasource",
+		"onSave": "javascript:function() { var result = arguments[0]; if (result.length > 0) result = result+'.columns[1]'; return result; }",
+		"onDisplay": "javascript:function() { return arguments[0].replace('.columns[1]',''); }"
+		}
+	}
     },
     {
       "name": "crn-chart-line",

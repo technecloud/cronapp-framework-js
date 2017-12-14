@@ -25,7 +25,8 @@ angular.module('datasourcejs', [])
         this.$apply = function(fc) {
             scope.$apply(fc);
         }.bind(scope);
-
+		
+		this.columns = [];
         this.data = [];
         this.name = name;
         this.keys = [];
@@ -525,6 +526,14 @@ angular.module('datasourcejs', [])
                 }.bind(this));
             }
         };
+		
+		this.getColumn = function(index) {
+			var returnValue = [];
+			$.each(this.data, function(key, value) {
+				returnValue.push(value[index]);
+			});
+			return returnValue;
+		};
 
         // Set this datasource back to the normal state
         this.onBackNomalState = function() {
@@ -1114,6 +1123,13 @@ angular.module('datasourcejs', [])
                         cursor = 0;
                     }
                 }
+				
+				this.columns = [];
+				if (this.data.length > 0) {
+					for (var i = 0; i < this.data[0].length; i++) {
+						this.columns.push(this.getColumn(i));
+					}
+				}
 
                 if (callbacks.success) callbacks.success.call(this, data);
 
