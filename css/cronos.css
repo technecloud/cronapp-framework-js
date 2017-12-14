@@ -315,3 +315,6 @@ div[data-component="crn-button"] {
     text-align: center;
     cursor: pointer;
 }
+.full-width {
+  width: 100% !important;
+}
