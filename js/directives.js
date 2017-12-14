@@ -446,6 +446,22 @@
             }
             button.data('filters', filters);
           },
+          makeAutoPostSearch: function($element, bindedFilter, datasource) {
+            var fieldset = $element.closest('fieldset');
+            if (fieldset && fieldset.length > 0) {
+              var button = fieldset.find('button[cronapp-filter]');
+              if (button && button.length > 0) {
+                var filters = button.data('filters');
+                if (filters && filters.length > 0) {
+                  bindedFilter = '';
+                  $(filters).each(function() {
+                      bindedFilter += this.bindedFilter+";";
+                  });
+                }
+              }
+            }
+            datasource.search(bindedFilter);
+          },
           inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
             var filterTemplate = '';
             var filtersSplited = attrs.cronappFilter.split(';');
@@ -499,7 +515,7 @@
                 
                 selfDirective.setFilterInButton($element, bindedFilter, operator);
                 if (autopost)
-                  datasource.search(bindedFilter);
+                  selfDirective.makeAutoPostSearch($element, bindedFilter, datasource);
 
               });
             }
@@ -518,7 +534,7 @@
 
                   selfDirective.setFilterInButton($element, bindedFilter, operator);
                   if (autopost)
-                    datasource.search(bindedFilter);
+                    selfDirective.makeAutoPostSearch($element, bindedFilter, datasource);
                 });
               }
               else {
@@ -551,7 +567,7 @@
 
                   selfDirective.setFilterInButton($element, bindedFilter, operator);
                   if (autopost)
-                    datasource.search(bindedFilter);
+                    selfDirective.makeAutoPostSearch($element, bindedFilter, datasource);
                 });
               }
             }
