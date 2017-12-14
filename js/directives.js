@@ -428,16 +428,22 @@
               filters = [];
 
             var index = -1;
-            var field = bindedFilter.split(operator)[0];
+            var ngModel = $element.attr('ng-model');
             $(filters).each(function(idx) {
-              if (this.startsWith(field)) {
+              if (this.ngModel == ngModel)
                 index = idx;
-              }
             });
 
             if (index > -1)
               filters.splice(index, 1);
-            filters.push(bindedFilter);
+            
+            if (bindedFilter.length > 0) {
+              var bindedFilterJson = {
+                "ngModel" : ngModel,
+                "bindedFilter" : bindedFilter
+              };
+              filters.push(bindedFilterJson);
+            }
             button.data('filters', filters);
           },
           inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
@@ -490,10 +496,10 @@
                 var bindedFilter = filterTemplate.split('{value}').join(value);
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
+                
+                selfDirective.setFilterInButton($element, bindedFilter, operator);
                 if (autopost)
                   datasource.search(bindedFilter);
-                else
-                  selfDirective.setFilterInButton($element, bindedFilter, operator);
 
               });
             }
@@ -510,10 +516,9 @@
                   if (this.value.length == 0)
                     bindedFilter = '';
 
+                  selfDirective.setFilterInButton($element, bindedFilter, operator);
                   if (autopost)
                     datasource.search(bindedFilter);
-                  else
-                    selfDirective.setFilterInButton($element, bindedFilter, operator);
                 });
               }
               else {
@@ -544,10 +549,9 @@
                   if (value.toString().length == 0)
                     bindedFilter = '';
 
+                  selfDirective.setFilterInButton($element, bindedFilter, operator);
                   if (autopost)
                     datasource.search(bindedFilter);
-                  else
-                    selfDirective.setFilterInButton($element, bindedFilter, operator);
                 });
               }
             }
@@ -563,7 +567,11 @@
 
               var filters = $this.data('filters');
               if (datasourceName && datasourceName.length > 0 && filters && filters.length > 0) {
-                var bindedFilter = filters.join(';');
+                var bindedFilter = '';
+                $(filters).each(function() {
+                    bindedFilter += this.bindedFilter+";";
+                });
+                
                 var datasourceToFilter = eval(datasourceName);
                 datasourceToFilter.search(bindedFilter);
               }
