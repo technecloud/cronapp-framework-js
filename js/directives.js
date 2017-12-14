@@ -582,7 +582,7 @@
                 datasourceName = $element.parent().attr('crn-datasource')
 
               var filters = $this.data('filters');
-              if (datasourceName && datasourceName.length > 0 && filters && filters.length > 0) {
+              if (datasourceName && datasourceName.length > 0 && filters) {
                 var bindedFilter = '';
                 $(filters).each(function() {
                     bindedFilter += this.bindedFilter+";";
