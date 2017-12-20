@@ -526,6 +526,47 @@ angular.module('datasourcejs', [])
                 }.bind(this));
             }
         };
+        
+        this.refreshActive = function() {
+          if (this.editing) {
+              var keyObj = getKeyValues(this.active);
+              var url = this.entity;
+              url += (this.entity.endsWith('/')) ? '' : '/';
+              for (var key in keyObj) {
+                url += this.active[key] + '/';
+              }
+              
+              this.$promise = $http({
+                  method: "GET",
+                  url: url,
+                  headers: this.headers
+              }).success(function(rows, status, headers, config) {
+                  debugger;
+                  if (!rows || rows.length < 1)
+                    return;
+                  var row = rows[0];                  
+                  this.active = row;
+                  
+                  this.data.forEach(function(currentRow) {
+                    var found;
+                    for (var key in keyObj) {
+                        if (currentRow[key] && currentRow[key] === keyObj[key]) {
+                            found = true;
+                        } else {
+                            found = false;
+                        }
+                    }
+                    if (found) {
+                        this.copy(row, currentRow);
+                    }
+                  }.bind(this));
+                  
+              }.bind(this)).error(function(data, status, headers, config) {
+                return;
+              }.bind(this));
+          }
+          
+        };
 		
 		this.getColumn = function(index) {
 			var returnValue = [];
