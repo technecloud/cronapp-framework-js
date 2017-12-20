@@ -63,7 +63,7 @@
         $scope.safeApply = safeApply;
 
         $scope.uploadFile = function(files) {
-          var uploadUrl = '/api/cronapi/upload/'+data.id;
+          var uploadUrl = 'api/cronapi/upload/'+data.id;
           var formData = new FormData();
           if (files.length == 0) {
             this.Notification.error(strFormat($translate.instant('Upload.errorValidation'), data.maxSize, data.filter));
