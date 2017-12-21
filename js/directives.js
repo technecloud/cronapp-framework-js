@@ -309,17 +309,17 @@
         'use strict';
         return {
           link: function(scope, elem, attrs, ctrl) {
-            elem.on('click', function() {
-              scope.$apply(function() {
-                if (scope.rowData) {
-                  var crnDatasource = elem.closest('[crn-datasource]')
-                  if (crnDatasource.length > 0) {
+            if (scope.rowData) {
+              var crnDatasource = elem.closest('[crn-datasource]')
+              if (crnDatasource.length > 0) {
+                elem.on('click', function() {
+                  scope.$apply(function() {
                     var datasource = eval(crnDatasource.attr('crn-datasource'));
                     datasource.active = scope.rowData; 
-                  }
-                }
-              });
-            });
+                  });
+                });
+              }
+            }
           }
         }
       }])
