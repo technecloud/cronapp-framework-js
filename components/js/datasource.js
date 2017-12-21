@@ -528,7 +528,7 @@ angular.module('datasourcejs', [])
         };
 
         this.refreshActive = function() {
-          if (this.editing) {
+          if (this.active) {
               var keyObj = getKeyValues(this.active);
               var url = this.entity;
               url += (this.entity.endsWith('/')) ? '' : '/';
@@ -541,7 +541,6 @@ angular.module('datasourcejs', [])
                   url: url,
                   headers: this.headers
               }).success(function(rows, status, headers, config) {
-                  debugger;
                   if (!rows || rows.length < 1)
                     return;
                   var row = rows[0];
