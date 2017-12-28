@@ -541,24 +541,38 @@ angular.module('datasourcejs', [])
                   url: url,
                   headers: this.headers
               }).success(function(rows, status, headers, config) {
-                  if (!rows || rows.length < 1)
-                    return;
-                  var row = rows[0];
+                  var row = null;
+                  if (rows && rows.length > 0)
+                    row = rows[0];
+                  
+                  var indexFound = -1;
+                  var i = 0;
                   this.active = row;
-
                   this.data.forEach(function(currentRow) {
-                    var found;
+                    var found = false;
+                    var idsFound = 0;
+                    var idsTotal = 0;
                     for (var key in keyObj) {
+                        idsTotal++;
                         if (currentRow[key] && currentRow[key] === keyObj[key]) {
-                            found = true;
-                        } else {
-                            found = false;
-                        }
+                            idsFound++;
+                        } 
                     }
+                    if (idsFound == idsTotal)
+                      found = true;
+                      
                     if (found) {
+                      indexFound = i;
+                      if (row)
                         this.copy(row, currentRow);
                     }
+                    i++;
                   }.bind(this));
+                  
+                  //Atualizou e o registro deixou de existir, remove da lista
+                  if (indexFound > -1 && !row) {
+                    this.data.splice(indexFound, 1);
+                  }
 
               }.bind(this)).error(function(data, status, headers, config) {
                 return;
