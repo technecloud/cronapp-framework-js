@@ -85,6 +85,13 @@ angular.module('datasourcejs', [])
                     busy = true;
                     url = url.replace('/specificSearch', '');
                     url = url.replace('/generalSearch', '');
+                    
+                    if (object && _self && _self.$scope && _self.$scope.vars) {
+                      object["vars"] = {};
+                      for (var attr in _self.$scope.vars) { 
+                        object.vars[attr] = _self.$scope.vars[attr];
+                      }
+                    }
 
                     // Get an ajax promise
                     this.$promise = $http({
