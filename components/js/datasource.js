@@ -540,6 +540,7 @@ angular.module('datasourcejs', [])
 
                 if (found) {
                   this.copy(obj, currentRow);
+                  this.active = currentRow;
                 }
 
                 this.handleAfterCallBack(this.onAfterUpdate);
