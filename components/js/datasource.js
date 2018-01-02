@@ -82,31 +82,36 @@ angular.module('datasourcejs', [])
             },
             call: function(url, verb, obj, applyScope) {
               var object = {};
+              var isCronapiQuery = (url.indexOf('/cronapi/query/') >= 0);
 
-              object.inputs = [obj];
+              if (isCronapiQuery) {
+                object.inputs = [obj];
 
-              var fields = {};
+                var fields = {};
 
-              var _callback;
-              busy = true;
-              url = url.replace('/specificSearch', '');
-              url = url.replace('/generalSearch', '');
+                var _callback;
+                busy = true;
+                url = url.replace('/specificSearch', '');
+                url = url.replace('/generalSearch', '');
 
-              if (_self && _self.$scope && _self.$scope.vars) {
-                fields["vars"] = {};
-                for (var attr in _self.$scope.vars) {
-                  fields.vars[attr] = _self.$scope.vars[attr];
+                if (_self && _self.$scope && _self.$scope.vars) {
+                  fields["vars"] = {};
+                  for (var attr in _self.$scope.vars) {
+                    fields.vars[attr] = _self.$scope.vars[attr];
+                  }
                 }
-              }
 
-              for (var key in _self.$scope) {
-                if (_self.$scope[key] && _self.$scope[key].constructor && _self.$scope[key].constructor.name=="DataSet") {
-                  fields[key] = {};
-                  fields[key].active = _self.$scope[key].active;
+                for (var key in _self.$scope) {
+                  if (_self.$scope[key] && _self.$scope[key].constructor && _self.$scope[key].constructor.name == "DataSet") {
+                    fields[key] = {};
+                    fields[key].active = _self.$scope[key].active;
+                  }
                 }
-              }
 
-              object.fields = fields;
+                object.fields = fields;
+              } else {
+                object = obj;
+              }
 
               // Get an ajax promise
               this.$promise = $http({
@@ -116,11 +121,13 @@ angular.module('datasourcejs', [])
                 headers: _self.headers
               }).success(function(data, status, headers, config) {
                 busy = false;
-                if (_callback) _callback(data.value);
-                _self.$scope.cronapi.evalInContext(JSON.stringify(data));
+                if (_callback) _callback(isCronapiQuery?data.value:data);
+                if (isCronapiQuery) {
+                  _self.$scope.cronapi.evalInContext(JSON.stringify(data));
+                }
               }).error(function(data, status, headers, config) {
                 busy = false;
-                _self.handleError(data.value);
+                _self.handleError(isCronapiQuery?data.value:data);
               });
 
               this.$promise.then = function(callback) {
