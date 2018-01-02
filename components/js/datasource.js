@@ -80,18 +80,33 @@ angular.module('datasourcejs', [])
                 remove: function(url) {
                     return this.call(url, "DELETE", null, true);
                 },
-                call: function(url, verb, object, applyScope) {
+                call: function(url, verb, obj, applyScope) {
+                    var object = {};
+
+                    object.inputs = [obj];
+
+                    var fields = {};
+
                     var _callback;
                     busy = true;
                     url = url.replace('/specificSearch', '');
                     url = url.replace('/generalSearch', '');
                     
-                    if (object && _self && _self.$scope && _self.$scope.vars) {
-                      object["vars"] = {};
-                      for (var attr in _self.$scope.vars) { 
-                        object.vars[attr] = _self.$scope.vars[attr];
+                    if (_self && _self.$scope && _self.$scope.vars) {
+                      fields["vars"] = {};
+                      for (var attr in _self.$scope.vars) {
+                        fields.vars[attr] = _self.$scope.vars[attr];
                       }
                     }
+
+                  for (var key in _self.$scope) {
+                    if (_self.$scope[key] && _self.$scope[key].constructor && _self.$scope[key].constructor.name=="DataSet") {
+                      fields[key] = {};
+                      fields[key].active = _self.$scope[key].active;
+                    }
+                  }
+
+                  object.fields = fields;
 
                     // Get an ajax promise
                     this.$promise = $http({
