@@ -75,7 +75,7 @@ angular.module('datasourcejs', [])
               return this.call(_self.entity, "POST", object, true);
             },
             update: function(url, object) {
-              return this.call(url, "PUT", object);
+              return this.call(url, "PUT", object, false);
             },
             remove: function(url) {
               return this.call(url, "DELETE", null, true);
@@ -116,10 +116,11 @@ angular.module('datasourcejs', [])
                 headers: _self.headers
               }).success(function(data, status, headers, config) {
                 busy = false;
-                if (_callback) _callback(data);
+                if (_callback) _callback(data.value);
+                _self.$scope.cronapi.evalInContext(JSON.stringify(data));
               }).error(function(data, status, headers, config) {
                 busy = false;
-                _self.handleError(data);
+                _self.handleError(data.value);
               });
 
               this.$promise.then = function(callback) {
