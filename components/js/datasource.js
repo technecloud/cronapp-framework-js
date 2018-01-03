@@ -522,11 +522,13 @@ angular.module('datasourcejs', [])
                 // current object match with the
                 // extracted key values
                 var found;
+				var dataKeys = getKeyValues(currentRow);
                 for (var key in keyObj) {
-                  if (currentRow[key] && currentRow[key] === keyObj[key]) {
+                  if (dataKeys[key] && dataKeys[key] === keyObj[key]) {
                     found = true;
                   } else {
                     found = false;
+					break;
                   }
                 }
 
@@ -737,6 +739,7 @@ angular.module('datasourcejs', [])
                       // and the key values extracted from the object
                       // that we want to remove
                       found = false;
+					  break;
                     }
                   }
                 }
