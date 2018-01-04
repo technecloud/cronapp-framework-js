@@ -116,12 +116,21 @@
     }
 
     $rootScope.logout = function logout() {
-      $rootScope.session = {};
-      if(typeof (Storage) !== "undefined") {
-        // save the user data on localStorage
-        sessionStorage.removeItem("_u");
+      $http({
+        method : 'GET',
+        url : 'logout',
+        headers : {
+          'Content-Type' : 'application/json'
+        }
+      }).success(clean).error(clean);
+
+      function clean() {
+        $rootScope.session = {};
+        if(typeof (Storage) !== "undefined") {
+          sessionStorage.removeItem("_u");
+        }
+        window.location.href = "";
       }
-      $state.go("login");
     };
 
     $scope.changePassword = function() {
