@@ -19,6 +19,6 @@
     $scope.message = {};
 
     try { $controller('AfterHomeController', { $scope: $scope }); } catch(e) {};
-
+    try { if ($scope.blockly.events.afterHomeRender) $scope.blockly.events.afterHomeRender(); } catch(e) {};
   });
 }(app));

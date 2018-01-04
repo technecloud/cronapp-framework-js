@@ -56,6 +56,7 @@
     }
 
     try { $controller('AfterLoginController', { $scope: $scope }); } catch(e) {};
+    try { if ($scope.blockly.events.afterLoginRender) $scope.blockly.events.afterLoginRender(); } catch(e) {};
   });
 
   app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
@@ -253,6 +254,7 @@
       }
     };
     try { $controller('AfterHomeController', { $scope: $scope }); } catch(e) {};
+    try { if ($scope.blockly.events.afterHomeRender) $scope.blockly.events.afterHomeRender(); } catch(e) {};
   });
 }(app));
 

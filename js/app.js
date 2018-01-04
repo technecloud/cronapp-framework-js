@@ -218,6 +218,7 @@ var app = (function() {
         registerComponentScripts();
 
         try { $controller('AfterPageController', { $scope: $scope }); } catch(e) {};
+        try { if ($scope.blockly.events.afterPageRender) $scope.blockly.events.afterPageRender(); } catch(e) {};
       })
 
       .run(function($rootScope, $state) {
