@@ -55,6 +55,11 @@
       "file": "index.html",
       "script": "js/system-events.js",
       "type": "script"
+    },
+	    {
+      "file": "index.html",
+      "script": "js/blockly.js",
+      "type": "script"
     }
 	
   ],
@@ -72,6 +77,11 @@
     {
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/format.min.js",
+      "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "/js/blockly.js",
       "type": "script"
     }
   ]
