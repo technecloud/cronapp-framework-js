@@ -1441,7 +1441,7 @@ angular.module('datasourcejs', [])
 
             // Check for headers
             if (props.headers && props.headers.length > 0) {
-              dts.headers = {};
+              dts.headers = {"X-From-DataSource": "true"};
               var headers = props.headers.trim().split(";");
               var header;
               for (var i = 0; i < headers.length; i++) {
