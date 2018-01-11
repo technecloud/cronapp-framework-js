@@ -82,6 +82,30 @@ var app = (function() {
               templateUrl: 'views/login.view.html'
             })
 
+            .state('publicRoot', {
+              url: "/public/{name:.*}",
+              controller: 'PageController',
+              templateUrl: function(urlattr) {
+                return 'views/public/' + urlattr.name + '.view.html';
+              }
+            })
+
+            .state('public', {
+              url: "/home/public",
+              controller: 'PublicController',
+              templateUrl: function(urlattr) {
+                return 'views/public/home.view.html';
+              }
+            })
+
+            .state('public.pages', {
+              url: "/{name:.*}",
+              controller: 'PageController',
+              templateUrl: function(urlattr) {
+                return 'views/public/' + urlattr.name + '.view.html';
+              }
+            })
+
             .state('home', {
               url: "/home",
               controller: 'HomeController',

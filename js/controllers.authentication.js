@@ -112,8 +112,10 @@
         $scope.refreshToken();
     }
     else {
-      $state.go("login");
-      sessionStorage.removeItem("_u");
+      if (!$scope.ignoreAuth) {
+        sessionStorage.removeItem("_u");
+        window.location.href = "";
+      }
     }
 
     $rootScope.logout = function logout() {
@@ -256,6 +258,14 @@
     try { $controller('AfterHomeController', { $scope: $scope }); } catch(e) {};
     try { if ($scope.blockly.events.afterHomeRender) $scope.blockly.events.afterHomeRender(); } catch(e) {};
   });
+
+  app.controller('PublicController', function($controller, $scope) {
+    $scope.ignoreAuth = true;
+    angular.extend(this, $controller('HomeController', {
+      $scope: $scope
+    }));
+  });
+
 }(app));
 
 window.safeApply = function(fn) {
