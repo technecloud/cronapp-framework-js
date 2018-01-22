@@ -444,6 +444,7 @@
         "cronapp-filter-caseinsensitive":  {
           "removable": false,
           "type": "list",
+          "selector": "input",
           "options": [
             {
               "value": "Sim",
