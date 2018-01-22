@@ -441,6 +441,20 @@
           "removable": false,
           "type": "pageDatasource"
         },
+        "cronapp-filter-caseinsensitive":  {
+          "removable": false,
+          "type": "list",
+          "options": [
+            {
+              "value": "Sim",
+              "key": "true"
+            },
+            {
+              "value": "Não",
+              "key": "false"
+            }
+          ]
+        },
         "cronapp-filter-autopost": {
           "removable": false,
           "type": "list",

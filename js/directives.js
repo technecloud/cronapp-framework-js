@@ -194,7 +194,7 @@
             var field = splitedNgModel[splitedNgModel.length-1];
             var number = Math.floor((Math.random() * 1000) + 20);
             var content = element.html();
-            
+
             var maxFileSize = "";
             if (attr.maxFileSize)
               maxFileSize = attr.maxFileSize;
@@ -229,9 +229,9 @@
                 .split('$required$').join(required)
                 .split('$userHtml$').join(content)
                 .split('$maxFileSize$').join(maxFileSize)
-                
-                );            
-                                
+
+            );
+
             element.html(templateDyn);
             $compile(templateDyn)(element.scope());
           }
@@ -315,7 +315,7 @@
                 elem.on('click', function() {
                   scope.$apply(function() {
                     var datasource = eval(crnDatasource.attr('crn-datasource'));
-                    datasource.active = scope.rowData; 
+                    datasource.active = scope.rowData;
                   });
                 });
               }
@@ -453,7 +453,7 @@
 
             if (index > -1)
               filters.splice(index, 1);
-            
+
             if (bindedFilter.length > 0) {
               var bindedFilterJson = {
                 "ngModel" : ngModel,
@@ -463,7 +463,7 @@
             }
             button.data('filters', filters);
           },
-          makeAutoPostSearch: function($element, bindedFilter, datasource) {
+          makeAutoPostSearch: function($element, bindedFilter, datasource, attrs) {
             var fieldset = $element.closest('fieldset');
             if (fieldset && fieldset.length > 0) {
               var button = fieldset.find('button[cronapp-filter]');
@@ -472,12 +472,12 @@
                 if (filters && filters.length > 0) {
                   bindedFilter = '';
                   $(filters).each(function() {
-                      bindedFilter += this.bindedFilter+";";
+                    bindedFilter += this.bindedFilter+";";
                   });
                 }
               }
             }
-            datasource.search(bindedFilter);
+            datasource.search(bindedFilter, (attrs.cronappFilterCaseinsensitive=="true"));
           },
           inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
             var filterTemplate = '';
@@ -529,10 +529,10 @@
                 var bindedFilter = filterTemplate.split('{value}').join(value);
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
-                
+
                 selfDirective.setFilterInButton($element, bindedFilter, operator);
                 if (autopost)
-                  selfDirective.makeAutoPostSearch($element, bindedFilter, datasource);
+                  selfDirective.makeAutoPostSearch($element, bindedFilter, datasource, attrs);
 
               });
             }
@@ -551,7 +551,7 @@
 
                   selfDirective.setFilterInButton($element, bindedFilter, operator);
                   if (autopost)
-                    selfDirective.makeAutoPostSearch($element, bindedFilter, datasource);
+                    selfDirective.makeAutoPostSearch($element, bindedFilter, datasource, attrs);
                 });
               }
               else {
@@ -584,7 +584,7 @@
 
                   selfDirective.setFilterInButton($element, bindedFilter, operator);
                   if (autopost)
-                    selfDirective.makeAutoPostSearch($element, bindedFilter, datasource);
+                    selfDirective.makeAutoPostSearch($element, bindedFilter, datasource, attrs);
                 });
               }
             }
@@ -602,11 +602,11 @@
               if (datasourceName && datasourceName.length > 0 && filters) {
                 var bindedFilter = '';
                 $(filters).each(function() {
-                    bindedFilter += this.bindedFilter+";";
+                  bindedFilter += this.bindedFilter+";";
                 });
-                
+
                 var datasourceToFilter = eval(datasourceName);
-                datasourceToFilter.search(bindedFilter);
+                datasourceToFilter.search(bindedFilter, (attrs.cronappFilterCaseinsensitive=="true"));
               }
             });
           },
@@ -627,7 +627,7 @@
             if ($element[0].tagName == "INPUT")
               this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
             else
-              this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+              this.buttonBehavior(scope, element, attrs, ngModeluCtrl, $element, typeElement, operator, autopost);
           }
         }
       })
