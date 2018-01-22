@@ -627,7 +627,7 @@
             if ($element[0].tagName == "INPUT")
               this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
             else
-              this.buttonBehavior(scope, element, attrs, ngModeluCtrl, $element, typeElement, operator, autopost);
+              this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
           }
         }
       })
