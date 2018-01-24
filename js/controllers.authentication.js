@@ -14,12 +14,12 @@
     }
 
     $scope.message = {};
-    $scope.login = function() {
+    $scope.login = function(oauth) {
       $scope.message.error = undefined;
 
       var user = {
-        username : $scope.username.value,
-        password : $scope.password.value
+        username : oauth?"#OAUTH#":$scope.username.value,
+        password : oauth?"#OAUTH#":$scope.password.value
       };
 
       $http({
@@ -264,6 +264,15 @@
     angular.extend(this, $controller('HomeController', {
       $scope: $scope
     }));
+  });
+
+  app.controller('SocialController', function($controller, $scope) {
+    $scope.checkSocial = true;
+    angular.extend(this, $controller('LoginController', {
+      $scope: $scope
+    }));
+
+    $scope.login(true);
   });
 
 }(app));

@@ -76,6 +76,12 @@ var app = (function() {
               templateUrl: 'views/login.view.html'
             })
 
+            .state('social', {
+              url: "/_=_",
+              controller: 'SocialController',
+              templateUrl: 'views/login.view.html'
+            })
+
             .state('main', {
               url: "/",
               controller: 'LoginController',
