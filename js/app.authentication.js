@@ -77,7 +77,13 @@ var app = (function() {
             })
 
             .state('social', {
-              url: "/_=_",
+              url: "/connected",
+              controller: 'SocialController',
+              templateUrl: 'views/login.view.html'
+            })
+
+            .state('socialError', {
+              url: "/notconnected",
               controller: 'SocialController',
               templateUrl: 'views/login.view.html'
             })
