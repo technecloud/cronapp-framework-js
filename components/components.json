@@ -1085,16 +1085,42 @@
       "text_pt_BR": "Lista de opção",
       "text_en_US": "Radio Group",
       "class": "adjust-icon mdi mdi-radiobox-marked",
+      "wrapper":false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/radiogroup.template.html",
+      "properties": {
+        "ng-model": {
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        }
+      },
       "handleRules": {
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<div class=\"radio\">\n  <label class=\"\" crn-value value=\"Value Two\"> \n       <input type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\" value=\"\"> \n       <span class=\"\">New option</span> \n </label> \n</div>",
-            "targetSelector": ".form-group"
+            "sourceHTML": "<div class=\"radio\" data-component=\"crn-radioOption\">\n  <label class=\"\" crn-value=\"\" value=\"value${RANDOM}\"> \n <input type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\" value=\"\"> \n       <span class=\"\">New option</span> \n </label> \n</div>",
+            "targetSelector": ":self"
           }
         ]
       }
+    },
+    {
+      "name": "crn-radioOption",
+      "pallete":false,
+      "childrenProperties": [
+        {
+          "name": "value",
+          "selector": "label[value]",
+          "displayName_pt_BR": "Valor do campo",
+          "displayName_en_US": "Field value"
+        },
+        {
+          "name": "crn-view-value",
+          "selector": "span",
+          "displayName_pt_BR": "Valor de exibição",
+          "displayName_en_US": "Text value"
+        }
+      ]
+
     },
     {
       "name": "crn-checkbox",
