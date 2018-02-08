@@ -83,6 +83,21 @@
       "file": "index.html",
       "script": "/js/blockly.js",
       "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/summernote/dist/summernote.css",
+      "type": "style"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/angular-summernote/dist/angular-summernote.min.js",
+      "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/summernote/dist/summernote.min.js",
+      "type": "script"
     }
   ]
 }

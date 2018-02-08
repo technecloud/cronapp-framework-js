@@ -1603,6 +1603,31 @@
 					"selector": "input"
 				}
 			]
-    }
+    },
+	{
+      "name": "crn-richtextarea",
+      "text_pt_BR": "Área de texto rico",
+      "text_en_US": "Rich textarea",
+      "class": "adjust-icon mdi mdi-format-text",
+      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" class=\"form-control\" summernote=\"\"></textarea></div>",
+      "properties": {
+        "ng-model": {
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        }
+      },
+      "groupedChildren": [
+        {
+          "text_pt_BR": "Rótulo",
+          "text_en_US": "Label",
+          "selector": "label"
+        },
+        {
+          "text_pt_BR": "Campo",
+          "text_en_US": "Field",
+          "selector": "textarea"
+        }
+      ]
+	}
   ]
 }
