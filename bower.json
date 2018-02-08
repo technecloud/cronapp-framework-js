@@ -1,6 +1,6 @@
 {
     "name": "cronapp-framework-js",
-    "version": "0.0.149-d" ,
+    "version": "0.0.150-d" ,
     "homepage": "https://github.com/technecloud/cronapp-framework-js",
     "authors": [
         "Techne Engenharia e Sistemas <contato@techne.com.br>"
@@ -43,5 +43,8 @@
         "cronapi-js": "latest",
         "pace": "1.0.2",
 		"angular-summernote":"0.8.1"
-    }
+    },
+	"resolutions": {
+		"angular": "1.5.9"
+	}
 }
