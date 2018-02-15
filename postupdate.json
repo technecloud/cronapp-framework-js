@@ -73,7 +73,7 @@
     },
 	{
       "file": "index.html",
-      "script": "plugins/summernote/dist/summernote.min.js",
+      "script": "plugins/summernote/dist/summernote.js",
       "type": "script"
     }
 	
@@ -97,6 +97,11 @@
 	{
       "file": "index.html",
       "script": "/js/blockly.js",
+      "type": "script"
+    },
+		{
+      "file": "index.html",
+      "script": "plugins/summernote/dist/summernote.min.js",
       "type": "script"
     }
   ]
