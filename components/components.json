@@ -1609,7 +1609,7 @@
       "text_pt_BR": "Área de texto rico",
       "text_en_US": "Rich textarea",
       "class": "adjust-icon mdi mdi-format-text",
-      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" class=\"form-control\" summernote=\"\"></textarea></div>",
+      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" class=\"form-control\" summernote=\"\" lang=\"pt-BR\"></textarea></div>",
       "properties": {
         "ng-model": {
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",

@@ -75,6 +75,11 @@
       "file": "index.html",
       "script": "plugins/summernote/dist/summernote.js",
       "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/summernote/dist/lang/summernote-pt-BR.min.js",
+      "type": "script"
     }
 	
   ],
