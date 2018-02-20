@@ -7,6 +7,10 @@
     {
       "from": "plugins/cronapp-framework-js/js/customModules.js",
       "to": "js/customModules.js"
+    },
+    {
+      "from": "plugins/cronapp-framework-js/js/customStateProvider.js",
+      "to": "js/customStateProvider.js"
     }
   ],
   "includes": [
@@ -28,6 +32,12 @@
     {
       "file": "index.html",
       "script": "js/customModules.js",
+      "type": "script",
+      "onTop": true
+    },
+    {
+      "file": "index.html",
+      "script": "js/customStateProvider.js",
       "type": "script",
       "onTop": true
     },

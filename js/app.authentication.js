@@ -67,10 +67,13 @@ var app = (function() {
           positionX: 'right',
           positionY: 'top'
         });
-
+        
+        if (window.customStateProvider) {
+          window.customStateProvider($stateProvider);
+        }
+        else {
         // Set up the states
-        $stateProvider
-
+          $stateProvider
             .state('login', {
               url: "",
               controller: 'LoginController',
@@ -148,6 +151,7 @@ var app = (function() {
                 return 'views/error/403.view.html';
               }
             });
+        }
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/error/404");

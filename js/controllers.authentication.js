@@ -102,7 +102,9 @@
       // When access home page we have to check
       // if the user is authenticated and the userData
       // was saved on the browser's sessionStorage
-      $rootScope.myTheme = $rootScope.session.user.theme;
+      $rootScope.myTheme = '';
+      if ($rootScope.session.user)
+        $rootScope.myTheme = $rootScope.session.user.theme;
       $scope.$watch('myTheme', function(value) {
         if(value !== undefined && value !== "") {
           $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
