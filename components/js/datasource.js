@@ -127,7 +127,7 @@ angular.module('datasourcejs', [])
                 }
               }).error(function(data, status, headers, config) {
                 busy = false;
-                _self.handleError(isCronapiQuery?data.value:data);
+                _self.handleError(isCronapiQuery&&data.value?data.value:data);
               });
 
               this.$promise.then = function(callback) {

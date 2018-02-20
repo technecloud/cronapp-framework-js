@@ -14,21 +14,27 @@
     }
 
     $scope.message = {};
-    $scope.login = function(oauth) {
+    $scope.login = function(user, password, token) {
       $scope.message.error = undefined;
 
       var user = {
-        username : oauth?"#OAUTH#":$scope.username.value,
-        password : oauth?"#OAUTH#":$scope.password.value
+        username : user?user:$scope.username.value,
+        password : password?password:$scope.password.value
       };
+
+      var headerValues = {
+        'Content-Type' : 'application/x-www-form-urlencoded'
+      };
+
+      if (token) {
+        headerValues["X-AUTH-TOKEN"] = token;
+      }
 
       $http({
         method : 'POST',
         url : 'auth',
         data : $.param(user),
-        headers : {
-          'Content-Type' : 'application/x-www-form-urlencoded'
-        }
+        headers : headerValues
       }).success(handleSuccess).error(handleError);
     }
 
@@ -104,7 +110,7 @@
       // was saved on the browser's sessionStorage
       $rootScope.myTheme = '';
       if ($rootScope.session.user)
-        $rootScope.myTheme = $rootScope.session.user.theme;
+      $rootScope.myTheme = $rootScope.session.user.theme;
       $scope.$watch('myTheme', function(value) {
         if(value !== undefined && value !== "") {
           $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
@@ -268,13 +274,21 @@
     }));
   });
 
-  app.controller('SocialController', function($controller, $scope) {
+  app.controller('SocialController', function($controller, $scope, $location) {
     $scope.checkSocial = true;
     angular.extend(this, $controller('LoginController', {
       $scope: $scope
     }));
 
-    $scope.login(true);
+    var queryStringParams = $location.search();
+    var params = {};
+    for (var key in queryStringParams) {
+      if (queryStringParams.hasOwnProperty(key)) {
+        params[key] = queryStringParams[key];
+      }
+    }
+
+    $scope.login("#OAUTH#", "#OAUTH#", params["_ctk"]);
   });
 
 }(app));
