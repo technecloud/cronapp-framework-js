@@ -253,7 +253,10 @@ var app = (function() {
 
         $scope.registerComponentScripts();
 
-        try { $controller('AfterPageController', { $scope: $scope }); } catch(e) {};
+        try { 
+          var contextAfterPageController = $controller('AfterPageController', { $scope: $scope });  
+          app.copyContext(contextAfterPageController, this, 'AfterPageController');
+        } catch(e) {};
         try { if ($scope.blockly.events.afterPageRender) $scope.blockly.events.afterPageRender(); } catch(e) {};
       })
 
@@ -322,6 +325,17 @@ app.registerEventsCronapi = function($scope, $translate) {
     console.info('Not loaded blockly functions');
     console.info(e);
   }
+};
+
+app.copyContext = function(fromContext, toContext, controllerName) {
+	if (fromContext) {
+  	for (var item in fromContext) {
+  	  if (!toContext[item])
+  	    toContext[item] = fromContext[item];
+  	  else 
+  	    toContext[item+controllerName] = fromContext[item];
+  	}
+	}
 };
 
 window.safeApply = function(fn) {

@@ -63,7 +63,7 @@
 
     try { 
       var contextAfterLoginController = $controller('AfterLoginController', { $scope: $scope }); 
-      copyContext(contextAfterLoginController, this, 'AfterLoginController');
+      app.copyContext(contextAfterLoginController, this, 'AfterLoginController');
     } catch(e) {};
     try { if ($scope.blockly.events.afterLoginRender) $scope.blockly.events.afterLoginRender(); } catch(e) {};
   });
@@ -268,7 +268,7 @@
     };
     try { 
       var contextAfterHomeController = $controller('AfterHomeController', { $scope: $scope });
-      copyContext(contextAfterHomeController, this, 'AfterHomeController');
+      app.copyContext(contextAfterHomeController, this, 'AfterHomeController');
     } catch(e) {};
     try { if ($scope.blockly.events.afterHomeRender) $scope.blockly.events.afterHomeRender(); } catch(e) {};
   });
@@ -311,13 +311,3 @@ window.safeApply = function(fn) {
   }
 };
 
-var copyContext = function(fromContext, toContext, controllerName) {
-	if (fromContext) {
-  	for (var item in fromContext) {
-  	  if (!toContext[item])
-  	    toContext[item] = fromContext[item];
-  	  else 
-  	    toContext[item+controllerName] = fromContext[item];
-  	}
-	}
-}
