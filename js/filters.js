@@ -43,5 +43,6 @@
       return encodeURIComponent(input);
     };
   });
-
+  
+  $app.filter('renderHTML', function($sce) { return $sce.trustAsHtml; });
 }(app));
