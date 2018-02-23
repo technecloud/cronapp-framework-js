@@ -156,7 +156,20 @@ var app = (function() {
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/error/404");
       })
-
+      .factory('originPath', ['$location', function($location) {  
+        var originPath = {
+            request: function(config) {
+                config.headers['origin-path'] = $location.path();
+                debugger;
+                return config;
+                
+            }
+        };
+        return originPath;
+      }])
+    	.config(['$httpProvider', function($httpProvider) {  
+    	    $httpProvider.interceptors.push('originPath');
+      }])
       .config(function($translateProvider, tmhDynamicLocaleProvider) {
 
         $translateProvider.useMissingTranslationHandlerLog();
