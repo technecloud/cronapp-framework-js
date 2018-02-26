@@ -63,6 +63,7 @@
         $scope.safeApply = safeApply;
 
         $scope.uploadFile = function(files) {
+          var pageScope = $scope.data.scope;
           var uploadUrl = 'api/cronapi/upload/'+data.id;
           var formData = new FormData();
           if (files.length == 0) {
@@ -92,7 +93,7 @@
                 });
               }.bind(this)
             }).success(function(data, status, headers, config) {
-              var result = this.cronapi.evalInContext(JSON.stringify(data));
+              var result = pageScope.cronapi.evalInContext(JSON.stringify(data));
               $scope.uploaded = true;
               $scope.uploading = false;
               $scope.close();
