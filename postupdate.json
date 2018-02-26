@@ -90,7 +90,12 @@
       "file": "index.html",
       "script": "plugins/summernote/dist/lang/summernote-pt-BR.min.js",
       "type": "script"
-    }
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/components/js/qrcode.js",
+      "type": "script"
+    },
 	
   ],
   "removes": [

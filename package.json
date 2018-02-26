@@ -1,6 +1,6 @@
 {
     "name": "cronapp-framework-js",
-    "version": "0.0.161-d-s-b",
+    "version": "0.0.162-d-s",
     "description": "Javascript library for CronApp's projects",
     "main": "cronapp.framework.js",
     "scripts": {
