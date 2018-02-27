@@ -160,9 +160,7 @@ var app = (function() {
         var originPath = {
             request: function(config) {
                 config.headers['origin-path'] = $location.path();
-                debugger;
                 return config;
-                
             }
         };
         return originPath;

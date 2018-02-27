@@ -1390,9 +1390,9 @@ angular.module('datasourcejs', [])
             return false;
         }
         
-        if (window.beforeDatasourceCreate) {
+        if (window.afterDatasourceCreate) {
           var args = [$q, $timeout, $rootScope, $window, Notification];
-          window.beforeDatasourceCreate.apply(this, args);
+          window.afterDatasourceCreate.apply(this, args);
         }
 
         this.init();
