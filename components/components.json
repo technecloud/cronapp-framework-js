@@ -1264,14 +1264,6 @@
       }
     },
     {
-      "name": "crn-chart-bar",
-      "text_pt_BR": "Barra de gráfico",
-      "text_en_US": "Chart Bar",
-      "class": "adjust-icon mdi mdi-chart-bar",
-      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/chart-bar.template.html",
-      "wrapper":false
-    },
-    {
       "name": "crn-title",
       "text_pt_BR": "Título",
       "text_en_US": "Title",
