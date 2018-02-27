@@ -476,7 +476,6 @@
     var render = function(canvas, value, typeNumber, correction, size, inputMode){
       var trim = /^\s+|\s+$/g;
       var text = value.replace(trim, '');
-      debugger;
       var qr = new QRCode(typeNumber, correction, inputMode);
       qr.addData(text);
       qr.make();
