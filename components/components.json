@@ -1601,6 +1601,55 @@
 				}
 			]
 		}
+	},
+	{
+		"name": "crn-panel",
+		"text_pt_BR": "Painel",
+		"text_en_US": "Panel",
+		"class": "adjust-icon mdi mdi-file-presentation-box",
+		"templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/panel.template.html",
+		"properties": {
+			"xattr-theme": {
+				"displayName": "Theme"
+			}
+		},
+		"attributesForPreview": [
+			{
+				"name": "xattr-theme",
+				"type": "options",
+				"target": "class",
+				"values": [
+					{
+						"key": "panel-default",
+						"value": "Default"
+					},
+					{
+						"key": "panel-primary",
+						"value": "Primary"
+					},
+					{
+						"key": "panel-success",
+						"value": "Success"
+					},
+					{
+						"key": "panel-info",
+						"value": "Info"
+					},
+					{
+						"key": "panel-warning",
+						"value": "Warning"
+					},
+					{
+						"key": "panel-danger",
+						"value": "Danger"
+					},
+					{
+						"key": "panel-link",
+						"value": "Link"
+					}
+				]
+			}
+		]
 	}
   ]
 }
