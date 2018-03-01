@@ -1650,6 +1650,14 @@
 				]
 			}
 		]
+	},
+	{
+	"name": "crn-header",
+	"text_pt_BR": "Cabeçalho",
+	"text_en_US": "Header",
+	"class": "adjust-icon mdi mdi-page-layout-header",
+	"template": "<div class=\"page-header\"><h1 class=\"component-holder text-left\" xattr-position=\"text-left\" data-component=\"crn-title\" id=\"crn-title${RANDOM}\">Header</h1></div>",
+	"wrapper":false
 	}
   ]
 }
