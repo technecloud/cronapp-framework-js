@@ -680,6 +680,8 @@ angular.module('datasourcejs', [])
           if (this.onStartInserting) {
             this.onStartInserting();
           }
+          
+          this.active = { id: "-1"};
         };
 
         /**
