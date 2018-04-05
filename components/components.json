@@ -175,7 +175,6 @@
     },
     {
       "name": "crn-icon",
-      "displayName": "icon",
       "text": "Icon",
       "class": "adjust-icon mdi mdi-star",
       "template": "<i class=\"fa fa-star\"/>",
