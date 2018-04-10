@@ -691,7 +691,6 @@
       "text_pt_BR": "Grade vertical",
       "text_en_US": "Vertical Grid",
       "wrapper": false,
-      "autoWrapper": true,
       "class": "adjust-icon mdi mdi-drag-vertical",
       "template": "<div class=\"crn-layout-container\"><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div></div>",
       "handleRules": {
@@ -711,7 +710,6 @@
       "text_pt_BR": "Grade horizontal",
       "text_en_US": "Horizontal Grid",
       "wrapper": false,
-      "autoWrapper": true,
       "class": "adjust-icon mdi mdi-drag-horizontal",
       "template": "<div class=\"row\">\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n      </div>",
       "handleRules": {
