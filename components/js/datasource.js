@@ -57,6 +57,8 @@ angular.module('datasourcejs', [])
         this.dependentBufferLazyPostData = null; //TRM
         this.lastAction = null; //TRM
         this.dependentData = null; //TRM
+		this.caseInsensitive = null;
+        this.terms = null;
         var _self = this;
         var service = null;
 
@@ -1047,6 +1049,9 @@ angular.module('datasourcejs', [])
             this.searchTimeout = null;
           }
 
+		this.caseInsensitive = caseInsensitive;
+        this.terms = terms; 
+		  
           this.searchTimeout = setTimeout(function() {
             this.doSearch(terms, caseInsensitive);
           }.bind(this), 500);
