@@ -744,6 +744,32 @@
           }
         }
       })
+      
+      .directive('cronRichEditor', function ($compile) {
+        return {
+          restrict: 'E',
+          replace: true,
+          require: 'ngModel',
+          link: function (scope, element, attrs, ngModelCtrl) {
+            
+            var templateDyn    = '\
+              <textarea \
+                ui-tinymce="$options$" \
+                ng-model="$ngModel$"> \
+              </textarea> \
+            ';
+            templateDyn = $(templateDyn
+                .split('$ngModel$').join(attrs.ngModel)
+                .split('$options$').join(attrs.options)
+            );
+
+            var x = angular.element(templateDyn);
+            element.html('');
+            element.append(x);
+            $compile(x)(scope);
+          }
+        };
+      })
 }(app));
 
 function maskDirectiveAsDate($compile, $translate) {
