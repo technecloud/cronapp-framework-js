@@ -1647,6 +1647,26 @@
 	"class": "adjust-icon mdi mdi-page-layout-header",
 	"template": "<div class=\"page-header\"><h1 class=\"component-holder text-left\" xattr-position=\"text-left\" data-component=\"crn-title\" id=\"crn-title${RANDOM}\">Header</h1></div>",
 	"wrapper":false
-	}
+	},
+	{
+      "name": "crn-cron-rich-editor",
+      "text_pt_BR": "Editor de Texto Rico",
+      "text_en_US": "Rich Editor",
+      "class": "adjust-icon mdi mdi-text-shadow",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-rich-editor.template.html",
+      "properties": {
+        "ng-model": {
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        }
+      },
+      "groupedChildren": [
+        {
+          "text_pt_BR": "Campo",
+          "text_en_US": "Field",
+          "selector": "cron-rich-editor"
+        }
+      ]
+  }
   ]
 }
