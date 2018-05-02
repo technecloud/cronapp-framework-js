@@ -18,7 +18,7 @@ tinymce.PluginManager
 					 */
 					editor.addButton("bdesk_photo", {
 						icon : 'image',
-						title : 'Image Embed Upload',
+						title : 'Imagem embutida Upload',
 						cmd : "bdesk_photo"
 					});
 					/**
@@ -35,7 +35,7 @@ tinymce.PluginManager
 										editor.windowManager
 												.open({
 													//text for dialog							  
-													title : "Embed a image",
+													title : "Embutir uma imagem",
 													width : 450,
 													//location:
 													height : 80,
@@ -127,7 +127,7 @@ tinymce.PluginManager
 					editor.addMenuItem("bdesk_photo", {
 						cmd : "bdesk_photo",
 						context : "insert",
-						text : 'Embed Image',
+						text : 'Imagem embutida',
 						icon : 'image',
 					});
 				});

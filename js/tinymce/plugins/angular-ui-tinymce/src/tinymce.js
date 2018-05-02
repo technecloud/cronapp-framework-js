@@ -3,9 +3,8 @@
  */
   angular.module('ui.tinymce', [])
   .value('uiTinymceConfig', {})
-  .directive('uiTinymce', ['$rootScope', '$compile', '$timeout', '$window', '$sce', 'uiTinymceConfig', 'uiTinymceService', function($rootScope, $compile, $timeout, $window, $sce, uiTinymceConfig, uiTinymceService) {
+  .directive('uiTinymce', ['$rootScope', '$compile', '$timeout', '$window', '$sce', 'uiTinymceConfig', 'uiTinymceService','$translate', function($rootScope, $compile, $timeout, $window, $sce, uiTinymceConfig, uiTinymceService, $translate) {
     uiTinymceConfig = uiTinymceConfig || {};
-
     if (uiTinymceConfig.baseUrl) {
       tinymce.baseURL = uiTinymceConfig.baseUrl;
     }
@@ -135,8 +134,16 @@
         // element to be present in DOM before instantiating editor when
         // re-rendering directive
         $timeout(function() {
+          debugger;
           if (options.baseURL){
             tinymce.baseURL = options.baseURL;
+          }
+          
+          if (!options.language) {
+            if ($translate.use() == 'pt_br')
+              options.language = 'pt_BR';
+            else
+              options.language = 'en_CA';
           }
           var maybeInitPromise = tinymce.init(options);
           if(maybeInitPromise && typeof maybeInitPromise.then === 'function') {
