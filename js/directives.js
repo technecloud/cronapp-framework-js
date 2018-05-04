@@ -541,7 +541,7 @@
 
       .directive('mask', maskDirectiveMask)
 
-      .directive('cronappFilter', function() {
+      .directive('cronappFilter', function($compile) {
         return {
           restrict: 'A',
           require: '?ngModel',
@@ -702,15 +702,51 @@
               }
             }
           },
+          forceDisableDatasource: function(datasourceName, scope) {
+            var disableDatasource = setInterval(function() {
+              try {
+                var datasourceInstance = eval(datasourceName);
+                if (datasourceInstance) {
+                  $(document).ready(function() {
+                    var time = 0;
+                    var intervalForceDisable = setInterval(function() {
+                      if (time < 10) {
+                        scope.$apply(function () {
+                          datasourceInstance.enabled = false;
+                          datasourceInstance.data = [];  
+                        });
+                        time++;
+                      }
+                      else
+                        clearInterval(intervalForceDisable);
+                    }, 20);
+                  });
+                  clearInterval(disableDatasource);
+                }
+              }
+              catch(e) {
+                //try again, until render
+              }
+            },10);
+          },
           buttonBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
+            var datasourceName = '';
+            if (attrs.crnDatasource)
+              datasourceName = attrs.crnDatasource;
+            else
+              datasourceName = $element.parent().attr('crn-datasource')
+            debugger;
+            var requiredFilter = attrs.requiredFilter && attrs.requiredFilter.toString() == "true";
+            if (requiredFilter) {
+              this.forceDisableDatasource(datasourceName, scope);
+              // var $datasource = $('datasource[name="'+datasourceName+'"]');
+              // $datasource.attr('enabled','false');
+              // var x = angular.element($datasource);
+              // $compile(x)(scope);
+            }
+            
             $element.on('click', function() {
               var $this = $(this);
-              var datasourceName = '';
-              if (attrs.crnDatasource)
-                datasourceName = attrs.crnDatasource;
-              else
-                datasourceName = $element.parent().attr('crn-datasource')
-
               var filters = $this.data('filters');
               if (datasourceName && datasourceName.length > 0 && filters) {
                 var bindedFilter = '';
@@ -719,7 +755,20 @@
                 });
 
                 var datasourceToFilter = eval(datasourceName);
-                datasourceToFilter.search(bindedFilter, (attrs.cronappFilterCaseinsensitive=="true"));
+                
+                if (requiredFilter) {
+                  datasourceToFilter.enabled = bindedFilter.length > 0;
+                  if (datasourceToFilter.enabled) {
+                    datasourceToFilter.search(bindedFilter, (attrs.cronappFilterCaseinsensitive=="true"));
+                  }
+                  else {
+                    scope.$apply(function () {
+                      datasourceToFilter.data = [];
+                    });
+                  }
+                }
+                else
+                  datasourceToFilter.search(bindedFilter, (attrs.cronappFilterCaseinsensitive=="true"));
               }
             });
           },

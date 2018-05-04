@@ -516,7 +516,7 @@
       "class": "adjust-icon mdi mdi-filter",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datasourcefiltercomplex.template.html"
     },
-    {
+     {
       "name": "crn-button-filter",
       "text_pt_BR": "Botão do Filtro",
       "text_en_US": "Button of Filter",
@@ -621,6 +621,21 @@
             {
               "key": "btn-link",
               "value": "Link"
+            }
+          ]
+        },
+        {
+          "name": "required-filter",
+          "type": "options",
+          "target": "required-filter",
+          "values": [
+            {
+              "key": "true",
+              "value": "Sim"
+            },
+            {
+              "key": "false",
+              "value": "Não"
             }
           ]
         }
