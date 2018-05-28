@@ -33,7 +33,8 @@
       }
       var user = {
         username : user?user:$scope.username.value,
-        password : password?password:$scope.password.value
+        password : password?password:$scope.password.value,
+		recaptchaToken : $scope.captcha_token ? $scope.captcha_token : undefined
       };
 
       var headerValues = {
