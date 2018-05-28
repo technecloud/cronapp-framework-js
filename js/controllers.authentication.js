@@ -14,9 +14,23 @@
     }
 
     $scope.message = {};
+	$scope.renderRecaptcha = function(){
+      window.grecaptcha.render('loginRecaptcha');
+      window.grecaptcha.reset();
+    }
     $scope.login = function(user, password, token) {
       $scope.message.error = undefined;
-
+		if($('form[name="'+this.form.$name+'"]').children('*[class=g-recaptcha]').length){
+        $scope.captcha_token = window.grecaptcha.getResponse();
+        if(!$scope.captcha_token != ""){
+        window.grecaptcha.execute(function(token){}).then(function(token){
+          angular.element($('form[ng-submit="login()"]')[0]).scope().login();
+        },function(){
+          Notification.error('Error on recaptcha');
+        });
+        return;
+        }
+      }
       var user = {
         username : user?user:$scope.username.value,
         password : password?password:$scope.password.value
