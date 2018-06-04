@@ -110,6 +110,11 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/tinymce/tinymce.min.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/angular-ui-tinymce/dist/tinymce.min.js",
+      "type": "script"
     }
   ],
   "removes": [
@@ -141,6 +146,11 @@
     {
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/tinymce/tinymce.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/angular-ui-tinymce/src/tinymce.js",
       "type": "script"
     }
   ]
