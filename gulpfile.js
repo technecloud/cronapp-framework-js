@@ -19,6 +19,11 @@ gulp.task('copy-tinymce-js', function() {
     .pipe(gulp.dest('dist/js/tinymce'));
 });
 
+gulp.task('copy-kendo-ui-js', function() {
+  return gulp.src(['js/kendo-ui/**'])
+  .pipe(gulp.dest('dist/js/kendo-ui'));
+});
+
 gulp.task('minify-css', function() {
   return gulp.src(['css/app.css', 'css/cronos-bootstrap.css', 'css/cronos-template.css', 'css/cronos.css'])
     .pipe(uglifycss())
@@ -70,6 +75,7 @@ gulp.task('i18n', function() {
 gulp.task('build', [
   'minify-js',
   'copy-tinymce-js',
+  'copy-kendo-ui-js',
   'minify-css',
   'minify-img',
   'minify-components-css',

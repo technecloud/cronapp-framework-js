@@ -857,6 +857,193 @@
           }
         };
       })
+      .directive('cronGrid', ['$compile', '$translate', function($compile, $translate) {
+        return {
+          restrict: 'E',
+          replace: true,
+          getColumns: function(options) {
+            var columns = [];
+            if (options.columns) {
+              options.columns.forEach(function(column)  {
+                if (column.visible) {
+                  if (column.dataType == "Database") {
+
+                    var addColumn = {
+                      field: column.field,
+                      title: column.headerText,
+                      type: column.type,
+                      width: column.width,
+                      sortable: column.sortable,
+                      filterable: column.filterable,
+                    };
+                    if (column.format)
+                      addColumn.format = column.format;
+                    columns.push(addColumn);
+
+                  }
+                  else if (column.dataType == "Command") {
+                    //Se não for editavel, não adiciona colunas de comando
+                    if (options.editable != 'no') {
+                      var command = column.command.split('|');
+                      var addColumn = {
+                        command: command,
+                        title: column.headerText,
+                        width: column.width
+                      };
+                      columns.push(addColumn);
+                    }
+
+                  }
+
+
+                }
+              });
+            }
+            return columns;
+          },
+          getPageAble: function(options) {
+            debugger;
+            var pageable = {
+              refresh:  options.allowRefreshGrid,
+              pageSizes: options.allowSelectionTotalPageToShow,
+              buttonCount: 5
+            };
+
+            if (!options.allowPaging)
+              pageable = options.allowPaging;
+
+            return pageable;
+          },
+          getToolbar: function(options) {
+            var toolbar = [];
+
+            options.toolBarButtons.forEach(function(toolbarButton) {
+              if (toolbarButton.type == "Native") {
+                //Se a grade for editavel, adiciona todos os commands
+                if (options.editable != 'no') {
+                  if (toolbarButton.title == "save" || toolbarButton.title == "cancel") {
+                    //O Salvar e cancelar na toolbar só é possível no batch mode
+                    if (options.editable == 'batch')
+                      toolbar.push(toolbarButton.title);
+                  }
+                  else
+                    toolbar.push(toolbarButton.title);
+                }
+                //Senão, adiciona somente commands que não sejam de crud
+                else {
+                  if (toolbarButton.title == "pdf" || toolbarButton.title == "excel") {
+                    toolbar.push(toolbarButton.title);
+                  }
+                }
+
+
+              }
+
+            });
+
+            if (toolbar.length == 0)
+              toolbar = undefined;
+            return toolbar;
+          },
+          getEditable: function(options) {
+
+            var editable = options.editable;
+            if (options.editable == 'batch') {
+              editable = true;
+            }
+            else if (options.editable == 'no') {
+              editable = false;
+            }
+            return editable;
+          },
+          generateKendoGridInit: function(options) {
+
+            var helperDirective = this;
+            function detailInit(e) {
+              e.sender.options.listCurrentOptions.forEach(currentOptions => {
+                var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions);
+                currentKendoGridInit.dataSource.filter = [];
+                currentOptions.columns.forEach( c => {
+                  if (c.linkParentField && c.linkParentField.length > 0) {
+                    var filter = { field: c.field, operator: "eq", value: e.data[c.linkParentField] };
+                    currentKendoGridInit.dataSource.filter.push(filter);
+                  }
+                });
+                var grid = $("<div/>").appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
+                grid.dataSource.transport.options.grid = grid;
+              });
+            }
+
+            var datasource = app.kendoHelper.getDataSource(options.dataSource, options.allowPaging, options.pageCount);
+            var columns = this.getColumns(options);
+            var pageAble = this.getPageAble(options);
+            var toolbar = this.getToolbar(options);
+            var editable = this.getEditable(options);
+
+            var kendoGridInit = {
+              toolbar: toolbar,
+              pdf: {
+                allPages: true,
+                avoidLinks: true,
+                paperSize: "A4",
+                margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+                landscape: true,
+                repeatHeaders: true,
+                // template: $("#page-template").html(),
+                scale: 0.8
+              },
+              dataSource: datasource,
+              editable: editable,
+              height: options.height,
+              groupable: options.allowGrouping,
+              sortable: options.allowSorting,
+              filterable: true,
+              // dataBound: function() {
+              //   if (!options.allowUpdate) {
+              //       this.table.find(".k-grid-edit").hide();
+              //   }
+              // },
+              pageable: pageAble,
+              columns: columns,
+            };
+            if (options.details && options.details.length > 0) {
+              kendoGridInit.detailInit = detailInit;
+              kendoGridInit.listCurrentOptions = options.details;
+            }
+
+            return kendoGridInit;
+
+          },
+          link: function (scope, element, attrs, ngModelCtrl) {
+            debugger;
+
+            var $templateDyn = $('<div></div>');
+            var baseUrl = 'plugins/cronapp-framework-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+            if ($translate.use() == 'pt_br')
+              baseUrl += "pt-BR.min.js";
+            else
+              baseUrl += "en-US.min.js";
+
+            var helperDirective = this;
+
+            $.getScript(baseUrl, function () {
+              console.log('loaded language');
+
+              var options = JSON.parse(attrs.options || "{}");
+              var kendoGridInit = helperDirective.generateKendoGridInit(options);
+
+              var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
+              grid.dataSource.transport.options.grid = grid;
+
+
+            });
+
+            element.html($templateDyn);
+            $compile($templateDyn)(element.scope());
+
+          }
+        };
+      }])
 }(app));
 
 function maskDirectiveAsDate($compile, $translate) {
