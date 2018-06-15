@@ -899,10 +899,22 @@
                 }
               });
             }
+
+            // var commandToEditDestroy = {
+            //   command: [],
+            //   title: "&nbsp;",
+            //   width: "250px"
+            // };
+            // if (options.allowInsert || options.allowUpdate)
+            //   commandToEditDestroy.command.push("edit");
+            // if (options.allowDelete)
+            //   commandToEditDestroy.command.push("destroy");
+            // if (commandToEditDestroy.command.length > 0)
+            //   columns.push(commandToEditDestroy);
+
             return columns;
           },
           getPageAble: function(options) {
-            debugger;
             var pageable = {
               refresh:  options.allowRefreshGrid,
               pageSizes: options.allowSelectionTotalPageToShow,
@@ -941,6 +953,13 @@
 
             });
 
+            // if (options.exportExcel)
+            //   toolbar.push("excel");
+            // if (options.exportPDF)
+            //   toolbar.push("pdf");
+            // if (options.allowInsert)
+            //   toolbar.push("create");
+
             if (toolbar.length == 0)
               toolbar = undefined;
             return toolbar;
@@ -960,10 +979,10 @@
 
             var helperDirective = this;
             function detailInit(e) {
-              e.sender.options.listCurrentOptions.forEach(currentOptions => {
+              e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
                 var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions);
                 currentKendoGridInit.dataSource.filter = [];
-                currentOptions.columns.forEach( c => {
+                currentOptions.columns.forEach( function(c) {
                   if (c.linkParentField && c.linkParentField.length > 0) {
                     var filter = { field: c.field, operator: "eq", value: e.data[c.linkParentField] };
                     currentKendoGridInit.dataSource.filter.push(filter);
@@ -1015,8 +1034,6 @@
 
           },
           link: function (scope, element, attrs, ngModelCtrl) {
-            debugger;
-
             var $templateDyn = $('<div></div>');
             var baseUrl = 'plugins/cronapp-framework-js/dist/js/kendo-ui/js/messages/kendo.messages.';
             if ($translate.use() == 'pt_br')

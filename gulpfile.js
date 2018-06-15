@@ -8,7 +8,7 @@ var gulp = require('gulp'),
   htmlmin = require('gulp-htmlmin')
   ngAnnotate = require('gulp-ng-annotate')
 gulp.task('minify-js', function() {
-  return gulp.src(['js/**', '!js/tinymce/**'])
+  return gulp.src(['js/**', '!js/tinymce/**', '!js/kendo-ui/**'])
   	.pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(gulp.dest('dist/js/'));

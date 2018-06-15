@@ -385,16 +385,16 @@ app.kendoHelper = {
       }
     };
     if (dataSource && dataSource.schemaFields) {
-      dataSource.schemaFields.forEach((field) => {
+      dataSource.schemaFields.forEach(function(field) {
         if (field.key)
-      schema.model.id = field.name;
-      schema.model.fields[field.name] = {
-        type: parseType(field.type),
-        editable: true,
-        nullable: field.nullable,
-        validation: { required: !field.nullable },
-      }
-    });
+          schema.model.id = field.name;
+        schema.model.fields[field.name] = {
+          type: parseType(field.type),
+          editable: true,
+          nullable: field.nullable,
+          validation: { required: !field.nullable },
+        }
+      });
     }
     return schema;
   },
@@ -473,9 +473,9 @@ app.kendoHelper = {
 
             var orderBy = '';
             if (this.options.grid) {
-              this.options.grid.dataSource.group().forEach((group) => {
+              this.options.grid.dataSource.group().forEach(function(group) {
                 orderBy += group.field +" " + group.dir + ",";
-            });
+              });
             }
             if (orderBy.length > 0) {
               orderBy = orderBy.substr(0, orderBy.length-1);
