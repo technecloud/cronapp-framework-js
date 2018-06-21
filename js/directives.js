@@ -861,7 +861,93 @@
         return {
           restrict: 'E',
           replace: true,
-          getColumns: function(options) {
+          generateId: function() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+          },
+          generateBlocklyCall: function(blocklyInfo) {
+            var call;
+            if (blocklyInfo.type == "client")  {
+              var splitedClass = blocklyInfo.blocklyClass.split('/');
+              var blocklyName = splitedClass[splitedClass.length-1];
+              call = "blockly.js.blockly." + blocklyName;
+              call += "." +  blocklyInfo.blocklyMethod;
+              var params = "()";
+              if (blocklyInfo.blocklyParams.length > 0) {
+                params = "(";
+                blocklyInfo.blocklyParams.forEach(function(p) {
+                  params += this.encodeHTML(p.value) + ",";
+                }.bind(this))
+                params = params.substr(0, params.length - 1);
+                params += ")";
+              }
+              call += params;
+            }
+            else if (blocklyInfo.type == "server") {
+              var blocklyName = blocklyInfo.blocklyClass + ':' + blocklyInfo.blocklyMethod;
+              call = "cronapi.util.makeCallServerBlocklyAsync('"+blocklyName+"',null,null,";
+              if (blocklyInfo.blocklyParams.length > 0) {
+                blocklyInfo.blocklyParams.forEach(function(p) {
+                  call += this.encodeHTML(p.value) + ",";
+                }.bind(this))
+              }
+              call = call.substr(0, call.length - 1);
+              call += ")";
+            }
+            return call;
+
+          },
+          generateToolbarButtonBlockly: function(toolbarButton, scope) {
+            var buttonBlockly;
+
+            var generateObjTemplate = function(functionToCall, title) {
+              var obj = {
+                template: function() {
+                  var buttonId = this.generateId();
+                  return compileTemplateAngular(buttonId, functionToCall, title);
+                }.bind(this)
+              };
+              return obj;
+            }.bind(this);
+
+            var compileTemplateAngular = function(buttonId, functionToCall, title) {
+              var template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
+              template = template
+              .split('#BUTTONID#').join(buttonId)
+              .split('#FUNCTIONCALL#').join(functionToCall)
+              .split('#TITLE#').join(title);
+
+              var waitRender = setInterval(function() {
+                if ($('#' + buttonId).length > 0) {
+                  var x = angular.element($('#' + buttonId ));
+                  $compile(x)(scope);
+                  clearInterval(waitRender);
+                }
+              },200);
+
+              return template;
+            };
+
+            var call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
+            buttonBlockly = generateObjTemplate(call, toolbarButton.title);
+            return buttonBlockly;
+          },
+          encodeHTML: function(value){
+            return value.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+          },
+          decodeHTML: function(value){
+            return value.replace(/&apos;/g, "'")
+            .replace(/&quot;/g, '"')
+            .replace(/&gt;/g, '>')
+            .replace(/&lt;/g, '<')
+            .replace(/&amp;/g, '&');
+          },
+          getColumns: function(options, scope) {
             var columns = [];
             if (options.columns) {
               options.columns.forEach(function(column)  {
@@ -892,25 +978,36 @@
                       };
                       columns.push(addColumn);
                     }
+                  }
+                  else if (column.dataType == "Blockly") {
+                    var directiveContext = this;
+                    var addColumn = {
+                      command: [{
+                        name: column.headerText,
+                        click: function(e) {
+                          debugger;
+                          e.preventDefault();
+                          var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                          var grid = tr.closest('table');
 
+                          var item = this.dataItem(tr);
+                          var index = $(grid).find('tr').index(tr);
+                          var consolidated = {
+                            item: item,
+                            index: index
+                          }
+                          var call = 'scope.' + directiveContext.generateBlocklyCall(column.blocklyInfo);
+                          eval(call);
+                        }
+                      }],
+                      width: column.width
+                    };
+                    columns.push(addColumn);
                   }
 
-
                 }
-              });
+              }.bind(this));
             }
-
-            // var commandToEditDestroy = {
-            //   command: [],
-            //   title: "&nbsp;",
-            //   width: "250px"
-            // };
-            // if (options.allowInsert || options.allowUpdate)
-            //   commandToEditDestroy.command.push("edit");
-            // if (options.allowDelete)
-            //   commandToEditDestroy.command.push("destroy");
-            // if (commandToEditDestroy.command.length > 0)
-            //   columns.push(commandToEditDestroy);
 
             return columns;
           },
@@ -926,7 +1023,7 @@
 
             return pageable;
           },
-          getToolbar: function(options) {
+          getToolbar: function(options, scope) {
             var toolbar = [];
 
             options.toolBarButtons.forEach(function(toolbarButton) {
@@ -947,18 +1044,19 @@
                     toolbar.push(toolbarButton.title);
                   }
                 }
-
-
+              }
+              else if (toolbarButton.type == "Blockly") {
+                var buttonBlockly = this.generateToolbarButtonBlockly(toolbarButton, scope);
+                toolbar.push(buttonBlockly);
+              }
+              else if (toolbarButton.type == "Template") {
+                var buttonTemplate =  {
+                  template: toolbarButton.template
+                }
+                toolbar.push(buttonTemplate);
               }
 
-            });
-
-            // if (options.exportExcel)
-            //   toolbar.push("excel");
-            // if (options.exportPDF)
-            //   toolbar.push("pdf");
-            // if (options.allowInsert)
-            //   toolbar.push("create");
+            }.bind(this));
 
             if (toolbar.length == 0)
               toolbar = undefined;
@@ -975,7 +1073,7 @@
             }
             return editable;
           },
-          generateKendoGridInit: function(options) {
+          generateKendoGridInit: function(options, scope) {
 
             var helperDirective = this;
             function detailInit(e) {
@@ -994,9 +1092,9 @@
             }
 
             var datasource = app.kendoHelper.getDataSource(options.dataSource, options.allowPaging, options.pageCount);
-            var columns = this.getColumns(options);
+            var columns = this.getColumns(options, scope);
             var pageAble = this.getPageAble(options);
-            var toolbar = this.getToolbar(options);
+            var toolbar = this.getToolbar(options, scope);
             var editable = this.getEditable(options);
 
             var kendoGridInit = {
@@ -1008,7 +1106,6 @@
                 margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
                 landscape: true,
                 repeatHeaders: true,
-                // template: $("#page-template").html(),
                 scale: 0.8
               },
               dataSource: datasource,
@@ -1017,11 +1114,6 @@
               groupable: options.allowGrouping,
               sortable: options.allowSorting,
               filterable: true,
-              // dataBound: function() {
-              //   if (!options.allowUpdate) {
-              //       this.table.find(".k-grid-edit").hide();
-              //   }
-              // },
               pageable: pageAble,
               columns: columns,
             };
@@ -1047,7 +1139,7 @@
               console.log('loaded language');
 
               var options = JSON.parse(attrs.options || "{}");
-              var kendoGridInit = helperDirective.generateKendoGridInit(options);
+              var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
