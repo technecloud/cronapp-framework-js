@@ -507,11 +507,11 @@ app.kendoHelper = {
     } else if (options.dataSource) {
       dataSource = app.kendoHelper.getDataSource(options.dataSource);
     }
-    
+
     if (!options.dataValueField || options.dataValueField.trim() == '') {
       options.dataValueField = options.dataTextField;
     }
-    
+
     var config = {
       dataTextField: options.dataTextField,
       dataValueField: options.dataValueField,
@@ -524,7 +524,7 @@ app.kendoHelper = {
       valuePrimitive : valuePrimitive,
       suggest: true
     };
-    
+
     if (!options.valuePrimitive) {
       config['optionLabel'] = options.optionLabel;
     }
@@ -533,15 +533,15 @@ app.kendoHelper = {
   },
   getConfigDate: function(translate, options) {
     var config = {};
-    
+
     if (config) {
       var formatCulture = function(culture) {
         culture = culture.replace(/_/gm,'-');
-        let parts = culture.split('-');    
+        var parts = culture.split('-');
         parts[parts.length - 1] = parts[parts.length - 1].toUpperCase();
         return parts.join('-');
       }
-          
+
       var formatKendoMask = function(mask) {
         if (mask) {
           mask = mask.replace(/:MM/gm,':mm');
@@ -552,7 +552,7 @@ app.kendoHelper = {
         }
         return mask;
       }
-      
+
       var animation = {};
       if (options.animation) {
         try {
@@ -561,7 +561,7 @@ app.kendoHelper = {
           console.log('DateAnimation invalid configuration! ' + err);
         }
       }
-      
+
       var format = formatKendoMask(options.format);
       var culture = formatCulture(translate.use());
       config = {
@@ -576,7 +576,7 @@ app.kendoHelper = {
         footer: options.footer
       }
     }
-      
+
     return config;
   },
   getConfigSlider: function(options) {
@@ -589,7 +589,7 @@ app.kendoHelper = {
       largeStep: options.largeStep,
       dragHandleTitle: options.dragHandleTitle
     }
-  
+
     return config;
   },
   getConfigSwitch: function(options) {
@@ -597,7 +597,7 @@ app.kendoHelper = {
       onLabel: options.onLabel,
       offLabel: options.offLabel
     }
-    
+
     return config;
   }
 };
