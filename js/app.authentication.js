@@ -502,20 +502,20 @@ app.kendoHelper = {
   getConfigCombobox: function(options) {
     var dataSource = {};
     var valuePrimitive = false;
-    if (options && Array.isArray(options.dataSource)) {
+    if (options && !options.dynamic) {
       valuePrimitive = true;
-    } else if (options.dataSource) {
-      dataSource = app.kendoHelper.getDataSource(options.dataSource);
+    } else if (options.datasource) {
+      dataSource = app.kendoHelper.getDataSource(options.datasource);
     }
-
+    
     if (!options.dataValueField || options.dataValueField.trim() == '') {
       options.dataValueField = options.dataTextField;
     }
-
+    
     var config = {
       dataTextField: options.dataTextField,
       dataValueField: options.dataValueField,
-      dataSource: valuePrimitive ? options.dataSource : dataSource,
+      dataSource: valuePrimitive ? options.fixedDataSource : dataSource,
       headerTemplate: options.headerTemplate,
       template: options.template,
       placeholder: options.placeholder,
@@ -524,7 +524,7 @@ app.kendoHelper = {
       valuePrimitive : valuePrimitive,
       suggest: true
     };
-
+    
     if (!options.valuePrimitive) {
       config['optionLabel'] = options.optionLabel;
     }
