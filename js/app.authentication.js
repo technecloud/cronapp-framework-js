@@ -504,6 +504,8 @@ app.kendoHelper = {
     var valuePrimitive = false;
     if (options && !options.dynamic) {
       valuePrimitive = true;
+      options.dataValueField = 'key'; 
+      options.dataTextField = 'value';
     } else if (options.datasource) {
       dataSource = app.kendoHelper.getDataSource(options.datasource);
     }
