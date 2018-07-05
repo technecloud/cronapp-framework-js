@@ -501,34 +501,38 @@ app.kendoHelper = {
   },
   getConfigCombobox: function(options) {
     var dataSource = {};
+    
     var valuePrimitive = false;
-    if (options && !options.dynamic) {
+    var dataSource = {};
+    if (options && (!options.dynamic || options.dynamic=='false')) {
       valuePrimitive = true;
       options.dataValueField = 'key'; 
       options.dataTextField = 'value';
-    } else if (options.datasource) {
-      dataSource = app.kendoHelper.getDataSource(options.datasource);
+      dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
+    } else if (options.dataSource) {
+      dataSource = app.kendoHelper.getDataSource(options.dataSource);
+      valuePrimitive = (options.valuePrimitive == null ? undefined : options.valuePrimitive);
     }
     
     if (!options.dataValueField || options.dataValueField.trim() == '') {
-      options.dataValueField = options.dataTextField;
+      options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
     }
     
     var config = {
-      dataTextField: options.dataTextField,
-      dataValueField: options.dataValueField,
-      dataSource: valuePrimitive ? options.fixedDataSource : dataSource,
-      headerTemplate: options.headerTemplate,
-      template: options.template,
-      placeholder: options.placeholder,
-      footerTemplate: options.footerTemplate,
-      filter: options.filter,
+      dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
+      dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
+      dataSource: dataSource,
+      headerTemplate: (options.headerTemplate == null ? undefined : options.headerTemplate),
+      template: (options.template == null ? undefined : options.template),
+      placeholder: (options.placeholder == null ? undefined : options.placeholder),
+      footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
+      filter: (options.filter == null ? undefined : options.filter),
       valuePrimitive : valuePrimitive,
       suggest: true
     };
     
-    if (!options.valuePrimitive) {
-      config['optionLabel'] = options.optionLabel;
+    if (!valuePrimitive) {
+      config.optionLabel = (options.optionLabel == null ? undefined : options.optionLabel);
     }
 
     return config;
@@ -545,13 +549,20 @@ app.kendoHelper = {
       }
 
       var formatKendoMask = function(mask) {
-        if (mask) {
-          mask = mask.replace(/:MM/gm,':mm');
-          mask = mask.replace(/:M/gm,':m');
-          mask = mask.replace(/S/gm,'s');
-          mask = mask.replace(/D/gm,'d');
-          mask = mask.replace(/Y/gm,'y');
+        mask = mask.replace(/:MM/gm,':mm');
+        mask = mask.replace(/:M/gm,':m');
+        mask = mask.replace(/S/gm,'s');
+        mask = mask.replace(/D/gm,'d');
+        mask = mask.replace(/Y/gm,'y');
+
+        return mask;
+      }
+
+      var formatMomentMask = function(type, mask) {
+        if (!mask) {
+          mask = parseMaskType(type, translate)
         }
+        
         return mask;
       }
 
@@ -564,11 +575,13 @@ app.kendoHelper = {
         }
       }
 
-      var format = formatKendoMask(options.format);
+      var momentFormat = formatMomentMask(options.type, options.format);
+      var format = formatKendoMask(momentFormat);
       var culture = formatCulture(translate.use());
       config = {
         value: null,
         format: format,
+        momentFormat: momentFormat,
         culture: culture,
         type: options.type,
         timeFormat: options.timeFormat,
@@ -581,15 +594,62 @@ app.kendoHelper = {
 
     return config;
   },
+  buildKendoMomentPicker : function($element, options, scope, ngModelCtrl) {
+    var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
+    
+    var onChange = function() {
+      var value = $element.val();
+      if (!value || value.trim() == '') {
+        if (ngModelCtrl) 
+          ngModelCtrl.$setViewValue('');
+      } else {
+        var momentDate = null;
+
+        if (useUTC) {
+          momentDate = moment.utc(value, options.momentFormat);
+        } else {
+          momentDate = moment(value, options.momentFormat);
+        }
+
+        if (ngModelCtrl && momentDate.isValid()) {
+          ngModelCtrl.$setViewValue(momentDate.toDate());
+          $element.data('changed', true);
+        }
+      }
+    }
+        
+    if (scope) {
+      options['change'] = function() {
+        scope.$apply(function () {
+          onChange();
+        });
+      };
+    } else {
+      options['change'] = onChange;
+    }
+    
+    if (options.type == 'date') {
+      return $element.kendoDatePicker(options).data('kendoDatePicker'); 
+    } else if (options.type == 'datetime' || options.type == 'datetime-local') {
+      return $element.kendoDateTimePicker(options).data('kendoDateTimePicker'); 
+    } else if (options.type == 'time' || options.type == 'time-local') {
+      return $element.kendoTimePicker(options).data('kendoTimePicker'); 
+    }
+  },
   getConfigSlider: function(options) {
     var config = {
       increaseButtonTitle: options.increaseButtonTitle,
       decreaseButtonTitle: options.decreaseButtonTitle,
-      min: options.min,
-      max: options.max,
-      smallStep: options.smallStep,
-      largeStep: options.largeStep,
       dragHandleTitle: options.dragHandleTitle
+    }
+
+    try {
+      config['min'] = options.min ? parseInt(options.min) : 1;
+      config['max'] = options.max ? parseInt(options.max) : 1;
+      config['smallStep'] = options.smallStep ? parseInt(options.smallStep) : 1;
+      config['largeStep'] = options.largeStep ? parseInt(options.largeStep) : 1;      
+    } catch(err) {
+      console.log('Slider invalid configuration! ' + err);
     }
 
     return config;
