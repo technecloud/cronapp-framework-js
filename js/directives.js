@@ -861,6 +861,7 @@
         return {
           restrict: 'E',
           replace: true,
+          require: 'ngModel',
           generateId: function() {
             return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
@@ -933,6 +934,57 @@
             buttonBlockly = generateObjTemplate(call, toolbarButton.title);
             return buttonBlockly;
           },
+          getObjectId: function(obj) {
+            if (!obj)
+              obj = "";
+            if (typeof obj === 'object') {
+              //Verifica se tem id, senão pega o primeiro campo
+              if (obj["id"])
+                obj = obj["id"];
+              else {
+                for (var key in obj) {
+                  obj = obj[key];
+                  break;
+                }
+              }
+            }
+            return obj;
+          },
+          updateFiltersFromAngular: function(grid, scope) {
+
+            grid.dataSource.options.filter.forEach(function(f) {
+              if ("screen" == f.linkParentType) {
+                scope.$watch(f.linkParentField, function(newValue, oldValue) {
+                  grid.dataSource.options.filter.forEach(function(filterToUpdate) {
+                    if ("screen" == f.linkParentType && f.linkParentField == filterToUpdate.linkParentField) {
+                      newValue = this.getObjectId(newValue);
+                      filterToUpdate.value = newValue;
+                    }
+                  }.bind(this));
+                  grid.dataSource.read();
+                  grid.refresh();
+                  grid.trigger('change');
+                }.bind(this));
+              }
+            }.bind(this));
+          },
+          setFiltersFromLinkColumns: function(datasource, options, scope) {
+            datasource.filter = [];
+            options.columns.forEach( function(c) {
+              if (c.linkParentField && c.linkParentField.length > 0 &&
+                  c.linkParentType && c.linkParentType.length > 0)
+              {
+                var filter = { field: c.field, operator: "eq", value: "", linkParentField: c.linkParentField, linkParentType: c.linkParentType };
+                if (filter.linkParentType == "screen") {
+                  var value = scope[filter.linkParentField];
+                  value = this.getObjectId(value);
+                  filter.value = value;
+                }
+                datasource.filter.push(filter);
+              }
+            }.bind(this));
+          },
+          // updateNgModel
           encodeHTML: function(value){
             return value.replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
@@ -948,6 +1000,25 @@
             .replace(/&amp;/g, '&');
           },
           getColumns: function(options, scope) {
+
+            function categoryDropDownEditor(container, options) {
+              debugger;
+              $('<input required name="' + options.field + '"/>')
+              .appendTo(container)
+              .kendoDropDownList({
+                autoBind: false,
+                dataTextField: "CategoryName",
+                dataValueField: "CategoryID",
+                dataSource: {
+                  type: "odata",
+                  transport: {
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                  }
+                }
+              });
+            }
+
+
             var columns = [];
             if (options.columns) {
               options.columns.forEach(function(column)  {
@@ -961,6 +1032,7 @@
                       width: column.width,
                       sortable: column.sortable,
                       filterable: column.filterable,
+                      // editor: categoryDropDownEditor
                     };
                     if (column.format)
                       addColumn.format = column.format;
@@ -983,7 +1055,8 @@
                     var directiveContext = this;
                     var addColumn = {
                       command: [{
-                        name: column.headerText,
+                        name: this.generateId(),
+                        text: column.headerText,
                         click: function(e) {
                           debugger;
                           e.preventDefault();
@@ -991,13 +1064,15 @@
                           var grid = tr.closest('table');
 
                           var item = this.dataItem(tr);
-                          var index = $(grid).find('tr').index(tr);
+                          // var index = $(grid).find('tr.'+$(tr).attr('class')).index(tr);
+                          var index = $(grid.find('tbody')[0]).children().index(tr)
                           var consolidated = {
                             item: item,
                             index: index
                           }
                           var call = 'scope.' + directiveContext.generateBlocklyCall(column.blocklyInfo);
                           eval(call);
+                          return;
                         }
                       }],
                       width: column.width
@@ -1078,16 +1153,18 @@
             var helperDirective = this;
             function detailInit(e) {
               e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
-                var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions);
-                currentKendoGridInit.dataSource.filter = [];
-                currentOptions.columns.forEach( function(c) {
-                  if (c.linkParentField && c.linkParentField.length > 0) {
-                    var filter = { field: c.field, operator: "eq", value: e.data[c.linkParentField] };
-                    currentKendoGridInit.dataSource.filter.push(filter);
+                var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope);
+
+                currentKendoGridInit.dataSource.filter.forEach(function(f) {
+                  if (f.linkParentType == "hierarchy" ) {
+                    f.value = e.data[f.linkParentField];
                   }
                 });
+
                 var grid = $("<div/>").appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
                 grid.dataSource.transport.options.grid = grid;
+                helperDirective.updateFiltersFromAngular(grid, scope);
+
               });
             }
 
@@ -1096,6 +1173,8 @@
             var pageAble = this.getPageAble(options);
             var toolbar = this.getToolbar(options, scope);
             var editable = this.getEditable(options);
+            //Adiciona os campos de ligação (Filtro do datasource)
+            this.setFiltersFromLinkColumns(datasource, options, scope);
 
             var kendoGridInit = {
               toolbar: toolbar,
@@ -1116,11 +1195,10 @@
               filterable: true,
               pageable: pageAble,
               columns: columns,
+              selectable: options.allowSelectionRow,
+              detailInit: (options.details && options.details.length > 0) ? detailInit : undefined,
+              listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined
             };
-            if (options.details && options.details.length > 0) {
-              kendoGridInit.detailInit = detailInit;
-              kendoGridInit.listCurrentOptions = options.details;
-            }
 
             return kendoGridInit;
 
@@ -1141,9 +1219,16 @@
               var options = JSON.parse(attrs.options || "{}");
               var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
+              kendoGridInit.change = function(e) {
+                var item = this.dataItem(this.select());
+                var fcChangeValue = eval('scope.cronapi.screen.changeValueOfField')
+                fcChangeValue(attrs['ngModel'], item);
+              }
+
+
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
-
+              helperDirective.updateFiltersFromAngular(grid, scope);
 
             });
 
