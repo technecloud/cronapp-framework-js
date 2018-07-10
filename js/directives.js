@@ -515,6 +515,20 @@
         };
       })
 
+      .filter('raw',function($translate) {
+        return function(o) {
+          if (typeof o == 'number') {
+            return o+"";
+          }
+          if (o instanceof Date) {
+            return "datetime'"+o.toISOString()+"'";
+          }
+          else {
+            return "'"+o+"'";
+          }
+        }
+      })
+
       .filter('mask',function($translate) {
         return function(value, maskValue) {
           maskValue = parseMaskType(maskValue, $translate);

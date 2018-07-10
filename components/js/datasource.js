@@ -123,7 +123,19 @@ angular.module('datasourcejs', [])
                 headers: _self.headers
               }).success(function(data, status, headers, config) {
                 this.busy = false;
-                if (_callback) _callback(isCronapiQuery?data.value:data);
+                if (_callback) {
+                  if (_self.isOData()) {
+                    if (verb == "GET") {
+                      _self.normalizeData(data.d.results);
+                      _callback(data.d.results);
+                    } else {
+                      _self.normalizeData(data.d);
+                      _callback(data.d);
+                    }
+                  } else {
+                    _callback(isCronapiQuery?data.value:data);
+                  }
+                }
                 if (isCronapiQuery || _self.isOData()) {
                   var commands = data;
                   if (_self.isOData()) {
@@ -353,7 +365,7 @@ angular.module('datasourcejs', [])
         this.insert = function(obj, callback) {
           if (this.handleBeforeCallBack(this.onBeforeCreate)) {
             //Check if contains dependentBy, if contains, only store in data TRM
-            if (this.dependentLazyPost && this.dependentLazyPostField && (eval(this.dependentLazyPost).inserting || eval(this.dependentLazyPost).editing)) {
+            if (this.dependentLazyPost && (this.dependentLazyPostField || this.parameters) && (eval(this.dependentLazyPost).inserting || eval(this.dependentLazyPost).editing)) {
               var random = Math.floor(Math.random() * 9999) + 1;
               obj.tempBufferId = random;
 
@@ -387,7 +399,9 @@ angular.module('datasourcejs', [])
           if (action == 'post' && thisContextDataSet.dependentBufferLazyPostData) {
 
             $(thisContextDataSet.dependentBufferLazyPostData).each(function() {
-              this[thisContextDataSet.dependentLazyPostField] = eval(thisContextDataSet.dependentLazyPost).active;
+              if (thisContextDataSet.dependentLazyPostField && !thisContextDataSet.parameters) {
+                this[thisContextDataSet.dependentLazyPostField] = eval(thisContextDataSet.dependentLazyPost).active;
+              }
 
               if (thisContextDataSet.entity.indexOf('//') > -1) {
                 var keyObj = this.getKeyValues(eval(thisContextDataSet.dependentLazyPost).active);
@@ -400,6 +414,17 @@ angular.module('datasourcejs', [])
                 suffixPath += '/';
                 thisContextDataSet.entity = thisContextDataSet.entity.replace('//', suffixPath);
               }
+
+              if (thisContextDataSet.parameters) {
+                var params = thisContextDataSet.getParametersMap();
+                for (var key in params) {
+                  if (params.hasOwnProperty(key)) {
+                    this[key] = params[key];
+                  }
+                }
+              }
+
+              delete this.tempBufferId;
 
               thisContextDataSet.insert(this);
             });
@@ -471,6 +496,9 @@ angular.module('datasourcejs', [])
               this.data.splice(indexObj, 1);
               //this.data.push(obj);
               this.data.splice(indexObj, 0, obj);
+
+              if (callback)
+                callback(obj);
               return;
             }
           }
@@ -513,11 +541,6 @@ angular.module('datasourcejs', [])
           if (this.inserting) {
             // Make a new request to persist the new item
             this.insert(this.active, function(obj) {
-              if (this.isOData()) {
-                obj = obj.d;
-                this.normalizeData(obj);
-              }
-
               // In case of success add the new inserted value at
               // the end of the array
               this.data.push(obj);
@@ -537,10 +560,6 @@ angular.module('datasourcejs', [])
           } else if (this.editing) {
             // Make a new request to update the modified item
             this.update(this.active, function(obj) {
-              if (this.isOData()) {
-                obj = obj.d;
-                this.normalizeData(obj);
-              }
               // Get the list of keys
               var keyObj = this.getKeyValues(obj);
 
@@ -723,13 +742,29 @@ angular.module('datasourcejs', [])
               } else {
                 this.active = data;
               }
+              this.updateWithParams();
             }.bind(this)).error(function(data, status, headers, config) {
               this.active = {};
+              this.updateWithParams();
             }.bind(this));
           } else {
             this.active = {};
+            this.updateWithParams();
           }
+
+
         };
+
+        this.updateWithParams = function() {
+          if (this.parameters) {
+            var params = this.getParametersMap();
+            for (var key in params) {
+              if (params.hasOwnProperty(key)) {
+                this.active[key] = params[key];
+              }
+            }
+          }
+        }
 
         /**
          * Put the datasource into the inserting state
@@ -740,8 +775,6 @@ angular.module('datasourcejs', [])
           if (this.onStartInserting) {
             this.onStartInserting();
           }
-
-          this.active = { id: "-1"};
         };
 
         /**
@@ -1168,19 +1201,40 @@ angular.module('datasourcejs', [])
           return this.entity.indexOf('odata') > 0;
         }
 
+        this.normalizeValue = function(value, unquote) {
+          if (typeof value == 'string' && value.length >= 10 && value.substring(0, 6) == '/Date(' && value.substring(value.length - 2, value.length) == ")/") {
+            var r = value.substring(6, value.length-2);
+            return new Date(parseInt(r));
+          }
+          else if (typeof value == 'string' && value.length >= 20 && value.substring(0, 9) == "datetime'" && value.substring(value.length - 1, value.length) == "'") {
+            var r = value.substring(9, value.length-1);
+            return new Date(r);
+          }
+          else if (typeof value == 'string' && value.length >= 20 && value.substring(0, 15) == "datetimeoffset'" && value.substring(value.length - 1, value.length) == "'") {
+            var r = value.substring(15, value.length-1);
+            return new Date(r);
+          }
+          else if (typeof value == 'string' && unquote && value.length > 2 && value.charAt(0) == "'" && value.charAt(value.length-1) == "'") {
+            var r = value.substring(1, value.length-1);
+            return r;
+          }
+
+          return value;
+        }
+
         this.normalizeObject = function(data) {
           for (var key in data) {
             if (data.hasOwnProperty(key)) {
               var d = data[key];
               if (d) {
-                if (typeof d == 'string' && d.length >= 10 && d.substring(0, 6) == '/Date(' && d.substring(d.length - 2, d.length) == ")/") {
-                  var value = d.substring(6, d.length-2)
-                  data[key] = new Date(parseInt(value));
-                }
-
-                else if (typeof d == 'object') {
+                if (typeof d == 'object') {
                   this.normalizeObject(d);
                 }
+
+                else {
+                  data[key] = this.normalizeValue(d);
+                }
+
               }
             }
           }
@@ -1188,12 +1242,37 @@ angular.module('datasourcejs', [])
 
         this.normalizeData = function(data) {
           if (data) {
+            delete data.__metadata;
             for (var i = 0; i < data.length; i++) {
               this.normalizeObject(data[i]);
             }
           }
           return data;
         }
+
+        this.getParametersMap = function() {
+          var map = {};
+          if (this.parameters && this.parameters.length > 0) {
+            var parts = this.parameters.split(";")
+            for (var i=0;i<parts.length;i++) {
+              var part = parts[i];
+              var binary = part.split("=");
+              if (binary.length == 2) {
+                map[binary[0]] = binary[1]?this.normalizeValue(binary[1], true):null;
+              }
+            }
+          }
+
+          return map;
+        }
+
+        this.setParameters = function(params) {
+          this.parameters = params;
+          this.fetch({
+            params: {}
+          });
+        }
+
 
         /**
          *  Fetch all data from the server
@@ -1218,8 +1297,34 @@ angular.module('datasourcejs', [])
           props.params = props.params || {};
           var resourceURL = (window.hostApp || "") + this.entity + (props.path || this.lastFilterParsed || "");
 
+          var filter = "";
+          var canProceed = true;
+          if (this.parameters && this.parameters.length > 0) {
+            var parts = this.parameters.split(";")
+            for (var i=0;i<parts.length;i++) {
+              var part = parts[i];
+              var binary = part.split("=");
+              if (binary.length == 2) {
+                if (filter != "") {
+                  filter += this.isOData()?" and ":";";
+                }
+
+                filter += binary[0];
+                filter += this.isOData()?" eq ":"=";
+                filter += binary[1];
+                if (!binary[1]) {
+                  canProceed = false;
+                }
+              }
+            }
+          }
+
+          if (!canProceed) {
+            return;
+          }
+
           //Check request, if  is dependentLazyPost, break old request
-          if (this.dependentLazyPost) {
+          if (this.dependentLazyPost && !this.parameters) {
             if (eval(this.dependentLazyPost).active) {
               var checkRequestId = '';
               var keyDependentLazyPost = this.getKeyValues(eval(this.dependentLazyPost).active);
@@ -1246,6 +1351,14 @@ angular.module('datasourcejs', [])
                 props.params.size = this.rowsPerPage;
                 props.params.page = this.offset;
               }
+            }
+          }
+
+          if (filter) {
+            if (this.isOData()) {
+              props.params.$filter = filter;
+            } else {
+              props.params.filter = filter;
             }
           }
 
@@ -1562,6 +1675,7 @@ angular.module('datasourcejs', [])
             dts.onBeforeDelete = props.onBeforeDelete;
             dts.onAfterDelete = props.onAfterDelete;
             dts.dependentBy = props.dependentBy;
+            dts.parameters = props.parameters;
 
             if (props.dependentLazyPost && props.dependentLazyPost.length > 0) {
               dts.dependentLazyPost = props.dependentLazyPost;
@@ -1700,12 +1814,14 @@ angular.module('datasourcejs', [])
               dependentBy: attrs.dependentBy,
               dependentLazyPost: attrs.dependentLazyPost, //TRM
               dependentLazyPostField: attrs.dependentLazyPostField, //TRM
+              parameters: attrs.parameters
             }
 
             var firstLoad = {
               filter: true,
               entity: true,
-              enabled: true
+              enabled: true,
+              parameters: true
             }
 
             var datasource = DatasetManager.initDataset(props, scope);
@@ -1728,12 +1844,35 @@ angular.module('datasourcejs', [])
               }
             });
 
+            attrs.$observe('parameters', function(value) {
+              datasource.parameters = value;
+
+              if (!firstLoad.parameters) {
+                $timeout.cancel(timeoutPromise);
+
+                timeoutPromise = $timeout(function() {
+                  datasource.fetch({
+                    params: {}
+                  });
+                }, 200);
+              } else {
+                $timeout(function() {
+                  firstLoad.parameters = false;
+                });
+              }
+            });
+
             attrs.$observe('enabled', function(value) {
               if (!firstLoad.enabled) {
-                datasource.enabled = (value === "true");
-                datasource.fetch({
-                  params: {}
-                });
+                // Stop the pending timeout
+                $timeout.cancel(timeoutPromise);
+
+                timeoutPromise = $timeout(function() {
+                  datasource.enabled = (value === "true");
+                  datasource.fetch({
+                    params: {}
+                  });
+                }, 200);
               } else {
                 $timeout(function() {
                   firstLoad.enabled = false;
@@ -1750,9 +1889,14 @@ angular.module('datasourcejs', [])
 
               if (!firstLoad.entity) {
                 // Only fetch if it's not the first load
-                datasource.fetch({
-                  params: {}
-                });
+
+                $timeout.cancel(timeoutPromise);
+
+                timeoutPromise = $timeout(function() {
+                  datasource.fetch({
+                    params: {}
+                  });
+                }, 200);
               } else {
                 $timeout(function() {
                   firstLoad.entity = false;
