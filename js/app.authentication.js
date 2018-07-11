@@ -511,7 +511,7 @@ app.kendoHelper = {
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
     } else if (options.dataSource) {
       dataSource = app.kendoHelper.getDataSource(options.dataSource);
-      valuePrimitive = (options.valuePrimitive == null ? undefined : options.valuePrimitive);
+      valuePrimitive = (options.valuePrimitive == null ? false : options.valuePrimitive);
     }
     
     if (!options.dataValueField || options.dataValueField.trim() == '') {
@@ -528,6 +528,8 @@ app.kendoHelper = {
       footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
       filter: (options.filter == null ? undefined : options.filter),
       valuePrimitive : valuePrimitive,
+      optionLabel : (options.optionLabel == null ? undefined : options.optionLabel),
+      //valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
       suggest: true
     };
     
@@ -535,10 +537,6 @@ app.kendoHelper = {
       config['cascadeFrom'] = options.cascadeFrom;
       config['cascadeFromField'] = options.cascadeFromField;
       config['autoBind'] = false; 
-    }
-    
-    if (!valuePrimitive) {
-      config['optionLabel'] = (options.optionLabel == null ? undefined : options.optionLabel);
     }
 
     return config;
@@ -608,36 +606,39 @@ app.kendoHelper = {
   buildKendoMomentPicker : function($element, options, scope, ngModelCtrl) {
     var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
     
-    var onChange = function() {
-      var value = $element.val();
-      if (!value || value.trim() == '') {
-        if (ngModelCtrl) 
-          ngModelCtrl.$setViewValue('');
-      } else {
-        var momentDate = null;
-
-        if (useUTC) {
-          momentDate = moment.utc(value, options.momentFormat);
+    if (!$element.attr('from-grid')) {
+      var onChange = function() {
+        var value = $element.val();
+        if (!value || value.trim() == '') {
+          if (ngModelCtrl) 
+            ngModelCtrl.$setViewValue('');
         } else {
-          momentDate = moment(value, options.momentFormat);
-        }
-
-        if (ngModelCtrl && momentDate.isValid()) {
-          ngModelCtrl.$setViewValue(momentDate.toDate());
-          $element.data('changed', true);
+          var momentDate = null;
+  
+          if (useUTC) {
+            momentDate = moment.utc(value, options.momentFormat);
+          } else {
+            momentDate = moment(value, options.momentFormat);
+          }
+  
+          if (ngModelCtrl && momentDate.isValid()) {
+            ngModelCtrl.$setViewValue(momentDate.toDate());
+            $element.data('changed', true);
+          }
         }
       }
+          
+      if (scope) {
+        options['change'] = function() {
+          scope.$apply(function () {
+            onChange();
+          });
+        };
+      } else {
+        options['change'] = onChange;
+      }  
     }
-        
-    if (scope) {
-      options['change'] = function() {
-        scope.$apply(function () {
-          onChange();
-        });
-      };
-    } else {
-      options['change'] = onChange;
-    }
+    
     
     if (options.type == 'date') {
       return $element.kendoDatePicker(options).data('kendoDatePicker'); 
@@ -672,5 +673,34 @@ app.kendoHelper = {
     }
 
     return config;
-  }
+  },
+  getConfigBarcode: function(options) {
+    var config = {
+      type: (options.type == null ? undefined : options.type),
+      width: (options.width == null ? undefined : parseInt(options.width)),
+      height: (options.height == null ? undefined : parseInt(options.height))
+    }
+    
+    if (!config.type) {
+      config.type = 'EAN8';
+    }
+
+    return config;
+  },
+  getConfigQrcode: function(options) {
+    var config = {
+      errorCorrection: (options.errorCorrection == null ? undefined : options.errorCorrection),
+      size: (options.size == null ? undefined : parseInt(options.size)),
+      color: (options.color == null ? undefined : options.color)
+    }
+    
+    if (options.borderColor || options.borderSize) {
+      config['border'] = {
+        size: (options.size == null ? undefined : parseInt(options.size)),
+        color: (options.color == null ? undefined : options.color)
+      }
+    }
+
+    return config;
+  },
 };
