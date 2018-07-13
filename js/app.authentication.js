@@ -575,8 +575,14 @@ app.kendoHelper = {
       suggest: true
     };
 
+    if (options.cascadeFrom && options.cascadeFromField) {
+      config['cascadeFrom'] = options.cascadeFrom;
+      config['cascadeFromField'] = options.cascadeFromField;
+      config['autoBind'] = false;
+    }
+
     if (!valuePrimitive) {
-      config.optionLabel = (options.optionLabel == null ? undefined : options.optionLabel);
+      config['optionLabel'] = (options.optionLabel == null ? undefined : options.optionLabel);
     }
 
     return config;
@@ -621,18 +627,23 @@ app.kendoHelper = {
 
       var momentFormat = formatMomentMask(options.type, options.format);
       var format = formatKendoMask(momentFormat);
+
+      var timeFormat = formatKendoMask("time", options.timeFormat);
       var culture = formatCulture(translate.use());
+
       config = {
         value: null,
         format: format,
+        timeFormat: timeFormat,
         momentFormat: momentFormat,
         culture: culture,
-        type: options.type,
-        timeFormat: options.timeFormat,
-        weekNumber: options.weekNumber,
-        dateInput: options.dateInput,
+        type: (options.type == null ? undefined : options.type),
+        weekNumber: (options.weekNumber  == null ? undefined : options.weekNumber),
+        dateInput: (options.dateInput == null ? undefined : options.dateInput),
         animation: animation,
-        footer: options.footer
+        footer: (options.footer == null ? undefined : options.footer),
+        start: (options.start == null ? undefined : options.start),
+        depth: (options.start == null ? undefined : options.start)
       }
     }
 

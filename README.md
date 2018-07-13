@@ -1,4 +1,4 @@
-# CronApp Framework JS
+# CronApp Framework Js
 
 Javascript library for CronApp's projects
 

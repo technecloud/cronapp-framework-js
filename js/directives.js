@@ -387,119 +387,119 @@
           }
         }
       })
-	  
-	.directive('qr', ['$window', function($window){
-    return {
-      restrict: 'A',
-      require: '^ngModel',
-      template: '<canvas ng-hide="image"></canvas><img ng-if="image" ng-src="{{canvasImage}}"/>',
-      link: function postlink(scope, element, attrs, ngModel){
-        if (scope.size === undefined  && attrs.size) {
-          scope.text = attrs.size;
-        }
-      var getTypeNumeber = function(){
-      return scope.typeNumber || 0;
-    };
-    var getCorrection = function(){
-      var levels = {
-        'L': 1,
-        'M': 0,
-        'Q': 3,
-        'H': 2
-      };
-    var correctionLevel = scope.correctionLevel || 0;
-      return levels[correctionLevel] || 0;
-    };
-    var getText = function(){
-      return ngModel.$modelValue || "";
-    };
-    var getSize = function(){
-      return scope.size || $(element).outerWidth();
-    };
-    var isNUMBER = function(text){
-      var ALLOWEDCHARS = /^[0-9]*$/;
-      return ALLOWEDCHARS.test(text);
-    };
-    var isALPHA_NUM = function(text){
-      var ALLOWEDCHARS = /^[0-9A-Z $%*+\-./:]*$/;
-      return ALLOWEDCHARS.test(text);
-    };
-    var is8bit = function(text){
-      for (var i = 0; i < text.length; i++) {
-        var code = text.charCodeAt(i);
-        if (code > 255) {
-          return false;
-        }
-      }
-      return true;
-    };
-    var checkInputMode = function(inputMode, text){
-      if (inputMode === 'NUMBER' && !isNUMBER(text)) {
-        throw new Error('The `NUMBER` input mode is invalid for text.');
-      }
-      else if (inputMode === 'ALPHA_NUM' && !isALPHA_NUM(text)) {
-        throw new Error('The `ALPHA_NUM` input mode is invalid for text.');
-      }
-      else if (inputMode === '8bit' && !is8bit(text)) {
-        throw new Error('The `8bit` input mode is invalid for text.');
-      }
-      else if (!is8bit(text)) {
-        throw new Error('Input mode is invalid for text.');
-      }
-      return true;
-    };
-    var getInputMode = function(text){
-      var inputMode = scope.inputMode;
-      inputMode = inputMode || (isNUMBER(text) ? 'NUMBER' : undefined);
-      inputMode = inputMode || (isALPHA_NUM(text) ? 'ALPHA_NUM' : undefined);
-      inputMode = inputMode || (is8bit(text) ? '8bit' : '');
-      return checkInputMode(inputMode, text) ? inputMode : '';
-    };
-    var canvas = element.find('canvas')[0];
-    var canvas2D = !!$window.CanvasRenderingContext2D;
-    scope.TYPE_NUMBER = getTypeNumeber();
-    scope.TEXT = getText();
-    scope.CORRECTION = getCorrection();
-    scope.SIZE = getSize();
-    scope.INPUT_MODE = getInputMode(scope.TEXT);
-    scope.canvasImage = '';
-    var draw = function(context, qr, modules, tile){
-      for (var row = 0; row < modules; row++) {
-        for (var col = 0; col < modules; col++) {
-          var w = (Math.ceil((col + 1) * tile) - Math.floor(col * tile)),
-              h = (Math.ceil((row + 1) * tile) - Math.floor(row * tile));
-          context.fillStyle = qr.isDark(row, col) ? '#000' : '#fff';
-          context.fillRect(Math.round(col * tile), Math.round(row * tile), w, h);
-        }
-      }
-    };
-    var render = function(canvas, value, typeNumber, correction, size, inputMode){
-      var trim = /^\s+|\s+$/g;
-      var text = value.replace(trim, '');
-      var qr = new QRCode(typeNumber, correction, inputMode);
-      qr.addData(text);
-      qr.make();
-      var context = canvas.getContext('2d');
-      var modules = qr.getModuleCount();
-      var tile = size / modules;
-      canvas.width = canvas.height = size;
-      if (canvas2D) {
-        draw(context, qr, modules, tile);
-        scope.canvasImage = canvas.toDataURL() || '';
-      }
-    };
-    
-    scope.$watch(function(){return ngModel.$modelValue}, function(value, old){
-    if (value !== old) {
-      scope.text = ngModel.$modelValue;
-      scope.TEXT = getText();
-      scope.INPUT_MODE = getInputMode(scope.TEXT);
-      render(canvas, scope.TEXT, scope.TYPE_NUMBER, scope.CORRECTION, scope.SIZE, scope.INPUT_MODE);
-    }
-  });
-    render(canvas, scope.TEXT, scope.TYPE_NUMBER, scope.CORRECTION, scope.SIZE, scope.INPUT_MODE);
-    }};
-  }])
+
+      .directive('qr', ['$window', function($window){
+        return {
+          restrict: 'A',
+          require: '^ngModel',
+          template: '<canvas ng-hide="image"></canvas><img ng-if="image" ng-src="{{canvasImage}}"/>',
+          link: function postlink(scope, element, attrs, ngModel){
+            if (scope.size === undefined  && attrs.size) {
+              scope.text = attrs.size;
+            }
+            var getTypeNumeber = function(){
+              return scope.typeNumber || 0;
+            };
+            var getCorrection = function(){
+              var levels = {
+                'L': 1,
+                'M': 0,
+                'Q': 3,
+                'H': 2
+              };
+              var correctionLevel = scope.correctionLevel || 0;
+              return levels[correctionLevel] || 0;
+            };
+            var getText = function(){
+              return ngModel.$modelValue || "";
+            };
+            var getSize = function(){
+              return scope.size || $(element).outerWidth();
+            };
+            var isNUMBER = function(text){
+              var ALLOWEDCHARS = /^[0-9]*$/;
+              return ALLOWEDCHARS.test(text);
+            };
+            var isALPHA_NUM = function(text){
+              var ALLOWEDCHARS = /^[0-9A-Z $%*+\-./:]*$/;
+              return ALLOWEDCHARS.test(text);
+            };
+            var is8bit = function(text){
+              for (var i = 0; i < text.length; i++) {
+                var code = text.charCodeAt(i);
+                if (code > 255) {
+                  return false;
+                }
+              }
+              return true;
+            };
+            var checkInputMode = function(inputMode, text){
+              if (inputMode === 'NUMBER' && !isNUMBER(text)) {
+                throw new Error('The `NUMBER` input mode is invalid for text.');
+              }
+              else if (inputMode === 'ALPHA_NUM' && !isALPHA_NUM(text)) {
+                throw new Error('The `ALPHA_NUM` input mode is invalid for text.');
+              }
+              else if (inputMode === '8bit' && !is8bit(text)) {
+                throw new Error('The `8bit` input mode is invalid for text.');
+              }
+              else if (!is8bit(text)) {
+                throw new Error('Input mode is invalid for text.');
+              }
+              return true;
+            };
+            var getInputMode = function(text){
+              var inputMode = scope.inputMode;
+              inputMode = inputMode || (isNUMBER(text) ? 'NUMBER' : undefined);
+              inputMode = inputMode || (isALPHA_NUM(text) ? 'ALPHA_NUM' : undefined);
+              inputMode = inputMode || (is8bit(text) ? '8bit' : '');
+              return checkInputMode(inputMode, text) ? inputMode : '';
+            };
+            var canvas = element.find('canvas')[0];
+            var canvas2D = !!$window.CanvasRenderingContext2D;
+            scope.TYPE_NUMBER = getTypeNumeber();
+            scope.TEXT = getText();
+            scope.CORRECTION = getCorrection();
+            scope.SIZE = getSize();
+            scope.INPUT_MODE = getInputMode(scope.TEXT);
+            scope.canvasImage = '';
+            var draw = function(context, qr, modules, tile){
+              for (var row = 0; row < modules; row++) {
+                for (var col = 0; col < modules; col++) {
+                  var w = (Math.ceil((col + 1) * tile) - Math.floor(col * tile)),
+                      h = (Math.ceil((row + 1) * tile) - Math.floor(row * tile));
+                  context.fillStyle = qr.isDark(row, col) ? '#000' : '#fff';
+                  context.fillRect(Math.round(col * tile), Math.round(row * tile), w, h);
+                }
+              }
+            };
+            var render = function(canvas, value, typeNumber, correction, size, inputMode){
+              var trim = /^\s+|\s+$/g;
+              var text = value.replace(trim, '');
+              var qr = new QRCode(typeNumber, correction, inputMode);
+              qr.addData(text);
+              qr.make();
+              var context = canvas.getContext('2d');
+              var modules = qr.getModuleCount();
+              var tile = size / modules;
+              canvas.width = canvas.height = size;
+              if (canvas2D) {
+                draw(context, qr, modules, tile);
+                scope.canvasImage = canvas.toDataURL() || '';
+              }
+            };
+
+            scope.$watch(function(){return ngModel.$modelValue}, function(value, old){
+              if (value !== old) {
+                scope.text = ngModel.$modelValue;
+                scope.TEXT = getText();
+                scope.INPUT_MODE = getInputMode(scope.TEXT);
+                render(canvas, scope.TEXT, scope.TYPE_NUMBER, scope.CORRECTION, scope.SIZE, scope.INPUT_MODE);
+              }
+            });
+            render(canvas, scope.TEXT, scope.TYPE_NUMBER, scope.CORRECTION, scope.SIZE, scope.INPUT_MODE);
+          }};
+      }])
 
       .directive('uiSelect', function ($compile) {
         return {
@@ -513,6 +513,24 @@
             }
           }
         };
+      })
+
+      .filter('raw',function($translate) {
+        return function(o) {
+          if (o) {
+            if (typeof o == 'number') {
+              return o + "";
+            }
+            if (o instanceof Date) {
+              return "datetime'" + o.toISOString() + "'";
+            }
+            else {
+              return "'" + o + "'";
+            }
+          } else {
+            return "";
+          }
+        }
       })
 
       .filter('mask',function($translate) {
@@ -595,20 +613,64 @@
           inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
             var filterTemplate = '';
             var filtersSplited = attrs.cronappFilter.split(';');
+            var datasource = eval(attrs.crnDatasource);
+            var isOData = datasource.isOData()
+
             $(filtersSplited).each(function() {
               if (this.length > 0) {
+                if (filterTemplate != "") {
+                  if (isOData) {
+                    filterTemplate += " and ";
+                  } else {
+                    filterTemplate += ";";
+                  }
+                }
+
+                if (isOData) {
+                  if (operator == "=") {
+                    operator = "eq";
+                  }
+                  else if (operator == "!=") {
+                    operator = "ne";
+                  }
+                  else if (operator == ">") {
+                    operator = "gt";
+                  }
+                  else if (operator == ">=") {
+                    operator = "ge";
+                  }
+                  else if (operator == "<") {
+                    operator = "lt";
+                  }
+                  else if (operator == "<=") {
+                    operator = "le";
+                  }
+                }
+
                 //Se for do tipo text passa parametro como like
-                if (typeElement == 'text')
-                  filterTemplate += this + '@' + operator + '%{value}%;';
-                //Senão passa parametro como valor exato
-                else
-                  filterTemplate += this + operator + '{value};';
+                if (typeElement == 'text') {
+                  if (isOData) {
+                    filterTemplate += this + " " + operator + " {value}";
+                  } else {
+                    filterTemplate += this + '@' + operator + '%{value}%';
+                  }
+                  //Senão passa parametro como valor exato
+                } else {
+                  if (isOData) {
+                    filterTemplate += this + " " + operator + ' {value}';
+                  } else {
+                    filterTemplate += this + operator + '{value}';
+                  }
+                }
               }
             });
-            if (filterTemplate.length > 0)
-              filterTemplate = filterTemplate.substr(0, filterTemplate.length-1);
-            else
-              filterTemplate = '%{value}%';
+            if (filterTemplate.length == 0) {
+              if (isOData) {
+                filterTemplate = "{value}";
+              } else {
+                filterTemplate = '%{value}%';
+              }
+            }
 
             var selfDirective = this;
             if (ngModelCtrl) {
@@ -616,29 +678,50 @@
                 if (angular.equals(newVal, oldVal)) { return; }
                 var eType = $element.data('type') || $element.attr('type');
                 var value = ngModelCtrl.$modelValue;
-                var datasource = eval(attrs.crnDatasource);
 
-                if (value instanceof Date) {
-                  value = value.toISOString();
-                  if (eType == "date") {
-                    value = value + "@@date";
+                if (isOData) {
+
+                  if (value instanceof Date) {
+                    if (eType == "datetime-local") {
+                      value = "datetimeoffset'" + value.toISOString() + "'";
+                    } else {
+                      value = "datetime'" + value.toISOString().substring(0, 23) + "'";
+                    }
                   }
-                  else if (eType == "time" || eType == "time-local") {
-                    value = value + "@@time";
+
+                  else if (typeof value == "number") {
+                    value = value;
                   }
-                  else {
-                    value = value + "@@datetime";
+
+                  else if (typeof value == "boolean") {
+                    value = value;
+                  } else {
+                    value = "'" + value + "'";
                   }
-                }
 
-                else if (typeof value == "number") {
-                  value = value + "@@number";
-                }
+                } else {
+                  if (value instanceof Date) {
+                    value = value.toISOString();
+                    if (eType == "date") {
+                      value = value + "@@date";
+                    }
+                    else if (eType == "time" || eType == "time-local") {
+                      value = value + "@@time";
+                    }
+                    else {
+                      value = value + "@@datetime";
+                    }
+                  }
 
-                else if (typeof value == "boolean") {
-                  value = value + "@@boolean";
-                }
+                  else if (typeof value == "number") {
+                    value = value + "@@number";
+                  }
 
+                  else if (typeof value == "boolean") {
+                    value = value + "@@boolean";
+                  }
+
+                }
                 var bindedFilter = filterTemplate.split('{value}').join(value);
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
@@ -713,7 +796,7 @@
                       if (time < 10) {
                         scope.$apply(function () {
                           datasourceInstance.enabled = false;
-                          datasourceInstance.data = [];  
+                          datasourceInstance.data = [];
                         });
                         time++;
                       }
@@ -744,7 +827,7 @@
               // var x = angular.element($datasource);
               // $compile(x)(scope);
             }
-            
+
             $element.on('click', function() {
               var $this = $(this);
               var filters = $this.data('filters');
@@ -755,7 +838,7 @@
                 });
 
                 var datasourceToFilter = eval(datasourceName);
-                
+
                 if (requiredFilter) {
                   datasourceToFilter.enabled = bindedFilter.length > 0;
                   if (datasourceToFilter.enabled) {
