@@ -398,7 +398,7 @@ app.kendoHelper = {
     }
     return schema;
   },
-  getDataSource: function(dataSource, allowPaging, pageCount) {
+  getDataSource: function(dataSource, allowPaging, pageCount, columns) {
     var crudServiceBaseUrl = dataSourceMap[dataSource.id].serviceUrlODATA;
     var schema = this.getSchema(dataSource);
 
@@ -430,6 +430,59 @@ app.kendoHelper = {
     if (allowPaging)
       pageSize = pageCount ? pageCount : 10;
 
+    //Quando não for data UTC
+    var offsetMiliseconds = new Date().getTimezoneOffset() * 60000;
+    function onRequestEnd(e) {
+      if (e.response  && e.response.d ) {
+        var items = null;
+        if (e.response.d.results)
+          items = e.response.d.results;
+        else
+          items = [e.response.d];
+
+        if (this.group().length) {
+
+          columns.forEach( function(c) {
+            if (c.dataType == 'Database') {
+            var notUseUTC = c.type == 'datetime-local' || c.type == 'month' || c.type == 'time-local' || c.type == 'week';
+            if (notUseUTC) {
+              for (var i = 0; i < items.length; i++) {
+                var gr = items[i];
+                if (c.field == gr.Member) {
+                  gr.Key = gr.Key.replace(/\d+/,
+                      function (n) { return parseInt(n) + offsetMiliseconds }
+                  );
+                }
+                addOffset.bind(this)(gr.Items);
+              }
+            }
+          }
+        });
+        } else {
+          addOffset.bind(this)(items);
+        }
+      }
+    }
+
+    function addOffset(items) {
+      for (var i = 0; i < items.length; i++) {
+        if (columns) {
+          columns.forEach( function(c) {
+            if (c.dataType == 'Database') {
+            var notUseUTC = c.type == 'datetime-local' || c.type == 'month' || c.type == 'time-local' || c.type == 'week';
+            if (notUseUTC) {
+              if (items[i][c.field]) {
+                items[i][c.field] = items[i][c.field].replace(/\d+/,
+                    function (n) { return parseInt(n) + offsetMiliseconds }
+                );
+              }
+            }
+          }
+        });
+        }
+
+      }
+    }
 
     var datasource = {
       type: "odata",
@@ -440,18 +493,7 @@ app.kendoHelper = {
         },
         update: {
           url: function(data) {
-            // if (options.editable == 'batch') {
-            //   var urls = [];
-            //   data.models.forEach((m) => {
-            //     urls.push(m.__metadata.uri);
-            //   });
-            //   return urls;
-            // }
-            // else {
-
             return data.__metadata.uri;
-
-            // }
           },
         },
         create: {
@@ -467,7 +509,7 @@ app.kendoHelper = {
         },
         parameterMap: function (data, type) {
           if (type == "read") {
-            var paramsOData = kendo.data.transports.odata.parameterMap(data, type, true);
+            var paramsOData = kendo.data.transports.odata.parameterMap(data, type);
 
             var orderBy = '';
             if (this.options.grid) {
@@ -495,8 +537,10 @@ app.kendoHelper = {
       serverFiltering: true,
       serverSorting: true,
       batch: false,
-      schema: schema
+      schema: schema,
+      requestEnd: onRequestEnd
     };
+
     return datasource;
   },
   getConfigCombobox: function(options) {
@@ -610,7 +654,7 @@ app.kendoHelper = {
       var onChange = function() {
         var value = $element.val();
         if (!value || value.trim() == '') {
-          if (ngModelCtrl) 
+        if (ngModelCtrl)
             ngModelCtrl.$setViewValue('');
         } else {
           var momentDate = null;
@@ -627,7 +671,7 @@ app.kendoHelper = {
           }
         }
       }
-          
+
       if (scope) {
         options['change'] = function() {
           scope.$apply(function () {
