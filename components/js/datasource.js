@@ -1,3 +1,5 @@
+var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
+
 angular.module('datasourcejs', [])
 
 /**
@@ -126,7 +128,7 @@ angular.module('datasourcejs', [])
               // Get an ajax promise
               this.$promise = $http({
                 method: verb,
-                url: ((window.hostApp || "") + url).split("//").join("/"),
+                url: this.removeSlash(((window.hostApp || "") + url)),
                 data: (object) ? JSON.stringify(cloneObject) : null,
                 headers: _self.headers
               }).success(function(data, status, headers, config) {
@@ -149,7 +151,7 @@ angular.module('datasourcejs', [])
                   if (_self.isOData()) {
                     commands = {};
                     commands.commands = data.__callback;
-                    _self.normalizeData(commands.commands)
+                    _self.normalizeData(commands.commands);
                   }
                   _self.$scope.cronapi.evalInContext(JSON.stringify(commands));
                 }
@@ -504,7 +506,7 @@ angular.module('datasourcejs', [])
           if (this.postDeleteData) {
             $(this.postDeleteData).each(function() {
               (function (oldObj) {
-                _self.remove(this, function() {
+                _self.remove(oldObj, function() {
                   //Do Nothing
                 }, true);
               })(this);
@@ -681,6 +683,35 @@ angular.module('datasourcejs', [])
         };
 
 
+        this.getDeletionURL = function(obj, forceOriginalKeys) {
+          var keyObj = this.getKeyValues(obj.__original?obj.__original:obj, forceOriginalKeys);
+
+          var suffixPath = "";
+          if (this.isOData()) {
+            suffixPath = "(";
+          }
+          for (var key in keyObj) {
+            if (keyObj.hasOwnProperty(key)) {
+              if (this.isOData()) {
+                suffixPath += key + "=" + this.getObjectAsString(keyObj[key]);
+              } else {
+                suffixPath += "/" + keyObj[key];
+              }
+            }
+          }
+          if (this.isOData()) {
+            suffixPath += ")";
+          }
+
+          var url = this.entity;
+
+          if (this.entity.endsWith('/')) {
+            url = url.substring(0, url.length-1);
+          }
+
+          return url + suffixPath;
+        }
+
         this.getEditionURL = function(forceOriginalKeys) {
           var keyObj = this.getKeyValues(this.active.__original?this.active.__original:this.active, forceOriginalKeys);
 
@@ -722,7 +753,7 @@ angular.module('datasourcejs', [])
             }).success(function(rows, status, headers, config) {
               if (this.isOData()) {
                 rows = rows.d;
-                this.normalizeData(rows);
+              this.normalizeData(rows);
               }
 
               var row = null;
@@ -810,7 +841,7 @@ angular.module('datasourcejs', [])
             url += (this.entity.endsWith('/')) ? '__new__' : '/__new__';
             this.$promise = $http({
               method: "GET",
-              url: url.replace("//", "/"),
+              url: this.removeSlash(url),
               headers: this.headers
             }).success(function(data, status, headers, config) {
               if (this.isOData()) {
@@ -910,7 +941,7 @@ angular.module('datasourcejs', [])
               object = this.active;
             }
 
-            var keyObj = this.getKeyValues(object);
+            var keyObj = this.getKeyValues(object, forceDelete);
 
             callback = callback || function() {
               // For each row data
@@ -980,7 +1011,7 @@ angular.module('datasourcejs', [])
               if (this.dependentLazyPost && !forceDelete) {
                 callback();
               } else {
-                service.remove(this.getEditionURL(forceDelete)).$promise.then(callback);
+                service.remove(this.getDeletionURL(object, forceDelete)).$promise.then(callback);
               }
             }
           }.bind(this);
@@ -1334,7 +1365,10 @@ angular.module('datasourcejs', [])
 
         this.normalizeValue = function(value, unquote) {
           if (typeof value == 'string') {
-            if (value.length >= 10 && value.substring(0, 6) == '/Date(' && value.substring(value.length - 2, value.length) == ")/") {
+            if (value.length >= 10 && value.match(ISO_PATTERN)) {
+              return new Date(value);
+            }
+            else if (value.length >= 10 && value.substring(0, 6) == '/Date(' && value.substring(value.length - 2, value.length) == ")/") {
               var r = value.substring(6, value.length-2);
               return new Date(parseInt(r));
             }
@@ -1420,6 +1454,17 @@ angular.module('datasourcejs', [])
           });
         }
 
+        this.removeSlash = function(u) {
+          if (u.indexOf("http://") == 0) {
+            return "http://" + u.substring(7).split("//").join("/");
+          }
+
+          else if (u.indexOf("https://") == 0) {
+            return "https://" + u.substring(8).split("//").join("/");
+          }
+
+          return u;
+        }
 
         /**
          *  Fetch all data from the server
@@ -1521,7 +1566,7 @@ angular.module('datasourcejs', [])
           // Get an ajax promise
           this.$promise = $http({
             method: "GET",
-            url: resourceURL.replace("//", "/"),
+            url: this.removeSlash(resourceURL),
             params: props.params,
             headers: this.headers
           }).success(function(data, status, headers, config) {
