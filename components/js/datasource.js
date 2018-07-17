@@ -50,6 +50,7 @@ angular.module('datasourcejs', [])
         this.links = null;
         this.loadedFinish = null;
         this.lastFilterParsed = null;
+        this.rowsCount = 0;
 
         this.busy = false;
         this.cursor = 0;
@@ -597,14 +598,14 @@ angular.module('datasourcejs', [])
           }
         };
 
-        this.postSilent = function() {
-          this.post(true);
+        this.postSilent = function(callback) {
+          this.post(callback, true);
         }
 
         /**
          * Insert or update based on the the datasource state
          */
-        this.post = function(silent) {
+        this.post = function(callback, silent) {
 
           if (!silent && this.missingRequiredField())
             return;
@@ -631,6 +632,10 @@ angular.module('datasourcejs', [])
                 $(this.dependentData).each(function() {
                   this.storeDependentBuffer();
                 });
+              }
+
+              if (callback) {
+                callback(this.active);
               }
 
             }.bind(this));
@@ -677,6 +682,10 @@ angular.module('datasourcejs', [])
                 $(this.dependentData).each(function() {
                   this.storeDependentBuffer();
                 });
+              }
+
+              if (callback) {
+                callback(this.active);
               }
 
             }.bind(this));
@@ -932,14 +941,14 @@ angular.module('datasourcejs', [])
         };
 
         this.removeSilent = function(object, callback) {
-          this.remove(object, callback, false, true);
+          this.remove(object, null, false, callback, true);
         }
 
         /**
          * Remove an object from this dataset by using the given id.
          * the objects
          */
-        this.remove = function(object, callback, forceDelete, silent) {
+        this.remove = function(object, callback, forceDelete, afterDelete, silent) {
 
           this.busy = true;
 
@@ -1012,6 +1021,10 @@ angular.module('datasourcejs', [])
                 this.onBackNomalState();
               }
               this.handleAfterCallBack(this.onAfterDelete);
+
+              if (afterDelete) {
+                afterDelete(object);
+              }
             }.bind(this)
 
             if (this.handleBeforeCallBack(this.onBeforeDelete)) {
@@ -1343,6 +1356,7 @@ angular.module('datasourcejs', [])
          */
         this.cleanup = function() {
           this.offset = 0;
+          this.rowsCount = 0;
           this.data.length = 0;
           this.cursor = -1;
           this.active = {};
@@ -1546,6 +1560,7 @@ angular.module('datasourcejs', [])
             if (this.isOData()) {
               props.params.$top = this.rowsPerPage;
               props.params.$skip = parseInt(this.offset) * parseInt(this.rowsPerPage);
+              props.params.$inlinecount = 'allpages';
             } else {
               if (this.apiVersion == 1 || resourceURL.indexOf('/cronapi/') == -1) {
                 props.params.limit = this.rowsPerPage;
@@ -1593,6 +1608,7 @@ angular.module('datasourcejs', [])
           var sucessHandler = function(data, headers) {
             var springVersion = false;
             this.responseHeaders = headers || {};
+            var total = -1;
 
             if (this.entity.indexOf('//') > -1 && this.entity.indexOf('://') < 0)
               data = [];
@@ -1604,6 +1620,7 @@ angular.module('datasourcejs', [])
                   springVersion = true;
                 }
                 else if (this.isOData()) {
+                  total = parseInt(data.d.__count);
                   data = data.d.results;
                   this.normalizeData(data)
                 }
@@ -1642,6 +1659,9 @@ angular.module('datasourcejs', [])
               }
             } else {
               this.cleanup();
+              if (total != -1) {
+                this.rowsCount = total;
+              }
               Array.prototype.push.apply(this.data, data);
               if (this.data.length > 0) {
                 this.active = data[0];
@@ -1701,6 +1721,10 @@ angular.module('datasourcejs', [])
             });
           }.bind(this);
         };
+
+        this.getRowsCount = function() {
+          return this.rowsCount;
+        }
 
         /**
          * Asynchronously notify observers
