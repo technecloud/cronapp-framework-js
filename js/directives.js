@@ -1121,7 +1121,7 @@
                 field: c.field, operator: "eq", value: value, linkParentField: c.linkParentField, linkParentType: c.linkParentType,
                 linkParentLoadIfEmpty: c.linkParentLoadIfEmpty
               };
-              if ((value && value != "") || !f.linkParentLoadIfEmpty)
+              if ((value && value != "") || !f.linkParentLoadIfEmpty) //Add
                 datasource.filter.push(filter);
               datasource.filterScreen.push(filter);
             }
