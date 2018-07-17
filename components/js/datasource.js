@@ -59,6 +59,7 @@ angular.module('datasourcejs', [])
         this.dependentData = null; //TRM
         this.caseInsensitive = null;
         this.terms = null;
+        this.checkRequired = true;
         var _self = this;
         var service = null;
 
@@ -574,26 +575,38 @@ angular.module('datasourcejs', [])
          * Valid if required field is valid
          */
         this.missingRequiredField = function() {
-          return $('[required][ng-model*="' + this.name + '."]').hasClass('ng-invalid-required') || $('[ng-model*="' + this.name + '."]').hasClass('ng-invalid') ||
-              $('[required][ng-model*="' + this.name + '."]').hasClass('ng-empty')  || $('[valid][ng-model*="' + this.name + '."]').hasClass('ng-empty');
+          if (this.checkRequired) {
+            return $('[required][ng-model*="' + this.name + '."]').hasClass('ng-invalid-required') || $('[ng-model*="' + this.name + '."]').hasClass('ng-invalid') ||
+                $('[required][ng-model*="' + this.name + '."]').hasClass('ng-empty')  || $('[valid][ng-model*="' + this.name + '."]').hasClass('ng-empty');
+          } else {
+            return false;
+          }
         }
 
         /**
          * Valid is other validations like email, date and so on
          */
         this.hasInvalidField = function() {
-          return $('input[ng-model*="' + this.name + '."]:invalid').size() > 0;
+          if (this.checkRequired) {
+            return $('input[ng-model*="' + this.name + '."]:invalid').size() > 0;
+          } else {
+            return false;
+          }
         };
+
+        this.postSilent = function() {
+          this.post(true);
+        }
 
         /**
          * Insert or update based on the the datasource state
          */
-        this.post = function() {
+        this.post = function(silent) {
 
-          if (this.missingRequiredField())
+          if (!silent && this.missingRequiredField())
             return;
 
-          if (this.hasInvalidField())
+          if (!silent && this.hasInvalidField())
             return;
 
           this.lastAction = "post"; //TRM
@@ -880,11 +893,15 @@ angular.module('datasourcejs', [])
           this.editing = true;
         };
 
+        this.removeSilent = function(object, callback) {
+          this.remove(object, callback, false, true);
+        }
+
         /**
          * Remove an object from this dataset by using the given id.
          * the objects
          */
-        this.remove = function(object, callback, forceDelete) {
+        this.remove = function(object, callback, forceDelete, silent) {
 
           this.busy = true;
 
@@ -968,7 +985,7 @@ angular.module('datasourcejs', [])
             }
           }.bind(this);
 
-          if (!forceDelete && this.deleteMessage && this.deleteMessage.length > 0) {
+          if (!forceDelete && !silent && this.deleteMessage && this.deleteMessage.length > 0) {
             if (confirm(this.deleteMessage)) {
               _remove(object, callback);
             } else {
@@ -1806,6 +1823,7 @@ angular.module('datasourcejs', [])
             dts.onAfterDelete = props.onAfterDelete;
             dts.dependentBy = props.dependentBy;
             dts.parameters = props.parameters;
+            dts.checkRequired = props.checkRequired;
 
             if (props.dependentLazyPost && props.dependentLazyPost.length > 0) {
               dts.dependentLazyPost = props.dependentLazyPost;
@@ -1944,7 +1962,8 @@ angular.module('datasourcejs', [])
               dependentBy: attrs.dependentBy,
               dependentLazyPost: attrs.dependentLazyPost, //TRM
               dependentLazyPostField: attrs.dependentLazyPostField, //TRM
-              parameters: attrs.parameters
+              parameters: attrs.parameters,
+              checkRequired: !attrs.hasOwnProperty('checkrequired') || attrs.checkrequired === "" || attrs.checkrequired === "true",
             }
 
             var firstLoad = {
