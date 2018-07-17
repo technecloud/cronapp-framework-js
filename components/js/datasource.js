@@ -128,7 +128,7 @@ angular.module('datasourcejs', [])
               // Get an ajax promise
               this.$promise = $http({
                 method: verb,
-                url: this.removeSlash(((window.hostApp || "") + url)),
+                url: _self.removeSlash(((window.hostApp || "") + url)),
                 data: (object) ? JSON.stringify(cloneObject) : null,
                 headers: _self.headers
               }).success(function(data, status, headers, config) {
