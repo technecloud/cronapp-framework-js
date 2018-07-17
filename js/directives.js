@@ -940,7 +940,7 @@
           }
         };
       })
-    .directive('cronGrid', ['$compile', '$translate', function($compile, $translate) {
+  .directive('cronGrid', ['$compile', '$translate', function($compile, $translate) {
     return {
       restrict: 'E',
       replace: true,
@@ -1063,14 +1063,14 @@
           var hasChanges = false;
           var filters = grid.dataSource.filter() ? grid.dataSource.filter().filters : null;
           if (index > -1) {
-            if (f.value && f.value != "")
+            if ((f.value && f.value != "") || !f.linkParentLoadIfEmpty)
               filters[index] = f;
             else
               filters.splice(index, 1);
             hasChanges = true;
           }
           else {
-            if (f.value && f.value != "")  {
+            if ((f.value && f.value != "") || !f.linkParentLoadIfEmpty)  {
               if (filters)
                 filters.push(f)
               else
@@ -1117,7 +1117,10 @@
             if (c.linkParentType == "screen") {
               var value = scope[c.linkParentField];
               value = this.getObjectId(value);
-              var filter = { field: c.field, operator: "eq", value: value, linkParentField: c.linkParentField, linkParentType: c.linkParentType };
+              var filter = {
+                field: c.field, operator: "eq", value: value, linkParentField: c.linkParentField, linkParentType: c.linkParentType,
+                linkParentLoadIfEmpty: c.linkParentLoadIfEmpty
+              };
               if (value && value != "")
                 datasource.filter.push(filter);
               datasource.filterScreen.push(filter);
@@ -1263,6 +1266,7 @@
             $input.attr('cron-date', '');
             $input.attr('options', JSON.stringify(column.dateOptions));
             $input.data('initial-date', opt.model[opt.field]);
+
             $input.appendTo(container).off('change');
             var waitRender = setInterval(function() {
               if ($('#' + buttonId).length > 0) {
@@ -1350,6 +1354,7 @@
                       var grid = tr.closest('table');
 
                       var item = this.dataItem(tr);
+                      // var index = $(grid).find('tr.'+$(tr).attr('class')).index(tr);
                       var index = $(grid.find('tbody')[0]).children().index(tr)
                       var consolidated = {
                         item: item,
