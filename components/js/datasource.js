@@ -1,4 +1,5 @@
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
+var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 
 angular.module('datasourcejs', [])
 
@@ -139,7 +140,7 @@ angular.module('datasourcejs', [])
                       _self.normalizeData(data.d.results);
                       _callback(data.d.results);
                     } else {
-                      _self.normalizeData(data.d);
+                      _self.normalizeObject(data.d);
                       _callback(data.d);
                     }
                   } else {
@@ -753,7 +754,7 @@ angular.module('datasourcejs', [])
             }).success(function(rows, status, headers, config) {
               if (this.isOData()) {
                 rows = rows.d;
-              this.normalizeData(rows);
+                this.normalizeData(rows);
               }
 
               var row = null;
@@ -901,11 +902,14 @@ angular.module('datasourcejs', [])
         /**
          * Put the datasource into the inserting state
          */
-        this.startInserting = function() {
+        this.startInserting = function(callback) {
           this.retrieveDefaultValues(function() {
             this.inserting = true;
             if (this.onStartInserting) {
               this.onStartInserting();
+            }
+            if (callback) {
+              callback(this.active);
             }
           }.bind(this));
         };
@@ -913,7 +917,7 @@ angular.module('datasourcejs', [])
         /**
          * Put the datasource into the editing state
          */
-        this.startEditing = function(item) {
+        this.startEditing = function(item, callback) {
           if (item) {
             this.active = this.copy(item);
             this.lastActive = item;
@@ -922,6 +926,9 @@ angular.module('datasourcejs', [])
             this.active = this.copy(this.active);
           }
           this.editing = true;
+          if (callback) {
+            callback(this.active);
+          }
         };
 
         this.removeSilent = function(object, callback) {
@@ -1367,6 +1374,10 @@ angular.module('datasourcejs', [])
           if (typeof value == 'string') {
             if (value.length >= 10 && value.match(ISO_PATTERN)) {
               return new Date(value);
+            }
+            else if (value.length >= 8 && value.match(TIME_PATTERN)) {
+              var g = TIME_PATTERN.exec(value);
+              return new Date(Date.UTC(1970, 0, 1, g[1], g[2], g[3]));
             }
             else if (value.length >= 10 && value.substring(0, 6) == '/Date(' && value.substring(value.length - 2, value.length) == ")/") {
               var r = value.substring(6, value.length-2);
