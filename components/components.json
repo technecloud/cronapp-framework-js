@@ -279,6 +279,11 @@
           "removable": false,
           "type": "datasourceList"
         },
+        "parameters": {
+          "displayName_pt_BR": "Parâmetros de Ligação",
+          "displayName_en_US": "Link Paramaters",
+          "removable": false
+        },
         "keys": {
           "removable": false,
           "type": "datasourceKeys"
