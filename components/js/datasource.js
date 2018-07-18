@@ -2140,6 +2140,13 @@ angular.module('datasourcejs', [])
               } else {
                 $timeout(function() {
                   firstLoad.filter = false;
+                },
+                {
+                  success : function (data) {
+                    if (datasource.events.refresh) {
+                      datasource.events.refresh(data, 'filter');
+                    }
+                  }
                 });
               }
             });
@@ -2152,6 +2159,12 @@ angular.module('datasourcejs', [])
                 timeoutPromise =$timeout(function() {
                   datasource.fetch({
                     params: {}
+                  }, {
+                    success : function (data) {
+                      if (datasource.events.refresh) {
+                        datasource.events.refresh(data, 'parameters');
+                      }
+                    }
                   });
                 }, 0);
 
@@ -2169,7 +2182,15 @@ angular.module('datasourcejs', [])
                   timeoutPromise =$timeout(function () {
                     datasource.fetch({
                       params: {}
-                    });
+                    },
+                    {
+                      success : function (data) {
+                        if (datasource.events.refresh) {
+                          datasource.events.refresh(data, 'enabled');
+                        }
+                      }
+                    }
+                    );
                   }, 200);
                 }
               }
@@ -2190,7 +2211,15 @@ angular.module('datasourcejs', [])
                 timeoutPromise = $timeout(function() {
                   datasource.fetch({
                     params: {}
-                  });
+                  },
+                  {
+                    success : function (data) {
+                      if (datasource.events.refresh) {
+                        datasource.events.refresh(data, 'entity');
+                      }
+                    }
+                  }
+                  );
                 }, 200);
               } else {
                 $timeout(function() {
