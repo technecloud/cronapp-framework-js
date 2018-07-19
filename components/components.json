@@ -752,7 +752,14 @@
           "removable": false,
           "type": "pageDatasource"
         }
-      }
+      },
+      "groupedChildren": [
+        {
+          "text_pt_BR": "Formulário",
+          "text_en_US": "Form",
+          "selector": "form"
+        }
+      ]
     },
     {
       "name": "crn-tabs",
