@@ -876,38 +876,46 @@ angular.module('datasourcejs', [])
         };
 
 
-        this.retrieveDefaultValues = function(callback) {
-          if (this.entity.indexOf('cronapi') >= 0 || this.isOData()) {
-            // Get an ajax promise
-            var url = this.entity;
-            url += (this.entity.endsWith('/')) ? '__new__' : '/__new__';
-            this.$promise = $http({
-              method: "GET",
-              url: this.removeSlash(url),
-              headers: this.headers
-            }).success(function(data, status, headers, config) {
-              if (this.isOData()) {
-                this.active = data.d;
-                this.normalizeData(this.active)
-              } else {
-                this.active = data;
-              }
-              this.updateWithParams();
-              if (callback) {
-                callback();
-              }
-            }.bind(this)).error(function(data, status, headers, config) {
+        this.retrieveDefaultValues = function(obj, callback) {
+          if (obj) {
+            this.active = obj;
+            this.updateWithParams();
+            if (callback) {
+              callback();
+            }
+          } else {
+            if (this.entity.indexOf('cronapi') >= 0 || this.isOData()) {
+              // Get an ajax promise
+              var url = this.entity;
+              url += (this.entity.endsWith('/')) ? '__new__' : '/__new__';
+              this.$promise = $http({
+                method: "GET",
+                url: this.removeSlash(url),
+                headers: this.headers
+              }).success(function (data, status, headers, config) {
+                if (this.isOData()) {
+                  this.active = data.d;
+                  this.normalizeData(this.active)
+                } else {
+                  this.active = data;
+                }
+                this.updateWithParams();
+                if (callback) {
+                  callback();
+                }
+              }.bind(this)).error(function (data, status, headers, config) {
+                this.active = {};
+                this.updateWithParams();
+                if (callback) {
+                  callback();
+                }
+              }.bind(this));
+            } else {
               this.active = {};
               this.updateWithParams();
               if (callback) {
                 callback();
               }
-            }.bind(this));
-          } else {
-            this.active = {};
-            this.updateWithParams();
-            if (callback) {
-              callback();
             }
           }
         };
@@ -943,8 +951,8 @@ angular.module('datasourcejs', [])
         /**
          * Put the datasource into the inserting state
          */
-        this.startInserting = function(callback) {
-          this.retrieveDefaultValues(function() {
+        this.startInserting = function(item, callback) {
+          this.retrieveDefaultValues(item, function() {
             this.inserting = true;
             if (this.onStartInserting) {
               this.onStartInserting();
