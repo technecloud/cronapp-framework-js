@@ -127,6 +127,7 @@ angular.module('datasourcejs', [])
               delete cloneObject.__original;
               delete cloneObject.__status;
               delete cloneObject.__originalIdx;
+              delete cloneObject.__sender;
 
               // Get an ajax promise
               this.$promise = $http({
@@ -641,6 +642,11 @@ angular.module('datasourcejs', [])
             this.insert(this.active, function(obj, hotData) {
               // In case of success add the new inserted value at
               // the end of the array
+
+              if (this.active.__sender) {
+                obj.__sender = this.active.__sender;
+              }
+
               this.data.push(obj);
               // The new object is now the active
               this.active = obj;
@@ -660,6 +666,8 @@ angular.module('datasourcejs', [])
               if (this.events.create && hotData) {
                 this.events.create(this.active);
               }
+
+              delete this.active.__sender;
 
             }.bind(this));
 
@@ -689,6 +697,11 @@ angular.module('datasourcejs', [])
                   var lastActive = {};
                   this.copy(this.lastActive, lastActive);
                   this.copy(obj, currentRow);
+
+                  if (this.lastActive && this.lastActive.__sender) {
+                    currentRow .__sender = this.lastActive.__sender;
+                  }
+
                   this.active = currentRow;
                   if (this.dependentLazyPost && !currentRow.__status) {
                     currentRow.__status = "updated";
@@ -700,6 +713,8 @@ angular.module('datasourcejs', [])
                   if (this.events.update && hotData) {
                     this.events.update(this.active);
                   }
+
+                  delete this.active.__sender;
                 }
               }.bind(this));
 
@@ -1276,11 +1291,31 @@ angular.module('datasourcejs', [])
          *  Moves the cursor to the specified item
          */
         this.goTo = function(rowId) {
-          for (var i = 0; i < this.data.length; i++) {
-            if (this.data[i][this.key] === rowId) {
-              this.cursor = i;
-              this.active = this.copy(this.data[this.cursor], {});
-              return this.active;
+          if (typeof rowId === 'object') {
+            var dataKeys;
+            if (this.data.length > 0)
+              dataKeys = this.getKeyValues(this.data[0]);
+            for (var i = 0; i < this.data.length; i++) {
+              var found = true;
+              var item = this.data[i];
+              for (var key in dataKeys) {
+                if (!rowId.hasOwnProperty(key) || rowId[key] != item[key])
+                  found = false;
+              }
+              if (found) {
+                this.cursor = i;
+                this.active = this.copy(this.data[this.cursor], {});
+                return this.active;
+              }
+            }
+          }
+          else {
+            for (var i = 0; i < this.data.length; i++) {
+              if (this.data[i][this.key] === rowId) {
+                this.cursor = i;
+                this.active = this.copy(this.data[this.cursor], {});
+                return this.active;
+              }
             }
           }
         };
@@ -2147,15 +2182,15 @@ angular.module('datasourcejs', [])
                 }, 100);
               } else {
                 $timeout(function() {
-                  firstLoad.filter = false;
-                },
-                {
-                  success : function (data) {
-                    if (datasource.events.refresh) {
-                      datasource.events.refresh(data, 'filter');
-                    }
-                  }
-                });
+                      firstLoad.filter = false;
+                    },
+                    {
+                      success : function (data) {
+                        if (datasource.events.refresh) {
+                          datasource.events.refresh(data, 'filter');
+                        }
+                      }
+                    });
               }
             });
 
@@ -2189,15 +2224,15 @@ angular.module('datasourcejs', [])
                   $timeout.cancel(timeoutPromise);
                   timeoutPromise =$timeout(function () {
                     datasource.fetch({
-                      params: {}
-                    },
-                    {
-                      success : function (data) {
-                        if (datasource.events.refresh) {
-                          datasource.events.refresh(data, 'enabled');
+                          params: {}
+                        },
+                        {
+                          success : function (data) {
+                            if (datasource.events.refresh) {
+                              datasource.events.refresh(data, 'enabled');
+                            }
+                          }
                         }
-                      }
-                    }
                     );
                   }, 200);
                 }
@@ -2218,15 +2253,15 @@ angular.module('datasourcejs', [])
 
                 timeoutPromise = $timeout(function() {
                   datasource.fetch({
-                    params: {}
-                  },
-                  {
-                    success : function (data) {
-                      if (datasource.events.refresh) {
-                        datasource.events.refresh(data, 'entity');
+                        params: {}
+                      },
+                      {
+                        success : function (data) {
+                          if (datasource.events.refresh) {
+                            datasource.events.refresh(data, 'entity');
+                          }
+                        }
                       }
-                    }
-                  }
                   );
                 }, 200);
               } else {

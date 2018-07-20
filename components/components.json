@@ -277,35 +277,24 @@
       "properties": {
         "entity": {
           "removable": false,
-          "type": "datasourceList"
+          "global": true
         },
         "parameters": {
-          "displayName_pt_BR": "Parâmetros de Ligação",
-          "displayName_en_US": "Link Paramaters",
-          "removable": false
+          "removable": false,
+          "global": true
         },
         "checkrequired": {
-          "displayName_pt_BR": "Validar Campos Requeridos",
-          "displayName_en_US": "Validate Required Fields",
           "removable": false,
-          "type": "list",
-          "options": [
-            {
-              "value": "Sim",
-              "key": "true"
-            },
-            {
-              "value": "Não",
-              "key": "false"
-            }
-          ]
+          "type": "logic",
+          "global": true
+        },
+        "lazy": {
+          "removable": false,
+          "type": "logic"
         },
         "keys": {
           "removable": false,
-          "type": "datasourceKeys"
-        },
-        "filter": {
-          "removable": true,
+          "type": "datasourceKeys",
           "global": true
         },
         "on-before-create": {
@@ -348,20 +337,10 @@
           "type": "event",
           "global": true
         },
-        "dependent-by": {
-          "removable": false,
-          "global": true,
-          "type": "pageDatasourceObject",
-          "onSave": "{{{value}}}",
-          "onDisplay": "\\{\\{(.*?)\\}\\}"
-        },
         "dependent-lazy-post": {
           "removable": false,
-          "global": true
-        },
-        "dependent-lazy-post-field": {
-          "removable": false,
-          "global": true
+          "global": true,
+          "type": "pageDatasourceObject"
         }
       }
     },
@@ -772,7 +751,14 @@
           "removable": false,
           "type": "pageDatasource"
         }
-      }
+      },
+      "groupedChildren": [
+        {
+          "text_pt_BR": "Formulário",
+          "text_en_US": "Form",
+          "selector": "form"
+        }
+      ]
     },
     {
       "name": "crn-tabs",
