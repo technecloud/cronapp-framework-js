@@ -277,7 +277,6 @@
       "properties": {
         "entity": {
           "removable": false,
-          "type": "datasourceList",
           "global": true
         },
         "parameters": {
