@@ -543,7 +543,7 @@ app.kendoHelper = {
 
     return datasource;
   },
-  getConfigCombobox: function(options) {
+  getConfigCombobox: function(options, scope) {
     var dataSource = {};
     
     var valuePrimitive = false;
@@ -554,7 +554,7 @@ app.kendoHelper = {
       options.dataTextField = 'value';
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
     } else if (options.dataSource) {
-      dataSource = app.kendoHelper.getDataSource(options.dataSource);
+      dataSource = app.kendoHelper.getDataSource(options.dataSource, scope);
       valuePrimitive = (options.valuePrimitive == null ? false : options.valuePrimitive == 'true');
     }
     
@@ -576,12 +576,6 @@ app.kendoHelper = {
       valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
       suggest: true
     };
-    
-    if (options.cascadeFrom && options.cascadeFromField) {
-      config['cascadeFrom'] = options.cascadeFrom;
-      config['cascadeFromField'] = options.cascadeFromField;
-      config['autoBind'] = false; 
-    }
 
     return config;
   },
@@ -745,43 +739,6 @@ app.kendoHelper = {
       }
     }
 
-    return config;
-  },
-  getConfigMasktext: function(options) {
-    var config = {
-      mask: (options.mask == null ? undefined : options.mask),
-      unmaskOnPost: (options.unmaskOnPost == null ? undefined : options.unmaskOnPost == 'true'),
-      clearPromptChar: (options.clearPromptChar == null ? undefined : options.clearPromptChar == 'true')
-    }
-    
-    if (options.promptChar) {
-      switch (options.promptChar) {
-        case 'space' : config['promptChar'] = ' '; break;
-        case 'underline' : config['promptChar'] = '_'; break;
-        default: config['promptChar'] = options.promptChar; break;
-      }
-    }
-    
-    return config;
-  },
-  getConfigNumerictext: function(options) {
-    var config = {
-      type: (options.type == null ? undefined : options.type),
-      format: (options.format == null ? undefined : options.format),
-      decimals: (options.decimals == null ? undefined : parseInt(options.decimals)),
-      downArrowText: (options.downArrowText == null ? undefined : options.downArrowText),
-      upArrowText: (options.upArrowText == null ? undefined : options.upArrowText),
-      factor: (options.factor == null ? undefined : parseFloat(options.factor)),
-      max: (options.max == null ? undefined : parseInt(options.max)),
-      min: (options.min == null ? undefined : parseInt(options.min)),
-      restrictDecimals: (options.restrictDecimals == null ? undefined : options.restrictDecimals == 'true'),
-      round: (options.round == null ? undefined : options.round == 'true'),
-      placeholder: (options.placeholder == null ? undefined : options.placeholder),
-      spinners: (options.spinners == null ? undefined : options.spinners == 'true'),
-      step: (options.step == null ? undefined : parseFloat(options.step))
-    }
-    
-    
     return config;
   }
 };
