@@ -497,7 +497,7 @@ angular.module('datasourcejs', [])
                     var idx = _self.getIndexOfListTempBuffer(oldObj);
                     _self.updateObjectAtIndex(newObj, idx);
                     if (_self.events.create) {
-                      _self.events.create(newObj);
+                      _self.callDataSourceEvents('create', newObj);
                     }
                   }, true);
                 })(this);
@@ -509,7 +509,7 @@ angular.module('datasourcejs', [])
                     var idx = _self.getIndexOfListTempBuffer(oldObj);
                     _self.updateObjectAtIndex(newObj, idx);
                     if (_self.events.update) {
-                      _self.events.update(newObj);
+                      _self.callDataSourceEvents('update', newObj);
                     }
                   }, true);
                 })(this);
@@ -528,7 +528,7 @@ angular.module('datasourcejs', [])
                     delete param.__tempId;
                     delete param.__original;
                     delete param.__originalIdx;
-                    _self.events.delete(param);
+                    _self.callDataSourceEvents('delete', param);
                   }
                 }, true);
               })(this);
@@ -664,7 +664,7 @@ angular.module('datasourcejs', [])
               }
 
               if (this.events.create && hotData) {
-                this.events.create(this.active);
+                this.callDataSourceEvents('create', this.active);
               }
 
               delete this.active.__sender;
@@ -711,7 +711,7 @@ angular.module('datasourcejs', [])
                   this.handleAfterCallBack(this.onAfterUpdate);
 
                   if (this.events.update && hotData) {
-                    this.events.update(this.active);
+                    this.callDataSourceEvents('update', this.active);
                   }
 
                   delete this.active.__sender;
@@ -843,7 +843,7 @@ angular.module('datasourcejs', [])
               }
 
               if (this.events.update) {
-                this.events.update(this.active);
+                this.callDataSourceEvents('update', this.active);
               }
 
             }.bind(this)).error(function(data, status, headers, config) {
@@ -976,7 +976,7 @@ angular.module('datasourcejs', [])
               callback(this.active);
             }
             if (this.events.creating) {
-              this.events.creating(this.active);
+              this.callDataSourceEvents('creating', this.active);
             }
           }.bind(this));
         };
@@ -997,7 +997,7 @@ angular.module('datasourcejs', [])
             callback(this.active);
           }
           if (this.events.editing) {
-            this.events.updating(this.active);
+            this.callDataSourceEvents('updating', this.active);
           }
         };
 
@@ -1088,7 +1088,7 @@ angular.module('datasourcejs', [])
               }
 
               if (this.events.delete && hotData) {
-                this.events.delete(object);
+                this.callDataSourceEvents('delete',object);
               }
             }.bind(this)
 
@@ -1330,7 +1330,7 @@ angular.module('datasourcejs', [])
         /**
          *  filter dataset by URL
          */
-        this.filter = function(url) {
+        this.filter = function(url, callback) {
           var oldoffset = this.offset;
           this.offset = 0;
           this.fetch({
@@ -1341,6 +1341,11 @@ angular.module('datasourcejs', [])
             },
             error: function(error) {
               this.offset = oldoffset;
+            },
+            success: function(data) {
+              if (callback) {
+                callback(data);
+              }
             }
           });
         };
@@ -1580,6 +1585,43 @@ angular.module('datasourcejs', [])
           this.events = events;
         }
 
+        this.addDataSourceEvents = function(events) {
+          for (var key in events) {
+            if (events.hasOwnProperty(key)) {
+              if (!this.events[key]) {
+                this.events[key] = [];
+              }
+
+              if (Object.prototype.toString.call(this.events[key]) !== '[object Array]') {
+                this.events[key] = [this.events[key]];
+              }
+
+              this.events[key].push(events[key]);
+            }
+          }
+        }
+
+        this.callDataSourceEvents = function(key, param) {
+          if (this.events) {
+            var event = this.events[key];
+            if (event) {
+              if (Object.prototype.toString.call(event) !== '[object Array]') {
+                event = [event];
+              }
+
+              var args = [];
+              for (var j = 1; j < arguments.length; j++) {
+                args.push(arguments[j]);
+              }
+
+              for (var i = 0; i < event.length; i++) {
+                event[i].apply(null, args);
+              }
+
+            }
+          }
+        }
+
         /**
          *  Fetch all data from the server
          */
@@ -1789,7 +1831,7 @@ angular.module('datasourcejs', [])
             if (callbacks.success) callbacks.success.call(this, data);
 
             if (this.events.read) {
-              this.events.read(data);
+              this.callDataSourceEvents('read', data);
             }
 
             this.hasMoreResults = (data.length >= this.rowsPerPage);
@@ -2177,20 +2219,21 @@ angular.module('datasourcejs', [])
 
                 // Start a timeout
                 timeoutPromise = $timeout(function() {
-                  datasource.filter(value);
+                  if (datasource.events.overRideRefresh) {
+                    datasource.callDataSourceEvents('overRideRefresh', 'filter', value);
+                  } else {
+                    datasource.filter(value, function (data) {
+                      if (datasource.events.refresh) {
+                        datasource.callDataSourceEvents('refresh', data, 'filter');
+                      }
+                    });
+                  }
                   datasource.lastFilterParsed = value;
                 }, 100);
               } else {
                 $timeout(function() {
                       firstLoad.filter = false;
-                    },
-                    {
-                      success : function (data) {
-                        if (datasource.events.refresh) {
-                          datasource.events.refresh(data, 'filter');
-                        }
-                      }
-                    });
+                    }, 0);
               }
             });
 
@@ -2200,15 +2243,19 @@ angular.module('datasourcejs', [])
 
                 $timeout.cancel(timeoutPromise);
                 timeoutPromise =$timeout(function() {
-                  datasource.fetch({
-                    params: {}
-                  }, {
-                    success : function (data) {
-                      if (datasource.events.refresh) {
-                        datasource.events.refresh(data, 'parameters');
+                  if (datasource.events.overRideRefresh) {
+                    datasource.callDataSourceEvents('overRideRefresh', 'parameters', datasource.parameters);
+                  } else {
+                    datasource.fetch({
+                      params: {}
+                    }, {
+                      success: function (data) {
+                        if (datasource.events.refresh) {
+                          datasource.callDataSourceEvents('refresh', data, 'parameters');
+                        }
                       }
-                    }
-                  });
+                    });
+                  }
                 }, 0);
 
               }
@@ -2223,17 +2270,21 @@ angular.module('datasourcejs', [])
                 if (datasource.enabled) {
                   $timeout.cancel(timeoutPromise);
                   timeoutPromise =$timeout(function () {
-                    datasource.fetch({
-                          params: {}
-                        },
-                        {
-                          success : function (data) {
-                            if (datasource.events.refresh) {
-                              datasource.events.refresh(data, 'enabled');
+                    if (datasource.events.overRideRefresh) {
+                      datasource.callDataSourceEvents('overRideRefresh', 'enabled', datasource.parameters);
+                    } else {
+                      datasource.fetch({
+                            params: {}
+                          },
+                          {
+                            success: function (data) {
+                              if (datasource.events.refresh) {
+                                datasource.callDataSourceEvents('refresh', data, 'enabled');
+                              }
                             }
                           }
-                        }
-                    );
+                      );
+                    }
                   }, 200);
                 }
               }
@@ -2258,7 +2309,7 @@ angular.module('datasourcejs', [])
                       {
                         success : function (data) {
                           if (datasource.events.refresh) {
-                            datasource.events.refresh(data, 'entity');
+                            datasource.callDataSourceEvents('refresh', data, 'entity');
                           }
                         }
                       }
