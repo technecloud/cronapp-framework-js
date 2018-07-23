@@ -555,7 +555,7 @@ app.kendoHelper = {
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
     } else if (options.dataSource) {
       dataSource = app.kendoHelper.getDataSource(options.dataSource, scope);
-      valuePrimitive = (options.valuePrimitive == null ? false : options.valuePrimitive == 'true');
+      valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
     }
     
     if (!options.dataValueField || options.dataValueField.trim() == '') {
