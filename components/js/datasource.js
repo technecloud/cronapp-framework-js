@@ -168,7 +168,7 @@ angular.module('datasourcejs', [])
                 } else {
                   msg = isCronapiQuery&&data.value?data.value:data
                 }
-                _self.handleError();
+                _self.handleError(msg);
                 if (_callbackError) {
                   _callbackError(msg);
                 }
