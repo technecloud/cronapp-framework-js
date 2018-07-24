@@ -1930,7 +1930,6 @@
   .directive('cronDate', ['$compile', '$translate', '$window', function ($compile, $translate, $window) {
     return {
       restrict: 'AE',
-      require: '^ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
         var options = {};
         var cronDate = {};
