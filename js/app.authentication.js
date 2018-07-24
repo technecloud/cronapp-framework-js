@@ -582,6 +582,7 @@ app.kendoHelper = {
             }
 
             var cronappDatasource = this.options.cronappDatasource;
+            cronappDatasource.rowsPerPage = e.data.pageSize;
             cronappDatasource.offset = (e.data.page - 1);
             var fetchData = {};
             fetchData.params = paramsOData;
