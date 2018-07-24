@@ -1615,57 +1615,55 @@
       replace: true,
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
-        if (attrs.required != undefined || attrs.ngRequired === 'true') {
-          var select = {};
-          try {
-            // var json = window.buildElementOptions(element);
-            select =  JSON.parse(attrs.options);
-          } catch(err) {
-            console.log('ComboBox invalid configuration! ' + err);
-          }
-          
-          var id = attrs.id ? ' id="' + attrs.id + '"' : '';
-          var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-          var parent = element.parent();
-          $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
-          var $element = $(parent).find('input.cronSelect');
-        
-          var options = app.kendoHelper.getConfigCombobox(select, scope);
-          var combobox = $element.kendoComboBox(options).data('kendoComboBox');
-          $(element).remove();
-          
-          var _scope = scope;
-          var _ngModelCtrl = ngModelCtrl;
-          
-          $element.on('change', function (event) {
-            _scope.$apply(function () {
-              _ngModelCtrl.$setViewValue(this.value());
-            }.bind(combobox));
-          });
+		  var select = {};
+		  try {
+			// var json = window.buildElementOptions(element);
+			select =  JSON.parse(attrs.options);
+		  } catch(err) {
+			console.log('ComboBox invalid configuration! ' + err);
+		  }
+		  
+		  var id = attrs.id ? ' id="' + attrs.id + '"' : '';
+		  var name = attrs.name ? ' name="' + attrs.name + '"' : '';
+		  var parent = element.parent();
+		  $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
+		  var $element = $(parent).find('input.cronSelect');
+		
+		  var options = app.kendoHelper.getConfigCombobox(select, scope);
+		  var combobox = $element.kendoComboBox(options).data('kendoComboBox');
+		  $(element).remove();
+		  
+		  var _scope = scope;
+		  var _ngModelCtrl = ngModelCtrl;
+		  
+		  $element.on('change', function (event) {
+			_scope.$apply(function () {
+			  _ngModelCtrl.$setViewValue(this.value());
+			}.bind(combobox));
+		  });
 
-          if (ngModelCtrl) {
-            ngModelCtrl.$formatters.push(function (value) {
-              var result = '';
-              
-              if (value) {
-                result = value;
-              }
-              
-              combobox.value(result);
-              
-              return result;
-            });
-  
-            ngModelCtrl.$parsers.push(function (value) {
-              if (value) {
-                return value;
-              }
-              
-              return null;
-            });
-          }
-        }
-      }
+		  if (ngModelCtrl) {
+			ngModelCtrl.$formatters.push(function (value) {
+			  var result = '';
+			  
+			  if (value) {
+				result = value;
+			  }
+			  
+			  combobox.value(result);
+			  
+			  return result;
+			});
+
+			ngModelCtrl.$parsers.push(function (value) {
+			  if (value) {
+				return value;
+			  }
+			  
+			  return null;
+			});
+		  }
+		}
     };
   })
   
@@ -1675,98 +1673,98 @@
       replace: true,
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
-        if (attrs.required != undefined || attrs.ngRequired === 'true') {
-          var select = {};
-          try {
-            // var json = window.buildElementOptions(element);
-            select = JSON.parse(attrs.options);
-          } catch(err) {
-            console.log('DynamicComboBox invalid configuration! ' + err);
-          }
-          
-          var options = app.kendoHelper.getConfigCombobox(select, scope);
-          try {
-            delete options.dataSource.schema.model.id;
-          } catch(e){}
-          
-          var parent = element.parent();
-          var id = attrs.id ? ' id="' + attrs.id + '"' : '';
-          var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-          $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
-          var $element = $(parent).find('input.cronDynamicSelect');
-          $(element).remove();
-          
-          options['dataBound'] = function(e) {
-            var currentValue = $(combobox).data('currentValue');
-            if (currentValue != null) {
-              setTimeout(function(){combobox.value(currentValue)},300);
-            }
-            $(combobox).data('currentValue', null);
-          };                   
-          
-          var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-          combobox.dataSource.transport.options.grid = combobox;
-          var _scope = scope;
-          var _ngModelCtrl = ngModelCtrl;
-          
-          $element.on('change', function (event) {
-            _scope.$apply(function () {
-              _ngModelCtrl.$setViewValue(this.dataItem());
-            }.bind(combobox));
-          });
-          
-          if (ngModelCtrl) {
-            /**
-            * Formatters change how model values will appear in the view.
-            * For display component.
-            */
-            ngModelCtrl.$formatters.push(function (value) {
-              var result = '';
-              
-              if (value) {
-                if (typeof value == "string") {
-                  result = value;
-                } else {
-                  if (value[select.dataValueField]) {
-                    result = value[select.dataValueField];
-                  }
-                }
-              }
-              
-              $(combobox).data('currentValue', result);
-              view = combobox.dataSource.view();
-              if (!view || (Array.isArray(view) && view.length == 0)) {
-                combobox.dataSource.read();
-              } else {
-                combobox.value(result);
-              }
-              
-              return result;
-            });
-  
-            /**
-            * Parsers change how view values will be saved in the model.
-            * for storage
-            */
-            ngModelCtrl.$parsers.push(function (value) {
-              if (value) {
-                if (combobox.options.valuePrimitive === true) {  
-                  if (typeof value == 'string') {
-                    return value;
-                  } else if (value[select.dataValueField]) {
-                    return value[select.dataValueField];
-                  }
-                } else {
-                  try {
-                    return objectClone(value, this.dataSource.options.schema.model.fields);
-                  } catch(e){}
-                }
-              }
-  
-              return null;
-            }.bind(combobox));
-          }
-        }
+		  var select = {};
+		  try {
+			// var json = window.buildElementOptions(element);
+			select = JSON.parse(attrs.options);
+		  } catch(err) {
+			console.log('DynamicComboBox invalid configuration! ' + err);
+		  }
+		  
+		  var options = app.kendoHelper.getConfigCombobox(select, scope);
+		  try {
+			delete options.dataSource.schema.model.id;
+		  } catch(e){}
+		  
+		  var parent = element.parent();
+		  var id = attrs.id ? ' id="' + attrs.id + '"' : '';
+		  var name = attrs.name ? ' name="' + attrs.name + '"' : '';
+		  $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
+		  var $element = $(parent).find('input.cronDynamicSelect');
+		  $(element).remove();
+		  
+		  options['dataBound'] = function(e) {
+			var currentValue = $(combobox).data('currentValue');
+			if (currentValue != null) {
+			  setTimeout(function(){combobox.value(currentValue)},300);
+			}
+			$(combobox).data('currentValue', null);
+		  };                   
+		  
+		  var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
+		  if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
+			combobox.dataSource.transport.options.grid = combobox;
+		  }
+		  var _scope = scope;
+		  var _ngModelCtrl = ngModelCtrl;
+		  
+		  $element.on('change', function (event) {
+			_scope.$apply(function () {
+			  _ngModelCtrl.$setViewValue(this.dataItem());
+			}.bind(combobox));
+		  });
+		  
+		  if (ngModelCtrl) {
+			/**
+			* Formatters change how model values will appear in the view.
+			* For display component.
+			*/
+			ngModelCtrl.$formatters.push(function (value) {
+			  var result = '';
+			  
+			  if (value) {
+				if (typeof value == "string") {
+				  result = value;
+				} else {
+				  if (value[select.dataValueField]) {
+					result = value[select.dataValueField];
+				  }
+				}
+			  }
+			  
+			  $(combobox).data('currentValue', result);
+			  view = combobox.dataSource.view();
+			  if (!view || (Array.isArray(view) && view.length == 0)) {
+				combobox.dataSource.read();
+			  } else {
+				combobox.value(result);
+			  }
+			  
+			  return result;
+			});
+
+			/**
+			* Parsers change how view values will be saved in the model.
+			* for storage
+			*/
+			ngModelCtrl.$parsers.push(function (value) {
+			  if (value) {
+				if (combobox.options.valuePrimitive === true) {  
+				  if (typeof value == 'string') {
+					return value;
+				  } else if (value[select.dataValueField]) {
+					return value[select.dataValueField];
+				  }
+				} else {
+				  try {
+					return objectClone(value, this.dataSource.options.schema.model.fields);
+				  } catch(e){}
+				}
+			  }
+
+			  return null;
+			}.bind(combobox));
+		}
       }
     };
   })
@@ -1776,7 +1774,6 @@
       restrict: 'E',
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
-        if (attrs.required != undefined || attrs.ngRequired === 'true') {
           var _self = this;
           var select = {};
           try {
@@ -1803,7 +1800,10 @@
           $(element).remove();
 
           var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
-          
+          if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
+			combobox.dataSource.transport.options.grid = combobox;
+		  }
+		  
           $(element).on('change', function (event) {
             _scope.$apply(function () {
               _ngModelCtrl.$setViewValue(this.dataItems());
@@ -1854,7 +1854,6 @@
               
               return null;
             }.bind(combobox));
-          }
         }
       }
     };
@@ -1891,6 +1890,10 @@
         }  
 
         var autoComplete = $element.kendoAutoComplete(options).data('kendoAutoComplete');
+		if (autoComplete.dataSource.transport && autoComplete.dataSource.transport.options) {
+			autoComplete.dataSource.transport.options.grid = autoComplete;
+		}
+		  
         $(element).remove();
 
         if (ngModelCtrl) {
@@ -1922,7 +1925,6 @@
             return null;
           });
         }
-      
       }
     }
   })
