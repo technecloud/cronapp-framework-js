@@ -50,7 +50,7 @@ angular.module('datasourcejs', [])
         this.links = null;
         this.loadedFinish = null;
         this.lastFilterParsed = null;
-        this.rowsCount = 0;
+        this.rowsCount = -1;
         this.events = {};
 
         this.busy = false;
@@ -1462,7 +1462,7 @@ angular.module('datasourcejs', [])
          */
         this.cleanup = function() {
           this.offset = 0;
-          this.rowsCount = 0;
+          this.rowsCount = -1;
           this.data.length = 0;
           this.cursor = -1;
           this.active = {};
@@ -1917,7 +1917,11 @@ angular.module('datasourcejs', [])
         };
 
         this.getRowsCount = function() {
-          return this.rowsCount;
+          if ( this.rowsCount != -1) {
+            return this.rowsCount;
+          } else {
+            return this.data.length;
+          }
         }
 
         /**
@@ -2068,7 +2072,7 @@ angular.module('datasourcejs', [])
             dts.entity = props.entity;
 
             if (window.dataSourceMap && window.dataSourceMap[dts.entity]) {
-              dts.entity = window.dataSourceMap[dts.entity].serviceUrlODATA;
+              dts.entity = window.dataSourceMap[dts.entity].serviceUrlODATA || window.dataSourceMap[dts.entity].serviceUrl;
             }
 
             if (app && app.config && app.config.datasourceApiVersion) {
@@ -2332,7 +2336,7 @@ angular.module('datasourcejs', [])
               datasource.entity = value;
 
               if (window.dataSourceMap && window.dataSourceMap[datasource.entity]) {
-                datasource.entity = window.dataSourceMap[datasource.entity].serviceUrlODATA;
+                datasource.entity = window.dataSourceMap[datasource.entity].serviceUrlODATA || window.dataSourceMap[datasource.entity].serviceUrl;;
               }
 
               if (!firstLoad.entity) {
