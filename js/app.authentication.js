@@ -677,17 +677,19 @@ app.kendoHelper = {
       }
 
       var formatKendoMask = function(mask) {
-        mask = mask.replace(/:MM/gm,':mm');
-        mask = mask.replace(/:M/gm,':m');
-        mask = mask.replace(/S/gm,'s');
-        mask = mask.replace(/D/gm,'d');
-        mask = mask.replace(/Y/gm,'y');
+        if (mask) {
+          mask = mask.replace(/:MM/gm,':mm');
+          mask = mask.replace(/:M/gm,':m');
+          mask = mask.replace(/S/gm,'s');
+          mask = mask.replace(/D/gm,'d');
+          mask = mask.replace(/Y/gm,'y');
+        }
 
         return mask;
       }
 
       var formatMomentMask = function(type, mask) {
-        if (!mask) {
+        if (mask == null) {
           mask = parseMaskType(type, translate)
         }
         
@@ -706,7 +708,7 @@ app.kendoHelper = {
       var momentFormat = formatMomentMask(options.type, options.format);
       var format = formatKendoMask(momentFormat);
       
-      var timeFormat = formatKendoMask("time", options.timeFormat);
+      var timeFormat = formatKendoMask(options.timeFormat);
       var culture = formatCulture(translate.use());
       
       config = {
@@ -792,8 +794,8 @@ app.kendoHelper = {
   },
   getConfigSwitch: function(options) {
     var config = {
-      onLabel: options.onLabel,
-      offLabel: options.offLabel
+      onLabel: (options.onLabel == null ? undefined : options.onLabel),
+      offLabel: (options.offLabel == null ? undefined : options.offLabel)
     }
 
     return config;
