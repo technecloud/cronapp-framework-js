@@ -435,10 +435,7 @@ app.kendoHelper = {
       return data;
     };
 
-    var pageSize = pageCount;
-    //Se permitir paginar, coloca quantidade default de registros, caso n tenha
-    if (allowPaging)
-      pageSize = pageCount ? pageCount : 10;
+    var pageSize = scope[dataSource.name].rowsPerPage;
 
     //Quando não for data UTC
     var offsetMiliseconds = new Date().getTimezoneOffset() * 60000;
@@ -537,42 +534,66 @@ app.kendoHelper = {
             overRideRefresh: function(data) {
               if (this.options.grid)
                 this.options.grid.dataSource.read();
+            }.bind(this),
+            read: function(data) {
+              this.options.fromRead = true;
+              this.options.grid.dataSource.read();
             }.bind(this)
           });
         },
         read:  function (e) {
-          for (key in e.data)
-            if(e.data[key] == undefined)
-              delete e.data[key];
-          var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
-          var orderBy = '';
 
-          if (this.options.grid) {
-            this.options.grid.dataSource.group().forEach(function(group) {
-              orderBy += group.field +" " + group.dir + ",";
+          var doFetch = false;
+          try {
+            var cronappDatasource = this.options.cronappDatasource;
+
+            if (!this.options.kendoCallback) {
+              this.options.kendoCallback = e;
+              e.success(cronappDatasource.data);
+            } else {
+              if (this.options.fromRead) {
+                this.options.kendoCallback.success(cronappDatasource.data);
+              } else {
+                doFetch = true;
+              }
+            }
+          } finally {
+            this.options.fromRead = false;
+          }
+
+          if (doFetch) {
+            for (key in e.data)
+              if(e.data[key] == undefined)
+                delete e.data[key];
+            var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
+            var orderBy = '';
+
+            if (this.options.grid) {
+              this.options.grid.dataSource.group().forEach(function(group) {
+                orderBy += group.field +" " + group.dir + ",";
+              });
+            }
+            if (orderBy.length > 0) {
+              orderBy = orderBy.substr(0, orderBy.length-1);
+              if (paramsOData.$orderby)
+                paramsOData.$orderby =  orderBy + "," + paramsOData.$orderby;
+              else
+                paramsOData.$orderby = orderBy;
+            }
+
+            var cronappDatasource = this.options.cronappDatasource;
+            cronappDatasource.offset = (e.data.page - 1);
+            var fetchData = {};
+            fetchData.params = paramsOData;
+            cronappDatasource.fetch(fetchData, {
+              success:  function(data) {
+                e.success(data);
+              },
+              canceled:  function(data) {
+                e.error("canceled", "canceled", "canceled");
+              }
             });
           }
-          if (orderBy.length > 0) {
-            orderBy = orderBy.substr(0, orderBy.length-1);
-            if (paramsOData.$orderby)
-              paramsOData.$orderby =  orderBy + "," + paramsOData.$orderby;
-            else
-              paramsOData.$orderby = orderBy;
-          }
-
-          var cronappDatasource = this.options.cronappDatasource;
-          cronappDatasource.rowsPerPage = e.data.pageSize;
-          cronappDatasource.offset = (e.data.page - 1);
-          var fetchData = {};
-          fetchData.params = paramsOData;
-          cronappDatasource.fetch(fetchData, {
-            success:  function(data) {
-              e.success(data);
-            },
-            canceled:  function(data) {
-              e.error("canceled", "canceled", "canceled");
-            }
-          });
 
         },
         update: function(e) {
@@ -595,6 +616,7 @@ app.kendoHelper = {
         batch: function (e) {
         },
         options: {
+          fromRead: false,
           disableAndSelect: function(e) {
             if (this.grid) {
               this.grid.select(e.container);
