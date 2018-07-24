@@ -435,7 +435,9 @@ app.kendoHelper = {
       return data;
     };
 
-    var pageSize = scope[dataSource.name].rowsPerPage;
+    var pageSize = 10;
+    if (scope[dataSource.name])
+      pageSize = scope[dataSource.name].rowsPerPage;
 
     //Quando não for data UTC
     var offsetMiliseconds = new Date().getTimezoneOffset() * 60000;

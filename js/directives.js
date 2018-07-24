@@ -986,21 +986,31 @@
         return call;
 
       },
-      generateToolbarButtonBlockly: function(toolbarButton, scope) {
-        var buttonBlockly;
+      generateToolbarButtonCall: function(toolbarButton, scope) {
+        var buttonCall;
 
-        var generateObjTemplate = function(functionToCall, title) {
+        var generateObjTemplate = function(functionToCall, title, saveButton, isSaveOrCancelChanges) {
           var obj = {
             template: function() {
               var buttonId = this.generateId();
-              return compileTemplateAngular(buttonId, functionToCall, title);
+              return compileTemplateAngular(buttonId, functionToCall, title, saveButton, isSaveOrCancelChanges);
             }.bind(this)
           };
           return obj;
         }.bind(this);
 
-        var compileTemplateAngular = function(buttonId, functionToCall, title) {
-          var template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
+        var compileTemplateAngular = function(buttonId, functionToCall, title, saveButton, isSaveOrCancelChanges) {
+          var template = '';
+          if (isSaveOrCancelChanges) {
+            if (saveButton)
+              template = '<a role="button" class="k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
+            else
+              template = '<a role="button" class="k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
+          }
+          else {
+            template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
+          }
+
           template = template
           .split('#BUTTONID#').join(buttonId)
           .split('#FUNCTIONCALL#').join(functionToCall)
@@ -1017,10 +1027,53 @@
           return template;
         };
 
-        var call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
-        buttonBlockly = generateObjTemplate(call, toolbarButton.title);
-        return buttonBlockly;
+        var call = '';
+        if (toolbarButton.type == "SaveOrCancelChanges")
+          call = toolbarButton.methodCall;
+        else
+          call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
+        buttonCall = generateObjTemplate(call, toolbarButton.title, toolbarButton.saveButton, toolbarButton.type == "SaveOrCancelChanges");
+        return buttonCall;
       },
+      // generateToolbarSaveOrCancelChanges: function(toolbarButton, scope) {
+      //   var buttonSaveOrCancel;
+
+      //   var generateObjTemplate = function(functionToCall, title, saveButton) {
+      //       var obj = {
+      //         template: function() {
+      //           var buttonId = this.generateId();
+      //           return compileTemplateAngular(buttonId, functionToCall, title, saveButton);
+      //         }.bind(this)
+      //       };
+      //       return obj;
+      //   }.bind(this);
+
+      //   var compileTemplateAngular = function(buttonId, functionToCall, title, saveButton) {
+      //     var template = '';
+
+      //     if (saveButton)
+      //       template = '<a role="button" class="k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
+      //     else
+      //       template = '<a role="button" class="k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
+
+      //     template = template
+      //               .split('#BUTTONID#').join(buttonId)
+      //               .split('#FUNCTIONCALL#').join(functionToCall)
+      //               .split('#TITLE#').join(title);
+
+      //     var waitRender = setInterval(function() {
+      //       if ($('#' + buttonId).length > 0) {
+      //         var x = angular.element($('#' + buttonId ));
+      //         $compile(x)(scope);
+      //         clearInterval(waitRender);
+      //       }
+      //     },200);
+
+      //     return template;
+      //   };
+      //   buttonSaveOrCancel = generateObjTemplate(toolbarButton.methodCall, toolbarButton.title, toolbarButton.saveButton);
+      //   return buttonSaveOrCancel;
+      // },
       getObjectId: function(obj) {
         if (!obj)
           obj = "";
@@ -1265,18 +1318,6 @@
             $input.attr('cron-date', '');
             $input.attr('options', JSON.stringify(column.dateOptions));
             $input.data('initial-date', opt.model[opt.field]);
-
-            // var kendoConfig = app.kendoHelper.getConfigDate($translate, column.dateOptions);
-            // // $input.attr('type', column.type);
-            // // $input.attr('mask', kendoConfig.momentFormat);
-            // if (column.dateOptions.type == 'date') {
-            //   $input.appendTo(container).kendoDatePicker(kendoConfig);
-            // } else if (column.dateOptions.type == 'datetime' || column.dateOptions.type == 'datetime-local') {
-            //   $input.appendTo(container).kendoDateTimePicker(kendoConfig);
-            // } else if (column.dateOptions.type == 'time' || column.dateOptions.type == 'time-local') {
-            //   $input.appendTo(container).kendoTimePicker(kendoConfig);
-            // }
-
             $input.appendTo(container).off('change');
             var waitRender = setInterval(function() {
               if ($('#' + buttonId).length > 0) {
@@ -1406,9 +1447,9 @@
             //Se a grade for editavel, adiciona todos os commands
             if (options.editable != 'no') {
               if (toolbarButton.title == "save" || toolbarButton.title == "cancel") {
-                //O Salvar e cancelar na toolbar só é possível no batch mode
-                if (options.editable == 'batch')
-                  toolbar.push(toolbarButton.title);
+                // //O Salvar e cancelar na toolbar só é possível no batch mode
+                // if (options.editable == 'batch')
+                toolbar.push(toolbarButton.title);
               }
               else
                 toolbar.push(toolbarButton.title);
@@ -1420,8 +1461,8 @@
               }
             }
           }
-          else if (toolbarButton.type == "Blockly") {
-            var buttonBlockly = this.generateToolbarButtonBlockly(toolbarButton, scope);
+          else if (toolbarButton.type == "Blockly" || toolbarButton.type == "SaveOrCancelChanges") {
+            var buttonBlockly = this.generateToolbarButtonCall(toolbarButton, scope);
             toolbar.push(buttonBlockly);
           }
           else if (toolbarButton.type == "Template") {
@@ -1470,15 +1511,8 @@
             e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
               var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope);
 
-              // currentKendoGridInit.dataSource.filter.forEach(function(f) {
-              //   if (f.linkParentType == "hierarchy" ) {
-              //     f.value = e.data[f.linkParentField];
-              //   }
-              // });
-
               var grid = $("<div/>").appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
-              // helperDirective.updateFiltersFromAngular(grid, scope);
             });
           }
           else
@@ -1514,8 +1548,6 @@
         var pageAble = this.getPageAble(options);
         var toolbar = this.getToolbar(options, scope);
         var editable = this.getEditable(options);
-        // //Adiciona os campos de ligação (Filtro do datasource)
-        // this.setFiltersFromLinkColumns(datasource, options, scope);
 
         var kendoGridInit = {
           toolbar: toolbar,
@@ -1541,17 +1573,20 @@
           listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
           edit: function(e) {
             this.dataSource.transport.options.disableAndSelect(e);
+            var container = e.container;
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             if (e.model.isNew() && !e.model.dirty) {
               var model = e.model;
               cronappDatasource.startInserting(null, function(active) {
                 for (var key in active) {
-                  if (key != datasource.schema.model.id)
-                    model.set(key, active[key]);
-                }
-                //Adicionando o _generatedId para não setar o id e o objeto continue com o status de new
-                if (active[datasource.schema.model.id]) {
-                  model["_generated" + datasource.schema.model.id] = active[datasource.schema.model.id];
+                  if (model.fields[key].validation && model.fields[key].validation.required) {
+                    var input = container.find("input[name='" + key + "']");
+                    if (input.length) {
+                      //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
+                      input.val(active[key]).trigger('change');
+                    }
+                  }
+                  model.set(key, active[key]);
                 }
               });
             }
@@ -1561,17 +1596,11 @@
             }
           },
           change: function(e) {
-            // var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-            // if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
-            //   var item = this.dataItem(this.select());
-            //   scope.safeApply(cronappDatasource.goTo(item));
-            // }
             var item = this.dataItem(this.select());
             setToActiveInCronappDataSource.bind(this)(item);
             collapseAllExcecptCurrent(this, this.select().next(), this.select() );
           },
           cancel: function(e) {
-            console.log('cancel');
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
@@ -1595,6 +1624,24 @@
           console.log('loaded language');
 
           var options = JSON.parse(attrs.options || "{}");
+
+          if (!scope[options.dataSource.name].dependentLazyPost) {
+            scope[options.dataSource.name].batchPost = true;
+            options.toolBarButtons = options.toolBarButtons || [];
+            options.toolBarButtons.push({
+              type: "SaveOrCancelChanges",
+              title: $translate.instant('SaveChanges'),
+              methodCall: options.dataSource.name + ".postBatchData()",
+              saveButton: true
+            });
+            options.toolBarButtons.push({
+              type: "SaveOrCancelChanges",
+              title: $translate.instant('CancelChanges'),
+              methodCall: options.dataSource.name + ".cancelBatchData()",
+              saveButton: false
+            });
+          }
+
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
