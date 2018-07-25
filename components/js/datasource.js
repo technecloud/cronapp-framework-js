@@ -631,12 +631,17 @@ angular.module('datasourcejs', [])
               if (item.__status == "inserted") {
                 (function (oldObj) {
                   _self.insert(oldObj, function (newObj) {
+                    var sender = oldObj.__sender;
                     var idx = _self.getIndexOfListTempBuffer(oldObj, array);
                     if (idx >= 0) {
                       _self.updateObjectAtIndex(newObj, array, idx);
                     }
                     if (_self.events.create) {
+                      if (sender) {
+                        newObj.__sender = sender;
+                      }
                       _self.callDataSourceEvents('create', newObj);
+                      delete newObj.__sender;
                     }
                     resolve();
                   }, function () {
@@ -648,12 +653,17 @@ angular.module('datasourcejs', [])
               else if (item.__status == "updated") {
                 (function (oldObj) {
                   _self.update(oldObj, function (newObj) {
+                    var sender = oldObj.__sender;
                     var idx = _self.getIndexOfListTempBuffer(oldObj, array);
                     if (idx >= 0) {
                       _self.updateObjectAtIndex(newObj, array, idx);
                     }
                     if (_self.events.update) {
+                      if (sender) {
+                        newObj.__sender = sender;
+                      }
                       _self.callDataSourceEvents('update', newObj);
+                      delete newObj.__sender;
                     }
                     resolve();
                   }, function () {
@@ -780,6 +790,14 @@ angular.module('datasourcejs', [])
 
         this.postSilent = function(onSuccess, onError) {
           this.post(onSuccess, onError, true);
+        }
+
+        this.updateActive = function(from) {
+          for (var key in from) {
+            if (from.hasOwnProperty(key) && this.active.hasOwnProperty(key)) {
+              this.active[key] = from[key];
+            }
+          }
         }
 
         /**
