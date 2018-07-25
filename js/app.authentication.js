@@ -500,11 +500,6 @@ app.kendoHelper = {
           var cronappDatasource = this.options.cronappDatasource;
           cronappDatasource.active = parseParameter(e.data);
           cronappDatasource.active.__sender = datasourceId;
-          //Removendo a chave gerada temporaria (somente em modo de inserção)
-          if (datasource.schema.model.id && cronappDatasource.active["_generated" + datasource.schema.model.id]) {
-            cronappDatasource.active[datasource.schema.model.id] = e.data["_generated" + datasource.schema.model.id];
-            delete cronappDatasource.active["_generated" + datasource.schema.model.id];
-          }
           cronappDatasource.postSilent(
               function(data) {
                 this.options.enableAndSelect(e);
@@ -515,7 +510,6 @@ app.kendoHelper = {
                 e.error(data, data, data);
               }.bind(this)
           );
-
         },
         push: function(callback) {
           //TODO: Colocar o datasource para receber uma lista de callback ao inves de setar,
