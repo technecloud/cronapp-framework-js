@@ -946,7 +946,6 @@
       replace: true,
       require: 'ngModel',
       initCulture: function() {
-        debugger;
         var culture = $translate.use();
         culture = culture.replace(/_/gm,'-');
         var parts = culture.split('-');
@@ -1549,14 +1548,16 @@
               var model = e.model;
               cronappDatasource.startInserting(null, function(active) {
                 for (var key in active) {
-                  if (model.fields[key].validation && model.fields[key].validation.required) {
-                    var input = container.find("input[name='" + key + "']");
-                    if (input.length) {
-                      //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
-                      input.val(active[key]).trigger('change');
+                  if (model.fields[key]) {
+                    if (model.fields[key].validation && model.fields[key].validation.required) {
+                      var input = container.find("input[name='" + key + "']");
+                      if (input.length) {
+                        //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
+                        input.val(active[key]).trigger('change');
+                      }
                     }
+                    model.set(key, active[key]);
                   }
-                  model.set(key, active[key]);
                 }
               });
             }
@@ -1605,6 +1606,7 @@
                 $('.k-pager-sizes').hide();
                 $('.k-pager-nav').hide();
                 $('.k-pager-numbers').hide();
+                $('.k-pager-refresh.k-link').hide();
                 $('.saveorcancelchanges').show();
               }
               else {
@@ -1612,6 +1614,7 @@
                 $('.k-pager-sizes').show();
                 $('.k-pager-nav').show();
                 $('.k-pager-numbers').show();
+                $('.k-pager-refresh.k-link').show();
                 $('.saveorcancelchanges').hide();
               }
             },100);
