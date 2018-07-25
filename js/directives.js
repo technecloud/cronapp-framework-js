@@ -1464,7 +1464,8 @@
         function detailInit(e) {
           //Significa que está fechando o detalhe (não é para fazer nada)
           if (e.masterRow.find('a').hasClass('k-i-expand')) {
-            collapseAllExcecptCurrent(this, null, null);
+            // collapseAllExcecptCurrent(this, null, null);
+            collapseCurrent(this, e.detailRow, e.masterRow);
             return;
           }
 
@@ -1504,6 +1505,23 @@
             }
           });
         };
+
+        var collapseCurrent = function(grid, trDetail, trMaster) {
+          var details = grid.table.find('.k-detail-row');
+          details.each(function() {
+            if (trDetail != null || this == trDetail[0]) {
+              $(this).remove();
+            }
+          });
+          var masters = grid.table.find('.k-master-row');
+          masters.each(function() {
+            if (trMaster != null || this == trMaster[0]) {
+              grid.collapseRow(this);
+            }
+          });
+        };
+
+
 
         var setToActiveInCronappDataSource = function(item) {
           var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
@@ -1592,32 +1610,13 @@
         this.initCulture();
         var helperDirective = this;
         $.getScript(baseUrl, function () {
-          console.log('loaded language');
 
           var options = JSON.parse(attrs.options || "{}");
 
           if (!scope[options.dataSource.name].dependentLazyPost) {
             scope[options.dataSource.name].batchPost = true;
 
-            setInterval(function() {
 
-              if (scope[options.dataSource.name].hasPendingChanges()) {
-                $('.k-icon.k-i-filter').hide();
-                $('.k-pager-sizes').hide();
-                $('.k-pager-nav').hide();
-                $('.k-pager-numbers').hide();
-                $('.k-pager-refresh.k-link').hide();
-                $('.saveorcancelchanges').show();
-              }
-              else {
-                $('.k-icon.k-i-filter').show();
-                $('.k-pager-sizes').show();
-                $('.k-pager-nav').show();
-                $('.k-pager-numbers').show();
-                $('.k-pager-refresh.k-link').show();
-                $('.saveorcancelchanges').hide();
-              }
-            },100);
 
             options.toolBarButtons = options.toolBarButtons || [];
             options.toolBarButtons.push({
@@ -1633,6 +1632,25 @@
               saveButton: false
             });
           }
+
+          setInterval(function() {
+            if (scope[options.dataSource.name].hasPendingChanges()) {
+              $('.k-icon.k-i-filter').hide();
+              $('.k-pager-sizes').hide();
+              $('.k-pager-nav').hide();
+              $('.k-pager-numbers').hide();
+              $('.k-pager-refresh.k-link').hide();
+              $('.saveorcancelchanges').show();
+            }
+            else {
+              $('.k-icon.k-i-filter').show();
+              $('.k-pager-sizes').show();
+              $('.k-pager-nav').show();
+              $('.k-pager-numbers').show();
+              $('.k-pager-refresh.k-link').show();
+              $('.saveorcancelchanges').hide();
+            }
+          },100);
 
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
