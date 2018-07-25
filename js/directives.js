@@ -1616,7 +1616,24 @@
           if (!scope[options.dataSource.name].dependentLazyPost) {
             scope[options.dataSource.name].batchPost = true;
 
-
+            setInterval(function() {
+              if (scope[options.dataSource.name].hasPendingChanges()) {
+                $('.k-icon.k-i-filter').hide();
+                $('.k-pager-sizes').hide();
+                $('.k-pager-nav').hide();
+                $('.k-pager-numbers').hide();
+                $('.k-pager-refresh.k-link').hide();
+                $('.saveorcancelchanges').show();
+              }
+              else {
+                $('.k-icon.k-i-filter').show();
+                $('.k-pager-sizes').show();
+                $('.k-pager-nav').show();
+                $('.k-pager-numbers').show();
+                $('.k-pager-refresh.k-link').show();
+                $('.saveorcancelchanges').hide();
+              }
+            },100);
 
             options.toolBarButtons = options.toolBarButtons || [];
             options.toolBarButtons.push({
@@ -1633,24 +1650,7 @@
             });
           }
 
-          setInterval(function() {
-            if (scope[options.dataSource.name].hasPendingChanges()) {
-              $('.k-icon.k-i-filter').hide();
-              $('.k-pager-sizes').hide();
-              $('.k-pager-nav').hide();
-              $('.k-pager-numbers').hide();
-              $('.k-pager-refresh.k-link').hide();
-              $('.saveorcancelchanges').show();
-            }
-            else {
-              $('.k-icon.k-i-filter').show();
-              $('.k-pager-sizes').show();
-              $('.k-pager-nav').show();
-              $('.k-pager-numbers').show();
-              $('.k-pager-refresh.k-link').show();
-              $('.saveorcancelchanges').hide();
-            }
-          },100);
+
 
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
