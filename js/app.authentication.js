@@ -498,7 +498,7 @@ app.kendoHelper = {
       transport: {
         setActiveAndPost: function(e) {
           var cronappDatasource = this.options.cronappDatasource;
-          cronappDatasource.active = parseParameter(e.data);
+          cronappDatasource.updateActive(parseParameter(e.data));
           cronappDatasource.active.__sender = datasourceId;
           cronappDatasource.postSilent(
               function(data) {
