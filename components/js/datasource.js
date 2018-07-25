@@ -1,5 +1,6 @@
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
+var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
 
 angular.module('datasourcejs', [])
 
@@ -426,12 +427,14 @@ angular.module('datasourcejs', [])
           }
         }
 
-        this.updateObjectAtIndex = function(obj, idx) {
-          this.copy(obj, this.data[idx]);
-          delete this.data[idx].__status;
-          delete this.data[idx].__tempId;
-          delete this.data[idx].__original;
-          delete this.data[idx].__originalIdx;
+        this.updateObjectAtIndex = function(obj, data, idx) {
+          data = data || this.data;
+
+          this.copy(obj, data[idx]);
+          delete data[idx].__status;
+          delete data[idx].__tempId;
+          delete data[idx].__original;
+          delete data[idx].__originalIdx;
         }
 
         this.cleanDependentBuffer = function() {
@@ -468,8 +471,10 @@ angular.module('datasourcejs', [])
 
           if (this.data && this.data.length > 0) {
             this.cursor = 0;
+            this.active = this.data[0];
           } else {
             this.cursor = -1;
+            this.active = null;
           }
 
           this.busy = false;
@@ -484,26 +489,56 @@ angular.module('datasourcejs', [])
         }
 
         this.cancelBatchData = function() {
-          this.cleanDependentBuffer();
-
           if (this.dependentData) {
-            $(this.dependentData).each(function() {
+            $(this.dependentData.reverse()).each(function() {
               this.cleanDependentBuffer();
             });
           }
+
+          this.cleanDependentBuffer();
         }
 
-        this.postBatchData = function() {
-          this.storeDependentBuffer();
+        this.postBatchData = function(callback) {
+          this.storeDependentBuffer(function() {
+            if (this.dependentData) {
+              reduce(this.dependentData, function(item, resolve) {
+                item.storeDependentBuffer(function() {
+                  resolve();
+                });
+              }.bind(this), function() {
+                if (callback) {
+                  callback();
+                }
+              }.bind(this))
+            } else {
+              if (callback) {
+                callback();
+              }
+            }
+          }.bind(this));
 
-          if (this.dependentData) {
-            $(this.dependentData).each(function() {
-              this.storeDependentBuffer();
+        }
+
+        var reduce = function (array, func, callback) {
+          if (array.length == 0) {
+            callback();
+          } else {
+            var requests = array.reduce(function (promiseChain, item) {
+
+              return promiseChain.then(function () {
+                return new Promise(function (resolve) {
+                  func(item, resolve);
+                })
+              });
+            }, Promise.resolve());
+
+            requests.then(function () {
+              callback();
             });
           }
         }
 
-        this.storeDependentBuffer = function() {
+        this.storeDependentBuffer = function(callback) {
           var _self = this;
           var dependentDS = eval(_self.dependentLazyPost);
 
@@ -511,15 +546,36 @@ angular.module('datasourcejs', [])
             dependentDS = this;
           }
 
-          var selfParams;
+          var array = [];
 
-          var func = function() {
+          array = array.concat(_self.data);
 
-            if (this.__status) {
+          if (_self.memoryData) {
+            for (key in _self.memoryData) {
+              if (_self.memoryData.hasOwnProperty(key)) {
+                var mem = _self.memoryData[key];
+                for (var x=0;x<mem.data.length;x++) {
+                  /*if (mem.data[x].parentData) {
+                    mem.data[x].__parentData = mem.parentData;
+                  }
+                  mem.data[x].__fromMemory = true;*/
+                }
+                array = array.concat(mem.data);
+              }
+            }
+          }
+
+          if (_self.postDeleteData) {
+            array = array.concat(_self.postDeleteData);
+          }
+
+          var func = function (item, resolve) {
+
+            if (item.__status) {
 
               if (!_self.parameters) {
                 if (_self.dependentLazyPostField) {
-                  this[_self.dependentLazyPostField] = dependentDS.active;
+                  item[_self.dependentLazyPostField] = dependentDS.active;
                 }
 
                 if (_self.entity.indexOf('//') > -1) {
@@ -535,80 +591,96 @@ angular.module('datasourcejs', [])
                 }
               }
 
-              if (this.__status == "inserted") {
+              //TODO: Em andamento
+              /*if (_self.parameters) {
+                var params = _self.getParametersMap();
+                for (var key in params) {
+                  if (params.hasOwnProperty(key)) {
+                    updateObjectValue(item, key, params[key]);
+                  }
+                }
+              }*/
+
+              if (item.__status == "inserted") {
                 (function (oldObj) {
                   _self.insert(oldObj, function (newObj) {
-                    var idx = _self.getIndexOfListTempBuffer(oldObj);
+                    var idx = _self.getIndexOfListTempBuffer(oldObj, array);
                     if (idx >= 0) {
-                      _self.updateObjectAtIndex(newObj, idx);
+                      _self.updateObjectAtIndex(newObj, array, idx);
                     }
                     if (_self.events.create) {
                       _self.callDataSourceEvents('create', newObj);
                     }
-                  }, function() {}, true);
-                })(this);
+                    resolve();
+                  }, function () {
+                    resolve();
+                  }, true);
+                })(item);
               }
 
-              else if (this.__status == "updated") {
+              else if (item.__status == "updated") {
                 (function (oldObj) {
                   _self.update(oldObj, function (newObj) {
-                    var idx = _self.getIndexOfListTempBuffer(oldObj);
+                    var idx = _self.getIndexOfListTempBuffer(oldObj, array);
                     if (idx >= 0) {
-                      _self.updateObjectAtIndex(newObj, idx);
+                      _self.updateObjectAtIndex(newObj, array, idx);
                     }
                     if (_self.events.update) {
                       _self.callDataSourceEvents('update', newObj);
                     }
-                  }, function() {}, true);
-                })(this);
+                    resolve();
+                  }, function () {
+                    resolve();
+                  }, true);
+                })(item);
               }
+
+              else if (item.__status == "deleted") {
+                (function (oldObj) {
+                  _self.remove(oldObj, function () {
+                    if (_self.events.delete) {
+                      var param = {};
+                      _self.copy(oldObj, param);
+                      delete param.__status;
+                      delete param.__tempId;
+                      delete param.__original;
+                      delete param.__originalIdx;
+                      _self.callDataSourceEvents('delete', param);
+                      resolve();
+                    }
+                  }, true, null, function() {
+                    resolve();
+                  });
+                })(item);
+              }
+
+              else {
+                resolve();
+              }
+            } else {
+              resolve();
             }
           };
 
-          $(_self.data).each(func);
-
-          if (_self.memoryData) {
-            for (key in _self.memoryData) {
-              if (_self.memoryData.hasOwnProperty(key)) {
-                var mem = _self.memoryData[key];
-                selfParams = mem.params;
-                $(mem.data).each(func);
-              }
+          reduce(array, func, function () {
+            this.busy = false;
+            this.editing = false;
+            this.inserting = false;
+            this.postDeleteData = null;
+            this.hasMemoryData = false;
+            if (callback) {
+              callback();
             }
-          }
-
-          if (this.postDeleteData) {
-            $(this.postDeleteData).each(function() {
-              (function (oldObj) {
-                _self.remove(oldObj, function() {
-                  if (_self.events.delete) {
-                    var param = {};
-                    _self.copy(oldObj, param);
-                    delete param.__status;
-                    delete param.__tempId;
-                    delete param.__original;
-                    delete param.__originalIdx;
-                    _self.callDataSourceEvents('delete', param);
-                  }
-                }, true);
-              })(this);
-            });
-          }
-          this.busy = false;
-          this.editing = false;
-          this.inserting = false;
-          this.postDeleteData = null;
-          this.hasMemoryData = false;
+          }.bind(this));
         }
-
-        //TRM
 
         /**
          * Find object in list by tempBufferId
          */
-        this.getIndexOfListTempBuffer = function(obj) {
-          for (var i = 0; i < this.data.length; i++) {
-            if (this.data[i].__tempId && obj.__tempId && this.data[i].__tempId == obj.__tempId) {
+        this.getIndexOfListTempBuffer = function(obj, data) {
+          data = data || this.data;
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].__tempId && obj.__tempId && data[i].__tempId == obj.__tempId) {
               return i;
             }
           }
@@ -1609,15 +1681,32 @@ angular.module('datasourcejs', [])
           return data;
         }
 
-        this.getParametersMap = function() {
+        this.getParametersMap = function(obj) {
           var map = {};
-          if (this.parameters && this.parameters.length > 0) {
-            var parts = this.parameters.split(";")
+
+          var parameters;
+
+          if (obj) {
+            parameters = this.parametersExpression;
+          } else {
+            parameters =  this.parameters;
+          }
+
+          if (parameters && parameters.length > 0) {
+            var parts = parameters.split(";")
             for (var i=0;i<parts.length;i++) {
               var part = parts[i];
               var binary = part.split("=");
               if (binary.length == 2) {
-                map[binary[0]] = binary[1]?this.normalizeValue(binary[1], true):null;
+                var value = binary[1];
+                if (obj) {
+                  if (binary[1].match(DEP_PATTERN)) {
+                    var g = DEP_PATTERN.exec(value);
+                    var field = g[1].replace(this.dependentLazyPost + ".active.", "");
+                    value = obj[field];
+                  }
+                }
+                map[binary[0]] = binary[1]?this.normalizeValue(value, true):null;
               }
             }
           }
@@ -2258,6 +2347,7 @@ angular.module('datasourcejs', [])
             dts.onAfterDelete = props.onAfterDelete;
             dts.dependentBy = props.dependentBy;
             dts.parameters = props.parameters;
+            dts.parametersExpression = props.parametersExpression;
             dts.checkRequired = props.checkRequired;
             dts.batchPost = props.batchPost;
 
@@ -2400,6 +2490,7 @@ angular.module('datasourcejs', [])
               batchPost: attrs.batchpost === "true", //TRM
               dependentLazyPostField: attrs.dependentLazyPostField, //TRM
               parameters: attrs.parameters,
+              parametersExpression: $(element).attr('parameters'),
               checkRequired: !attrs.hasOwnProperty('checkrequired') || attrs.checkrequired === "" || attrs.checkrequired === "true",
             }
 
