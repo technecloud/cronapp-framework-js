@@ -514,7 +514,7 @@ app.kendoHelper = {
         push: function(callback) {
           //TODO: Colocar o datasource para receber uma lista de callback ao inves de setar,
           //tem que ser push
-          this.options.cronappDatasource.addDataSourceEvents({
+          this.options.cronappDatasource.setDataSourceEvents({
             create: function(data) {
               if (data.__sender != datasourceId)
                 callback.pushCreate(data);

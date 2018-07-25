@@ -1354,8 +1354,19 @@
                 //Se não for editavel, não adiciona colunas de comando
                 if (options.editable != 'no') {
                   var command = column.command.split('|');
+
+                  var commands = [];
+                  command.forEach(function(f) {
+                    var cmd = { name: f };
+                  if ( f == "edit")
+                    cmd.text = { edit: " ", update: " ", cancel: " " };
+                  else
+                    cmd.text = " ";
+                  commands.push(cmd);
+                });
+
                   var addColumn = {
-                    command: command,
+                    command: commands,
                     title: column.headerText,
                     width: column.width
                   };
@@ -1471,13 +1482,14 @@
 
           var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
           if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
-            if (this.selectable)
+            if (this.selectable) {
               this.select(e.masterRow);
-            else
+            }
+            else {
               setToActiveInCronappDataSource.bind(this)(e.data);
+              collapseAllExcecptCurrent(this, e.detailRow, e.masterRow);
+            }
             //Obtendo todos os detalhes da grade atual, fechando e removendo todos (exceto o que esta sendo aberto agora)
-            collapseAllExcecptCurrent(this, e.detailRow, e.masterRow);
-
             e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
               var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope);
 
@@ -1492,36 +1504,40 @@
         }
 
         var collapseAllExcecptCurrent = function(grid, trDetail, trMaster) {
-          var details = grid.table.find('.k-detail-row');
-          details.each(function() {
-            if (trDetail == null || this != trDetail[0]) {
-              $(this).remove();
-            }
-          });
+
           var masters = grid.table.find('.k-master-row');
           masters.each(function() {
             if (trMaster == null || this != trMaster[0]) {
               grid.collapseRow(this);
             }
           });
-        };
 
-        var collapseCurrent = function(grid, trDetail, trMaster) {
           var details = grid.table.find('.k-detail-row');
           details.each(function() {
-            if (trDetail != null || this == trDetail[0]) {
+            if (trDetail == null || this != trDetail[0]) {
               $(this).remove();
             }
           });
+
+        };
+
+        var collapseCurrent = function(grid, trDetail, trMaster) {
+
           var masters = grid.table.find('.k-master-row');
           masters.each(function() {
             if (trMaster != null || this == trMaster[0]) {
               grid.collapseRow(this);
             }
           });
+
+          var details = grid.table.find('.k-detail-row');
+          details.each(function() {
+            if (trDetail != null || this == trDetail[0]) {
+              $(this).remove();
+            }
+          });
+
         };
-
-
 
         var setToActiveInCronappDataSource = function(item) {
           var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
@@ -1552,7 +1568,7 @@
           height: options.height,
           groupable: options.allowGrouping,
           sortable: options.allowSorting,
-          filterable: true,
+          filterable: { mode: "row" },
           pageable: pageAble,
           columns: columns,
           selectable: options.allowSelectionRow,
@@ -1616,25 +1632,6 @@
           if (!scope[options.dataSource.name].dependentLazyPost) {
             scope[options.dataSource.name].batchPost = true;
 
-            setInterval(function() {
-              if (scope[options.dataSource.name].hasPendingChanges()) {
-                $('.k-icon.k-i-filter').hide();
-                $('.k-pager-sizes').hide();
-                $('.k-pager-nav').hide();
-                $('.k-pager-numbers').hide();
-                $('.k-pager-refresh.k-link').hide();
-                $('.saveorcancelchanges').show();
-              }
-              else {
-                $('.k-icon.k-i-filter').show();
-                $('.k-pager-sizes').show();
-                $('.k-pager-nav').show();
-                $('.k-pager-numbers').show();
-                $('.k-pager-refresh.k-link').show();
-                $('.saveorcancelchanges').hide();
-              }
-            },100);
-
             options.toolBarButtons = options.toolBarButtons || [];
             options.toolBarButtons.push({
               type: "SaveOrCancelChanges",
@@ -1650,7 +1647,24 @@
             });
           }
 
-
+          setInterval(function() {
+            if (scope[options.dataSource.name].hasPendingChanges()) {
+              $('.k-icon.k-i-filter').hide();
+              $('.k-pager-sizes').hide();
+              $('.k-pager-nav').hide();
+              $('.k-pager-numbers').hide();
+              $('.k-pager-refresh.k-link').hide();
+              $('.saveorcancelchanges').show();
+            }
+            else {
+              $('.k-icon.k-i-filter').show();
+              $('.k-pager-sizes').show();
+              $('.k-pager-nav').show();
+              $('.k-pager-numbers').show();
+              $('.k-pager-refresh.k-link').show();
+              $('.saveorcancelchanges').hide();
+            }
+          },100);
 
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
