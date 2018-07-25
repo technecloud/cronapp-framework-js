@@ -1989,6 +1989,7 @@
   .directive('cronDate', ['$compile', '$translate', '$window', function ($compile, $translate, $window) {
     return {
       restrict: 'AE',
+      require: '?ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
         var options = {};
         var cronDate = {};
@@ -2042,7 +2043,7 @@
               momentDate = moment(valueDate, options.momentFormat);
             }
             
-            datePicker.value(momentDate.format());
+            datePicker.value(momentDate.format(options.momentFormat));
             $(this).data('rawvalue', momentDate.toDate());
           }
           $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue).on('change', unmaskedvalue);
@@ -2074,9 +2075,9 @@
               if (value) {
                 var momentDate = null;
                 if (useUTC) {
-                  momentDate = moment.utc(value, options.momentFormat);
+                  momentDate = moment.utc(datePicker._oldText, options.momentFormat);
                 } else {
-                  momentDate = moment(value, options.momentFormat);
+                  momentDate = moment(datePicker._oldText, options.momentFormat);
                 }
                 return momentDate.toDate();
               }
