@@ -419,6 +419,11 @@ angular.module('datasourcejs', [])
          * Append a datasource to be notify when has a post or cancel
          */
         this.addDependentDatasource = function(dts) {
+          if (!this.children)
+            this.children = [];
+
+          this.children.push(dts);
+
           if (this.dependentLazyPost) {
             eval(this.dependentLazyPost).addDependentDatasource(dts);
           } else {
@@ -1833,9 +1838,9 @@ angular.module('datasourcejs', [])
 
         this.hasPendingChanges = function() {
           var changed = this.hasMemoryData;
-          if (this.dependentData) {
-            $(this.dependentData).each(function() {
-              changed = changed || this.hasMemoryData;
+          if (this.children) {
+            $(this.children).each(function() {
+              changed = changed || this.hasPendingChanges();
             });
           }
 
