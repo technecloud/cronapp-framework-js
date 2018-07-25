@@ -498,6 +498,24 @@ angular.module('datasourcejs', [])
           this.cleanDependentBuffer();
         }
 
+        this.flushDependencies = function(callback) {
+          if (this.dependentData) {
+            reduce(this.dependentData, function(item, resolve) {
+              item.storeDependentBuffer(function() {
+                resolve();
+              });
+            }.bind(this), function() {
+              if (callback) {
+                callback();
+              }
+            }.bind(this))
+          } else {
+            if (callback) {
+              callback();
+            }
+          }
+        }
+
         this.postBatchData = function(callback) {
           this.storeDependentBuffer(function() {
             if (this.dependentData) {
@@ -786,21 +804,24 @@ angular.module('datasourcejs', [])
               this.handleAfterCallBack(this.onAfterCreate);
               this.onBackNomalState();
 
+              var func = function() {
+                if (onSuccess) {
+                  onSuccess(this.active);
+                }
+
+                if (this.events.create && hotData) {
+                  this.callDataSourceEvents('create', this.active);
+                }
+
+                delete this.active.__sender;
+              }.bind(this);
+
               if (this.dependentData && !this.dependentLazyPost && !this.batchPost) {
-                $(this.dependentData).each(function() {
-                  this.storeDependentBuffer();
-                });
+                this.flushDependencies(func);
+              } else {
+                func();
               }
 
-              if (onSuccess) {
-                onSuccess(this.active);
-              }
-
-              if (this.events.create && hotData) {
-                this.callDataSourceEvents('create', this.active);
-              }
-
-              delete this.active.__sender;
 
             }.bind(this), onError);
 
@@ -854,16 +875,17 @@ angular.module('datasourcejs', [])
 
               this.onBackNomalState();
 
+              var func = function() {
+                if (onSuccess) {
+                  onSuccess(this.active);
+                }
+              }.bind(this);
+
               if (this.dependentData && !this.dependentLazyPost && !this.batchPost) {
-                $(this.dependentData).each(function() {
-                  this.storeDependentBuffer();
-                });
+                this.flushDependencies(func);
+              } else {
+                func();
               }
-
-              if (onSuccess) {
-                onSuccess(this.active);
-              }
-
             }.bind(this), onError);
           }
         };
