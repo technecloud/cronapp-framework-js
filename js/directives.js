@@ -945,6 +945,15 @@
       restrict: 'E',
       replace: true,
       require: 'ngModel',
+      initCulture: function() {
+        debugger;
+        var culture = $translate.use();
+        culture = culture.replace(/_/gm,'-');
+        var parts = culture.split('-');
+        parts[parts.length - 1] = parts[parts.length - 1].toUpperCase();
+        culture = parts.join('-');
+        kendo.culture(culture);
+      },
       generateId: function() {
         var numbersOnly = '0123456789';
         var result = Math.floor((1 + Math.random()) * 0x10000)
@@ -1003,9 +1012,9 @@
           var template = '';
           if (isSaveOrCancelChanges) {
             if (saveButton)
-              template = '<a role="button" class="k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
+              template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
             else
-              template = '<a role="button" class="k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
+              template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
           }
           else {
             template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
@@ -1035,45 +1044,6 @@
         buttonCall = generateObjTemplate(call, toolbarButton.title, toolbarButton.saveButton, toolbarButton.type == "SaveOrCancelChanges");
         return buttonCall;
       },
-      // generateToolbarSaveOrCancelChanges: function(toolbarButton, scope) {
-      //   var buttonSaveOrCancel;
-
-      //   var generateObjTemplate = function(functionToCall, title, saveButton) {
-      //       var obj = {
-      //         template: function() {
-      //           var buttonId = this.generateId();
-      //           return compileTemplateAngular(buttonId, functionToCall, title, saveButton);
-      //         }.bind(this)
-      //       };
-      //       return obj;
-      //   }.bind(this);
-
-      //   var compileTemplateAngular = function(buttonId, functionToCall, title, saveButton) {
-      //     var template = '';
-
-      //     if (saveButton)
-      //       template = '<a role="button" class="k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
-      //     else
-      //       template = '<a role="button" class="k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
-
-      //     template = template
-      //               .split('#BUTTONID#').join(buttonId)
-      //               .split('#FUNCTIONCALL#').join(functionToCall)
-      //               .split('#TITLE#').join(title);
-
-      //     var waitRender = setInterval(function() {
-      //       if ($('#' + buttonId).length > 0) {
-      //         var x = angular.element($('#' + buttonId ));
-      //         $compile(x)(scope);
-      //         clearInterval(waitRender);
-      //       }
-      //     },200);
-
-      //     return template;
-      //   };
-      //   buttonSaveOrCancel = generateObjTemplate(toolbarButton.methodCall, toolbarButton.title, toolbarButton.saveButton);
-      //   return buttonSaveOrCancel;
-      // },
       getObjectId: function(obj) {
         if (!obj)
           obj = "";
@@ -1618,8 +1588,8 @@
         else
           baseUrl += "en-US.min.js";
 
+        this.initCulture();
         var helperDirective = this;
-
         $.getScript(baseUrl, function () {
           console.log('loaded language');
 
@@ -1627,6 +1597,25 @@
 
           if (!scope[options.dataSource.name].dependentLazyPost) {
             scope[options.dataSource.name].batchPost = true;
+
+            setInterval(function() {
+
+              if (scope[options.dataSource.name].hasPendingChanges()) {
+                $('.k-icon.k-i-filter').hide();
+                $('.k-pager-sizes').hide();
+                $('.k-pager-nav').hide();
+                $('.k-pager-numbers').hide();
+                $('.saveorcancelchanges').show();
+              }
+              else {
+                $('.k-icon.k-i-filter').show();
+                $('.k-pager-sizes').show();
+                $('.k-pager-nav').show();
+                $('.k-pager-numbers').show();
+                $('.saveorcancelchanges').hide();
+              }
+            },100);
+
             options.toolBarButtons = options.toolBarButtons || [];
             options.toolBarButtons.push({
               type: "SaveOrCancelChanges",
