@@ -1358,17 +1358,17 @@
                   var commands = [];
                   command.forEach(function(f) {
                     var cmd = { name: f };
-                  if ( f == "edit")
-                    cmd.text = { edit: " ", update: " ", cancel: " " };
-                  else
-                    cmd.text = " ";
-                  commands.push(cmd);
-                });
+                    if ( f == "edit")
+                      cmd.text = { edit: " ", update: " ", cancel: " " };
+                    else
+                      cmd.text = " ";
+                    commands.push(cmd);
+                  });
 
                   var addColumn = {
                     command: commands,
                     title: column.headerText,
-                    width: column.width
+                    width: column.width ? column.width : 155
                   };
                   columns.push(addColumn);
                 }
@@ -1649,7 +1649,7 @@
 
           setInterval(function() {
             if (scope[options.dataSource.name].hasPendingChanges()) {
-              $('.k-icon.k-i-filter').hide();
+              $('.k-filter-row').hide();
               $('.k-pager-sizes').hide();
               $('.k-pager-nav').hide();
               $('.k-pager-numbers').hide();
@@ -1657,7 +1657,7 @@
               $('.saveorcancelchanges').show();
             }
             else {
-              $('.k-icon.k-i-filter').show();
+              $('.k-filter-row').show();
               $('.k-pager-sizes').show();
               $('.k-pager-nav').show();
               $('.k-pager-numbers').show();
