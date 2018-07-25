@@ -945,6 +945,15 @@
       restrict: 'E',
       replace: true,
       require: 'ngModel',
+      initCulture: function() {
+        debugger;
+        var culture = $translate.use();
+        culture = culture.replace(/_/gm,'-');
+        var parts = culture.split('-');
+        parts[parts.length - 1] = parts[parts.length - 1].toUpperCase();
+        culture = parts.join('-');
+        kendo.culture(culture);
+      },
       generateId: function() {
         var numbersOnly = '0123456789';
         var result = Math.floor((1 + Math.random()) * 0x10000)
@@ -986,21 +995,31 @@
         return call;
 
       },
-      generateToolbarButtonBlockly: function(toolbarButton, scope) {
-        var buttonBlockly;
+      generateToolbarButtonCall: function(toolbarButton, scope) {
+        var buttonCall;
 
-        var generateObjTemplate = function(functionToCall, title) {
+        var generateObjTemplate = function(functionToCall, title, saveButton, isSaveOrCancelChanges) {
           var obj = {
             template: function() {
               var buttonId = this.generateId();
-              return compileTemplateAngular(buttonId, functionToCall, title);
+              return compileTemplateAngular(buttonId, functionToCall, title, saveButton, isSaveOrCancelChanges);
             }.bind(this)
           };
           return obj;
         }.bind(this);
 
-        var compileTemplateAngular = function(buttonId, functionToCall, title) {
-          var template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
+        var compileTemplateAngular = function(buttonId, functionToCall, title, saveButton, isSaveOrCancelChanges) {
+          var template = '';
+          if (isSaveOrCancelChanges) {
+            if (saveButton)
+              template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
+            else
+              template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
+          }
+          else {
+            template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
+          }
+
           template = template
           .split('#BUTTONID#').join(buttonId)
           .split('#FUNCTIONCALL#').join(functionToCall)
@@ -1017,9 +1036,13 @@
           return template;
         };
 
-        var call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
-        buttonBlockly = generateObjTemplate(call, toolbarButton.title);
-        return buttonBlockly;
+        var call = '';
+        if (toolbarButton.type == "SaveOrCancelChanges")
+          call = toolbarButton.methodCall;
+        else
+          call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
+        buttonCall = generateObjTemplate(call, toolbarButton.title, toolbarButton.saveButton, toolbarButton.type == "SaveOrCancelChanges");
+        return buttonCall;
       },
       getObjectId: function(obj) {
         if (!obj)
@@ -1265,18 +1288,6 @@
             $input.attr('cron-date', '');
             $input.attr('options', JSON.stringify(column.dateOptions));
             $input.data('initial-date', opt.model[opt.field]);
-
-            // var kendoConfig = app.kendoHelper.getConfigDate($translate, column.dateOptions);
-            // // $input.attr('type', column.type);
-            // // $input.attr('mask', kendoConfig.momentFormat);
-            // if (column.dateOptions.type == 'date') {
-            //   $input.appendTo(container).kendoDatePicker(kendoConfig);
-            // } else if (column.dateOptions.type == 'datetime' || column.dateOptions.type == 'datetime-local') {
-            //   $input.appendTo(container).kendoDateTimePicker(kendoConfig);
-            // } else if (column.dateOptions.type == 'time' || column.dateOptions.type == 'time-local') {
-            //   $input.appendTo(container).kendoTimePicker(kendoConfig);
-            // }
-
             $input.appendTo(container).off('change');
             var waitRender = setInterval(function() {
               if ($('#' + buttonId).length > 0) {
@@ -1406,9 +1417,9 @@
             //Se a grade for editavel, adiciona todos os commands
             if (options.editable != 'no') {
               if (toolbarButton.title == "save" || toolbarButton.title == "cancel") {
-                //O Salvar e cancelar na toolbar só é possível no batch mode
-                if (options.editable == 'batch')
-                  toolbar.push(toolbarButton.title);
+                // //O Salvar e cancelar na toolbar só é possível no batch mode
+                // if (options.editable == 'batch')
+                toolbar.push(toolbarButton.title);
               }
               else
                 toolbar.push(toolbarButton.title);
@@ -1420,8 +1431,8 @@
               }
             }
           }
-          else if (toolbarButton.type == "Blockly") {
-            var buttonBlockly = this.generateToolbarButtonBlockly(toolbarButton, scope);
+          else if (toolbarButton.type == "Blockly" || toolbarButton.type == "SaveOrCancelChanges") {
+            var buttonBlockly = this.generateToolbarButtonCall(toolbarButton, scope);
             toolbar.push(buttonBlockly);
           }
           else if (toolbarButton.type == "Template") {
@@ -1470,15 +1481,8 @@
             e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
               var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope);
 
-              // currentKendoGridInit.dataSource.filter.forEach(function(f) {
-              //   if (f.linkParentType == "hierarchy" ) {
-              //     f.value = e.data[f.linkParentField];
-              //   }
-              // });
-
               var grid = $("<div/>").appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
-              // helperDirective.updateFiltersFromAngular(grid, scope);
             });
           }
           else
@@ -1514,8 +1518,6 @@
         var pageAble = this.getPageAble(options);
         var toolbar = this.getToolbar(options, scope);
         var editable = this.getEditable(options);
-        // //Adiciona os campos de ligação (Filtro do datasource)
-        // this.setFiltersFromLinkColumns(datasource, options, scope);
 
         var kendoGridInit = {
           toolbar: toolbar,
@@ -1541,17 +1543,20 @@
           listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
           edit: function(e) {
             this.dataSource.transport.options.disableAndSelect(e);
+            var container = e.container;
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             if (e.model.isNew() && !e.model.dirty) {
               var model = e.model;
               cronappDatasource.startInserting(null, function(active) {
                 for (var key in active) {
-                  if (key != datasource.schema.model.id)
-                    model.set(key, active[key]);
-                }
-                //Adicionando o _generatedId para não setar o id e o objeto continue com o status de new
-                if (active[datasource.schema.model.id]) {
-                  model["_generated" + datasource.schema.model.id] = active[datasource.schema.model.id];
+                  if (model.fields[key].validation && model.fields[key].validation.required) {
+                    var input = container.find("input[name='" + key + "']");
+                    if (input.length) {
+                      //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
+                      input.val(active[key]).trigger('change');
+                    }
+                  }
+                  model.set(key, active[key]);
                 }
               });
             }
@@ -1561,17 +1566,11 @@
             }
           },
           change: function(e) {
-            // var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-            // if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
-            //   var item = this.dataItem(this.select());
-            //   scope.safeApply(cronappDatasource.goTo(item));
-            // }
             var item = this.dataItem(this.select());
             setToActiveInCronappDataSource.bind(this)(item);
             collapseAllExcecptCurrent(this, this.select().next(), this.select() );
           },
           cancel: function(e) {
-            console.log('cancel');
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
@@ -1589,12 +1588,49 @@
         else
           baseUrl += "en-US.min.js";
 
+        this.initCulture();
         var helperDirective = this;
-
         $.getScript(baseUrl, function () {
           console.log('loaded language');
 
           var options = JSON.parse(attrs.options || "{}");
+
+          if (!scope[options.dataSource.name].dependentLazyPost) {
+            scope[options.dataSource.name].batchPost = true;
+
+            setInterval(function() {
+
+              if (scope[options.dataSource.name].hasPendingChanges()) {
+                $('.k-icon.k-i-filter').hide();
+                $('.k-pager-sizes').hide();
+                $('.k-pager-nav').hide();
+                $('.k-pager-numbers').hide();
+                $('.saveorcancelchanges').show();
+              }
+              else {
+                $('.k-icon.k-i-filter').show();
+                $('.k-pager-sizes').show();
+                $('.k-pager-nav').show();
+                $('.k-pager-numbers').show();
+                $('.saveorcancelchanges').hide();
+              }
+            },100);
+
+            options.toolBarButtons = options.toolBarButtons || [];
+            options.toolBarButtons.push({
+              type: "SaveOrCancelChanges",
+              title: $translate.instant('SaveChanges'),
+              methodCall: options.dataSource.name + ".postBatchData()",
+              saveButton: true
+            });
+            options.toolBarButtons.push({
+              type: "SaveOrCancelChanges",
+              title: $translate.instant('CancelChanges'),
+              methodCall: options.dataSource.name + ".cancelBatchData()",
+              saveButton: false
+            });
+          }
+
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
@@ -1615,57 +1651,55 @@
       replace: true,
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
-        if (attrs.required != undefined || attrs.ngRequired === 'true') {
-          var select = {};
-          try {
-            // var json = window.buildElementOptions(element);
-            select =  JSON.parse(attrs.options);
-          } catch(err) {
-            console.log('ComboBox invalid configuration! ' + err);
-          }
-          
-          var id = attrs.id ? ' id="' + attrs.id + '"' : '';
-          var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-          var parent = element.parent();
-          $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
-          var $element = $(parent).find('input.cronSelect');
-        
-          var options = app.kendoHelper.getConfigCombobox(select, scope);
-          var combobox = $element.kendoComboBox(options).data('kendoComboBox');
-          $(element).remove();
-          
-          var _scope = scope;
-          var _ngModelCtrl = ngModelCtrl;
-          
-          $element.on('change', function (event) {
-            _scope.$apply(function () {
-              _ngModelCtrl.$setViewValue(this.value());
-            }.bind(combobox));
-          });
+		  var select = {};
+		  try {
+			// var json = window.buildElementOptions(element);
+			select =  JSON.parse(attrs.options);
+		  } catch(err) {
+			console.log('ComboBox invalid configuration! ' + err);
+		  }
+		  
+		  var id = attrs.id ? ' id="' + attrs.id + '"' : '';
+		  var name = attrs.name ? ' name="' + attrs.name + '"' : '';
+		  var parent = element.parent();
+		  $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
+		  var $element = $(parent).find('input.cronSelect');
+		
+		  var options = app.kendoHelper.getConfigCombobox(select, scope);
+		  var combobox = $element.kendoComboBox(options).data('kendoComboBox');
+		  $(element).remove();
+		  
+		  var _scope = scope;
+		  var _ngModelCtrl = ngModelCtrl;
+		  
+		  $element.on('change', function (event) {
+			_scope.$apply(function () {
+			  _ngModelCtrl.$setViewValue(this.value());
+			}.bind(combobox));
+		  });
 
-          if (ngModelCtrl) {
-            ngModelCtrl.$formatters.push(function (value) {
-              var result = '';
-              
-              if (value) {
-                result = value;
-              }
-              
-              combobox.value(result);
-              
-              return result;
-            });
-  
-            ngModelCtrl.$parsers.push(function (value) {
-              if (value) {
-                return value;
-              }
-              
-              return null;
-            });
-          }
-        }
-      }
+		  if (ngModelCtrl) {
+			ngModelCtrl.$formatters.push(function (value) {
+			  var result = '';
+			  
+			  if (value) {
+				result = value;
+			  }
+			  
+			  combobox.value(result);
+			  
+			  return result;
+			});
+
+			ngModelCtrl.$parsers.push(function (value) {
+			  if (value) {
+				return value;
+			  }
+			  
+			  return null;
+			});
+		  }
+		}
     };
   })
   
@@ -1675,98 +1709,98 @@
       replace: true,
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
-        if (attrs.required != undefined || attrs.ngRequired === 'true') {
-          var select = {};
-          try {
-            // var json = window.buildElementOptions(element);
-            select = JSON.parse(attrs.options);
-          } catch(err) {
-            console.log('DynamicComboBox invalid configuration! ' + err);
-          }
-          
-          var options = app.kendoHelper.getConfigCombobox(select, scope);
-          try {
-            delete options.dataSource.schema.model.id;
-          } catch(e){}
-          
-          var parent = element.parent();
-          var id = attrs.id ? ' id="' + attrs.id + '"' : '';
-          var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-          $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
-          var $element = $(parent).find('input.cronDynamicSelect');
-          $(element).remove();
-          
-          options['dataBound'] = function(e) {
-            var currentValue = $(combobox).data('currentValue');
-            if (currentValue != null) {
-              setTimeout(function(){combobox.value(currentValue)},300);
-            }
-            $(combobox).data('currentValue', null);
-          };                   
-          
-          var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-          combobox.dataSource.transport.options.grid = combobox;
-          var _scope = scope;
-          var _ngModelCtrl = ngModelCtrl;
-          
-          $element.on('change', function (event) {
-            _scope.$apply(function () {
-              _ngModelCtrl.$setViewValue(this.dataItem());
-            }.bind(combobox));
-          });
-          
-          if (ngModelCtrl) {
-            /**
-            * Formatters change how model values will appear in the view.
-            * For display component.
-            */
-            ngModelCtrl.$formatters.push(function (value) {
-              var result = '';
-              
-              if (value) {
-                if (typeof value == "string") {
-                  result = value;
-                } else {
-                  if (value[select.dataValueField]) {
-                    result = value[select.dataValueField];
-                  }
-                }
-              }
-              
-              $(combobox).data('currentValue', result);
-              view = combobox.dataSource.view();
-              if (!view || (Array.isArray(view) && view.length == 0)) {
-                combobox.dataSource.read();
-              } else {
-                combobox.value(result);
-              }
-              
-              return result;
-            });
-  
-            /**
-            * Parsers change how view values will be saved in the model.
-            * for storage
-            */
-            ngModelCtrl.$parsers.push(function (value) {
-              if (value) {
-                if (combobox.options.valuePrimitive === true) {  
-                  if (typeof value == 'string') {
-                    return value;
-                  } else if (value[select.dataValueField]) {
-                    return value[select.dataValueField];
-                  }
-                } else {
-                  try {
-                    return objectClone(value, this.dataSource.options.schema.model.fields);
-                  } catch(e){}
-                }
-              }
-  
-              return null;
-            }.bind(combobox));
-          }
-        }
+		  var select = {};
+		  try {
+			// var json = window.buildElementOptions(element);
+			select = JSON.parse(attrs.options);
+		  } catch(err) {
+			console.log('DynamicComboBox invalid configuration! ' + err);
+		  }
+		  
+		  var options = app.kendoHelper.getConfigCombobox(select, scope);
+		  try {
+			delete options.dataSource.schema.model.id;
+		  } catch(e){}
+		  
+		  var parent = element.parent();
+		  var id = attrs.id ? ' id="' + attrs.id + '"' : '';
+		  var name = attrs.name ? ' name="' + attrs.name + '"' : '';
+		  $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
+		  var $element = $(parent).find('input.cronDynamicSelect');
+		  $(element).remove();
+		  
+		  options['dataBound'] = function(e) {
+			var currentValue = $(combobox).data('currentValue');
+			if (currentValue != null) {
+			  setTimeout(function(){combobox.value(currentValue)},300);
+			}
+			$(combobox).data('currentValue', null);
+		  };                   
+		  
+		  var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
+		  if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
+			combobox.dataSource.transport.options.grid = combobox;
+		  }
+		  var _scope = scope;
+		  var _ngModelCtrl = ngModelCtrl;
+		  
+		  $element.on('change', function (event) {
+			_scope.$apply(function () {
+			  _ngModelCtrl.$setViewValue(this.dataItem());
+			}.bind(combobox));
+		  });
+		  
+		  if (ngModelCtrl) {
+			/**
+			* Formatters change how model values will appear in the view.
+			* For display component.
+			*/
+			ngModelCtrl.$formatters.push(function (value) {
+			  var result = '';
+			  
+			  if (value) {
+				if (typeof value == "string") {
+				  result = value;
+				} else {
+				  if (value[select.dataValueField]) {
+					result = value[select.dataValueField];
+				  }
+				}
+			  }
+			  
+			  $(combobox).data('currentValue', result);
+			  view = combobox.dataSource.view();
+			  if (!view || (Array.isArray(view) && view.length == 0)) {
+				combobox.dataSource.read();
+			  } else {
+				combobox.value(result);
+			  }
+			  
+			  return result;
+			});
+
+			/**
+			* Parsers change how view values will be saved in the model.
+			* for storage
+			*/
+			ngModelCtrl.$parsers.push(function (value) {
+			  if (value) {
+				if (combobox.options.valuePrimitive === true) {  
+				  if (typeof value == 'string') {
+					return value;
+				  } else if (value[select.dataValueField]) {
+					return value[select.dataValueField];
+				  }
+				} else {
+				  try {
+					return objectClone(value, this.dataSource.options.schema.model.fields);
+				  } catch(e){}
+				}
+			  }
+
+			  return null;
+			}.bind(combobox));
+		}
       }
     };
   })
@@ -1776,7 +1810,6 @@
       restrict: 'E',
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
-        if (attrs.required != undefined || attrs.ngRequired === 'true') {
           var _self = this;
           var select = {};
           try {
@@ -1803,7 +1836,10 @@
           $(element).remove();
 
           var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
-          
+          if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
+			combobox.dataSource.transport.options.grid = combobox;
+		  }
+		  
           $(element).on('change', function (event) {
             _scope.$apply(function () {
               _ngModelCtrl.$setViewValue(this.dataItems());
@@ -1854,7 +1890,6 @@
               
               return null;
             }.bind(combobox));
-          }
         }
       }
     };
@@ -1891,6 +1926,10 @@
         }  
 
         var autoComplete = $element.kendoAutoComplete(options).data('kendoAutoComplete');
+		if (autoComplete.dataSource.transport && autoComplete.dataSource.transport.options) {
+			autoComplete.dataSource.transport.options.grid = autoComplete;
+		}
+		  
         $(element).remove();
 
         if (ngModelCtrl) {
@@ -1922,7 +1961,6 @@
             return null;
           });
         }
-      
       }
     }
   })
