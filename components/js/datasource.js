@@ -494,7 +494,7 @@ angular.module('datasourcejs', [])
           }
         }
 
-        this.cancelBatchData = function() {
+        this.cancelBatchData = function(callback) {
           if (this.dependentData) {
             $(this.dependentData.reverse()).each(function() {
               this.cleanDependentBuffer();
@@ -502,6 +502,9 @@ angular.module('datasourcejs', [])
           }
 
           this.cleanDependentBuffer();
+          if (callback) {
+            callback();
+          }
         }
 
         this.flushDependencies = function(callback) {
@@ -817,9 +820,8 @@ angular.module('datasourcejs', [])
 
                 if (this.events.create && hotData) {
                   this.callDataSourceEvents('create', this.active);
+                  delete this.active.__sender;
                 }
-
-                delete this.active.__sender;
               }.bind(this);
 
               if (this.dependentData && !this.dependentLazyPost && !this.batchPost) {
@@ -873,9 +875,8 @@ angular.module('datasourcejs', [])
 
                   if (this.events.update && hotData) {
                     this.callDataSourceEvents('update', this.active);
+                    delete this.active.__sender;
                   }
-
-                  delete this.active.__sender;
                 }
               }.bind(this));
 
