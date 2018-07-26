@@ -1268,6 +1268,13 @@
             var kendoConfig = app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
             kendoConfig.autoBind = true;
             kendoConfig.optionLabel = undefined;
+            if (column.displayField) {
+              kendoConfig.change = function(e) {
+                opt.model.set(column.displayField, this.text());
+                opt.model.dirty = true;
+                opt.model.dirtyFields[column.displayField] = true;
+              };
+            }
             $input.appendTo(container).kendoDropDownList(kendoConfig, scope);
           }
           else if (column.inputType == 'slider') {
