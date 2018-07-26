@@ -1273,7 +1273,7 @@
                 opt.model.set(column.displayField, this.text());
                 opt.model.dirty = true;
                 opt.model.dirtyFields[column.displayField] = true;
-              };
+              }
             }
             $input.appendTo(container).kendoDropDownList(kendoConfig, scope);
           }
@@ -1654,29 +1654,31 @@
             });
           }
 
-          setInterval(function() {
-            if (scope[options.dataSource.name].hasPendingChanges()) {
-              $('.k-filter-row').hide();
-              $('.k-pager-sizes').hide();
-              $('.k-pager-nav').hide();
-              $('.k-pager-numbers').hide();
-              $('.k-pager-refresh.k-link').hide();
-              $('.saveorcancelchanges').show();
-            }
-            else {
-              $('.k-filter-row').show();
-              $('.k-pager-sizes').show();
-              $('.k-pager-nav').show();
-              $('.k-pager-numbers').show();
-              $('.k-pager-refresh.k-link').show();
-              $('.saveorcancelchanges').hide();
-            }
-          },100);
+
 
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
+
+          setInterval(function() {
+            if (scope[options.dataSource.name].hasPendingChanges()) {
+              $templateDyn.find('.k-filter-row').hide();
+              $templateDyn.find('.k-pager-sizes').hide();
+              $templateDyn.find('.k-pager-nav').hide();
+              $templateDyn.find('.k-pager-numbers').hide();
+              $templateDyn.find('.k-pager-refresh.k-link').hide();
+              $templateDyn.find('.saveorcancelchanges').show();
+            }
+            else {
+              $templateDyn.find('.k-filter-row').show();
+              $templateDyn.find('.k-pager-sizes').show();
+              $templateDyn.find('.k-pager-nav').show();
+              $templateDyn.find('.k-pager-numbers').show();
+              $templateDyn.find('.k-pager-refresh.k-link').show();
+              $templateDyn.find('.saveorcancelchanges').hide();
+            }
+          },100);
 
         });
 
