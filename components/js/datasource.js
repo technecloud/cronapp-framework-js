@@ -134,6 +134,7 @@ angular.module('datasourcejs', [])
               delete cloneObject.__originalIdx;
               delete cloneObject.__sender;
               delete cloneObject.__$id;
+              delete cloneObject.__parentId;
               delete cloneObject.$$hashKey;
 
               // Get an ajax promise
@@ -417,6 +418,9 @@ angular.module('datasourcejs', [])
             if ((this.dependentLazyPost || this.batchPost) && !forceSave) {
               obj.__status = 'inserted';
               obj.__tempId = Math.round(Math.random()*999999);
+              if (this.dependentLazyPost) {
+                obj.__parentId = eval(this.dependentLazyPost).active.__$id;
+              }
               this.hasMemoryData = true;
 
               if (onSuccess)
@@ -597,11 +601,10 @@ angular.module('datasourcejs', [])
               if (_self.memoryData.hasOwnProperty(key)) {
                 var mem = _self.memoryData[key];
                 for (var x=0;x<mem.data.length;x++) {
-                  //TODO: Andamento
-                  /*if (mem.data[x].parentData) {
+                  if (mem.data[x].parentData) {
                     mem.data[x].__parentData = mem.parentData;
                   }
-                  mem.data[x].__fromMemory = true;*/
+                  mem.data[x].__fromMemory = true;
                 }
                 array = array.concat(mem.data);
               }
@@ -634,15 +637,14 @@ angular.module('datasourcejs', [])
                 }
               }
 
-              //TODO: Em andamento
-              /*if (_self.parameters) {
-                var params = _self.getParametersMap();
+              if (_self.parameters) {
+                var params = _self.getParametersMap(item.__parentId?item.__parentId:null);
                 for (var key in params) {
                   if (params.hasOwnProperty(key)) {
                     updateObjectValue(item, key, params[key]);
                   }
                 }
-              }*/
+              }
 
               if (item.__status == "inserted") {
                 (function (oldObj) {
@@ -654,8 +656,8 @@ angular.module('datasourcejs', [])
                     }
                     if (_self.events.create) {
                       if (sender) {
-                        newObj.__sender = sender;
                         newObj = array[idx];
+                        newObj.__sender = sender;
                       }
                       _self.callDataSourceEvents('create', newObj);
                       delete newObj.__sender;
@@ -812,7 +814,7 @@ angular.module('datasourcejs', [])
 
         this.updateActive = function(from) {
           for (var key in from) {
-            if (from.hasOwnProperty(key) && this.active.hasOwnProperty(key)) {
+            if (from.hasOwnProperty(key)) {
               this.active[key] = from[key];
             }
           }
@@ -1114,7 +1116,8 @@ angular.module('datasourcejs', [])
               callback();
             }
           } else {
-            if (this.entity.indexOf('cronapi') >= 0 || this.isOData()) {
+            if (false) {
+//            if (this.entity.indexOf('cronapi') >= 0 || this.isOData()) {
               // Get an ajax promise
               var url = this.entity;
               url += (this.entity.endsWith('/')) ? '__new__' : '/__new__';
@@ -1768,13 +1771,50 @@ angular.module('datasourcejs', [])
           return data;
         }
 
-        this.getParametersMap = function(obj) {
+        this.getAllData = function() {
+          var array = [];
+
+          array = array.concat(this.data);
+
+          if (this.memoryData) {
+            for (key in this.memoryData) {
+              if (this.memoryData.hasOwnProperty(key)) {
+                var mem = this.memoryData[key];
+                if (mem.data) {
+                  array = array.concat(mem.data);
+                }
+              }
+            }
+          }
+
+          if (this.postDeleteData) {
+            array = array.concat(this.postDeleteData);
+          }
+
+          return array;
+        }
+
+        this.getParametersMap = function(parentId) {
           var map = {};
 
           var parameters;
 
-          if (obj) {
+          var obj;
+
+          var mapParams;
+
+          if (parentId) {
             parameters = this.parametersExpression;
+            var arr = eval(this.dependentLazyPost).getAllData();
+
+            for (var i=0;i<arr.length;i++) {
+              if (arr[i].__$id == parentId) {
+                obj = arr[i];
+                break;
+              }
+            }
+
+            mapParams = this.getParametersMap();
           } else {
             parameters =  this.parameters;
           }
@@ -1786,14 +1826,23 @@ angular.module('datasourcejs', [])
               var binary = part.split("=");
               if (binary.length == 2) {
                 var value = binary[1];
-                if (obj) {
+                if (parentId) {
                   if (binary[1].match(DEP_PATTERN)) {
                     var g = DEP_PATTERN.exec(value);
-                    var field = g[1].replace(this.dependentLazyPost + ".active.", "");
-                    value = obj[field];
+                    if (g[1].indexOf(".active.") != -1) {
+                      var field = g[1].replace(this.dependentLazyPost + ".active.", "");
+                      if (obj) {
+                        map[binary[0]] = obj[field];
+                      }
+                    } else {
+                      map[binary[0]] = mapParams[binary[0]];
+                    }
+                  } else {
+                    map[binary[0]] = mapParams[binary[0]];
                   }
+                } else {
+                  map[binary[0]] = binary[1] ? this.normalizeValue(value, true) : null;
                 }
-                map[binary[0]] = binary[1]?this.normalizeValue(value, true):null;
               }
             }
           }
@@ -2020,8 +2069,8 @@ angular.module('datasourcejs', [])
             var thisDatasourceName = this.name;
             $('datasource').each(function(idx, elem) {
               var dependentBy = null;
-              var dependent = eval(elem.getAttribute('name'));
-              if (elem.getAttribute('dependent-by') !== "" && elem.getAttribute('dependent-by') != null) {
+              var dependent = window[elem.getAttribute('name')];
+              if (dependent && elem.getAttribute('dependent-by') !== "" && elem.getAttribute('dependent-by') != null) {
                 try {
                   dependentBy = JSON.parse(elem.getAttribute('dependent-by'));
                 } catch (ex) {
@@ -2073,6 +2122,7 @@ angular.module('datasourcejs', [])
           var resourceURL = (window.hostApp || "") + this.entity + (props.path || this.lastFilterParsed || "");
 
           var filter = "";
+          var cleanData = false;
           var canProceed = true;
           if (this.parameters && this.parameters.length > 0) {
             var parts = this.parameters.split(";")
@@ -2086,9 +2136,16 @@ angular.module('datasourcejs', [])
 
                 filter += binary[0];
                 filter += this.isOData()?" eq ":"=";
-                filter += this.getObjectAsString(this.normalizeValue(binary[1], true));
-                if (!binary[1]) {
-                  canProceed = false;
+                if (!binary[1] && this.dependentLazyPost) {
+                  cleanData = true;
+                  var dds = eval(this.dependentLazyPost);
+                  if (dds.active && dds.active.__$id) {
+                    filter += eval(this.dependentLazyPost).active.__$id;
+                  } else {
+                    filter += "memory";
+                  }
+                } else {
+                  filter += this.getObjectAsString(this.normalizeValue(binary[1], true));
                 }
               }
             }
@@ -2194,6 +2251,11 @@ angular.module('datasourcejs', [])
 
           // Store the last configuration for late use
           this._savedProps = props;
+
+          if (cleanData) {
+            sucessHandler([], null, true);
+            return;
+          }
 
           // Make the datasource busy
           this.busy = true;
@@ -2404,6 +2466,13 @@ angular.module('datasourcejs', [])
 
             var endpoint = (props.endpoint) ? props.endpoint : "";
             var dts = new DataSet(props.name, scope);
+
+            // Add this instance into the root scope
+            // This will expose the dataset name as a
+            // global variable
+            $rootScope[props.name] = dts;
+            window[props.name] = dts;
+
             var defaultApiVersion = 1;
 
             dts.entity = props.entity;
@@ -2510,12 +2579,6 @@ angular.module('datasourcejs', [])
             if (props.filterURL && props.filterURL.length > 0 && dts.allowFetch) {
               dts.filter(props.filterURL);
             }
-
-            // Add this instance into the root scope
-            // This will expose the dataset name as a
-            // global variable
-            $rootScope[dts.name] = dts;
-            window[dts.name] = dts;
 
             return dts;
           };
