@@ -1168,7 +1168,7 @@
         .replace(/&lt;/g, '<')
         .replace(/&amp;/g, '&');
       },
-      getColumns: function(options, scope) {
+      getColumns: function(options, datasource, scope) {
 
         window.formatDate = function(value, format, type) {
           var momentDate;
@@ -1244,10 +1244,9 @@
         function isRequired(fieldName) {
           var required = false;
           var selected = null;
-          options.dataSource.schemaFields.forEach(function(field)  {
-            if (field.name == fieldName)
-              selected = field;
-          });
+          if (datasource.schema.model.fields[fieldName]){
+            selected = datasource.schema.model.fields[fieldName];
+          }
           if (selected)
             required = !selected.nullable;
           return required;
@@ -1554,7 +1553,7 @@
 
         var datasource = app.kendoHelper.getDataSource(options.dataSource, scope, options.allowPaging, options.pageCount, options.columns);
 
-        var columns = this.getColumns(options, scope);
+        var columns = this.getColumns(options, datasource, scope);
         var pageAble = this.getPageAble(options);
         var toolbar = this.getToolbar(options, scope);
         var editable = this.getEditable(options);
@@ -1661,22 +1660,27 @@
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
 
-          setInterval(function() {
-            if (scope[options.dataSource.name].hasPendingChanges()) {
-              $templateDyn.find('.k-filter-row').hide();
-              $templateDyn.find('.k-pager-sizes').hide();
-              $templateDyn.find('.k-pager-nav').hide();
-              $templateDyn.find('.k-pager-numbers').hide();
-              $templateDyn.find('.k-pager-refresh.k-link').hide();
-              $templateDyn.find('.saveorcancelchanges').show();
+          var checkDsChanges = setInterval(function() {
+            if (scope[options.dataSource.name]) {
+              if (scope[options.dataSource.name].hasPendingChanges()) {
+                $templateDyn.find('.k-filter-row').hide();
+                $templateDyn.find('.k-pager-sizes').hide();
+                $templateDyn.find('.k-pager-nav').hide();
+                $templateDyn.find('.k-pager-numbers').hide();
+                $templateDyn.find('.k-pager-refresh.k-link').hide();
+                $templateDyn.find('.saveorcancelchanges').show();
+              }
+              else {
+                $templateDyn.find('.k-filter-row').show();
+                $templateDyn.find('.k-pager-sizes').show();
+                $templateDyn.find('.k-pager-nav').show();
+                $templateDyn.find('.k-pager-numbers').show();
+                $templateDyn.find('.k-pager-refresh.k-link').show();
+                $templateDyn.find('.saveorcancelchanges').hide();
+              }
             }
             else {
-              $templateDyn.find('.k-filter-row').show();
-              $templateDyn.find('.k-pager-sizes').show();
-              $templateDyn.find('.k-pager-nav').show();
-              $templateDyn.find('.k-pager-numbers').show();
-              $templateDyn.find('.k-pager-refresh.k-link').show();
-              $templateDyn.find('.saveorcancelchanges').hide();
+              clearInterval(checkDsChanges);
             }
           },100);
 
