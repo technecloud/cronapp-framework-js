@@ -2123,8 +2123,8 @@
         var slider = {};
         
         try {
-          var json = window.buildElementOptions(element);
-          slider = JSON.parse(json);
+          //var json = window.buildElementOptions(element);
+          slider = JSON.parse(attrs.options);
         } catch(err) {
           console.log('Slider invalid configuration! ' + err);
         }
