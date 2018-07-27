@@ -44,7 +44,7 @@ var app = (function() {
             function($q, $rootScope) {
               var service = {
                 'request': function(config) {
-                  var _u = JSON.parse(sessionStorage.getItem('_u'));
+                  var _u = JSON.parse(localStorage.getItem('_u'));
                   if (_u && _u.token) {
                     config.headers['X-AUTH-TOKEN'] = _u.token;
                     window.uToken = _u.token;

@@ -133,6 +133,8 @@ angular.module('datasourcejs', [])
               delete cloneObject.__status;
               delete cloneObject.__originalIdx;
               delete cloneObject.__sender;
+              delete cloneObject.__$id;
+              delete cloneObject.$$hashKey;
 
               // Get an ajax promise
               this.$promise = $http({
@@ -393,6 +395,19 @@ angular.module('datasourcejs', [])
           return formatAsBytes(size(base64String));
         };
 
+        function uuid() {
+          var uuid = "", i, random;
+          for (i = 0; i < 32; i++) {
+            random = Math.random() * 16 | 0;
+
+            if (i == 8 || i == 12 || i == 16 || i == 20) {
+              uuid += "-"
+            }
+            uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
+          }
+          return uuid;
+        }
+
         /**
          * Append a new value to the end of this dataset.
          */
@@ -582,6 +597,7 @@ angular.module('datasourcejs', [])
               if (_self.memoryData.hasOwnProperty(key)) {
                 var mem = _self.memoryData[key];
                 for (var x=0;x<mem.data.length;x++) {
+                  //TODO: Andamento
                   /*if (mem.data[x].parentData) {
                     mem.data[x].__parentData = mem.parentData;
                   }
@@ -639,6 +655,7 @@ angular.module('datasourcejs', [])
                     if (_self.events.create) {
                       if (sender) {
                         newObj.__sender = sender;
+                        newObj = array[idx];
                       }
                       _self.callDataSourceEvents('create', newObj);
                       delete newObj.__sender;
@@ -657,6 +674,7 @@ angular.module('datasourcejs', [])
                     var idx = _self.getIndexOfListTempBuffer(oldObj, array);
                     if (idx >= 0) {
                       _self.updateObjectAtIndex(newObj, array, idx);
+                      newObj = array[idx];
                     }
                     if (_self.events.update) {
                       if (sender) {
@@ -825,6 +843,10 @@ angular.module('datasourcejs', [])
                 obj.__sender = this.active.__sender;
               }
 
+              if (this.active.__$id) {
+                obj.__$id = this.active.__$id;
+              }
+
               this.data.push(obj);
               // The new object is now the active
               this.active = obj;
@@ -975,8 +997,8 @@ angular.module('datasourcejs', [])
         }
 
 
-        this.refreshActive = function() {
-          if (this.active) {
+        this.refreshActive = function(onSuccess, onError) {
+          if (this.active && this.active.__status != 'inserted') {
             var url = this.getEditionURL(this.active);
             var keyObj = this.getKeyValues(this.active);
 
@@ -985,18 +1007,18 @@ angular.module('datasourcejs', [])
               url: url,
               headers: this.headers
             }).success(function(rows, status, headers, config) {
-              if (this.isOData()) {
-                rows = rows.d;
-                this.normalizeData(rows);
-              }
-
               var row = null;
-              if (rows && rows.length > 0)
-                row = rows[0];
+
+              if (this.isOData()) {
+                row = rows.d;
+                this.normalizeObject(row);
+              } else {
+                if (rows && rows.length > 0)
+                  row = rows[0];
+              }
 
               var indexFound = -1;
               var i = 0;
-              this.active = row;
               this.data.forEach(function(currentRow) {
                 var found = false;
                 var idsFound = 0;
@@ -1012,26 +1034,38 @@ angular.module('datasourcejs', [])
 
                 if (found) {
                   indexFound = i;
-                  if (row)
+                  if (row) {
                     this.copy(row, currentRow);
+                    this.copy(row, this.active);
+                  }
                 }
                 i++;
               }.bind(this));
 
               //Atualizou e o registro deixou de existir, remove da lista
-              if (indexFound > -1 && !row) {
-                this.data.splice(indexFound, 1);
-              }
+              if (indexFound != -1) {
+                if (this.events.update) {
+                  this.callDataSourceEvents('update', this.active);
+                }
 
-              if (this.events.update) {
-                this.callDataSourceEvents('update', this.active);
+                if (onSuccess) {
+                  onSuccess(this.active)
+                }
+              } else {
+                if (onError) {
+                  onError();
+                }
               }
-
             }.bind(this)).error(function(data, status, headers, config) {
-              return;
+              if (onError) {
+                onError();
+              }
             }.bind(this));
+          } else {
+            if (onSuccess) {
+              onSuccess(this.active)
+            }
           }
-
         };
 
         this.getColumn = function(index) {
@@ -1149,10 +1183,16 @@ angular.module('datasourcejs', [])
          */
         this.startInserting = function(item, callback) {
           this.retrieveDefaultValues(item, function() {
+            if (!this.active.__$id) {
+              this.active.__$id = uuid();
+            }
+
             this.inserting = true;
+
             if (this.onStartInserting) {
               this.onStartInserting();
             }
+
             if (callback) {
               callback(this.active);
             }
@@ -1905,6 +1945,10 @@ angular.module('datasourcejs', [])
               }
             }
 
+            for (var n=0;n<data.length;n++) {
+              data[n].__$id = uuid();
+            }
+
             // Call the before fill callback
             if (callbacks.beforeFill) callbacks.beforeFill.apply(this, this.data);
 
@@ -2233,13 +2277,13 @@ angular.module('datasourcejs', [])
           to = to || {};
 
           for (var key in from) {
-            if (from.hasOwnProperty(key) && key.indexOf('$') == -1) {
+            if (from.hasOwnProperty(key) && key.indexOf('$$') == -1) {
               to[key] = this.copy(from[key]);
             }
           }
           //Verificando os campos que não existem mais no registro (Significa que foi setado para nulo)
           for (var key in to) {
-            if (from[key] == undefined)
+            if (key != '__$id' && from[key] == undefined)
               delete to[key];
           }
 
