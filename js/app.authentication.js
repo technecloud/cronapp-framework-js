@@ -421,8 +421,12 @@ app.kendoHelper = {
             data[attr] = parseFloat(data[attr]);
           else if (schemaField.type == 'date' && data[attr] != undefined)
             data[attr] = '/Date('+data[attr].getTime()+')/';
-          else if (schemaField.type == 'boolean' && data[attr] != undefined)
-            data[attr] = data[attr].toString().toLowerCase() == "true"?true:false;
+          else if (schemaField.type == 'boolean') {
+            if (data[attr] == undefined)
+              data[attr] = false;
+            else
+              data[attr] = data[attr].toString().toLowerCase() == "true"?true:false;
+          }
 
           //Significa que é o ID
           if (schema.model.id == attr) {
@@ -498,7 +502,7 @@ app.kendoHelper = {
       transport: {
         setActiveAndPost: function(e) {
           var cronappDatasource = this.options.cronappDatasource;
-          cronappDatasource.active = parseParameter(e.data);
+          cronappDatasource.updateActive(parseParameter(e.data));
           cronappDatasource.active.__sender = datasourceId;
           cronappDatasource.postSilent(
               function(data) {

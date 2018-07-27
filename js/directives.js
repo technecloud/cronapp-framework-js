@@ -1268,6 +1268,13 @@
             var kendoConfig = app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
             kendoConfig.autoBind = true;
             kendoConfig.optionLabel = undefined;
+            if (column.displayField) {
+              kendoConfig.change = function(e) {
+                opt.model.set(column.displayField, this.text());
+                opt.model.dirty = true;
+                opt.model.dirtyFields[column.displayField] = true;
+              }
+            }
             $input.appendTo(container).kendoDropDownList(kendoConfig, scope);
           }
           else if (column.inputType == 'slider') {
@@ -1358,17 +1365,17 @@
                   var commands = [];
                   command.forEach(function(f) {
                     var cmd = { name: f };
-                  if ( f == "edit")
-                    cmd.text = { edit: " ", update: " ", cancel: " " };
-                  else
-                    cmd.text = " ";
-                  commands.push(cmd);
-                });
+                    if ( f == "edit")
+                      cmd.text = { edit: " ", update: " ", cancel: " " };
+                    else
+                      cmd.text = " ";
+                    commands.push(cmd);
+                  });
 
                   var addColumn = {
                     command: commands,
                     title: column.headerText,
-                    width: column.width
+                    width: column.width ? column.width : 155
                   };
                   columns.push(addColumn);
                 }
@@ -1647,29 +1654,31 @@
             });
           }
 
-          setInterval(function() {
-            if (scope[options.dataSource.name].hasPendingChanges()) {
-              $('.k-icon.k-i-filter').hide();
-              $('.k-pager-sizes').hide();
-              $('.k-pager-nav').hide();
-              $('.k-pager-numbers').hide();
-              $('.k-pager-refresh.k-link').hide();
-              $('.saveorcancelchanges').show();
-            }
-            else {
-              $('.k-icon.k-i-filter').show();
-              $('.k-pager-sizes').show();
-              $('.k-pager-nav').show();
-              $('.k-pager-numbers').show();
-              $('.k-pager-refresh.k-link').show();
-              $('.saveorcancelchanges').hide();
-            }
-          },100);
+
 
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
+
+          setInterval(function() {
+            if (scope[options.dataSource.name].hasPendingChanges()) {
+              $templateDyn.find('.k-filter-row').hide();
+              $templateDyn.find('.k-pager-sizes').hide();
+              $templateDyn.find('.k-pager-nav').hide();
+              $templateDyn.find('.k-pager-numbers').hide();
+              $templateDyn.find('.k-pager-refresh.k-link').hide();
+              $templateDyn.find('.saveorcancelchanges').show();
+            }
+            else {
+              $templateDyn.find('.k-filter-row').show();
+              $templateDyn.find('.k-pager-sizes').show();
+              $templateDyn.find('.k-pager-nav').show();
+              $templateDyn.find('.k-pager-numbers').show();
+              $templateDyn.find('.k-pager-refresh.k-link').show();
+              $templateDyn.find('.saveorcancelchanges').hide();
+            }
+          },100);
 
         });
 
