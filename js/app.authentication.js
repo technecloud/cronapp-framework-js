@@ -44,7 +44,7 @@ var app = (function() {
             function($q, $rootScope) {
               var service = {
                 'request': function(config) {
-                  var _u = JSON.parse(sessionStorage.getItem('_u'));
+                  var _u = JSON.parse(localStorage.getItem('_u'));
                   if (_u && _u.token) {
                     config.headers['X-AUTH-TOKEN'] = _u.token;
                     window.uToken = _u.token;
@@ -389,14 +389,12 @@ app.kendoHelper = {
 
     var schema = {
       model : {
-        id : undefined,
+        id : "__$id",
         fields: {}
       }
     };
     if (dataSource && dataSource.schemaFields) {
       dataSource.schemaFields.forEach(function(field) {
-        if (field.key)
-          schema.model.id = field.name;
         schema.model.fields[field.name] = {
           type: parseType(field.type),
           editable: true,
@@ -404,11 +402,26 @@ app.kendoHelper = {
           validation: { required: !field.nullable },
         }
       });
+      schema.model.fields["__$id"] = {
+        type: "string",
+        editable: true,
+      }
     }
     return schema;
   },
   getDataSource: function(dataSource, scope, allowPaging, pageCount, columns) {
     var schema = this.getSchema(dataSource);
+    if (columns) {
+      columns.forEach(function(c) {
+        for (var key in schema.model.fields) {
+          if (c.dataType == "Database" && c.field == key ) {
+            schema.model.fields[key].nullable = !c.required;
+            schema.model.fields[key].validation.required = c.required;
+            break;
+          }
+        }
+      });
+    }
 
     var parseParameter = function(data) {
       for (var attr in data) {
@@ -520,16 +533,23 @@ app.kendoHelper = {
           //tem que ser push
           this.options.cronappDatasource.setDataSourceEvents({
             create: function(data) {
+              var currentDatasource = (this.options.grid?this.options.grid.dataSource:callback);
               if (data.__sender != datasourceId)
-                callback.pushCreate(data);
+                currentDatasource.pushCreate(data);
+              else
+                currentDatasource.pushUpdate(data);
             }.bind(this),
             update: function(data) {
-              if (data.__sender != datasourceId)
-                callback.pushUpdate(data);
+              var pushUpdate = (this.options.grid?this.options.grid.dataSource.pushUpdate:callback.pushUpdate);
+              if (data.__sender != datasourceId) {
+                pushUpdate(data);
+              }
             }.bind(this),
             delete: function(data) {
-              if (data.__sender != datasourceId)
-                callback.pushDestroy(data);
+              var pushDestroy = (this.options.grid?this.options.grid.dataSource.pushDestroy:callback.pushDestroy);
+              if (data.__sender != datasourceId) {
+                pushDestroy(data);
+              }
             }.bind(this),
             overRideRefresh: function(data) {
               if (this.options.grid)
