@@ -1,4 +1,4 @@
-//v2.0.0
+//v2.0.1
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -926,8 +926,8 @@ angular.module('datasourcejs', [])
                 // extracted key values
                 var found;
 
-                if (this.lastActive.__$id && currentRow.__$id && this.lastActive.__$id == currentRow.__$id) {
-                  found = true;
+                if (this.lastActive.__$id && currentRow.__$id) {
+                  found = this.lastActive.__$id == currentRow.__$id;
                 } else {
                   var dataKeys = this.getKeyValues(currentRow);
                   for (var key in keyObj) {
@@ -1296,8 +1296,8 @@ angular.module('datasourcejs', [])
               for (var i = 0; i < this.data.length; i++) {
                 // current object match with the same
                 var found;
-                if (object.__$id && this.data[i].__$id && this.data[i].__$id == object.__$id) {
-                  found = true;
+                if (object.__$id && this.data[i].__$id) {
+                  found = this.data[i].__$id == object.__$id;
                 } else {
                   // vey values
                   // Check all keys
