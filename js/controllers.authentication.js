@@ -14,8 +14,8 @@
     }
     
     $scope.autoLogin = function(){
-      if(localStorage.getItem('_u') != undefined)
-      $state.go('home');
+      // if(localStorage.getItem('_u') != undefined)
+      // $state.go('home');
     }
     $scope.autoLogin();
     $scope.message = {};
