@@ -1601,8 +1601,10 @@
               });
             }
             else if (!e.model.isNew() && !e.model.dirty) {
-              var currentItem = cronappDatasource.goTo(e.model);
-              scope.safeApply(cronappDatasource.startEditing(currentItem, function(xxx) {}));
+              scope.safeApply(function() {
+                var currentItem = cronappDatasource.goTo(e.model);
+                cronappDatasource.startEditing(currentItem, function(xxx) {});
+              });
             }
           },
           change: function(e) {
@@ -1634,7 +1636,7 @@
 
           var options = JSON.parse(attrs.options || "{}");
 
-          if (!scope[options.dataSource.name].dependentLazyPost) {
+          if (scope[options.dataSource.name] && !scope[options.dataSource.name].dependentLazyPost) {
             scope[options.dataSource.name].batchPost = true;
 
             options.toolBarButtons = options.toolBarButtons || [];
@@ -1652,36 +1654,38 @@
             });
           }
 
-
-
           var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
 
-          var checkDsChanges = setInterval(function() {
-            if (scope[options.dataSource.name]) {
-              if (scope[options.dataSource.name].hasPendingChanges()) {
-                $templateDyn.find('.k-filter-row').hide();
-                $templateDyn.find('.k-pager-sizes').hide();
-                $templateDyn.find('.k-pager-nav').hide();
-                $templateDyn.find('.k-pager-numbers').hide();
-                $templateDyn.find('.k-pager-refresh.k-link').hide();
-                $templateDyn.find('.saveorcancelchanges').show();
+          scope.safeApply(function() {
+            var checkDsChanges = setInterval(function() {
+              if (scope[options.dataSource.name]) {
+
+                if (scope[options.dataSource.name].hasPendingChanges()) {
+                  $templateDyn.find('.k-filter-row').hide();
+                  $templateDyn.find('.k-pager-sizes').hide();
+                  $templateDyn.find('.k-pager-nav').hide();
+                  $templateDyn.find('.k-pager-numbers').hide();
+                  $templateDyn.find('.k-pager-refresh.k-link').hide();
+                  $templateDyn.find('.saveorcancelchanges').show();
+                }
+                else {
+                  $templateDyn.find('.k-filter-row').show();
+                  $templateDyn.find('.k-pager-sizes').show();
+                  $templateDyn.find('.k-pager-nav').show();
+                  $templateDyn.find('.k-pager-numbers').show();
+                  $templateDyn.find('.k-pager-refresh.k-link').show();
+                  $templateDyn.find('.saveorcancelchanges').hide();
+                }
               }
               else {
-                $templateDyn.find('.k-filter-row').show();
-                $templateDyn.find('.k-pager-sizes').show();
-                $templateDyn.find('.k-pager-nav').show();
-                $templateDyn.find('.k-pager-numbers').show();
-                $templateDyn.find('.k-pager-refresh.k-link').show();
-                $templateDyn.find('.saveorcancelchanges').hide();
+                clearInterval(checkDsChanges);
               }
-            }
-            else {
-              clearInterval(checkDsChanges);
-            }
-          },100);
+            },100);
+          });
+
 
         });
 
