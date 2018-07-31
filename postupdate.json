@@ -165,6 +165,11 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/styles/kendo.cerulean.mobile.min.css",
       "type": "style"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/kendo.all.fixed.js",
+      "type": "script"
     }
   ],
   "removes": [
@@ -217,6 +222,11 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/styles/kendo.bootstrap.mobile.min.css",
       "type": "style"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/kendo.all.min.js",
+      "type": "script"
     }
   ]
 }
