@@ -1878,6 +1878,11 @@
           var _scope = scope;
           var _ngModelCtrl = ngModelCtrl;
           
+          relactionDS = {
+            relationDataSource: (select.relationDataSource != null ? eval(select.relationDataSource.name) : null),
+            relationField: (select.relationField != null ? select.relationField : '')
+          }
+          
           var options = app.kendoHelper.getConfigCombobox(select, scope);
           
           try {
@@ -1890,24 +1895,54 @@
           $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/>');
           var $element = $(parent).find('input.cronMultiSelect');
           $(element).remove();
+        
+          options['deselect'] = function(e) {
+            var dataItem = e.dataItem;
+            var relation = this.relationDataSource;
+            var dataValueField = e.sender.options.dataValueField;
 
+            var selectItem = null;
+            if (relation && relation.data && dataItem[dataValueField]) { 
+              for (key in relation.data) {
+                var item = relation.data[key];
+                if (item[this.relationField] && (item[this.relationField] == dataItem[dataValueField])) {
+                  selectItem = item;
+                  break;
+                }
+              };
+
+              if (selectItem != null) {
+                $(combobox).data('silent', true);
+                this.relationDataSource.removeSilent(selectItem, null, null);
+              }
+            }
+          }.bind(relactionDS);
+          
+          options['select'] = function(e) {
+            var dataItem = e.dataItem;
+            var dataValueField = e.sender.options.dataValueField;
+            if (this.relationDataSource && dataItem[dataValueField]) {
+              var obj = {};
+              obj[this.relationField] = dataItem[dataValueField];
+              var combobox = e.sender;
+              $(combobox).data('silent', true);
+              this.relationDataSource.startInserting(obj, function(data){
+                this.postSilent();
+              }.bind(this.relationDataSource));
+            }
+          }.bind(relactionDS);
+          
           var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
           if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
-			combobox.dataSource.transport.options.grid = combobox;
-		  }
-		  
-          $(element).on('change', function (event) {
-            _scope.$apply(function () {
-              _ngModelCtrl.$setViewValue(this.dataItems());
-            }.bind(combobox));
-          });
+	          combobox.dataSource.transport.options.grid = combobox;
+          }
           
           var convertArray = function(value) {
             var result = [];
             
             if (value) {
               for (var item in value) {
-                result.push(value[item][select.dataValueField]);
+                result.push(value[item][relactionDS.relationField]);
               }
             }
             
@@ -1915,42 +1950,15 @@
           }
           
           scope.$watchCollection(function(){return ngModelCtrl.$modelValue}, function(value, old){
-            if (JSON.stringify(value) !== JSON.stringify(old)) {
+            var silent = $(combobox).data('silent');
+            $(combobox).data('silent', false);
+            if (!silent && (JSON.stringify(value) !== JSON.stringify(old))) {
               combobox.value(convertArray(value));
             }
           });
-          
-          if (ngModelCtrl) {
-            ngModelCtrl.$formatters.push(function (value) {
-              var result = convertArray(value);
-              
-              combobox.value(result);
-            
-              return result;
-            });
-  
-            ngModelCtrl.$parsers.push(function (value) {
-              if (value && Array.isArray(value)) {
-                if (this.dataSource) {
-                  var result = [];
-                  
-                  try {
-                    for (var item in value) {
-                      result.push(objectClone(value[item], this.dataSource.options.schema.model.fields));
-                    }
-                  } catch (e){}
-                  
-                  return result;
-                }
-              }
-              
-              return null;
-            }.bind(combobox));
-        }
-      }
+       }
     };
-  })  
-  
+  })   
   .directive('cronAutoComplete', function ($compile) {
     return {
       restrict: 'E',
