@@ -1957,6 +1957,27 @@ angular.module('datasourcejs', [])
           }
         }
 
+        this.removeDataSourceEvents = function(events) {
+          for (var key in events) {
+            if (events.hasOwnProperty(key)) {
+              if (!this.events[key]) {
+                this.events[key] = [];
+              }
+
+              if (Object.prototype.toString.call(this.events[key]) !== '[object Array]') {
+                this.events[key] = [this.events[key]];
+              }
+
+              var arr = [].concat(this.events[key]);
+              for (var i =0;i<arr.length;i++) {
+                if (arr[i] == events[key]) {
+                  this.events[key].splice(i, 1);
+                }
+              }
+            }
+          }
+        }
+
         this.callDataSourceEvents = function(key, param) {
           if (this.events) {
             var event = this.events[key];
