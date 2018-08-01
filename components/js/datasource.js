@@ -1,4 +1,4 @@
-//v2.0.1
+//v2.0.2
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -2201,30 +2201,29 @@ angular.module('datasourcejs', [])
 
           // Ignore any call if the datasource is busy (fetching another request)
           if (this.busy) {
-            if (callbacksObj.canceled) {
-              callbacksObj.canceled();
+            if (callbacks.canceled) {
+              callbacks.canceled();
             }
             return;
           }
 
           //Ignore call witouth ids if not http:// or https://
           if (this.entity.indexOf('//') > -1 && this.entity.indexOf('://') < 0) {
-            if (callbacksObj.canceled) {
-              callbacksObj.canceled();
+            if (callbacks.canceled) {
+              callbacks.canceled();
             }
             return;
           }
 
           if (!this.enabled) {
             this.cleanup();
-            if (callbacksObj.canceled) {
-              callbacksObj.canceled();
+            if (callbacks.canceled) {
+              callbacks.canceled();
             }
             return;
           }
 
           var props = properties || {};
-          var callbacks = callbacksObj || {};
 
           // Adjust property parameters and the endpoint url
           props.params = props.params || {};
@@ -2266,8 +2265,8 @@ angular.module('datasourcejs', [])
           }
 
           if (!canProceed) {
-            if (callbacksObj.canceled) {
-              callbacksObj.canceled();
+            if (callbacks.canceled) {
+              callbacks.canceled();
             }
             return;
           }
@@ -2283,8 +2282,8 @@ angular.module('datasourcejs', [])
               }
               if (checkRequestId && checkRequestId.length > 0)
                 if (resourceURL.indexOf(checkRequestId) == -1) {
-                  if (callbacksObj.canceled) {
-                    callbacksObj.canceled();
+                  if (callbacks.canceled) {
+                    callbacks.canceled();
                   }
                   return;
                 }
@@ -2345,8 +2344,8 @@ angular.module('datasourcejs', [])
             }
 
             if (this.lastFilter == filter) {
-              if (callbacksObj.canceled) {
-                callbacksObj.canceled();
+              if (callbacks.canceled) {
+                callbacks.canceled();
               }
               return;
             }
