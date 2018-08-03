@@ -1709,13 +1709,11 @@
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         }
       },
-      "groupedChildren": [
+      "childrenProperties":[
         {
-          "text_pt_BR": "Configuração",
-          "text_en_US": "Configuration",
+          "name": "options",
           "selector": "cron-grid"
-        }
-      ]
+        }]
     },
     {
       "name": "crn-enterprise-combobox",
