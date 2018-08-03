@@ -729,8 +729,8 @@ app.kendoHelper = {
       options.dataValueField = 'key'; 
       options.dataTextField = 'value';
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
-    } else if (options.dataSource) {
-      dataSource = app.kendoHelper.getDataSource(options.dataSource, scope);
+    } else if (options.dataSourceScreen.entityDataSource) {
+      dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope);
       valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
     }
     
