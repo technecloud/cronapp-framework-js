@@ -1,4 +1,4 @@
-//v2.0.4
+//v2.0.5
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -2449,6 +2449,17 @@ angular.module('datasourcejs', [])
         this.addObserver = function(observer) {
           this.observers.push(observer);
         };
+
+        this.sum = function(field) {
+          var total= 0;
+          for (var i=0;i<this.data.length;i++) {
+            if (this.data[i][field]) {
+              total = total + this.data[i][field];
+            }
+          }
+
+          return total;
+        }
 
         /**
          * Clone a JSON Object
