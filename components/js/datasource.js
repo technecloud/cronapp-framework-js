@@ -1,4 +1,4 @@
-//v2.0.3
+//v2.0.5
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -73,11 +73,15 @@ angular.module('datasourcejs', [])
         var service = null;
 
         function reverseArr(input) {
-          var ret = new Array;
-          for(var i = input.length-1; i >= 0; i--) {
-            ret.push(input[i]);
+          if (input) {
+            var ret = new Array;
+            for (var i = input.length - 1; i >= 0; i--) {
+              ret.push(input[i]);
+            }
+            return ret;
+          } else {
+            return [];
           }
-          return ret;
         }
 
         // Public methods
@@ -564,39 +568,32 @@ angular.module('datasourcejs', [])
         }
 
         this.postBatchData = function(callback) {
-          if (this.dependentData) {
-            var func = function() {
-              this.storeDependentBuffer(function () {
-                  reduce(this.dependentData, function (item, resolve) {
-                    item.storeDependentBuffer(function () {
-                      resolve();
-                    });
-                  }.bind(this), function () {
-                    if (callback) {
-                      callback();
-                    }
-                  }.bind(this))
-              }.bind(this));
-            }.bind(this);
-
-            //Primeiro executa as remoções
-            reduce(reverseArr(this.dependentData), function (item, resolve) {
-              item.storeDependentBuffer(function () {
-                resolve();
-              }, true);
-            }.bind(this), function() {
-              func();
+          var func = function() {
+            this.storeDependentBuffer(function () {
+                reduce(this.dependentData, function (item, resolve) {
+                  item.storeDependentBuffer(function () {
+                    resolve();
+                  });
+                }.bind(this), function () {
+                  if (callback) {
+                    callback();
+                  }
+                }.bind(this))
             }.bind(this));
+          }.bind(this);
 
-          } else {
-            if (callback) {
-              callback();
-            }
-          }
+          //Primeiro executa as remoções
+          reduce(reverseArr(this.dependentData), function (item, resolve) {
+            item.storeDependentBuffer(function () {
+              resolve();
+            }, true);
+          }.bind(this), function() {
+            func();
+          }.bind(this));
         }
 
         var reduce = function (array, func, callback) {
-          if (array.length == 0) {
+          if (!array || array.length == 0) {
             callback();
           } else {
             var requests = array.reduce(function (promiseChain, item) {
@@ -2452,6 +2449,17 @@ angular.module('datasourcejs', [])
         this.addObserver = function(observer) {
           this.observers.push(observer);
         };
+
+        this.sum = function(field) {
+          var total= 0;
+          for (var i=0;i<this.data.length;i++) {
+            if (this.data[i][field]) {
+              total = total + this.data[i][field];
+            }
+          }
+
+          return total;
+        }
 
         /**
          * Clone a JSON Object
