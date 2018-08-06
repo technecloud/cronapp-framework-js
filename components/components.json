@@ -66,6 +66,7 @@
       "name": "crn-button",
       "text_pt_BR": "Botão",
       "text_en_US": "Button",
+      "order": 0,
       "class": "adjust-icon mdi mdi-stop",
       "wrapper": false,
       "autoWrapper": true,
@@ -270,6 +271,7 @@
       "name": "crn-datasource",
       "wrapper": false,
       "autoWrapper": true,
+      "order": 0,
       "text_pt_BR": "Fonte de dados",
       "text_en_US": "Datasource",
       "class": "adjust-icon mdi mdi-table-large",
@@ -348,6 +350,7 @@
       "name": "crn-textinput",
       "text_pt_BR": "Entrada de texto",
       "text_en_US": "input",
+      "order": 0,
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinput.template.html",
       "properties": {
@@ -742,6 +745,7 @@
       "name": "crn-form",
       "text_pt_BR": "Formulário",
       "text_en_US": "Form",
+      "order": 0,
       "class": "adjust-icon mdi mdi-file-document",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/form.template.html",
       "properties": {
@@ -1151,6 +1155,7 @@
       "name": "crn-checkbox",
       "text_pt_BR": "Caixa de checagem",
       "text_en_US": "Checkbox",
+      "order": 0,
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/checkbox.template.html",
       "properties": {
@@ -1459,6 +1464,7 @@
       "name": "crn-textarea",
       "text_pt_BR": "Área de texto",
       "text_en_US": "Textarea",
+      "order": 0,
       "class": "adjust-icon mdi mdi-textbox",
       "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"none\"class=\"form-control\" rows=\"5\"></textarea></div>",
       "properties": {
@@ -1694,6 +1700,7 @@
       "name": "crn-cron-grid",
       "text_pt_BR": "Grade",
       "text_en_US": "Grid",
+      "order": 0,
       "class": "adjust-icon mdi mdi-nutrition",
       "designTimeDynamic": true,
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/cron-grid.designtime.html",
@@ -1760,6 +1767,7 @@
       "name": "crn-enterprise-dynamic-combobox",
       "text_pt_BR": "_Caixa de seleção dinâmica",
       "text_en_US": "Dynamic Combobox",
+      "order": 0,
       "class": "adjust-icon mdi mdi-nutrition",
       "designTimeHTML": "<span unselectable=\"on\" class=\"k-dropdown-wrap k-state-default\"><span unselectable=\"on\" class=\"k-input\"></span><span unselectable=\"on\" class=\"k-select\" aria-label=\"select\"><span class=\"k-icon k-i-arrow-60-down\"></span></span></span>",
       "designTimeSelector": "cron-dynamic-select",
