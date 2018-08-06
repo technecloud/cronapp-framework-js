@@ -619,6 +619,21 @@ app.kendoHelper = {
             var cronappDatasource = this.options.cronappDatasource;
             cronappDatasource.rowsPerPage = e.data.pageSize;
             cronappDatasource.offset = (e.data.page - 1);
+
+            //Significa que quer exibir todos
+            if (!e.data.pageSize) {
+              cronappDatasource.offset = undefined
+              delete paramsOData.$skip;
+              if (this.options.grid) {
+                //Se houver grade associado, e a pagina não for a primeira, cancela a chamada atual, e faz novamente selecionando a pagina 1
+                if (this.options.grid.dataSource.page() != 1) {
+                  this.options.grid.dataSource.page(1);
+                  e.error("canceled", "canceled", "canceled");
+                  return;
+                }
+              }
+            }
+
             var fetchData = {};
             fetchData.params = paramsOData;
             cronappDatasource.fetch(fetchData, {
