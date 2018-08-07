@@ -1338,75 +1338,76 @@
         var columns = [];
         if (options.columns) {
           options.columns.forEach(function(column)  {
-            if (column.visible) {
-              if (column.dataType == "Database") {
+            if (column.dataType == "Database") {
 
-                var addColumn = {
-                  field: column.field,
-                  title: column.headerText,
-                  type: column.type,
-                  width: column.width,
-                  sortable: column.sortable,
-                  filterable: column.filterable
-                };
-                addColumn.template = getTemplate(column);
-                addColumn.format = getFormat(column);
-                addColumn.editor = getEditor.bind(this)(column);
-                columns.push(addColumn);
-
-              }
-              else if (column.dataType == "Command") {
-                //Se não for editavel, não adiciona colunas de comando
-                if (options.editable != 'no') {
-                  var command = column.command.split('|');
-
-                  var commands = [];
-                  command.forEach(function(f) {
-                    var cmd = { name: f };
-                    if ( f == "edit")
-                      cmd.text = { edit: " ", update: " ", cancel: " " };
-                    else
-                      cmd.text = " ";
-                    commands.push(cmd);
-                  });
-
-                  var addColumn = {
-                    command: commands,
-                    title: column.headerText,
-                    width: column.width ? column.width : 155
-                  };
-                  columns.push(addColumn);
-                }
-              }
-              else if (column.dataType == "Blockly") {
-                var directiveContext = this;
-                var addColumn = {
-                  command: [{
-                    name: this.generateId(),
-                    text: column.headerText,
-                    click: function(e) {
-                      e.preventDefault();
-                      var tr = $(e.target).closest("tr"); // get the current table row (tr)
-                      var grid = tr.closest('table');
-
-                      var item = this.dataItem(tr);
-                      // var index = $(grid).find('tr.'+$(tr).attr('class')).index(tr);
-                      var index = $(grid.find('tbody')[0]).children().index(tr)
-                      var consolidated = {
-                        item: item,
-                        index: index
-                      }
-                      var call = 'scope.' + directiveContext.generateBlocklyCall(column.blocklyInfo);
-                      eval(call);
-                      return;
-                    }
-                  }],
-                  width: column.width
-                };
-                columns.push(addColumn);
-              }
+              var addColumn = {
+                field: column.field,
+                title: column.headerText,
+                type: column.type,
+                width: column.width,
+                sortable: column.sortable,
+                filterable: column.filterable,
+                hidden: !column.visible
+              };
+              addColumn.template = getTemplate(column);
+              addColumn.format = getFormat(column);
+              addColumn.editor = getEditor.bind(this)(column);
+              columns.push(addColumn);
 
             }
+            else if (column.dataType == "Command") {
+              //Se não for editavel, não adiciona colunas de comando
+              if (options.editable != 'no') {
+                var command = column.command.split('|');
+
+                var commands = [];
+                command.forEach(function(f) {
+                  var cmd = { name: f };
+                  if ( f == "edit")
+                    cmd.text = { edit: " ", update: " ", cancel: " " };
+                  else
+                    cmd.text = " ";
+                  commands.push(cmd);
+                });
+
+                var addColumn = {
+                  command: commands,
+                  title: column.headerText,
+                  width: column.width ? column.width : 155,
+                  hidden: !column.visible
+                };
+                columns.push(addColumn);
+              }
+            }
+            else if (column.dataType == "Blockly") {
+              var directiveContext = this;
+              var addColumn = {
+                command: [{
+                  name: this.generateId(),
+                  text: column.headerText,
+                  hidden: !column.visible,
+                  click: function(e) {
+                    e.preventDefault();
+                    var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                    var grid = tr.closest('table');
+
+                    var item = this.dataItem(tr);
+                    // var index = $(grid).find('tr.'+$(tr).attr('class')).index(tr);
+                    var index = $(grid.find('tbody')[0]).children().index(tr)
+                    var consolidated = {
+                      item: item,
+                      index: index
+                    }
+                    var call = 'scope.' + directiveContext.generateBlocklyCall(column.blocklyInfo);
+                    eval(call);
+                    return;
+                  }
+                }],
+                width: column.width
+              };
+              columns.push(addColumn);
+            }
+
           }.bind(this));
         }
 
