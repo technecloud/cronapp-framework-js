@@ -442,36 +442,21 @@
           "displayName_pt_BR": "Fonte de dados",
           "displayName_en_US": "Datasource",
           "removable": false,
-          "type": "pageDatasource"
+          "type": "pageDatasource",
+          "selector": "input",
+          "childrenProperty": true
         },
         "cronapp-filter-caseinsensitive":  {
           "removable": false,
-          "type": "list",
+          "type": "logic",
           "selector": "input",
-          "options": [
-            {
-              "value": "Sim",
-              "key": "true"
-            },
-            {
-              "value": "Não",
-              "key": "false"
-            }
-          ]
+          "childrenProperty": true
         },
         "cronapp-filter-autopost": {
           "removable": false,
-          "type": "list",
-          "options": [
-            {
-              "value": "Sim",
-              "key": "true"
-            },
-            {
-              "value": "Não",
-              "key": "false"
-            }
-          ]
+          "type": "logic",
+          "selector": "input",
+          "childrenProperty": true
         },
         "cronapp-filter-operator": {
           "removable": false,
@@ -497,7 +482,9 @@
               "value": "<=",
               "key": "<="
             }
-          ]
+          ],
+          "selector": "input",
+          "childrenProperty": true
         }
       },
       "groupedChildren": [{
@@ -1805,7 +1792,7 @@
         }
       ]
     },
-	{
+    {
       "name": "crn-enterprise-combobox-multiple",
       "text_pt_BR": "_Caixa de seleção multipla",
       "text_en_US": "Combobox Multi Select",
