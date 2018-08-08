@@ -1996,7 +1996,7 @@
       ]
     },
     {
-      "name": "crn-checkbox",
+      "name": "crn-enterprise-checkbox",
       "text_pt_BR": "_Checkbox",
       "text_en_US": "Checkbox",
       "class": "adjust-icon mdi mdi-checkbox-marked-outline",
@@ -2017,7 +2017,7 @@
         {
           "text_pt_BR": "Rótulo",
           "text_en_US": "Label",
-          "selector": "span"
+          "selector": "label"
         },
         {
           "text_pt_BR": "Campo",
