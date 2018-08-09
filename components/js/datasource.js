@@ -1,4 +1,4 @@
-//v2.0.7
+//v2.0.8
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -466,7 +466,7 @@ angular.module('datasourcejs', [])
         this.updateObjectAtIndex = function(obj, data, idx) {
           data = data || this.data;
 
-          this.copy(obj, data[idx]);
+          this.copy(data[idx], obj);
           delete data[idx].__status;
           delete data[idx].__original;
           delete data[idx].__originalIdx;
