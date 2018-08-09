@@ -567,6 +567,22 @@ app.kendoHelper = {
                   this.options.fromRead = true;
                   this.options.grid.dataSource.read();
                 }
+              }.bind(this),
+              memorycreate: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushUpdate(data);
+                }
+                else
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              memoryupdate: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushUpdate(data);
+                }
+                else
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
               }.bind(this)
             };
             this.options.cronappDatasource.addDataSourceEvents(this.options.dataSourceEventsPush);
