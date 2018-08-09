@@ -995,7 +995,8 @@
           "displayName_pt_BR": "Campo",
           "displayName_en_US": "Field",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+          "type":"text"
         }
 
       },
@@ -1049,7 +1050,8 @@
           "name": "crn-datasource",
           "selector": "ui-select",
           "displayName_pt_BR": "Fonte de dados",
-          "displayName_en_US": "Datasource"
+          "displayName_en_US": "Datasource",
+          "type":"pageDatasource"
         },
         {
           "name": "ng-model",
@@ -1064,7 +1066,8 @@
           "name": "ng-required",
           "selector": "ui-select",
           "displayName_pt_BR": "Requerido",
-          "displayName_en_US": "Required"
+          "displayName_en_US": "Required",
+          "type":"text"
         },
         {
           "editExpression": false,
