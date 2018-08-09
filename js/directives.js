@@ -1135,7 +1135,7 @@
 
         function getTemplate(column) {
           var template = undefined;
-          if (column.inputType == 'checkbox') {
+          if (column.inputType == 'checkbox' || column.type == 'boolean') {
             template = "<input type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
                 "<label class='k-checkbox-label k-no-text'></label>"
           }
@@ -1233,7 +1233,7 @@
             var kendoConfig = app.kendoHelper.getConfigSwitch(column.switchOptions);
             $input.appendTo(container).kendoMobileSwitch(kendoConfig, scope);
           }
-          else if (column.inputType == 'checkbox') {
+          else if (column.inputType == 'checkbox' || column.type == 'boolean') {
             var guid = this.generateId();
             $input = $('<input id="'+guid+'" name="' + opt.field + '" class="k-checkbox" type="checkbox" ><label class="k-checkbox-label" for="'+guid+'"></label>');
             $input.appendTo(container);
