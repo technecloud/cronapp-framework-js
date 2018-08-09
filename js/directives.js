@@ -2084,13 +2084,14 @@
             var datePicker = app.kendoHelper.buildKendoMomentPicker($element, options, scope, ngModelCtrl);
 
             if (attrs.fromGrid) {
+              var initialDate = $element.data('initial-date');
               var unmaskedvalue = function() {
                 var momentDate = null;
 
                 var valueDate =  $(this).val();
-                if ($(this).data('initial-date')) {
-                  valueDate = $(this).data('initial-date');
-                  $(this).data('initial-date', null);
+                if (initialDate) {
+                  valueDate = initialDate;
+                  initialDate = undefined;
                 }
 
                 if (useUTC) {
