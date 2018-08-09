@@ -1,4 +1,4 @@
-//v2.0.5
+//v2.0.7
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -899,6 +899,10 @@ angular.module('datasourcejs', [])
                   this.callDataSourceEvents('create', this.active);
                   delete this.active.__sender;
                 }
+
+                if (this.events.memorycreate && !hotData) {
+                  this.callDataSourceEvents('memorycreate', this.active);
+                }
               }.bind(this);
 
               if (this.dependentData && !this.dependentLazyPost && !this.batchPost) {
@@ -960,6 +964,10 @@ angular.module('datasourcejs', [])
                   if (this.events.update && hotData) {
                     this.callDataSourceEvents('update', this.active);
                     delete this.active.__sender;
+                  }
+
+                  if (this.events.memoryupdate && !hotData) {
+                    this.callDataSourceEvents('memoryupdate', this.active);
                   }
                 }
               }.bind(this));
