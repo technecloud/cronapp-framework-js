@@ -3,8 +3,6 @@
 
   app.controller('LoginController', function($controller, $scope, $http, $location, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService) {
 
-    // save state params into scope
-    $scope.params = $stateParams;
     $scope.$http = $http;
     app.registerEventsCronapi($scope, $translate);
 
@@ -92,8 +90,7 @@
   });
 
   app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
-    // save state params into scope
-    $scope.params = $stateParams;
+
     $scope.$http = $http;
     app.registerEventsCronapi($scope, $translate);
 
