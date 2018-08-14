@@ -239,11 +239,12 @@ var app = (function() {
       ])
       // General controller
       .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate) {
-        app.registerEventsCronapi($scope, $translate);
-
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
+
+        app.registerEventsCronapi($scope, $translate);
+
 
         // Query string params
         var queryStringParams = $location.search();
