@@ -270,7 +270,7 @@
     {
       "name": "crn-datasource",
       "wrapper": false,
-      "autoWrapper": true,
+      "autoWrapper": false,
       "order": 0,
       "text_pt_BR": "Fonte de dados",
       "text_en_US": "Datasource",
