@@ -1787,8 +1787,10 @@
             }
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
+            var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
+              dataSourceScreen = eval(select.dataSourceScreen.name);
             } catch(e){}
 
             var parent = element.parent();
@@ -1813,9 +1815,21 @@
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
 
+            if (dataSourceScreen != null) {
+              $(combobox).data('dataSourceScreen', dataSourceScreen);
+            }
+
             $element.on('change', function (event) {
               _scope.$apply(function () {
                 _ngModelCtrl.$setViewValue(this.dataItem());
+                
+                dataSourceScreen = $(this).data('dataSourceScreen');
+                if (dataSourceScreen != null) {
+                  var rowId = {
+                    __$id : this.dataItem().__$id
+                  }
+                  dataSourceScreen.goTo(rowId);
+                }
               }.bind(combobox));
             });
 
