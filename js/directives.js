@@ -1825,10 +1825,7 @@
                 
                 dataSourceScreen = $(this).data('dataSourceScreen');
                 if (dataSourceScreen != null) {
-                  var rowId = {
-                    __$id : this.dataItem().__$id
-                  }
-                  dataSourceScreen.goTo(rowId);
+                  dataSourceScreen.goTo(this.dataItem());
                 }
               }.bind(combobox));
             });
