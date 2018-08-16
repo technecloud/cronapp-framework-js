@@ -570,15 +570,15 @@ angular.module('datasourcejs', [])
         this.postBatchData = function(callback) {
           var func = function() {
             this.storeDependentBuffer(function () {
-                reduce(this.dependentData, function (item, resolve) {
-                  item.storeDependentBuffer(function () {
-                    resolve();
-                  });
-                }.bind(this), function () {
-                  if (callback) {
-                    callback();
-                  }
-                }.bind(this))
+              reduce(this.dependentData, function (item, resolve) {
+                item.storeDependentBuffer(function () {
+                  resolve();
+                });
+              }.bind(this), function () {
+                if (callback) {
+                  callback();
+                }
+              }.bind(this))
             }.bind(this));
           }.bind(this);
 
@@ -779,7 +779,10 @@ angular.module('datasourcejs', [])
 
         this.getObjectAsString = function(o) {
           if (this.isOData()) {
-            if (typeof o == 'number' || typeof o == 'boolean') {
+            if (o == null) {
+              return "null";
+            }
+            else if (typeof o == 'number' || typeof o == 'boolean') {
               return o+"";
             }
             else if (o instanceof Date) {
@@ -788,7 +791,10 @@ angular.module('datasourcejs', [])
 
             return "'"+o+"'";
           } else {
-            if (typeof o == 'number') {
+            if (o == null) {
+              return "";
+            }
+            else if (typeof o == 'number') {
               return o+"@@number";
             }
             else if (o instanceof Date) {
@@ -1335,6 +1341,10 @@ angular.module('datasourcejs', [])
                       deleted.__originalIdx = i;
                       this.postDeleteData.push(deleted);
                       this.hasMemoryData = true;
+
+                      if (this.events.memorydelete) {
+                        this.callDataSourceEvents('memorydelete', deleted);
+                      }
                     }
                   }
                   // If it's the object we're loking for
@@ -1807,7 +1817,7 @@ angular.module('datasourcejs', [])
                 return null;
               }
 
-              else {
+              else if (value != '') {
                 return parseFloat(value);
               }
             }
@@ -2263,7 +2273,12 @@ angular.module('datasourcejs', [])
                     filter += "memory";
                   }
                 } else {
-                  filter += this.getObjectAsString(this.normalizeValue(binary[1], true));
+                  if (!binary[1] && g[1]) {
+                    filter += 'null';
+                    cleanData = true;
+                  } else {
+                    filter += this.getObjectAsString(this.normalizeValue(binary[1], true));
+                  }
                 }
               }
             }

@@ -517,7 +517,7 @@
 
       .filter('raw',function($translate) {
         return function(o) {
-          if (o) {
+          if (o != null && o !== undefined) {
             if (typeof o == 'number') {
               return o + "";
             }
@@ -966,7 +966,7 @@
               if (blocklyInfo.blocklyParams.length > 0) {
                 params = "(";
                 blocklyInfo.blocklyParams.forEach(function(p) {
-                  params += this.encodeHTML(p.value ? p.value : "''") + ",";
+                  params += (p.value ? this.encodeHTML(p.value) : "''") + ",";
                 }.bind(this))
                 params = params.substr(0, params.length - 1);
                 params += ")";
@@ -978,7 +978,7 @@
               call = "cronapi.util.makeCallServerBlocklyAsync('"+blocklyName+"',null,null,";
               if (blocklyInfo.blocklyParams.length > 0) {
                 blocklyInfo.blocklyParams.forEach(function(p) {
-                  call += this.encodeHTML(p.value ? p.value : "''") + ",";
+                  call += (p.value ? this.encodeHTML(p.value) : "''") + ",";
                 }.bind(this))
               }
               call = call.substr(0, call.length - 1);
@@ -2979,6 +2979,13 @@ app.kendoHelper = {
                 }
                 else
                   this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              memorydelete: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushDestroy(data);
+                }
+
               }.bind(this)
             };
             this.options.cronappDatasource.addDataSourceEvents(this.options.dataSourceEventsPush);
