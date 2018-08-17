@@ -1,4 +1,4 @@
-//v2.0.8
+//v2.0.9
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -2497,11 +2497,6 @@ angular.module('datasourcejs', [])
             if (from.hasOwnProperty(key) && key.indexOf('$$') == -1) {
               to[key] = this.copy(from[key]);
             }
-          }
-          //Verificando os campos que não existem mais no registro (Significa que foi setado para nulo)
-          for (var key in to) {
-            if (key != '__$id' && from[key] == undefined)
-              delete to[key];
           }
 
           return to;
