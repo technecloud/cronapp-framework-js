@@ -35,11 +35,13 @@
     }
 
     $scope.autoLogin = function(){
-      refreshToken($http, function(){
-        $state.go('home');
-      }, function(){
-        localStorage.removeItem('_u');
-      })
+      if(localStorage.getItem('_u') && localStorage.getItem('_u').token ){
+        refreshToken($http, function(){
+          $state.go('home');
+        }, function(){
+          localStorage.removeItem('_u');
+        })
+      }
     }
     $scope.autoLogin();
     $scope.message = {};
@@ -147,7 +149,7 @@
           $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
         }
       });
-      if($rootScope.session.token){
+      if(localStorage.getItem('_u') && localStorage.getItem('_u').token ){
         refreshToken($http,function(){},function(){
           localStorage.removeItem('_u');
           $state.go('login');
