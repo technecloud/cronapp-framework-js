@@ -44,7 +44,7 @@ var app = (function() {
             function($q, $rootScope) {
               var service = {
                 'request': function(config) {
-                  var _u = JSON.parse(sessionStorage.getItem('_u'));
+                  var _u = JSON.parse(localStorage.getItem('_u'));
                   if (_u && _u.token) {
                     config.headers['X-AUTH-TOKEN'] = _u.token;
                     window.uToken = _u.token;
@@ -68,106 +68,106 @@ var app = (function() {
           positionX: 'right',
           positionY: 'top'
         });
-        
+
         if (window.customStateProvider) {
           window.customStateProvider($stateProvider);
         }
         else {
-        // Set up the states
+          // Set up the states
           $stateProvider
-            .state('login', {
-              url: "",
-              controller: 'LoginController',
-              templateUrl: 'views/login.view.html'
-            })
+              .state('login', {
+                url: "",
+                controller: 'LoginController',
+                templateUrl: 'views/login.view.html'
+              })
 
-            .state('social', {
-              url: "/connected",
-              controller: 'SocialController',
-              templateUrl: 'views/login.view.html'
-            })
+              .state('social', {
+                url: "/connected",
+                controller: 'SocialController',
+                templateUrl: 'views/login.view.html'
+              })
 
-            .state('socialError', {
-              url: "/notconnected",
-              controller: 'SocialController',
-              templateUrl: 'views/login.view.html'
-            })
+              .state('socialError', {
+                url: "/notconnected",
+                controller: 'SocialController',
+                templateUrl: 'views/login.view.html'
+              })
 
-            .state('main', {
-              url: "/",
-              controller: 'LoginController',
-              templateUrl: 'views/login.view.html'
-            })
+              .state('main', {
+                url: "/",
+                controller: 'LoginController',
+                templateUrl: 'views/login.view.html'
+              })
 
-            .state('publicRoot', {
-              url: "/public/{name:.*}",
-              controller: 'PageController',
-              templateUrl: function(urlattr) {
-                return 'views/public/' + urlattr.name + '.view.html';
-              }
-            })
+              .state('publicRoot', {
+                url: "/public/{name:.*}",
+                controller: 'PageController',
+                templateUrl: function(urlattr) {
+                  return 'views/public/' + urlattr.name + '.view.html';
+                }
+              })
 
-            .state('public', {
-              url: "/home/public",
-              controller: 'PublicController',
-              templateUrl: function(urlattr) {
-                return 'views/public/home.view.html';
-              }
-            })
+              .state('public', {
+                url: "/home/public",
+                controller: 'PublicController',
+                templateUrl: function(urlattr) {
+                  return 'views/public/home.view.html';
+                }
+              })
 
-            .state('public.pages', {
-              url: "/{name:.*}",
-              controller: 'PageController',
-              templateUrl: function(urlattr) {
-                return 'views/public/' + urlattr.name + '.view.html';
-              }
-            })
+              .state('public.pages', {
+                url: "/{name:.*}",
+                controller: 'PageController',
+                templateUrl: function(urlattr) {
+                  return 'views/public/' + urlattr.name + '.view.html';
+                }
+              })
 
-            .state('home', {
-              url: "/home",
-              controller: 'HomeController',
-              templateUrl: 'views/logged/home.view.html'
-            })
+              .state('home', {
+                url: "/home",
+                controller: 'HomeController',
+                templateUrl: 'views/logged/home.view.html'
+              })
 
-            .state('home.pages', {
-              url: "/{name:.*}",
-              controller: 'PageController',
-              templateUrl: function(urlattr) {
-                return 'views/' + urlattr.name + '.view.html';
-              }
-            })
+              .state('home.pages', {
+                url: "/{name:.*}",
+                controller: 'PageController',
+                templateUrl: function(urlattr) {
+                  return 'views/' + urlattr.name + '.view.html';
+                }
+              })
 
-            .state('404', {
-              url: "/error/404",
-              controller: 'PageController',
-              templateUrl: function(urlattr) {
-                return 'views/error/404.view.html';
-              }
-            })
+              .state('404', {
+                url: "/error/404",
+                controller: 'PageController',
+                templateUrl: function(urlattr) {
+                  return 'views/error/404.view.html';
+                }
+              })
 
-            .state('403', {
-              url: "/error/403",
-              controller: 'PageController',
-              templateUrl: function(urlattr) {
-                return 'views/error/403.view.html';
-              }
-            });
+              .state('403', {
+                url: "/error/403",
+                controller: 'PageController',
+                templateUrl: function(urlattr) {
+                  return 'views/error/403.view.html';
+                }
+              });
         }
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/error/404");
       })
-      .factory('originPath', ['$location', function($location) {  
+      .factory('originPath', ['$location', function($location) {
         var originPath = {
-            request: function(config) {
-                config.headers['origin-path'] = $location.path();
-                return config;
-            }
+          request: function(config) {
+            config.headers['origin-path'] = $location.path();
+            return config;
+          }
         };
         return originPath;
       }])
-    	.config(['$httpProvider', function($httpProvider) {  
-    	    $httpProvider.interceptors.push('originPath');
+      .config(['$httpProvider', function($httpProvider) {
+        $httpProvider.interceptors.push('originPath');
       }])
       .config(function($translateProvider, tmhDynamicLocaleProvider) {
 
@@ -239,11 +239,12 @@ var app = (function() {
       ])
       // General controller
       .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate) {
-        app.registerEventsCronapi($scope, $translate);
-
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
+
+        app.registerEventsCronapi($scope, $translate);
+
 
         // Query string params
         var queryStringParams = $location.search();
@@ -265,8 +266,8 @@ var app = (function() {
 
         $scope.registerComponentScripts();
 
-        try { 
-          var contextAfterPageController = $controller('AfterPageController', { $scope: $scope });  
+        try {
+          var contextAfterPageController = $controller('AfterPageController', { $scope: $scope });
           app.copyContext(contextAfterPageController, this, 'AfterPageController');
         } catch(e) {};
         try { if ($scope.blockly.events.afterPageRender) $scope.blockly.events.afterPageRender(); } catch(e) {};
@@ -277,7 +278,8 @@ var app = (function() {
           if (arguments.length >= 6) {
             var requestObj = arguments[5];
             if (requestObj.status === 404 || requestObj.status === 403) {
-              $state.go(requestObj.status.toString());
+              localStorage.removeItem('_u');
+              $state.go('login');
             }
           } else {
             $state.go('404');
@@ -340,14 +342,14 @@ app.registerEventsCronapi = function($scope, $translate) {
 };
 
 app.copyContext = function(fromContext, toContext, controllerName) {
-	if (fromContext) {
-  	for (var item in fromContext) {
-  	  if (!toContext[item])
-  	    toContext[item] = fromContext[item];
-  	  else 
-  	    toContext[item+controllerName] = fromContext[item];
-  	}
-	}
+  if (fromContext) {
+    for (var item in fromContext) {
+      if (!toContext[item])
+        toContext[item] = fromContext[item];
+      else
+        toContext[item+controllerName] = fromContext[item];
+    }
+  }
 };
 
 window.safeApply = function(fn) {

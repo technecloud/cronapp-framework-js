@@ -1,8 +1,29 @@
 (function($app) {
   angular.module('custom.controllers', []);
 
+  // refresh token
+  var  refreshToken = function($http,success,error) {
+    $http({
+      method : 'GET',
+      url : 'auth/refresh'
+    }).success(function(data, status, headers, config) {
+      // Store data response on local storage
+      console.log('revive :', new Date(data.expires));
+      localStorage.setItem("_u", JSON.stringify(data));
+      // Recussive
+      setTimeout(function() {
+        $scope.refreshToken($http, success,error);
+        // refres time
+      }, (1800 * 1000));
+      success();
+    }).error(function() {
+      error();
+    });
+  };
+
   app.controller('LoginController', function($controller, $scope, $http, $location, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService) {
 
+    $scope.$http = $http;
     app.registerEventsCronapi($scope, $translate);
 
     $rootScope.http = $http;
@@ -13,13 +34,38 @@
       ReportService.openReport(reportName, params);
     }
 
+    $scope.autoLogin = function(){
+      if(localStorage.getItem('_u') ){
+        refreshToken($http, function(){
+          $state.go('home');
+        }, function(){
+          localStorage.removeItem('_u');
+        })
+      }
+    }
+    $scope.autoLogin();
     $scope.message = {};
+    $scope.renderRecaptcha = function(){
+      window.grecaptcha.render('loginRecaptcha');
+      window.grecaptcha.reset();
+    }
     $scope.login = function(user, password, token) {
       $scope.message.error = undefined;
-
+      if($('form[name="'+this.form.$name+'"]').children('*[class=g-recaptcha]').length){
+        $scope.captcha_token = window.grecaptcha.getResponse();
+        if(!$scope.captcha_token != ""){
+          window.grecaptcha.execute(function(token){}).then(function(token){
+            angular.element($('form[ng-submit="login()"]')[0]).scope().login();
+          },function(){
+            Notification.error('Error on recaptcha');
+          });
+          return;
+        }
+      }
       var user = {
         username : user?user:$scope.username.value,
-        password : password?password:$scope.password.value
+        password : password?password:$scope.password.value,
+        recaptchaToken : $scope.captcha_token ? $scope.captcha_token : undefined
       };
 
       var headerValues = {
@@ -40,11 +86,11 @@
 
     function handleSuccess(data, status, headers, config) {
       // Store data response on session storage
-      // The session storage will be cleaned when the browser window is closed
+      // The local storage will be cleaned when the browser window is closed
       if(typeof (Storage) !== "undefined") {
         // save the user data on localStorage
-        sessionStorage.setItem("_u", JSON.stringify(data));
-        $rootScope.session = JSON.parse(sessionStorage._u);
+        localStorage.setItem("_u", JSON.stringify(data));
+        $rootScope.session = JSON.parse(localStorage._u);
       }
       else {
         // Sorry! No Web Storage support.
@@ -61,8 +107,8 @@
       Notification.error(error);
     }
 
-    try { 
-      var contextAfterLoginController = $controller('AfterLoginController', { $scope: $scope }); 
+    try {
+      var contextAfterLoginController = $controller('AfterLoginController', { $scope: $scope });
       app.copyContext(contextAfterLoginController, this, 'AfterLoginController');
     } catch(e) {};
     try { if ($scope.blockly.events.afterLoginRender) $scope.blockly.events.afterLoginRender(); } catch(e) {};
@@ -70,6 +116,7 @@
 
   app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
 
+    $scope.$http = $http;
     app.registerEventsCronapi($scope, $translate);
 
     $rootScope.http = $http;
@@ -86,45 +133,37 @@
       valor : 1
     }
 
-    // refresh token
-    $scope.refreshToken = function() {
-      $http({
-        method : 'GET',
-        url : 'auth/refresh'
-      }).success(function(data, status, headers, config) {
-        // Store data response on session storage
-        console.log('revive :', new Date(data.expires));
-        sessionStorage.setItem("_u", JSON.stringify(data));
-        // Recussive
-        setTimeout(function() {
-          $scope.refreshToken();
-          // refres time
-        }, (1800 * 1000));
-      }).error(function() {
-        // abafar TODO
-      });
-    };
 
-    $rootScope.session = (sessionStorage._u) ? JSON.parse(sessionStorage._u) : null;
+
+    $rootScope.session = (localStorage.getItem('_u') != undefined) ? JSON.parse(localStorage.getItem('_u')) : null;
 
     if($rootScope.session) {
       // When access home page we have to check
       // if the user is authenticated and the userData
-      // was saved on the browser's sessionStorage
+      // was saved on the browser's localStorage
       $rootScope.myTheme = '';
       if ($rootScope.session.user)
-      $rootScope.myTheme = $rootScope.session.user.theme;
+        $rootScope.myTheme = $rootScope.session.user.theme;
       $scope.$watch('myTheme', function(value) {
         if(value !== undefined && value !== "") {
           $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
         }
       });
-      if($rootScope.session.token)
-        $scope.refreshToken();
+      if(localStorage.getItem('_u')){
+        refreshToken($http,function(){},function(){
+          localStorage.removeItem('_u');
+          $state.go('login');
+          console.log('userRemoved');
+        })
+      }else {
+        localStorage.removeItem('_u');
+        $state.go('login');
+        console.log('userRemoved');
+      };
     }
     else {
       if (!$scope.ignoreAuth) {
-        sessionStorage.removeItem("_u");
+        localStorage.removeItem("_u");
         window.location.href = "";
       }
     }
@@ -141,7 +180,7 @@
       function clean() {
         $rootScope.session = {};
         if(typeof (Storage) !== "undefined") {
-          sessionStorage.removeItem("_u");
+          localStorage.removeItem("_u");
         }
         window.location.href = "";
       }
@@ -257,7 +296,7 @@
         function changeSuccess(data, status, headers, config) {
           $rootScope.session.theme = theme;
           $rootScope.session.user.theme = theme;
-          sessionStorage.setItem("_u", JSON.stringify($rootScope.session));
+          localStorage.setItem("_u", JSON.stringify($rootScope.session));
         }
 
         function changeError(data, status, headers, config) {
@@ -266,7 +305,7 @@
         }
       }
     };
-    try { 
+    try {
       var contextAfterHomeController = $controller('AfterHomeController', { $scope: $scope });
       app.copyContext(contextAfterHomeController, this, 'AfterHomeController');
     } catch(e) {};
