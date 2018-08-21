@@ -278,7 +278,8 @@ var app = (function() {
           if (arguments.length >= 6) {
             var requestObj = arguments[5];
             if (requestObj.status === 404 || requestObj.status === 403) {
-              $state.go(requestObj.status.toString());
+              localStorage.removeItem('_u');
+              $state.go('login');
             }
           } else {
             $state.go('404');
