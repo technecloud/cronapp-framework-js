@@ -5,7 +5,7 @@
   var  refreshToken = function($http,success,error) {
     $http({
       method : 'GET',
-      url : 'auth/refresh'
+      url :  window.hostApp + 'auth/refresh'
     }).success(function(data, status, headers, config) {
       // Store data response on local storage
       localStorage.setItem("_u", JSON.stringify(data));
