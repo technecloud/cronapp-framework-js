@@ -8,7 +8,6 @@
       url : 'auth/refresh'
     }).success(function(data, status, headers, config) {
       // Store data response on local storage
-      console.log('revive :', new Date(data.expires));
       localStorage.setItem("_u", JSON.stringify(data));
       // Recussive
       setTimeout(function() {
@@ -35,7 +34,7 @@
     }
 
     $scope.autoLogin = function(){
-      if(localStorage.getItem('_u') ){
+      if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token ){
         refreshToken($http, function(){
           $state.go('home');
         }, function(){
@@ -149,17 +148,12 @@
           $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
         }
       });
-      if(localStorage.getItem('_u')){
+      if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token){
         refreshToken($http,function(){},function(){
           localStorage.removeItem('_u');
           $state.go('login');
-          console.log('userRemoved');
         })
-      }else {
-        localStorage.removeItem('_u');
-        $state.go('login');
-        console.log('userRemoved');
-      };
+      }
     }
     else {
       if (!$scope.ignoreAuth) {
