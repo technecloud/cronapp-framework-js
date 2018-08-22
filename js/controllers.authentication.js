@@ -8,7 +8,6 @@
       url : 'auth/refresh'
     }).success(function(data, status, headers, config) {
       // Store data response on local storage
-      console.log('revive :', new Date(data.expires));
       localStorage.setItem("_u", JSON.stringify(data));
       // Recussive
       setTimeout(function() {
@@ -153,7 +152,6 @@
         refreshToken($http,function(){},function(){
           localStorage.removeItem('_u');
           $state.go('login');
-          console.log('userRemoved');
         })
       }
     }

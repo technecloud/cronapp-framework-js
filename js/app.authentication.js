@@ -299,8 +299,6 @@ app.bindScope = function($scope, obj) {
   var newObj = {};
 
   for (var x in obj) {
-    // var name = parentName+'.'+x;
-    // console.log(name);
     if (typeof obj[x] == 'string')
       newObj[x] = obj[x];
     else if (typeof obj[x] == 'function')
