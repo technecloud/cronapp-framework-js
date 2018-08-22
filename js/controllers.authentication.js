@@ -149,17 +149,13 @@
           $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
         }
       });
-      if(localStorage.getItem('_u')){
+      if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token){
         refreshToken($http,function(){},function(){
           localStorage.removeItem('_u');
           $state.go('login');
           console.log('userRemoved');
         })
-      }else {
-        localStorage.removeItem('_u');
-        $state.go('login');
-        console.log('userRemoved');
-      };
+      }
     }
     else {
       if (!$scope.ignoreAuth) {
