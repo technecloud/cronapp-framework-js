@@ -35,7 +35,7 @@
     }
 
     $scope.autoLogin = function(){
-      if(localStorage.getItem('_u') ){
+      if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token ){
         refreshToken($http, function(){
           $state.go('home');
         }, function(){
