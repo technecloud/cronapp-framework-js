@@ -1793,51 +1793,55 @@
             } catch(err) {
               console.log('DynamicComboBox invalid configuration! ' + err);
             }
-
+            
             var options = app.kendoHelper.getConfigCombobox(select, scope);
             var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
               dataSourceScreen = eval(select.dataSourceScreen.name);
             } catch(e){}
-
+            
             var parent = element.parent();
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
             var $element = $(parent).find('input.cronDynamicSelect');
             $(element).remove();
-
-            options['dataBound'] = function(e) {
-              var currentValue = $(combobox).data('currentValue');
-              if (currentValue != null) {
-                setTimeout(function(){combobox.value(currentValue)},300);
-              }
-              $(combobox).data('currentValue', null);
-            };
-
-            var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-            if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
-              combobox.dataSource.transport.options.grid = combobox;
+            
+            options.virtual = {}; 
+            options.virtual.itemHeight = 26;
+            if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
+              options.height = options.dataSource.pageSize * options.virtual.itemHeight / 4;
+              options.virtual.mapValueTo = 'dataItem';
+              options.virtual.valueMapper = function(options) {
+                if (options.value) {
+                  this.findObj([options.value], false, function(data) {
+                    options.success(data);
+                  });
+                } else {
+                  options.success(null);
+                }
+              }.bind(dataSourceScreen);
             }
-            var _scope = scope;
-            var _ngModelCtrl = ngModelCtrl;
-
+            
+            var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
+            
             if (dataSourceScreen != null) {
               $(combobox).data('dataSourceScreen', dataSourceScreen);
             }
-
+            
+            var _scope = scope;
+            var _ngModelCtrl = ngModelCtrl;
             $element.on('change', function (event) {
               _scope.$apply(function () {
                 _ngModelCtrl.$setViewValue(this.dataItem());
-
                 dataSourceScreen = $(this).data('dataSourceScreen');
                 if (dataSourceScreen != null) {
                   dataSourceScreen.goTo(this.dataItem());
                 }
               }.bind(combobox));
             });
-
+            
             if (ngModelCtrl) {
               /**
                * Formatters change how model values will appear in the view.
@@ -1845,7 +1849,7 @@
                */
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
-
+                
                 if (value) {
                   if (typeof value == "string") {
                     result = value;
@@ -1855,18 +1859,18 @@
                     }
                   }
                 }
-
-                $(combobox).data('currentValue', result);
-                view = combobox.dataSource.view();
-                if (!view || (Array.isArray(view) && view.length == 0)) {
-                  combobox.dataSource.read();
-                } else {
+                
+                setTimeout(function() {
                   combobox.value(result);
-                }
-
+                  /*Se não existe no datasource view, força a inserção do item no combo*/
+                  if (combobox.value() == '' || combobox.text().trim() == '') {
+                    combobox.trigger("valueMapper");
+                  }
+                }, 300);
+                
                 return result;
               });
-
+              
               /**
                * Parsers change how view values will be saved in the model.
                * for storage
@@ -1885,7 +1889,7 @@
                     } catch(e){}
                   }
                 }
-
+                
                 return null;
               }.bind(combobox));
             }
@@ -3045,6 +3049,11 @@ app.kendoHelper = {
 
             var fetchData = {};
             fetchData.params = paramsOData;
+			var append = false;
+            if (dataSource.append) {
+              append = dataSource.append;
+            }
+            cronappDatasource.append = append;
             cronappDatasource.fetch(fetchData, {
               success:  function(data) {
                 e.success(data);
@@ -3052,7 +3061,7 @@ app.kendoHelper = {
               canceled:  function(data) {
                 e.error("canceled", "canceled", "canceled");
               }
-            });
+            }, append);
           }
 
         },
@@ -3154,6 +3163,7 @@ app.kendoHelper = {
       options.dataTextField = 'value';
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
     } else if (options.dataSourceScreen.entityDataSource) {
+	  options.dataSourceScreen.entityDataSource.append = true;
       dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope);
       valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
     }
