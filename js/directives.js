@@ -1811,7 +1811,6 @@
             options.virtual = {}; 
             options.virtual.itemHeight = 26;
             if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
-              options.height = options.dataSource.pageSize * options.virtual.itemHeight / 4;
               options.virtual.mapValueTo = 'dataItem';
               options.virtual.valueMapper = function(options) {
                 if (options.value) {
