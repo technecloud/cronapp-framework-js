@@ -1,4 +1,4 @@
-//v2.0.8
+//v2.0.9
 var ISO_PATTERN  = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 var TIME_PATTERN  = new RegExp("PT(?:(\\d+)H)?(?:(\\d+)M)?(?:(\\d+)(?:\\.(\\d+)?)?S)?");
 var DEP_PATTERN  = new RegExp("\\{\\{(.*?)\\|raw\\}\\}");
@@ -570,15 +570,15 @@ angular.module('datasourcejs', [])
         this.postBatchData = function(callback) {
           var func = function() {
             this.storeDependentBuffer(function () {
-                reduce(this.dependentData, function (item, resolve) {
-                  item.storeDependentBuffer(function () {
-                    resolve();
-                  });
-                }.bind(this), function () {
-                  if (callback) {
-                    callback();
-                  }
-                }.bind(this))
+              reduce(this.dependentData, function (item, resolve) {
+                item.storeDependentBuffer(function () {
+                  resolve();
+                });
+              }.bind(this), function () {
+                if (callback) {
+                  callback();
+                }
+              }.bind(this))
             }.bind(this));
           }.bind(this);
 
@@ -779,7 +779,10 @@ angular.module('datasourcejs', [])
 
         this.getObjectAsString = function(o) {
           if (this.isOData()) {
-            if (typeof o == 'number' || typeof o == 'boolean') {
+            if (o == null) {
+              return "null";
+            }
+            else if (typeof o == 'number' || typeof o == 'boolean') {
               return o+"";
             }
             else if (o instanceof Date) {
@@ -788,7 +791,10 @@ angular.module('datasourcejs', [])
 
             return "'"+o+"'";
           } else {
-            if (typeof o == 'number') {
+            if (o == null) {
+              return "";
+            }
+            else if (typeof o == 'number') {
               return o+"@@number";
             }
             else if (o instanceof Date) {
@@ -1335,6 +1341,10 @@ angular.module('datasourcejs', [])
                       deleted.__originalIdx = i;
                       this.postDeleteData.push(deleted);
                       this.hasMemoryData = true;
+
+                      if (this.events.memorydelete) {
+                        this.callDataSourceEvents('memorydelete', deleted);
+                      }
                     }
                   }
                   // If it's the object we're loking for
@@ -1807,7 +1817,7 @@ angular.module('datasourcejs', [])
                 return null;
               }
 
-              else {
+              else if (value != '') {
                 return parseFloat(value);
               }
             }
@@ -2263,7 +2273,12 @@ angular.module('datasourcejs', [])
                     filter += "memory";
                   }
                 } else {
-                  filter += this.getObjectAsString(this.normalizeValue(binary[1], true));
+                  if (!binary[1] && g[1]) {
+                    filter += 'null';
+                    cleanData = true;
+                  } else {
+                    filter += this.getObjectAsString(this.normalizeValue(binary[1], true));
+                  }
                 }
               }
             }
@@ -2482,11 +2497,6 @@ angular.module('datasourcejs', [])
             if (from.hasOwnProperty(key) && key.indexOf('$$') == -1) {
               to[key] = this.copy(from[key]);
             }
-          }
-          //Verificando os campos que não existem mais no registro (Significa que foi setado para nulo)
-          for (var key in to) {
-            if (key != '__$id' && from[key] == undefined)
-              delete to[key];
           }
 
           return to;

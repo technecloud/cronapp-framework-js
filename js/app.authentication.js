@@ -278,7 +278,8 @@ var app = (function() {
           if (arguments.length >= 6) {
             var requestObj = arguments[5];
             if (requestObj.status === 404 || requestObj.status === 403) {
-              $state.go(requestObj.status.toString());
+              localStorage.removeItem('_u');
+              $state.go('login');
             }
           } else {
             $state.go('404');
@@ -298,8 +299,6 @@ app.bindScope = function($scope, obj) {
   var newObj = {};
 
   for (var x in obj) {
-    // var name = parentName+'.'+x;
-    // console.log(name);
     if (typeof obj[x] == 'string')
       newObj[x] = obj[x];
     else if (typeof obj[x] == 'function')
