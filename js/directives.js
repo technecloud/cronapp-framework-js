@@ -1743,9 +1743,19 @@
             var $element = $(parent).find('input.cronSelect');
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
+            
+            var initValue = attrs.cronInit;
+            options.dataBound = function(e) {
+              if (initValue && initValue!= null) {
+                ngModelCtrl.$setViewValue(initValue);
+                e.sender.value(initValue);
+                initValue = null;
+              }
+            }
+            
             var combobox = $element.kendoComboBox(options).data('kendoComboBox');
             $(element).remove();
-
+            
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
 
@@ -1821,6 +1831,15 @@
                   options.success(null);
                 }
               }.bind(dataSourceScreen);
+            }
+            
+            var initValue = attrs.cronInit;
+            options.dataBound = function(e) {
+              if (initValue && initValue!= null) {
+                _ngModelCtrl.$setViewValue(initValue);
+                e.sender.value(initValue);
+                initValue = null;
+              }
             }
             
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
