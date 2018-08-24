@@ -1730,6 +1730,10 @@
           "displayName_en_US": "Field",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        "cron-init":{
+          "displayName_pt_BR": "Valor Inicial",
+          "displayName_en_US": "Initial Value"
         }
       },
       "childrenProperties": [
@@ -1772,6 +1776,10 @@
           "displayName_en_US": "Field",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        "cron-init":{
+          "displayName_pt_BR": "Valor Inicial",
+          "displayName_en_US": "Initial Value"
         }
       },
       "childrenProperties": [
