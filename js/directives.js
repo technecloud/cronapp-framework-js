@@ -958,80 +958,95 @@
           generateBlocklyCall: function(blocklyInfo) {
             var call;
             if (blocklyInfo.type == "client")  {
-              var splitedClass = blocklyInfo.blocklyClass.split('/');
-              var blocklyName = splitedClass[splitedClass.length-1];
-              call = "blockly.js.blockly." + blocklyName;
-              call += "." +  blocklyInfo.blocklyMethod;
-              var params = "()";
-              if (blocklyInfo.blocklyParams.length > 0) {
-                params = "(";
-                blocklyInfo.blocklyParams.forEach(function(p) {
-                  params += (p.value ? this.encodeHTML(p.value) : "''") + ",";
-                }.bind(this))
-                params = params.substr(0, params.length - 1);
-                params += ")";
-              }
-              call += params;
+              call = "cronapi.client('" + blocklyInfo.blocklyClass + "." +  blocklyInfo.blocklyMethod + "')";
+              var params = "";
+              blocklyInfo.blocklyParams.forEach(function(p) {
+                if (params.length  > 0) {
+                  params += ", ";
+                }
+                params += (p.value ? p.value : "null");
+              });
+              call += ".run("+params+")";
             }
             else if (blocklyInfo.type == "server") {
-              var blocklyName = blocklyInfo.blocklyClass + ':' + blocklyInfo.blocklyMethod;
-              call = "cronapi.util.makeCallServerBlocklyAsync('"+blocklyName+"',null,null,";
-              if (blocklyInfo.blocklyParams.length > 0) {
-                blocklyInfo.blocklyParams.forEach(function(p) {
-                  call += (p.value ? this.encodeHTML(p.value) : "''") + ",";
-                }.bind(this))
-              }
-              call = call.substr(0, call.length - 1);
-              call += ")";
+              var blocklyName = blocklyInfo.blocklyClass + '.' + blocklyInfo.blocklyMethod;
+              call = "cronapi.server('"+blocklyName+"')";
+
+              var params = "";
+              blocklyInfo.blocklyParams.forEach(function(p) {
+                if (params.length  > 0) {
+                  params += ", ";
+                }
+                params += (p.value ? p.value : "null");
+              });
+
+              call += ".run("+params+")";
+
             }
             return call;
 
           },
-          generateToolbarButtonCall: function(toolbarButton, scope) {
+          generateToolbarButtonCall: function(toolbarButton, scope, options) {
             var buttonCall;
 
             var generateObjTemplate = function(functionToCall, title) {
               var obj = {
                 template: function() {
                   var buttonId = this.generateId();
-                  return compileTemplateAngular(buttonId, functionToCall, title);
+                  return createTemplateButton(buttonId, functionToCall, title);
                 }.bind(this)
               };
               return obj;
             }.bind(this);
 
-            var compileTemplateAngular = function(buttonId, functionToCall, title) {
+            var createTemplateButton = function(buttonId, functionToCall, title) {
               var template = '';
               if (toolbarButton.type == "SaveOrCancelChanges") {
                 if (toolbarButton.saveButton)
-                  template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-check"></span>#TITLE#</a>';
+                  template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-check"></span>#TITLE#</a>';
                 else
-                  template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
+                  template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
               }
               else if (toolbarButton.type == "Blockly") {
-                template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)" ng-click="#FUNCTIONCALL#">#TITLE#</a>';
+                template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
               }
               else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
-                template = '<a role="button" id="#BUTTONID#" class="k-button " href="javascript:void(0)" ng-click="#FUNCTIONCALL#"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
+                template = '<a role="button" id="#BUTTONID#" class="k-button " href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
               }
 
               template = template
                   .split('#BUTTONID#').join(buttonId)
-                  .split('#FUNCTIONCALL#').join(functionToCall)
+                  .split('#FUNCTIONCALL#').join(this.encodeHTML(functionToCall))
                   .split('#TITLE#').join(title);
+
+              var cronappDatasource = eval(options.dataSourceScreen.entityDataSource.name);
 
               var waitRender = setInterval(function() {
                 if ($('#' + buttonId).length > 0) {
-                  scope.safeApply(function() {
-                    var x = angular.element($('#' + buttonId ));
-                    $compile(x)(scope);
-                    clearInterval(waitRender);
-                  });
+                  $('#' + buttonId).click(function() {
+                    var consolidated = {
+                      item: cronappDatasource.active,
+                      index: cronappDatasource.cursor
+                    }
+                    var contextVars = {
+                      'currentData': cronappDatasource.data,
+                      'datasource': cronappDatasource,
+                      'selectedIndex': cronappDatasource.cursor,
+                      'index': cronappDatasource.cursor,
+                      'selectedRow': cronappDatasource.active,
+                      'consolidated': consolidated,
+                      'item': cronappDatasource.active,
+                      'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true)
+                    };
+
+                    scope.$eval(functionToCall, contextVars) ;
+                  }.bind(this));
+                  clearInterval(waitRender);
                 }
-              },200);
+              }.bind(this),200);
 
               return template;
-            };
+            }.bind(this);
 
             var call = '';
             if (toolbarButton.methodCall)
@@ -1065,6 +1080,7 @@
                   });
                 }
               },200);
+
               return template;
             };
             buttonCall = compileTemplateAngular(buttonType, functionToCall, datasourceName, modalId);
@@ -1385,7 +1401,7 @@
                           index: index
                         }
 
-                        var call = 'scope.' + directiveContext.generateBlocklyCall(column.blocklyInfo);
+                        var call = directiveContext.generateBlocklyCall(column.blocklyInfo);
 
                         var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
                         if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
@@ -1393,7 +1409,18 @@
                           this.select(tr);
                         }
 
-                        eval(call);
+                        var contextVars = {
+                          'currentData': cronappDatasource.data,
+                          'datasource': cronappDatasource,
+                          'selectedIndex': index,
+                          'index': index,
+                          'selectedRow': item,
+                          'consolidated': consolidated,
+                          'item': item,
+                          'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true)
+                        };
+
+                        scope.$eval(call, contextVars);
                         return;
                       }
                     }],
@@ -1430,7 +1457,7 @@
                     var datasourceName = options.dataSourceScreen.name;
                     var popupInsert = options.popupInsert;
                     toolbarButton.methodCall = datasourceName + ".startInserting(); cronapi.screen.showModal('"+popupInsert+"');";
-                    var button = this.generateToolbarButtonCall(toolbarButton, scope);
+                    var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                     toolbar.push(button);
                     this.addButtonsInModal(popupInsert, datasourceName, scope);
                   }
@@ -1445,12 +1472,12 @@
                 }
               }
               else if (toolbarButton.type == "Blockly") {
-                var buttonBlockly = this.generateToolbarButtonCall(toolbarButton, scope);
+                var buttonBlockly = this.generateToolbarButtonCall(toolbarButton, scope, options);
                 toolbar.push(buttonBlockly);
               }
               else if (toolbarButton.type == "SaveOrCancelChanges") {
                 if (options.editable != 'no') {
-                  var buttonSaveOrCancel = this.generateToolbarButtonCall(toolbarButton, scope);
+                  var buttonSaveOrCancel = this.generateToolbarButtonCall(toolbarButton, scope, options);
                   toolbar.push(buttonSaveOrCancel);
                 }
               }
@@ -1743,7 +1770,7 @@
             var $element = $(parent).find('input.cronSelect');
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
-            
+
             var initValue = attrs.cronInit;
             options.dataBound = function(e) {
               if (initValue && initValue!= null) {
@@ -1752,10 +1779,10 @@
                 initValue = null;
               }
             }
-            
+
             var combobox = $element.kendoComboBox(options).data('kendoComboBox');
             $(element).remove();
-            
+
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
 
@@ -1803,22 +1830,22 @@
             } catch(err) {
               console.log('DynamicComboBox invalid configuration! ' + err);
             }
-            
+
             var options = app.kendoHelper.getConfigCombobox(select, scope);
             var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
               dataSourceScreen = eval(select.dataSourceScreen.name);
             } catch(e){}
-            
+
             var parent = element.parent();
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
             var $element = $(parent).find('input.cronDynamicSelect');
             $(element).remove();
-            
-            options.virtual = {}; 
+
+            options.virtual = {};
             options.virtual.itemHeight = 26;
             if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
               options.virtual.mapValueTo = 'dataItem';
@@ -1832,7 +1859,7 @@
                 }
               }.bind(dataSourceScreen);
             }
-            
+
             var initValue = attrs.cronInit;
             options.dataBound = function(e) {
               if (initValue && initValue!= null) {
@@ -1841,13 +1868,13 @@
                 initValue = null;
               }
             }
-            
+
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-            
+
             if (dataSourceScreen != null) {
               $(combobox).data('dataSourceScreen', dataSourceScreen);
             }
-            
+
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
             $element.on('change', function (event) {
@@ -1859,7 +1886,7 @@
                 }
               }.bind(combobox));
             });
-            
+
             if (ngModelCtrl) {
               /**
                * Formatters change how model values will appear in the view.
@@ -1867,7 +1894,7 @@
                */
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
-                
+
                 if (value) {
                   if (typeof value == "string") {
                     result = value;
@@ -1877,7 +1904,7 @@
                     }
                   }
                 }
-                
+
                 setTimeout(function() {
                   combobox.value(result);
                   /*Se não existe no datasource view, força a inserção do item no combo*/
@@ -1885,10 +1912,10 @@
                     combobox.trigger("valueMapper");
                   }
                 }, 300);
-                
+
                 return result;
               });
-              
+
               /**
                * Parsers change how view values will be saved in the model.
                * for storage
@@ -1907,7 +1934,7 @@
                     } catch(e){}
                   }
                 }
-                
+
                 return null;
               }.bind(combobox));
             }
@@ -3074,7 +3101,7 @@ app.kendoHelper = {
 
             var fetchData = {};
             fetchData.params = paramsOData;
-			var append = false;
+            var append = false;
             if (dataSource.append) {
               append = dataSource.append;
             }
@@ -3188,7 +3215,7 @@ app.kendoHelper = {
       options.dataTextField = 'value';
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
     } else if (options.dataSourceScreen.entityDataSource) {
-	  options.dataSourceScreen.entityDataSource.append = true;
+      options.dataSourceScreen.entityDataSource.append = true;
       dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope);
       valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
     }
