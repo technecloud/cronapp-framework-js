@@ -50,8 +50,8 @@
         }
 
         // fetch a unique ID from the service
-        var uniqueId = uiTinymceService.getUniqueId();
-        attrs.$set('id', uniqueId);
+        // var uniqueId = uiTinymceService.getUniqueId();
+        // attrs.$set('id', uniqueId);
 
         expression = {};
 

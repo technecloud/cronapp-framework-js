@@ -918,17 +918,20 @@
             var templateDyn    = '\
                   <textarea \
                     ui-tinymce="$options$" \
-                    ng-model="$ngModel$"> \
+                    ng-model="$ngModel$" \
+                    id="$id$"> \
                   </textarea> \
                 ';
             templateDyn = $(templateDyn
                 .split('$ngModel$').join(attrs.ngModel)
+                .split('$id$').join(attrs.id)
                 .split('$options$').join(escape(tinyMCEOptions))
             );
 
             var x = angular.element(templateDyn);
             element.html('');
             element.append(x);
+            element.attr('id' , null);
             $compile(x)(scope);
           }
         };
