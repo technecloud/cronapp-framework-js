@@ -634,7 +634,7 @@
                     filterTemplate = this + " eq {value}";
                   }
                   else if (operator == "!=") {
-                    operator = this + " ne {value}";
+                    filterTemplate = this + " ne {value}";
                   }
                   else if (operator == ">") {
                     filterTemplate = this + " gt {value}";
