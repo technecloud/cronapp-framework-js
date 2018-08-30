@@ -1,6 +1,7 @@
 (function($app) {
 
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
+  var ISO_PATTERN = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 
   /**
    * Função que retorna o formato que será utilizado no componente
@@ -522,10 +523,14 @@
               return o + "";
             }
             if (o instanceof Date) {
-              return "datetime'" + o.toISOString() + "'";
+              var dt = "datetimeoffset'" + o.toISOString() + "'";
             }
             else {
-              return "'" + o + "'";
+              if (o.length >= 10 && o.match(ISO_PATTERN)) {
+                return "datetimeoffset'" + o + "'";
+              } else {
+                return "'" + o + "'";
+              }
             }
           } else {
             return "";
