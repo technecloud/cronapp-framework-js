@@ -1023,6 +1023,11 @@
 
               var waitRender = setInterval(function() {
                 if ($('#' + buttonId).length > 0) {
+                  scope.safeApply(function() {
+                    var x = angular.element($('#' + buttonId ));
+                    $compile(x)(scope);
+                  });
+
                   $('#' + buttonId).click(function() {
                     var consolidated = {
                       item: cronappDatasource.active,
@@ -1041,6 +1046,7 @@
 
                     scope.$eval(functionToCall, contextVars) ;
                   }.bind(this));
+
                   clearInterval(waitRender);
                 }
               }.bind(this),200);
@@ -1132,22 +1138,6 @@
           },
           getColumns: function(options, datasource, scope) {
             var directiveContext = this;
-
-            window.useMask = function(value, format, type) {
-              var mask = '';
-              format = format == 'null' ? undefined : format;
-
-              var resolvedValue = value;
-              var resolvedType = format || type;
-
-              if (value) {
-                if (value instanceof Date)
-                  resolvedValue = value.toISOString();
-
-                mask = '{{ "' + resolvedValue + '"  | mask:"' + resolvedType + '"}}';
-              }
-              return mask;
-            };
 
             function getTemplate(column) {
               var template = undefined;
@@ -1594,12 +1584,28 @@
               }
             };
 
+            var anyFilterableColumn = function(options) {
+              var hasFilterableColumn = false;
+              if (options.columns) {
+                for (var i = 0; i<options.columns.length; i++) {
+                  if (options.columns[i].dataType == "Database") {
+                    if (options.columns[i].filterable){
+                      hasFilterableColumn = true;
+                      break;
+                    }
+                  }
+                }
+              }
+              return hasFilterableColumn;
+            };
+
             var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns);
 
             var columns = this.getColumns(options, datasource, scope);
             var pageAble = this.getPageAble(options);
             var toolbar = this.getToolbar(options, scope);
             var editable = this.getEditable(options);
+            var filterable = anyFilterableColumn(options);
 
             var kendoGridInit = {
               toolbar: toolbar,
@@ -1617,7 +1623,7 @@
               height: options.height,
               groupable: options.allowGrouping,
               sortable: options.allowSorting,
-              filterable: { mode: "row" },
+              filterable: filterable ? { mode: "row" } : false,
               pageable: pageAble,
               columns: columns,
               selectable: options.allowSelectionRow,
@@ -3405,4 +3411,20 @@ app.kendoHelper = {
 
     return config;
   }
+};
+
+window.useMask = function(value, format, type) {
+  var mask = '';
+  format = format == 'null' || format == 'undefined' ? undefined : format;
+
+  var resolvedValue = value;
+  var resolvedType = format || type;
+
+  if (value) {
+    if (value instanceof Date)
+      resolvedValue = value.toISOString();
+
+    mask = '{{ "' + resolvedValue + '"  | mask:"' + resolvedType + '"}}';
+  }
+  return mask;
 };
