@@ -180,6 +180,7 @@
       "class": "adjust-icon mdi mdi-star",
       "template": "<i class=\"fa fa-star\"/>",
       "wrapper": false,
+      "autoWrapper": false,
       "properties": {
         "ng-click": {
           "removable": true,
