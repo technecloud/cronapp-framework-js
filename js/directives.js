@@ -1,5 +1,18 @@
 (function($app) {
 
+
+  app.common = {
+    generateId: function() {
+            var numbersOnly = '0123456789';
+            var result = Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+            if (numbersOnly.indexOf(result.substr(0,1)) > -1)
+              return this.generateId();
+            return result;
+          }
+  }
+
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
   var ISO_PATTERN = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 
@@ -954,15 +967,6 @@
             culture = parts.join('-');
             kendo.culture(culture);
           },
-          generateId: function() {
-            var numbersOnly = '0123456789';
-            var result = Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-            if (numbersOnly.indexOf(result.substr(0,1)) > -1)
-              return this.generateId();
-            return result;
-          },
           generateBlocklyCall: function(blocklyInfo) {
             var call;
             if (blocklyInfo.type == "client")  {
@@ -1000,7 +1004,7 @@
             var generateObjTemplate = function(functionToCall, title) {
               var obj = {
                 template: function() {
-                  var buttonId = this.generateId();
+                  var buttonId = app.common.generateId();
                   return createTemplateButton(buttonId, functionToCall, title);
                 }.bind(this)
               };
@@ -1072,7 +1076,7 @@
           },
           generateModalSaveOrCancelButtonCall: function(buttonType, functionToCall, datasourceName, modalId, scope) {
 
-            var buttonId = this.generateId();
+            var buttonId = app.common.generateId();
             var compileTemplateAngular = function(buttonType, functionToCall, datasourceName, modalId) {
               var template;
               if (buttonType == 'save')
@@ -1224,7 +1228,7 @@
 
               var column = getColumnByField(opt.field);
               var required = isRequired(opt.field) ? "required" : "";
-              var buttonId = this.generateId();
+              var buttonId = app.common.generateId();
               var $input = $('<input '+required+' name="' + opt.field + '" id="' + buttonId + '"from-grid=true />');
               if (column.inputType == 'dynamicComboBox' || column.inputType == 'comboBox') {
                 var kendoConfig = app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
@@ -1248,7 +1252,7 @@
                 $input.appendTo(container).kendoMobileSwitch(kendoConfig, scope);
               }
               else if (column.inputType == 'checkbox' || column.type == 'boolean') {
-                var guid = this.generateId();
+                var guid = app.common.generateId();
                 $input = $('<input id="'+guid+'" name="' + opt.field + '" class="k-checkbox" type="checkbox" ><label class="k-checkbox-label" for="'+guid+'"></label>');
                 $input.appendTo(container);
               }
@@ -1303,7 +1307,7 @@
               var cmd;
               if (opt.editable == 'popupCustom') {
                 cmd = {
-                  name: this.generateId(),
+                  name: app.common.generateId(),
                   text: '',
                   iconClass: "k-icon k-i-edit",
                   click: function(e) {
@@ -1384,7 +1388,7 @@
 
                   var addColumn = {
                     command: [{
-                      name: this.generateId(),
+                      name: app.common.generateId(),
                       text: column.headerText,
                       hidden: !column.visible,
                       click: function(e) {
@@ -2818,15 +2822,6 @@ function parseMaskType(type, $translate) {
 
 
 app.kendoHelper = {
-  generateId: function() {
-    var numbersOnly = '0123456789';
-    var result = Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    if (numbersOnly.indexOf(result.substr(0,1)) > -1)
-      return this.generateId();
-    return result;
-  },
   getSchema: function(dataSource) {
     var parseAttribute = [
       { kendoType: "string", entityType: ["string", "character", "uuid", "guid"] },
@@ -2968,7 +2963,7 @@ app.kendoHelper = {
       }
     }
 
-    var datasourceId = this.generateId();
+    var datasourceId = app.common.generateId();
     var datasource = {
       transport: {
         setActiveAndPost: function(e) {
