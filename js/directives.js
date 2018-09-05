@@ -1020,10 +1020,10 @@
                   template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
               }
               else if (toolbarButton.type == "Blockly") {
-                template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
+                template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
               }
               else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
-                template = '<a role="button" id="#BUTTONID#" class="k-button " href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
+                template = '<a role="button" id="#BUTTONID#" class="k-button k-grid-native" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
               }
 
               template = template
@@ -1391,6 +1391,7 @@
                       name: app.common.generateId(),
                       text: column.headerText,
                       hidden: !column.visible,
+                      className: "k-custom-command",
                       click: function(e) {
                         e.preventDefault();
                         var tr = $(e.target).closest("tr");
@@ -1731,30 +1732,37 @@
               grid.dataSource.transport.options.grid = grid;
 
               scope.safeApply(function() {
-                var checkDsChanges = setInterval(function() {
-                  if (scope[options.dataSourceScreen.entityDataSource.name]) {
+                if (scope[options.dataSourceScreen.entityDataSource.name]) {
 
-                    if (scope[options.dataSourceScreen.entityDataSource.name].hasPendingChanges()) {
-                      $templateDyn.find('.k-filter-row').hide();
-                      $templateDyn.find('.k-pager-sizes').hide();
-                      $templateDyn.find('.k-pager-nav').hide();
-                      $templateDyn.find('.k-pager-numbers').hide();
-                      $templateDyn.find('.k-pager-refresh.k-link').hide();
-                      $templateDyn.find('.saveorcancelchanges').show();
-                    }
-                    else {
-                      $templateDyn.find('.k-filter-row').show();
-                      $templateDyn.find('.k-pager-sizes').show();
-                      $templateDyn.find('.k-pager-nav').show();
-                      $templateDyn.find('.k-pager-numbers').show();
-                      $templateDyn.find('.k-pager-refresh.k-link').show();
-                      $templateDyn.find('.saveorcancelchanges').hide();
-                    }
-                  }
-                  else {
-                    clearInterval(checkDsChanges);
-                  }
-                },100);
+                  $templateDyn.find('.k-filter-row').show();
+                  $templateDyn.find('.k-pager-sizes').show();
+                  $templateDyn.find('.k-pager-nav').show();
+                  $templateDyn.find('.k-pager-numbers').show();
+                  $templateDyn.find('.k-pager-refresh.k-link').show();
+                  $templateDyn.find('.saveorcancelchanges').hide();
+
+                  scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
+                      {
+                        "pendingchanges": function(value) {
+                          if (value) {
+                            $templateDyn.find('.k-filter-row').hide();
+                            $templateDyn.find('.k-pager-sizes').hide();
+                            $templateDyn.find('.k-pager-nav').hide();
+                            $templateDyn.find('.k-pager-numbers').hide();
+                            $templateDyn.find('.k-pager-refresh.k-link').hide();
+                            $templateDyn.find('.saveorcancelchanges').show();
+                          } else {
+                            $templateDyn.find('.k-filter-row').show();
+                            $templateDyn.find('.k-pager-sizes').show();
+                            $templateDyn.find('.k-pager-nav').show();
+                            $templateDyn.find('.k-pager-numbers').show();
+                            $templateDyn.find('.k-pager-refresh.k-link').show();
+                            $templateDyn.find('.saveorcancelchanges').hide();
+                          }
+                        }
+                      }
+                  );
+                }
               });
 
 
@@ -2524,29 +2532,34 @@ function maskDirective($compile, $translate, attrName) {
         var useUTC = type == 'date' || type == 'datetime' || type == 'time';
 
         if ($element.attr('from-grid')) {
-          $element.on('click', function() {
+          var openPopup = function() {
             var popup = $(this).offset();
-
             var isBellowInput = true;
             var datetimepickerShowing = $(this).parent().find('.bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.bottom');
             if (!datetimepickerShowing.length) {
               isBellowInput = false;
               datetimepickerShowing = $(this).parent().find('.bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.top');
             }
-            var popupLeft = $(datetimepickerShowing).offset().left;
+            if ($(datetimepickerShowing).offset()) {
+              var popupLeft = $(datetimepickerShowing).offset().left;
 
-            var grid = datetimepickerShowing.closest('cron-grid');
-            datetimepickerShowing.appendTo(grid);
+              var grid = datetimepickerShowing.closest('cron-grid');
+              datetimepickerShowing.appendTo(grid);
 
-            var popupTop = 0
-            if (!isBellowInput)
-              popupTop = popup.top - ($(datetimepickerShowing).height() + 15);
-            else
-              popupTop = popup.top + 35;
+              var popupTop = 0
+              if (!isBellowInput)
+                popupTop = popup.top - ($(datetimepickerShowing).height() + 15);
+              else
+                popupTop = popup.top + 35;
 
-            datetimepickerShowing.css("top", popupTop);
-            datetimepickerShowing.css("bottom", "auto");
-            datetimepickerShowing.css("left", popupLeft);
+              datetimepickerShowing.css("top", popupTop);
+              datetimepickerShowing.css("bottom", "auto");
+              datetimepickerShowing.css("left", popupLeft);
+            }
+          };
+          $element.on('click', openPopup);
+          $element.on('focus', function() {
+            setTimeout(openPopup.bind(this), 100);
           });
           $element.on('dp.change', function () {
             var momentDate = null;

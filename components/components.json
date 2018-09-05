@@ -1834,6 +1834,16 @@
           "text_en_US": "Delete Button Hover"
         },
         {
+          "selector": "div#{id} .k-grid tbody .k-custom-command",
+          "text_pt_BR": "Botão de Customizado",
+          "text_en_US": "Custom Button"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-custom-command:hover",
+          "text_pt_BR": "Botão de Customizado Hover",
+          "text_en_US": "Custom Button Hover"
+        },
+        {
           "selector": "div#{id} .k-grid tbody .k-grid-update",
           "text_pt_BR": "Botão de Atualizar",
           "text_en_US": "Update Button"
@@ -1877,6 +1887,16 @@
           "selector": "div#{id} .k-grid .k-header .k-grid-add:hover",
           "text_pt_BR": "Botão de Adicionar Hover",
           "text_en_US": "Add Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-custom",
+          "text_pt_BR": "Botão de Customizado",
+          "text_en_US": "Custom Button"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-custom:hover",
+          "text_pt_BR": "Botão Customizado Hover",
+          "text_en_US": "Custom Button Hover"
         },
         {
           "selector": "div#{id} .k-grid .k-header .k-grid-save-changes",

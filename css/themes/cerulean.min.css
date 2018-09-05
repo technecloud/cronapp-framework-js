@@ -191,6 +191,22 @@
     color: #39ff7f;
 }
 
+/*Botão custom*/
+.k-grid tbody .k-custom-command {
+    padding: 5px 5px;
+    border-radius: 6px;
+    color: #a5a5a5;
+    background-color: #efefef;
+    border-color: #a5a5a5;
+}
+
+/*Botão custom:hover*/
+.k-grid tbody .k-custom-command:hover {
+    background-color: #10b54a;
+    border: 2px solid #10b54a;
+    color: #39ff7f;
+}
+
 /*Botão deletar*/
 .k-grid tbody .k-grid-delete {
     min-width: 0px;
@@ -263,6 +279,22 @@
 
 /*Botão Adicionar :hover*/
 .k-grid .k-header .k-grid-add:hover {
+    color: #777777;
+    border-color: #bfbfbf;
+    background-color: #eaeaea;
+}
+
+/*Botão Custom*/
+.k-grid .k-header .k-grid-custom {
+    padding: 5px 5px;
+    border-radius: 6px;
+    color: #39a8e8;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
+/*Botão Custom :hover*/
+.k-grid .k-header .k-grid-custom:hover {
     color: #777777;
     border-color: #bfbfbf;
     background-color: #eaeaea;
