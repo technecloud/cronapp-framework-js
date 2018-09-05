@@ -631,7 +631,24 @@
           inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
             var filterTemplate = '';
             var filtersSplited = attrs.cronappFilter.split(';');
-            var datasource = eval(attrs.crnDatasource);
+            var datasource;
+            if (attrs.crnDatasource) {
+              datasource = eval(attrs.crnDatasource);
+            } else {
+              var fieldset = $element.closest('fieldset');
+              if (!fieldset)
+                return;
+              var button = fieldset.find('button[cronapp-filter]');
+              if (!button)
+                return;
+
+              if (!button.attr('crn-datasource')) {
+                return;
+              }
+
+              datasource = eval(button.attr('crn-datasource'));
+            }
+
             var isOData = datasource.isOData()
 
             $(filtersSplited).each(function() {
@@ -734,7 +751,11 @@
 
                 }
                 var bindedFilter = filterTemplate.split('{value}').join(value);
-                bindedFilter = bindedFilter.split('{value.lower}').join(value.toLowerCase());
+                if (typeof value == 'string') {
+                  bindedFilter = bindedFilter.split('{value.lower}').join(value.toLowerCase());
+                } else {
+                  bindedFilter = bindedFilter.split('{value.lower}').join(value);
+                }
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
 
@@ -829,14 +850,14 @@
             if (attrs.crnDatasource)
               datasourceName = attrs.crnDatasource;
             else
-              datasourceName = $element.parent().attr('crn-datasource')
+              datasourceName = $element.parent().attr('crn-datasource');
+
+            var datasource = eval(datasourceName);
+            var isOData = datasource.isOData()
+
             var requiredFilter = attrs.requiredFilter && attrs.requiredFilter.toString() == "true";
             if (requiredFilter) {
               this.forceDisableDatasource(datasourceName, scope);
-              // var $datasource = $('datasource[name="'+datasourceName+'"]');
-              // $datasource.attr('enabled','false');
-              // var x = angular.element($datasource);
-              // $compile(x)(scope);
             }
 
             $element.on('click', function() {
@@ -845,7 +866,10 @@
               if (datasourceName && datasourceName.length > 0 && filters) {
                 var bindedFilter = '';
                 $(filters).each(function() {
-                  bindedFilter += this.bindedFilter+";";
+                  if (bindedFilter != '') {
+                    bindedFilter += (isOData?" and ":";");
+                  }
+                  bindedFilter += this.bindedFilter;
                 });
 
                 var datasourceToFilter = eval(datasourceName);
