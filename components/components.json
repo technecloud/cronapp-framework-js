@@ -1711,7 +1711,245 @@
         {
           "name": "options",
           "selector": "cron-grid"
-        }]
+        }],
+      "styles": [
+        {
+          "selector": "div#{id} .k-grid",
+          "text_pt_BR": "Área da Grade",
+          "text_en_US": "Grid Area"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr[role=\"row\"]",
+          "text_pt_BR": "Linhas",
+          "text_en_US": "Rows"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr[role=\"row\"] .k-link",
+          "text_pt_BR": "Título do cabeçalho",
+          "text_en_US": "Header Title"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr",
+          "text_pt_BR": "Área dos Filtros",
+          "text_en_US": "Filters Area"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-header",
+          "text_pt_BR": "Cabeçalho",
+          "text_en_US": "Header"
+        },
+        {
+          "selector": "div#{id} .k-grid tr:hover ",
+          "text_pt_BR": "Linha Hover",
+          "text_en_US": "Row Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grouping-header",
+          "text_pt_BR": "Agrupar Colunas",
+          "text_en_US": "Column Group"
+        },
+        {
+          "selector": "div#{id} .k-grid a",
+          "text_pt_BR": "Links",
+          "text_en_US": "Links"
+        },
+        {
+          "selector": "div#{id} .k-grid th, div#{id} .k-grid td",
+          "text_pt_BR": "Célula do Cabeçalho",
+          "text_en_US": "Header Cell"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-content tr",
+          "text_pt_BR": "Linha Normal",
+          "text_en_US": "Default Row"
+        },
+        {
+          "selector": "div#{id} .k-grid tr:hover",
+          "text_pt_BR": "Linha Normal Hover",
+          "text_en_US": "Default Row Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid tr.k-alt",
+          "text_pt_BR": "Linha Alternativa",
+          "text_en_US": "Alternative Row"
+        },
+        {
+          "selector": "div#{id} .k-grid tr.k-state-selected ",
+          "text_pt_BR": "Linha Selecionada",
+          "text_en_US": "Selected Row"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-pager-wrap",
+          "text_pt_BR": "Área de paginação",
+          "text_en_US": "Pagination Container"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-dropdown .k-dropdown-wrap",
+          "text_pt_BR": "Combo de Paginação",
+          "text_en_US": "Pagination DropDown"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-pager-wrap>.k-link>.k-icon",
+          "text_pt_BR": "Ícones da Paginação",
+          "text_en_US": "Pagination Icons"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-pager-wrap>.k-link>.k-icon:hover",
+          "text_pt_BR": "Ícones da Paginação Hover",
+          "text_en_US": "Pagination Icons Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-pager-numbers .k-state-selected",
+          "text_pt_BR": "Página Atual",
+          "text_en_US": "Current Page"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-pager-numbers .k-link",
+          "text_pt_BR": "Item da Paginação",
+          "text_en_US": "Pagination Item"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-pager-numbers .k-link:focus",
+          "text_pt_BR": "Item de Paginação Focus",
+          "text_en_US": "Pagination Item Focus"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-edit",
+          "text_pt_BR": "Botão de Editar",
+          "text_en_US": "Edit Button"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-edit:hover",
+          "text_pt_BR": "Botão de Editar Hover",
+          "text_en_US": "Edit Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-delete",
+          "text_pt_BR": "Botão de Deletar",
+          "text_en_US": "Delete Button"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-delete:hover",
+          "text_pt_BR": "Botão de Deletar Hover",
+          "text_en_US": "Delete Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-update",
+          "text_pt_BR": "Botão de Atualizar",
+          "text_en_US": "Update Button"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-update:hover",
+          "text_pt_BR": "Botão de Atualizar",
+          "text_en_US": "Update Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-cancel",
+          "text_pt_BR": "Botão de Cancelar",
+          "text_en_US": "Cancel Button"
+        },
+        {
+          "selector": "div#{id} .k-grid tbody .k-grid-cancel:hover",
+          "text_pt_BR": "Botão de Cancelar Hover",
+          "text_en_US": "Cancel Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grouping-header .k-group-indicator",
+          "text_pt_BR": "Item Agrupado",
+          "text_en_US": "Grouped Item"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-toolbar",
+          "text_pt_BR": "Barra de Ferramentas",
+          "text_en_US": "Toolbar"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-group-indicator .k-link",
+          "text_pt_BR": "Link Item Agrupado",
+          "text_en_US": "Link Grouped Item"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-add",
+          "text_pt_BR": "Botão de Adicionar",
+          "text_en_US": "Add Button"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-add:hover",
+          "text_pt_BR": "Botão de Adicionar Hover",
+          "text_en_US": "Add Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-save-changes",
+          "text_pt_BR": "Botão de Salvar Alterações",
+          "text_en_US": "Save Changes Button"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-save-changes:hover",
+          "text_pt_BR": "Botão de Salvar Alterações Hover",
+          "text_en_US": "Save Changes Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-cancel-changes",
+          "text_pt_BR": "Botão de Cancelar Alteração",
+          "text_en_US": "Cancel Changes Button"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-header .k-grid-cancel-changes:hover",
+          "text_pt_BR": "Botão de Cancelar Altrações Hover",
+          "text_en_US": "Cancel Changes Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-primary",
+          "text_pt_BR": "Botão Primário",
+          "text_en_US": "Primary Button"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-primary:hover",
+          "text_pt_BR": "Botão Primário Hover",
+          "text_en_US": "Primary Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-cancel",
+          "text_pt_BR": "Botão de Cancelar",
+          "text_en_US": "Cancel Button"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-cancel:hover",
+          "text_pt_BR": "Botão de Cancelar Hover",
+          "text_en_US": "Cancel Button Hover"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-input",
+          "text_pt_BR": "Entradas de Texto",
+          "text_en_US": "Inputs"
+        },
+        {
+          "selector": "div#{id} .k-grid span.k-select",
+          "text_pt_BR": "Combo de Filtros",
+          "text_en_US": "Filters Combo"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-list-container",
+          "text_pt_BR": "Dropdown Container",
+          "text_en_US": "Dropdown Container"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-list-scroller ",
+          "text_pt_BR": "Área de Rolagem do Dropdown",
+          "text_en_US": "Dropdown Roll Area"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-list-scroller .k-item",
+          "text_pt_BR": "Item Dropdown",
+          "text_en_US": "Dropdown Item"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-list-scroller .k-item:hover",
+          "text_pt_BR": "Item Dropdown Hover",
+          "text_en_US": "Dropdown Item Hover"
+        }
+      ]
+
     },
     {
       "name": "crn-enterprise-combobox",
