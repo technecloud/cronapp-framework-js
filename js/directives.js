@@ -880,10 +880,12 @@
             if (attrs.cronappFilterAutopost && attrs.cronappFilterAutopost == "false")
               autopost = false;
 
-            if ($element[0].tagName == "INPUT")
-              this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
-            else
-              this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+            setTimeout(function() {
+              if ($element[0].tagName == "INPUT")
+                this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+              else
+                this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+            }.bind(this), 100);
           }
         }
       })
