@@ -3,14 +3,14 @@
 
   app.common = {
     generateId: function() {
-            var numbersOnly = '0123456789';
-            var result = Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-            if (numbersOnly.indexOf(result.substr(0,1)) > -1)
-              return this.generateId();
-            return result;
-          }
+      var numbersOnly = '0123456789';
+      var result = Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      if (numbersOnly.indexOf(result.substr(0,1)) > -1)
+        return this.generateId();
+      return result;
+    }
   }
 
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
@@ -3438,11 +3438,21 @@ window.useMask = function(value, format, type) {
   var resolvedValue = value;
   var resolvedType = format || type;
 
-  if (value) {
-    if (value instanceof Date)
-      resolvedValue = value.toISOString();
+  if (value != null && value != undefined) {
+    if (value instanceof Date) {
+      resolvedValue = '"'+value.toISOString()+'"';
+    }
 
-    mask = '{{ "' + resolvedValue + '"  | mask:"' + resolvedType + '"}}';
+    else if (typeof value == 'number') {
+      resolvedValue = value;
+    }
+
+    else {
+      resolvedValue = '"'+value+'"';
+    }
+
+    mask = '{{ ' + resolvedValue + '  | mask:"' + resolvedType + '"}}';
   }
+
   return mask;
 };
