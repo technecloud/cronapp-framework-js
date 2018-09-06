@@ -16,7 +16,6 @@ var cronappModules = [
   'ngFileUpload',
   'report.services',
   'upload.services',
-  'summernote',
   'ui.tinymce'
 ];
 
