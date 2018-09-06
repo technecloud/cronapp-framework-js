@@ -3,14 +3,14 @@
 
   app.common = {
     generateId: function() {
-            var numbersOnly = '0123456789';
-            var result = Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-            if (numbersOnly.indexOf(result.substr(0,1)) > -1)
-              return this.generateId();
-            return result;
-          }
+      var numbersOnly = '0123456789';
+      var result = Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      if (numbersOnly.indexOf(result.substr(0,1)) > -1)
+        return this.generateId();
+      return result;
+    }
   }
 
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
@@ -631,7 +631,24 @@
           inputBehavior: function(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost) {
             var filterTemplate = '';
             var filtersSplited = attrs.cronappFilter.split(';');
-            var datasource = eval(attrs.crnDatasource);
+            var datasource;
+            if (attrs.crnDatasource) {
+              datasource = eval(attrs.crnDatasource);
+            } else {
+              var fieldset = $element.closest('fieldset');
+              if (!fieldset)
+                return;
+              var button = fieldset.find('button[cronapp-filter]');
+              if (!button)
+                return;
+
+              if (!button.attr('crn-datasource')) {
+                return;
+              }
+
+              datasource = eval(button.attr('crn-datasource'));
+            }
+
             var isOData = datasource.isOData()
 
             $(filtersSplited).each(function() {
@@ -734,7 +751,11 @@
 
                 }
                 var bindedFilter = filterTemplate.split('{value}').join(value);
-                bindedFilter = bindedFilter.split('{value.lower}').join(value.toLowerCase());
+                if (typeof value == 'string') {
+                  bindedFilter = bindedFilter.split('{value.lower}').join(value.toLowerCase());
+                } else {
+                  bindedFilter = bindedFilter.split('{value.lower}').join(value);
+                }
                 if (ngModelCtrl.$viewValue.length == 0)
                   bindedFilter = '';
 
@@ -829,14 +850,14 @@
             if (attrs.crnDatasource)
               datasourceName = attrs.crnDatasource;
             else
-              datasourceName = $element.parent().attr('crn-datasource')
+              datasourceName = $element.parent().attr('crn-datasource');
+
+            var datasource = eval(datasourceName);
+            var isOData = datasource.isOData()
+
             var requiredFilter = attrs.requiredFilter && attrs.requiredFilter.toString() == "true";
             if (requiredFilter) {
               this.forceDisableDatasource(datasourceName, scope);
-              // var $datasource = $('datasource[name="'+datasourceName+'"]');
-              // $datasource.attr('enabled','false');
-              // var x = angular.element($datasource);
-              // $compile(x)(scope);
             }
 
             $element.on('click', function() {
@@ -845,7 +866,10 @@
               if (datasourceName && datasourceName.length > 0 && filters) {
                 var bindedFilter = '';
                 $(filters).each(function() {
-                  bindedFilter += this.bindedFilter+";";
+                  if (bindedFilter != '') {
+                    bindedFilter += (isOData?" and ":";");
+                  }
+                  bindedFilter += this.bindedFilter;
                 });
 
                 var datasourceToFilter = eval(datasourceName);
@@ -880,10 +904,13 @@
             if (attrs.cronappFilterAutopost && attrs.cronappFilterAutopost == "false")
               autopost = false;
 
-            if ($element[0].tagName == "INPUT")
-              this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
-            else
-              this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+            //Correção para aceitar datasources fora de ordem
+            setTimeout(function() {
+              if ($element[0].tagName == "INPUT")
+                this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+              else
+                this.buttonBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
+            }.bind(this), 100);
           }
         }
       })
@@ -1020,10 +1047,10 @@
                   template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
               }
               else if (toolbarButton.type == "Blockly") {
-                template = '<a class="k-button" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
+                template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
               }
               else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
-                template = '<a role="button" id="#BUTTONID#" class="k-button " href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
+                template = '<a role="button" id="#BUTTONID#" class="k-button k-grid-native" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
               }
 
               template = template
@@ -1391,6 +1418,7 @@
                       name: app.common.generateId(),
                       text: column.headerText,
                       hidden: !column.visible,
+                      className: "k-custom-command",
                       click: function(e) {
                         e.preventDefault();
                         var tr = $(e.target).closest("tr");
@@ -1731,30 +1759,37 @@
               grid.dataSource.transport.options.grid = grid;
 
               scope.safeApply(function() {
-                var checkDsChanges = setInterval(function() {
-                  if (scope[options.dataSourceScreen.entityDataSource.name]) {
+                if (scope[options.dataSourceScreen.entityDataSource.name]) {
 
-                    if (scope[options.dataSourceScreen.entityDataSource.name].hasPendingChanges()) {
-                      $templateDyn.find('.k-filter-row').hide();
-                      $templateDyn.find('.k-pager-sizes').hide();
-                      $templateDyn.find('.k-pager-nav').hide();
-                      $templateDyn.find('.k-pager-numbers').hide();
-                      $templateDyn.find('.k-pager-refresh.k-link').hide();
-                      $templateDyn.find('.saveorcancelchanges').show();
-                    }
-                    else {
-                      $templateDyn.find('.k-filter-row').show();
-                      $templateDyn.find('.k-pager-sizes').show();
-                      $templateDyn.find('.k-pager-nav').show();
-                      $templateDyn.find('.k-pager-numbers').show();
-                      $templateDyn.find('.k-pager-refresh.k-link').show();
-                      $templateDyn.find('.saveorcancelchanges').hide();
-                    }
-                  }
-                  else {
-                    clearInterval(checkDsChanges);
-                  }
-                },100);
+                  $templateDyn.find('.k-filter-row').show();
+                  $templateDyn.find('.k-pager-sizes').show();
+                  $templateDyn.find('.k-pager-nav').show();
+                  $templateDyn.find('.k-pager-numbers').show();
+                  $templateDyn.find('.k-pager-refresh.k-link').show();
+                  $templateDyn.find('.saveorcancelchanges').hide();
+
+                  scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
+                      {
+                        "pendingchanges": function(value) {
+                          if (value) {
+                            $templateDyn.find('.k-filter-row').hide();
+                            $templateDyn.find('.k-pager-sizes').hide();
+                            $templateDyn.find('.k-pager-nav').hide();
+                            $templateDyn.find('.k-pager-numbers').hide();
+                            $templateDyn.find('.k-pager-refresh.k-link').hide();
+                            $templateDyn.find('.saveorcancelchanges').show();
+                          } else {
+                            $templateDyn.find('.k-filter-row').show();
+                            $templateDyn.find('.k-pager-sizes').show();
+                            $templateDyn.find('.k-pager-nav').show();
+                            $templateDyn.find('.k-pager-numbers').show();
+                            $templateDyn.find('.k-pager-refresh.k-link').show();
+                            $templateDyn.find('.saveorcancelchanges').hide();
+                          }
+                        }
+                      }
+                  );
+                }
               });
 
 
@@ -2524,29 +2559,34 @@ function maskDirective($compile, $translate, attrName) {
         var useUTC = type == 'date' || type == 'datetime' || type == 'time';
 
         if ($element.attr('from-grid')) {
-          $element.on('click', function() {
+          var openPopup = function() {
             var popup = $(this).offset();
-
             var isBellowInput = true;
             var datetimepickerShowing = $(this).parent().find('.bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.bottom');
             if (!datetimepickerShowing.length) {
               isBellowInput = false;
               datetimepickerShowing = $(this).parent().find('.bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.top');
             }
-            var popupLeft = $(datetimepickerShowing).offset().left;
+            if ($(datetimepickerShowing).offset()) {
+              var popupLeft = $(datetimepickerShowing).offset().left;
 
-            var grid = datetimepickerShowing.closest('cron-grid');
-            datetimepickerShowing.appendTo(grid);
+              var grid = datetimepickerShowing.closest('cron-grid');
+              datetimepickerShowing.appendTo(grid);
 
-            var popupTop = 0
-            if (!isBellowInput)
-              popupTop = popup.top - ($(datetimepickerShowing).height() + 15);
-            else
-              popupTop = popup.top + 35;
+              var popupTop = 0
+              if (!isBellowInput)
+                popupTop = popup.top - ($(datetimepickerShowing).height() + 15);
+              else
+                popupTop = popup.top + 35;
 
-            datetimepickerShowing.css("top", popupTop);
-            datetimepickerShowing.css("bottom", "auto");
-            datetimepickerShowing.css("left", popupLeft);
+              datetimepickerShowing.css("top", popupTop);
+              datetimepickerShowing.css("bottom", "auto");
+              datetimepickerShowing.css("left", popupLeft);
+            }
+          };
+          $element.on('click', openPopup);
+          $element.on('focus', function() {
+            setTimeout(openPopup.bind(this), 100);
           });
           $element.on('dp.change', function () {
             var momentDate = null;
@@ -3423,11 +3463,21 @@ window.useMask = function(value, format, type) {
   var resolvedValue = value;
   var resolvedType = format || type;
 
-  if (value) {
-    if (value instanceof Date)
-      resolvedValue = value.toISOString();
+  if (value != null && value != undefined) {
+    if (value instanceof Date) {
+      resolvedValue = '"'+value.toISOString()+'"';
+    }
 
-    mask = '{{ "' + resolvedValue + '"  | mask:"' + resolvedType + '"}}';
+    else if (typeof value == 'number') {
+      resolvedValue = value;
+    }
+
+    else {
+      resolvedValue = '"'+value+'"';
+    }
+
+    mask = '{{ ' + resolvedValue + '  | mask:"' + resolvedType + '"}}';
   }
+
   return mask;
 };
