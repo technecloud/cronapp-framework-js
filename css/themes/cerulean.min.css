@@ -18,36 +18,38 @@
 
 /*Linhas*/
 .k-grid .k-grid-header-wrap thead tr[role='row'] {
-    border: 1px solid transparent;
+    border: 0px solid transparent;
     background-color: #f2f2f200;
     padding: 0;
 }
+
+/*Cor de Fundo Cabeçalho*/
+.k-grid-header-wrap {
+    border-color: #f2f2f2;
+    padding-right: 0px!important;
+    background-color: #1680bd;
+    padding: 10px 0px;
+    color: #fff;
+}
+
+.k-header {
+    background-color:#1680bd;
+}
+/*Cor de Fundo Cabeçalho FINAL*/
 
 /*Título do cabeçalho*/
 .k-grid .k-grid-header-wrap thead tr[role='row'] .k-link {
     font-weight: bold;
     padding: 5px 0px 0px 0px;
-    color: #545454;
+    color: #f1f8f9;
+    font-size: 12px;
 }
 
-/*Cabeçalho dos filtros*/
-.k-grid .k-grid-header-wrap thead tr {
-    background-color: #f2f2f2;
-    border: 0;
-}
-
-.k-grid .k-filter-row th {
-    padding: .5em .6em .6em .6em;
-}
-
-/*Cabeçalho*/
-.k-grid .k-grid-header {
-    border-color: #f2f2f2;
-}
-
-/*Grid Geral*/
-.k-grid {
-    background-color: #000;
+.k-grid-header {
+    border-color: transparent!important;
+    border-bottom-style: none!important;
+    border-bottom-width: 0px!important;
+    padding-right: 0px!important;
 }
 
 /*Linha :hover*/
@@ -65,13 +67,13 @@
     text-align: center;
 }
 
-/*Links*/
-.k-grid a {
-    color: #a5a5a5;
-    text-decoration: none;
-    font-size: 12px;
-    transition: 300ms;
+/*Ícone Cabeçalho*/
+.k-header>.k-grid-filter {
+    float: left;
+    margin-right: 3px;
+    color:#ffffff;
 }
+
 /*Célula Cabeçalho */
 .k-grid th, .k-grid td {
     border-style: solid;
@@ -83,6 +85,18 @@
     font-size: 11px;
     text-overflow: ellipsis;
 }
+
+.k-filter-row th, .k-grid-header th.k-header {
+    overflow: hidden;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    padding: .5em .6em .4em .0em;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
 /*Linha Normal*/
 .k-grid .k-grid-content tr {
     background-color:#ffffff;
@@ -94,7 +108,6 @@
 /*Linha selecionada*/
 .k-grid tr.k-state-selected {
     color: #214458;
-    font-weight: bold;
     background-color: #41b6f9;
 }
 /*Linha normal :hover*/
@@ -267,6 +280,8 @@
     color: #eaf3f9;
     font-weight: 500;
 }
+
+
 
 /*Botão Adicionar*/
 .k-grid .k-header .k-grid-add {

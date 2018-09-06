@@ -1251,7 +1251,6 @@
             }
 
             function editor(container, opt) {
-              $(container).css("position", "relative");
 
               var column = getColumnByField(opt.field);
               var required = isRequired(opt.field) ? "required" : "";
@@ -1531,11 +1530,8 @@
             if (options.editable == 'batch') {
               editable = true;
             }
-            else if (options.editable == 'no') {
+            else if (options.editable == 'no' || options.editable == 'popupCustom' ) {
               editable = false;
-            }
-            else if (options.editable == 'popupCustom') {
-              editable = "inline";
             }
             return editable;
           },
@@ -1664,7 +1660,7 @@
               height: options.height,
               groupable: options.allowGrouping,
               sortable: options.allowSorting,
-              filterable: filterable ? { mode: "row" } : false,
+              filterable: filterable ? true : false,
               pageable: pageAble,
               columns: columns,
               selectable: options.allowSelectionRow,
@@ -2571,7 +2567,7 @@ function maskDirective($compile, $translate, attrName) {
             if ($(datetimepickerShowing).offset()) {
               var popupLeft = $(datetimepickerShowing).offset().left;
 
-              var grid = datetimepickerShowing.closest('cron-grid');
+              var grid = $('body');
               datetimepickerShowing.appendTo(grid);
 
               var popupTop = 0
@@ -2583,6 +2579,7 @@ function maskDirective($compile, $translate, attrName) {
               datetimepickerShowing.css("top", popupTop);
               datetimepickerShowing.css("bottom", "auto");
               datetimepickerShowing.css("left", popupLeft);
+              datetimepickerShowing.css("z-index", 999999);
             }
           };
           $element.on('click', openPopup);
@@ -2614,8 +2611,6 @@ function maskDirective($compile, $translate, attrName) {
         else
           $element.wrap("<div style=\"position:relative\"></div>");
         $element.datetimepicker(options);
-
-
 
         $element.on('dp.change', function () {
           if ($(this).is(":visible")) {
