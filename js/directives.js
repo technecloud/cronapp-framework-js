@@ -1050,7 +1050,7 @@
                 template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
               }
               else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
-                template = '<a role="button" id="#BUTTONID#" class="k-button k-grid-native" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
+                template = '<a role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
               }
 
               template = template
@@ -1337,6 +1337,7 @@
                   name: app.common.generateId(),
                   text: '',
                   iconClass: "k-icon k-i-edit",
+                  className: "k-grid-edit",
                   click: function(e) {
                     e.preventDefault();
                     var tr = $(e.target).closest("tr");
