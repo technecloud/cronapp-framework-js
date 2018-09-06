@@ -71,39 +71,9 @@
       "script": "js/blockly.js",
       "type": "script"
     },
-		{
-      "file": "index.html",
-      "script": "plugins/summernote/dist/summernote.css",
-      "type": "style"
-    },
-	{
-      "file": "index.html",
-      "script": "plugins/angular-summernote/dist/angular-summernote.min.js",
-      "type": "script"
-    },
-	{
-      "file": "index.html",
-      "script": "plugins/summernote/dist/summernote.js",
-      "type": "script"
-    },
-	{
-      "file": "index.html",
-      "script": "plugins/summernote/dist/lang/summernote-pt-BR.min.js",
-      "type": "script"
-    },
 	{
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/components/js/qrcode.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/tinymce/tinymce.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/angular-ui-tinymce/src/tinymce.js",
       "type": "script"
     },
     {
@@ -114,11 +84,6 @@
     {
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/angular-ui-tinymce/dist/tinymce.min.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/kendo.all.min.js",
       "type": "script"
     },
     {
@@ -181,9 +146,24 @@
       "script": "/js/blockly.js",
       "type": "script"
     },
-		{
+    {
       "file": "index.html",
-      "script": "plugins/summernote/dist/summernote.min.js",
+      "script": "plugins/summernote/dist/summernote.css",
+      "type": "style"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/angular-summernote/dist/angular-summernote.min.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/summernote/dist/summernote.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/summernote/dist/lang/summernote-pt-BR.min.js",
       "type": "script"
     },
     {
