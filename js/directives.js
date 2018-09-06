@@ -904,6 +904,7 @@
             if (attrs.cronappFilterAutopost && attrs.cronappFilterAutopost == "false")
               autopost = false;
 
+            //Correção para aceitar datasources fora de ordem
             setTimeout(function() {
               if ($element[0].tagName == "INPUT")
                 this.inputBehavior(scope, element, attrs, ngModelCtrl, $element, typeElement, operator, autopost);
