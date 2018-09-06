@@ -1872,16 +1872,23 @@
           restrict: 'E',
           replace: true,
           require: 'ngModel',
+          goTo: function(scope, combobox, rowId) {
+            dataSourceScreen = $(combobox).data('dataSourceScreen');
+            if (dataSourceScreen != null) {
+              scope.safeApply(dataSourceScreen.goTo(rowId, true));
+            }
+          },
           link: function (scope, element, attrs, ngModelCtrl) {
             var select = {};
             try {
-              // var json = window.buildElementOptions(element);
               select = JSON.parse(attrs.options);
             } catch(err) {
               console.log('DynamicComboBox invalid configuration! ' + err);
             }
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
+            options.autoBind = true;
+            
             var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
@@ -1898,6 +1905,7 @@
             options.virtual = {};
             options.virtual.itemHeight = 26;
             if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
+              options.height = options.dataSource.pageSize * options.virtual.itemHeight / 4;
               options.virtual.mapValueTo = 'dataItem';
               options.virtual.valueMapper = function(options) {
                 if (options.value) {
@@ -1916,11 +1924,16 @@
                 _ngModelCtrl.$setViewValue(initValue);
                 e.sender.value(initValue);
                 initValue = null;
-              }
-            }
-
+              } 
+            }.bind(this);
+            
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-
+            if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
+              combobox.dataSource.transport.options.combobox = combobox;
+              combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
+              combobox.dataSource.transport.options.initRead = true;
+            }
+            
             if (dataSourceScreen != null) {
               $(combobox).data('dataSourceScreen', dataSourceScreen);
             }
@@ -1929,14 +1942,11 @@
             var _ngModelCtrl = ngModelCtrl;
             $element.on('change', function (event) {
               _scope.$apply(function () {
-                _ngModelCtrl.$setViewValue(this.dataItem());
-                dataSourceScreen = $(this).data('dataSourceScreen');
-                if (dataSourceScreen != null) {
-                  dataSourceScreen.goTo(this.dataItem());
-                }
-              }.bind(combobox));
-            });
-
+                _ngModelCtrl.$setViewValue(combobox.dataItem());
+                this.goTo(scope, combobox, combobox.dataItem());
+              }.bind(this));
+            }.bind(this));
+            
             if (ngModelCtrl) {
               /**
                * Formatters change how model values will appear in the view.
@@ -1954,17 +1964,16 @@
                     }
                   }
                 }
-
-                setTimeout(function() {
+                
+                combobox.dataSource.read();
+                combobox.value(result);
+                if ((result != '' ) && (combobox.value() == '' || combobox.text().trim() == '')) { 
                   combobox.value(result);
-                  /*Se não existe no datasource view, força a inserção do item no combo*/
-                  if (combobox.value() == '' || combobox.text().trim() == '') {
-                    combobox.trigger("valueMapper");
-                  }
-                }, 300);
-
+                  combobox.trigger("valueMapper");
+                } 
+                
                 return result;
-              });
+              }.bind(this));
 
               /**
                * Parsers change how view values will be saved in the model.
@@ -3047,6 +3056,17 @@ app.kendoHelper = {
               overRideRefresh: function(data) {
                 if (this.options.isGridInDocument(this.options.grid)) {
                   this.options.grid.dataSource.read();
+                } else if (this.options.combobox) {
+                  if (!this.options.initRead) {
+                    this.options.combobox.value('');
+                    if (this.options.ngModelCtrl) {
+                      this.options.ngModelCtrl.$setViewValue(this.options.combobox.value());
+                    }
+                  } else {
+                    this.options.initRead = false;
+                  }
+                  
+                  this.options.combobox.dataSource.read();
                 }
               }.bind(this),
               read: function(data) {
@@ -3092,7 +3112,6 @@ app.kendoHelper = {
             if (!this.options.kendoCallback) {
               this.options.kendoCallback = e;
               doFetch = true;
-              // e.success(cronappDatasource.data);
             }
             else {
               if (this.options.fromRead) {
@@ -3249,6 +3268,48 @@ app.kendoHelper = {
     };
     return datasource;
   },
+  getEventReadCombo: function (e) {
+    for (key in e.data) {
+      if(e.data[key] == undefined) {
+        delete e.data[key];
+      }
+    }
+    var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
+      
+    var cronappDatasource = this.options.cronappDatasource;
+    cronappDatasource.rowsPerPage = e.data.pageSize;
+    cronappDatasource.offset = (e.data.page - 1);
+      
+    if (!e.data.pageSize) {
+      cronappDatasource.offset = undefined
+      delete paramsOData.$skip;
+      if (e.data.page == 1) {
+        if (this.options.grid.dataSource.page() != 1) {
+          this.options.grid.dataSource.page(1);
+          e.error("canceled", "canceled", "canceled");
+          return;
+        }
+      }
+    }
+    
+    if (!e.data.filter) {
+      cronappDatasource.append = false;
+    }
+      
+    var silentActive = true;
+    var fetchData = {};
+    fetchData.params = paramsOData;
+    cronappDatasource.fetch(fetchData, {
+        success:  function(data) {
+          e.success(data);
+        },
+        canceled:  function(data) {
+          e.error("canceled", "canceled", "canceled");
+        }
+      }, 
+      cronappDatasource.append
+    );
+  },
   getConfigCombobox: function(options, scope) {
     var dataSource = {};
 
@@ -3261,7 +3322,8 @@ app.kendoHelper = {
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
     } else if (options.dataSourceScreen.entityDataSource) {
       options.dataSourceScreen.entityDataSource.append = true;
-      dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope);
+      dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
+      dataSource.transport.read = app.kendoHelper.getEventReadCombo;
       valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
     }
 
