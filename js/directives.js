@@ -1879,15 +1879,17 @@
             }
           },
           link: function (scope, element, attrs, ngModelCtrl) {
+            var initValue = '';
             var select = {};
             try {
               select = JSON.parse(attrs.options);
+              initValue = select.initValue;
             } catch(err) {
               console.log('DynamicComboBox invalid configuration! ' + err);
             }
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
-            options.autoBind = true;
+            options.autoBind = false;
             
             var dataSourceScreen = null;
             try {
@@ -1917,41 +1919,21 @@
                 }
               }.bind(dataSourceScreen);
             }
-
-            var initValue = attrs.cronInit;
-            options.dataBound = function(e) {
-              if (initValue && initValue!= null) {
-                _ngModelCtrl.$setViewValue(initValue);
-                e.sender.value(initValue);
-                initValue = null;
-              } 
-            }.bind(this);
             
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-            if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
-              combobox.dataSource.transport.options.combobox = combobox;
-              combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
-              combobox.dataSource.transport.options.initRead = true;
-            }
             
             if (dataSourceScreen != null) {
               $(combobox).data('dataSourceScreen', dataSourceScreen);
             }
 
-            var _scope = scope;
-            var _ngModelCtrl = ngModelCtrl;
             $element.on('change', function (event) {
-              _scope.$apply(function () {
-                _ngModelCtrl.$setViewValue(combobox.dataItem());
+              scope.$apply(function () {
+                ngModelCtrl.$setViewValue(combobox.dataItem());
                 this.goTo(scope, combobox, combobox.dataItem());
               }.bind(this));
             }.bind(this));
             
             if (ngModelCtrl) {
-              /**
-               * Formatters change how model values will appear in the view.
-               * For display component.
-               */
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
 
@@ -1969,16 +1951,11 @@
                 combobox.value(result);
                 if ((result != '' ) && (combobox.value() == '' || combobox.text().trim() == '')) { 
                   combobox.value(result);
-                  combobox.trigger("valueMapper");
                 } 
                 
                 return result;
               }.bind(this));
 
-              /**
-               * Parsers change how view values will be saved in the model.
-               * for storage
-               */
               ngModelCtrl.$parsers.push(function (value) {
                 if (value) {
                   if (combobox.options.valuePrimitive === true) {
@@ -1996,6 +1973,18 @@
 
                 return null;
               }.bind(combobox));
+            }
+            
+            if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
+              combobox.dataSource.transport.options.combobox = combobox;
+              combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
+              combobox.dataSource.transport.options.initRead = true;
+              if (initValue && initValue != null) {
+                ngModelCtrl.$setViewValue(initValue);
+                combobox.value(initValue);
+                combobox.refresh();
+                combobox.dataSource.read();
+              }
             }
           }
         };
