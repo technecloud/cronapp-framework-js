@@ -1881,6 +1881,7 @@
           link: function (scope, element, attrs, ngModelCtrl) {
             var initValue = '';
             var select = {};
+            var self = this;
             try {
               select = JSON.parse(attrs.options);
               initValue = select.initValue;
@@ -1902,7 +1903,6 @@
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
             var $element = $(parent).find('input.cronDynamicSelect');
-            $(element).remove();
 
             options.virtual = {};
             options.virtual.itemHeight = 26;
@@ -1931,6 +1931,11 @@
                 ngModelCtrl.$setViewValue(combobox.dataItem());
                 this.goTo(scope, combobox, combobox.dataItem());
               }.bind(this));
+              
+              if (combobox.dataSource.transport.options.$compile) {
+                var template = angular.element(combobox.element[0].parentElement);
+                combobox.dataSource.transport.options.$compile(template)(scope);
+              }
             }.bind(this));
             
             if (ngModelCtrl) {
@@ -1977,6 +1982,8 @@
             
             if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
               combobox.dataSource.transport.options.combobox = combobox;
+              combobox.dataSource.transport.options.$compile = $compile;
+              combobox.dataSource.transport.options.scope = scope;
               combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
               combobox.dataSource.transport.options.initRead = true;
               if (initValue && initValue != null) {
@@ -1986,6 +1993,12 @@
                 combobox.dataSource.read();
               }
             }
+            
+            var $template = $(parent).find('span.cronDynamicSelect');
+            var templateDyn = angular.element($template);
+            $compile(templateDyn)(scope);
+            
+            $(element).remove();
           }
         };
       })
@@ -3284,13 +3297,20 @@ app.kendoHelper = {
     if (!e.data.filter) {
       cronappDatasource.append = false;
     }
-      
+    
+    
+    var self = this;
     var silentActive = true;
     var fetchData = {};
     fetchData.params = paramsOData;
     cronappDatasource.fetch(fetchData, {
         success:  function(data) {
           e.success(data);
+          if (self.options.combobox.element[0].id) {
+            var expToFind = " .k-animation-container";
+            var x = angular.element($(expToFind));
+            self.options.$compile(x)(self.options.scope);
+          }
         },
         canceled:  function(data) {
           e.error("canceled", "canceled", "canceled");
@@ -3320,6 +3340,14 @@ app.kendoHelper = {
       options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
     }
 
+    if (!options.template && options.format) {
+      options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
+    }
+    
+    if (!options.valueTemplate && options.format) {
+      options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
+    }
+    
     var config = {
       dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
       dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
