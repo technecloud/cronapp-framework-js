@@ -31,7 +31,7 @@
   });
 
   ParameterController.$inject = ['$modalInstance', '$scope', 'ReportService',
-      'report', 'htmlParameters'];
+    'report', 'htmlParameters'];
 
   function ParameterController($modalInstance, $scope, ReportService, report,
       htmlParameters) {
@@ -48,24 +48,24 @@
       }
       return name;
     };
-    
+
     $scope.cloneElement = function(el) {
       return angular.copy(el);
     };
-    
+
     $scope.isVisibleParam = function(param) {
       if (param.name == 'DATA_LIMIT')
         return false;
       else if (param.value === "")
         return true;
       else if (param.value != "")
-        return false;  
-        
+        return false;
+
       return true;
     };
 
 
-    var grp = report.reportName.match(/\/(.*?)(.*?)\.jrxml/);
+    var grp = report.reportName.match(/\/(.*?)(.*?)(\.jrxml|\.report)/);
     $scope.report = report;
     $scope.report.name = grp[2];
     $scope.htmlParameters = htmlParameters;
@@ -85,14 +85,17 @@
       var oldIE = navigator.userAgent.match(/MSIE/g);
 
       if (ie || oldIE || ieEDGE) {
-       window.navigator.msSaveBlob(blob, $scope.report.reportName + ".pdf");
+        window.navigator.msSaveBlob(blob, $scope.report.reportName + ".pdf");
       } else {
-       ReportService.openURLContent(URL.createObjectURL(blob));
+        ReportService.openURLContent(URL.createObjectURL(blob));
       }
     }
 
     $scope.onPrint = function() {
-      ReportService.getPDFAsFile($scope.report).then(openPDFAsFile);
+      if ($scope.report.reportName.endsWith('.report'))
+        ReportService.openStimulsoftReport($scope.report.contentData, $scope.report.parameters);
+      else
+        ReportService.getPDFAsFile($scope.report).then(openPDFAsFile);
     };
 
     $scope.onCancel = function() {

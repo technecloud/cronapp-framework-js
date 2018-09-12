@@ -123,6 +123,27 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/cultures/kendo.culture.pt-BR.min.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.viewer.css",
+      "type": "style",
+      "onTop": true
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.reports.pack.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.viewer.pack.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft-helper.js",
+      "type": "script"
     }
   ],
   "removes": [
