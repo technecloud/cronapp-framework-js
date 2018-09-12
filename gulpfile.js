@@ -8,7 +8,7 @@ var gulp = require('gulp'),
   htmlmin = require('gulp-htmlmin')
   ngAnnotate = require('gulp-ng-annotate')
 gulp.task('minify-js', function() {
-  return gulp.src(['js/**', '!js/tinymce/**', '!js/kendo-ui/**'])
+  return gulp.src(['js/**', '!js/tinymce/**', '!js/kendo-ui/**', '!js/stimulsoft/**'])
   	.pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(gulp.dest('dist/js/'));
@@ -22,6 +22,11 @@ gulp.task('copy-tinymce-js', function() {
 gulp.task('copy-kendo-ui-js', function() {
   return gulp.src(['js/kendo-ui/**'])
   .pipe(gulp.dest('dist/js/kendo-ui'));
+});
+
+gulp.task('copy-stimulsoft', function() {
+  return gulp.src(['js/stimulsoft/**'])
+  .pipe(gulp.dest('dist/js/stimulsoft'));
 });
 
 gulp.task('minify-css', function() {
@@ -76,6 +81,7 @@ gulp.task('build', [
   'minify-js',
   'copy-tinymce-js',
   'copy-kendo-ui-js',
+  'copy-stimulsoft',
   'minify-css',
   'minify-img',
   'minify-components-css',
