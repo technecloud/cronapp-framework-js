@@ -1867,7 +1867,7 @@
         };
       })
 
-      .directive('cronDynamicSelect', function ($compile) {
+      .directive('cronDynamicSelect', function ($compile, $timeout) {
         return {
           restrict: 'E',
           replace: true,
@@ -1877,6 +1877,12 @@
             if (dataSourceScreen != null) {
               scope.safeApply(dataSourceScreen.goTo(rowId, true));
             }
+          },
+          compileAngular: function(scope, element) {
+            // var $template = $(combobox.element[0].parentElement);
+            var $template = $(element);
+            var templateDyn = angular.element($template);
+            $compile(templateDyn)(scope);
           },
           link: function (scope, element, attrs, ngModelCtrl) {
             var initValue = '';
@@ -1891,7 +1897,7 @@
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
             options.autoBind = false;
-            
+
             var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
@@ -1906,42 +1912,65 @@
 
             options.virtual = {};
             options.virtual.itemHeight = 26;
+            var _scope = scope;
+            var _compileAngular = this.compileAngular;
+            var _options = options;
             if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
               options.height = options.dataSource.pageSize * options.virtual.itemHeight / 4;
               options.virtual.mapValueTo = 'dataItem';
               options.virtual.valueMapper = function(options) {
                 if (options.value) {
-                  this.findObj([options.value], false, function(data) {
+                  var _dataSource = _options.dataSource.transport.options.cronappDatasource;
+                  var _combobox = _options.combobox;
+                  _dataSource.findObj([options.value], false, function(data) {
                     options.success(data);
                   });
                 } else {
                   options.success(null);
                 }
-              }.bind(dataSourceScreen);
+              };
             }
-            
+
+            scope.currentData = dataSourceScreen.data;
+            scope.$watchCollection('currentData', function( newValue, oldValue ) {
+                  var _combobox = _options.combobox;
+                  var _listView = _combobox.listView;
+                  if (newValue) {
+                    if (_listView.itemCount == 0 && newValue.length > 0) {
+                      _options.dataSource.data = newValue;
+                      _combobox.dataSource.read();
+                      $timeout(function() {
+                        _compileAngular(_scope, _listView.element[0]);
+                      }, 500);
+                    }
+                  }
+                }
+            );
+
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
-            
+            options.combobox = combobox;
+
+            var _goTo = this.goTo;
+            var _ngModelCtrl = ngModelCtrl;
+            $element.on('change', function (event) {
+              _scope.$apply(function () {
+                _ngModelCtrl.$setViewValue(combobox.dataItem());
+                _goTo(scope, combobox, combobox.dataItem());
+              });
+              _compileAngular(scope, options.combobox.element[0]);
+            });
+
+            $(combobox.span).on('DOMSubtreeModified', function(e){
+              _compileAngular(scope, _options.combobox.element[0].parentElement);
+            });
+
             if (dataSourceScreen != null) {
               $(combobox).data('dataSourceScreen', dataSourceScreen);
             }
 
-            $element.on('change', function (event) {
-              scope.$apply(function () {
-                ngModelCtrl.$setViewValue(combobox.dataItem());
-                this.goTo(scope, combobox, combobox.dataItem());
-              }.bind(this));
-              
-              if (combobox.dataSource.transport.options.$compile) {
-                var template = angular.element(combobox.element[0].parentElement);
-                combobox.dataSource.transport.options.$compile(template)(scope);
-              }
-            }.bind(this));
-            
             if (ngModelCtrl) {
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
-
                 if (value) {
                   if (typeof value == "string") {
                     result = value;
@@ -1951,15 +1980,14 @@
                     }
                   }
                 }
-                
+
                 combobox.dataSource.read();
                 combobox.value(result);
-                if ((result != '' ) && (combobox.value() == '' || combobox.text().trim() == '')) { 
+                if ((result != '' ) && (combobox.value() == '' || combobox.text().trim() == '')) {
                   combobox.value(result);
-                } 
-                
+                }
                 return result;
-              }.bind(this));
+              });
 
               ngModelCtrl.$parsers.push(function (value) {
                 if (value) {
@@ -1971,15 +1999,14 @@
                     }
                   } else {
                     try {
-                      return objectClone(value, this.dataSource.options.schema.model.fields);
+                      return objectClone(value, combobox.dataSource.options.schema.model.fields);
                     } catch(e){}
                   }
                 }
-
                 return null;
-              }.bind(combobox));
+              });
             }
-            
+
             if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
               combobox.dataSource.transport.options.combobox = combobox;
               combobox.dataSource.transport.options.$compile = $compile;
@@ -1990,14 +2017,11 @@
                 ngModelCtrl.$setViewValue(initValue);
                 combobox.value(initValue);
                 combobox.refresh();
-                combobox.dataSource.read();
               }
             }
-            
-            var $template = $(parent).find('span.cronDynamicSelect');
-            var templateDyn = angular.element($template);
-            $compile(templateDyn)(scope);
-            
+
+            _compileAngular(scope, combobox.element[0].parentElement);
+
             $(element).remove();
           }
         };
@@ -3277,46 +3301,33 @@ app.kendoHelper = {
       }
     }
     var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
-      
+
     var cronappDatasource = this.options.cronappDatasource;
     cronappDatasource.rowsPerPage = e.data.pageSize;
     cronappDatasource.offset = (e.data.page - 1);
-      
-    if (!e.data.pageSize) {
-      cronappDatasource.offset = undefined
-      delete paramsOData.$skip;
-      if (e.data.page == 1) {
-        if (this.options.grid.dataSource.page() != 1) {
-          this.options.grid.dataSource.page(1);
-          e.error("canceled", "canceled", "canceled");
-          return;
-        }
-      }
-    }
-    
+
     if (!e.data.filter) {
       cronappDatasource.append = false;
     }
-    
-    
+
     var self = this;
     var silentActive = true;
     var fetchData = {};
     fetchData.params = paramsOData;
     cronappDatasource.fetch(fetchData, {
-        success:  function(data) {
-          e.success(data);
-          if (self.options.combobox.element[0].id) {
-            var expToFind = " .k-animation-container";
-            var x = angular.element($(expToFind));
-            self.options.$compile(x)(self.options.scope);
+          success:  function(data) {
+            e.success(data);
+            if (self.options.combobox.element[0].id) {
+              var expToFind = " .k-animation-container";
+              var x = angular.element($(expToFind));
+              self.options.$compile(x)(self.options.scope);
+            }
+          },
+          canceled:  function(data) {
+            e.error("canceled", "canceled", "canceled");
           }
         },
-        canceled:  function(data) {
-          e.error("canceled", "canceled", "canceled");
-        }
-      }, 
-      cronappDatasource.append
+        cronappDatasource.append
     );
   },
   getConfigCombobox: function(options, scope) {
@@ -3340,14 +3351,26 @@ app.kendoHelper = {
       options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
     }
 
-    if (!options.template && options.format) {
-      options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
+    var getFieldType = function(field) {
+      var fields = options.dataSourceScreen.entityDataSource.schemaFields;
+      for (count = 0; count < fields.length; count++) {
+        if (field == fields[count].name) {
+          return fields[count].type.toLowerCase();
+          break;
+        }
+      }
+
+      return null;
     }
-    
+
+    if (!options.template && options.format) {
+      options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
+    }
+
     if (!options.valueTemplate && options.format) {
       options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
     }
-    
+
     var config = {
       dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
       dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
