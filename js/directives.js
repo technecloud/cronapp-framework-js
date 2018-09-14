@@ -1799,7 +1799,7 @@
         };
       }])
 
-      .directive('cronSelect', function ($compile) {
+	  .directive('cronSelect', function ($compile) {
         return {
           restrict: 'E',
           replace: true,
@@ -1820,16 +1820,6 @@
             var $element = $(parent).find('input.cronSelect');
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
-
-            var initValue = attrs.cronInit;
-            options.dataBound = function(e) {
-              if (initValue && initValue!= null) {
-                ngModelCtrl.$setViewValue(initValue);
-                e.sender.value(initValue);
-                initValue = null;
-              }
-            }
-
             var combobox = $element.kendoComboBox(options).data('kendoComboBox');
             $(element).remove();
 
@@ -1838,7 +1828,7 @@
 
             $element.on('change', function (event) {
               _scope.$apply(function () {
-                _ngModelCtrl.$setViewValue(this.value());
+                _ngModelCtrl.$setViewValue(eval(this.value()));
               }.bind(combobox));
             });
 
@@ -1846,7 +1836,7 @@
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
 
-                if (value) {
+                if ((typeof value === 'boolean') || (value)) {
                   result = value;
                 }
 
@@ -1856,7 +1846,7 @@
               });
 
               ngModelCtrl.$parsers.push(function (value) {
-                if (value) {
+                if ((typeof value === 'boolean') || value) {
                   return value;
                 }
 
@@ -3340,6 +3330,9 @@ app.kendoHelper = {
       options.dataValueField = 'key';
       options.dataTextField = 'value';
       dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
+      for (i = 0; i < dataSource.data.length; i++) {
+        dataSource.data[i].key = eval(dataSource.data[i].key);
+      }
     } else if (options.dataSourceScreen.entityDataSource) {
       options.dataSourceScreen.entityDataSource.append = true;
       dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
