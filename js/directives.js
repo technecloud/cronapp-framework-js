@@ -535,6 +535,9 @@
             if (typeof o == 'number') {
               return o + "";
             }
+			if (typeof o == 'boolean') {
+              return o + "";
+            }
             if (o instanceof Date) {
               var dt = "datetimeoffset'" + o.toISOString() + "'";
             }
