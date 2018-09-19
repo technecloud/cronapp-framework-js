@@ -10,9 +10,9 @@ var StimulsoftHelper = function() {
       "8ujdA1wiPoKPgMDYx8qPVwbaib1Zk4T+D1pZ";
   this._regexForParam = /[a-zA-Z]*[0-9]*\s+[a-zA-Z]*\s+:[a-zA-Z]*[0-9]*/gim;
   this._currentLanguage;
-  
+
   this._ptBrValue = 'pt_br';
-  
+
   this._groupedType = {
     STRING : { types: ["string", "character", "uuid", "guid"] },
     DATE: { types: ["date", "datetime", "time"] },
@@ -45,6 +45,7 @@ StimulsoftHelper.prototype.parseToGroupedParam = function(datasourcesParam) {
         if (this._groupedType[type].types.contains(fp.type.toLowerCase())) {
           parameters.push({
             name: fp.param,
+            originalName: fp.param,
             type: type,
             value: ''
           });
@@ -53,7 +54,7 @@ StimulsoftHelper.prototype.parseToGroupedParam = function(datasourcesParam) {
       }
     }.bind(this));
   }.bind(this));
-  return parameters;  
+  return parameters;
 };
 
 StimulsoftHelper.prototype.getLocalizationInfo = function (cultureName, xml) {
@@ -69,8 +70,8 @@ StimulsoftHelper.prototype.getKey = function() {
 
 StimulsoftHelper.prototype.nomenclaturePattern = function(value) {
   if (value)
-      value = value.replaceAll(".","_").replaceAll(" ", "_");
-    return value;
+    value = value.replaceAll(".","_").replaceAll(" ", "_");
+  return value;
 };
 
 StimulsoftHelper.prototype.findDatasourceByName = function(dataSources, name) {
@@ -135,7 +136,7 @@ StimulsoftHelper.prototype.getParamsFromFilter = function(datasource) {
     var type = column ? column.type.getStiTypeName() : 'String';
     result.push({
       field: groupResult[0],
-      param: groupResult[2],
+      param: groupResult[2].substr(1),
       type: type,
     });
   }
@@ -148,7 +149,7 @@ StimulsoftHelper.prototype.setParamsInFilter = function(dataSources, datasources
     datasource.originalSqlCommand = datasource.sqlCommand;
     datasourceP.fieldParams.forEach(function(fp) {
       var paramValue = this.adjustParamODATA(fp);
-      var regex = eval('/' + fp.param + '\\b/gim');
+      var regex = eval('/' + ':' +  fp.param + '\\b/gim');
       datasource.sqlCommand = datasource.sqlCommand.replaceAll(regex, paramValue);
     }.bind(this));
   }.bind(this));

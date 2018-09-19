@@ -118,7 +118,7 @@
         parameters.forEach(function(p) {
           stimulsoftParams.forEach(function(sp) {
             for (var i = 0; i<sp.fieldParams.length; i++) {
-              if (sp.fieldParams[i].param == p.name) {
+              if (sp.fieldParams[i].param == p.originalName) {
                 sp.fieldParams[i]["value"] = p.value;
                 break;
               }
@@ -268,6 +268,10 @@
                     if (params)
                       result.data.parameters = this.mergeParam(result.data.parameters, params);
                     if (this.hasParameterWithOutValue(result.data.parameters)) {
+                      //Traduz o nome dos parametros
+                      result.data.parameters.forEach(function(p) {
+                        p.name = $translate.instant(p.name);
+                      });
                       this.showParameters(JSON.parse(JSON.stringify(result.data)));
                     } else {
                       this.openStimulsoftReport(content.data, result.data.parameters);
