@@ -1872,7 +1872,6 @@
             }
           },
           compileAngular: function(scope, element) {
-            // var $template = $(combobox.element[0].parentElement);
             var $template = $(element);
             var templateDyn = angular.element($template);
             $compile(templateDyn)(scope);
@@ -1964,11 +1963,11 @@
             if (ngModelCtrl) {
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
-                if (value) {
+                if ((typeof value === 'boolean') || value) {
                   if (typeof value == "string") {
                     result = value;
                   } else {
-                    if (value[select.dataValueField]) {
+                    if ((typeof value[select.dataValueField] === 'boolean') || value[select.dataValueField]) {
                       result = value[select.dataValueField];
                     }
                   }
@@ -1983,11 +1982,11 @@
               });
 
               ngModelCtrl.$parsers.push(function (value) {
-                if (value) {
+                if ((typeof value === 'boolean') || value) {
                   if (combobox.options.valuePrimitive === true) {
                     if (typeof value == 'string') {
                       return value;
-                    } else if (value[select.dataValueField]) {
+                    } else if ((typeof value[select.dataValueField] === 'boolean') || value[select.dataValueField]) {
                       return value[select.dataValueField];
                     }
                   } else {
