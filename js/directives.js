@@ -1925,18 +1925,18 @@
 
             scope.currentData = dataSourceScreen.data;
             scope.$watchCollection('currentData', function( newValue, oldValue ) {
-                  var _combobox = _options.combobox;
-                  var _listView = _combobox.listView;
-                  if (newValue) {
-                    if (_listView.itemCount == 0 && newValue.length > 0) {
-                      _options.dataSource.data = newValue;
-                      _combobox.dataSource.read();
-                      $timeout(function() {
-                        _compileAngular(_scope, _listView.element[0]);
-                      }, 500);
-                    }
+                var _combobox = _options.combobox;
+                var _listView = _combobox.listView;
+                if (newValue) {
+                  if (_listView.itemCount == 0 && newValue.length > 0) {
+                    _options.dataSource.data = newValue;
+                    _combobox.dataSource.read();
+                    $timeout(function() {
+                      _compileAngular(_scope, _listView.element[0]);
+                    }, 500);
                   }
                 }
+              }
             );
 
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
@@ -3308,15 +3308,19 @@ app.kendoHelper = {
     fetchData.params = paramsOData;
     cronappDatasource.fetch(fetchData, {
           success:  function(data) {
-            e.success(data);
-            if (self.options.combobox.element[0].id) {
-              var expToFind = " .k-animation-container";
-              var x = angular.element($(expToFind));
-              self.options.$compile(x)(self.options.scope);
+            if (e.success) {
+              e.success(data);
+              if (self.options.combobox.element[0].id) {
+                var expToFind = " .k-animation-container";
+                var x = angular.element($(expToFind));
+                self.options.$compile(x)(self.options.scope);
+              }
             }
           },
           canceled:  function(data) {
-            e.error("canceled", "canceled", "canceled");
+            if (e.success) {
+              e.error("canceled", "canceled", "canceled");
+            }
           }
         },
         cronappDatasource.append
