@@ -231,7 +231,7 @@
             "accordionTabClicked": "panel-collapse.collapse",
             "activeSelector": "div.panel-collapse.collapse.in",
             "activeClass": "in",
-            "sourceHTML": "<div class=\"panel panel-default\"><div class=\"panel-heading\" role=\"tab\" id=\"heading${RANDOM}\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse${RANDOM}\" aria-expanded=\"false\" aria-controls=\"collapse${RANDOM}\" ><h1 class=\"lead text-center\" data-component=\"crn-title\" xattr-position=\"text-center\"> New Group Title </h1></div><div id=\"collapse${RANDOM}\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading${RANDOM}\"><div class=\"panel-body\"> <h2 data-component=\"crn-subtitle\" class=\"lead text-center\" xattr-position=\"text-center\">  New Group Description   </h2>  </div></div></div>",
+            "sourceHTML": "<div class=\"panel panel-default\"><div class=\"panel-heading\" role=\"tab\" id=\"heading${RANDOM}\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse${RANDOM}\" aria-expanded=\"false\" aria-controls=\"collapse${RANDOM}\" ><h1 class=\"lead text-center\" data-component=\"crn-title\" xattr-position=\"text-center\"> New Group Title </h1></div><div id=\"collapse${RANDOM}\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading${RANDOM}\"><div class=\"panel-body\" data-container=\"true\" > <h2 data-component=\"crn-subtitle\" class=\"lead text-center\" xattr-position=\"text-center\">  New Group Description   </h2>  </div></div></div>",
             "targetSelector": "div.panel-group"
           },
           {
@@ -259,6 +259,7 @@
       "text_pt_BR": "Carrossel",
       "text_en_US": "Carousel",
       "class": "adjust-icon mdi mdi-view-carousel",
+      "forcedGroup":true,
       "handleRules": {
         "canOrder": true,
         "canActivate": true,
@@ -273,7 +274,7 @@
           {
             "activeSelector": "div.carousel-inner div.item.active",
             "activeClass": "active",
-            "sourceHTML": "<div class=\"item\"><img alt=\"New slide [900x500]\" style=\"margin: 0 auto;\" data-src=\"holder.js/900x500/auto/#777:#555/text:New slide\" src=\"data:image/png;base64,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YhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACAjRgEAyIhRAAAyYhQAgIwYBQAgI0YBAMiIUQAAMmIUAICMGAUAICNGAQDIiFEAADJiFACAjBgFACDy99//Dz8WqnGpeRKeAAAAAElFTkSuQmCC\" data-holder-rendered=\"true\"></div>",
+            "sourceHTML": "<div class=\"item\"><img data-component= \"crn-image\" alt=\"New slide\" style=\"margin: 0 auto;\" src = \"http://placehold.it/900x500\"><div class = \"carousel-caption\"><h1  data-component=\"crn-title\">New Slide</h1><h2 data-component=\"crn-subtitle\"> Subtitle </h2></div></div>",
             "targetSelector": "div.carousel-inner"
           }
         ]
@@ -670,16 +671,18 @@
           ]
         }
       ],
-      "groupedChildren": [
+      "childrenProperties":[
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "span"
+          "name": "content",
+          "selector": "span",
+          "type":"content"
         },
         {
-          "text_pt_BR": "Ícone",
-          "text_en_US": "Icon",
-          "selector": "i"
+          "name": "class",
+          "displayName_pt_BR": "Ícone",
+          "displayName_en_US": "Icon",
+          "selector": "i",
+          "type": "icon"
         }
       ]
     },
@@ -800,24 +803,49 @@
       "text_en_US": "Date",
       "class": "adjust-icon mdi mdi-calendar",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/date.template.html",
-      "properties": {
-        "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
-        }
-      },
-      "groupedChildren": [
+      "childrenProperties": [
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "label"
+          "name": "content",
+          "selector": "label",
+          "type":"content"
         },
         {
-          "text_pt_BR": "Campo",
-          "text_en_US": "Field",
-          "selector": "input"
+          "name":"ng-model",
+          "selector":"input",
+          "type":"text",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        {
+          "name":"type",
+          "selector":"input",
+          "type":"type"
+        },
+        {
+          "name":"mask",
+          "selector":"input",
+          "type":"mask"
+        },
+        {
+          "name": "ng-required",
+          "selector": "input",
+          "type":"logic"
+        },
+        {
+          "name":"placeholder",
+          "selector":"input",
+          "type":"text"
+        },
+        {
+          "name":"mask-placeholder",
+          "selector":"input",
+          "type":"text"
         }
-      ]
+
+      ],
+      "type": {
+        "displayName": "Type"
+      }
     },
     {
       "name": "crn-timepicker",
@@ -1032,18 +1060,16 @@
           "selector": "ui-select",
           "displayName_pt_BR": "Items",
           "displayName_en_US": "Items"
-        }
-      ],
-      "groupedChildren": [
-        {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "label"
         },
         {
-          "text_pt_BR": "Campo",
-          "text_en_US": "Field",
-          "selector": "ui-select"
+          "name": "ng-model",
+          "selector": "ui-select",
+          "type":"text"
+        },
+        {
+          "name": "ng-required",
+          "selector": "ui-select",
+          "type":"logic"
         }
       ]
     },
@@ -1080,13 +1106,6 @@
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
-          "name": "ng-required",
-          "selector": "ui-select",
-          "displayName_pt_BR": "Requerido",
-          "displayName_en_US": "Required",
-          "type":"text"
-        },
-        {
           "editExpression": false,
           "name": "option-selected",
           "selector": "ui-select-match",
@@ -1105,13 +1124,18 @@
           "type": "datasourceFieldList",
           "onSave": "javascript:function() { var result = ''; var splited = arguments[0].split('+'); for (var i = 0; i<splited.length; i++) { if (splited[i].trim().startsWith(\"'\") || splited[i].trim().startsWith('\"')) result += splited[i].trim() + ' + '; else result += 'rowData.' + splited[i].trim() + ' + ';  } result = result.substr(0, result.length - 2); return '{{'+result.trim()+'}}'; }",
           "onDisplay": "javascript:function() { return arguments[0].replace(/rowData./g,'').replace('{{','').replace('}}','').replace(/\\$/g,''); }"
-        }
-      ],
-      "groupedChildren": [
+        },
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "label"
+          "name": "content",
+          "selector": "label",
+          "type":"content"
+        },
+        {
+          "name": "ng-required",
+          "selector": "ui-select",
+          "displayName_pt_BR": "Requerido",
+          "displayName_en_US": "Required",
+          "type":"logic"
         }
       ]
     },
@@ -1564,37 +1588,14 @@
       ]
     },
     {
-      "name": "crn-richtextarea",
-      "text_pt_BR": "Área de texto rico",
-      "text_en_US": "Rich textarea",
-      "class": "adjust-icon mdi mdi-format-text",
-      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" class=\"form-control\" summernote=\"\" lang=\"pt-BR\"></textarea></div>",
-      "properties": {
-        "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
-        }
-      },
-      "groupedChildren": [
-        {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "label"
-        },
-        {
-          "text_pt_BR": "Campo",
-          "text_en_US": "Field",
-          "selector": "textarea"
-        }
-      ]
-    },
-    {
       "name": "crn-QRCode",
       "text_pt_BR": "Código QR",
       "text_en_US": "QR Code",
       "class": "adjust-icon mdi mdi-qrcode",
       "wrapper": false,
       "template": "<div qr=\"true\" ng-model=\"vars.QR${RANDOM}\" ><div> </div> </div>",
+      "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/qrcode.png\"/>",
+      "designTimeSelector": "div",
       "properties": {
         "ng-model": {
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
@@ -1604,21 +1605,6 @@
           "removable": false,
           "displayName": "QR Code"
         }
-      },
-      "classForPreview": {
-        "targetSelector": "div:parent",
-        "condition": [
-          {
-            "name": "qr",
-            "value": "true",
-            "class": "qrCodeCronapp"
-          },
-          {
-            "name": "qr",
-            "value": "false",
-            "class": "qrCodeCronapp"
-          }
-        ]
       }
     },
     {
