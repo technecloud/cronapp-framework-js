@@ -76,10 +76,6 @@
           "removable": true,
           "type": "event"
         },
-        "onmouseover": {
-          "removable": true,
-          "type": "event"
-        },
         "xattr-fullsize": {
           "displayName": "Width"
         },
@@ -161,16 +157,18 @@
           ]
         }
       ],
-      "groupedChildren": [
+      "childrenProperties":[
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "span"
+          "name": "class",
+          "selector": "i",
+          "displayName_pt_BR": "Ícone",
+          "displayName_en_US": "Icon",
+          "type": "icon"
         },
         {
-          "text_pt_BR": "Ícone",
-          "text_en_US": "Icon",
-          "selector": "i"
+          "name": "content",
+          "selector": "span",
+          "type": "content"
         }
       ]
     },
