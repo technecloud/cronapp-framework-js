@@ -1726,21 +1726,22 @@
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/cron-grid.designtime.html",
       "designTimeSelector": "cron-grid",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-grid.template.html",
-      "properties": {
-        "options": {
-          "removable": false,
-          "global": "true"
-        },
-        "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
-        }
-      },
       "childrenProperties":[
         {
           "name": "options",
-          "selector": "cron-grid"
-        }],
+          "removable": false,
+          "global": "true",
+          "selector": "cron-grid",
+          "type":"text"
+        },
+        {
+          "name": "ng-model",
+          "selector": "cron-grid",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+          "type":"text"
+        }
+      ],
       "styles": [
         {
           "selector": "div#{id} .k-grid",
