@@ -10,9 +10,6 @@
       "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/anchor.template.html",
       "properties": {
-        "onclick": {
-          "type": "event"
-        },
         "target": {
           "removable": false,
           "type": "list",
@@ -39,28 +36,8 @@
           "removable": false,
           "type": "projectResource",
           "resourceType": "text/html"
-        },
-        "xattr-fullsize": {
-          "displayName": "Width"
         }
-      },
-      "attributesForPreview": [
-        {
-          "name": "xattr-fullsize",
-          "type": "options",
-          "target": "style",
-          "values": [
-            {
-              "key": "display:block;",
-              "value": "Block"
-            },
-            {
-              "key": "display:inline;",
-              "value": "Inline"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
       "name": "crn-button",
@@ -428,23 +405,37 @@
       "text_pt_BR": "Imagem dinâmica",
       "text_en_US": "Dynamic Image",
       "class": "adjust-icon mdi mdi-image",
+      "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicimage.template.html",
-      "properties": {
-        "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
-        }
-      },
-      "groupedChildren": [
+      "childrenProperties":[
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "label"
+          "name": "ng-model",
+          "selector": "div[dynamic-image]",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+          "type": "text"
         },
         {
-          "text_pt_BR": "Campo",
-          "text_en_US": "Field",
-          "selector": "dynamic-image|div[dynamic-image]"
+          "name": "content",
+          "selector": "label",
+          "displayName_pt_BR": "Rótulo",
+          "displayName_en_US": "Label",
+          "type": "content"
+        },
+        {
+          "name": "max-file-size",
+          "selector": "div[dynamic-image]",
+          "type": "text"
+        },
+        {
+          "name": "ng-required",
+          "selector": "div[dynamic-image]",
+          "type": "logic"
+        },
+        {
+          "name": "content",
+          "selector": "div[dynamic-image]",
+          "type": "text"
         }
       ]
     },
@@ -546,11 +537,14 @@
           "childrenProperty": true
         }
       },
-      "groupedChildren": [{
-        "text_pt_BR": "Rótulo",
-        "text_en_US": "Label",
-        "selector": "label"
-      },
+      "childrenProperties":[
+        {
+          "name": "content",
+          "selector": "label",
+          "type": "content"
+        }
+      ],
+      "groupedChildren": [
         {
           "text_pt_BR": "Campo",
           "text_en_US": "Field",
@@ -755,39 +749,15 @@
       "name": "crn-vertical-container",
       "text_pt_BR": "Grade vertical",
       "text_en_US": "Vertical Grid",
-      "wrapper": false,
-      "class": "adjust-icon mdi mdi-drag-vertical",
-      "template": "<div class=\"crn-layout-container\"><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div><div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div></div>",
-      "handleRules": {
-        "canOrder": false,
-        "canActivate": false,
-        "canIncrement": true,
-        "rules": [
-          {
-            "sourceHTML": "<div class=\"row\"><div data-container=\"true\" data-replace=\"true\">Content goes here</div></div>",
-            "targetSelector": ":self"
-          }
-        ]
-      }
+      "ctfdeedr5lass": "adjust-icon mdi mdi-drag-vertical",
+      "template": "<div class=\"col-md-12\" data-container=\"true\" data-replace=\"true\">Content goes here</div> <div class=\"col-md-12\" data-container=\"true\" data-replace=\"true\">Content goes here</div>"
     },
     {
       "name": "crn-horizontal-container",
       "text_pt_BR": "Grade horizontal",
       "text_en_US": "Horizontal Grid",
-      "wrapper": false,
       "class": "adjust-icon mdi mdi-drag-horizontal",
-      "template": "<div class=\"row\">\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n        <div class=\"column col-xs-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>\r\n      </div>",
-      "handleRules": {
-        "canOrder": false,
-        "canActivate": false,
-        "canIncrement": true,
-        "rules": [
-          {
-            "sourceHTML": "<div class=\"column col-xs-1\" data-container=\"true\" data-replace=\"true\">Content </div>",
-            "targetSelector": ":self"
-          }
-        ]
-      }
+      "template": "<div class=\"col-md-6\" data-container=\"true\" data-replace=\"true\">Content goes here </div> <div class=\"col-md-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>"
     },
     {
       "name": "crn-tabs",
@@ -871,24 +841,49 @@
       "text_en_US": "Time",
       "class": "adjust-icon mdi mdi-timer",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/time.template.html",
-      "properties": {
-        "ng-model": {
-          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
-        }
-      },
-      "groupedChildren": [
+      "childrenProperties": [
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "label"
+          "name": "content",
+          "selector": "label",
+          "type":"content"
         },
         {
-          "text_pt_BR": "Campo",
-          "text_en_US": "Field",
-          "selector": "input"
+          "name":"ng-model",
+          "selector":"input",
+          "type":"text",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        {
+          "name":"type",
+          "selector":"input",
+          "type":"type"
+        },
+        {
+          "name":"mask",
+          "selector":"input",
+          "type":"mask"
+        },
+        {
+          "name": "ng-required",
+          "selector": "input",
+          "type":"logic"
+        },
+        {
+          "name":"placeholder",
+          "selector":"input",
+          "type":"text"
+        },
+        {
+          "name":"mask-placeholder",
+          "selector":"input",
+          "type":"text"
         }
-      ]
+
+      ],
+      "type": {
+        "displayName": "Type"
+      }
     },
     {
       "name": "crn-datetimepicker",
@@ -1237,16 +1232,17 @@
           "name": "value",
           "selector": "label[value]",
           "displayName_pt_BR": "Valor do campo",
-          "displayName_en_US": "Field value"
+          "displayName_en_US": "Field value",
+          "type":"text"
         },
         {
           "name": "crn-view-value",
           "selector": "span",
           "displayName_pt_BR": "Valor de exibição",
-          "displayName_en_US": "Text value"
+          "displayName_en_US": "Text value",
+          "type":"text"
         }
       ]
-
     },
     {
       "name": "crn-checkbox",
@@ -1701,17 +1697,17 @@
       "text_en_US": "Chart",
       "class": "adjust-icon mdi mdi-chart-bar",
       "wrapper": false,
-      "template": "<div> <canvas id=\"chart${RANDOM}\" data-component=\"crn-chart\" class=\"col-xs-12\"></canvas></div>",
-      "classForPreview": {
-        "targetSelector": "canvas",
-        "condition": [
-          {
-            "name": "data-component",
-            "value": "crn-chart",
-            "class": "chart chart-line"
-          }
-        ]
-      }
+      "template": "<div class=\"col-xs-12\"> <canvas id=\"chart${RANDOM}\" data-component=\"crn-chart\" class=\"col-xs-12\"></canvas></div>",
+      "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/svg-charts.svg\"/>",
+      "designTimeSelector": "canvas",
+      "childrenProperties":[
+        {
+          "name":"id",
+          "selector":"canvas",
+          "type":"text",
+          "displayName_pt_BR": "Identificador do gráfico",
+          "displayName_en_US": "Chart Id"
+        }]
     },
     {
       "name": "crn-panel",
