@@ -1464,6 +1464,7 @@
       "name": "crn-tags",
       "text_pt_BR": "Seleção múltipla",
       "text_en_US": "Multiselect",
+      "pallete":false,
       "dependences": {
         "editor": [
           "plugins/cronapp-framework-js/components/css/multiselect-editor.css"
@@ -1475,12 +1476,15 @@
         {
           "name": "crn-datasource",
           "selector": "ui-select",
+          "type": "pageDatasource",
           "displayName_pt_BR": "Fonte de dados",
           "displayName_en_US": "Datasource"
         },
         {
           "name": "ng-model",
           "selector": "ui-select",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
           "displayName_pt_BR": "Campo",
           "displayName_en_US": "Field"
         },
