@@ -1998,6 +1998,64 @@
       }
     },
     {
+      "name": "crn-textinputicon",
+      "text_pt_BR": "Entrada de texto com ícone",
+      "text_en_US": "Input with icon",
+      "class": "adjust-icon mdi mdi-label-outline",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinputicon.template.html",
+      "forcedGroupd": true,
+      "styles": [
+        {
+          "selector": "div#{id} .input-group .form-control",
+          "text_pt_BR": "Estilo Geral",
+          "text_en_US": "General Style"
+        }
+      ],
+      "childrenProperties": [
+        {
+          "name": "content",
+          "selector": "label",
+          "type":"content"
+        },
+        {
+          "name":"ng-model",
+          "selector":"input",
+          "type":"text",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        {
+          "name":"type",
+          "selector":"input",
+          "type":"type"
+        },
+        {
+          "name":"mask",
+          "selector":"input",
+          "type":"mask"
+        },
+        {
+          "name": "ng-required",
+          "selector": "input",
+          "type":"logic"
+        },
+        {
+          "name":"placeholder",
+          "selector":"input",
+          "type":"text"
+        },
+        {
+          "name":"mask-placeholder",
+          "selector":"input",
+          "type":"text"
+        }
+
+      ],
+      "type": {
+        "displayName": "Type"
+      }
+    },
+    {
       "name": "crn-QRCode",
       "text_pt_BR": "Código QR",
       "text_en_US": "QR Code",
