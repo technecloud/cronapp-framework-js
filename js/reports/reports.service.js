@@ -3,6 +3,13 @@
 
     var body = $('body');
     var scope = angular.element(body.get(0)).scope();
+    var scriptsStimulsoft = [
+      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.viewer.css',
+      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.reports.pack.js',
+      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.viewer.pack.js',
+      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft-helper.js'
+    ];
+    var loadedScripts = [];
 
     // data
     this.getReport = function(reportName) {
@@ -227,42 +234,113 @@
 
     };
 
+    this.loadSriptsStimulsoft = function(callback) {
+      var loadedAllSuccess = true;
+      var total = scriptsStimulsoft.length;
+      var totalAdded = 0;
+
+      scriptsStimulsoft.forEach(function(url, idx) {
+        this.loadScript(url, function(success) {
+          totalAdded++;
+          if (!success)
+            loadedAllSuccess = false;
+          if (totalAdded == total)
+            callback(loadedAllSuccess);
+        });
+      }.bind(this));
+    }
+
+    this.loadScript = function(url, callback) {
+      if($.inArray(url, loadedScripts) >= 0) {
+        callback && callback(true);
+        return;
+      }
+
+      if(url.indexOf(".css") != -1) {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = url;
+        link.media = 'all';
+        link.onload = function() {
+          loadedScripts.push(url);
+          callback && callback(true);
+
+        };
+        link.onerror = function() {
+          callback && callback(false);
+        };
+        try {
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+        catch(ex) {
+          console.log(ex);
+        }
+      }
+      else {
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+        if(script.readyState) { // IE
+          script.onreadystatechange = function() {
+            if(script.readyState == "loaded" || script.readyState == "complete") {
+              script.onreadystatechange = null;
+              loadedScripts.push(url);
+              callback && callback(true);
+            }
+          };
+        }
+        else { // Others
+          script.onload = function() {
+            loadedScripts.push(url);
+            callback && callback(true);
+          };
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
+    }
+
     this.openReport = function(reportName, params) {
       this.getReport(reportName).then(function(result) {
         if(result && result.data) {
           if (result.data.reportName.endsWith('.report')) {
 
-            this.initializeStimulsoft($translate.use());
+            this.loadSriptsStimulsoft(function(success) {
+              this.initializeStimulsoft($translate.use());
+              this.getContentAsString(result.data).then(
 
-            this.getContentAsString(result.data).then(
-                function(content) {
-                  var datasourcesInBand = this.getDatasourcesInBand(content.data);
-                  if (datasourcesInBand.hasParam) {
-                    //Compatibilizar os tipos para o relatório antigo
-                    result.data.parameters = stimulsoftHelper.parseToGroupedParam(datasourcesInBand.datasources);
-                    result.data.contentData = content.data;
+                  function(content) {
+                    var datasourcesInBand = this.getDatasourcesInBand(content.data);
+                    if (datasourcesInBand.hasParam) {
+                      //Compatibilizar os tipos para o relatório antigo
+                      result.data.parameters = stimulsoftHelper.parseToGroupedParam(datasourcesInBand.datasources);
+                      result.data.contentData = content.data;
 
-                    if (params)
-                      result.data.parameters = this.mergeParam(result.data.parameters, params);
-                    if (this.hasParameterWithOutValue(result.data.parameters)) {
-                      //Traduz o nome dos parametros
-                      result.data.parameters.forEach(function(p) {
-                        p.name = $translate.instant(p.name);
-                      });
-                      this.showParameters(JSON.parse(JSON.stringify(result.data)));
-                    } else {
-                      this.openStimulsoftReport(content.data, result.data.parameters);
+                      if (params)
+                        result.data.parameters = this.mergeParam(result.data.parameters, params);
+                      if (this.hasParameterWithOutValue(result.data.parameters)) {
+                        //Traduz o nome dos parametros
+                        result.data.parameters.forEach(function(p) {
+                          p.name = $translate.instant(p.name);
+                        });
+                        this.showParameters(JSON.parse(JSON.stringify(result.data)));
+                      } else {
+                        this.openStimulsoftReport(content.data, result.data.parameters);
+                      }
                     }
-                  }
-                  else {
-                    this.openStimulsoftReport(content.data);
-                  }
-                }.bind(this),
-                function(data) {
-                  var message = cronapi.internal.getErrorMessage(data, data.statusText);
-                  scope.Notification.error(message);
-                }.bind(this)
-            );
+                    else {
+                      this.openStimulsoftReport(content.data);
+                    }
+                  }.bind(this),
+                  function(data) {
+                    var message = cronapi.internal.getErrorMessage(data, data.statusText);
+                    scope.Notification.error(message);
+                  }.bind(this)
+
+              );
+
+            }.bind(this));
           }
           else {
             // Abrir direto o relatorio , caso não haja parametros
