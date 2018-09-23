@@ -91,18 +91,20 @@ StimulsoftHelper.prototype.findDatasourceByName = function(dataSources, name) {
 
 StimulsoftHelper.prototype.getDateODATA = function(date) {
   try {
-    let groups = date.split(' ');
-    let dayMonthYear = groups[0].split('/');
-    let hourMinSec = groups[1].length > 0 ? groups[1] : '00:00:00';
+    var groups = date.split(' ');
+    var dayMonthYear = groups[0].split('/');
+    var hourMinSec = groups[1].length > 0 ? groups[1] : '00:00:00';
+
+    var result = '';
 
     if (this._currentLanguage == this._ptBrValue)
-      return dayMonthYear[2] + '-' + dayMonthYear[1] + '-' + dayMonthYear[0] + 'T' + hourMinSec;
-    return dayMonthYear[2] + '-' +  dayMonthYear[0] + '-' + dayMonthYear[1] + 'T' + hourMinSec;
+      result = dayMonthYear[2] + '-' + dayMonthYear[1] + '-' + dayMonthYear[0] + 'T' + hourMinSec;
+    else
+      result =  dayMonthYear[2] + '-' +  dayMonthYear[0] + '-' + dayMonthYear[1] + 'T' + hourMinSec;
+    return "datetime'" + result + "'";
   }
   catch(e) {
-    //Erro ao setar parametro, retorna vazio
-    //TODO: Notificar parametro preenchido incorretamente
-    return '';
+    return "datetimeoffset'"+date+"'";
   }
 };
 
@@ -124,8 +126,28 @@ StimulsoftHelper.prototype.dataSourceHasParam = function(datasource) {
 };
 
 StimulsoftHelper.prototype.getParamsFromFilter = function(datasource) {
+  // this.resetRegex();
+  // var value = datasource.sqlCommand;
+  // var result = [];
+
+  // var ocurr = null;
+  // while ( (ocurr = this._regexForParam.exec(value)) !== null) {
+  //   var groupResult = ocurr[0].replace(/\s\s+/g, ' ').split(' ');
+  //   var column = this.getColumnByName(datasource, groupResult[0]);
+  //   //TODO: quando a coluna não existir notificar que coluna não existe
+  //   var type = column ? column.type.getStiTypeName() : 'String';
+  //   result.push({
+  //     field: groupResult[0],
+  //     param: groupResult[2].substr(1),
+  //     type: type,
+  //   });
+  // }
+  // return result;
   this.resetRegex();
-  var value = datasource.sqlCommand;
+  var linkParameters = this.manageLinkParameters('get', datasource);
+  var value = '';
+  if (linkParameters.length > 0)
+    value = window.parserOdata(JSON.parse(linkParameters));
   var result = [];
 
   var ocurr = null;
@@ -144,15 +166,58 @@ StimulsoftHelper.prototype.getParamsFromFilter = function(datasource) {
 };
 
 StimulsoftHelper.prototype.setParamsInFilter = function(dataSources, datasourcesParam) {
+  // datasourcesParam.forEach(function(datasourceP) {
+  //   var datasource = this.findDatasourceByName(dataSources, datasourceP.name);
+  //   datasource.originalSqlCommand = datasource.sqlCommand;
+  //   datasourceP.fieldParams.forEach(function(fp) {
+  //     var paramValue = this.adjustParamODATA(fp);
+  //     var regex = eval('/' + ':' +  fp.param + '\\b/gim');
+  //     datasource.sqlCommand = datasource.sqlCommand.replaceAll(regex, paramValue);
+  //   }.bind(this));
+  // }.bind(this));
   datasourcesParam.forEach(function(datasourceP) {
     var datasource = this.findDatasourceByName(dataSources, datasourceP.name);
     datasource.originalSqlCommand = datasource.sqlCommand;
+
+    //Convert o linkParameters para o sqlCommand
+    var linkParameters = this.manageLinkParameters('get', datasource);
+    var odata = '';
+    if (linkParameters.length)
+      odata = window.parserOdata(JSON.parse(linkParameters));
+
     datasourceP.fieldParams.forEach(function(fp) {
       var paramValue = this.adjustParamODATA(fp);
-      var regex = eval('/' + ':' +  fp.param + '\\b/gim');
-      datasource.sqlCommand = datasource.sqlCommand.replaceAll(regex, paramValue);
+      var regex = eval('/' + ':' + fp.param + '\\b/gim');
+      odata = odata.replaceAll(regex, paramValue);
     }.bind(this));
+
+    if (odata.length > 0)
+      odata = '$filter=' + odata;
+    this.manageLinkParameters('set', datasource, odata);
+
   }.bind(this));
+};
+
+StimulsoftHelper.prototype.manageLinkParameters = function(operation, datasource, conditionToSet) {
+
+  var condition = '';
+  var queryName = datasource.sqlCommand;
+  var idxQues = datasource.sqlCommand.indexOf('?');
+  if (idxQues > -1) {
+    condition = datasource.sqlCommand.substr(idxQues + 1);
+    queryName = datasource.sqlCommand.substr(0, idxQues);
+  }
+
+  if (operation == 'get') {
+    return condition;
+  }
+  else if (operation == 'set') {
+    datasource.sqlCommand = queryName;
+    if (conditionToSet && conditionToSet.length > 0)
+      datasource.sqlCommand += '?' + conditionToSet;
+  }
+
+  return '';
 };
 
 StimulsoftHelper.prototype.restoreOriginalFilter = function(dataSources, datasourcesParam) {
@@ -180,6 +245,33 @@ StimulsoftHelper.prototype.getCustomIdFromFilter = function(datasource) {
   if (indexOf > -1)
     return datasource.sqlCommand.substr(0, indexOf);
   return datasource.sqlCommand;
+};
+
+StimulsoftHelper.prototype.getDatasourcesInBand = function(report) {
+  var datasourcesInBands = { hasParam: false, datasources: [] };
+  if (report.pages && report.pages.list && report.pages.list.length > 0) {
+    //Itera as paginas e descobre as bands e datasources associados
+    var pages = report.pages.toList();
+    pages.forEach(function(p)  {
+      var components = p.components.toList();
+      components.forEach(function (c) {
+
+        if (c.dataSourceName) {
+          var datasource = this.findDatasourceByName(report.dictionary.dataSources, c.dataSourceName);
+          if (datasource) {
+            var ds = {
+              name: datasource.name,
+              fieldParams: this.getParamsFromFilter(datasource)
+            };
+            if (ds.fieldParams.length > 0) datasourcesInBands.hasParam = true;
+            datasourcesInBands.datasources.push(ds);
+          }
+        }
+
+      }.bind(this));
+    }.bind(this));
+  }
+  return datasourcesInBands;
 };
 
 var stimulsoftHelper = new StimulsoftHelper();

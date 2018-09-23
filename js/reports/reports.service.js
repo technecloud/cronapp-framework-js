@@ -113,10 +113,10 @@
       var report = new Stimulsoft.Report.StiReport();
       report.load(json);
 
+      var datasourcesInBand = stimulsoftHelper.getDatasourcesInBand(report);
       if (parameters) {
-        var stimulsoftParams = this.getStimulsoftParams(json);
         parameters.forEach(function(p) {
-          stimulsoftParams.forEach(function(sp) {
+          datasourcesInBand.datasources.forEach(function(sp) {
             for (var i = 0; i<sp.fieldParams.length; i++) {
               if (sp.fieldParams[i].param == p.originalName) {
                 sp.fieldParams[i]["value"] = p.value;
@@ -125,9 +125,8 @@
             }
           });
         });
-        stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, stimulsoftParams);
       }
-
+      stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, datasourcesInBand.datasources);
       viewer.report = report;
 
       var include = setInterval(function() {
@@ -218,35 +217,13 @@
       return hasWithOutValue;
     };
 
-    this.getStimulsoftParams = function(json) {
+    this.getDatasourcesInBand = function(json) {
 
       var report = new Stimulsoft.Report.StiReport();
       report.load(json);
 
-      var datasourcesToCheck = [];
-      if (report.pages && report.pages.list && report.pages.list.length > 0) {
-        //Itera as paginas e descobre as bands e datasources associados
-        var pages = report.pages.toList();
-        pages.forEach(function (p) {
-          var components = p.components.toList();
-          components.forEach(function(c) {
-            datasourcesToCheck.push(c.dataSourceName);
-          });
-        });
-      }
-
-      var datasourcesParam = [];
-      datasourcesToCheck.forEach(function(toCheckName) {
-        var datasource = stimulsoftHelper.findDatasourceByName(report.dictionary.dataSources, toCheckName);
-        if (datasource && stimulsoftHelper.dataSourceHasParam(datasource)) {
-          datasourcesParam.push({
-            name: datasource.name,
-            fieldParams: stimulsoftHelper.getParamsFromFilter(datasource)
-          });
-        }
-      });
-
-      return datasourcesParam;
+      var datasourcesInBand = stimulsoftHelper.getDatasourcesInBand(report);
+      return datasourcesInBand;
 
     };
 
@@ -259,10 +236,10 @@
 
             this.getContentAsString(result.data).then(
                 function(content) {
-                  var paramsStimulsoft = this.getStimulsoftParams(content.data);
-                  if (paramsStimulsoft.length > 0) {
+                  var datasourcesInBand = this.getDatasourcesInBand(content.data);
+                  if (datasourcesInBand.hasParam) {
                     //Compatibilizar os tipos para o relatório antigo
-                    result.data.parameters = stimulsoftHelper.parseToGroupedParam(paramsStimulsoft);
+                    result.data.parameters = stimulsoftHelper.parseToGroupedParam(datasourcesInBand.datasources);
                     result.data.contentData = content.data;
 
                     if (params)
