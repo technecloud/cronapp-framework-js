@@ -91,20 +91,29 @@ StimulsoftHelper.prototype.findDatasourceByName = function(dataSources, name) {
 
 StimulsoftHelper.prototype.getDateODATA = function(date) {
   try {
-    var groups = date.split(' ');
-    var dayMonthYear = groups[0].split('/');
-    var hourMinSec = groups[1].length > 0 ? groups[1] : '00:00:00';
 
-    var result = '';
+    if (date instanceof Date) {
+      return "datetimeoffset'" + date.toISOString() + "'";
+    }
+    else if (date.indexOf('/')) {
+      var groups = date.split(' ');
+      var dayMonthYear = groups[0].split('/');
+      var hourMinSec = groups[1].length > 0 ? groups[1] : '00:00:00';
 
-    if (this._currentLanguage == this._ptBrValue)
-      result = dayMonthYear[2] + '-' + dayMonthYear[1] + '-' + dayMonthYear[0] + 'T' + hourMinSec;
-    else
-      result =  dayMonthYear[2] + '-' +  dayMonthYear[0] + '-' + dayMonthYear[1] + 'T' + hourMinSec;
-    return "datetime'" + result + "'";
+      var result = '';
+      if (this._currentLanguage == this._ptBrValue)
+        result = dayMonthYear[2] + '-' + dayMonthYear[1] + '-' + dayMonthYear[0] + 'T' + hourMinSec;
+      else
+        result =  dayMonthYear[2] + '-' +  dayMonthYear[0] + '-' + dayMonthYear[1] + 'T' + hourMinSec;
+      return "datetime'" + result + "'";
+    }
+    else {
+      return "datetimeoffset'"+date+"'";
+    }
+
   }
   catch(e) {
-    return "datetimeoffset'"+date+"'";
+    return date;
   }
 };
 
@@ -112,7 +121,7 @@ StimulsoftHelper.prototype.adjustParamODATA = function(param) {
   if (param.type == 'String')
     return "'" + param.value +"'";
   else if (param.type.startsWith('Date'))
-    return "datetime'"+this.getDateODATA(param.value)+"'";
+    return this.getDateODATA(param.value);
   return param.value;
 };
 
@@ -126,23 +135,6 @@ StimulsoftHelper.prototype.dataSourceHasParam = function(datasource) {
 };
 
 StimulsoftHelper.prototype.getParamsFromFilter = function(datasource) {
-  // this.resetRegex();
-  // var value = datasource.sqlCommand;
-  // var result = [];
-
-  // var ocurr = null;
-  // while ( (ocurr = this._regexForParam.exec(value)) !== null) {
-  //   var groupResult = ocurr[0].replace(/\s\s+/g, ' ').split(' ');
-  //   var column = this.getColumnByName(datasource, groupResult[0]);
-  //   //TODO: quando a coluna não existir notificar que coluna não existe
-  //   var type = column ? column.type.getStiTypeName() : 'String';
-  //   result.push({
-  //     field: groupResult[0],
-  //     param: groupResult[2].substr(1),
-  //     type: type,
-  //   });
-  // }
-  // return result;
   this.resetRegex();
   var linkParameters = this.manageLinkParameters('get', datasource);
   var value = '';
@@ -159,22 +151,13 @@ StimulsoftHelper.prototype.getParamsFromFilter = function(datasource) {
     result.push({
       field: groupResult[0],
       param: groupResult[2].substr(1),
-      type: type,
+      type: type
     });
   }
   return result;
 };
 
 StimulsoftHelper.prototype.setParamsInFilter = function(dataSources, datasourcesParam) {
-  // datasourcesParam.forEach(function(datasourceP) {
-  //   var datasource = this.findDatasourceByName(dataSources, datasourceP.name);
-  //   datasource.originalSqlCommand = datasource.sqlCommand;
-  //   datasourceP.fieldParams.forEach(function(fp) {
-  //     var paramValue = this.adjustParamODATA(fp);
-  //     var regex = eval('/' + ':' +  fp.param + '\\b/gim');
-  //     datasource.sqlCommand = datasource.sqlCommand.replaceAll(regex, paramValue);
-  //   }.bind(this));
-  // }.bind(this));
   datasourcesParam.forEach(function(datasourceP) {
     var datasource = this.findDatasourceByName(dataSources, datasourceP.name);
     datasource.originalSqlCommand = datasource.sqlCommand;

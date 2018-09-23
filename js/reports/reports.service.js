@@ -265,7 +265,6 @@
         link.onload = function() {
           loadedScripts.push(url);
           callback && callback(true);
-
         };
         link.onerror = function() {
           callback && callback(false);
@@ -307,38 +306,43 @@
           if (result.data.reportName.endsWith('.report')) {
 
             this.loadSriptsStimulsoft(function(success) {
-              this.initializeStimulsoft($translate.use());
-              this.getContentAsString(result.data).then(
+              if (success) {
+                this.initializeStimulsoft($translate.use());
+                this.getContentAsString(result.data).then(
+                    function (content) {
+                      var datasourcesInBand = this.getDatasourcesInBand(content.data);
+                      if (datasourcesInBand.hasParam) {
+                        //Compatibilizar os tipos para o relatório antigo
+                        result.data.parameters = stimulsoftHelper.parseToGroupedParam(datasourcesInBand.datasources);
+                        result.data.contentData = content.data;
 
-                  function(content) {
-                    var datasourcesInBand = this.getDatasourcesInBand(content.data);
-                    if (datasourcesInBand.hasParam) {
-                      //Compatibilizar os tipos para o relatório antigo
-                      result.data.parameters = stimulsoftHelper.parseToGroupedParam(datasourcesInBand.datasources);
-                      result.data.contentData = content.data;
-
-                      if (params)
-                        result.data.parameters = this.mergeParam(result.data.parameters, params);
-                      if (this.hasParameterWithOutValue(result.data.parameters)) {
-                        //Traduz o nome dos parametros
-                        result.data.parameters.forEach(function(p) {
-                          p.name = $translate.instant(p.name);
-                        });
-                        this.showParameters(JSON.parse(JSON.stringify(result.data)));
-                      } else {
-                        this.openStimulsoftReport(content.data, result.data.parameters);
+                        if (params) {
+                          result.data.parameters = this.mergeParam(result.data.parameters, params);
+                        }
+                        if (this.hasParameterWithOutValue(result.data.parameters)) {
+                          //Traduz o nome dos parametros
+                          result.data.parameters.forEach(function (p) {
+                            p.name = $translate.instant(p.name);
+                          });
+                          this.showParameters(JSON.parse(JSON.stringify(result.data)));
+                        }
+                        else {
+                          this.openStimulsoftReport(content.data, result.data.parameters);
+                        }
                       }
-                    }
-                    else {
-                      this.openStimulsoftReport(content.data);
-                    }
-                  }.bind(this),
-                  function(data) {
-                    var message = cronapi.internal.getErrorMessage(data, data.statusText);
-                    scope.Notification.error(message);
-                  }.bind(this)
-
-              );
+                      else {
+                        this.openStimulsoftReport(content.data);
+                      }
+                    }.bind(this),
+                    function (data) {
+                      var message = cronapi.internal.getErrorMessage(data, data.statusText);
+                      scope.Notification.error(message);
+                    }.bind(this)
+                );
+              }
+              else {
+                scope.Notification.error("Error loading report script");
+              }
 
             }.bind(this));
           }
