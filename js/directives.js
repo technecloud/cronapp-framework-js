@@ -972,7 +972,7 @@
                 ';
             templateDyn = $(templateDyn
                 .split('$ngModel$').join(attrs.ngModel)
-                .split('$id$').join(attrs.id)
+                .split('$id$').join(attrs.id || app.common.generateId())
                 .split('$options$').join(escape(tinyMCEOptions))
             );
 
