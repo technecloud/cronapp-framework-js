@@ -24,6 +24,7 @@ var StimulsoftHelper = function() {
 
 StimulsoftHelper.prototype.setLanguage = function(language) {
   this._currentLanguage = language;
+  this.overrideMethods();
 };
 
 StimulsoftHelper.prototype.getLocalization = function() {
@@ -255,6 +256,48 @@ StimulsoftHelper.prototype.getDatasourcesInBand = function(report) {
     }.bind(this));
   }
   return datasourcesInBands;
+};
+
+StimulsoftHelper.prototype.overrideMethods = function() {
+
+  //Os js são carregados assincronamente, faz o override apenas quando todos os js do stimulsoft estiverem carregados.
+  Stimulsoft.Base.StiODataHelper.prototype.getDefaultWebClient = function () {
+    var client = {};
+    if (!String.isNullOrWhiteSpace(this.addressBearer)) {
+      if (String.isNullOrWhiteSpace(this.bearerAccessToken)) {
+        this.bearerAccessToken = StiODataHelper.getBearerAccessToken(this.addressBearer, this.userName, this.password);
+      }
+    }
+    client.downloadString = function (address, userName, password, bearerAccessToken) {
+      try {
+        var request = new XMLHttpRequest();
+
+        if (!String.isNullOrWhiteSpace(userName) && String.isNullOrWhiteSpace(bearerAccessToken)) {
+          request.withCredentials = true;
+          request.open("Get", address, false, userName, password);
+        }
+        else {
+          if (!String.isNullOrWhiteSpace(bearerAccessToken)) {
+            request.setRequestHeader("Authorization", "Bearer " + bearerAccessToken);
+          }
+          request.open("Get", address, false);
+        }
+
+        if (window.uToken) {
+          request.setRequestHeader("X-AUTH-TOKEN", window.uToken);
+        }
+        request.send();
+        if (request.status == 200) {
+          return request.responseText;
+        }
+      }
+      catch (e) {
+        throw e;
+      }
+    };
+    return client;
+  };
+
 };
 
 var stimulsoftHelper = new StimulsoftHelper();
