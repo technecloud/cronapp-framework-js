@@ -265,7 +265,7 @@ StimulsoftHelper.prototype.overrideMethods = function() {
     var client = {};
     if (!String.isNullOrWhiteSpace(this.addressBearer)) {
       if (String.isNullOrWhiteSpace(this.bearerAccessToken)) {
-        this.bearerAccessToken = StiODataHelper.getBearerAccessToken(this.addressBearer, this.userName, this.password);
+        this.bearerAccessToken = Stimulsoft.Base.StiODataHelper.getBearerAccessToken(this.addressBearer, this.userName, this.password);
       }
     }
     client.downloadString = function (address, userName, password, bearerAccessToken) {
