@@ -2407,7 +2407,7 @@
         {
           "selector": "div#{id} .k-grid tbody .k-custom-command",
           "text_pt_BR": "Botão Customizável Grid",
-          "text_en_US": "Custom Button Grid "
+          "text_en_US": "Custom Grid Butto"
         },
         {
           "selector": "div#{id} .k-grid tbody .k-custom-command:hover",
@@ -2417,7 +2417,7 @@
         {
           "selector": "div#{id} .k-grid .k-header .k-grid-custom",
           "text_pt_BR": "Botão Customizável Cabeçalho",
-          "text_en_US": "Custom Button Header"
+          "text_en_US": "Custom Header Button"
         },
         {
           "selector": "div#{id} .k-grid .k-header .k-grid-custom:hover",
