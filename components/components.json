@@ -2406,25 +2406,23 @@
 
         {
           "selector": "div#{id} .k-grid tbody .k-custom-command",
-          "text_pt_BR": "Botão de Customizado",
-          "text_en_US": "Custom Button"
+          "text_pt_BR": "Botão Customizável Grid",
+          "text_en_US": "Custom Grid Button"
         },
         {
           "selector": "div#{id} .k-grid tbody .k-custom-command:hover",
-          "text_pt_BR": "Botão de Customizado Hover",
-          "text_en_US": "Custom Button Hover"
+          "text_pt_BR": "Botão Customizável Grid Hover",
+          "text_en_US": "Custom Grid Button Hover"
         },
-
-
         {
           "selector": "div#{id} .k-grid .k-header .k-grid-custom",
-          "text_pt_BR": "Botão de Customizado",
-          "text_en_US": "Custom Button"
+          "text_pt_BR": "Botão Customizável Cabeçalho",
+          "text_en_US": "Custom Header Button"
         },
         {
           "selector": "div#{id} .k-grid .k-header .k-grid-custom:hover",
-          "text_pt_BR": "Botão Customizado Hover",
-          "text_en_US": "Custom Button Hover"
+          "text_pt_BR": "Botão Customizável Cabeçalho Hover",
+          "text_en_US": "Custom Header Button Hover"
         },
         {
           "selector": "div#{id} .k-grid .k-primary",
