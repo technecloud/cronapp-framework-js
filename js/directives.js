@@ -1789,6 +1789,14 @@
                         }
                       }
                   );
+				  
+				  scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
+                      {
+                        "afterchanges": function(value) {
+                          grid.dataSource.filter([]);
+                        }
+                      }
+                  );
                 }
               });
 
