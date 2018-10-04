@@ -876,7 +876,7 @@
       "name": "crn-vertical-container",
       "text_pt_BR": "Grade vertical",
       "text_en_US": "Vertical Grid",
-      "ctfdeedr5lass": "adjust-icon mdi mdi-drag-vertical",
+      "class": "adjust-icon mdi mdi-drag-vertical",
       "styles": [
         {
           "selector": "div#{id}.cron-vertical-grid",
