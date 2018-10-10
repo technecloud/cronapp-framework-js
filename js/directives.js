@@ -1794,7 +1794,7 @@
                       }
                   );
 				  
-				  scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
+				          scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
                       {
                         "afterchanges": function(value) {
                           grid.dataSource.filter([]);
@@ -1888,13 +1888,46 @@
             var templateDyn = angular.element($template);
             $compile(templateDyn)(scope);
           },
+          getActive: function(active) {
+            if (active && active.indexOf('.active.')) {
+              try {
+                return eval(active.substr(0, active.indexOf('.active.')));
+              } catch(e) {}
+            }
+
+            return null;
+          },
+          getFieldText: function(active, select) {
+            if (active && active.indexOf('.active.') && select.dataTextField) {
+              try {
+                var text = active.substr(active.indexOf('.active.') + 8);
+                return text + '_' + select.dataTextField;
+              } catch(e) {}
+            }
+            
+            return null;
+          },
+          isDefaultEntity: function(dataSource) {
+            if (dataSource && dataSource.entity) {
+              var parts = dataSource.entity.split('/');
+              if (parts && parts.length > 0) {
+                return parts.pop().indexOf('query') == -1;
+              }                
+            }
+
+            return false;
+          },
           link: function (scope, element, attrs, ngModelCtrl) {
             var initValue = '';
             var select = {};
             var self = this;
+            var parentDS = {};
+            var textField = null;
             try {
               select = JSON.parse(attrs.options);
               initValue = select.initValue;
+              parentDS = this.getActive(attrs.ngModel);
+              textField = this.getFieldText(attrs.ngModel, select);
             } catch(err) {
               console.log('DynamicComboBox invalid configuration! ' + err);
             }
@@ -1956,12 +1989,21 @@
 
             var _goTo = this.goTo;
             var _ngModelCtrl = ngModelCtrl;
+            var _isDefaultEntity = this.isDefaultEntity;
             $element.on('change', function (event) {
               _scope.$apply(function () {
                 _ngModelCtrl.$setViewValue(combobox.dataItem());
                 _goTo(scope, combobox, combobox.dataItem());
               });
               _compileAngular(scope, options.combobox.element[0]);
+
+              if (parentDS && parentDS.active && textField && parentDS.active.hasOwnProperty(textField) && _isDefaultEntity(parentDS)) {
+                if (typeof combobox.dataItem() === 'string') {
+                  parentDS.active[textField] = combobox.dataItem();                     
+                } else {
+                  parentDS.active[textField] = combobox.dataItem()[select.dataTextField]; 
+                }
+              }
             });
 
             $(combobox.span).on('DOMSubtreeModified', function(e){
@@ -3322,7 +3364,7 @@ app.kendoHelper = {
           success:  function(data) {
             if (e.success) {
               e.success(data);
-              if (self.options.combobox.element[0].id) {
+              if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
                 var expToFind = " .k-animation-container";
                 var x = angular.element($(expToFind));
                 self.options.$compile(x)(self.options.scope);
