@@ -50,7 +50,7 @@
     }
     $scope.login = function(user, password, token) {
       $scope.message.error = undefined;
-      if($('form[name="'+this.form.$name+'"]').children('*[class=g-recaptcha]').length){
+      if($('form').children('*[class=g-recaptcha]').length){
         $scope.captcha_token = window.grecaptcha.getResponse();
         if(!$scope.captcha_token != ""){
           window.grecaptcha.execute(function(token){}).then(function(token){
