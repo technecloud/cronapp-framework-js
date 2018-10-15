@@ -1571,7 +1571,7 @@
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<li class=\"dropdown component-holder\" data-component=\"crn-menu-item\"> <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"><span>Menu Item</span> <span class=\"caret\"></span></a> <ul class=\"dropdown-menu\">   <li><a href=\"#\" class=\"component-holder\" xattr-fullsize=\"display:inline;\" style=\"display:inline;\"data-component=\"crn-anchor\">Action Item</a></li> </ul></li>",
+            "sourceHTML": "<li class=\"dropdown component-holder\" data-component=\"crn-menu-item\"> <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"><span>Menu Item</span> <span class=\"caret\"></span></a> <ul class=\"dropdown-menu\">   <li><a href=\"#\" class=\"component-holder col-md-12\"  data-component=\"crn-anchor\">Action Item</a></li> </ul></li>",
             "targetSelector": ".nav.navbar-nav"
           }
         ]
@@ -1591,7 +1591,7 @@
           {
             "toggleSelector": ".dropdown",
             "toggleClass": "open",
-            "sourceHTML": "<li><a href=\"#\" class=\"component-holder\" xattr-fullsize=\"display:inline;\" style=\"display:inline;\" data-component=\"crn-anchor\">Action item</a></li>",
+            "sourceHTML": "<li><a href=\"#\" class=\"component-holder col-md-12\"  data-component=\"crn-anchor\">Action item</a></li>",
             "targetSelector": "ul.dropdown-menu"
           }
         ]
@@ -1626,7 +1626,7 @@
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<li data-toggle=\"collapse\" data-component=\"crn-sidebar-item\" data-target=\"#menu-sub-${RANDOM}\" class=\"collapsed active component-holder\"><a href=\"javascript:void(0);\" class=\"\"><i class=\"fa fa-users fa-lg\"></i> <span>Menu Item</span> <span class=\"arrow\"></span></a> <ul class=\"sub-menu collapse  navbar-nav in\" id=\"menu-sub-${RANDOM}\"> <li><a href=\"#/\" class=\"component-holder\" xattr-fullsize=\"display:inline;\" style=\"display:inline;\" data-component=\"crn-anchor\">Submenu Item</a></li>  </ul> </li> ",
+            "sourceHTML": "<li data-toggle=\"collapse\" data-component=\"crn-sidebar-item\" data-target=\"#menu-sub-${RANDOM}\" class=\"collapsed active component-holder\"><a href=\"javascript:void(0);\" class=\"\"><i class=\"fa fa-users fa-lg\"></i> <span>Menu Item</span> <span class=\"arrow\"></span></a> <ul class=\"sub-menu collapse  navbar-nav in\" id=\"menu-sub-${RANDOM}\"> <li><a href=\"#/\" class=\"component-holder col-md-12\"  data-component=\"crn-anchor\">Submenu Item</a></li>  </ul> </li> ",
             "targetSelector": ".menu-content"
           }
         ]
@@ -1646,7 +1646,7 @@
           {
             "toggleSelector": ".sub-menu.collapse",
             "toggleClass": "in",
-            "sourceHTML": "<li><a href=\"#/\" class=\"component-holder\"style=\"display:inline;\"data-component=\"crn-anchor\" xattr-fullsize=\"style:inline;\">Submenu Item</a></li>",
+            "sourceHTML": "<li><a href=\"#/\" class=\"component-holder col-md-12\" data-component=\"crn-anchor\">Submenu Item</a></li>",
             "targetSelector": ".sub-menu"
           }
         ]
