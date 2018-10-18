@@ -1369,6 +1369,34 @@
               return cmd;
             }
 
+            function getCommandForRemoveButtonDatabase(opt, command) {
+              var cmd;
+              if (opt.editable == 'popupCustom') {
+                cmd = {
+                  name: app.common.generateId(),
+                  text: '',
+                  iconClass: "k-icon k-i-close",
+                  className: "k-grid-delete",
+                  click: function(e) { 
+                    e.preventDefault(); 
+                    var tr = $(e.target).closest("tr"); 
+                    var item = this.dataItem(tr); 
+                    var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                    scope.safeApply(function() {
+                      var currentItem = cronappDatasource.goTo(item);
+                      cronappDatasource.remove(currentItem);
+                    });
+                  }
+                };
+              } else {
+                cmd = {
+                  name: command,
+                  text: " "
+                };
+              }
+              return cmd;
+            }
+
             var columns = [];
             if (options.columns) {
               options.columns.forEach(function(column)  {
@@ -1401,10 +1429,7 @@
                         cmd = getCommandForEditButtonDatabase.bind(this)(options, f);
                       }
                       else {
-                        cmd = {
-                          name: f,
-                          text: " "
-                        };
+                        cmd = getCommandForRemoveButtonDatabase.bind(this)(options, f);
                       }
                       commands.push(cmd);
                     }.bind(this));
