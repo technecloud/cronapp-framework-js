@@ -666,7 +666,7 @@
 
                 if (isOData) {
                   if (operator == "=" && typeElement == 'text') {
-                    filterTemplate = "startswith(tolower("+this+"), {value.lower})";
+                    filterTemplate = "substringof({value.lower}, tolower("+this+"))";
                   }
                   else if (operator == "=") {
                     filterTemplate = this + " eq {value}";
@@ -721,7 +721,7 @@
                   }
 
                   else if (typeof value == "number") {
-                    value = value;
+                    value = value + "M";
                   }
 
                   else if (typeof value == "boolean") {
