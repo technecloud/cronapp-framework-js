@@ -3383,63 +3383,66 @@ app.kendoHelper = {
     );
   },
   getConfigCombobox: function(options, scope) {
-    var dataSource = {};
-
     var valuePrimitive = false;
     var dataSource = {};
-    if (options && (!options.dynamic || options.dynamic=='false')) {
-      valuePrimitive = true;
-      options.dataValueField = 'key';
-      options.dataTextField = 'value';
-      dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
-      for (i = 0; i < dataSource.data.length; i++) {
+    var dataSource = {};
+    var config = {};
+
+    if (options) {
+      if (!options.dynamic || options.dynamic=='false') {
+        valuePrimitive = true;
+        options.dataValueField = 'key';
+        options.dataTextField = 'value';
+        dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
+        for (i = 0; i < dataSource.data.length; i++) {
         dataSource.data[i].key = eval(dataSource.data[i].key);
-      }
-    } else if (options.dataSourceScreen.entityDataSource) {
-      options.dataSourceScreen.entityDataSource.append = true;
-      dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
-      dataSource.transport.read = app.kendoHelper.getEventReadCombo;
-      valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
-    }
-
-    if (!options.dataValueField || options.dataValueField.trim() == '') {
-      options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
-    }
-
-    var getFieldType = function(field) {
-      var fields = options.dataSourceScreen.entityDataSource.schemaFields;
-      for (count = 0; count < fields.length; count++) {
-        if (field == fields[count].name) {
-          return fields[count].type.toLowerCase();
-          break;
         }
+      } else if (options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
+        options.dataSourceScreen.entityDataSource.append = true;
+        dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
+        dataSource.transport.read = app.kendoHelper.getEventReadCombo;
+        valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
       }
 
-      return null;
-    }
+      if (!options.dataValueField || options.dataValueField.trim() == '') {
+        options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
+      }
 
-    if (!options.template && options.format) {
-      options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
-    }
+      var getFieldType = function(field) {
+        var fields = options.dataSourceScreen.entityDataSource.schemaFields;
+        for (count = 0; count < fields.length; count++) {
+          if (field == fields[count].name) {
+            return fields[count].type.toLowerCase();
+            break;
+          }
+        }
 
-    if (!options.valueTemplate && options.format) {
-      options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
-    }
+        return null;
+      }
 
-    var config = {
-      dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
-      dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
-      dataSource: dataSource,
-      headerTemplate: (options.headerTemplate == null ? undefined : options.headerTemplate),
-      template: (options.template == null ? undefined : options.template),
-      placeholder: (options.placeholder == null ? undefined : options.placeholder),
-      footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
-      filter: (options.filter == null ? undefined : options.filter),
-      valuePrimitive : valuePrimitive,
-      optionLabel : (options.optionLabel == null ? undefined : options.optionLabel),
-      valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
-      suggest: true
-    };
+      if (!options.template && options.format) {
+        options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
+      }
+
+      if (!options.valueTemplate && options.format) {
+        options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
+      }
+
+      var config = {
+        dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
+        dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
+        dataSource: dataSource,
+        headerTemplate: (options.headerTemplate == null ? undefined : options.headerTemplate),
+        template: (options.template == null ? undefined : options.template),
+        placeholder: (options.placeholder == null ? undefined : options.placeholder),
+        footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
+        filter: (options.filter == null ? undefined : options.filter),
+        valuePrimitive : valuePrimitive,
+        optionLabel : (options.optionLabel == null ? undefined : options.optionLabel),
+        valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
+        suggest: true
+      };
+    }
 
     return config;
   },
