@@ -1703,8 +1703,10 @@
               },
               change: function(e) {
                 var item = this.dataItem(this.select());
-                setToActiveInCronappDataSource.bind(this)(item);
-                collapseAllExcecptCurrent(this, this.select().next(), this.select());
+                if (item) {
+                  setToActiveInCronappDataSource.bind(this)(item);
+                  collapseAllExcecptCurrent(this, this.select().next(), this.select());
+                }
                 compileListing(e);
               },
               cancel: function(e) {
