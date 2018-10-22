@@ -1382,9 +1382,17 @@
                     var tr = $(e.target).closest("tr"); 
                     var item = this.dataItem(tr); 
                     var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                    var self = this;
                     scope.safeApply(function() {
                       var currentItem = cronappDatasource.goTo(item);
-                      cronappDatasource.remove(currentItem);
+                      var fn;
+                      if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
+                        fn = function(e) {
+                          self.dataSource.remove(item);
+                        }
+                      }
+                      
+                      cronappDatasource.remove(currentItem, fn);
                     });
                   }
                 };
