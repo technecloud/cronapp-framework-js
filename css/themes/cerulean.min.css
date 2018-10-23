@@ -466,7 +466,7 @@ span.k-window-title {
 
 /*Botão Primário*/
 .k-grid .k-primary {
-    color: #a5a5a5;
+    color: #000;
     border-color: #a5a5a5;
     border-width: 1px;
     background-color: #f2f2f2;
@@ -480,7 +480,7 @@ span.k-window-title {
 }
 /*Botão de Cancelar*/
 .k-grid .k-grid-cancel {
-    color: #a5a5a5;
+    color: #000;
     border-color: #a5a5a5;
     border-width: 1px;
     background-color: #f2f2f2;
@@ -967,6 +967,11 @@ cron-rich-editor textarea {
 
 .cron-vertical-grid {
   
+}
+
+.k-grid-filter.k-state-active {
+    background-color: transparent;
+    color: #00dcff!important;
 }
 
 
