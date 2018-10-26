@@ -253,6 +253,14 @@ var app = (function() {
           }
         }
 
+        var screenParams = eval($('#starter[data-component="crn-start"]').attr('screen-params'));
+        if (screenParams && screenParams.length) {
+          screenParams.forEach(function(screenParam) {
+            if (!$scope.params[screenParam.key])
+              $scope.params[screenParam.key] = screenParam.value;
+          });
+        }
+
         //Components personalization jquery
         $scope.registerComponentScripts = function() {
           //carousel slider
