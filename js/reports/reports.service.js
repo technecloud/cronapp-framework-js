@@ -1,6 +1,5 @@
 (function($app) {
   angular.module('report.services', []).service('ReportService', function($http, $compile, $modal, $translate) {
-
     var body = $('body');
     var scope = angular.element(body.get(0)).scope();
     var scriptsStimulsoft = [
