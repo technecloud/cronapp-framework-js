@@ -4,10 +4,10 @@
     var body = $('body');
     var scope = angular.element(body.get(0)).scope();
     var scriptsStimulsoft = [
-      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.viewer.css',
-      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.reports.pack.js',
-      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft.viewer.pack.js',
-      'plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft-helper.js'
+      'plugins/cronapp-lib-js/dist/js/stimulsoft/stimulsoft.viewer.css',
+      'plugins/cronapp-lib-js/dist/js/stimulsoft/stimulsoft.reports.pack.js',
+      'plugins/cronapp-lib-js/dist/js/stimulsoft/stimulsoft.viewer.pack.js',
+      'plugins/cronapp-lib-js/dist/js/stimulsoft/stimulsoft-helper.js'
     ];
     var loadedScripts = [];
 

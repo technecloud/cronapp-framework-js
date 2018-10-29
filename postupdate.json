@@ -78,50 +78,12 @@
     },
     {
       "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/tinymce/tinymce.min.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/angular-ui-tinymce/dist/tinymce.min.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/jszip.min.js",
       "type": "script"
     },
     {
       "file": "index.html",
       "script": "js/dataSourceMap.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/styles/kendo.common.min.css?v=2.0.0",
-      "type": "style",
-      "onTop": true
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/styles/kendo.cerulean.css?v=2.0.0",
-      "type": "style",
-      "onTop": true
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/styles/kendo.cerulean.mobile.min.css?v=2.0.0",
-      "type": "style",
-      "onTop": true
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/kendo.all.fixed.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/kendo-ui/js/cultures/kendo.culture.pt-BR.min.js",
       "type": "script"
     }
   ],
@@ -164,16 +126,6 @@
     {
       "file": "index.html",
       "script": "plugins/summernote/dist/lang/summernote-pt-BR.min.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/tinymce/tinymce.js",
-      "type": "script"
-    },
-    {
-      "file": "index.html",
-      "script": "plugins/cronapp-framework-js/dist/js/tinymce/plugins/angular-ui-tinymce/src/tinymce.js",
       "type": "script"
     },
     {
