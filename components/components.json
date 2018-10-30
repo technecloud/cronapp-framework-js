@@ -78,16 +78,6 @@
           "selector": "div#{id} .btn-default",
           "text_pt_BR": "Estilo do Botão",
           "text_en_US": "Button Styles"
-        },
-        {
-          "selector": "div#{id} .btn-default:hover",
-          "text_pt_BR": "Botão Hover",
-          "text_en_US": "Button Hover"
-        },
-        {
-          "selector": "div#{id} .btn-default:focus",
-          "text_pt_BR": "Botão Focus",
-          "text_en_US": "Button Focus"
         }
       ],
       "attributesForPreview": [
@@ -426,16 +416,6 @@
           "selector": "div#{id} input.form-control",
           "text_pt_BR": "Estilo Entrada de Texto",
           "text_en_US": "Input Style"
-        },
-        {
-          "selector": "div#{id} input.form-control:hover",
-          "text_pt_BR": "Estilo Entrada de Texto Hover",
-          "text_en_US": "Input Style Hover"
-        },
-        {
-          "selector": "div#{id} input.form-control:focus",
-          "text_pt_BR": "Estilo Entrada de Texto Focus",
-          "text_en_US": "Input Style Focus"
         }
       ],
       "childrenProperties": [
@@ -1425,11 +1405,6 @@
           "selector": "div#{id} .radio input[type=radio]:checked ",
           "text_pt_BR": "Estilo Geral Checked",
           "text_en_US": "General Style Checked"
-        },
-        {
-          "selector": "div#{id} .radio input[type=radio]:hover ",
-          "text_pt_BR": "Estilo Geral Hover",
-          "text_en_US": "General Style Hover"
         }
       ],
       "properties": {
@@ -1485,11 +1460,6 @@
           "selector": "div#{id} .form-group input[type=checkbox]:checked ",
           "text_pt_BR": "Estilo Geral Checked",
           "text_en_US": "General Style Checked"
-        },
-        {
-          "selector": "div#{id} .form-group input[type=checkbox]:hover ",
-          "text_pt_BR": "Estilo Geral Hover",
-          "text_en_US": "General Style Hover"
         }
       ],
       "properties": {
@@ -2235,29 +2205,14 @@
           "text_en_US": "Add Button"
         },
         {
-          "selector": "div#{id} .k-grid .k-header .k-grid-add:hover",
-          "text_pt_BR": "Botão de Adicionar Hover",
-          "text_en_US": "Add Button Hover"
-        },
-        {
           "selector": "div#{id} .k-grid .k-header .k-grid-save-changes",
           "text_pt_BR": "Botão de Salvar Alterações",
           "text_en_US": "Save Changes Button"
         },
         {
-          "selector": "div#{id} .k-grid .k-header .k-grid-save-changes:hover",
-          "text_pt_BR": "Botão de Salvar Alterações Hover",
-          "text_en_US": "Save Changes Button Hover"
-        },
-        {
           "selector": "div#{id} .k-grid .k-header .k-grid-cancel-changes",
           "text_pt_BR": "Botão de Cancelar Alteração",
           "text_en_US": "Cancel Changes Button"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-header .k-grid-cancel-changes:hover",
-          "text_pt_BR": "Botão de Cancelar Altrações Hover",
-          "text_en_US": "Cancel Changes Button Hover"
         },
         {
           "selector": "div#{id} .k-grid .k-grouping-header",
@@ -2305,11 +2260,6 @@
           "text_en_US": "Default Row"
         },
         {
-          "selector": "div#{id} .k-grid tr:hover",
-          "text_pt_BR": "Linha Hover",
-          "text_en_US": "Row Hover"
-        },
-        {
           "selector": "div#{id} .k-grid tr.k-alt",
           "text_pt_BR": "Linha Alternativa",
           "text_en_US": "Alternative Row"
@@ -2325,19 +2275,9 @@
           "text_en_US": "Edit Button"
         },
         {
-          "selector": "div#{id} .k-grid tbody .k-grid-edit:hover",
-          "text_pt_BR": "Botão de Editar Hover",
-          "text_en_US": "Edit Button Hover"
-        },
-        {
           "selector": "div#{id} .k-grid tbody .k-grid-delete",
           "text_pt_BR": "Botão de Deletar",
           "text_en_US": "Delete Button"
-        },
-        {
-          "selector": "div#{id} .k-grid tbody .k-grid-delete:hover",
-          "text_pt_BR": "Botão de Deletar Hover",
-          "text_en_US": "Delete Button Hover"
         },
         {
           "selector": "div#{id} .k-grid tbody .k-grid-update",
@@ -2345,24 +2285,10 @@
           "text_en_US": "Update Button"
         },
         {
-          "selector": "div#{id} .k-grid tbody .k-grid-update:hover",
-          "text_pt_BR": "Botão de Atualizar Hover",
-          "text_en_US": "Update Button Hover"
-        },
-        {
           "selector": "div#{id} .k-grid tbody .k-grid-cancel",
           "text_pt_BR": "Botão de Cancelar",
           "text_en_US": "Cancel Button"
         },
-        {
-          "selector": "div#{id} .k-grid tbody .k-grid-cancel:hover",
-          "text_pt_BR": "Botão de Cancelar Hover",
-          "text_en_US": "Cancel Button Hover"
-        },
-
-
-
-
         {
           "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr[role=\"row\"]",
           "text_pt_BR": "Linhas",
@@ -2384,11 +2310,6 @@
           "text_en_US": "Pagination Icons"
         },
         {
-          "selector": "div#{id} .k-grid .k-pager-wrap>.k-link>.k-icon:hover",
-          "text_pt_BR": "Ícones da Paginação Hover",
-          "text_en_US": "Pagination Icons Hover"
-        },
-        {
           "selector": "div#{id} .k-grid .k-pager-numbers .k-state-selected",
           "text_pt_BR": "Página Atual",
           "text_en_US": "Current Page"
@@ -2399,20 +2320,9 @@
           "text_en_US": "Pagination Item"
         },
         {
-          "selector": "div#{id} .k-grid .k-pager-numbers .k-link:focus",
-          "text_pt_BR": "Item de Paginação Focus",
-          "text_en_US": "Pagination Item Focus"
-        },
-
-        {
           "selector": "div#{id} .k-grid tbody .k-custom-command",
           "text_pt_BR": "Botão Customizável Grid",
           "text_en_US": "Custom Grid Button"
-        },
-        {
-          "selector": "div#{id} .k-grid tbody .k-custom-command:hover",
-          "text_pt_BR": "Botão Customizável Grid Hover",
-          "text_en_US": "Custom Grid Button Hover"
         },
         {
           "selector": "div#{id} .k-grid .k-header .k-grid-custom",
@@ -2420,29 +2330,14 @@
           "text_en_US": "Custom Header Button"
         },
         {
-          "selector": "div#{id} .k-grid .k-header .k-grid-custom:hover",
-          "text_pt_BR": "Botão Customizável Cabeçalho Hover",
-          "text_en_US": "Custom Header Button Hover"
-        },
-        {
           "selector": "div#{id} .k-grid .k-primary",
           "text_pt_BR": "Botão Primário",
           "text_en_US": "Primary Button"
         },
         {
-          "selector": "div#{id} .k-grid .k-primary:hover",
-          "text_pt_BR": "Botão Primário Hover",
-          "text_en_US": "Primary Button Hover"
-        },
-        {
           "selector": "div#{id} .k-grid .k-grid-cancel",
           "text_pt_BR": "Botão de Cancelar",
           "text_en_US": "Cancel Button"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-grid-cancel:hover",
-          "text_pt_BR": "Botão de Cancelar Hover",
-          "text_en_US": "Cancel Button Hover"
         },
         {
           "selector": "div#{id} .k-grid .k-input",
@@ -2468,11 +2363,6 @@
           "selector": "div#{id} .k-grid .k-list-scroller .k-item",
           "text_pt_BR": "Item Dropdown",
           "text_en_US": "Dropdown Item"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-list-scroller .k-item:hover",
-          "text_pt_BR": "Item Dropdown Hover",
-          "text_en_US": "Dropdown Item Hover"
         }
       ]
 
