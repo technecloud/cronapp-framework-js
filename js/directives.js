@@ -1760,7 +1760,7 @@
       },
       link: function (scope, element, attrs, ngModelCtrl) {
         var $templateDyn = $('<div></div>');
-        var baseUrl = 'plugins/cronapp-framework-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+        var baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
         if ($translate.use() == 'pt_br')
           baseUrl += "pt-BR.min.js";
         else
