@@ -1261,6 +1261,7 @@
     },
     {
       "name": "crn-combobox",
+      "pallete": false,
       "text_pt_BR": "Caixa de seleção",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
@@ -1316,6 +1317,7 @@
     },
     {
       "name": "crn-combobox-dynamic",
+      "pallete": false,
       "text_pt_BR": "Caixa de seleção dinâmica",
       "text_en_US": "Dynamic Combobox",
       "class": "adjust-icon mdi mdi-nutrition",
@@ -1445,6 +1447,7 @@
     },
     {
       "name": "crn-checkbox",
+      "pallete":false,
       "text_pt_BR": "Caixa de checagem",
       "text_en_US": "Checkbox",
       "order": 0,
@@ -2369,7 +2372,7 @@
     },
     {
       "name": "crn-enterprise-combobox",
-      "text_pt_BR": "_Caixa de seleção",
+      "text_pt_BR": "Caixa de seleção",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
       "designTimeHTML": "<span unselectable=\"on\" class=\"k-dropdown-wrap k-state-default\"><span unselectable=\"on\" class=\"k-input\"></span><span unselectable=\"on\" class=\"k-select\" aria-label=\"select\"><span class=\"k-icon k-i-arrow-60-down\"></span></span></span>",
@@ -2406,17 +2409,12 @@
           "name": "content",
           "selector": "label",
           "type":"text"
-        },
-        {
-          "name": "cron-init",
-          "selector": "cron-select",
-          "type":"text"
         }
       ]
     },
     {
       "name": "crn-enterprise-dynamic-combobox",
-      "text_pt_BR": "_Caixa de seleção dinâmica",
+      "text_pt_BR": "Caixa de seleção dinâmica",
       "text_en_US": "Dynamic Combobox",
       "order": 0,
       "class": "adjust-icon mdi mdi-nutrition",
@@ -2442,11 +2440,6 @@
           "type":"content"
         },
         {
-          "name": "cron-init",
-          "selector": "cron-dynamic-select",
-          "type":"text"
-        },
-        {
           "name": "ng-required",
           "selector": "cron-dynamic-select",
           "type":"logic"
@@ -2455,7 +2448,7 @@
     },
     {
       "name": "crn-enterprise-combobox-multiple",
-      "text_pt_BR": "_Caixa de seleção multipla",
+      "text_pt_BR": "Caixa de seleção multipla",
       "text_en_US": "Combobox Multi Select",
       "class": "adjust-icon mdi mdi-nutrition",
       "designTimeHTML": "<select></select>",
@@ -2495,8 +2488,9 @@
     },
     {
       "name": "crn-enterprise-date",
-      "text_pt_BR": "_Data",
-      "text_en_US": "Date",
+      "pallete":false,
+      "text_pt_BR": "Data Grade",
+      "text_en_US": "Grid Date",
       "class": "adjust-icon mdi mdi-calendar-multiple",
       "designTimeHTML": "<input type='date'/>",
       "designTimeSelector": "cron-date",
@@ -2563,7 +2557,7 @@
     },
     {
       "name": "crn-enterprise-autocomplete",
-      "text_pt_BR": "_Auto Completar",
+      "text_pt_BR": "Auto Completar",
       "text_en_US": "Auto Complete",
       "class": "adjust-icon mdi mdi-receipt",
       "designTimeHTML": "<input type='text'/>",
@@ -2593,7 +2587,7 @@
     },
     {
       "name": "crn-enterprise-dynamic-autocomplete",
-      "text_pt_BR": "_Auto Completar Dinâmico",
+      "text_pt_BR": "Auto Completar Dinâmico",
       "text_en_US": "Dynamic Auto Complete",
       "class": "adjust-icon mdi mdi-receipt",
       "designTimeHTML": "<input type='text'/>",
@@ -2623,7 +2617,7 @@
     },
     {
       "name": "crn-slider",
-      "text_pt_BR": "_Slider",
+      "text_pt_BR": "Slider",
       "text_en_US": "Slider",
       "class": "adjust-icon mdi mdi-server-network",
       "designTimeHTML": "<input type='range' min='1' max='10' value='5' class='slider'/>",
@@ -2681,7 +2675,7 @@
     },
     {
       "name": "crn-enterprise-checkbox",
-      "text_pt_BR": "_Checkbox",
+      "text_pt_BR": "Checkbox",
       "text_en_US": "Checkbox",
       "class": "adjust-icon mdi mdi-checkbox-marked-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-checkbox.template.html",

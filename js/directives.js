@@ -2008,6 +2008,12 @@
               var _combobox = _options.combobox;
               var _listView = _combobox.listView;
               if (newValue) {
+                if (select.firstValue && dataSourceScreen && dataSourceScreen.active && dataSourceScreen.active[select.dataValueField]) {
+                  _combobox.value(dataSourceScreen.active[select.dataValueField]);
+                  _combobox.refresh();
+                  select.firstValue = false;
+                }
+
                 if (_listView.itemCount == 0 && newValue.length > 0) {
                   _options.dataSource.data = newValue;
                   _combobox.dataSource.read();
