@@ -2008,7 +2008,9 @@
               var _combobox = _options.combobox;
               var _listView = _combobox.listView;
               if (newValue) {
-                if (select.firstValue && dataSourceScreen && dataSourceScreen.active && dataSourceScreen.active[select.dataValueField]) {
+                if (select.firstValue && dataSourceScreen && 
+                    dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
+                    !parentDS) {
                   _combobox.value(dataSourceScreen.active[select.dataValueField]);
                   _combobox.refresh();
                   select.firstValue = false;
@@ -2100,7 +2102,7 @@
           combobox.dataSource.transport.options.scope = scope;
           combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
           combobox.dataSource.transport.options.initRead = true;
-          if (initValue && initValue != null) {
+          if (initValue && initValue != null && !parentDS) {
             ngModelCtrl.$setViewValue(initValue);
             combobox.value(initValue);
             combobox.refresh();
