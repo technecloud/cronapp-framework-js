@@ -76,8 +76,8 @@
       "styles": [
         {
           "selector": "div#{id} .btn-default",
-          "text_pt_BR": "Estilo do Botão",
-          "text_en_US": "Button Styles"
+          "text_pt_BR": "Botão",
+          "text_en_US": "Button"
         }
       ],
       "attributesForPreview": [
@@ -662,7 +662,7 @@
     {
       "name": "crn-button-filter",
       "text_pt_BR": "Botão do Filtro",
-      "text_en_US": "Button of Filter",
+      "text_en_US": "Filter Button",
       "class": "adjust-icon mdi mdi-stop",
       "wrapper": false,
       "autoWrapper": true,
@@ -1884,6 +1884,11 @@
           "selector": "div#{id} textarea.form-control",
           "text_pt_BR": "Área de Texto Geral",
           "text_en_US": "Text Area General"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "attributesForPreview": [
