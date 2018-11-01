@@ -1684,76 +1684,76 @@
         var editable = this.getEditable(options);
         var filterable = anyFilterableColumn(options);
 
-        var kendoGridInit = {
-          toolbar: toolbar,
-          pdf: {
-            allPages: true,
-            avoidLinks: true,
-            paperSize: "A4",
-            margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
-            landscape: true,
-            repeatHeaders: true,
-            scale: 0.8
-          },
-          dataSource: datasource,
-          editable: editable,
-          height: options.height,
-          groupable: options.allowGrouping,
-          sortable: options.allowSorting,
-          filterable: filterable ? true : false,
-          pageable: pageAble,
-          columns: columns,
-          selectable: options.allowSelectionRow,
-          detailInit: (options.details && options.details.length > 0) ? detailInit : undefined,
-          listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
-          edit: function(e) {
-            this.dataSource.transport.options.disableAndSelect(e);
-            var container = e.container;
-            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-            if (e.model.isNew() && !e.model.dirty) {
-              var model = e.model;
-              cronappDatasource.startInserting(null, function(active) {
-                for (var key in active) {
-                  if (model.fields[key]) {
-                    if (model.fields[key].validation && model.fields[key].validation.required) {
-                      var input = container.find("input[name='" + key + "']");
-                      if (input.length) {
-                        //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
-                        input.val(active[key]).trigger('change');
+            var kendoGridInit = {
+              toolbar: toolbar,
+              pdf: {
+                allPages: true,
+                avoidLinks: true,
+                paperSize: "A4",
+                margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+                landscape: true,
+                repeatHeaders: true,
+                scale: 0.8
+              },
+              dataSource: datasource,
+              editable: editable,
+              height: options.height,
+              groupable: options.allowGrouping,
+              sortable: options.allowSorting,
+              filterable: { mode: "row" },
+              pageable: pageAble,
+              columns: columns,
+              selectable: options.allowSelectionRow,
+              detailInit: (options.details && options.details.length > 0) ? detailInit : undefined,
+              listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
+              edit: function(e) {
+                this.dataSource.transport.options.disableAndSelect(e);
+                var container = e.container;
+                var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                if (e.model.isNew() && !e.model.dirty) {
+                  var model = e.model;
+                  cronappDatasource.startInserting(null, function(active) {
+                    for (var key in active) {
+                      if (model.fields[key]) {
+                        if (model.fields[key].validation && model.fields[key].validation.required) {
+                          var input = container.find("input[name='" + key + "']");
+                          if (input.length) {
+                            //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
+                            input.val(active[key]).trigger('change');
+                          }
+                        }
+                        model.set(key, active[key]);
                       }
                     }
-                    model.set(key, active[key]);
-                  }
+                  });
                 }
-              });
-            }
-            else if (!e.model.isNew() && !e.model.dirty) {
-              scope.safeApply(function() {
-                var currentItem = cronappDatasource.goTo(e.model);
-                cronappDatasource.startEditing(currentItem, function(xxx) {});
-              });
-            }
-          },
-          change: function(e) {
-            var item = this.dataItem(this.select());
-            if (item) {
-              setToActiveInCronappDataSource.bind(this)(item);
-              collapseAllExcecptCurrent(this, this.select().next(), this.select());
-            }
-            compileListing(e);
-          },
-          cancel: function(e) {
-            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-            scope.safeApply(cronappDatasource.cancel());
-            this.dataSource.transport.options.enableAndSelect(e);
-          },
-          dataBound: function(e) {
-            this.dataSource.transport.options.selectActiveInGrid();
-            //Colocando para compilar a listagem no databound quando a grade não permitir seleção, pois não passa no change
-            if (!options.allowSelectionRow)
-              compileListing(e);
-          }
-        };
+                else if (!e.model.isNew() && !e.model.dirty) {
+                  scope.safeApply(function() {
+                    var currentItem = cronappDatasource.goTo(e.model);
+                    cronappDatasource.startEditing(currentItem, function(xxx) {});
+                  });
+                }
+                compileListing(e)
+              },
+              change: function(e) {
+                var item = this.dataItem(this.select());
+                setToActiveInCronappDataSource.bind(this)(item);
+                collapseAllExcecptCurrent(this, this.select().next(), this.select());
+                compileListing(e);
+              },
+              cancel: function(e) {
+                var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                scope.safeApply(cronappDatasource.cancel());
+                this.dataSource.transport.options.enableAndSelect(e);
+                compileListing(e)
+              },
+              dataBound: function(e) {
+                this.dataSource.transport.options.selectActiveInGrid();
+                //Colocando para compilar a listagem no databound quando a grade não permitir seleção, pois não passa no change
+                if (!options.allowSelectionRow)
+                  compileListing(e);
+              }
+            };
 
         return kendoGridInit;
 
@@ -2008,7 +2008,7 @@
               var _combobox = _options.combobox;
               var _listView = _combobox.listView;
               if (newValue) {
-                if (select.firstValue && dataSourceScreen && 
+                if (select.firstValue && dataSourceScreen &&
                     dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
                     !parentDS) {
                   _combobox.value(dataSourceScreen.active[select.dataValueField]);
