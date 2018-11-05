@@ -75,7 +75,7 @@
       },
       "styles": [
         {
-          "selector": "div#{id} .btn-default",
+          "selector": "button#{id}",
           "text_pt_BR": "Botão",
           "text_en_US": "Button"
         }
@@ -242,7 +242,7 @@
       },
       "styles": [
         {
-          "selector": "div#{id} .panel-default>.panel-heading",
+          "selector": "div#{id} .panel-default .panel-heading",
           "text_pt_BR": "Acordeão Cabeçalho",
           "text_en_US": "Accordion Heading"
         },
@@ -277,19 +277,34 @@
       "forcedGroup":true,
       "styles": [
         {
+          "selector": "div#{id} .carousel-inner",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
           "selector": "div#{id} .carousel-control.left",
-          "text_pt_BR": "Estilo seta Esquerda",
+          "text_pt_BR": "Seta Esquerda",
           "text_en_US": "Left Arrow Style"
         },
         {
           "selector": "div#{id} .carousel-control.right",
-          "text_pt_BR": "Estilo seta Direita",
-          "text_en_US": "Right Arrow Style"
+          "text_pt_BR": "Seta Direita",
+          "text_en_US": "Right Arrow"
         },
         {
           "selector": "div#{id} .carousel-indicators .active",
-          "text_pt_BR": "Estilo Ativo Indicador",
-          "text_en_US": "Active Indicator Style"
+          "text_pt_BR": "Indicador Ativo",
+          "text_en_US": "Active Indicator"
+        },
+        {
+          "selector": "div#{id} .carousel-caption h1",
+          "text_pt_BR": "Título",
+          "text_en_US": "Title"
+        },
+        {
+          "selector": "div#{id} .carousel-caption h2",
+          "text_pt_BR": "Subtítulo",
+          "text_en_US": "Subtitle"
         }
       ],
       "handleRules": {
@@ -416,6 +431,11 @@
           "selector": "div#{id} input.form-control",
           "text_pt_BR": "Estilo Entrada de Texto",
           "text_en_US": "Input Style"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
@@ -1816,17 +1836,17 @@
       "wrapper": false,
       "styles": [
         {
-          "selector": "div#{id} .jumbotron",
+          "selector": "div#{id}",
           "text_pt_BR": "Banner",
           "text_en_US": "Jumbotron"
         },
         {
-          "selector": "div#{id} .jumbotron h1",
+          "selector": "div#{id} h1",
           "text_pt_BR": "Banner Título",
           "text_en_US": "Jumbotron Title"
         },
         {
-          "selector": "div#{id} .jumbotron h2",
+          "selector": "div#{id} h2",
           "text_pt_BR": "Banner Sub-Título",
           "text_en_US": "Jumbotron Subtitle"
         }
@@ -2373,7 +2393,6 @@
           "text_en_US": "Dropdown Item"
         }
       ]
-
     },
     {
       "name": "crn-enterprise-combobox",
@@ -2448,6 +2467,18 @@
           "name": "ng-required",
           "selector": "cron-dynamic-select",
           "type":"logic"
+        }
+      ],
+      "styles": [
+        {
+          "selector": "div#{id} .form-group .form-control",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ]
     },
@@ -2587,6 +2618,18 @@
           "name": "content",
           "selector": "label",
           "type":"text"
+        }
+      ],
+      "styles": [
+        {
+          "selector": "div#{id} input.form-control",
+          "text_pt_BR": "Estilo Entrada de Texto",
+          "text_en_US": "Input Style"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ]
     },
