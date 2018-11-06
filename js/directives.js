@@ -2217,7 +2217,6 @@
       link: function (scope, element, attrs, ngModelCtrl) {
         var select = {};
         try {
-          // var json = window.buildElementOptions(element);
           select = JSON.parse(attrs.options);
         } catch(err) {
           console.log('AutoComplete invalid configuration! ' + err);
@@ -2233,6 +2232,7 @@
         var name = attrs.name ? ' name="' + attrs.name + '"' : '';
         $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronAutoComplete" ng-model="' + attrs.ngModel + '"/>');
         var $element = $(parent).find('input.cronAutoComplete');
+        $(element).remove();
 
         options['change'] = function(e) {
           scope.$apply(function () {
@@ -2241,11 +2241,6 @@
         }
 
         var autoComplete = $element.kendoAutoComplete(options).data('kendoAutoComplete');
-        if (autoComplete.dataSource.transport && autoComplete.dataSource.transport.options) {
-          autoComplete.dataSource.transport.options.grid = autoComplete;
-        }
-
-        $(element).remove();
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
