@@ -2124,7 +2124,6 @@
         var _self = this;
         var select = {};
         try {
-          //var json = window.buildElementOptions(element);
           select = JSON.parse(attrs.options);
         } catch(err) {
           console.log('MultiSelect invalid configuration! ' + err);
@@ -2188,9 +2187,6 @@
         }.bind(relactionDS);
 
         var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
-        if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
-          combobox.dataSource.transport.options.grid = combobox;
-        }
 
         var convertArray = function(value) {
           var result = [];
