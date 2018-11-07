@@ -37,14 +37,7 @@
           "type": "projectResource",
           "resourceType": "text/html"
         }
-      },
-      "styles": [
-        {
-          "selector": ".cron-link",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
-        }
-      ]
+      }
     },
     {
       "name": "crn-button",
@@ -75,9 +68,9 @@
       },
       "styles": [
         {
-          "selector": "div#{id} .btn-default",
-          "text_pt_BR": "Estilo do Botão",
-          "text_en_US": "Button Styles"
+          "selector": "button#{id}",
+          "text_pt_BR": "Botão",
+          "text_en_US": "Button"
         }
       ],
       "attributesForPreview": [
@@ -196,13 +189,6 @@
       "template": "<i class=\"fa fa-star\"/>",
       "wrapper": false,
       "autoWrapper": false,
-      "styles": [
-        {
-          "selector": ".cron-icon",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
-        }
-      ],
       "properties": {
         "ng-click": {
           "removable": true,
@@ -242,7 +228,7 @@
       },
       "styles": [
         {
-          "selector": "div#{id} .panel-default>.panel-heading",
+          "selector": "div#{id} .panel-default .panel-heading",
           "text_pt_BR": "Acordeão Cabeçalho",
           "text_en_US": "Accordion Heading"
         },
@@ -277,19 +263,34 @@
       "forcedGroup":true,
       "styles": [
         {
+          "selector": "div#{id} .carousel-inner",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
           "selector": "div#{id} .carousel-control.left",
-          "text_pt_BR": "Estilo seta Esquerda",
+          "text_pt_BR": "Seta Esquerda",
           "text_en_US": "Left Arrow Style"
         },
         {
           "selector": "div#{id} .carousel-control.right",
-          "text_pt_BR": "Estilo seta Direita",
-          "text_en_US": "Right Arrow Style"
+          "text_pt_BR": "Seta Direita",
+          "text_en_US": "Right Arrow"
         },
         {
           "selector": "div#{id} .carousel-indicators .active",
-          "text_pt_BR": "Estilo Ativo Indicador",
-          "text_en_US": "Active Indicator Style"
+          "text_pt_BR": "Indicador Ativo",
+          "text_en_US": "Active Indicator"
+        },
+        {
+          "selector": "div#{id} .carousel-caption h1",
+          "text_pt_BR": "Título",
+          "text_en_US": "Title"
+        },
+        {
+          "selector": "div#{id} .carousel-caption h2",
+          "text_pt_BR": "Subtítulo",
+          "text_en_US": "Subtitle"
         }
       ],
       "handleRules": {
@@ -416,6 +417,11 @@
           "selector": "div#{id} input.form-control",
           "text_pt_BR": "Estilo Entrada de Texto",
           "text_en_US": "Input Style"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
@@ -472,8 +478,18 @@
       "styles": [
         {
           "selector": "div#{id} .dynamic-image-container",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
+          "selector": "div#{id} .btn",
+          "text_pt_BR": "Campo Interno",
+          "text_en_US": "Internal Field"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties":[
@@ -516,14 +532,19 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicfile.template.html",
       "styles": [
         {
-          "selector": ".dynamic-image-container",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id} .dynamic-image-container",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
         },
         {
-          "selector": ".btn",
-          "text_pt_BR": "Estilo Interno",
-          "text_en_US": "Internal Style"
+          "selector": "div#{id} .btn",
+          "text_pt_BR": "Campo Interno",
+          "text_en_US": "Internal Field"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "properties": {
@@ -571,8 +592,13 @@
       "styles": [
         {
           "selector": "div#{id} input.form-control",
-          "text_pt_BR": "Estilo Filtro Geral",
-          "text_en_US": "Filter Style"
+          "text_pt_BR": "Filtro Geral",
+          "text_en_US": "Filter"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "properties": {
@@ -648,13 +674,18 @@
       "styles": [
         {
           "selector": "div#{id} .btn-default",
-          "text_pt_BR": "Estilo Botão do Filtro",
-          "text_en_US": "Filter Button Style"
+          "text_pt_BR": "Botão do Filtro",
+          "text_en_US": "Filter Button"
         },
         {
           "selector": "div#{id} input.form-control",
-          "text_pt_BR": "Estilo Entrada de texto",
-          "text_en_US": "Input Style"
+          "text_pt_BR": "Entrada de texto",
+          "text_en_US": "Input"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datasourcefiltercomplex.template.html"
@@ -662,16 +693,16 @@
     {
       "name": "crn-button-filter",
       "text_pt_BR": "Botão do Filtro",
-      "text_en_US": "Button of Filter",
+      "text_en_US": "Filter Button",
       "class": "adjust-icon mdi mdi-stop",
       "wrapper": false,
       "autoWrapper": true,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/buttonfilter.template.html",
       "styles": [
         {
-          "selector": "div#{id} .btn-default",
-          "text_pt_BR": "Estilo Botão do Filtro",
-          "text_en_US": "Filter Button Style"
+          "selector": "button#{id}",
+          "text_pt_BR": "Botão do Filtro",
+          "text_en_US": "Filter Button"
         }
       ],
       "properties": {
@@ -859,9 +890,9 @@
       "class": "adjust-icon mdi mdi-drag-vertical",
       "styles": [
         {
-          "selector": "div#{id}.cron-vertical-grid",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id} div",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
         }
       ],
       "template": "<div class=\"col-md-12\" data-container=\"true\" data-replace=\"true\">Content goes here</div> <div class=\"col-md-12\" data-container=\"true\" data-replace=\"true\">Content goes here</div>"
@@ -873,9 +904,9 @@
       "class": "adjust-icon mdi mdi-drag-horizontal",
       "styles": [
         {
-          "selector": "div#{id}.cron-horizontal-grid",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id} div",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
         }
       ],
       "template": "<div class=\"col-md-6\" data-container=\"true\" data-replace=\"true\">Content goes here </div> <div class=\"col-md-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>"
@@ -907,13 +938,13 @@
       "styles": [
         {
           "selector": "div#{id} .nav-tabs>li.active>a",
-          "text_pt_BR": "Estilo Aba Ativa",
-          "text_en_US": "Active Tab Style"
+          "text_pt_BR": "Aba Ativa",
+          "text_en_US": "Active Tab"
         },
         {
           "selector": "div#{id} .nav-tabs>li>a",
-          "text_pt_BR": "Estilo Aba Padrão",
-          "text_en_US": "Default Tab Style"
+          "text_pt_BR": "Aba Padrão",
+          "text_en_US": "Default Tab"
         }
       ],
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/tabs.template.html"
@@ -927,8 +958,13 @@
       "styles": [
         {
           "selector": "div#{id} input.form-control",
-          "text_pt_BR": "Estilo Entrada de Dados",
-          "text_en_US": "Input Style"
+          "text_pt_BR": "Entrada de Dados",
+          "text_en_US": "Input"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
@@ -984,8 +1020,13 @@
       "styles": [
         {
           "selector": "div#{id} input.form-control",
-          "text_pt_BR": "Estilo Entrada de Dados",
-          "text_en_US": "Input Style"
+          "text_pt_BR": "Entrada de Dados",
+          "text_en_US": "Input"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Botão",
+          "text_en_US": "Button"
         }
       ],
       "childrenProperties": [
@@ -1074,9 +1115,14 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/fileupload.template.html",
       "styles": [
         {
-          "selector": "div#{id} .btn-primary",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id}",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Botão",
+          "text_en_US": "Button"
         }
       ],
       "attributesForPreview": [
@@ -1221,13 +1267,13 @@
       "styles": [
         {
           "selector": "div#{id} th.active",
-          "text_pt_BR": "Estilo Coluna Ativa",
-          "text_en_US": "Active Column Style"
+          "text_pt_BR": "Coluna Ativa",
+          "text_en_US": "Active Column"
         },
         {
           "selector": "div#{id} th",
-          "text_pt_BR": "Estilo Coluna Padrão",
-          "text_en_US": "Default Column Style"
+          "text_pt_BR": "Coluna Padrão",
+          "text_en_US": "Default Column"
         }
       ],
       "properties": {},
@@ -1399,14 +1445,14 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/radiogroup.template.html",
       "styles": [
         {
-          "selector": "div#{id} .radio input[type=radio]",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id} span",
+          "text_pt_BR": "Legenda",
+          "text_en_US": "Caption"
         },
         {
-          "selector": "div#{id} .radio input[type=radio]:checked ",
-          "text_pt_BR": "Estilo Geral Checked",
-          "text_en_US": "General Style Checked"
+          "selector": "div#{id} .k-radio",
+          "text_pt_BR": "Checked",
+          "text_en_US": "Checked"
         }
       ],
       "properties": {
@@ -1521,23 +1567,23 @@
       "styles": [
         {
           "selector": "div#{id} .navbar",
-          "text_pt_BR": "Estilo Plano de Fundo",
-          "text_en_US": "Background Style"
+          "text_pt_BR": "Plano de Fundo",
+          "text_en_US": "Background"
         },
         {
           "selector": "div#{id} .navbar-default .navbar-brand",
-          "text_pt_BR": "Estilo Menu Marca",
-          "text_en_US": "Menu Brand Style"
+          "text_pt_BR": "Menu Marca",
+          "text_en_US": "Menu Brand"
         },
         {
           "selector": "div#{id} .navbar-default .navbar-nav>li>a",
-          "text_pt_BR": "Estilo Item Menu",
-          "text_en_US": "Menu Item Style"
+          "text_pt_BR": "Item Menu",
+          "text_en_US": "Menu Item"
         },
         {
-          "selector": "div#{id} .dropdown-menu>li>a",
-          "text_pt_BR": "Estilo Sub Item",
-          "text_en_US": "Sub Item Style"
+          "selector": "div#{id} .dropdown-menu",
+          "text_pt_BR": "Sub Item",
+          "text_en_US": "Sub Item"
         }
       ],
       "handleRules": {
@@ -1591,8 +1637,8 @@
       "styles": [
         {
           "selector": "div#{id} .navbar-default",
-          "text_pt_BR": "Estilo Barra Lateral",
-          "text_en_US": "Sidebar Style"
+          "text_pt_BR": "Barra Lateral",
+          "text_en_US": "Sidebar"
         }
       ],
       "handleRules": {
@@ -1632,13 +1678,6 @@
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-pound",
       "template": "<h1 class=\"lead text-center\" xattr-position=\"text-center\">Title</h1>",
-      "styles": [
-        {
-          "selector": "h1.lead",
-          "text_pt_BR": "Estilo Cabeçalho",
-          "text_en_US": "Header Style"
-        }
-      ],
       "properties": {
         "onclick": {
           "removable": true,
@@ -1680,13 +1719,6 @@
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-annotation-plus",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/text.template.html",
-      "styles": [
-        {
-          "selector": "p.componente-p",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
-        }
-      ],
       "properties": {
         "xattr-position": {
           "displayName": "Position"
@@ -1766,17 +1798,10 @@
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-2",
       "template": "<h2 class=\"lead text-center\" xattr-position=\"text-center\">Subtitle</h2>",
-      "styles": [
-        {
-          "selector": "h2.lead",
-          "text_pt_BR": "Estilo Subtítulo",
-          "text_en_US": "Subtitle Style"
-        }
-      ],
       "properties": {
         "onclick": {
           "removable": true,
-          "type": "event"
+          "type": "event
         },
         "xattr-position": {
           "displayName": "Position"
@@ -1816,17 +1841,17 @@
       "wrapper": false,
       "styles": [
         {
-          "selector": "div#{id} .jumbotron",
+          "selector": "div#{id}",
           "text_pt_BR": "Banner",
           "text_en_US": "Jumbotron"
         },
         {
-          "selector": "div#{id} .jumbotron h1",
+          "selector": "div#{id} h1",
           "text_pt_BR": "Banner Título",
           "text_en_US": "Jumbotron Title"
         },
         {
-          "selector": "div#{id} .jumbotron h2",
+          "selector": "div#{id} h2",
           "text_pt_BR": "Banner Sub-Título",
           "text_en_US": "Jumbotron Subtitle"
         }
@@ -1848,7 +1873,7 @@
       "text_en_US": "Textarea",
       "order": 0,
       "class": "adjust-icon mdi mdi-textbox",
-      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control\" rows=\"5\"></textarea></div>",
+      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control k-textbox\" rows=\"5\"></textarea></div>",
       "rows": {
         "displayName": "rows"
       },
@@ -1884,6 +1909,11 @@
           "selector": "div#{id} textarea.form-control",
           "text_pt_BR": "Área de Texto Geral",
           "text_en_US": "Text Area General"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "attributesForPreview": [
@@ -1922,8 +1952,18 @@
       "styles": [
         {
           "selector": "div#{id} .input-group .form-control",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
+          "selector": "div#{id} button",
+          "text_pt_BR": "Botão",
+          "text_en_US": "Button"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
@@ -1979,9 +2019,19 @@
       "forcedGroupd": true,
       "styles": [
         {
-          "selector": "div#{id} .input-group .form-control",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id} .input-group .k-textbot",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
+          "selector": "div#{id} span",
+          "text_pt_BR": "Ícone",
+          "text_en_US": "Icon"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
@@ -2075,18 +2125,18 @@
       "styles": [
         {
           "selector": "div#{id} .panel-heading",
-          "text_pt_BR": "Estilo Cabeçalho",
-          "text_en_US": "Header Style"
+          "text_pt_BR": "Cabeçalho",
+          "text_en_US": "Header"
         },
         {
           "selector": "div#{id} .panel-body",
-          "text_pt_BR": "Estilo Conteúdo",
-          "text_en_US": "Content Style"
+          "text_pt_BR": "Conteúdo",
+          "text_en_US": "Content"
         },
         {
           "selector": "div#{id} .panel-footer",
-          "text_pt_BR": "Estilo Rodapé",
-          "text_en_US": "Footer Style"
+          "text_pt_BR": "Rodapé",
+          "text_en_US": "Footer"
         }
       ],
       "properties": {
@@ -2146,13 +2196,6 @@
       "text_en_US": "Rich Editor",
       "class": "adjust-icon mdi mdi-text-shadow",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-rich-editor.template.html",
-      "styles": [
-        {
-          "selector": "div#{id} cron-rich-editor textarea",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
-        }
-      ],
       "childrenProperties":[
         {
           "name": "options",
@@ -2368,7 +2411,6 @@
           "text_en_US": "Dropdown Item"
         }
       ]
-
     },
     {
       "name": "crn-enterprise-combobox",
@@ -2381,13 +2423,33 @@
       "styles": [
         {
           "selector": "div#{id} .k-combobox .k-select",
-          "text_pt_BR": "Estilo Seta",
-          "text_en_US": "Dropdown Style"
+          "text_pt_BR": "Seta",
+          "text_en_US": "Dropdown"
         },
         {
           "selector": "div#{id} .cronSelect",
           "text_pt_BR": "Campo da Caixa de Seleção",
           "text_en_US": "Select Field"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
+        },
+        {
+          "selector": "div#comboBox{id}-select-list",
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#comboBox{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
+        },
+        {
+          "selector": "div#comboBox{id}-select-list>div>ul>li.k-state-focused",
+          "text_pt_BR": "Item Selecionado",
+          "text_en_US": "Selected Item"
         }
       ],
       "childrenProperties": [
@@ -2444,6 +2506,38 @@
           "selector": "cron-dynamic-select",
           "type":"logic"
         }
+      ],
+      "styles": [
+        {
+          "selector": "div#{id} .k-select",
+          "text_pt_BR": "Seta",
+          "text_en_US": "Dropdown"
+        },
+        {
+          "selector": "div#{id} .k-input",
+          "text_pt_BR": "Campo da Caixa de Seleção",
+          "text_en_US": "Select Field"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
+        },
+        {
+          "selector": "div#combobox{id}-select-list",
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>div>ul>li.k-state-focused",
+          "text_pt_BR": "Item Selecionado",
+          "text_en_US": "Selected Item"
+        }
       ]
     },
     {
@@ -2456,9 +2550,29 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.template.html",
       "styles": [
         {
-          "selector": "div#{id} .crn-select",
-          "text_pt_BR": "Estilo Geral",
-          "text_en_US": "General Style"
+          "selector": "div#{id} .k-multiselect-wrap",
+          "text_pt_BR": "Campo de Seleção Múltipla",
+          "text_en_US": "Multi Select Field"
+        },
+        {
+          "selector": "div#{id}>div>div>div>ul>li.k-button",
+          "text_pt_BR": "Itens Selecionados no Campo",
+          "text_en_US": "Selected Itens on Field"
+        },
+        {
+          "selector": "div#combobox{id}-select-list",
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>ul>li.k-state-selected",
+          "text_pt_BR": "Itens Selecionados Na Lista",
+          "text_en_US": "Selected Itens On List"
         }
       ],
       "childrenProperties": [
@@ -2583,6 +2697,28 @@
           "selector": "label",
           "type":"text"
         }
+      ],
+      "styles": [
+        {
+          "selector": "div#{id} .k-input",
+          "text_pt_BR": "Entrada de Texto",
+          "text_en_US": "Input"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
+        },
+        {
+          "selector": "div#autoComplete{id}-select-list",
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#autoComplete{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
+        }
       ]
     },
     {
@@ -2612,6 +2748,28 @@
           "name": "content",
           "selector": "label",
           "type":"text"
+        }
+      ],
+      "styles": [
+        {
+          "selector": "div#{id} .k-input",
+          "text_pt_BR": "Entrada de Texto",
+          "text_en_US": "Input"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
+        },
+        {
+          "selector": "div#autoComplete{id}-select-list",
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#autoComplete{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
         }
       ]
     },
@@ -2643,6 +2801,11 @@
           "selector": "div#{id} .k-draghandle",
           "text_pt_BR": "Estilo do Botão Arrastar",
           "text_en_US": "Drag Button Style"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
@@ -2696,6 +2859,13 @@
           "name": "ng-required",
           "selector": "input",
           "type":"logic"
+        }
+      ],
+      "styles": [
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ]
     },
