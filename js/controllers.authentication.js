@@ -250,7 +250,7 @@
       navMain.on("click", "a", closeMenuHandler);
     });
 
-    $scope.themes = [ "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "lumen", "paper", "readable", "sandstone", "simplex", "slate", "spacelab", "superhero", "united", "yeti" ];
+    $scope.themes = [ "material" ];
 
     $scope.changeTheme = function(theme) {
       if(theme !== undefined) {
