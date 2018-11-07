@@ -71,11 +71,6 @@
           "selector": "button#{id}",
           "text_pt_BR": "Botão",
           "text_en_US": "Button"
-        },
-        {
-          "selector": "button:hover#{id}",
-          "text_pt_BR": "Hover",
-          "text_en_US": "Hover"
         }
       ],
       "attributesForPreview": [
@@ -708,11 +703,6 @@
           "selector": "button#{id}",
           "text_pt_BR": "Botão do Filtro",
           "text_en_US": "Filter Button"
-        },
-        {
-          "selector": "button:hover#{id}",
-          "text_pt_BR": "Hover",
-          "text_en_US": "Hover"
         }
       ],
       "properties": {
@@ -1455,12 +1445,12 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/radiogroup.template.html",
       "styles": [
         {
-          "selector": "div#{id} .radio input[type=radio]",
-          "text_pt_BR": "Geral",
-          "text_en_US": "General"
+          "selector": "div#{id} span",
+          "text_pt_BR": "Legenda",
+          "text_en_US": "Caption"
         },
         {
-          "selector": "div#{id} .radio input[type=radio]:checked ",
+          "selector": "div#{id} .k-radio",
           "text_pt_BR": "Checked",
           "text_en_US": "Checked"
         }
@@ -1811,7 +1801,7 @@
       "properties": {
         "onclick": {
           "removable": true,
-          "type": "event"
+          "type": "event
         },
         "xattr-position": {
           "displayName": "Position"
@@ -1883,7 +1873,7 @@
       "text_en_US": "Textarea",
       "order": 0,
       "class": "adjust-icon mdi mdi-textbox",
-      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control\" rows=\"5\"></textarea></div>",
+      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control k-textbox\" rows=\"5\"></textarea></div>",
       "rows": {
         "displayName": "rows"
       },
@@ -2029,7 +2019,7 @@
       "forcedGroupd": true,
       "styles": [
         {
-          "selector": "div#{id} .input-group .form-control",
+          "selector": "div#{id} .input-group .k-textbot",
           "text_pt_BR": "Geral",
           "text_en_US": "General"
         },
@@ -2448,16 +2438,16 @@
         },
         {
           "selector": "div#comboBox{id}-select-list",
-          "text_pt_BR": "Lista",
-          "text_en_US": "List"
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
         },
         {
-          "selector": "ul#comboBox{id}-select_listbox>li:hover",
+          "selector": "div#comboBox{id}-select-list>div>ul>li.k-state-hover",
           "text_pt_BR": "Item da Lista Hover",
           "text_en_US": "Item List Hover"
         },
         {
-          "selector": "ul#comboBox{id}-select_listbox>li.k-state-focused",
+          "selector": "div#comboBox{id}-select-list>div>ul>li.k-state-focused",
           "text_pt_BR": "Item Selecionado",
           "text_en_US": "Selected Item"
         }
@@ -2535,8 +2525,18 @@
         },
         {
           "selector": "div#combobox{id}-select-list",
-          "text_pt_BR": "Lista",
-          "text_en_US": "List"
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>div>ul>li.k-state-focused",
+          "text_pt_BR": "Item Selecionado",
+          "text_en_US": "Selected Item"
         }
       ]
     },
@@ -2555,9 +2555,24 @@
           "text_en_US": "Multi Select Field"
         },
         {
+          "selector": "div#{id}>div>div>div>ul>li.k-button",
+          "text_pt_BR": "Itens Selecionados no Campo",
+          "text_en_US": "Selected Itens on Field"
+        },
+        {
           "selector": "div#combobox{id}-select-list",
-          "text_pt_BR": "Lista",
-          "text_en_US": "List"
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
+        },
+        {
+          "selector": "div#combobox{id}-select-list>div>ul>li.k-state-selected",
+          "text_pt_BR": "Itens Selecionados Na Lista",
+          "text_en_US": "Selected Itens On List"
         }
       ],
       "childrenProperties": [
@@ -2696,8 +2711,13 @@
         },
         {
           "selector": "div#autoComplete{id}-select-list",
-          "text_pt_BR": "Lista",
-          "text_en_US": "List"
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#autoComplete{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
         }
       ]
     },
@@ -2743,8 +2763,13 @@
         },
         {
           "selector": "div#autoComplete{id}-select-list",
-          "text_pt_BR": "Lista",
-          "text_en_US": "List"
+          "text_pt_BR": "Lista de Itens",
+          "text_en_US": "Item List"
+        },
+        {
+          "selector": "div#autoComplete{id}-select-list>div>ul>li.k-state-hover",
+          "text_pt_BR": "Item da Lista Hover",
+          "text_en_US": "Item List Hover"
         }
       ]
     },
@@ -2776,6 +2801,11 @@
           "selector": "div#{id} .k-draghandle",
           "text_pt_BR": "Estilo do Botão Arrastar",
           "text_en_US": "Drag Button Style"
+        },
+        {
+          "selector": "div#{id} label",
+          "text_pt_BR": "Label",
+          "text_en_US": "Label"
         }
       ],
       "childrenProperties": [
