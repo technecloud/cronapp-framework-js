@@ -539,7 +539,7 @@
           return o + "";
         }
         if (o instanceof Date) {
-          var dt = "datetimeoffset'" + o.toISOString() + "'";
+          return "datetimeoffset'" + o.toISOString() + "'";
         }
         else {
           if (o.length >= 10 && o.match(ISO_PATTERN)) {
