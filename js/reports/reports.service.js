@@ -52,6 +52,15 @@
       return $http(req);
     };
 
+    this.getDataSourcesParams = function(datasourcesInBand) {
+      var req = {
+        url : 'api/rest/report/getdatasourcesparams',
+        method : 'POST',
+        data : angular.toJson(datasourcesInBand)
+      };
+      return $http(req);
+    };
+
     // open report
     this.openURLContent = function(url) {
       // Retrocompatibilidade
@@ -100,7 +109,7 @@
       }
     }
 
-    this.openStimulsoftReport = function(json, parameters) {
+    this.openStimulsoftReport = function(json, parameters, datasourcesInBand) {
       var context = $('#reportViewContext');
       if(!context.get(0)) {
         console.log('include[#reportViewContext]');
@@ -119,7 +128,9 @@
       var report = new Stimulsoft.Report.StiReport();
       report.load(json);
 
-      var datasourcesInBand = stimulsoftHelper.getDatasourcesInBand(report);
+      if (!datasourcesInBand)
+        datasourcesInBand = stimulsoftHelper.getDatasourcesInBand(report);
+
       if (parameters) {
         parameters.forEach(function(p) {
           datasourcesInBand.datasources.forEach(function(sp) {
@@ -309,11 +320,16 @@
                 this.initializeStimulsoft($translate.use());
                 this.getContentAsString(result.data).then(
                     function (content) {
+
                       var datasourcesInBand = this.getDatasourcesInBand(content.data);
-                      if (datasourcesInBand.hasParam) {
+                      //Verificar se existem parametros na Fonte de dados dos datasources utilizados no relatorio
+                      this.getDataSourcesParams(datasourcesInBand).then(function(dsInBand) {
+
+                        datasourcesInBand = dsInBand.data;
                         //Compatibilizar os tipos para o relatório antigo
                         result.data.parameters = stimulsoftHelper.parseToGroupedParam(datasourcesInBand.datasources);
                         result.data.contentData = content.data;
+                        result.data.datasourcesInBand = datasourcesInBand;
 
                         if (params) {
                           result.data.parameters = this.mergeParam(result.data.parameters, params);
@@ -326,12 +342,13 @@
                           this.showParameters(JSON.parse(JSON.stringify(result.data)));
                         }
                         else {
-                          this.openStimulsoftReport(content.data, result.data.parameters);
+                          this.openStimulsoftReport(content.data, result.data.parameters, result.data.datasourcesInBand);
                         }
-                      }
-                      else {
-                        this.openStimulsoftReport(content.data);
-                      }
+
+                      }.bind(this));
+
+
+
                     }.bind(this),
                     function (data) {
                       var message = cronapi.internal.getErrorMessage(data, data.statusText);

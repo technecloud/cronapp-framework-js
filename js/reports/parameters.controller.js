@@ -93,7 +93,7 @@
 
     $scope.onPrint = function() {
       if ($scope.report.reportName.endsWith('.report'))
-        ReportService.openStimulsoftReport($scope.report.contentData, $scope.report.parameters);
+        ReportService.openStimulsoftReport($scope.report.contentData, $scope.report.parameters, $scope.report.datasourcesInBand);
       else
         ReportService.getPDFAsFile($scope.report).then(openPDFAsFile);
     };
@@ -102,5 +102,4 @@
       $modalInstance.dismiss('cancel');
     };
   }
-
 })();
