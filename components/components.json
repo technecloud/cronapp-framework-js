@@ -186,7 +186,7 @@
       "name": "crn-icon",
       "text": "Icon",
       "class": "adjust-icon mdi mdi-star",
-      "template": "<i class=\"fa fa-star\"/>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/icon.template.html",
       "wrapper": false,
       "autoWrapper": false,
       "properties": {
@@ -334,7 +334,7 @@
       "text_pt_BR": "Fonte de dados",
       "text_en_US": "Datasource",
       "class": "adjust-icon mdi mdi-table-large",
-      "template": "<datasource name=\"\" entity=\"\" keys=\"\" rows-per-page=\"100\" on-before-create=\"\" on-after-create=\"\" on-before-update=\"\" on-after-update=\"\" on-before-delete=\"\" on-after-delete=\"\" on-after-fill=\"\"></datasource>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datasource.template.html",
       "properties": {
         "entity": {
           "removable": false,
@@ -843,7 +843,7 @@
       "class": "adjust-icon mdi mdi-image",
       "wrapper": false,
       "autoWrapper": true,
-      "template": "<img src=\"http://placehold.it/50x50\" class=\"\" style=\"display:block; width:100px; height: 100px;\"  xattr-position=\"\"/>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/image.default.template.html",
       "properties": {
         "src": {
           "removable": false,
@@ -895,7 +895,7 @@
           "text_en_US": "General"
         }
       ],
-      "template": "<div class=\"col-md-12\" data-container=\"true\" data-replace=\"true\">Content goes here</div> <div class=\"col-md-12\" data-container=\"true\" data-replace=\"true\">Content goes here</div>"
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/grid-vertical.template.html"
     },
     {
       "name": "crn-horizontal-container",
@@ -909,7 +909,7 @@
           "text_en_US": "General"
         }
       ],
-      "template": "<div class=\"col-md-6\" data-container=\"true\" data-replace=\"true\">Content goes here </div> <div class=\"col-md-6\" data-container=\"true\" data-replace=\"true\">Content goes here</div>"
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/grid-horizontal.template.html"
     },
     {
       "name": "crn-tabs",
@@ -1192,7 +1192,7 @@
       "wrapper": false,
       "pallete": false,
       "class": "adjust-icon mdi mdi-cloud-upload",
-      "template": "<label class=\"btn btn-primary\" xattr-theme=\"btn-primary\" ><i class=\"glyphicon glyphicon-cloud-upload\"></i> <input type=\"file\" style=\"display:none\" onchange=\"$('#upload-file-info').html($(this).val().split('\\')[2])\"><span>Upload</span></label><label id=\"upload-file-info\"></label> ",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/fileupload-button.template.html",
       "properties": {
         "ng-model": {
           "displayName": "Field"
@@ -1672,7 +1672,7 @@
       "text_en_US": "Title",
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-pound",
-      "template": "<h1 class=\"lead text-center\" xattr-position=\"text-center\">Title</h1>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/title-default.template.html",
       "properties": {
         "onclick": {
           "removable": true,
@@ -1792,7 +1792,7 @@
       "text_en_US": "Subtitle",
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-2",
-      "template": "<h2 class=\"lead text-center\" xattr-position=\"text-center\">Subtitle</h2>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/subtitle.template.html",
       "properties": {
         "onclick": {
           "removable": true,
@@ -1832,7 +1832,7 @@
       "text_pt_BR": "Banner",
       "text_en_US": "Banner",
       "class": "adjust-icon mdi mdi-page-layout-body",
-      "template": "<div class=\"jumbotron\"> <h1 data-component=\"crn-title\" class=\"component-holder text-center\"  xattr-position=\"text-center\" > Title  </h1> <h2 data-component=\"crn-subtitle\" class=\"component-holder text-center\"  xattr-position=\"text-center\"> Subtitle </h2>    </div>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/banner.template.html",
       "wrapper": false,
       "styles": [
         {
@@ -1868,7 +1868,7 @@
       "text_en_US": "Textarea",
       "order": 0,
       "class": "adjust-icon mdi mdi-textbox",
-      "template": "<div class=\"form-group\"><label for=\"input${RANDOM}\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control k-textbox\" rows=\"5\"></textarea></div>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textarea.template.html",
       "rows": {
         "displayName": "rows"
       },
@@ -2079,7 +2079,7 @@
       "text_en_US": "QR Code",
       "class": "adjust-icon mdi mdi-qrcode",
       "wrapper": false,
-      "template": "<div qr=\"true\" ng-model=\"vars.QR${RANDOM}\" ><div> </div> </div>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/qrcode.template.html",
       "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/qrcode.png\"/>",
       "designTimeSelector": "div",
       "properties": {
@@ -2099,7 +2099,7 @@
       "text_en_US": "Chart",
       "class": "adjust-icon mdi mdi-chart-bar",
       "wrapper": false,
-      "template": "<div class=\"col-xs-12\"> <canvas id=\"chart${RANDOM}\" data-component=\"crn-chart\" class=\"col-xs-12\"></canvas></div>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/chart.template.html",
       "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/svg-charts.svg\"/>",
       "designTimeSelector": "canvas",
       "childrenProperties":[
@@ -2182,7 +2182,7 @@
       "text_pt_BR": "Cabeçalho",
       "text_en_US": "Header",
       "class": "adjust-icon mdi mdi-page-layout-header",
-      "template": "<div class=\"page-header\"><h1 class=\"component-holder text-left\" xattr-position=\"text-left\" data-component=\"crn-title\" id=\"crn-title${RANDOM}\">Header</h1></div>",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/header.template.html",
       "wrapper":false
     },
     {
