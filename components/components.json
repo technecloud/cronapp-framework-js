@@ -1448,11 +1448,6 @@
           "selector": "div#{id} span",
           "text_pt_BR": "Legenda",
           "text_en_US": "Caption"
-        },
-        {
-          "selector": "div#{id} .k-radio",
-          "text_pt_BR": "Checked",
-          "text_en_US": "Checked"
         }
       ],
       "properties": {
@@ -1873,7 +1868,7 @@
       "text_en_US": "Textarea",
       "order": 0,
       "class": "adjust-icon mdi mdi-textbox",
-      "template": "<div class=\"form-group\"><label for=\"textAreaTemplate\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control k-textbox\" rows=\"5\"></textarea></div>",
+      "template": "<div class=\"form-group\"><label for=\"input${RANDOM}\">Label:</label><textarea id=\"textArea${RANDOM}\" ng-model=\"vars.textarea${RANDOM}\" maxlength=\"300\" style=\"resize:none;\" resize=\"resize:none;\"class=\"form-control k-textbox\" rows=\"5\"></textarea></div>",
       "rows": {
         "displayName": "rows"
       },
