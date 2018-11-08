@@ -1,5 +1,5 @@
 .form-control {
-    width:100%;/*Ver depois pra remover important*/
+    width:100%;
 }
 
 .k-checkbox-label {
@@ -73,7 +73,6 @@ Material Grid
     border-radius: 0px;
     margin-left: -16px;
     margin-right: -16px;
-    /*!important utilizado para deixar o background transparente e o a borda reta.*/
 }
 
 .k-input.k-textbox:focus,.k-textbox:focus {
