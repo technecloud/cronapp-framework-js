@@ -182,6 +182,21 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/js/stimulsoft/stimulsoft-helper.js",
       "type": "script"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/cronapp-lib-js/dist/js/kendo-ui/styles/kendo.common.min.css?v=2.0.0",
+      "type": "style"
+    },
+	{
+      "file": "index.html",
+      "script": "plugins/cronapp-lib-js/dist/js/kendo-ui/styles/kendo.cerulean.css?v=2.0.0",
+      "type": "style"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/cronapp-lib-js/dist/js/kendo-ui/styles/kendo.cerulean.mobile.min.css?v=2.0.0",
+      "type": "style"
     }
   ]
 }
