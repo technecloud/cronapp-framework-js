@@ -1801,7 +1801,7 @@
       "properties": {
         "onclick": {
           "removable": true,
-          "type": "event
+          "type": "event"
         },
         "xattr-position": {
           "displayName": "Position"
