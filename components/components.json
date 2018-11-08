@@ -2276,12 +2276,12 @@
           "text_en_US": "Internal Header"
         },
         {
-          "selector": "div#{id} .k-grid .k-grid-header-wrap",
+          "selector": "div#{id} .k-grid .k-grid-header",
           "text_pt_BR": "Cabeçalho Externo",
-          "text_en_US": "External Head"
+          "text_en_US": "External Header"
         },
         {
-          "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr[role=\"row\"] .k-link",
+          "selector": "div#{id} .k-grid .k-grid-header thead tr[role=\"row\"] .k-link",
           "text_pt_BR": "Título do cabeçalho",
           "text_en_US": "Header Title"
         },
@@ -2291,19 +2291,14 @@
           "text_en_US": "Icon From Filter"
         },
         {
-          "selector": "div#{id} .k-grid th, div#{id} .k-grid td",
-          "text_pt_BR": "Célula do Cabeçalho",
-          "text_en_US": "Header Cell"
-        },
-        {
           "selector": "div#{id} .k-grid .k-grid-content tr",
-          "text_pt_BR": "Linha Normal",
+          "text_pt_BR": "Linha Padrão",
           "text_en_US": "Default Row"
         },
         {
           "selector": "div#{id} .k-grid tr.k-alt",
-          "text_pt_BR": "Linha Alternativa",
-          "text_en_US": "Alternative Row"
+          "text_pt_BR": "Linha Alternada",
+          "text_en_US": "Alternate Row"
         },
         {
           "selector": "div#{id} .k-grid tr.k-state-selected",
