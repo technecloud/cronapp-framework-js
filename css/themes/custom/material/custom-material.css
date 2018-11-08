@@ -4,6 +4,31 @@
     min-height: 200px !important;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c; 
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+}
+
 .form-control {
     width:100% !important;/*Ver depois pra remover important*/
 }
