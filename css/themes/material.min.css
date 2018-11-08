@@ -1,2 +1,3 @@
-@import 'libs/material/kendo.material-v2.min.css';
+@import '../../../cronapp-lib-js/dist/js/kendo-ui/styles/kendo.common-material.min.css';
+@import '../../../cronapp-lib-js/dist/js/kendo-ui/styles/kendo.material.min.css';
 @import 'custom/material/custom-material.css';
