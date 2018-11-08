@@ -5,7 +5,7 @@
 }
 
 .form-control {
-    width:100% !important;/*Ver depois pra remover important*/
+    width:100%;/*Ver depois pra remover important*/
 }
 
 .k-checkbox-label {
@@ -48,12 +48,11 @@ Material Grid
 */
 
 .k-grid tbody .k-button {
-    min-width: 32px!important;
-    min-height: 32px!important;
+    min-width: 32px;
+    min-height: 32px;
     padding: 0;
-    margin: 0px 5px -2px 0px!important;
-    border-radius: 100%!important;
-    /*O !important foi utilizado para retirar as margens relativas e a largura e altura mínimas*/
+    margin: 0px 5px -2px 0px;
+    border-radius: 100%;
 }
 
 .k-header>.k-grid-filter, .k-header>.k-header-column-menu {
@@ -72,13 +71,12 @@ Material Grid
 }
 
 .k-button-icontext .k-icon {
-    margin: 0!important;
-    /*Botão fica centralizado com este !important*/
+    margin: 0;
 }
 
 .k-grid-edit-row>td>.k-input.k-textbox,.k-grid-edit-row>td>.k-textbox {
-    background-color: transparent!important;
-    border-radius: 0px!important;
+    background-color: transparent;
+    border-radius: 0px;
     margin-left: -16px;
     margin-right: -16px;
     /*!important utilizado para deixar o background transparente e o a borda reta.*/
@@ -89,7 +87,7 @@ Material Grid
 }
 
 .k-grid-edit-row .k-textbox, .k-grid-edit-row .k-textbox.k-input {
-    padding-left: 0!important;
+    padding-left: 0;
 }
 
 .k-pager-wrap .k-link:hover, .k-pager-wrap .k-pager-nav:hover {
@@ -105,7 +103,7 @@ Material Grid
 }
 
 div.k-grid-footer, div.k-grid-header {
-    padding-right:17px!important;
+    padding-right:17px;
 }
 
 .k-grid-header .k-grid-filter {
@@ -141,20 +139,20 @@ k-grid-header .k-header>.k-link {
 }
 
 .k-filter-help-text {
-    font-weight: 400!important;
+    font-weight: 400;
 }
 
-.k-animation-container>.k-popup {
+.k-animation-container>.k-list-container>.k-list-scroller>.k-list {
     box-shadow: 0 3px 3px -2px rgba(0,0,0,.02), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
-    font-weight: 400!important;
+    font-weight: 400;
 }
 
 .k-list .k-item.k-state-selected {
-    color:#3f51b5!important;
+    color:#3f51b5;
 }
 
 .k-list .k-item:hover.k-state-selected {
-    color: #3f51b5!important;
+    color: #3f51b5;
 }
 
 /*
@@ -181,26 +179,26 @@ Material Grid - F I N A L
 }
 
 .navbar-default {
-    background-color: #5665be!important;
-    border-color: #5665be!important;
+    background-color: #5665be;
+    border-color: #5665be;
 }
 
 .navbar-default .navbar-brand {
-    color: #fff!important;
+    color: #fff;
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: #fff!important;
+    color: #fff;
 }
 
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
-    color: #fff!important;
-    background-color: transparent!important;
+    color: #fff;
+    background-color: transparent;
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: #ffffff!important;
-    background-color: transparent!important;
+    color: #ffffff;
+    background-color: transparent;
 }
 
 .dropdown-menu {
@@ -216,14 +214,14 @@ Material Grid - F I N A L
     font-size: 14px;
     text-align: left;
     list-style: none;
-    background-color: #ffffff!important;
+    background-color: #ffffff;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
     border: 1px solid #ccc;
     border: 0px solid rgb(5, 21, 21);
     border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26)!important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 .dropdown-menu>li>a {
@@ -232,14 +230,14 @@ Material Grid - F I N A L
     clear: both;
     font-weight: 400;
     line-height: 1.42857143;
-    color: #393939!important;
+    color: #393939;
     white-space: nowrap;
 }
 
 .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
-    color: #5665be!important;
+    color: #5665be;
     text-decoration: none;
-    background-color: #f6f6f6!important;
+    background-color: #f6f6f6;
 }
 
 /*.k-grid-content::-webkit-scrollbar {*/
@@ -260,9 +258,16 @@ Material Grid - F I N A L
 }
 
 .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-    background-color: transparent !important;
-    border: 0 !important;
-    color: #FFFFFF !important;
+    background-color: transparent;
+    border: 0;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: transparent;
+    border: 0;
+    color: #FFFFFF;
     font-weight: 500;
 }
 
@@ -277,6 +282,6 @@ Material Grid - F I N A L
     outline: 0;
 }
 
-text-area.form-control.k-textbox {
-    height: auto!important;
+textarea.form-control.k-textbox {
+    height: auto;
 }
