@@ -2015,7 +2015,7 @@
       "forcedGroupd": true,
       "styles": [
         {
-          "selector": "div#{id} .input-group .k-textbot",
+          "selector": "div#{id} .input-group .k-textbox",
           "text_pt_BR": "Geral",
           "text_en_US": "General"
         },
@@ -2267,44 +2267,44 @@
           "text_en_US": "Grouped Item"
         },
         {
-          "selector": "div#{id} .k-grid .k-group-indicator .k-link",
-          "text_pt_BR": "Link Item Agrupado",
-          "text_en_US": "Link Grouped Item"
+          "selector": "div#{id} .k-grid th.k-header",
+          "text_pt_BR": "Cabeçalho",
+          "text_en_US": "Header"
         },
         {
-          "selector": "div#{id} .k-grid .k-header",
-          "text_pt_BR": "Cabeçalho Interno",
-          "text_en_US": "Internal Header"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-grid-header-wrap",
-          "text_pt_BR": "Cabeçalho Externo",
-          "text_en_US": "External Head"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr[role=\"row\"] .k-link",
+          "selector": "div#{id} .k-grid .k-grid-header thead tr[role=\"row\"]",
           "text_pt_BR": "Título do cabeçalho",
           "text_en_US": "Header Title"
         },
         {
-          "selector": "div#{id} .k-grid .k-header>.k-grid-filter",
-          "text_pt_BR": "Ícones do Filtro",
-          "text_en_US": "Icon From Filter"
+          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row",
+          "text_pt_BR": "Filtro do cabeçalho",
+          "text_en_US": "Header Filter"
         },
         {
-          "selector": "div#{id} .k-grid th, div#{id} .k-grid td",
-          "text_pt_BR": "Célula do Cabeçalho",
-          "text_en_US": "Header Cell"
+          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell",
+          "text_pt_BR": "Célula de Filtro",
+          "text_en_US": "Filter Cell"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell .k-autocomplete",
+          "text_pt_BR": "Célula de Filtro",
+          "text_en_US": "Filter Input"
+        },
+        {
+          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell .k-button",
+          "text_pt_BR": "Botão de Limpar Filtro",
+          "text_en_US": "Clean Filter Button"
         },
         {
           "selector": "div#{id} .k-grid .k-grid-content tr",
-          "text_pt_BR": "Linha Normal",
+          "text_pt_BR": "Linha Padrão",
           "text_en_US": "Default Row"
         },
         {
           "selector": "div#{id} .k-grid tr.k-alt",
-          "text_pt_BR": "Linha Alternativa",
-          "text_en_US": "Alternative Row"
+          "text_pt_BR": "Linha Alternada",
+          "text_en_US": "Alternate Row"
         },
         {
           "selector": "div#{id} .k-grid tr.k-state-selected",
@@ -2332,19 +2332,14 @@
           "text_en_US": "Cancel Button"
         },
         {
-          "selector": "div#{id} .k-grid .k-grid-header-wrap thead tr[role=\"row\"]",
-          "text_pt_BR": "Linhas",
-          "text_en_US": "Rows"
-        },
-        {
           "selector": "div#{id} .k-grid .k-pager-wrap",
           "text_pt_BR": "Área de paginação",
           "text_en_US": "Pagination Container"
         },
         {
-          "selector": "div#{id} .k-grid .k-dropdown .k-dropdown-wrap",
+          "selector": "div#{id} .k-grid .k-pager-wrap .k-dropdown .k-dropdown-wrap",
           "text_pt_BR": "Combo de Paginação",
-          "text_en_US": "Pagination DropDown"
+          "text_en_US": "Pagination Dropdown"
         },
         {
           "selector": "div#{id} .k-grid .k-pager-wrap>.k-link>.k-icon",
@@ -2382,11 +2377,6 @@
           "text_en_US": "Cancel Button"
         },
         {
-          "selector": "div#{id} .k-grid .k-input",
-          "text_pt_BR": "Entradas de Texto",
-          "text_en_US": "Inputs"
-        },
-        {
           "selector": "div#{id} .k-grid span.k-select",
           "text_pt_BR": "Combo de Filtros",
           "text_en_US": "Filters Combo"
@@ -2417,6 +2407,11 @@
       "designTimeSelector": "cron-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox.template.html",
       "styles": [
+        {
+          "selector": "div#{id} .k-dropdown-wrap",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
         {
           "selector": "div#{id} .k-combobox .k-select",
           "text_pt_BR": "Seta",
@@ -2508,6 +2503,11 @@
           "selector": "div#{id} .k-select",
           "text_pt_BR": "Seta",
           "text_en_US": "Dropdown"
+        },
+        {
+          "selector": "div#{id} .k-dropdown-wrap",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
         },
         {
           "selector": "div#{id} .k-input",
@@ -2701,6 +2701,11 @@
           "text_en_US": "Input"
         },
         {
+          "selector": "div#{id} .k-autocomplete",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
+        {
           "selector": "div#{id} label",
           "text_pt_BR": "Label",
           "text_en_US": "Label"
@@ -2747,6 +2752,11 @@
         }
       ],
       "styles": [
+        {
+          "selector": "div#{id} .k-autocomplete",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
         {
           "selector": "div#{id} .k-input",
           "text_pt_BR": "Entrada de Texto",
