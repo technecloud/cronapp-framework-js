@@ -1282,7 +1282,8 @@
           "name": "crn-datasource",
           "selector": "div[crn-datasource]",
           "displayName_pt_BR": "Fonte de dados",
-          "displayName_en_US": "Datasource"
+          "displayName_en_US": "Datasource",
+          "type":"pageDatasource"
         }
       ],
       "handleRules": {
@@ -1293,7 +1294,7 @@
           {
             "activeSelector": ".table-header th.active",
             "activeClass": "active",
-            "sourceHTML": "<th><div data-container=\"true\">New Title</div></th>",
+            "sourceHTML": "<th class=\"k-header\"><div data-container=\"true\">New Title</div></th>",
             "targetSelector": ".table-header"
           },
           {
