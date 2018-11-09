@@ -1,3 +1,14 @@
+.btn-fab {
+    border-radius: 50%;
+    font-size: 12px;
+    height: 32px;
+    margin: auto;
+    min-width: 32px;
+    width: 32px;
+    padding: 0;
+    position: relative;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #337ab7;
