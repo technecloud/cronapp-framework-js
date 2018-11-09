@@ -250,7 +250,7 @@
       navMain.on("click", "a", closeMenuHandler);
     });
 
-    $scope.themes = [ "material" ];
+    $scope.themes = [ "material","cerulean"];
 
     $scope.changeTheme = function(theme) {
       if(theme !== undefined) {
