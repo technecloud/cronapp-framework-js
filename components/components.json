@@ -2288,7 +2288,7 @@
         },
         {
           "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell .k-autocomplete",
-          "text_pt_BR": "Célula de Filtro",
+          "text_pt_BR": "Entrada do Filtro",
           "text_en_US": "Filter Input"
         },
         {
