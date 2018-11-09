@@ -2700,7 +2700,7 @@
           "text_en_US": "Input"
         },
         {
-          "selector": "div#{id} .k-dropdown-wrap",
+          "selector": "div#{id} .k-autocomplete",
           "text_pt_BR": "Geral",
           "text_en_US": "General"
         },
@@ -2751,6 +2751,11 @@
         }
       ],
       "styles": [
+        {
+          "selector": "div#{id} .k-autocomplete",
+          "text_pt_BR": "Geral",
+          "text_en_US": "General"
+        },
         {
           "selector": "div#{id} .k-input",
           "text_pt_BR": "Entrada de Texto",
