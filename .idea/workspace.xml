@@ -1,39 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/cosmo/cosmo.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/cyborg/cyborg.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/darkly/custom-darkly.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/flatly/custom-flatly.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/journal/custom-journal.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/lumen/custom-lumen.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/paper/custom-paper.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/readable/custom-readable.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/sandstone/custom-sandstone.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/simplex/custom-simplex.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/spacelab/custom-spacelab.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/superhero/custom-superhero.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/united/custom-united.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/custom/yeti/custom-yeti.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/css/themes/slate/custom-slate.min.css" afterDir="false" />
+    <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="mudança no template de login web">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/cosmo.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/cosmo.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/cyborg.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/cyborg.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/darkly.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/darkly.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/flatly.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/flatly.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/journal.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/journal.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/lumen.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/lumen.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/paper.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/paper.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/readable.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/readable.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/sandstone.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/sandstone.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/simplex.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/simplex.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/slate.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/slate.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/spacelab.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/spacelab.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/superhero.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/superhero.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/united.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/united.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/yeti.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/yeti.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/controllers.authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/controllers.authentication.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +14,7 @@
     <session id="1293939791">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.opened" value="3" />
@@ -54,6 +23,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="44" />
+          <entry key="gitignore" value="1" />
           <entry key="js" value="7" />
           <entry key="json" value="1" />
         </counts>
@@ -63,13 +33,15 @@
           <entry key="CSS" value="44" />
           <entry key="JSON" value="1" />
           <entry key="JavaScript" value="7" />
+          <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="119" />
+          <entry key="gitignore" value="9" />
           <entry key="js" value="15" />
-          <entry key="txt" value="82" />
+          <entry key="txt" value="154" />
           <entry key="xml" value="7" />
         </counts>
       </usages-collector>
@@ -77,24 +49,14 @@
         <counts>
           <entry key="CSS" value="119" />
           <entry key="JavaScript" value="15" />
-          <entry key="PLAIN_TEXT" value="82" />
+          <entry key="PLAIN_TEXT" value="163" />
           <entry key="XML" value="7" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/controllers.authentication.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="252" column="199" selection-start-line="252" selection-start-column="199" selection-end-line="252" selection-end-column="199" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -129,6 +91,7 @@
         <option value="$PROJECT_DIR$/css/themes/united.min.css" />
         <option value="$PROJECT_DIR$/css/themes/yeti.min.css" />
         <option value="$PROJECT_DIR$/js/controllers.authentication.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -169,8 +132,8 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
-    <option name="width" value="1939" />
-    <option name="height" value="1049" />
+    <option name="width" value="1940" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -187,45 +150,6 @@
               <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
               <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="material" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="paper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -235,16 +159,16 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541783964514" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541792572954" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cronapp-lib-js" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\img" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\yeti" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\united" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\superhero" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\spacelab" />
-      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\slate" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\paper" />
@@ -275,7 +199,7 @@
       <updated>1541622455123</updated>
       <workItem from="1541622457079" duration="2600000" />
       <workItem from="1541686394977" duration="3219000" />
-      <workItem from="1541771500383" duration="4400000" />
+      <workItem from="1541771500383" duration="7843000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -305,15 +229,28 @@
       <option name="project" value="LOCAL" />
       <updated>1541772555206</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="adição da novo icone da tela de login">
+      <created>1541792405834</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1541792405834</updated>
+    </task>
+    <task id="LOCAL-00006" summary="mudança no template de login web">
+      <created>1541792496068</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1541792496068</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10219000" />
+    <option name="totallyTimeSpent" value="13662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -333,7 +270,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32907802" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.26950353" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="JRebel Console" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -357,7 +294,9 @@
     <MESSAGE value="movendo para libs e material" />
     <MESSAGE value="material ajustado para versao do kendo" />
     <MESSAGE value="cerulean theme" />
-    <option name="LAST_COMMIT_MESSAGE" value="cerulean theme" />
+    <MESSAGE value="adição da novo icone da tela de login" />
+    <MESSAGE value="mudança no template de login web" />
+    <option name="LAST_COMMIT_MESSAGE" value="mudança no template de login web" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/postupdate.json">
@@ -566,6 +505,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
           <caret line="252" column="199" selection-start-line="252" selection-start-column="199" selection-end-line="252" selection-end-column="199" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
         </state>
       </provider>
     </entry>

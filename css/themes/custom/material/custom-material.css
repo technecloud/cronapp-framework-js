@@ -203,7 +203,6 @@ Material Grid - F I N A L
     top: -2px;
     margin-right: 3px;
     display: inline-block;
-    font-family: 'Glyphicons Halflings';
     font-style: normal;
     font-weight: 400;
     line-height: 1;
@@ -323,4 +322,29 @@ textarea.form-control.k-textbox {
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     background: #ffffff;
     margin: 30px;
+}
+.k-button:focus, .k-button:hover {
+    text-decoration: none;
+    outline: 0;
+    background-color: #008dcd;
+    color: #fff;
+}
+
+.k-checkbox:checked+.k-checkbox-label:before {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+.k-checkbox:checked+.k-checkbox-label:after, .k-checkbox:indeterminate+.k-checkbox-label:after {
+    background-color: #008dcd;
+    border-color: #3f51b5;
+}
+
+.k-input.k-textbox, .k-textarea, .k-textbox {
+    background-color: transparent;
+    border-width: 0 0 1px;
+    border-color: rgba(0,0,0,.42);
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
 }
