@@ -1,3 +1,46 @@
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #bdbdbd;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #bdbdbd;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+    border: 0px none #ffffff;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-track:hover {
+    background: transparent;
+}
+::-webkit-scrollbar-track:active {
+    background: #333333;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
 .btn-fab {
     border-radius: 50%;
     font-size: 12px;
@@ -16,7 +59,7 @@
 
 .btn-success {
     color: #fff;
-    background-color: #5cb85c; 
+    background-color: #5cb85c;
 }
 
 .btn-info {
@@ -71,8 +114,10 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
     font-weight: 400;
 }
 
-body {
-    background: #f5f5f5;
+@media only screen and (min-width: 768px) {
+    body {
+        background: #f5f5f5;
+    }
 }
 
 /*
@@ -318,11 +363,14 @@ textarea.form-control.k-textbox {
     height: auto;
 }
 
-.main-view {
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    background: #ffffff;
-    margin: 30px;
+@media only screen and (min-width: 768px) {
+    .main-view {
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+        background: #ffffff;
+        margin: 30px;
+    }
 }
+
 .k-button:focus, .k-button:hover {
     text-decoration: none;
     outline: 0;
@@ -347,4 +395,38 @@ textarea.form-control.k-textbox {
     border-radius: 0;
     box-shadow: none;
     font-size: 14px;
+}
+
+@media only screen and (min-width: 768px) {
+    .login-view {
+        box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+        background: #ffffff;
+        padding: 20px;
+    }
+}
+
+.main-title {
+    display: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .main-title {
+        background-color: #3d488b;
+        color: #ffffff;
+        display: block;
+    }
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+        color: #fff;
+    }
 }
