@@ -331,3 +331,7 @@ div[data-component="crn-button"] {
 .full-width {
   width: 100% !important;
 }
+
+.main-title {
+    display: none;
+}
