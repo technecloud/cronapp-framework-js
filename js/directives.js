@@ -1870,6 +1870,14 @@
         var $element = $(parent).find('input.cronSelect');
 
         var options = app.kendoHelper.getConfigCombobox(select, scope);
+        options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
+        options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
+        options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
+        options.filtering = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
+        options.open = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
+        options.select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
+        options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
+
         var combobox = $element.kendoComboBox(options).data('kendoComboBox');
         $(element).remove();
 
@@ -2027,6 +2035,14 @@
             }
         );
 
+        options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
+        options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
+        options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
+        options.filtering = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
+        options.open = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
+        options.select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
+        options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
+
         var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
         options.combobox = combobox;
 
@@ -2150,6 +2166,9 @@
         var $element = $(parent).find('input.cronMultiSelect');
         $(element).remove();
 
+        var select;
+        var deselect;
+
         options['deselect'] = function(e) {
           var dataItem = e.dataItem;
           var relation = this.relationDataSource;
@@ -2169,6 +2188,10 @@
               $(combobox).data('silent', true);
               this.relationDataSource.removeSilent(selectItem, null, null);
             }
+
+            if (deselect) {
+              deselect();
+            } 
           }
         }.bind(relactionDS);
 
@@ -2184,7 +2207,22 @@
               this.postSilent();
             }.bind(this.relationDataSource));
           }
+
+          if (select) {
+            select();
+          } 
+
         }.bind(relactionDS);
+
+        var options = app.kendoHelper.getConfigCombobox(select, scope);
+        options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
+        options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
+        options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
+        options.filtering = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
+        options.open = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
+        options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
+        select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
+        deselect = attrs.onDeselect ? function (){eval(attrs.onDeselect)}: undefined;
 
         var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
 

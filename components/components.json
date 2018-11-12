@@ -2478,6 +2478,41 @@
       ],
       "childrenProperties": [
         {
+          "name": "on-select",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select",
+          "type":"event"         
+        },
+        {
+          "name": "on-close",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Fechar",
+          "displayName_en_US": "On Close",
+          "type":"event"         
+        },
+        {
+          "name": "on-dataBound",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Carregar",
+          "displayName_en_US": "On DataBound",
+          "type":"event"         
+        },
+        {
+          "name": "on-filtering",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Filtrar",
+          "displayName_en_US": "On Filtering",
+          "type":"event"         
+        },
+        {
+          "name": "on-open",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Abrir",
+          "displayName_en_US": "On Open",
+          "type":"event"         
+        },
+        {
           "name": "options",
           "selector": "cron-select",
           "displayName_pt_BR": "Configuração",
@@ -2509,6 +2544,41 @@
       "designTimeSelector": "cron-dynamic-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.template.html",
       "childrenProperties": [
+        {
+          "name": "on-select",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select",
+          "type":"event"         
+        },
+        {
+          "name": "on-close",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Fechar",
+          "displayName_en_US": "On Close",
+          "type":"event"         
+        },
+        {
+          "name": "on-dataBound",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Carregar",
+          "displayName_en_US": "On DataBound",
+          "type":"event"         
+        },
+        {
+          "name": "on-filtering",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Filtrar",
+          "displayName_en_US": "On Filtering",
+          "type":"event"         
+        },
+        {
+          "name": "on-open",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Abrir",
+          "displayName_en_US": "On Open",
+          "type":"event"         
+        },
         {
           "name": "options",
           "selector": "cron-dynamic-select",
@@ -2607,6 +2677,48 @@
         }
       ],
       "childrenProperties": [
+        {
+          "name": "on-select",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select",
+          "type":"event"         
+        },
+        {
+          "name": "on-deselect",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Remover Seleção",
+          "displayName_en_US": "On Deselect",
+          "type":"event"         
+        },
+        {
+          "name": "on-close",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Fechar",
+          "displayName_en_US": "On Close",
+          "type":"event"         
+        },
+        {
+          "name": "on-dataBound",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Carregar",
+          "displayName_en_US": "On DataBound",
+          "type":"event"         
+        },
+        {
+          "name": "on-filtering",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Filtrar",
+          "displayName_en_US": "On Filtering",
+          "type":"event"         
+        },
+        {
+          "name": "on-open",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Abrir",
+          "displayName_en_US": "On Open",
+          "type":"event"         
+        },
         {
           "name": "options",
           "selector": "cron-multi-select",
