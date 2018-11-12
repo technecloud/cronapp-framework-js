@@ -1700,7 +1700,7 @@
               height: options.height,
               groupable: options.allowGrouping,
               sortable: options.allowSorting,
-              filterable: { mode: "row" },
+              filterable: true,
               pageable: pageAble,
               columns: columns,
               selectable: options.allowSelectionRow,
