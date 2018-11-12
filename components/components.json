@@ -1656,7 +1656,7 @@
           "displayName_en_US": "Icon",
           "type": "icon"
         }
-        ]
+      ]
     },
     {
       "name": "crn-sidebar",
@@ -2306,29 +2306,14 @@
           "text_en_US": "Header"
         },
         {
-          "selector": "div#{id} .k-grid .k-grid-header thead tr[role=\"row\"]",
+          "selector": "div#{id} .k-grid .k-grid-header thead tr[role=\"row\"] a",
           "text_pt_BR": "Título do cabeçalho",
           "text_en_US": "Header Title"
         },
         {
-          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row",
-          "text_pt_BR": "Filtro do cabeçalho",
-          "text_en_US": "Header Filter"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell",
-          "text_pt_BR": "Célula de Filtro",
-          "text_en_US": "Filter Cell"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell .k-autocomplete",
-          "text_pt_BR": "Entrada do Filtro",
-          "text_en_US": "Filter Input"
-        },
-        {
-          "selector": "div#{id} .k-grid .k-grid-header .k-filter-row .k-filtercell .k-button",
-          "text_pt_BR": "Botão de Limpar Filtro",
-          "text_en_US": "Clean Filter Button"
+          "selector": "div#{id} .k-grid .k-grid-header thead tr[role=\"row\"] .k-i-filter",
+          "text_pt_BR": "Ícone do Filtro",
+          "text_en_US": "Filter Icon"
         },
         {
           "selector": "div#{id} .k-grid .k-grid-content tr",
@@ -2484,35 +2469,35 @@
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-close",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-dataBound",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-filtering",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-open",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "options",
@@ -2551,35 +2536,35 @@
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-close",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-dataBound",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-filtering",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-open",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "options",
@@ -2684,42 +2669,42 @@
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-deselect",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Remover Seleção",
           "displayName_en_US": "On Deselect",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-close",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-dataBound",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-filtering",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "on-open",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
-          "type":"event"         
+          "type":"event"
         },
         {
           "name": "options",
