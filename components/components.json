@@ -684,13 +684,6 @@
           "selector": "input",
           "type":"content"
         }
-      ],
-      "groupedChildren": [
-        {
-          "text_pt_BR": "Campo",
-          "text_en_US": "Field",
-          "selector": "input"
-        }
       ]
     },
     {
@@ -1648,18 +1641,20 @@
           }
         ]
       },
-      "groupedChildren": [
+      "childrenProperties": [
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "span"
+          "name": "content",
+          "selector": "span",
+          "type": "content",
+          "displayName_pt_BR": "Rótulo",
+          "displayName_en_US": "Label"
         },
         {
-          "text_pt_BR": "Ícone",
-          "text_en_US": "Icon",
-          "selector": "i"
+          "name": "class",
+          "selector": "icon",
+          "type": "icon"
         }
-      ]
+        ]
     },
     {
       "name": "crn-sidebar",
