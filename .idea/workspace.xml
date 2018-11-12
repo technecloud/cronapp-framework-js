@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="">
+    <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="espaço">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/components.json" beforeDir="false" afterPath="$PROJECT_DIR$/components/components.json" afterDir="false" />
     </list>
@@ -23,36 +23,36 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="css" value="116" />
-          <entry key="gitignore" value="2" />
+          <entry key="css" value="118" />
+          <entry key="gitignore" value="3" />
           <entry key="js" value="8" />
-          <entry key="json" value="5" />
+          <entry key="json" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="116" />
-          <entry key="JSON" value="5" />
+          <entry key="CSS" value="118" />
+          <entry key="JSON" value="6" />
           <entry key="JavaScript" value="8" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="194" />
+          <entry key="css" value="199" />
           <entry key="gitignore" value="9" />
           <entry key="js" value="15" />
           <entry key="json" value="61" />
-          <entry key="txt" value="513" />
+          <entry key="txt" value="532" />
           <entry key="xml" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="194" />
+          <entry key="CSS" value="199" />
           <entry key="JSON" value="61" />
           <entry key="JavaScript" value="15" />
-          <entry key="PLAIN_TEXT" value="522" />
+          <entry key="PLAIN_TEXT" value="541" />
           <entry key="XML" value="7" />
         </counts>
       </usages-collector>
@@ -63,11 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/components.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="1656" column="9" selection-start-line="1656" selection-start-column="9" selection-end-line="1656" selection-end-column="9" />
-              <folding>
-                <element signature="e#50897#51471#0" />
-              </folding>
+            <state relative-caret-position="329">
+              <caret line="1657" column="9" selection-start-line="1657" selection-start-column="9" selection-end-line="1657" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -94,6 +91,9 @@
       <find>groupChi</find>
       <find>group</find>
       <find>grou</find>
+      <find>groupedChi</find>
+      <find>pad</find>
+      <find>crn-menu-item</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -216,10 +216,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="component&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
+    <property name="SearchEverywhereHistoryKey" value="components.json&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;custom-mater&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;component&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542055200070" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542056240696" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cronapp-lib-js" />
   </component>
   <component name="RecentsManager">
@@ -261,7 +261,7 @@
       <workItem from="1541622457079" duration="2600000" />
       <workItem from="1541686394977" duration="3219000" />
       <workItem from="1541771500383" duration="7843000" />
-      <workItem from="1542026953803" duration="14686000" />
+      <workItem from="1542026953803" duration="15726000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -375,11 +375,25 @@
       <option name="project" value="LOCAL" />
       <updated>1542054989591</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="remoção de grouped item">
+      <created>1542055219638</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1542055219638</updated>
+    </task>
+    <task id="LOCAL-00018" summary="espaço">
+      <created>1542055816336</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1542055816336</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28348000" />
+    <option name="totallyTimeSpent" value="29388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -449,7 +463,10 @@
     <MESSAGE value="padding." />
     <MESSAGE value="filter" />
     <MESSAGE value="remoção de group no carrousel" />
-    <option name="LAST_COMMIT_MESSAGE" value="remoção de group no carrousel" />
+    <MESSAGE value="remoção de grouped item" />
+    <MESSAGE value="gulp" />
+    <MESSAGE value="espaço" />
+    <option name="LAST_COMMIT_MESSAGE" value="espaço" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/controllers.js">
@@ -579,13 +596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="36" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -764,20 +774,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/themes/custom/material/custom-material.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="367" column="21" selection-start-line="367" selection-start-column="21" selection-end-line="367" selection-end-column="21" />
+        <state relative-caret-position="324">
+          <caret line="427" column="42" selection-start-line="427" selection-start-column="42" selection-end-line="427" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/components.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="1656" column="9" selection-start-line="1656" selection-start-column="9" selection-end-line="1656" selection-end-column="9" />
-          <folding>
-            <element signature="e#50897#51471#0" />
-          </folding>
+        <state relative-caret-position="329">
+          <caret line="1657" column="9" selection-start-line="1657" selection-start-column="9" selection-end-line="1657" selection-end-column="9" />
         </state>
       </provider>
     </entry>

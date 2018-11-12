@@ -1651,7 +1651,9 @@
         },
         {
           "name": "class",
-          "selector": "icon",
+          "selector": "i",
+          "displayName_pt_BR": "Ícone",
+          "displayName_en_US": "Icon",
           "type": "icon"
         }
         ]
