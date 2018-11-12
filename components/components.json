@@ -1265,16 +1265,16 @@
           ]
         }
       ],
-      "groupedChildren": [
+      "childrenProperties": [
         {
-          "text_pt_BR": "Ícone",
-          "text_en_US": "Icon",
-          "selector": "i"
+          "name": "class",
+          "selector": "i",
+          "type":"icon"
         },
         {
-          "text_pt_BR": "Rótulo",
-          "text_en_US": "Label",
-          "selector": "span"
+          "name": "content",
+          "selector": "span",
+          "type":"content"
         }
       ]
     },
