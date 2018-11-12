@@ -663,9 +663,38 @@
       },
       "childrenProperties":[
         {
+          "name": "ng-model",
+          "selector": "input",
+          "type":"text"
+        },
+        {
           "name": "content",
           "selector": "label",
           "type": "content"
+        },
+        {
+          "name": "type",
+          "selector": "input",
+          "type":"type"
+        },
+        {
+          "name": "cronapp-filter",
+          "selector": "input"
+        },
+        {
+          "name": "mask",
+          "selector": "input",
+          "type":"mask"
+        },
+        {
+          "name": "placeholder",
+          "selector": "input",
+          "type":"content"
+        },
+        {
+          "name": "mask-placeholder",
+          "selector": "input",
+          "type":"content"
         }
       ],
       "groupedChildren": [
