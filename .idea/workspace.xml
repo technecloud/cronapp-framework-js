@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/slate/custom-slate.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/slate/custom-slate.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/themes/slate/custom-slate.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/custom/slate/custom-slate.min.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +43,7 @@
           <entry key="gitignore" value="9" />
           <entry key="js" value="15" />
           <entry key="json" value="17" />
-          <entry key="txt" value="420" />
+          <entry key="txt" value="429" />
           <entry key="xml" value="7" />
         </counts>
       </usages-collector>
@@ -52,42 +52,14 @@
           <entry key="CSS" value="193" />
           <entry key="JSON" value="17" />
           <entry key="JavaScript" value="15" />
-          <entry key="PLAIN_TEXT" value="429" />
+          <entry key="PLAIN_TEXT" value="438" />
           <entry key="XML" value="7" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/themes/slate.min.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/css/themes/slate/custom-slate.min.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="7275" column="1" selection-start-line="7275" selection-start-column="1" selection-end-line="7275" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/themes/journal.min.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -236,141 +208,6 @@
               <item name="themes" type="462c0819:PsiDirectoryNode" />
               <item name="custom" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="cerulean" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="cosmo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="cyborg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="darkly" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="flatly" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="journal" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="lumen" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="material" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="paper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="readable" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="sandstone" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="simplex" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="spacelab" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="superhero" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="united" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="yeti" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="slate" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -381,11 +218,12 @@
     <property name="SearchEverywhereHistoryKey" value="components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542050638579" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542050658087" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cronapp-lib-js" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\paper" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\libs\material" />
     </key>
@@ -422,7 +260,7 @@
       <workItem from="1541622457079" duration="2600000" />
       <workItem from="1541686394977" duration="3219000" />
       <workItem from="1541771500383" duration="7843000" />
-      <workItem from="1542026953803" duration="12235000" />
+      <workItem from="1542026953803" duration="12657000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -501,15 +339,21 @@
       <option name="project" value="LOCAL" />
       <updated>1542049951306</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="correção tema slate">
+      <created>1542050654196</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1542050654196</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25897000" />
+    <option name="totallyTimeSpent" value="26319000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -570,7 +414,8 @@
     <MESSAGE value="remoção de box-shadow" />
     <MESSAGE value="todos os temas voltam ao default." />
     <MESSAGE value="correção temas" />
-    <option name="LAST_COMMIT_MESSAGE" value="correção temas" />
+    <MESSAGE value="correção tema slate" />
+    <option name="LAST_COMMIT_MESSAGE" value="correção tema slate" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/controllers.js">
@@ -885,17 +730,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/themes/custom/slate/custom-slate.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="7252" column="18" lean-forward="true" selection-start-line="7252" selection-start-column="18" selection-end-line="7252" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/themes/slate.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/themes/slate/custom-slate.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="7275" column="1" selection-start-line="7275" selection-start-column="1" selection-end-line="7275" selection-end-column="1" />
         </state>
       </provider>
     </entry>
