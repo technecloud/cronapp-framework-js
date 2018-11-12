@@ -1066,3 +1066,15 @@ cron-rich-editor textarea {
 .cron-vertical-grid {
   
 }
+
+.navbar {
+    position: relative;
+    min-height: 40px;
+    border: 1px solid transparent
+}
+
+@media (min-width:768px) {
+    .navbar {
+        margin-bottom: 20px;
+    }
+}
