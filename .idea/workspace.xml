@@ -43,7 +43,7 @@
           <entry key="gitignore" value="9" />
           <entry key="js" value="15" />
           <entry key="json" value="17" />
-          <entry key="txt" value="461" />
+          <entry key="txt" value="483" />
           <entry key="xml" value="7" />
         </counts>
       </usages-collector>
@@ -52,7 +52,7 @@
           <entry key="CSS" value="194" />
           <entry key="JSON" value="17" />
           <entry key="JavaScript" value="15" />
-          <entry key="PLAIN_TEXT" value="470" />
+          <entry key="PLAIN_TEXT" value="492" />
           <entry key="XML" value="7" />
         </counts>
       </usages-collector>
@@ -72,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/components.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2021">
-              <caret line="706" column="4" selection-start-line="706" selection-start-column="4" selection-end-line="706" selection-end-column="4" />
+            <state relative-caret-position="1301">
+              <caret line="325" column="4" lean-forward="true" selection-start-line="325" selection-start-column="4" selection-end-line="325" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -247,7 +247,7 @@
     <property name="SearchEverywhereHistoryKey" value="components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542054870365" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542054968827" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cronapp-lib-js" />
   </component>
   <component name="RecentsManager">
@@ -289,7 +289,7 @@
       <workItem from="1541622457079" duration="2600000" />
       <workItem from="1541686394977" duration="3219000" />
       <workItem from="1541771500383" duration="7843000" />
-      <workItem from="1542026953803" duration="14356000" />
+      <workItem from="1542026953803" duration="14455000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -389,11 +389,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542053859031</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="filter">
+      <created>1542054886984</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1542054886984</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28018000" />
+    <option name="totallyTimeSpent" value="28117000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -461,7 +468,8 @@
     <MESSAGE value="correção tema slate" />
     <MESSAGE value="correção de diretório" />
     <MESSAGE value="padding." />
-    <option name="LAST_COMMIT_MESSAGE" value="padding." />
+    <MESSAGE value="filter" />
+    <option name="LAST_COMMIT_MESSAGE" value="filter" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/controllers.js">
@@ -785,8 +793,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/components.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2021">
-          <caret line="706" column="4" selection-start-line="706" selection-start-column="4" selection-end-line="706" selection-end-column="4" />
+        <state relative-caret-position="1301">
+          <caret line="325" column="4" lean-forward="true" selection-start-line="325" selection-start-column="4" selection-end-line="325" selection-end-column="4" />
         </state>
       </provider>
     </entry>

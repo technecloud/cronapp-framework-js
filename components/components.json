@@ -322,19 +322,7 @@
           }
         ]
       },
-      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/carousel.template.html",
-      "groupedChildren": [
-        {
-          "text_pt_BR": "Esquerda",
-          "text_en_US": "Left",
-          "selector": ".left"
-        },
-        {
-          "text_pt_BR": "Direita",
-          "text_en_US": "Right",
-          "selector": ".right"
-        }
-      ]
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/carousel.template.html"
     },
     {
       "name": "crn-datasource",
