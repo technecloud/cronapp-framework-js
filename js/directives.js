@@ -1030,18 +1030,17 @@
       },
       generateToolbarButtonCall: function(toolbarButton, scope, options) {
         var buttonCall;
-
-        var generateObjTemplate = function(functionToCall, title) {
+        var generateObjTemplate = function(functionToCall, title, iconClass) {
           var obj = {
             template: function() {
               var buttonId = app.common.generateId();
-              return createTemplateButton(buttonId, functionToCall, title);
+              return createTemplateButton(buttonId, functionToCall, title, iconClass);
             }.bind(this)
           };
           return obj;
         }.bind(this);
 
-        var createTemplateButton = function(buttonId, functionToCall, title) {
+        var createTemplateButton = function(buttonId, functionToCall, title, iconClass) {
           var template = '';
           if (toolbarButton.type == "SaveOrCancelChanges") {
             if (toolbarButton.saveButton)
@@ -1050,7 +1049,7 @@
               template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
           }
           else if (toolbarButton.type == "Blockly") {
-            template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
+            template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)"><span class="#ICONCLASS#" ></span>#TITLE#</a>';
           }
           else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
             template = '<a role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
@@ -1059,7 +1058,8 @@
           template = template
           .split('#BUTTONID#').join(buttonId)
           .split('#FUNCTIONCALL#').join(this.encodeHTML(functionToCall))
-          .split('#TITLE#').join(title);
+          .split('#TITLE#').join(title)
+          .split('#ICONCLASS#').join(iconClass);
 
           var cronappDatasource = eval(options.dataSourceScreen.entityDataSource.name);
 
@@ -1101,7 +1101,7 @@
           call = toolbarButton.methodCall;
         else
           call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
-        buttonCall = generateObjTemplate(call, toolbarButton.title);
+        buttonCall = generateObjTemplate(call, toolbarButton.title, toolbarButton.iconClass);
         return buttonCall;
       },
       generateModalSaveOrCancelButtonCall: function(buttonType, functionToCall, datasourceName, modalId, scope) {
@@ -1459,6 +1459,7 @@
                   text: column.headerText,
                   hidden: !column.visible,
                   className: "k-custom-command",
+                  iconClass: column.iconClass,
                   click: function(e) {
                     e.preventDefault();
                     var tr = $(e.target).closest("tr");
