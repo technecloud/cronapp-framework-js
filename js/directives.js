@@ -1101,7 +1101,9 @@
           call = toolbarButton.methodCall;
         else
           call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
-        buttonCall = generateObjTemplate(call, toolbarButton.title, toolbarButton.iconClass);
+
+        var title = toolbarButton.title == undefined ? '': toolbarButton.title;
+        buttonCall = generateObjTemplate(call, title, toolbarButton.iconClass);
         return buttonCall;
       },
       generateModalSaveOrCancelButtonCall: function(buttonType, functionToCall, datasourceName, modalId, scope) {
@@ -1456,7 +1458,7 @@
               var addColumn = {
                 command: [{
                   name: app.common.generateId(),
-                  text: column.headerText,
+                  text: column.headerText == undefined ? '': column.headerText,
                   hidden: !column.visible,
                   className: "k-custom-command",
                   iconClass: column.iconClass,
