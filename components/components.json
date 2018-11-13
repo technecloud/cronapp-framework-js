@@ -1616,7 +1616,7 @@
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<li class=\"dropdown component-holder\" data-component=\"crn-menu-item\"> <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"><span>Menu Item</span> <span class=\"caret\"></span></a> <ul class=\"dropdown-menu\">   <li><a href=\"#\" class=\"component-holder col-md-12\"  data-component=\"crn-anchor\">Action Item</a></li> </ul></li>",
+            "sourceHTML": "<li class=\"dropdown component-holder\" data-component=\"crn-menu-item\"> <a class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"\"></i><span>Menu Item</span> <span class=\"caret\"></span></a> <ul class=\"dropdown-menu\">   <li><a href=\"#\" class=\"component-holder col-md-12\"  data-component=\"crn-anchor\">Action Item</a></li> </ul></li>",
             "targetSelector": ".nav.navbar-nav"
           }
         ]
