@@ -1644,7 +1644,7 @@
       "childrenProperties": [
         {
           "name": "content",
-          "selector": "span",
+          "selector": "a > span:first",
           "type": "content",
           "displayName_pt_BR": "Rótulo",
           "displayName_en_US": "Label"
