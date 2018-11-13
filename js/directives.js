@@ -1030,18 +1030,17 @@
       },
       generateToolbarButtonCall: function(toolbarButton, scope, options) {
         var buttonCall;
-
-        var generateObjTemplate = function(functionToCall, title) {
+        var generateObjTemplate = function(functionToCall, title, iconClass) {
           var obj = {
             template: function() {
               var buttonId = app.common.generateId();
-              return createTemplateButton(buttonId, functionToCall, title);
+              return createTemplateButton(buttonId, functionToCall, title, iconClass);
             }.bind(this)
           };
           return obj;
         }.bind(this);
 
-        var createTemplateButton = function(buttonId, functionToCall, title) {
+        var createTemplateButton = function(buttonId, functionToCall, title, iconClass) {
           var template = '';
           if (toolbarButton.type == "SaveOrCancelChanges") {
             if (toolbarButton.saveButton)
@@ -1049,8 +1048,8 @@
             else
               template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
           }
-          else if (toolbarButton.type == "Blockly") {
-            template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)">#TITLE#</a>';
+          else if (toolbarButton.type == "Blockly" || toolbarButton.type == "Customized") {
+            template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)"><span class="#ICONCLASS#" ></span>#TITLE#</a>';
           }
           else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
             template = '<a role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
@@ -1059,7 +1058,8 @@
           template = template
           .split('#BUTTONID#').join(buttonId)
           .split('#FUNCTIONCALL#').join(this.encodeHTML(functionToCall))
-          .split('#TITLE#').join(title);
+          .split('#TITLE#').join(title)
+          .split('#ICONCLASS#').join(iconClass);
 
           var cronappDatasource = eval(options.dataSourceScreen.entityDataSource.name);
 
@@ -1097,11 +1097,15 @@
         }.bind(this);
 
         var call = '';
-        if (toolbarButton.methodCall)
+        if (toolbarButton.type == 'Customized')
+          call = toolbarButton.execute;
+        else if (toolbarButton.methodCall)
           call = toolbarButton.methodCall;
         else
           call = this.generateBlocklyCall(toolbarButton.blocklyInfo);
-        buttonCall = generateObjTemplate(call, toolbarButton.title);
+
+        var title = toolbarButton.title == undefined ? '': toolbarButton.title;
+        buttonCall = generateObjTemplate(call, title, toolbarButton.iconClass);
         return buttonCall;
       },
       generateModalSaveOrCancelButtonCall: function(buttonType, functionToCall, datasourceName, modalId, scope) {
@@ -1451,14 +1455,15 @@
                 columns.push(addColumn);
               }
             }
-            else if (column.dataType == "Blockly") {
+            else if (column.dataType == "Blockly" || column.dataType == "Customized") {
 
               var addColumn = {
                 command: [{
                   name: app.common.generateId(),
-                  text: column.headerText,
+                  text: column.headerText == undefined ? '': column.headerText,
                   hidden: !column.visible,
                   className: "k-custom-command",
+                  iconClass: column.iconClass,
                   click: function(e) {
                     e.preventDefault();
                     var tr = $(e.target).closest("tr");
@@ -1471,7 +1476,11 @@
                       index: index
                     }
 
-                    var call = directiveContext.generateBlocklyCall(column.blocklyInfo);
+                    var call = undefined;
+                    if (column.dataType == "Customized")
+                      call = column.execute;
+                    else
+                      call = directiveContext.generateBlocklyCall(column.blocklyInfo);
 
                     var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
                     if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
@@ -1498,7 +1507,6 @@
               };
               columns.push(addColumn);
             }
-
           }.bind(this));
         }
 
@@ -1541,7 +1549,7 @@
               }
             }
           }
-          else if (toolbarButton.type == "Blockly") {
+          else if (toolbarButton.type == "Blockly" || toolbarButton.type == "Customized") {
             var buttonBlockly = this.generateToolbarButtonCall(toolbarButton, scope, options);
             toolbar.push(buttonBlockly);
           }
@@ -1684,76 +1692,76 @@
         var editable = this.getEditable(options);
         var filterable = anyFilterableColumn(options);
 
-            var kendoGridInit = {
-              toolbar: toolbar,
-              pdf: {
-                allPages: true,
-                avoidLinks: true,
-                paperSize: "A4",
-                margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
-                landscape: true,
-                repeatHeaders: true,
-                scale: 0.8
-              },
-              dataSource: datasource,
-              editable: editable,
-              height: options.height,
-              groupable: options.allowGrouping,
-              sortable: options.allowSorting,
-              filterable: true,
-              pageable: pageAble,
-              columns: columns,
-              selectable: options.allowSelectionRow,
-              detailInit: (options.details && options.details.length > 0) ? detailInit : undefined,
-              listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
-              edit: function(e) {
-                this.dataSource.transport.options.disableAndSelect(e);
-                var container = e.container;
-                var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                if (e.model.isNew() && !e.model.dirty) {
-                  var model = e.model;
-                  cronappDatasource.startInserting(null, function(active) {
-                    for (var key in active) {
-                      if (model.fields[key]) {
-                        if (model.fields[key].validation && model.fields[key].validation.required) {
-                          var input = container.find("input[name='" + key + "']");
-                          if (input.length) {
-                            //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
-                            input.val(active[key]).trigger('change');
-                          }
-                        }
-                        model.set(key, active[key]);
+        var kendoGridInit = {
+          toolbar: toolbar,
+          pdf: {
+            allPages: true,
+            avoidLinks: true,
+            paperSize: "A4",
+            margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+            landscape: true,
+            repeatHeaders: true,
+            scale: 0.8
+          },
+          dataSource: datasource,
+          editable: editable,
+          height: options.height,
+          groupable: options.allowGrouping,
+          sortable: options.allowSorting,
+          filterable: true,
+          pageable: pageAble,
+          columns: columns,
+          selectable: options.allowSelectionRow,
+          detailInit: (options.details && options.details.length > 0) ? detailInit : undefined,
+          listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
+          edit: function(e) {
+            this.dataSource.transport.options.disableAndSelect(e);
+            var container = e.container;
+            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+            if (e.model.isNew() && !e.model.dirty) {
+              var model = e.model;
+              cronappDatasource.startInserting(null, function(active) {
+                for (var key in active) {
+                  if (model.fields[key]) {
+                    if (model.fields[key].validation && model.fields[key].validation.required) {
+                      var input = container.find("input[name='" + key + "']");
+                      if (input.length) {
+                        //TODO: Verificar com a telerik https://stackoverflow.com/questions/22179758/kendo-grid-using-model-set-to-update-the-value-of-required-fields-triggers-vali
+                        input.val(active[key]).trigger('change');
                       }
                     }
-                  });
+                    model.set(key, active[key]);
+                  }
                 }
-                else if (!e.model.isNew() && !e.model.dirty) {
-                  scope.safeApply(function() {
-                    var currentItem = cronappDatasource.goTo(e.model);
-                    cronappDatasource.startEditing(currentItem, function(xxx) {});
-                  });
-                }
-                compileListing(e)
-              },
-              change: function(e) {
-                var item = this.dataItem(this.select());
-                setToActiveInCronappDataSource.bind(this)(item);
-                collapseAllExcecptCurrent(this, this.select().next(), this.select());
-                compileListing(e);
-              },
-              cancel: function(e) {
-                var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                scope.safeApply(cronappDatasource.cancel());
-                this.dataSource.transport.options.enableAndSelect(e);
-                compileListing(e)
-              },
-              dataBound: function(e) {
-                this.dataSource.transport.options.selectActiveInGrid();
-                //Colocando para compilar a listagem no databound quando a grade não permitir seleção, pois não passa no change
-                if (!options.allowSelectionRow)
-                  compileListing(e);
-              }
-            };
+              });
+            }
+            else if (!e.model.isNew() && !e.model.dirty) {
+              scope.safeApply(function() {
+                var currentItem = cronappDatasource.goTo(e.model);
+                cronappDatasource.startEditing(currentItem, function(xxx) {});
+              });
+            }
+            compileListing(e)
+          },
+          change: function(e) {
+            var item = this.dataItem(this.select());
+            setToActiveInCronappDataSource.bind(this)(item);
+            collapseAllExcecptCurrent(this, this.select().next(), this.select());
+            compileListing(e);
+          },
+          cancel: function(e) {
+            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+            scope.safeApply(cronappDatasource.cancel());
+            this.dataSource.transport.options.enableAndSelect(e);
+            compileListing(e)
+          },
+          dataBound: function(e) {
+            this.dataSource.transport.options.selectActiveInGrid();
+            //Colocando para compilar a listagem no databound quando a grade não permitir seleção, pois não passa no change
+            if (!options.allowSelectionRow)
+              compileListing(e);
+          }
+        };
 
         return kendoGridInit;
 
