@@ -1577,7 +1577,6 @@
           mode:  options.editable,
           confirmation: false
         };
-
         if (options.editable == 'batch') {
           editable = true;
         }
