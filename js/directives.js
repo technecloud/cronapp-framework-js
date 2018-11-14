@@ -1559,10 +1559,10 @@
               toolbar.push(buttonSaveOrCancel);
             }
           }
-          else if (toolbarButton.type == "Template") {
+          else if (toolbarButton.type == "Template" || toolbarButton.type == "Title") {
             var buttonTemplate =  {
               template: toolbarButton.template
-            }
+            };
             toolbar.push(buttonTemplate);
           }
 
@@ -1573,8 +1573,11 @@
         return toolbar;
       },
       getEditable: function(options) {
+        var editable = {
+          mode:  options.editable,
+          confirmation: false
+        };
 
-        var editable = options.editable;
         if (options.editable == 'batch') {
           editable = true;
         }
