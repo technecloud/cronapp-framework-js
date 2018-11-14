@@ -1840,6 +1840,7 @@
               scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
                   {
                     "afterchanges": function(value) {
+                      //QAIBT-610
                       //grid.dataSource.filter([]);
                     }
                   }
