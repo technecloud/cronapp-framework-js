@@ -586,3 +586,13 @@ textarea.form-control.k-textbox {
 .navbar{
     text-transform: uppercase;
 }
+
+.crn-grid-title {
+    float: left;
+    color: #337ab7;
+    font-size: 20px;
+    font-family: 'Roboto';
+    margin: 0;
+    padding: 0;
+    padding-left: 7px;
+}
