@@ -36,6 +36,9 @@
           "removable": false,
           "type": "projectResource",
           "resourceType": "text/html"
+        },
+        "class":{
+          "order": 9999
         }
       }
     },
@@ -64,6 +67,9 @@
         },
         "xattr-disabled": {
           "displayName" :"Disabled"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "styles": [
@@ -207,6 +213,9 @@
         "onmouseover": {
           "removable": true,
           "type": "event"
+        },
+        "class": {
+          "order": 9999
         }
       }
     },
@@ -262,6 +271,9 @@
         "onmouseover": {
           "removable": true,
           "type": "event"
+        },
+        "class":{
+          "order": 9999
         }
       }
     },
@@ -271,6 +283,11 @@
       "text_en_US": "Carousel",
       "class": "adjust-icon mdi mdi-view-carousel",
       "forcedGroup":true,
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .carousel-inner",
@@ -335,6 +352,7 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datasource.template.html",
       "properties": {
         "entity": {
+          "order": 1,
           "removable": false,
           "global": true
         },
@@ -410,6 +428,11 @@
       "order": 0,
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinput.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} input.form-control",
@@ -473,6 +496,11 @@
       "class": "adjust-icon mdi mdi-image",
       "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicimage.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .dynamic-image-container",
@@ -549,6 +577,9 @@
         "ng-model": {
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "childrenProperties":[
@@ -606,7 +637,8 @@
           "removable": false,
           "type": "pageDatasource",
           "selector": "input",
-          "childrenProperty": true
+          "childrenProperty": true,
+          "order": 9999
         },
         "cronapp-filter-caseinsensitive":  {
           "removable": false,
@@ -647,6 +679,9 @@
           ],
           "selector": "input",
           "childrenProperty": true
+        },
+        "class":{
+          "order": 9999
         }
       },
       "childrenProperties":[
@@ -691,6 +726,11 @@
       "text_pt_BR": "Filtro Complexo",
       "text_en_US": "Complex Filter",
       "class": "adjust-icon mdi mdi-filter",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .btn-default",
@@ -740,7 +780,8 @@
           "displayName_pt_BR": "Fonte de dados",
           "displayName_en_US": "Datasource",
           "removable": false,
-          "type": "pageDatasource"
+          "type": "pageDatasource",
+          "order": 4
         },
         "ng-click": {
           "removable": true,
@@ -918,6 +959,11 @@
       "text_pt_BR": "Grade vertical",
       "text_en_US": "Vertical Grid",
       "class": "adjust-icon mdi mdi-drag-vertical",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} div",
@@ -932,6 +978,11 @@
       "text_pt_BR": "Grade horizontal",
       "text_en_US": "Horizontal Grid",
       "class": "adjust-icon mdi mdi-drag-horizontal",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} div",
@@ -946,6 +997,11 @@
       "text_pt_BR": "Abas",
       "text_en_US": "Tabs",
       "class": "adjust-icon mdi mdi-window-maximize",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "handleRules": {
         "canOrder": true,
         "canActivate": true,
@@ -985,6 +1041,11 @@
       "text_en_US": "Date",
       "class": "adjust-icon mdi mdi-calendar",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/date.template.html",
+      "properties":{
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} input.form-control",
@@ -1047,6 +1108,11 @@
       "text_en_US": "Time",
       "class": "adjust-icon mdi mdi-timer",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/time.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} input.form-control",
@@ -1097,7 +1163,6 @@
           "selector":"input",
           "type":"text"
         }
-
       ],
       "type": {
         "displayName": "Type"
@@ -1120,6 +1185,9 @@
         "ng-model": {
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "childrenProperties":[
@@ -1229,6 +1297,9 @@
         },
         "xattr-theme": {
           "displayName": "Theme"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "attributesForPreview": [
@@ -1279,6 +1350,8 @@
         {
           "name": "class",
           "selector": "i",
+          "displayName_pt_BR": "Ícone",
+          "displayName_en_US": "Icon",
           "type":"icon"
         },
         {
@@ -1306,7 +1379,11 @@
           "text_en_US": "Default Column"
         }
       ],
-      "properties": {},
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties": [
         {
           "name": "crn-datasource",
@@ -1485,6 +1562,9 @@
         "ng-model": {
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "handleRules": {
@@ -1590,6 +1670,11 @@
       "text_en_US": "Navbar",
       "class": "adjust-icon mdi mdi-tab",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/navbar.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .navbar",
@@ -1664,6 +1749,11 @@
       "text_en_US": "Sidebar",
       "class": "adjust-icon mdi mdi-book-open",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/sidebar.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .navbar-default",
@@ -1715,6 +1805,12 @@
         },
         "xattr-position": {
           "displayName": "Position"
+        },
+        "class":{
+          "order": 9999
+        },
+        "content":{
+          "order": 9998
         }
       },
       "attributesForPreview": [
@@ -1752,6 +1848,9 @@
       "properties": {
         "xattr-position": {
           "displayName": "Position"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "attributesForPreview": [
@@ -1835,6 +1934,9 @@
         },
         "xattr-position": {
           "displayName": "Position"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "attributesForPreview": [
@@ -1894,6 +1996,9 @@
         "onmouseover": {
           "removable": true,
           "type": "event"
+        },
+        "class":{
+          "order": 9999
         }
       }
     },
@@ -1904,6 +2009,11 @@
       "order": 0,
       "class": "adjust-icon mdi mdi-textbox",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textarea.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "rows": {
         "displayName": "rows"
       },
@@ -1979,6 +2089,11 @@
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinputbutton.template.html",
       "forcedGroupd": true,
+      "properties":{
+        "class": {
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .input-group .form-control",
@@ -2047,6 +2162,11 @@
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinputicon.template.html",
       "forcedGroupd": true,
+      "properties":{
+        "class": {
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .input-group .k-textbox",
@@ -2125,6 +2245,9 @@
         "qr": {
           "removable": false,
           "displayName": "QR Code"
+        },
+        "class":{
+          "order": 9999
         }
       }
     },
@@ -2137,6 +2260,11 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/chart.template.html",
       "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/svg-charts.svg\"/>",
       "designTimeSelector": "canvas",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties":[
         {
           "name":"id",
@@ -2172,6 +2300,9 @@
       "properties": {
         "xattr-theme": {
           "displayName": "Theme"
+        },
+        "class":{
+          "order": 9999
         }
       },
       "attributesForPreview": [
@@ -2226,6 +2357,11 @@
       "text_en_US": "Rich Editor",
       "class": "adjust-icon mdi mdi-text-shadow",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-rich-editor.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties":[
         {
           "name": "options",
@@ -2426,6 +2562,11 @@
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-designtime.template.html",
       "designTimeSelector": "cron-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .k-dropdown-wrap",
@@ -2530,6 +2671,11 @@
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox-designtime.template.html",
       "designTimeSelector": "cron-dynamic-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties": [
         {
           "name": "on-select",
@@ -2636,6 +2782,11 @@
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple-designtime.template.html",
       "designTimeSelector": "cron-multi-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .k-multiselect-wrap",
@@ -2808,6 +2959,11 @@
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete-designtime.template.html",
       "designTimeSelector": "cron-auto-complete",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties": [
         {
           "name": "options",
@@ -2866,6 +3022,11 @@
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-autocomplete.template.html",
       "designTimeSelector": "cron-auto-complete",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-autocomplete.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties": [
         {
           "name": "options",
@@ -2923,6 +3084,11 @@
       "designTimeHTML": "<input type='range' min='1' max='10' value='5' class='slider'/>",
       "designTimeSelector": "cron-slider",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-slider.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "styles": [
         {
           "selector": "div#{id} .k-slider .k-button-decrease",
@@ -2984,6 +3150,11 @@
       "text_en_US": "Checkbox",
       "class": "adjust-icon mdi mdi-checkbox-marked-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-checkbox.template.html",
+      "properties": {
+        "class":{
+          "order": 9999
+        }
+      },
       "childrenProperties": [
         {
           "name": "ng-model",
