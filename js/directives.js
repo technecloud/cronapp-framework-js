@@ -2052,10 +2052,6 @@
             }
           });
         }
-        
-        options.open = function(e) {
-          _compileAngular(scope, e.sender.listView);
-        }		
 		
         options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
         options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
@@ -2168,6 +2164,9 @@
         } catch(err) {
           console.log('MultiSelect invalid configuration! ' + err);
         }
+
+        var _scope = scope;
+        var _ngModelCtrl = ngModelCtrl;
 
         relactionDS = {
           relationDataSource: (select.relationDataSource != null ? eval(select.relationDataSource.name) : null),
