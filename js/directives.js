@@ -1868,7 +1868,6 @@
       link: function (scope, element, attrs, ngModelCtrl) {
         var select = {};
         try {
-          // var json = window.buildElementOptions(element);
           select =  JSON.parse(attrs.options);
         } catch(err) {
           console.log('ComboBox invalid configuration! ' + err);
@@ -1993,6 +1992,7 @@
         try {
           delete options.dataSource.schema.model.id;
           dataSourceScreen = eval(select.dataSourceScreen.name);
+		      dataSourceScreen.rowsPerPage = dataSourceScreen.rowsPerPage ? dataSourceScreen.rowsPerPage : 100;
         } catch(e){}
 
         var parent = element.parent();
@@ -2005,10 +2005,10 @@
         options.virtual.itemHeight = 26;
         var _scope = scope;
         var _compileAngular = this.compileAngular;
-        var _options = options;
         if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
           options.height = options.dataSource.pageSize * options.virtual.itemHeight / 4;
           options.virtual.mapValueTo = 'dataItem';
+          var _options = options;
           options.virtual.valueMapper = function(options) {
             if (options.value) {
               var _dataSource = _options.dataSource.transport.options.cronappDatasource;
@@ -2022,30 +2022,41 @@
           };
         }
 
-        scope.currentData = dataSourceScreen.data;
-        scope.$watchCollection('currentData', function( newValue, oldValue ) {
-              var _combobox = _options.combobox;
-              var _listView = _combobox.listView;
-              if (newValue) {
-                if (select.firstValue && dataSourceScreen &&
-                    dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
-                    !parentDS) {
-                  _combobox.value(dataSourceScreen.active[select.dataValueField]);
-                  _combobox.refresh();
-                  select.firstValue = false;
+        var _goTo = this.goTo;
+        var _ngModelCtrl = ngModelCtrl;
+        if (dataSourceScreen != null && dataSourceScreen != undefined) {
+          dataSourceScreen.addDataSourceEvents({
+            read: function(data) {
+            var _combobox = options.combobox;
+            var _listView = _combobox.listView;
+            if (select.firstValue && dataSourceScreen &&
+              dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
+                !parentDS) {
+                _combobox.value(dataSourceScreen.active[select.dataValueField]);
+                _combobox.refresh();
+                _combobox.dataSource.success(data);
+                $timeout(function() {
+                    _scope.$apply(function(){
+                    _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
+                  });
+                });
+                select.firstValue = false;
+              }
+              
+              if (initValue && initValue != null && !parentDS) {
+                if (select.changeCursor) {
+                  _goTo(scope, combobox, initValue);
                 }
-
-                if (_listView.itemCount == 0 && newValue.length > 0) {
-                  _options.dataSource.data = newValue;
-                  _combobox.dataSource.read();
-                  $timeout(function() {
-                    _compileAngular(_scope, _listView.element[0]);
-                  }, 500);
-                }
+                initValue = undefined;
               }
             }
-        );
-
+          });
+        }
+        
+        options.open = function(e) {
+          _compileAngular(scope, e.sender.listView);
+        }		
+		
         options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
         options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
         options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
@@ -2057,13 +2068,13 @@
         var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
         options.combobox = combobox;
 
-        var _goTo = this.goTo;
-        var _ngModelCtrl = ngModelCtrl;
         var _isDefaultEntity = this.isDefaultEntity;
         $element.on('change', function (event) {
           _scope.$apply(function () {
             _ngModelCtrl.$setViewValue(combobox.dataItem());
-            _goTo(scope, combobox, combobox.dataItem());
+            if (select.changeCursor) {
+              _goTo(scope, combobox, combobox.dataItem());
+            }
           });
           _compileAngular(scope, options.combobox.element[0]);
 
@@ -2077,16 +2088,17 @@
         });
 
         $(combobox.span).on('DOMSubtreeModified', function(e){
-          _compileAngular(scope, _options.combobox.element[0].parentElement);
+          _compileAngular(scope, options.combobox.element[0].parentElement);
         });
 
-        if (dataSourceScreen != null) {
+        if (dataSourceScreen != null && dataSourceScreen != undefined) {
           $(combobox).data('dataSourceScreen', dataSourceScreen);
         }
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
             var result = '';
+            
             if ((typeof value === 'boolean') || value) {
               if (typeof value == "string") {
                 result = value;
@@ -2097,11 +2109,11 @@
               }
             }
 
-            combobox.dataSource.read();
-            combobox.value(result);
-            if ((result != '' ) && (combobox.value() == '' || combobox.text().trim() == '')) {
-              combobox.value(result);
+            if (result != '') {
+              combobox.dataSource.read();
             }
+			
+            combobox.value(result);
             return result;
           });
 
@@ -2131,6 +2143,7 @@
           combobox.dataSource.transport.options.initRead = true;
           if (initValue && initValue != null && !parentDS) {
             ngModelCtrl.$setViewValue(initValue);
+            dataSourceScreen.busy = false;
             combobox.value(initValue);
             combobox.refresh();
           }
@@ -2155,9 +2168,6 @@
         } catch(err) {
           console.log('MultiSelect invalid configuration! ' + err);
         }
-
-        var _scope = scope;
-        var _ngModelCtrl = ngModelCtrl;
 
         relactionDS = {
           relationDataSource: (select.relationDataSource != null ? eval(select.relationDataSource.name) : null),
@@ -2225,13 +2235,12 @@
 
         }.bind(relactionDS);
 
-        var options = app.kendoHelper.getConfigCombobox(select, scope);
-        options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
-        options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
-        options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
-        options.filtering = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
-        options.open = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
-        options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
+        options['change'] = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
+        options['close'] = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
+        options['dataBound'] = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
+        options['filtering'] = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
+        options['open'] = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
+        options['cascade'] = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
         select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
         deselect = attrs.onDeselect ? function (){eval(attrs.onDeselect)}: undefined;
 
@@ -2239,13 +2248,11 @@
 
         var convertArray = function(value) {
           var result = [];
-
           if (value) {
             for (var item in value) {
               result.push(value[item][relactionDS.relationField]);
             }
           }
-
           return result;
         }
 
@@ -2259,6 +2266,7 @@
       }
     };
   })
+
   .directive('cronAutoComplete', function ($compile) {
     return {
       restrict: 'E',
@@ -2439,7 +2447,6 @@
         var slider = {};
 
         try {
-          //var json = window.buildElementOptions(element);
           slider = JSON.parse(attrs.options);
         } catch(err) {
           console.log('Slider invalid configuration! ' + err);
@@ -3444,23 +3451,23 @@ app.kendoHelper = {
     var fetchData = {};
     fetchData.params = paramsOData;
     cronappDatasource.fetch(fetchData, {
-          success:  function(data) {
-            if (e.success) {
-              e.success(data);
-              if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
-                var expToFind = " .k-animation-container";
-                var x = angular.element($(expToFind));
-                self.options.$compile(x)(self.options.scope);
-              }
-            }
-          },
-          canceled:  function(data) {
-            if (e.success) {
-              e.error("canceled", "canceled", "canceled");
+        success:  function(data) {
+          if (e.success) {
+            e.success(data);
+            if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
+              var expToFind = " .k-animation-container";
+              var x = angular.element($(expToFind));
+              self.options.$compile(x)(self.options.scope);
             }
           }
         },
-        cronappDatasource.append
+        canceled:  function(data) {
+          if (e.success) {
+            e.error("canceled", "canceled", "canceled");
+          }
+        }
+      },
+      cronappDatasource.append
     );
   },
   getConfigCombobox: function(options, scope) {
