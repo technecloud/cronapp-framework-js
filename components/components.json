@@ -2727,7 +2727,7 @@
       "class": "adjust-icon mdi mdi-equal-box",
       "order": 3,
       "designTimeDynamic": true,
-      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-designtime.template.html",
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox.designtime.html",
       "designTimeSelector": "cron-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox.template.html",
       "properties": {
@@ -2841,7 +2841,7 @@
       "text_en_US": "Dynamic Combobox",
       "class": "adjust-icon mdi mdi-nutrition",
       "designTimeDynamic": true,
-      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox-designtime.template.html",
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.designtime.html",
       "designTimeSelector": "cron-dynamic-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.template.html",
       "properties": {
@@ -2959,7 +2959,7 @@
       "class": "adjust-icon mdi mdi-nutrition",
       "order": 9,
       "designTimeDynamic": true,
-      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple-designtime.template.html",
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.designtime.html",
       "designTimeSelector": "cron-multi-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.template.html",
       "properties": {
@@ -3142,7 +3142,7 @@
       "text_en_US": "Auto Complete",
       "class": "adjust-icon mdi mdi-receipt",
       "designTimeDynamic": true,
-      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete-designtime.template.html",
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
       "designTimeSelector": "cron-auto-complete",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.template.html",
       "properties": {
@@ -3211,7 +3211,7 @@
       "text_en_US": "Dynamic Auto Complete",
       "class": "adjust-icon mdi mdi-receipt",
       "designTimeDynamic": true,
-      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete-designtime.template.html",
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
       "designTimeSelector": "cron-auto-complete",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-autocomplete.template.html",
       "properties": {
