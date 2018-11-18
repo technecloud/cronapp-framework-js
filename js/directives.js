@@ -2027,29 +2027,30 @@
         if (dataSourceScreen != null && dataSourceScreen != undefined) {
           dataSourceScreen.addDataSourceEvents({
             read: function(data) {
-            var _combobox = options.combobox;
-            var _listView = _combobox.listView;
-            if (select.firstValue && dataSourceScreen &&
-              dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
-                !parentDS) {
-                _combobox.value(dataSourceScreen.active[select.dataValueField]);
-                _combobox.refresh();
-                _combobox.dataSource.success(data);
-                $timeout(function() {
-                    _scope.$apply(function(){
-                    _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
+              var _combobox = options.combobox;
+              var _listView = _combobox.listView;
+              if (select.firstValue && dataSourceScreen &&
+                dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
+                  !parentDS) {
+                  _combobox.value(dataSourceScreen.active[select.dataValueField]);
+                  _combobox.refresh();
+                  _combobox.dataSource.success(data);
+                  $timeout(function() {
+                      _scope.$apply(function(){
+                      _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
+                    });
                   });
-                });
                 select.firstValue = false;
-              }
-              
+              } 
+
               if (initValue && initValue != null && !parentDS) {
                 if (select.changeCursor) {
                   _goTo(scope, combobox, initValue);
                 }
+
                 initValue = undefined;
               }
-            }
+            }            
           });
         }
 		
@@ -2081,10 +2082,6 @@
               parentDS.active[textField] = combobox.dataItem()[select.dataTextField];
             }
           }
-        });
-
-        $(combobox.span).on('DOMSubtreeModified', function(e){
-          _compileAngular(scope, options.combobox.element[0].parentElement);
         });
 
         if (dataSourceScreen != null && dataSourceScreen != undefined) {
@@ -2145,8 +2142,19 @@
           }
         }
 
-        _compileAngular(scope, combobox.element[0].parentElement);
-
+        $(combobox.span).on('DOMSubtreeModified', function(e){
+          _compileAngular(scope, e.target);
+        });
+        
+        $(combobox.ul).on('DOMSubtreeModified', function(e){
+          $timeout(function() {
+            _compileAngular(scope, e.target);
+          });
+        });
+        
+        _compileAngular(scope, combobox.span);
+        _compileAngular(scope, combobox.ul);
+        
         $(element).remove();
       }
     };
