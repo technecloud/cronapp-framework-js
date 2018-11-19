@@ -72,9 +72,9 @@
 }
 
 .remove-image-button {
-  position: absolute;
-  margin-top: -23px;
-  right: 19px;
+  position: relative;
+  margin-top: -22px;
+  float: right;
 }
 
 .dynamic-image-container {

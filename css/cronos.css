@@ -207,10 +207,6 @@ div[data-component="crn-button"] {
   border: 2px dashed #DDD;
 }
 
-.dragover {
-  border: 2px dashed blue;
-}
-
 .pace-inactive {
   display: none;
 }
@@ -256,4 +252,8 @@ div[data-component="crn-button"] {
 
 .main-title {
   display: none;
+}
+
+.dragover {
+  border: 2px dashed blue;
 }
