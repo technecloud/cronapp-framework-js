@@ -1342,7 +1342,7 @@
 
         function getCommandForEditButtonDatabase(opt, command) {
           var cmd;
-          if (opt.editable == 'popupCustom') {
+          if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
             cmd = {
               name: app.common.generateId(),
               text: '',
@@ -1358,7 +1358,9 @@
                   directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
                   var currentItem = cronappDatasource.goTo(item);
                   cronappDatasource.startEditing(currentItem, function(xxx) {});
-                  cronapi.screen.showModal(options.popupEdit);
+                  if (opt.editable != 'datasource') {
+                    cronapi.screen.showModal(options.popupEdit);
+                  }
                 });
                 return;
               }
@@ -1375,7 +1377,7 @@
 
         function getCommandForRemoveButtonDatabase(opt, command) {
           var cmd;
-          if (opt.editable == 'popupCustom') {
+          if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
             cmd = {
               name: app.common.generateId(),
               text: '',
@@ -1531,10 +1533,13 @@
           if (toolbarButton.type == "Native") {
             //Se a grade for editavel, adiciona todos os commands
             if (options.editable != 'no') {
-              if (options.editable == 'popupCustom' &&  toolbarButton.title == 'create') {
+              if ((options.editable == 'datasource' || options.editable == 'popupCustom') &&  toolbarButton.title == 'create') {
                 var datasourceName = options.dataSourceScreen.name;
                 var popupInsert = options.popupInsert;
-                toolbarButton.methodCall = datasourceName + ".startInserting(); cronapi.screen.showModal('"+popupInsert+"');";
+                toolbarButton.methodCall = datasourceName + ".startInserting();";
+                if (options.editable == 'popupCustom') {
+                  toolbarButton.methodCall = toolbarButton.methodCall + " cronapi.screen.showModal('"+popupInsert+"');";
+                }
                 var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                 toolbar.push(button);
                 this.addButtonsInModal(popupInsert, datasourceName, scope);
@@ -1580,7 +1585,7 @@
         if (options.editable == 'batch') {
           editable = true;
         }
-        else if (options.editable == 'no' || options.editable == 'popupCustom' ) {
+        else if (options.editable == 'no' || options.editable == 'popupCustom' || options.editable == 'datasource') {
           editable = false;
         }
         return editable;
@@ -1782,7 +1787,7 @@
 
           var options = JSON.parse(attrs.options || "{}");
 
-          if (scope[options.dataSourceScreen.entityDataSource.name] && !scope[options.dataSourceScreen.entityDataSource.name].dependentLazyPost) {
+          if (options.editable != 'datasource' && scope[options.dataSourceScreen.entityDataSource.name] && !scope[options.dataSourceScreen.entityDataSource.name].dependentLazyPost) {
             scope[options.dataSourceScreen.entityDataSource.name].batchPost = true;
 
             options.toolBarButtons = options.toolBarButtons || [];
@@ -1849,7 +1854,6 @@
               );
             }
           });
-
 
         });
 
