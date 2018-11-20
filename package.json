@@ -35,6 +35,7 @@
         "gulp-uglifycss": "^1.0.8"
     },
     "dependencies": {
-        "gulp-babel": "^8.0.0"
+        "gulp-babel": "^8.0.0",
+        "gulp-cli": "^2.0.1"
     }
 }

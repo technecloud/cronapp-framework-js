@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/themes/custom/material/custom-material.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/themes/custom/material/custom-material.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/components.json" beforeDir="false" afterPath="$PROJECT_DIR$/components/components.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/templates/tabs.template.html" beforeDir="false" afterPath="$PROJECT_DIR$/components/templates/tabs.template.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,23 +65,57 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1540370795">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="4" />
+          <entry key="json" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="4" />
+          <entry key="JSON" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="2" />
+          <entry key="json" value="25" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="2" />
+          <entry key="JSON" value="25" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/app.css">
+        <entry file="file://$PROJECT_DIR$/components/components.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+            <state relative-caret-position="297">
+              <caret line="1121" column="48" lean-forward="true" selection-start-line="1121" selection-start-column="48" selection-end-line="1121" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/css/themes/custom/material/custom-material.css">
+        <entry file="file://$PROJECT_DIR$/components/templates/tabs.template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="586" column="30" selection-start-line="586" selection-start-column="30" selection-end-line="586" selection-end-column="30" />
+            <state relative-caret-position="34">
+              <caret line="2" column="116" selection-start-line="2" selection-start-column="116" selection-end-line="2" selection-end-column="116" />
             </state>
           </provider>
         </entry>
@@ -114,6 +148,8 @@
       <find>k-grid</find>
       <find>.k-button:hover</find>
       <find>.navbar</find>
+      <find>col-md</find>
+      <find>crn-tabs</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -161,10 +197,11 @@
         <option value="$PROJECT_DIR$/css/themes/custom/united/custom-united.min.css" />
         <option value="$PROJECT_DIR$/css/themes/custom/yeti/custom-yeti.min.css" />
         <option value="$PROJECT_DIR$/css/themes/slate/custom-slate.min.css" />
-        <option value="$PROJECT_DIR$/components/components.json" />
         <option value="$PROJECT_DIR$/css/cronos.css" />
         <option value="$PROJECT_DIR$/css/app.css" />
         <option value="$PROJECT_DIR$/css/themes/custom/material/custom-material.css" />
+        <option value="$PROJECT_DIR$/components/components.json" />
+        <option value="$PROJECT_DIR$/components/templates/tabs.template.html" />
       </list>
     </option>
   </component>
@@ -180,45 +217,23 @@
       <select />
     </treeState>
   </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
-      <path value="$PROJECT_DIR$/bower_components/angular-chart.js/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-cookies/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-dynamic-locale/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-i18n/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-resource/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-sanitize/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-translate-handler-log/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-translate-loader-static-files/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-translate-storage-cookie/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-translate-storage-local/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-ui-notification/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular-ui-select/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/angular/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/bootstrap/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/chart.js/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/eonasdan-bootstrap-datetimepicker/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/justgage-toorshia/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/ngMask/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/summernote/package.json" />
-      <path value="$PROJECT_DIR$/bower_components/ui-select-infinity/package.json" />
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-445" />
+    <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1940" />
-    <option name="height" value="1060" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,49 +244,32 @@
             <path>
               <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
               <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
               <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-              <item name="themes" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="material" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cronapp-framework-js" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cronapp-framework-js" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="cron-gr&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/templates/cron-grid.designtime.html&#10;components.json&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;custom-mater&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;component&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542211425020" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../cronapp-lib-js" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542752112969" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -316,6 +314,8 @@
       <workItem from="1542110152278" duration="7536000" />
       <workItem from="1542194366328" duration="1170000" />
       <workItem from="1542196654356" duration="2810000" />
+      <workItem from="1542718533247" duration="227000" />
+      <workItem from="1542751773687" duration="275000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -489,13 +489,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41960000" />
+    <option name="totallyTimeSpent" value="42462000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27114093" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27919462" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -510,7 +510,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.20141844" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.2" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -685,13 +685,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bower_components/eonasdan-bootstrap-datetimepicker/tasks/bump_version.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="54" column="21" selection-start-line="54" selection-start-column="21" selection-end-line="54" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/bower_components/eonasdan-bootstrap-datetimepicker/tasks/bump_version.js" />
     <entry file="file://$PROJECT_DIR$/css/themes/custom/cosmo/custom-cosmo.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
@@ -860,30 +854,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/components.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="1711" column="35" selection-start-line="1711" selection-start-column="35" selection-end-line="1711" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/logo-cronapp-negativa.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/img/img-user.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/themes/custom/material/custom-material.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="586" column="30" selection-start-line="586" selection-start-column="30" selection-end-line="586" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/app.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="51">
           <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/themes/custom/material/custom-material.css">
+    <entry file="file://$PROJECT_DIR$/components/templates/anchor.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="586" column="30" selection-start-line="586" selection-start-column="30" selection-end-line="586" selection-end-column="30" />
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/components.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="1121" column="48" lean-forward="true" selection-start-line="1121" selection-start-column="48" selection-end-line="1121" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/templates/tabs.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="116" selection-start-line="2" selection-start-column="116" selection-end-line="2" selection-end-column="116" />
         </state>
       </provider>
     </entry>

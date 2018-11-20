@@ -1101,7 +1101,7 @@
           {
             "activeSelector": "ul.nav-tabs li.active",
             "activeClass": "active",
-            "sourceHTML": "<li role=\"presentation\"><a data-target=\"#tab${RANDOM}\" role=\"tab\" data-toggle=\"tab\">New Tab</a></li>",
+            "sourceHTML": "<li role=\"presentation\"><a data-target=\"#tab${RANDOM}\" role=\"tab\" data-toggle=\"tab\" data-container=\"true\">New Tab</a></li>",
             "targetSelector": "ul.nav-tabs"
           },
           {
