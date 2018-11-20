@@ -1974,36 +1974,38 @@
 
         return false;
       },
+      getModelParent: function (parametersExpression) {
+        if (typeof parametersExpression === 'string' && parametersExpression.length > 9) {
+          parametersExpression = parametersExpression.trim();
+          var model = parametersExpression.substr(parametersExpression.indexOf('{{') + 2);
+          model = model.substr(0, model.indexOf('|raw}}'))
+          return model.trim();
+        }
+      },
       link: function (scope, element, attrs, ngModelCtrl) {
-        var initValue = '';
         var select = {};
         var self = this;
         var parentDS = {};
         var textField = null;
         try {
           select = JSON.parse(attrs.options);
-          initValue = select.initValue;
           parentDS = this.getActive(attrs.ngModel);
           textField = this.getFieldText(attrs.ngModel, select);
         } catch(err) {
           console.log('DynamicComboBox invalid configuration! ' + err);
         }
 
+        /**
+         * Configurações do componente
+         */
         var options = app.kendoHelper.getConfigCombobox(select, scope);
         options.autoBind = false;
-
         var dataSourceScreen = null;
         try {
           delete options.dataSource.schema.model.id;
           dataSourceScreen = eval(select.dataSourceScreen.name);
 		      dataSourceScreen.rowsPerPage = dataSourceScreen.rowsPerPage ? dataSourceScreen.rowsPerPage : 100;
         } catch(e){}
-
-        var parent = element.parent();
-        var id = attrs.id ? ' id="' + attrs.id + '"' : '';
-        var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-        $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
-        var $element = $(parent).find('input.cronDynamicSelect');
 
         options.virtual = {};
         options.virtual.itemHeight = 26;
@@ -2013,6 +2015,9 @@
           options.height = options.dataSource.pageSize * options.virtual.itemHeight / 4;
           options.virtual.mapValueTo = 'dataItem';
           var _options = options;
+          /**
+           * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
+           */        
           options.virtual.valueMapper = function(options) {
             if (options.value) {
               var _dataSource = _options.dataSource.transport.options.cronappDatasource;
@@ -2025,38 +2030,6 @@
             }
           };
         }
-
-        var _goTo = this.goTo;
-        var _ngModelCtrl = ngModelCtrl;
-        if (dataSourceScreen != null && dataSourceScreen != undefined) {
-          dataSourceScreen.addDataSourceEvents({
-            read: function(data) {
-              var _combobox = options.combobox;
-              var _listView = _combobox.listView;
-              if (select.firstValue && dataSourceScreen &&
-                dataSourceScreen.active && dataSourceScreen.active[select.dataValueField] &&
-                  !parentDS) {
-                  _combobox.value(dataSourceScreen.active[select.dataValueField]);
-                  _combobox.refresh();
-                  _combobox.dataSource.success(data);
-                  $timeout(function() {
-                      _scope.$apply(function(){
-                      _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
-                    });
-                  });
-                select.firstValue = false;
-              } 
-
-              if (initValue && initValue != null && !parentDS) {
-                if (select.changeCursor) {
-                  _goTo(scope, combobox, initValue);
-                }
-
-                initValue = undefined;
-              }
-            }            
-          });
-        }
 		
         options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
         options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
@@ -2066,9 +2039,77 @@
         options.select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
         options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
 
+        /**
+         * Renderizando DropdownList
+         */
+        var parent = element.parent();
+        var id = attrs.id ? ' id="' + attrs.id + '"' : '';
+        var name = attrs.name ? ' name="' + attrs.name + '"' : '';
+        $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
+        var $element = $(parent).find('input.cronDynamicSelect');
         var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
         options.combobox = combobox;
+        if (dataSourceScreen != null && dataSourceScreen != undefined) {
+          $(combobox).data('dataSourceScreen', dataSourceScreen);
+        }
 
+        /**
+         * firstValue() - Método utilizado para setar o valor do primeiro registro no model e no componente. 
+         */
+        var _ngModelCtrl = ngModelCtrl;
+        var firstValue = function(data) {
+          if (dataSourceScreen && dataSourceScreen.active && 
+              dataSourceScreen.active[select.dataValueField] && !parentDS) {
+            combobox.value(dataSourceScreen.active[select.dataValueField]);
+            combobox.refresh();
+            if (data) {
+              combobox.dataSource.success(data);
+            }
+            
+            $timeout(function() {
+              _scope.$apply(function(){
+                _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
+              });
+              
+              if (select.changeCursor) {
+                _goTo(scope, combobox, dataSourceScreen.active[select.dataValueField]);
+              }
+            });
+          }
+        }
+
+        /**
+         * Escutando o model pai (caso exista). Caso o usuário configure para pegar o primeiro valor do dataset seta a váriavel firstValue para ser usada no addDataSourceEvents({read()). 
+         */
+        if (select.firstValue && dataSourceScreen.parametersExpression && this.getModelParent(dataSourceScreen.parametersExpression)) {
+          scope.$watch(this.getModelParent(dataSourceScreen.parametersExpression), function(newValue, oldValue) {
+            select.firstValue = true;
+          });  
+        }
+
+        /**
+         * Observa o read do datasource para setar o primeiro valor ou valor inicial.
+         */
+        var _goTo = this.goTo;
+        if (dataSourceScreen != null && dataSourceScreen != undefined) {
+          dataSourceScreen.addDataSourceEvents({
+            read: function(data) {
+              if (select.firstValue) {
+                firstValue(data);
+                select.firstValue = false;
+              } else if (select.initValue && select.initValue != null && !parentDS) {
+                if (select.changeCursor) {
+                  _goTo(scope, combobox, select.initValue);
+                }
+                select.initValue = undefined;
+              }
+            }            
+          });
+        }
+
+        /**
+         * Observando se houve mudança no valor do DropdownList.
+         */
         var _isDefaultEntity = this.isDefaultEntity;
         $element.on('change', function (event) {
           _scope.$apply(function () {
@@ -2087,11 +2128,10 @@
             }
           }
         });
-
-        if (dataSourceScreen != null && dataSourceScreen != undefined) {
-          $(combobox).data('dataSourceScreen', dataSourceScreen);
-        }
-
+        
+        /**
+         * Observando model do DropdownList.
+         */
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
             var result = '';
@@ -2138,10 +2178,10 @@
           combobox.dataSource.transport.options.scope = scope;
           combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
           combobox.dataSource.transport.options.initRead = true;
-          if (initValue && initValue != null && !parentDS) {
-            ngModelCtrl.$setViewValue(initValue);
+          if (select.initValue && select.initValue != null && !parentDS) {
+            ngModelCtrl.$setViewValue(select.initValue);
             dataSourceScreen.busy = false;
-            combobox.value(initValue);
+            combobox.value(select.initValue);
             combobox.refresh();
           }
         }
