@@ -1186,7 +1186,7 @@
         var directiveContext = this;
 
         function getTemplate(column) {
-          var template = undefined;
+          var template = "#=showTreatedValue("+column.field+")#";
           if (column.inputType == 'switch') {
             template =
                 '<span class="k-switch km-switch k-widget km-widget k-switch-off km-switch-off" style="width: 100%">\
@@ -3717,6 +3717,12 @@ app.kendoHelper = {
 
     return config;
   }
+};
+
+window.showTreatedValue = function(value) {
+  if (value)
+    return value;
+  return '';
 };
 
 window.useMask = function(value, format, type) {
