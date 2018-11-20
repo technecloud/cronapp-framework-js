@@ -1522,7 +1522,7 @@
     {
       "name": "crn-combobox",
       "pallete": false,
-      "text_pt_BR": "Caixa de seleção",
+      "text_pt_BR": "Caixa de seleção estática",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
       "order": 3,
@@ -2723,7 +2723,7 @@
     },
     {
       "name": "crn-enterprise-combobox",
-      "text_pt_BR": "Caixa de seleção",
+      "text_pt_BR": "Caixa de seleção estática",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
       "order": 3,
@@ -2841,6 +2841,7 @@
       "text_pt_BR": "Caixa de seleção dinâmica",
       "text_en_US": "Dynamic Combobox",
       "class": "adjust-icon mdi mdi-nutrition",
+      "order": 3,
       "designTimeDynamic": true,
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.designtime.html",
       "designTimeSelector": "cron-dynamic-select",
@@ -2955,7 +2956,7 @@
     },
     {
       "name": "crn-enterprise-combobox-multiple",
-      "text_pt_BR": "Caixa de seleção multipla",
+      "text_pt_BR": "Caixa de seleção múltipla",
       "text_en_US": "Combobox Multi Select",
       "class": "adjust-icon mdi mdi-nutrition",
       "order": 9,
@@ -3408,6 +3409,7 @@
       "text_en_US": "Text",
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-pound",
+      "order": 10,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/text.template.html",
       "properties": {
         "xattr-position": {
@@ -3465,4 +3467,3 @@
       ]
     }
   ]
-}
