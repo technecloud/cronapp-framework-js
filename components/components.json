@@ -38,16 +38,16 @@
           "type": "projectResource",
           "resourceType": "text/html"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
-        "onclick":{
+        "onclick": {
           "order": 1
         },
-        "id":{
+        "id": {
           "order": 4
         },
-        "data-replace":{
+        "data-replace": {
           "order": 3
         }
       }
@@ -79,10 +79,10 @@
           "order": 2
         },
         "xattr-disabled": {
-          "displayName" :"Disabled",
+          "displayName": "Disabled",
           "order": 4
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -200,7 +200,7 @@
           ]
         }
       ],
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "class",
           "selector": "i",
@@ -238,7 +238,7 @@
           "order": 2
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "class",
           "selector": "i",
@@ -253,7 +253,7 @@
       "text_pt_BR": "Acordeão",
       "text_en_US": "Accordion",
       "class": "adjust-icon mdi mdi-view-day",
-      "forcedGroup":true,
+      "forcedGroup": true,
       "handleRules": {
         "canOrder": true,
         "canActivate": true,
@@ -301,7 +301,7 @@
           "removable": true,
           "type": "event"
         },
-        "class":{
+        "class": {
           "order": 9999
         }
       }
@@ -311,9 +311,9 @@
       "text_pt_BR": "Carrossel",
       "text_en_US": "Carousel",
       "class": "adjust-icon mdi mdi-view-carousel",
-      "forcedGroup":true,
+      "forcedGroup": true,
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -457,7 +457,7 @@
           "global": true,
           "type": "pageDatasourceObject"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "order-by": {
@@ -476,7 +476,7 @@
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinput.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -499,41 +499,40 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
-          "name":"ng-model",
-          "selector":"input",
-          "type":"text",
+          "name": "ng-model",
+          "selector": "input",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
-          "name":"type",
-          "selector":"input",
-          "type":"type"
+          "name": "type",
+          "selector": "input",
+          "type": "type"
         },
         {
-          "name":"mask",
-          "selector":"input",
-          "type":"mask"
+          "name": "mask",
+          "selector": "input",
+          "type": "mask"
         },
         {
           "name": "ng-required",
           "selector": "input",
-          "type":"logic"
+          "type": "logic"
         },
         {
-          "name":"placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "placeholder",
+          "selector": "input",
+          "type": "text"
         },
         {
-          "name":"mask-placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "mask-placeholder",
+          "selector": "input",
+          "type": "text"
         }
-
       ],
       "type": {
         "displayName": "Type"
@@ -548,10 +547,10 @@
       "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicimage.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 3
         }
       },
@@ -572,7 +571,7 @@
           "text_en_US": "Label"
         }
       ],
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "ng-model",
           "selector": "div[dynamic-image]",
@@ -636,14 +635,14 @@
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
           "order": 1
         },
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 3
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "content",
           "selector": "div[dynamic-file]",
@@ -707,7 +706,7 @@
           "childrenProperty": true,
           "order": 1
         },
-        "cronapp-filter-caseinsensitive":  {
+        "cronapp-filter-caseinsensitive": {
           "removable": false,
           "type": "logic",
           "selector": "input",
@@ -748,20 +747,20 @@
           ],
           "selector": "input",
           "childrenProperty": true,
-          "order":4
+          "order": 4
         },
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 5
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "ng-model",
           "selector": "input",
-          "type":"text",
+          "type": "text",
           "order": 6
         },
         {
@@ -773,7 +772,7 @@
         {
           "name": "type",
           "selector": "input",
-          "type":"type"
+          "type": "type"
         },
         {
           "name": "cronapp-filter",
@@ -782,17 +781,17 @@
         {
           "name": "mask",
           "selector": "input",
-          "type":"mask"
+          "type": "mask"
         },
         {
           "name": "placeholder",
           "selector": "input",
-          "type":"content"
+          "type": "content"
         },
         {
           "name": "mask-placeholder",
           "selector": "input",
-          "type":"content"
+          "type": "content"
         }
       ]
     },
@@ -802,7 +801,7 @@
       "text_en_US": "Complex Filter",
       "class": "adjust-icon mdi mdi-filter",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -976,11 +975,11 @@
           ]
         }
       ],
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "content",
           "selector": "span",
-          "type":"content",
+          "type": "content",
           "order": 2
         },
         {
@@ -1046,7 +1045,7 @@
       "text_en_US": "Vertical Grid",
       "class": "adjust-icon mdi mdi-drag-vertical",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -1068,7 +1067,7 @@
       "text_en_US": "Horizontal Grid",
       "class": "adjust-icon mdi mdi-drag-horizontal",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         }
       },
@@ -1087,11 +1086,11 @@
       "text_en_US": "Tabs",
       "class": "adjust-icon mdi mdi-window-maximize",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
-          "order":1
+        "id": {
+          "order": 1
         }
       },
       "handleRules": {
@@ -1133,8 +1132,8 @@
       "text_en_US": "Date",
       "class": "adjust-icon mdi mdi-calendar",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/date.template.html",
-      "properties":{
-        "class":{
+      "properties": {
+        "class": {
           "order": 9999
         },
         "id": {
@@ -1157,41 +1156,40 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
-          "name":"ng-model",
-          "selector":"input",
-          "type":"text",
+          "name": "ng-model",
+          "selector": "input",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
-          "name":"type",
-          "selector":"input",
-          "type":"type"
+          "name": "type",
+          "selector": "input",
+          "type": "type"
         },
         {
-          "name":"mask",
-          "selector":"input",
-          "type":"mask"
+          "name": "mask",
+          "selector": "input",
+          "type": "mask"
         },
         {
           "name": "ng-required",
           "selector": "input",
-          "type":"logic"
+          "type": "logic"
         },
         {
-          "name":"placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "placeholder",
+          "selector": "input",
+          "type": "text"
         },
         {
-          "name":"mask-placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "mask-placeholder",
+          "selector": "input",
+          "type": "text"
         }
-
       ],
       "type": {
         "displayName": "Type"
@@ -1204,11 +1202,11 @@
       "class": "adjust-icon mdi mdi-timer",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/time.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
-          "order":1
+        "id": {
+          "order": 1
         }
       },
       "styles": [
@@ -1227,39 +1225,39 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
-          "name":"ng-model",
-          "selector":"input",
-          "type":"text",
+          "name": "ng-model",
+          "selector": "input",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
-          "name":"type",
-          "selector":"input",
-          "type":"type"
+          "name": "type",
+          "selector": "input",
+          "type": "type"
         },
         {
-          "name":"mask",
-          "selector":"input",
-          "type":"mask"
+          "name": "mask",
+          "selector": "input",
+          "type": "mask"
         },
         {
           "name": "ng-required",
           "selector": "input",
-          "type":"logic"
+          "type": "logic"
         },
         {
-          "name":"placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "placeholder",
+          "selector": "input",
+          "type": "text"
         },
         {
-          "name":"mask-placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "mask-placeholder",
+          "selector": "input",
+          "type": "text"
         }
       ],
       "type": {
@@ -1284,14 +1282,14 @@
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 1
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "content",
           "selector": "label",
@@ -1365,7 +1363,7 @@
           ]
         }
       ],
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "class",
           "selector": "i",
@@ -1401,7 +1399,7 @@
           "displayName": "Theme",
           "order": 2
         },
-        "class":{
+        "class": {
           "order": 9999
         }
       },
@@ -1455,12 +1453,12 @@
           "selector": "i",
           "displayName_pt_BR": "Ícone",
           "displayName_en_US": "Icon",
-          "type":"icon"
+          "type": "icon"
         },
         {
           "name": "content",
           "selector": "span",
-          "type":"content"
+          "type": "content"
         }
       ]
     },
@@ -1471,11 +1469,11 @@
       "class": "adjust-icon mdi mdi-apps",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/grid.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
-          "order":1
+        "id": {
+          "order": 1
         }
       },
       "styles": [
@@ -1496,7 +1494,7 @@
           "selector": "div[crn-datasource]",
           "displayName_pt_BR": "Configurações",
           "displayName_en_US": "Configuration",
-          "type":"pageDatasource"
+          "type": "pageDatasource"
         }
       ],
       "handleRules": {
@@ -1539,14 +1537,13 @@
           "removable": true,
           "type": "event"
         },
-        "ng-model":{
+        "ng-model": {
           "displayName_pt_BR": "Campo",
           "displayName_en_US": "Field",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-          "type":"text"
+          "type": "text"
         }
-
       },
       "handleRules": {
         "canToggle": true,
@@ -1567,12 +1564,12 @@
         {
           "name": "ng-model",
           "selector": "ui-select",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "ng-required",
           "selector": "ui-select",
-          "type":"logic"
+          "type": "logic"
         }
       ]
     },
@@ -1605,7 +1602,7 @@
           "selector": "ui-select",
           "displayName_pt_BR": "Configurações",
           "displayName_en_US": "Configuration",
-          "type":"pageDatasource"
+          "type": "pageDatasource"
         },
         {
           "name": "ng-model",
@@ -1639,14 +1636,14 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
           "name": "ng-required",
           "selector": "ui-select",
           "displayName_pt_BR": "Requerido",
           "displayName_en_US": "Required",
-          "type":"logic"
+          "type": "logic"
         }
       ]
     },
@@ -1654,9 +1651,9 @@
       "name": "crn-radiogroup",
       "text_pt_BR": "Lista de opção",
       "text_en_US": "Radio Group",
-      "forcedGroup":true,
+      "forcedGroup": true,
       "class": "adjust-icon mdi mdi-radiobox-marked",
-      "wrapper":false,
+      "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/radiogroup.template.html",
       "styles": [
         {
@@ -1671,10 +1668,10 @@
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
           "order": 1
         },
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 2
         }
       },
@@ -1690,27 +1687,27 @@
     },
     {
       "name": "crn-radioOption",
-      "pallete":false,
+      "pallete": false,
       "childrenProperties": [
         {
           "name": "value",
           "selector": "label[value]",
           "displayName_pt_BR": "Valor do campo",
           "displayName_en_US": "Field value",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "crn-view-value",
           "selector": "span",
           "displayName_pt_BR": "Valor de exibição",
           "displayName_en_US": "Text value",
-          "type":"text"
+          "type": "text"
         }
       ]
     },
     {
       "name": "crn-checkbox",
-      "pallete":false,
+      "pallete": false,
       "text_pt_BR": "Caixa de checagem",
       "text_en_US": "Checkbox",
       "order": 0,
@@ -1750,7 +1747,7 @@
           ]
         }
       ],
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "content",
           "selector": "span",
@@ -1779,11 +1776,11 @@
       "name": "crn-navbar",
       "text_pt_BR": "Barra de navegação",
       "text_en_US": "Navbar",
-      "forcedGroup":true,
+      "forcedGroup": true,
       "class": "adjust-icon mdi mdi-tab",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/navbar.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -1865,7 +1862,7 @@
       "class": "adjust-icon mdi mdi-book-open",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/sidebar.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -1895,7 +1892,7 @@
       "text_en_US": "SideBarMenuItem",
       "class": "cpn cpn-sidebar",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         }
       },
@@ -1919,7 +1916,7 @@
       "text_pt_BR": "Título",
       "text_en_US": "Title",
       "wrapper": false,
-      "pallete":false,
+      "pallete": false,
       "class": "adjust-icon mdi mdi-format-header-pound",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/title-default.template.html",
       "properties": {
@@ -1930,10 +1927,10 @@
         "xattr-position": {
           "displayName": "Position"
         },
-        "content":{
+        "content": {
           "order": 1
         },
-        "class":{
+        "class": {
           "order": 9999
         }
       },
@@ -1967,7 +1964,7 @@
       "text_pt_BR": "Texto",
       "text_en_US": "Text",
       "wrapper": false,
-      "pallete":false,
+      "pallete": false,
       "class": "adjust-icon mdi mdi-format-annotation-plus",
       "order": 10,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/text.template.html",
@@ -1975,11 +1972,11 @@
         "xattr-position": {
           "displayName": "Position"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
-          "order" : 1
+          "order": 1
         }
       },
       "attributesForPreview": [
@@ -2011,7 +2008,7 @@
       "name": "crn-tags",
       "text_pt_BR": "Seleção múltipla",
       "text_en_US": "Multiselect",
-      "pallete":false,
+      "pallete": false,
       "dependences": {
         "editor": [
           "plugins/cronapp-framework-js/components/css/multiselect-editor.css"
@@ -2053,7 +2050,7 @@
       "name": "crn-subtitle",
       "text_pt_BR": "Subtítulo",
       "text_en_US": "Subtitle",
-      "pallete":false,
+      "pallete": false,
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-2",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/subtitle.template.html",
@@ -2065,7 +2062,7 @@
         "xattr-position": {
           "displayName": "Position"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -2130,7 +2127,7 @@
           "removable": true,
           "type": "event"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -2145,41 +2142,41 @@
       "class": "adjust-icon mdi mdi-textbox",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textarea.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
-          "order":1
+        "id": {
+          "order": 1
         }
       },
       "rows": {
         "displayName": "rows"
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
           "name": "ng-model",
           "selector": "textarea",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "rows",
           "selector": "textarea",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "maxlength",
           "selector": "textarea",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "resize",
           "selector": "textarea",
-          "type":"text"
+          "type": "text"
         }
       ],
       "styles": [
@@ -2227,7 +2224,7 @@
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinputbutton.template.html",
       "forcedGroupd": true,
-      "properties":{
+      "properties": {
         "class": {
           "order": 9999
         },
@@ -2256,41 +2253,40 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
-          "name":"ng-model",
-          "selector":"input",
-          "type":"text",
+          "name": "ng-model",
+          "selector": "input",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
-          "name":"type",
-          "selector":"input",
-          "type":"type"
+          "name": "type",
+          "selector": "input",
+          "type": "type"
         },
         {
-          "name":"mask",
-          "selector":"input",
-          "type":"mask"
+          "name": "mask",
+          "selector": "input",
+          "type": "mask"
         },
         {
           "name": "ng-required",
           "selector": "input",
-          "type":"logic"
+          "type": "logic"
         },
         {
-          "name":"placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "placeholder",
+          "selector": "input",
+          "type": "text"
         },
         {
-          "name":"mask-placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "mask-placeholder",
+          "selector": "input",
+          "type": "text"
         }
-
       ],
       "type": {
         "displayName": "Type"
@@ -2303,7 +2299,7 @@
       "class": "adjust-icon mdi mdi-label-outline",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinputicon.template.html",
       "forcedGroupd": true,
-      "properties":{
+      "properties": {
         "class": {
           "order": 9999
         },
@@ -2332,39 +2328,39 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
-          "name":"ng-model",
-          "selector":"input",
-          "type":"text",
+          "name": "ng-model",
+          "selector": "input",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
-          "name":"type",
-          "selector":"input",
-          "type":"type"
+          "name": "type",
+          "selector": "input",
+          "type": "type"
         },
         {
-          "name":"mask",
-          "selector":"input",
-          "type":"mask"
+          "name": "mask",
+          "selector": "input",
+          "type": "mask"
         },
         {
           "name": "ng-required",
           "selector": "input",
-          "type":"logic"
+          "type": "logic"
         },
         {
-          "name":"placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "placeholder",
+          "selector": "input",
+          "type": "text"
         },
         {
-          "name":"mask-placeholder",
-          "selector":"input",
-          "type":"text"
+          "name": "mask-placeholder",
+          "selector": "input",
+          "type": "text"
         }
       ],
       "type": {
@@ -2378,7 +2374,7 @@
       "class": "adjust-icon mdi mdi-qrcode",
       "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/qrcode.template.html",
-      "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/qrcode.png\"/>",
+      "designTimeHTML": "<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/qrcode.png\"/>",
       "designTimeSelector": "div",
       "properties": {
         "ng-model": {
@@ -2390,7 +2386,7 @@
           "removable": false,
           "displayName": "QR Code"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -2405,24 +2401,25 @@
       "class": "adjust-icon mdi mdi-chart-bar",
       "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/chart.template.html",
-      "designTimeHTML":"<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/svg-charts.svg\"/>",
+      "designTimeHTML": "<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"plugins/cronapp-framework-js/img/svg-charts.svg\"/>",
       "designTimeSelector": "canvas",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 1
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
-          "name":"id",
-          "selector":"canvas",
-          "type":"text",
+          "name": "id",
+          "selector": "canvas",
+          "type": "text",
           "displayName_pt_BR": "Identificador do gráfico",
           "displayName_en_US": "Chart Id"
-        }]
+        }
+      ]
     },
     {
       "name": "crn-panel",
@@ -2451,7 +2448,7 @@
         "xattr-theme": {
           "displayName": "Theme"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -2502,7 +2499,7 @@
       "text_en_US": "Header",
       "class": "adjust-icon mdi mdi-page-layout-header",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/header.template.html",
-      "wrapper":false
+      "wrapper": false
     },
     {
       "name": "crn-cron-rich-editor",
@@ -2511,27 +2508,27 @@
       "class": "adjust-icon mdi mdi-text-shadow",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-rich-editor.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 1
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "options",
           "removable": false,
           "global": "true",
           "selector": "cron-rich-editor",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "ng-model",
           "selector": "cron-rich-editor",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-          "type":"text"
+          "type": "text"
         }
       ]
     },
@@ -2546,14 +2543,14 @@
       "designTimeSelector": "cron-grid",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-grid.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 1
         }
       },
-      "childrenProperties":[
+      "childrenProperties": [
         {
           "name": "options",
           "displayName_pt_BR": "Configurações",
@@ -2561,7 +2558,7 @@
           "removable": false,
           "global": "true",
           "selector": "cron-grid",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
@@ -2569,7 +2566,7 @@
           "selector": "cron-grid",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-          "type":"text",
+          "type": "text",
           "order": 2
         }
       ],
@@ -2732,7 +2729,7 @@
       "designTimeSelector": "cron-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -2782,42 +2779,42 @@
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-close",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-dataBound",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-filtering",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-open",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "options",
           "selector": "cron-select",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
@@ -2825,13 +2822,13 @@
           "selector": "cron-select",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-          "type":"text",
+          "type": "text",
           "order": 3
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"text",
+          "type": "text",
           "order": 2
         }
       ]
@@ -2847,7 +2844,7 @@
       "designTimeSelector": "cron-dynamic-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -2860,60 +2857,60 @@
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-close",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-dataBound",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-filtering",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-open",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "options",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
           "name": "ng-model",
           "selector": "cron-dynamic-select",
-          "type":"text",
+          "type": "text",
           "order": 3
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"content",
+          "type": "content",
           "order": 2
         },
         {
           "name": "ng-required",
           "selector": "cron-dynamic-select",
-          "type":"logic"
+          "type": "logic"
         }
       ],
       "styles": [
@@ -2965,10 +2962,10 @@
       "designTimeSelector": "cron-multi-select",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 1
         }
       },
@@ -3005,73 +3002,73 @@
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-deselect",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Remover Seleção",
           "displayName_en_US": "On Deselect",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-close",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-dataBound",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-filtering",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "on-open",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
-          "type":"event"
+          "type": "event"
         },
         {
           "name": "options",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
           "name": "ng-model",
           "selector": "cron-multi-select",
-          "type":"text",
+          "type": "text",
           "order": 3
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"content",
+          "type": "content",
           "order": 2
         },
         {
           "name": "ng-required",
           "selector": "cron-multi-select",
-          "type":"logic"
+          "type": "logic"
         }
       ]
     },
     {
       "name": "crn-enterprise-date",
-      "pallete":false,
+      "pallete": false,
       "text_pt_BR": "Data Grade",
       "text_en_US": "Grid Date",
       "class": "adjust-icon mdi mdi-calendar-multiple",
@@ -3116,26 +3113,25 @@
           "selector": "cron-date",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text"
+          "type": "text"
         },
         {
           "name": "ng-model",
           "selector": "cron-date",
-          "type":"text",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"content"
+          "type": "content"
         },
         {
           "name": "ng-required",
           "selector": "cron-date",
-          "type":"logic"
+          "type": "logic"
         }
-
       ]
     },
     {
@@ -3148,7 +3144,7 @@
       "designTimeSelector": "cron-auto-complete",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -3161,7 +3157,7 @@
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
@@ -3169,13 +3165,13 @@
           "selector": "cron-auto-complete",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-          "type":"text",
+          "type": "text",
           "order": 3
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"text",
+          "type": "text",
           "order": 2
         }
       ],
@@ -3217,7 +3213,7 @@
       "designTimeSelector": "cron-auto-complete",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-autocomplete.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -3230,7 +3226,7 @@
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
@@ -3238,13 +3234,13 @@
           "selector": "cron-auto-complete",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-          "type":"text",
+          "type": "text",
           "order": 3
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"text",
+          "type": "text",
           "order": 2
         }
       ],
@@ -3285,7 +3281,7 @@
       "designTimeSelector": "cron-slider",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-slider.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
         "id": {
@@ -3325,28 +3321,27 @@
           "selector": "cron-slider",
           "displayName_pt_BR": "Configuração",
           "displayName_en_US": "Configuration",
-          "type":"text",
+          "type": "text",
           "order": 1
         },
         {
           "name": "ng-model",
           "selector": "cron-slider",
-          "type":"text",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }"
         },
         {
           "name": "content",
           "selector": "label",
-          "type":"content",
+          "type": "content",
           "order": 2
         },
         {
           "name": "ng-required",
           "selector": "cron-slider",
-          "type":"logic"
+          "type": "logic"
         }
-
       ]
     },
     {
@@ -3357,10 +3352,10 @@
       "order": 7,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-checkbox.template.html",
       "properties": {
-        "class":{
+        "class": {
           "order": 9999
         },
-        "id":{
+        "id": {
           "order": 1
         }
       },
@@ -3368,7 +3363,7 @@
         {
           "name": "ng-model",
           "selector": "input",
-          "type":"text",
+          "type": "text",
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
           "order": 2
@@ -3376,13 +3371,13 @@
         {
           "name": "content",
           "selector": "label",
-          "type":"content",
+          "type": "content",
           "order": 1
         },
         {
           "name": "ng-required",
           "selector": "input",
-          "type":"logic"
+          "type": "logic"
         }
       ],
       "styles": [
@@ -3415,10 +3410,10 @@
         "xattr-position": {
           "displayName": "Position"
         },
-        "class":{
+        "class": {
           "order": 9999
         },
-        "content":{
+        "content": {
           "order": 9998
         }
       },
@@ -3467,3 +3462,4 @@
       ]
     }
   ]
+}
