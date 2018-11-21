@@ -2224,7 +2224,7 @@
         var _scope = scope;
         var _ngModelCtrl = ngModelCtrl;
 
-        relactionDS = {
+        var relactionDS = {
           relationDataSource: (select.relationDataSource != null ? eval(select.relationDataSource.name) : null),
           relationField: (select.relationField != null ? select.relationField : '')
         }
@@ -2242,7 +2242,7 @@
         var $element = $(parent).find('input.cronMultiSelect');
         $(element).remove();
 
-        var select;
+        var evtSelect;
         var deselect;
 
         options['deselect'] = function(e) {
@@ -2284,8 +2284,8 @@
             }.bind(this.relationDataSource));
           }
 
-          if (select) {
-            select();
+          if (evtSelect) {
+            evtSelect();
           } 
 
         }.bind(relactionDS);
@@ -2296,7 +2296,7 @@
         options['filtering'] = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
         options['open'] = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
         options['cascade'] = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
-        select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
+        evtSelect = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
         deselect = attrs.onDeselect ? function (){eval(attrs.onDeselect)}: undefined;
 
         var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
