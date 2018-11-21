@@ -1590,7 +1590,7 @@
         }
         return editable;
       },
-      generateKendoGridInit: function(options, scope) {
+      generateKendoGridInit: function(options, scope, ngModelCtrl) {
 
         var helperDirective = this;
         function detailInit(e) {
@@ -1753,6 +1753,10 @@
           change: function(e) {
             var item = this.dataItem(this.select());
             setToActiveInCronappDataSource.bind(this)(item);
+            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+            if (ngModelCtrl) {
+              ngModelCtrl.$setViewValue(cronappDatasource.active);
+            }
             collapseAllExcecptCurrent(this, this.select().next(), this.select());
             compileListing(e);
           },
@@ -1807,7 +1811,7 @@
 
 
 
-          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope);
+          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
