@@ -1679,7 +1679,7 @@
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<div class=\"radio\" data-component=\"crn-radioOption\">\n  <label class=\"\" crn-value=\"\" value=\"value${RANDOM}\"> \n <input type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\" value=\"\"> \n       <span class=\"\">New option</span> \n </label> \n</div>",
+            "sourceHTML": "<div class=\"k-content\" data-component=\"crn-radioOption\">    <span class=\"\">New option</span>     <input class=\"k-radio\" type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\" checked=\"\">    <label class=\"k-radio-label\" crn-value=\"\" for=\"optionsRadios${RANDOM}\" value=\"value${RANDOM}\"></label>  </div>",
             "targetSelector": ":self"
           }
         ]
