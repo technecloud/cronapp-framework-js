@@ -395,6 +395,28 @@
           "global": true,
           "order": 3
         },
+        "parameters-null-strategy": {
+          "removable": false,
+          "type": "list",
+          "options": [
+            {
+              "key": "default",
+              "value_en_US": "Default",
+              "value_pt_BR": "Padrão"
+            },
+            {
+              "key": "clean",
+              "value_en_US": "Clean Data",
+              "value_pt_BR": "Limpar Dados"
+            },
+            {
+              "key": "ignore",
+              "value_en_US": "Remove Clause",
+              "value_pt_BR": "Remover Cláusula"
+            }
+          ],
+          "order": 4
+        },
         "checkrequired": {
           "removable": false,
           "type": "logic",
