@@ -415,7 +415,7 @@
               "value_pt_BR": "Remover Cláusula"
             }
           ],
-          "order": 4
+          "order": 3
         },
         "checkrequired": {
           "removable": false,
