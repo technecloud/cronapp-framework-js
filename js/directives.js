@@ -2084,7 +2084,7 @@
           var _options = options;
           /**
            * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
-           */        
+           */
           options.virtual.valueMapper = function(options) {
             if (options.value) {
               var _dataSource = _options.dataSource.transport.options.cronappDatasource;
@@ -2097,14 +2097,14 @@
             }
           };
         }
-		
+
         options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
         options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
         options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
         options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
         options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
         options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
-        
+
         /**
          * Renderizando DropdownList
          */
@@ -2120,23 +2120,23 @@
         }
 
         /**
-         * firstValue() - Método utilizado para setar o valor do primeiro registro no model e no componente. 
+         * firstValue() - Método utilizado para setar o valor do primeiro registro no model e no componente.
          */
         var _ngModelCtrl = ngModelCtrl;
         var firstValue = function(data) {
-          if (dataSourceScreen && dataSourceScreen.active && 
+          if (dataSourceScreen && dataSourceScreen.active &&
               dataSourceScreen.active[select.dataValueField] && !parentDS) {
             combobox.value(dataSourceScreen.active[select.dataValueField]);
             combobox.refresh();
             if (data) {
               combobox.dataSource.success(data);
             }
-            
+
             $timeout(function() {
               _scope.$apply(function(){
                 _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
               });
-              
+
               if (select.changeCursor) {
                 _goTo(scope, combobox, dataSourceScreen.active[select.dataValueField]);
               }
@@ -2145,12 +2145,12 @@
         }
 
         /**
-         * Escutando o model pai (caso exista). Caso o usuário configure para pegar o primeiro valor do dataset seta a váriavel firstValue para ser usada no addDataSourceEvents({read()). 
+         * Escutando o model pai (caso exista). Caso o usuário configure para pegar o primeiro valor do dataset seta a váriavel firstValue para ser usada no addDataSourceEvents({read()).
          */
         if (select.firstValue && dataSourceScreen.parametersExpression && this.getModelParent(dataSourceScreen.parametersExpression)) {
           scope.$watch(this.getModelParent(dataSourceScreen.parametersExpression), function(newValue, oldValue) {
             select.firstValue = true;
-          });  
+          });
         }
 
         /**
@@ -2169,7 +2169,7 @@
                 }
                 select.initValue = undefined;
               }
-            }            
+            }
           });
         }
 
@@ -2194,14 +2194,14 @@
             }
           }
         });
-        
+
         /**
          * Observando model do DropdownList.
          */
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
             var result = '';
-            
+
             if ((typeof value === 'boolean') || value) {
               if (typeof value == "string") {
                 result = value;
@@ -2215,7 +2215,7 @@
             if (result != '') {
               combobox.dataSource.read();
             }
-			
+
             combobox.value(result);
             return result;
           });
@@ -2255,16 +2255,16 @@
         $(combobox.span).on('DOMSubtreeModified', function(e){
           _compileAngular(scope, e.target);
         });
-        
+
         $(combobox.ul).on('DOMSubtreeModified', function(e){
           $timeout(function() {
             _compileAngular(scope, e.target);
           });
         });
-        
+
         _compileAngular(scope, combobox.span);
         _compileAngular(scope, combobox.ul);
-        
+
         $(element).remove();
       }
     };
@@ -2329,7 +2329,7 @@
 
             if (deselect) {
               deselect();
-            } 
+            }
           }
         }.bind(relactionDS);
 
@@ -2348,7 +2348,7 @@
 
           if (evtSelect) {
             evtSelect();
-          } 
+          }
 
         }.bind(relactionDS);
 
@@ -2401,6 +2401,12 @@
         } catch(e){}
 
         var options = app.kendoHelper.getConfigCombobox(select, scope);
+        options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
+        options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
+        options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
+        options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
+        options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
+        options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
         var parent = element.parent();
         var id = attrs.id ? ' id="' + attrs.id + '"' : '';
         var name = attrs.name ? ' name="' + attrs.name + '"' : '';
@@ -2568,24 +2574,21 @@
         } catch(err) {
           console.log('Slider invalid configuration! ' + err);
         }
-
-        var onChange = function(event) {
-          scope.$apply(function () {
-            ngModelCtrl.$setViewValue(parseInt($(element).val()));
-          });
-        }
-
-        var sliderOnChange = function(event) {
-          onChange(event);
-        }
-
-        var sliderOnSlide = function(event) {
-          onChange(event);
-        }
-
+        
         var config = app.kendoHelper.getConfigSlider(slider);
-        config['change'] = sliderOnChange;
-        config['slide'] = sliderOnSlide;
+        config.change = attrs.ngChange ? function (){
+              scope.$apply(function () {
+                scope.$eval(attrs.ngSlide)
+                ngModelCtrl.$setViewValue(parseInt($(element).val()));
+              });
+            } :
+            function(event) {
+              scope.$apply(function () {
+                ngModelCtrl.$setViewValue(parseInt($(element).val()));
+              });
+            }
+
+        config.slide = attrs.ngSlide ? function (){scope.$eval(attrs.ngSlide)}: undefined;
 
         $(element).empty();
         var slider = $(element).kendoSlider(config).data("kendoSlider");

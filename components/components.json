@@ -3661,11 +3661,39 @@
           "displayName_en_US": "On Redo"
         },
         {
-          "name": "ng-node-change",
+          "name": "ng-change",
           "selector": "cron-rich-editor",
           "type": "event",
-          "displayName_pt_BR": "Ao Mudar de Nó",
-          "displayName_en_US": "On Node Change"
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change"
+        },
+        {
+          "name": "ng-dirty",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Sujar Editor",
+          "displayName_en_US": "On Dirty"
+        },
+        {
+          "name": "ng-exec-command",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Executar Comando",
+          "displayName_en_US": "On Exec Command"
+        },
+        {
+          "name": "ng-paste-pre-process",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Colar Antes do Processamento",
+          "displayName_en_US": "On Paste Pre Process"
+        },
+        {
+          "name": "ng-paste-post-process",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Colar Depois do Processamento",
+          "displayName_en_US": "On Paste Post Process"
         },
         {
           "name": "ng-click",
@@ -4632,14 +4660,14 @@
           "type": "logic"
         },
         {
-          "name": "on-change",
+          "name": "ng-change",
           "selector": "cron-slider",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change",
           "type": "event"
         },
         {
-          "name": "on-slide",
+          "name": "ng-slide",
           "selector": "cron-slider",
           "displayName_pt_BR": "Ao Mover Slide",
           "displayName_en_US": "On Slide",
