@@ -1888,13 +1888,12 @@
         var $element = $(parent).find('input.cronSelect');
 
         var options = app.kendoHelper.getConfigCombobox(select, scope);
-        options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
-        options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
-        options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
-        options.filtering = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
-        options.open = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
-        options.select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
-        options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
+        options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
+        options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
+        options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
+        options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
+        options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
+        options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
 
         var combobox = $element.kendoComboBox(options).data('kendoComboBox');
         $(element).remove();
@@ -2035,14 +2034,13 @@
           };
         }
 		
-        options.change = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
-        options.close = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
-        options.dataBound = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
-        options.filtering = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
-        options.open = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
-        options.select = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
-        options.cascade = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
-
+        options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
+        options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
+        options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
+        options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
+        options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
+        options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
+        
         /**
          * Renderizando DropdownList
          */

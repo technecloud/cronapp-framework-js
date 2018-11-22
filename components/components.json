@@ -3701,7 +3701,7 @@
     },
     {
       "name": "crn-enterprise-combobox",
-      "text_pt_BR": "Caixa de seleção fixa",
+      "text_pt_BR": "Caixa de seleção estática",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
       "order": 9,
@@ -3756,42 +3756,35 @@
       ],
       "childrenProperties": [
         {
-          "name": "on-select",
+          "name": "ng-select",
           "selector": "cron-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
           "type": "event"
         },
         {
-          "name": "on-change",
-          "selector": "cron-select",
-          "displayName_pt_BR": "Ao Alterar",
-          "displayName_en_US": "On Change",
-          "type": "event"
-        },
-        {
-          "name": "on-close",
+          "name": "ng-close",
           "selector": "cron-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
           "type": "event"
         },
         {
-          "name": "on-dataBound",
+          "name": "ng-data-bound",
           "selector": "cron-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
           "type": "event"
         },
         {
-          "name": "on-filtering",
+          "name": "ng-filtering",
           "selector": "cron-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
           "type": "event"
         },
         {
-          "name": "on-open",
+          "name": "ng-open",
           "selector": "cron-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
@@ -3841,42 +3834,35 @@
       },
       "childrenProperties": [
         {
-          "name": "on-select",
+          "name": "ng-select",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
           "type": "event"
         },
         {
-          "name": "on-change",
-          "selector": "cron-dynamic-select",
-          "displayName_pt_BR": "Ao Alterar",
-          "displayName_en_US": "On Change",
-          "type": "event"
-        },
-        {
-          "name": "on-close",
+          "name": "ng-close",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
           "type": "event"
         },
         {
-          "name": "on-dataBound",
+          "name": "ng-data-bound",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
           "type": "event"
         },
         {
-          "name": "on-filtering",
+          "name": "ng-filtering",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
           "type": "event"
         },
         {
-          "name": "on-open",
+          "name": "ng-open",
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
@@ -4021,7 +4007,7 @@
           "type": "event"
         },
         {
-          "name": "on-dataBound",
+          "name": "ng-data-bound",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
