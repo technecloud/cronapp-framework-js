@@ -41,6 +41,10 @@
         "class": {
           "order": 9999
         },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -79,6 +83,10 @@
       "autoWrapper": true,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
       "properties": {
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -256,6 +264,10 @@
       "wrapper": false,
       "autoWrapper": false,
       "properties": {
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -343,6 +355,11 @@
         }
       },
       "childrenProperties": [
+        {
+          "name": "ng-init",
+          "selector": "div.panel-heading",
+          "type": "event"
+        },
         {
           "name": "ng-click",
           "selector": "div.panel-heading",
@@ -437,6 +454,11 @@
       },
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/carousel.template.html",
       "childrenProperties": [
+        {
+          "name": "ng-init",
+          "selector": "div.carousel",
+          "type": "event"
+        },
         {
           "name": "ng-click",
           "selector": "div.carousel",
@@ -647,6 +669,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -666,7 +693,7 @@
           "selector": "input",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "input",
           "type": "event"
@@ -773,6 +800,11 @@
           "order": 1
         },
         {
+          "name": "ng-init",
+          "selector": "div[dynamic-image]",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "div[dynamic-image]",
           "type": "event"
@@ -867,6 +899,11 @@
           "selector": "div[dynamic-file]",
           "type": "logic",
           "order": 5
+        },
+        {
+          "name": "ng-init",
+          "selector": "div[dynamic-file]",
+          "type": "event"
         },
         {
           "name": "ng-click",
@@ -1012,6 +1049,11 @@
           "type": "content"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -1123,7 +1165,12 @@
           "removable": false,
           "type": "pageDatasource",
           "order": 1
-        },"ng-click": {
+        },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-click": {
           "removable": true,
           "type": "event"
         },
@@ -1278,6 +1325,10 @@
           "type": "projectResource",
           "resourceType": "image/jpeg,image/gif,image/png"
         },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -1339,6 +1390,10 @@
         "id": {
           "order": 1
         },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -1377,6 +1432,10 @@
       "properties": {
         "class": {
           "order": 9999
+        },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
         },
         "ng-click": {
           "removable": true,
@@ -1453,7 +1512,12 @@
         }
       ],
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/tabs.template.html",
-       "childrenProperties": [
+      "childrenProperties": [
+        {
+          "name": "ng-init",
+          "selector": "a",
+          "type": "event"
+        },
         {
           "name": "ng-click",
           "selector": "a",
@@ -1479,7 +1543,7 @@
           "selector": "a",
           "type": "event"
         }
-       ]
+      ]
     },
     {
       "name": "crn-datepicker",
@@ -1546,6 +1610,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -1565,7 +1634,7 @@
           "selector": "input",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "input",
           "type": "event"
@@ -1670,6 +1739,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -1689,7 +1763,7 @@
           "selector": "input",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "input",
           "type": "event"
@@ -1766,6 +1840,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -1785,7 +1864,7 @@
           "selector": "input",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "input",
           "type": "event"
@@ -1915,6 +1994,10 @@
           "displayName": "Field",
           "order": 1
         },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -2035,6 +2118,11 @@
           "displayName_pt_BR": "Configurações",
           "displayName_en_US": "Configuration",
           "type": "pageDatasource"
+        },
+        {
+          "name": "ng-init",
+          "selector": "div[crn-datasource]",
+          "type": "event"
         },
         {
           "name": "ng-click",
@@ -2239,6 +2327,10 @@
         "id": {
           "order": 2
         },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -2430,6 +2522,11 @@
       },
       "childrenProperties": [
         {
+          "name": "ng-init",
+          "selector": "nav",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "nav",
           "type": "event"
@@ -2590,6 +2687,10 @@
       "class": "adjust-icon mdi mdi-format-header-pound",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/title-default.template.html",
       "properties": {
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -2741,7 +2842,11 @@
       "class": "adjust-icon mdi mdi-format-header-2",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/subtitle.template.html",
       "properties": {
-         "ng-click": {
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-click": {
           "removable": true,
           "type": "event"
         },
@@ -2821,6 +2926,10 @@
         }
       ],
       "properties": {
+        "ng-init": {
+          "removable": true,
+          "type": "event"
+        },
         "ng-click": {
           "removable": true,
           "type": "event"
@@ -2893,6 +3002,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "textarea",
           "type": "event"
@@ -2912,7 +3026,7 @@
           "selector": "textarea",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "textarea",
           "type": "event"
@@ -3057,6 +3171,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -3076,7 +3195,7 @@
           "selector": "input",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "input",
           "type": "event"
@@ -3187,6 +3306,11 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -3206,7 +3330,7 @@
           "selector": "input",
           "type": "event"
         },
-         {
+        {
           "name": "ng-focus",
           "selector": "input",
           "type": "event"
@@ -3270,6 +3394,10 @@
         },
         "id": {
           "order": 2
+        },
+        "ng-init": {
+          "removable": true,
+          "type": "event"
         },
         "ng-click": {
           "removable": true,
@@ -3393,6 +3521,11 @@
       ],
       "childrenProperties": [
         {
+          "name": "ng-init",
+          "selector": "div.panel",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "div.panel",
           "type": "event"
@@ -3457,6 +3590,112 @@
           "type": "text"
         },
         {
+          "name": "ng-init",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-focus",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-before-set-content",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Antes de Inserir Conteúdo",
+          "displayName_en_US": "Before Set Content"
+        },
+        {
+          "name": "ng-set-content",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Inserir Conteúdo",
+          "displayName_en_US": "On Set Content"
+        },
+        {
+          "name": "ng-get-content",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Obter Conteúdo",
+          "displayName_en_US": "On Get Content"
+        },
+        {
+          "name": "ng-pre-process",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Antes de Processar",
+          "displayName_en_US": "Pre Process"
+        },
+        {
+          "name": "ng-post-process",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Após Processar",
+          "displayName_en_US": "Post Process"
+        },
+        {
+          "name": "ng-node-change",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Mudar de Nó",
+          "displayName_en_US": "On Node Change"
+        },
+        {
+          "name": "ng-undo",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Desfazer",
+          "displayName_en_US": "On Undo"
+        },
+        {
+          "name": "ng-redo",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Refazer",
+          "displayName_en_US": "On Redo"
+        },
+        {
+          "name": "ng-change",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change"
+        },
+        {
+          "name": "ng-dirty",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Sujar Editor",
+          "displayName_en_US": "On Dirty"
+        },
+        {
+          "name": "ng-exec-command",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Executar Comando",
+          "displayName_en_US": "On Exec Command"
+        },
+        {
+          "name": "ng-paste-pre-process",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Colar Antes do Processamento",
+          "displayName_en_US": "On Paste Pre Process"
+        },
+        {
+          "name": "ng-paste-post-process",
+          "selector": "cron-rich-editor",
+          "type": "event",
+          "displayName_pt_BR": "Ao Colar Depois do Processamento",
+          "displayName_en_US": "On Paste Post Process"
+        },
+        {
           "name": "ng-click",
           "selector": "cron-rich-editor",
           "type": "event"
@@ -3476,16 +3715,6 @@
           "selector": "cron-rich-editor",
           "type": "event"
         },
-         {
-          "name": "ng-focus",
-          "selector": "cron-rich-editor",
-          "type": "event"
-        },
-        {
-          "name": "ng-blur",
-          "selector": "cron-rich-editor",
-          "type": "event"
-        },
         {
           "name": "ng-mouseenter",
           "selector": "cron-rich-editor",
@@ -3498,11 +3727,6 @@
         },
         {
           "name": "ng-mousemove",
-          "selector": "cron-rich-editor",
-          "type": "event"
-        },
-        {
-          "name": "ng-copy",
           "selector": "cron-rich-editor",
           "type": "event"
         },
@@ -3701,7 +3925,7 @@
     },
     {
       "name": "crn-enterprise-combobox",
-      "text_pt_BR": "Caixa de seleção estática",
+      "text_pt_BR": "Caixa de seleção fixa",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
       "order": 9,
@@ -3755,6 +3979,13 @@
         }
       ],
       "childrenProperties": [
+        {
+          "name": "ng-change",
+          "selector": "cron-select",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
         {
           "name": "ng-select",
           "selector": "cron-select",
@@ -3833,6 +4064,13 @@
         }
       },
       "childrenProperties": [
+        {
+          "name": "ng-change",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
         {
           "name": "ng-select",
           "selector": "cron-dynamic-select",
@@ -3979,28 +4217,35 @@
       ],
       "childrenProperties": [
         {
-          "name": "on-select",
-          "selector": "cron-multi-select",
-          "displayName_pt_BR": "Ao Selecionar",
-          "displayName_en_US": "On Select",
-          "type": "event"
-        },
-        {
-          "name": "on-change",
+          "name": "ng-change",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change",
           "type": "event"
         },
         {
-          "name": "on-deselect",
+          "name": "ng-select",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select",
+          "type": "event"
+        },
+        {
+          "name": "ng-change",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
+        {
+          "name": "ng-deselect",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Remover Seleção",
           "displayName_en_US": "On Deselect",
           "type": "event"
         },
         {
-          "name": "on-close",
+          "name": "ng-close",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
@@ -4014,14 +4259,14 @@
           "type": "event"
         },
         {
-          "name": "on-filtering",
+          "name": "ng-filtering",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
           "type": "event"
         },
         {
-          "name": "on-open",
+          "name": "ng-open",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
@@ -4163,42 +4408,42 @@
           "order": 2
         },
         {
-          "name": "on-select",
+          "name": "ng-select",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
           "type": "event"
         },
         {
-          "name": "on-change",
+          "name": "ng-change",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change",
           "type": "event"
         },
         {
-          "name": "on-close",
+          "name": "ng-close",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
           "type": "event"
         },
         {
-          "name": "on-dataBound",
+          "name": "ng-data-bound",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
           "type": "event"
         },
         {
-          "name": "on-filtering",
+          "name": "ng-filtering",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
           "type": "event"
         },
         {
-          "name": "on-open",
+          "name": "ng-open",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
@@ -4274,42 +4519,42 @@
           "order": 2
         },
         {
-          "name": "on-select",
+          "name": "ng-select",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
           "type": "event"
         },
         {
-          "name": "on-change",
+          "name": "ng-change",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change",
           "type": "event"
         },
         {
-          "name": "on-close",
+          "name": "ng-close",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
           "type": "event"
         },
         {
-          "name": "on-dataBound",
+          "name": "ng-data-bound",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
           "type": "event"
         },
         {
-          "name": "on-filtering",
+          "name": "ng-filtering",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
           "type": "event"
         },
         {
-          "name": "on-open",
+          "name": "ng-open",
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
@@ -4415,14 +4660,14 @@
           "type": "logic"
         },
         {
-          "name": "on-change",
+          "name": "ng-change",
           "selector": "cron-slider",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change",
           "type": "event"
         },
         {
-          "name": "on-slide",
+          "name": "ng-slide",
           "selector": "cron-slider",
           "displayName_pt_BR": "Ao Mover Slide",
           "displayName_en_US": "On Slide",
