@@ -41,8 +41,25 @@
         "class": {
           "order": 9999
         },
-        "onclick": {
-          "order": 1
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         },
         "id": {
           "order": 4
@@ -63,6 +80,22 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
       "properties": {
         "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
           "removable": true,
           "type": "event"
         },
@@ -227,7 +260,19 @@
           "removable": true,
           "type": "event"
         },
-        "onmouseover": {
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
           "removable": true,
           "type": "event"
         },
@@ -293,18 +338,37 @@
       ],
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/accordion.template.html",
       "properties": {
-        "ng-click": {
-          "removable": true,
-          "type": "event"
-        },
-        "onmouseover": {
-          "removable": true,
-          "type": "event"
-        },
         "class": {
           "order": 9999
         }
-      }
+      },
+      "childrenProperties": [
+        {
+          "name": "ng-click",
+          "selector": "div.panel-heading",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "div.panel-heading",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "div.panel-heading",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "div.panel-heading",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "div.panel-heading",
+          "type": "event"
+        }
+      ]
     },
     {
       "name": "crn-carousel",
@@ -371,7 +435,34 @@
           }
         ]
       },
-      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/carousel.template.html"
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/carousel.template.html",
+      "childrenProperties": [
+        {
+          "name": "ng-click",
+          "selector": "div.carousel",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "div.carousel",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "div.carousel",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "div.carousel",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "div.carousel",
+          "type": "event"
+        }
+      ]
     },
     {
       "name": "crn-datasource",
@@ -554,6 +645,61 @@
           "name": "mask-placeholder",
           "selector": "input",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ],
       "type": {
@@ -625,6 +771,31 @@
           "selector": "div[dynamic-image]",
           "type": "text",
           "order": 1
+        },
+        {
+          "name": "ng-click",
+          "selector": "div[dynamic-image]",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "div[dynamic-image]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "div[dynamic-image]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "div[dynamic-image]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "div[dynamic-image]",
+          "type": "event"
         }
       ]
     },
@@ -696,6 +867,31 @@
           "selector": "div[dynamic-file]",
           "type": "logic",
           "order": 5
+        },
+        {
+          "name": "ng-click",
+          "selector": "div[dynamic-file]",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "div[dynamic-file]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "div[dynamic-file]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "div[dynamic-file]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "div[dynamic-file]",
+          "type": "event"
         }
       ]
     },
@@ -814,6 +1010,51 @@
           "name": "mask-placeholder",
           "selector": "input",
           "type": "content"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ]
     },
@@ -882,16 +1123,25 @@
           "removable": false,
           "type": "pageDatasource",
           "order": 1
-        },
-        "ng-click": {
+        },"ng-click": {
           "removable": true,
-          "type": "event",
-          "order": 2
+          "type": "event"
         },
-        "onmouseover": {
+        "ng-dblclick": {
           "removable": true,
-          "type": "event",
-          "order": 3
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         },
         "xattr-fullsize": {
           "displayName": "Width",
@@ -1028,7 +1278,23 @@
           "type": "projectResource",
           "resourceType": "image/jpeg,image/gif,image/png"
         },
-        "onclick": {
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
           "removable": true,
           "type": "event"
         },
@@ -1072,6 +1338,26 @@
         },
         "id": {
           "order": 1
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         }
       },
       "styles": [
@@ -1091,6 +1377,26 @@
       "properties": {
         "class": {
           "order": 9999
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         }
       },
       "styles": [
@@ -1146,7 +1452,34 @@
           "text_en_US": "Default Tab"
         }
       ],
-      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/tabs.template.html"
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/tabs.template.html",
+       "childrenProperties": [
+        {
+          "name": "ng-click",
+          "selector": "a",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "a",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "a",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "a",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "a",
+          "type": "event"
+        }
+       ]
     },
     {
       "name": "crn-datepicker",
@@ -1211,6 +1544,61 @@
           "name": "mask-placeholder",
           "selector": "input",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ],
       "type": {
@@ -1280,6 +1668,61 @@
           "name": "mask-placeholder",
           "selector": "input",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ],
       "type": {
@@ -1321,6 +1764,61 @@
           "name": "ng-model",
           "selector": "input",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ]
     },
@@ -1416,6 +1914,26 @@
         "ng-model": {
           "displayName": "Field",
           "order": 1
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         },
         "xattr-theme": {
           "displayName": "Theme",
@@ -1517,6 +2035,31 @@
           "displayName_pt_BR": "Configurações",
           "displayName_en_US": "Configuration",
           "type": "pageDatasource"
+        },
+        {
+          "name": "ng-click",
+          "selector": "div[crn-datasource]",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "div[crn-datasource]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "div[crn-datasource]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "div[crn-datasource]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "div[crn-datasource]",
+          "type": "event"
         }
       ],
       "handleRules": {
@@ -1542,10 +2085,10 @@
     {
       "name": "crn-combobox",
       "pallete": false,
-      "text_pt_BR": "Caixa de seleção estática",
+      "text_pt_BR": "Caixa de seleção fixa",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
-      "order": 3,
+      "order": 10,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/combobox.template.html",
       "styles": [
         {
@@ -1695,6 +2238,26 @@
         },
         "id": {
           "order": 2
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         }
       },
       "handleRules": {
@@ -1724,6 +2287,31 @@
           "displayName_pt_BR": "Valor de exibição",
           "displayName_en_US": "Text value",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "label[value]",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "label[value]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "label[value]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "label[value]",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "label[value]",
+          "type": "event"
         }
       ]
     },
@@ -1839,7 +2427,34 @@
             "targetSelector": ".nav.navbar-nav"
           }
         ]
-      }
+      },
+      "childrenProperties": [
+        {
+          "name": "ng-click",
+          "selector": "nav",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "nav",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "nav",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "nav",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "nav",
+          "type": "event"
+        }
+      ]
     },
     {
       "name": "crn-menu-item",
@@ -1874,6 +2489,38 @@
           "displayName_pt_BR": "Ícone",
           "displayName_en_US": "Icon",
           "type": "icon"
+        },
+        {
+          "name": "ng-click",
+          "selector": "a.dropdown-toggle",
+          "type": "event"
+        },
+        {
+          "name": "ng-click",
+          "selector": "ul",
+          "type": "event",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "a.dropdown-toggle",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "a.dropdown-toggle",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "a.dropdown-toggle",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "a.dropdown-toggle",
+          "type": "event"
         }
       ]
     },
@@ -1883,6 +2530,7 @@
       "text_en_US": "Sidebar",
       "class": "adjust-icon mdi mdi-book-open",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/sidebar.template.html",
+      "pallete": false,
       "properties": {
         "class": {
           "order": 9999
@@ -1942,7 +2590,23 @@
       "class": "adjust-icon mdi mdi-format-header-pound",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/title-default.template.html",
       "properties": {
-        "onclick": {
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
           "removable": true,
           "type": "event"
         },
@@ -2077,7 +2741,23 @@
       "class": "adjust-icon mdi mdi-format-header-2",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/subtitle.template.html",
       "properties": {
-        "onclick": {
+         "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
           "removable": true,
           "type": "event"
         },
@@ -2145,7 +2825,19 @@
           "removable": true,
           "type": "event"
         },
-        "onmouseover": {
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
           "removable": true,
           "type": "event"
         },
@@ -2199,6 +2891,61 @@
           "name": "resize",
           "selector": "textarea",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "textarea",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "textarea",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "textarea",
+          "type": "event"
         }
       ],
       "styles": [
@@ -2308,6 +3055,61 @@
           "name": "mask-placeholder",
           "selector": "input",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ],
       "type": {
@@ -2383,6 +3185,61 @@
           "name": "mask-placeholder",
           "selector": "input",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "input",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "input",
+          "type": "event"
         }
       ],
       "type": {
@@ -2413,6 +3270,26 @@
         },
         "id": {
           "order": 2
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         }
       }
     },
@@ -2513,6 +3390,33 @@
             }
           ]
         }
+      ],
+      "childrenProperties": [
+        {
+          "name": "ng-click",
+          "selector": "div.panel",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "div.panel",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "div.panel",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "div.panel",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "div.panel",
+          "type": "event"
+        }
       ]
     },
     {
@@ -2551,6 +3455,61 @@
           "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
           "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
           "type": "text"
+        },
+        {
+          "name": "ng-click",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-keydown",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-keyup",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+         {
+          "name": "ng-focus",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-blur",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-copy",
+          "selector": "cron-rich-editor",
+          "type": "event"
+        },
+        {
+          "name": "ng-paste",
+          "selector": "cron-rich-editor",
+          "type": "event"
         }
       ]
     },
@@ -2742,10 +3701,10 @@
     },
     {
       "name": "crn-enterprise-combobox",
-      "text_pt_BR": "Caixa de seleção estática",
+      "text_pt_BR": "Caixa de seleção fixa",
       "text_en_US": "Combobox",
       "class": "adjust-icon mdi mdi-equal-box",
-      "order": 3,
+      "order": 9,
       "designTimeDynamic": true,
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox.designtime.html",
       "designTimeSelector": "cron-select",
@@ -2798,35 +3757,42 @@
       "childrenProperties": [
         {
           "name": "on-select",
-          "selector": "cron-dynamic-select",
+          "selector": "cron-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
           "type": "event"
         },
         {
+          "name": "on-change",
+          "selector": "cron-select",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
+        {
           "name": "on-close",
-          "selector": "cron-dynamic-select",
+          "selector": "cron-select",
           "displayName_pt_BR": "Ao Fechar",
           "displayName_en_US": "On Close",
           "type": "event"
         },
         {
           "name": "on-dataBound",
-          "selector": "cron-dynamic-select",
+          "selector": "cron-select",
           "displayName_pt_BR": "Ao Carregar",
           "displayName_en_US": "On DataBound",
           "type": "event"
         },
         {
           "name": "on-filtering",
-          "selector": "cron-dynamic-select",
+          "selector": "cron-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
           "type": "event"
         },
         {
           "name": "on-open",
-          "selector": "cron-dynamic-select",
+          "selector": "cron-select",
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
           "type": "event"
@@ -2879,6 +3845,13 @@
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
+          "type": "event"
+        },
+        {
+          "name": "on-change",
+          "selector": "cron-dynamic-select",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
           "type": "event"
         },
         {
@@ -3024,6 +3997,13 @@
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Selecionar",
           "displayName_en_US": "On Select",
+          "type": "event"
+        },
+        {
+          "name": "on-change",
+          "selector": "cron-multi-select",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
           "type": "event"
         },
         {
@@ -3195,6 +4175,48 @@
           "selector": "label",
           "type": "text",
           "order": 2
+        },
+        {
+          "name": "on-select",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select",
+          "type": "event"
+        },
+        {
+          "name": "on-change",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
+        {
+          "name": "on-close",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Fechar",
+          "displayName_en_US": "On Close",
+          "type": "event"
+        },
+        {
+          "name": "on-dataBound",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Carregar",
+          "displayName_en_US": "On DataBound",
+          "type": "event"
+        },
+        {
+          "name": "on-filtering",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Filtrar",
+          "displayName_en_US": "On Filtering",
+          "type": "event"
+        },
+        {
+          "name": "on-open",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Abrir",
+          "displayName_en_US": "On Open",
+          "type": "event"
         }
       ],
       "styles": [
@@ -3264,6 +4286,48 @@
           "selector": "label",
           "type": "text",
           "order": 2
+        },
+        {
+          "name": "on-select",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Selecionar",
+          "displayName_en_US": "On Select",
+          "type": "event"
+        },
+        {
+          "name": "on-change",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
+        {
+          "name": "on-close",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Fechar",
+          "displayName_en_US": "On Close",
+          "type": "event"
+        },
+        {
+          "name": "on-dataBound",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Carregar",
+          "displayName_en_US": "On DataBound",
+          "type": "event"
+        },
+        {
+          "name": "on-filtering",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Filtrar",
+          "displayName_en_US": "On Filtering",
+          "type": "event"
+        },
+        {
+          "name": "on-open",
+          "selector": "cron-auto-complete",
+          "displayName_pt_BR": "Ao Abrir",
+          "displayName_en_US": "On Open",
+          "type": "event"
         }
       ],
       "styles": [
@@ -3363,6 +4427,20 @@
           "name": "ng-required",
           "selector": "cron-slider",
           "type": "logic"
+        },
+        {
+          "name": "on-change",
+          "selector": "cron-slider",
+          "displayName_pt_BR": "Ao Alterar",
+          "displayName_en_US": "On Change",
+          "type": "event"
+        },
+        {
+          "name": "on-slide",
+          "selector": "cron-slider",
+          "displayName_pt_BR": "Ao Mover Slide",
+          "displayName_en_US": "On Slide",
+          "type": "event"
         }
       ]
     },
@@ -3400,6 +4478,31 @@
           "name": "ng-required",
           "selector": "input",
           "type": "logic"
+        },
+        {
+          "name": "ng-click",
+          "selector": "label",
+          "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "label",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseenter",
+          "selector": "label",
+          "type": "event"
+        },
+        {
+          "name": "ng-mouseleave",
+          "selector": "label",
+          "type": "event"
+        },
+        {
+          "name": "ng-mousemove",
+          "selector": "label",
+          "type": "event"
         }
       ],
       "styles": [
@@ -3437,6 +4540,26 @@
         },
         "content": {
           "order": 9998
+        },
+        "ng-click": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-dblclick": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseenter": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mouseleave": {
+          "removable": true,
+          "type": "event"
+        },
+        "ng-mousemove": {
+          "removable": true,
+          "type": "event"
         }
       },
       "attributesForPreview": [
