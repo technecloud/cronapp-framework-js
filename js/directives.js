@@ -1475,6 +1475,38 @@
           return cmd;
         }
 
+        function getAggregate(column) {
+          if (column.aggregates) {
+            var aggregates = [];
+            column.aggregates.forEach(function(a) {
+              aggregates.push(a.type);
+            });
+            if (aggregates.length > 0)
+              return aggregates;
+          }
+          return undefined;
+        }
+
+        function getAggregateFooter(column, group) {
+          if (column.aggregates) {
+            var footer = [];
+            column.aggregates.forEach(function(a) {
+
+              var typeForLabel = '#='+ a.type + '#';
+              if (a.type == 'average') {
+                typeForLabel = "#=kendo.toString("+ a.type + ",'0.00')#";
+              }
+
+              if (!group)
+                footer.push(a.footerTemplate + ': ' + typeForLabel);
+              else
+                footer.push(a.groupFooterTemplate + ': ' + typeForLabel);
+            });
+            return footer.join('<br/>');
+          }
+          return undefined;
+        }
+
         var columns = [];
         if (options.columns) {
           options.columns.forEach(function(column)  {
@@ -1489,11 +1521,14 @@
                 filterable: column.filterable,
                 hidden: !column.visible
               };
+              debugger;
               addColumn.template = getTemplate(column);
               addColumn.format = getFormat(column);
               addColumn.editor = getEditor.bind(this)(column);
+              addColumn.aggregates = getAggregate(column);
+              addColumn.footerTemplate = getAggregateFooter(column, false);
+              addColumn.groupFooterTemplate = getAggregateFooter(column, true);
               columns.push(addColumn);
-
             }
             else if (column.dataType == "Command") {
               //Se não for editavel, não adiciona colunas de comando
@@ -3290,6 +3325,18 @@ app.kendoHelper = {
       }
     }
 
+    function getAggregate(columns) {
+      var aggregates = [];
+      columns.forEach(function(c) {
+        if (c.aggregates) {
+          c.aggregates.forEach(function(ag) {
+            aggregates.push({field: c.field, aggregate: ag.type});
+          });
+        }
+      });
+      return aggregates;
+    }
+
     var datasourceId = app.common.generateId();
     var datasource = {
       transport: {
@@ -3544,6 +3591,7 @@ app.kendoHelper = {
       schema: schema,
       requestEnd: onRequestEnd
     };
+    datasource.aggregate = getAggregate(columns);
 
     datasource.schema.total = function(){
       return datasource.transport.options.cronappDatasource.getRowsCount();
