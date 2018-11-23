@@ -1521,7 +1521,6 @@
                 filterable: column.filterable,
                 hidden: !column.visible
               };
-              debugger;
               addColumn.template = getTemplate(column);
               addColumn.format = getFormat(column);
               addColumn.editor = getEditor.bind(this)(column);
