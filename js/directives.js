@@ -1493,7 +1493,7 @@
                     column.aggregates.forEach(function(a) {
 
                       var typeForLabel = '#='+ a.type + '#';
-                      if (a.type == 'average') {
+                      if (a.type == 'average' || a.type == 'sum') {
                         typeForLabel = "#=kendo.toString("+ a.type + ",'0.00')#";
                       }
 
