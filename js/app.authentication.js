@@ -237,14 +237,15 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate) {
+      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService) {
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
+        $scope.Notification = Notification;
+        $scope.UploadService = UploadService;
 
         app.registerEventsCronapi($scope, $translate);
-
-
+        
         // Query string params
         var queryStringParams = $location.search();
         for (var key in queryStringParams) {
