@@ -4769,9 +4769,6 @@
         "class": {
           "order": 9999
         },
-        "content": {
-          "order": 9998
-        },
         "ng-click": {
           "removable": true,
           "type": "event"
