@@ -1246,338 +1246,372 @@
                         .replace(/&lt;/g, '<')
                         .replace(/&amp;/g, '&');
                 },
-                getColumns: function(options, datasource, scope) {
-                    var directiveContext = this;
+              getColumns: function(options, datasource, scope) {
+                var directiveContext = this;
 
-                    function getTemplate(column) {
-                        var template = "#=showTreatedValue("+column.field+")#";
-                        if (column.inputType == 'switch') {
-                            template =
-                                '<span class="k-switch km-switch k-widget km-widget k-switch-off km-switch-off" style="width: 100%">\
-                  <span class="k-switch-wrapper km-switch-wrapper">\
-                    <span class="k-switch-background km-switch-background" style="margin-left: #=' + column.field + ' ? "80%": "0%" #"></span>\
+                function getTemplate(column) {
+                  var template = "#=showTreatedValue("+column.field+")#";
+                  if (column.inputType == 'switch') {
+                    template =
+                        '<span class="k-switch km-switch k-widget km-widget k-switch-off km-switch-off" style="width: 100%">\
+                          <span class="k-switch-wrapper km-switch-wrapper">\
+                            <span class="k-switch-background km-switch-background" style="margin-left: #=' + column.field + ' ? "80%": "0%" #"></span>\
                   </span>\
                   <span class="k-switch-container km-switch-container">\
                     <span class="k-switch-handle km-switch-handle" style=#=' + column.field + ' ? "float:right;margin-right:-1px": "margin-left:0%" #>\
                     </span>\
                   </span>\
                 </span>';
-                        }
-                        else if (column.inputType == 'checkbox' || column.type == 'boolean') {
-                            template = "<input type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
-                                "<label class='k-checkbox-label k-no-text'></label>"
-                        }
-                        else if (column.displayField && column.displayField.length > 0) {
-                            if (column.type.startsWith('date') || column.type.startsWith('month')
-                                || column.type.startsWith('time') || column.type.startsWith('week')
-                                || column.type.startsWith('money') || column.type.startsWith('number')
-                                || column.type.startsWith('tel') || (column.format && column.format != 'null')) {
-                                template = "#= useMask("+column.displayField+",'"+column.format+"','"+column.type+"') #";
-                            }
-                            else {
-                                template = "#="+column.displayField+"#";
-                            }
-                        }
-                        else if (column.type.startsWith('date') || column.type.startsWith('month')
-                            || column.type.startsWith('time') || column.type.startsWith('week')
-                            || column.type.startsWith('money') || column.type.startsWith('number')
-                            || column.type.startsWith('tel') || (column.format && column.format != 'null')   ) {
-                            template = "#= useMask("+column.field+",'"+column.format+"','"+column.type+"') #";
-                        }
-                        return template;
+                  }
+                  else if (column.inputType == 'checkbox' || column.type == 'boolean') {
+                    template = "<input type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
+                        "<label class='k-checkbox-label k-no-text'></label>"
+                  }
+                  else if (column.displayField && column.displayField.length > 0) {
+                    if (column.type.startsWith('date') || column.type.startsWith('month')
+                        || column.type.startsWith('time') || column.type.startsWith('week')
+                        || column.type.startsWith('money') || column.type.startsWith('number')
+                        || column.type.startsWith('tel') || (column.format && column.format != 'null')) {
+                      template = "#= useMask("+column.displayField+",'"+column.format+"','"+column.type+"') #";
                     }
-
-                    function getFormat(column) {
-                        if (!column.type.startsWith('date') && !column.type.startsWith('month')
-                            && !column.type.startsWith('time') && !column.type.startsWith('week')
-                            && !column.type.startsWith('money') && !column.type.startsWith('number')
-                            && !column.type.startsWith('tel')
-                        )
-                            return column.format;
-                        return undefined;
+                    else {
+                      template = "#="+column.displayField+"#";
                     }
+                  }
+                  else if (column.type.startsWith('date') || column.type.startsWith('month')
+                      || column.type.startsWith('time') || column.type.startsWith('week')
+                      || column.type.startsWith('money') || column.type.startsWith('number')
+                      || column.type.startsWith('tel') || (column.format && column.format != 'null')   ) {
+                    template = "#= useMask("+column.field+",'"+column.format+"','"+column.type+"') #";
+                  }
+                  return template;
+                }
 
-                    function getColumnByField(fieldName) {
-                        var selected = null;
-                        options.columns.forEach(function(column)  {
-                            if (column.field == fieldName)
-                                selected = column;
+                function getFormat(column) {
+                  if (!column.type.startsWith('date') && !column.type.startsWith('month')
+                      && !column.type.startsWith('time') && !column.type.startsWith('week')
+                      && !column.type.startsWith('money') && !column.type.startsWith('number')
+                      && !column.type.startsWith('tel')
+                  )
+                    return column.format;
+                  return undefined;
+                }
+
+                function getColumnByField(fieldName) {
+                  var selected = null;
+                  options.columns.forEach(function(column)  {
+                    if (column.field == fieldName)
+                      selected = column;
+                  });
+                  return selected;
+                }
+
+                function isRequired(fieldName) {
+                  var required = false;
+                  var selected = null;
+                  if (datasource.schema.model.fields[fieldName]){
+                    selected = datasource.schema.model.fields[fieldName];
+                  }
+                  if (selected)
+                    required = !selected.nullable;
+                  return required;
+                }
+
+                function getEditor(column) {
+                  return editor.bind(this);
+                }
+
+                function editor(container, opt) {
+
+                  var column = getColumnByField(opt.field);
+                  if (column.visibleCrud != undefined && !column.visibleCrud) {
+                    container.parent().find('.k-edit-label [for='+ column.field +']').parent().remove();
+                    container.remove();
+                  }
+                  var required = isRequired(opt.field) ? "required" : "";
+                  var buttonId = app.common.generateId();
+                  var $input = $('<input '+required+' name="' + opt.field + '" id="' + buttonId + '"from-grid=true />');
+                  if (column.inputType == 'dynamicComboBox' || column.inputType == 'comboBox') {
+                    var kendoConfig = app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
+                    kendoConfig.autoBind = true;
+                    kendoConfig.optionLabel = undefined;
+                    if (column.displayField) {
+                      kendoConfig.change = function(e) {
+                        opt.model.set(column.displayField, this.text());
+                        opt.model.dirty = true;
+                        opt.model.dirtyFields[column.displayField] = true;
+                      }
+                    }
+                    $input.appendTo(container).kendoDropDownList(kendoConfig, scope);
+                  }
+                  else if (column.inputType == 'slider') {
+                    var kendoConfig = app.kendoHelper.getConfigSlider(column.sliderOptions);
+                    $input.appendTo(container).kendoSlider(kendoConfig, scope);
+                  }
+                  else if (column.inputType == 'switch') {
+                    var kendoConfig = app.kendoHelper.getConfigSwitch(column.switchOptions);
+                    $input.appendTo(container).kendoMobileSwitch(kendoConfig, scope);
+                  }
+                  else if (column.inputType == 'checkbox' || column.type == 'boolean') {
+                    var guid = app.common.generateId();
+                    $input = $('<input id="'+guid+'" name="' + opt.field + '" class="k-checkbox" type="checkbox" ><label class="k-checkbox-label" for="'+guid+'"></label>');
+                    $input.appendTo(container);
+                  }
+                  else if (column.inputType == 'date') {
+                    $input.attr('cron-date', '');
+                    $input.attr('options', JSON.stringify(column.dateOptions));
+                    $input.data('initial-date', opt.model[opt.field]);
+                    $input.appendTo(container).off('change');
+                    var waitRender = setInterval(function() {
+                      if ($('#' + buttonId).length > 0) {
+                        var x = angular.element($('#' + buttonId ));
+                        $compile(x)(scope);
+                        clearInterval(waitRender);
+
+                        $('#' + buttonId).on('change', function() {
+                          setTimeout(function() {
+                            opt.model[opt.field] = $('#' + buttonId ).data('rawvalue');
+                            opt.model.dirty = true;
+                            opt.model.dirtyFields[opt.field] = true;
+                          }.bind(this));
+
                         });
-                        return selected;
-                    }
+                      }
+                    },10);
+                  }
+                  else {
+                    $input.attr('type', column.type);
+                    $input.attr('mask', column.format ? column.format : '');
+                    $input.attr('class', 'k-input k-textbox');
+                    $input.data('initial-value', opt.model[opt.field]);
+                    $input.appendTo(container);
 
-                    function isRequired(fieldName) {
-                        var required = false;
-                        var selected = null;
-                        if (datasource.schema.model.fields[fieldName]){
-                            selected = datasource.schema.model.fields[fieldName];
-                        }
-                        if (selected)
-                            required = !selected.nullable;
-                        return required;
-                    }
+                    var waitRender = setInterval(function() {
+                      if ($('#' + buttonId).length > 0) {
+                        $('#' + buttonId ).off('change');
+                        $('#' + buttonId ).on('change', function() {
+                          opt.model[opt.field] = $('#' + buttonId ).data('rawvalue');
+                          opt.model.dirty = true;
+                          opt.model.dirtyFields[opt.field] = true;
+                        });
 
-                    function getEditor(column) {
-                        return editor.bind(this);
-                    }
+                        var x = angular.element($('#' + buttonId ));
+                        $compile(x)(scope);
+                        clearInterval(waitRender);
+                      }
+                    },10);
+                  }
 
-                    function editor(container, opt) {
+                }
 
-                        var column = getColumnByField(opt.field);
-                        if (column.visibleCrud != undefined && !column.visibleCrud) {
-                            container.parent().find('.k-edit-label [for='+ column.field +']').parent().remove();
-                            container.remove();
-                        }
-                        var required = isRequired(opt.field) ? "required" : "";
-                        var buttonId = app.common.generateId();
-                        var $input = $('<input '+required+' name="' + opt.field + '" id="' + buttonId + '"from-grid=true />');
-                        if (column.inputType == 'dynamicComboBox' || column.inputType == 'comboBox') {
-                            var kendoConfig = app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
-                            kendoConfig.autoBind = true;
-                            kendoConfig.optionLabel = undefined;
-                            if (column.displayField) {
-                                kendoConfig.change = function(e) {
-                                    opt.model.set(column.displayField, this.text());
-                                    opt.model.dirty = true;
-                                    opt.model.dirtyFields[column.displayField] = true;
-                                }
+                function getCommandForEditButtonDatabase(opt, command) {
+                  var cmd;
+                  if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
+                    cmd = {
+                      name: app.common.generateId(),
+                      text: '',
+                      iconClass: "k-icon k-i-edit",
+                      className: "k-grid-edit",
+                      click: function(e) {
+                        e.preventDefault();
+                        var tr = $(e.target).closest("tr");
+                        var grid = tr.closest('table');
+                        var item = this.dataItem(tr);
+                        var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                        scope.safeApply(function() {
+                          directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
+                          var currentItem = cronappDatasource.goTo(item);
+                          cronappDatasource.startEditing(currentItem, function(xxx) {});
+                          if (opt.editable != 'datasource') {
+                            cronapi.screen.showModal(options.popupEdit);
+                          }
+                        });
+                        return;
+                      }
+                    };
+                  }
+                  else {
+                    cmd = {
+                      name: command,
+                      text: { edit: " ", update: " ", cancel: " " }
+                    };
+                  }
+                  return cmd;
+                }
+
+                function getCommandForRemoveButtonDatabase(opt, command) {
+                  var cmd;
+                  if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
+                    cmd = {
+                      name: app.common.generateId(),
+                      text: '',
+                      iconClass: "k-icon k-i-close",
+                      className: "k-grid-delete",
+                      click: function(e) {
+                        e.preventDefault();
+                        var tr = $(e.target).closest("tr");
+                        var item = this.dataItem(tr);
+                        var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                        var self = this;
+                        scope.safeApply(function() {
+                          var currentItem = cronappDatasource.goTo(item);
+                          var fn;
+                          if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
+                            fn = function(e) {
+                              self.dataSource.remove(item);
                             }
-                            $input.appendTo(container).kendoDropDownList(kendoConfig, scope);
-                        }
-                        else if (column.inputType == 'slider') {
-                            var kendoConfig = app.kendoHelper.getConfigSlider(column.sliderOptions);
-                            $input.appendTo(container).kendoSlider(kendoConfig, scope);
-                        }
-                        else if (column.inputType == 'switch') {
-                            var kendoConfig = app.kendoHelper.getConfigSwitch(column.switchOptions);
-                            $input.appendTo(container).kendoMobileSwitch(kendoConfig, scope);
-                        }
-                        else if (column.inputType == 'checkbox' || column.type == 'boolean') {
-                            var guid = app.common.generateId();
-                            $input = $('<input id="'+guid+'" name="' + opt.field + '" class="k-checkbox" type="checkbox" ><label class="k-checkbox-label" for="'+guid+'"></label>');
-                            $input.appendTo(container);
-                        }
-                        else if (column.inputType == 'date') {
-                            $input.attr('cron-date', '');
-                            $input.attr('options', JSON.stringify(column.dateOptions));
-                            $input.data('initial-date', opt.model[opt.field]);
-                            $input.appendTo(container).off('change');
-                            var waitRender = setInterval(function() {
-                                if ($('#' + buttonId).length > 0) {
-                                    var x = angular.element($('#' + buttonId ));
-                                    $compile(x)(scope);
-                                    clearInterval(waitRender);
+                          }
 
-                                    $('#' + buttonId).on('change', function() {
-                                        setTimeout(function() {
-                                            opt.model[opt.field] = $('#' + buttonId ).data('rawvalue');
-                                            opt.model.dirty = true;
-                                            opt.model.dirtyFields[opt.field] = true;
-                                        }.bind(this));
+                          cronappDatasource.remove(currentItem, fn);
+                        });
+                      }
+                    };
+                  } else {
+                    cmd = {
+                      name: command,
+                      text: " "
+                    };
+                  }
+                  return cmd;
+                }
 
-                                    });
-                                }
-                            },10);
-                        }
-                        else {
-                            $input.attr('type', column.type);
-                            $input.attr('mask', column.format ? column.format : '');
-                            $input.attr('class', 'k-input k-textbox');
-                            $input.data('initial-value', opt.model[opt.field]);
-                            $input.appendTo(container);
+                function getAggregate(column) {
+                  if (column.aggregates) {
+                    var aggregates = [];
+                    column.aggregates.forEach(function(a) {
+                      aggregates.push(a.type);
+                    });
+                    if (aggregates.length > 0)
+                      return aggregates;
+                  }
+                  return undefined;
+                }
 
-                            var waitRender = setInterval(function() {
-                                if ($('#' + buttonId).length > 0) {
-                                    $('#' + buttonId ).off('change');
-                                    $('#' + buttonId ).on('change', function() {
-                                        opt.model[opt.field] = $('#' + buttonId ).data('rawvalue');
-                                        opt.model.dirty = true;
-                                        opt.model.dirtyFields[opt.field] = true;
-                                    });
+                function getAggregateFooter(column, group) {
+                  if (column.aggregates) {
+                    var footer = [];
+                    column.aggregates.forEach(function(a) {
 
-                                    var x = angular.element($('#' + buttonId ));
-                                    $compile(x)(scope);
-                                    clearInterval(waitRender);
-                                }
-                            },10);
-                        }
+                      var typeForLabel = '#='+ a.type + '#';
+                      if (a.type == 'average') {
+                        typeForLabel = "#=kendo.toString("+ a.type + ",'0.00')#";
+                      }
 
+                      if (!group)
+                        footer.push(a.footerTemplate + ': ' + typeForLabel);
+                      else
+                        footer.push(a.groupFooterTemplate + ': ' + typeForLabel);
+                    });
+                    return footer.join('<br/>');
+                  }
+                  return undefined;
+                }
+
+                var columns = [];
+                if (options.columns) {
+                  options.columns.forEach(function(column)  {
+                    if (column.dataType == "Database") {
+
+                      var addColumn = {
+                        field: column.field,
+                        title: column.headerText,
+                        type: column.type,
+                        width: column.width,
+                        sortable: column.sortable,
+                        filterable: column.filterable,
+                        hidden: !column.visible
+                      };
+                      addColumn.template = getTemplate(column);
+                      addColumn.format = getFormat(column);
+                      addColumn.editor = getEditor.bind(this)(column);
+                      addColumn.aggregates = getAggregate(column);
+                      addColumn.footerTemplate = getAggregateFooter(column, false);
+                      addColumn.groupFooterTemplate = getAggregateFooter(column, true);
+                      columns.push(addColumn);
                     }
+                    else if (column.dataType == "Command") {
+                      //Se não for editavel, não adiciona colunas de comando
+                      if (options.editable != 'no') {
+                        var command = column.command.split('|');
 
-                    function getCommandForEditButtonDatabase(opt, command) {
-                        var cmd;
-                        if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
-                            cmd = {
-                                name: app.common.generateId(),
-                                text: '',
-                                iconClass: "k-icon k-i-edit",
-                                className: "k-grid-edit",
-                                click: function(e) {
-                                    e.preventDefault();
-                                    var tr = $(e.target).closest("tr");
-                                    var grid = tr.closest('table');
-                                    var item = this.dataItem(tr);
-                                    var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                                    scope.safeApply(function() {
-                                        directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
-                                        var currentItem = cronappDatasource.goTo(item);
-                                        cronappDatasource.startEditing(currentItem, function(xxx) {});
-                                        if (opt.editable != 'datasource') {
-                                            cronapi.screen.showModal(options.popupEdit);
-                                        }
-                                    });
-                                    return;
-                                }
-                            };
-                        }
-                        else {
-                            cmd = {
-                                name: command,
-                                text: { edit: " ", update: " ", cancel: " " }
-                            };
-                        }
-                        return cmd;
-                    }
-
-                    function getCommandForRemoveButtonDatabase(opt, command) {
-                        var cmd;
-                        if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
-                            cmd = {
-                                name: app.common.generateId(),
-                                text: '',
-                                iconClass: "k-icon k-i-close",
-                                className: "k-grid-delete",
-                                click: function(e) {
-                                    e.preventDefault();
-                                    var tr = $(e.target).closest("tr");
-                                    var item = this.dataItem(tr);
-                                    var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                                    var self = this;
-                                    scope.safeApply(function() {
-                                        var currentItem = cronappDatasource.goTo(item);
-                                        var fn;
-                                        if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
-                                            fn = function(e) {
-                                                self.dataSource.remove(item);
-                                            }
-                                        }
-
-                                        cronappDatasource.remove(currentItem, fn);
-                                    });
-                                }
-                            };
-                        } else {
-                            cmd = {
-                                name: command,
-                                text: " "
-                            };
-                        }
-                        return cmd;
-                    }
-
-                    var columns = [];
-                    if (options.columns) {
-                        options.columns.forEach(function(column)  {
-                            if (column.dataType == "Database") {
-
-                                var addColumn = {
-                                    field: column.field,
-                                    title: column.headerText,
-                                    type: column.type,
-                                    width: column.width,
-                                    sortable: column.sortable,
-                                    filterable: column.filterable,
-                                    hidden: !column.visible
-                                };
-                                addColumn.template = getTemplate(column);
-                                addColumn.format = getFormat(column);
-                                addColumn.editor = getEditor.bind(this)(column);
-                                columns.push(addColumn);
-
-                            }
-                            else if (column.dataType == "Command") {
-                                //Se não for editavel, não adiciona colunas de comando
-                                if (options.editable != 'no') {
-                                    var command = column.command.split('|');
-
-                                    var commands = [];
-                                    command.forEach(function(f) {
-                                        var cmd;
-                                        if ( f == "edit") {
-                                            cmd = getCommandForEditButtonDatabase.bind(this)(options, f);
-                                        }
-                                        else {
-                                            cmd = getCommandForRemoveButtonDatabase.bind(this)(options, f);
-                                        }
-                                        commands.push(cmd);
-                                    }.bind(this));
-
-                                    var addColumn = {
-                                        command: commands,
-                                        title: column.headerText,
-                                        width: column.width ? column.width : 155,
-                                        hidden: !column.visible
-                                    };
-                                    columns.push(addColumn);
-                                }
-                            }
-                            else if (column.dataType == "Blockly" || column.dataType == "Customized") {
-
-                                var addColumn = {
-                                    command: [{
-                                        name: app.common.generateId(),
-                                        text: column.headerText == undefined ? '': column.headerText,
-                                        hidden: !column.visible,
-                                        className: "k-custom-command",
-                                        iconClass: column.iconClass,
-                                        click: function(e) {
-                                            e.preventDefault();
-                                            var tr = $(e.target).closest("tr");
-                                            var grid = tr.closest('table');
-
-                                            var item = this.dataItem(tr);
-                                            var index = $(grid.find('tbody')[0]).children().index(tr)
-                                            var consolidated = {
-                                                item: item,
-                                                index: index
-                                            }
-
-                                            var call = undefined;
-                                            if (column.dataType == "Customized")
-                                                call = column.execute;
-                                            else
-                                                call = directiveContext.generateBlocklyCall(column.blocklyInfo);
-
-                                            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                                            if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
-                                                var tr = e.currentTarget.parentElement.parentElement;
-                                                this.select(tr);
-                                            }
-
-                                            var contextVars = {
-                                                'currentData': cronappDatasource.data,
-                                                'datasource': cronappDatasource,
-                                                'selectedIndex': index,
-                                                'index': index,
-                                                'selectedRow': item,
-                                                'consolidated': consolidated,
-                                                'item': item,
-                                                'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true)
-                                            };
-
-                                            scope.$eval(call, contextVars);
-                                            return;
-                                        }
-                                    }],
-                                    width: column.width
-                                };
-                                columns.push(addColumn);
-                            }
+                        var commands = [];
+                        command.forEach(function(f) {
+                          var cmd;
+                          if ( f == "edit") {
+                            cmd = getCommandForEditButtonDatabase.bind(this)(options, f);
+                          }
+                          else {
+                            cmd = getCommandForRemoveButtonDatabase.bind(this)(options, f);
+                          }
+                          commands.push(cmd);
                         }.bind(this));
-                    }
 
-                    return columns;
-                },
+                        var addColumn = {
+                          command: commands,
+                          title: column.headerText,
+                          width: column.width ? column.width : 155,
+                          hidden: !column.visible
+                        };
+                        columns.push(addColumn);
+                      }
+                    }
+                    else if (column.dataType == "Blockly" || column.dataType == "Customized") {
+
+                      var addColumn = {
+                        command: [{
+                          name: app.common.generateId(),
+                          text: column.headerText == undefined ? '': column.headerText,
+                          hidden: !column.visible,
+                          className: "k-custom-command",
+                          iconClass: column.iconClass,
+                          click: function(e) {
+                            e.preventDefault();
+                            var tr = $(e.target).closest("tr");
+                            var grid = tr.closest('table');
+
+                            var item = this.dataItem(tr);
+                            var index = $(grid.find('tbody')[0]).children().index(tr)
+                            var consolidated = {
+                              item: item,
+                              index: index
+                            }
+
+                            var call = undefined;
+                            if (column.dataType == "Customized")
+                              call = column.execute;
+                            else
+                              call = directiveContext.generateBlocklyCall(column.blocklyInfo);
+
+                            var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                            if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
+                              var tr = e.currentTarget.parentElement.parentElement;
+                              this.select(tr);
+                            }
+
+                            var contextVars = {
+                              'currentData': cronappDatasource.data,
+                              'datasource': cronappDatasource,
+                              'selectedIndex': index,
+                              'index': index,
+                              'selectedRow': item,
+                              'consolidated': consolidated,
+                              'item': item,
+                              'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true)
+                            };
+
+                            scope.$eval(call, contextVars);
+                            return;
+                          }
+                        }],
+                        width: column.width
+                      };
+                      columns.push(addColumn);
+                    }
+                  }.bind(this));
+                }
+
+                return columns;
+              },
                 getPageAble: function(options) {
                     var pageable = {
                         refresh:  options.allowRefreshGrid,
@@ -3189,367 +3223,380 @@ app.kendoHelper = {
         }
         return schema;
     },
-    getDataSource: function(dataSource, scope, allowPaging, pageCount, columns) {
-        var schema = this.getSchema(dataSource);
+  getDataSource: function(dataSource, scope, allowPaging, pageCount, columns) {
+    var schema = this.getSchema(dataSource);
+    if (columns) {
+      columns.forEach(function(c) {
+        for (var key in schema.model.fields) {
+          if (c.dataType == "Database" && c.field == key ) {
+            schema.model.fields[key].nullable = !c.required;
+            schema.model.fields[key].validation.required = c.required;
+            break;
+          }
+        }
+      });
+    }
+
+    var parseParameter = function(data) {
+      for (var attr in data) {
+        if (schema.model.fields.hasOwnProperty(attr)) {
+
+          var schemaField = schema.model.fields[attr];
+          if (schemaField.type == 'string' && data[attr] != undefined)
+            data[attr] = data[attr] + "";
+          else if (schemaField.type == 'number' && data[attr] != undefined)
+            data[attr] = parseFloat(data[attr]);
+          else if (schemaField.type == 'date' && data[attr] != undefined)
+            data[attr] = '/Date('+data[attr].getTime()+')/';
+          else if (schemaField.type == 'boolean') {
+            if (data[attr] == undefined)
+              data[attr] = false;
+            else
+              data[attr] = data[attr].toString().toLowerCase() == "true"?true:false;
+          }
+
+          //Significa que é o ID
+          if (schema.model.id == attr) {
+            //Se o mesmo for vazio, remover do data
+            if (data[attr] != undefined && data[attr].toString().length == 0)
+              delete data[attr];
+          }
+        }
+      }
+      return data;
+    };
+
+    var pageSize = 10;
+    if (scope[dataSource.name])
+      pageSize = scope[dataSource.name].rowsPerPage;
+
+    //Quando não for data UTC
+    var offsetMiliseconds = new Date().getTimezoneOffset() * 60000;
+    function onRequestEnd(e) {
+      if (e.response  && e.response.d ) {
+        var items = null;
+        if (e.response.d.results)
+          items = e.response.d.results;
+        else
+          items = [e.response.d];
+
+        if (this.group().length) {
+
+          columns.forEach( function(c) {
+            if (c.dataType == 'Database') {
+              var notUseUTC = c.type == 'datetime-local' || c.type == 'month' || c.type == 'time-local' || c.type == 'week';
+              if (notUseUTC) {
+                for (var i = 0; i < items.length; i++) {
+                  var gr = items[i];
+                  if (c.field == gr.Member) {
+                    gr.Key = gr.Key.replace(/\d+/,
+                        function (n) { return parseInt(n) + offsetMiliseconds }
+                    );
+                  }
+                  addOffset.bind(this)(gr.Items);
+                }
+              }
+            }
+          });
+        } else {
+          addOffset.bind(this)(items);
+        }
+      }
+    }
+
+    function addOffset(items) {
+      for (var i = 0; i < items.length; i++) {
         if (columns) {
-            columns.forEach(function(c) {
-                for (var key in schema.model.fields) {
-                    if (c.dataType == "Database" && c.field == key ) {
-                        schema.model.fields[key].nullable = !c.required;
-                        schema.model.fields[key].validation.required = c.required;
-                        break;
-                    }
+          columns.forEach( function(c) {
+            if (c.dataType == 'Database') {
+              var notUseUTC = c.type == 'datetime-local' || c.type == 'month' || c.type == 'time-local' || c.type == 'week';
+              if (notUseUTC) {
+                if (items[i][c.field]) {
+                  items[i][c.field] = items[i][c.field].replace(/\d+/,
+                      function (n) { return parseInt(n) + offsetMiliseconds }
+                  );
                 }
-            });
+              }
+            }
+          });
         }
 
-        var parseParameter = function(data) {
-            for (var attr in data) {
-                if (schema.model.fields.hasOwnProperty(attr)) {
+      }
+    }
 
-                    var schemaField = schema.model.fields[attr];
-                    if (schemaField.type == 'string' && data[attr] != undefined)
-                        data[attr] = data[attr] + "";
-                    else if (schemaField.type == 'number' && data[attr] != undefined)
-                        data[attr] = parseFloat(data[attr]);
-                    else if (schemaField.type == 'date' && data[attr] != undefined)
-                        data[attr] = '/Date('+data[attr].getTime()+')/';
-                    else if (schemaField.type == 'boolean') {
-                        if (data[attr] == undefined)
-                            data[attr] = false;
-                        else
-                            data[attr] = data[attr].toString().toLowerCase() == "true"?true:false;
-                    }
+    function getAggregate(columns) {
+      var aggregates = [];
+      columns.forEach(function(c) {
+        if (c.aggregates) {
+          c.aggregates.forEach(function(ag) {
+            aggregates.push({field: c.field, aggregate: ag.type});
+          });
+        }
+      });
+      return aggregates;
+    }
 
-                    //Significa que é o ID
-                    if (schema.model.id == attr) {
-                        //Se o mesmo for vazio, remover do data
-                        if (data[attr] != undefined && data[attr].toString().length == 0)
-                            delete data[attr];
-                    }
+    var datasourceId = app.common.generateId();
+    var datasource = {
+      transport: {
+        setActiveAndPost: function(e) {
+          var cronappDatasource = this.options.cronappDatasource;
+          scope.safeApply(cronappDatasource.updateActive(parseParameter(e.data)));
+          cronappDatasource.active.__sender = datasourceId;
+          cronappDatasource.postSilent(
+              function(data) {
+                this.options.enableAndSelect(e);
+                e.success(data);
+              }.bind(this),
+              function(data) {
+                this.options.enableAndSelect(e);
+                e.error(data, data, data);
+              }.bind(this)
+          );
+        },
+        push: function(callback) {
+          if (!this.options.dataSourceEventsPush && this.options.cronappDatasource) {
+            this.options.dataSourceEventsPush = {
+              create: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushUpdate(data);
                 }
-            }
-            return data;
-        };
-
-        var pageSize = 10;
-        if (scope[dataSource.name])
-            pageSize = scope[dataSource.name].rowsPerPage;
-
-        //Quando não for data UTC
-        var offsetMiliseconds = new Date().getTimezoneOffset() * 60000;
-        function onRequestEnd(e) {
-            if (e.response  && e.response.d ) {
-                var items = null;
-                if (e.response.d.results)
-                    items = e.response.d.results;
                 else
-                    items = [e.response.d];
-
-                if (this.group().length) {
-
-                    columns.forEach( function(c) {
-                        if (c.dataType == 'Database') {
-                            var notUseUTC = c.type == 'datetime-local' || c.type == 'month' || c.type == 'time-local' || c.type == 'week';
-                            if (notUseUTC) {
-                                for (var i = 0; i < items.length; i++) {
-                                    var gr = items[i];
-                                    if (c.field == gr.Member) {
-                                        gr.Key = gr.Key.replace(/\d+/,
-                                            function (n) { return parseInt(n) + offsetMiliseconds }
-                                        );
-                                    }
-                                    addOffset.bind(this)(gr.Items);
-                                }
-                            }
-                        }
-                    });
-                } else {
-                    addOffset.bind(this)(items);
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              update: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushUpdate(data);
                 }
+                else
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              delete: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushDestroy(data);
+                }
+                else
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              overRideRefresh: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  this.options.grid.dataSource.read();
+                } else if (this.options.combobox) {
+                  if (!this.options.initRead) {
+                    this.options.combobox.value('');
+                    if (this.options.ngModelCtrl) {
+                      this.options.ngModelCtrl.$setViewValue(this.options.combobox.value());
+                    }
+                  } else {
+                    this.options.initRead = false;
+                  }
+
+                  this.options.combobox.dataSource.read();
+                }
+              }.bind(this),
+              read: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  this.options.fromRead = true;
+                  this.options.grid.dataSource.read();
+                }
+              }.bind(this),
+              memorycreate: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushUpdate(data);
+                }
+                else
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              memoryupdate: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushUpdate(data);
+                }
+                else
+                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+              }.bind(this),
+              memorydelete: function(data) {
+                if (this.options.isGridInDocument(this.options.grid)) {
+                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
+                  current.pushDestroy(data);
+                }
+
+              }.bind(this)
+            };
+            this.options.cronappDatasource.addDataSourceEvents(this.options.dataSourceEventsPush);
+          }
+        },
+        read:  function (e) {
+
+          var doFetch = false;
+          try {
+            var cronappDatasource = this.options.cronappDatasource;
+            var grid = this.options.grid;
+
+            if (!this.options.kendoCallback) {
+              this.options.kendoCallback = e;
+              doFetch = true;
             }
-        }
-
-        function addOffset(items) {
-            for (var i = 0; i < items.length; i++) {
-                if (columns) {
-                    columns.forEach( function(c) {
-                        if (c.dataType == 'Database') {
-                            var notUseUTC = c.type == 'datetime-local' || c.type == 'month' || c.type == 'time-local' || c.type == 'week';
-                            if (notUseUTC) {
-                                if (items[i][c.field]) {
-                                    items[i][c.field] = items[i][c.field].replace(/\d+/,
-                                        function (n) { return parseInt(n) + offsetMiliseconds }
-                                    );
-                                }
-                            }
-                        }
-                    });
-                }
-
+            else {
+              if (this.options.fromRead) {
+                this.options.kendoCallback.success(cronappDatasource.data);
+              }
+              else {
+                doFetch = true;
+              }
             }
-        }
+          } finally {
+            this.options.fromRead = false;
+          }
 
-        var datasourceId = app.common.generateId();
-        var datasource = {
-            transport: {
-                setActiveAndPost: function(e) {
-                    var cronappDatasource = this.options.cronappDatasource;
-                    scope.safeApply(cronappDatasource.updateActive(parseParameter(e.data)));
-                    cronappDatasource.active.__sender = datasourceId;
-                    cronappDatasource.postSilent(
-                        function(data) {
-                            this.options.enableAndSelect(e);
-                            e.success(data);
-                        }.bind(this),
-                        function(data) {
-                            this.options.enableAndSelect(e);
-                            e.error(data, data, data);
-                        }.bind(this)
-                    );
-                },
-                push: function(callback) {
-                    if (!this.options.dataSourceEventsPush && this.options.cronappDatasource) {
-                        this.options.dataSourceEventsPush = {
-                            create: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                                    current.pushUpdate(data);
-                                }
-                                else
-                                    this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-                            }.bind(this),
-                            update: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                                    current.pushUpdate(data);
-                                }
-                                else
-                                    this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-                            }.bind(this),
-                            delete: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                                    current.pushDestroy(data);
-                                }
-                                else
-                                    this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-                            }.bind(this),
-                            overRideRefresh: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    this.options.grid.dataSource.read();
-                                } else if (this.options.combobox) {
-                                    if (!this.options.initRead) {
-                                        this.options.combobox.value('');
-                                        if (this.options.ngModelCtrl) {
-                                            this.options.ngModelCtrl.$setViewValue(this.options.combobox.value());
-                                        }
-                                    } else {
-                                        this.options.initRead = false;
-                                    }
+          if (doFetch) {
+            for (key in e.data)
+              if(e.data[key] == undefined)
+                delete e.data[key];
+            var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
+            var orderBy = '';
 
-                                    this.options.combobox.dataSource.read();
-                                }
-                            }.bind(this),
-                            read: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    this.options.fromRead = true;
-                                    this.options.grid.dataSource.read();
-                                }
-                            }.bind(this),
-                            memorycreate: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                                    current.pushUpdate(data);
-                                }
-                                else
-                                    this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-                            }.bind(this),
-                            memoryupdate: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                                    current.pushUpdate(data);
-                                }
-                                else
-                                    this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-                            }.bind(this),
-                            memorydelete: function(data) {
-                                if (this.options.isGridInDocument(this.options.grid)) {
-                                    var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                                    current.pushDestroy(data);
-                                }
+            if (this.options.grid) {
+              this.options.grid.dataSource.group().forEach(function(group) {
+                orderBy += group.field +" " + group.dir + ",";
+              });
+            }
+            if (orderBy.length > 0) {
+              orderBy = orderBy.substr(0, orderBy.length-1);
+              if (paramsOData.$orderby)
+                paramsOData.$orderby =  orderBy + "," + paramsOData.$orderby;
+              else
+                paramsOData.$orderby = orderBy;
+            }
 
-                            }.bind(this)
-                        };
-                        this.options.cronappDatasource.addDataSourceEvents(this.options.dataSourceEventsPush);
-                    }
-                },
-                read:  function (e) {
+            var cronappDatasource = this.options.cronappDatasource;
+            cronappDatasource.rowsPerPage = e.data.pageSize;
+            cronappDatasource.offset = (e.data.page - 1);
 
-                    var doFetch = false;
-                    try {
-                        var cronappDatasource = this.options.cronappDatasource;
-                        var grid = this.options.grid;
-
-                        if (!this.options.kendoCallback) {
-                            this.options.kendoCallback = e;
-                            doFetch = true;
-                        }
-                        else {
-                            if (this.options.fromRead) {
-                                this.options.kendoCallback.success(cronappDatasource.data);
-                            }
-                            else {
-                                doFetch = true;
-                            }
-                        }
-                    } finally {
-                        this.options.fromRead = false;
-                    }
-
-                    if (doFetch) {
-                        for (key in e.data)
-                            if(e.data[key] == undefined)
-                                delete e.data[key];
-                        var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
-                        var orderBy = '';
-
-                        if (this.options.grid) {
-                            this.options.grid.dataSource.group().forEach(function(group) {
-                                orderBy += group.field +" " + group.dir + ",";
-                            });
-                        }
-                        if (orderBy.length > 0) {
-                            orderBy = orderBy.substr(0, orderBy.length-1);
-                            if (paramsOData.$orderby)
-                                paramsOData.$orderby =  orderBy + "," + paramsOData.$orderby;
-                            else
-                                paramsOData.$orderby = orderBy;
-                        }
-
-                        var cronappDatasource = this.options.cronappDatasource;
-                        cronappDatasource.rowsPerPage = e.data.pageSize;
-                        cronappDatasource.offset = (e.data.page - 1);
-
-                        //Significa que quer exibir todos
-                        if (!e.data.pageSize) {
-                            cronappDatasource.offset = undefined
-                            delete paramsOData.$skip;
-                            if (this.options.grid) {
-                                //Se houver grade associado, e a pagina não for a primeira, cancela a chamada atual, e faz novamente selecionando a pagina 1
-                                if (this.options.grid.dataSource.page() != 1) {
-                                    this.options.grid.dataSource.page(1);
-                                    e.error("canceled", "canceled", "canceled");
-                                    return;
-                                }
-                            }
-                        }
-
-                        var fetchData = {};
-                        fetchData.params = paramsOData;
-                        var append = false;
-                        if (dataSource.append) {
-                            append = dataSource.append;
-                        }
-                        cronappDatasource.append = append;
-                        cronappDatasource.fetch(fetchData, {
-                            success:  function(data) {
-                                e.success(data);
-                            },
-                            canceled:  function(data) {
-                                e.error("canceled", "canceled", "canceled");
-                            }
-                        }, append);
-                    }
-
-                },
-                update: function(e) {
-                    this.setActiveAndPost(e);
-                },
-                create: function (e) {
-                    this.setActiveAndPost(e);
-                },
-                destroy: function(e) {
-                    cronappDatasource = this.options.cronappDatasource;
-                    cronappDatasource.removeSilent(e.data,
-                        function(data) {
-                            e.success(data);
-                        },
-                        function(data) {
-                            e.error("canceled", "canceled", "canceled");
-                        }
-                    );
-                },
-                batch: function (e) {
-                },
-                options: {
-                    fromRead: false,
-                    disableAndSelect: function(e) {
-                        if (this.isGridInDocument(this.grid)) {
-                            this.grid.select(e.container);
-                            this.grid.options.selectable = false;
-                            if (this.grid.selectable && this.grid.selectable.element) {
-                                this.grid.selectable.destroy();
-                                this.grid.selectable = null;
-                            }
-                        }
-                    },
-                    enableAndSelect: function(e) {
-                        if (this.isGridInDocument(this.grid)) {
-                            this.grid.options.selectable = "row";
-                            this.grid._selectable();
-                            this.grid.select(e.container);
-                        }
-                    },
-                    selectActiveInGrid: function(data) {
-                        //Verifica se já existe a grid
-                        if (this.isGridInDocument(this.grid)) {
-                            //Verifica se tem a opção selecionavel setada e se tem registros
-                            if (this.grid.selectable && this.grid.dataItems().length > 0) {
-                                //Se já existir o active setado, verifica se tem na grade
-                                if (this.cronappDatasource.active && this.cronappDatasource.active.__$id) {
-                                    var items = this.grid.dataItems();
-                                    var idxSelected = -1;
-                                    for (var idx = 0; idx < items.length; idx++) {
-                                        if (this.cronappDatasource.active.__$id == items[idx].__$id) {
-                                            idxSelected = idx;
-                                            break;
-                                        }
-                                    }
-                                    if (idxSelected >-1)
-                                        this.grid.select(this.grid.table.find('tr')[idxSelected]);
-                                }
-                            }
-                        }
-                    },
-                    isGridInDocument: function(grid) {
-                        if (!grid) return false;
-                        //Se não tiver element, significa que é
-                        //Verifica se a grade ainda existe
-                        return ($(document).has(grid.element[0]).length);
-                    },
-                    getCurrentCallbackForPush: function(callback, grid) {
-                        if (callback)
-                            return callback;
-                        return grid;
-                    },
-                    cronappDatasource: scope[dataSource.name]
+            //Significa que quer exibir todos
+            if (!e.data.pageSize) {
+              cronappDatasource.offset = undefined
+              delete paramsOData.$skip;
+              if (this.options.grid) {
+                //Se houver grade associado, e a pagina não for a primeira, cancela a chamada atual, e faz novamente selecionando a pagina 1
+                if (this.options.grid.dataSource.page() != 1) {
+                  this.options.grid.dataSource.page(1);
+                  e.error("canceled", "canceled", "canceled");
+                  return;
                 }
-            },
-            pageSize: pageSize,
-            serverPaging: true,
-            serverFiltering: true,
-            serverSorting: true,
-            batch: false,
-            schema: schema,
-            requestEnd: onRequestEnd
-        };
+              }
+            }
 
-        datasource.schema.total = function(){
-            return datasource.transport.options.cronappDatasource.getRowsCount();
-        };
-        return datasource;
-    },
+            var fetchData = {};
+            fetchData.params = paramsOData;
+            var append = false;
+            if (dataSource.append) {
+              append = dataSource.append;
+            }
+            cronappDatasource.append = append;
+            cronappDatasource.fetch(fetchData, {
+              success:  function(data) {
+                e.success(data);
+              },
+              canceled:  function(data) {
+                e.error("canceled", "canceled", "canceled");
+              }
+            }, append);
+          }
+
+        },
+        update: function(e) {
+          this.setActiveAndPost(e);
+        },
+        create: function (e) {
+          this.setActiveAndPost(e);
+        },
+        destroy: function(e) {
+          cronappDatasource = this.options.cronappDatasource;
+          cronappDatasource.removeSilent(e.data,
+              function(data) {
+                e.success(data);
+              },
+              function(data) {
+                e.error("canceled", "canceled", "canceled");
+              }
+          );
+        },
+        batch: function (e) {
+        },
+        options: {
+          fromRead: false,
+          disableAndSelect: function(e) {
+            if (this.isGridInDocument(this.grid)) {
+              this.grid.select(e.container);
+              this.grid.options.selectable = false;
+              if (this.grid.selectable && this.grid.selectable.element) {
+                this.grid.selectable.destroy();
+                this.grid.selectable = null;
+              }
+            }
+          },
+          enableAndSelect: function(e) {
+            if (this.isGridInDocument(this.grid)) {
+              this.grid.options.selectable = "row";
+              this.grid._selectable();
+              this.grid.select(e.container);
+            }
+          },
+          selectActiveInGrid: function(data) {
+            //Verifica se já existe a grid
+            if (this.isGridInDocument(this.grid)) {
+              //Verifica se tem a opção selecionavel setada e se tem registros
+              if (this.grid.selectable && this.grid.dataItems().length > 0) {
+                //Se já existir o active setado, verifica se tem na grade
+                if (this.cronappDatasource.active && this.cronappDatasource.active.__$id) {
+                  var items = this.grid.dataItems();
+                  var idxSelected = -1;
+                  for (var idx = 0; idx < items.length; idx++) {
+                    if (this.cronappDatasource.active.__$id == items[idx].__$id) {
+                      idxSelected = idx;
+                      break;
+                    }
+                  }
+                  if (idxSelected >-1)
+                    this.grid.select(this.grid.table.find('tr')[idxSelected]);
+                }
+              }
+            }
+          },
+          isGridInDocument: function(grid) {
+            if (!grid) return false;
+            //Se não tiver element, significa que é
+            //Verifica se a grade ainda existe
+            return ($(document).has(grid.element[0]).length);
+          },
+          getCurrentCallbackForPush: function(callback, grid) {
+            if (callback)
+              return callback;
+            return grid;
+          },
+          cronappDatasource: scope[dataSource.name]
+        }
+      },
+      pageSize: pageSize,
+      serverPaging: true,
+      serverFiltering: true,
+      serverSorting: true,
+      batch: false,
+      schema: schema,
+      requestEnd: onRequestEnd
+    };
+    datasource.aggregate = getAggregate(columns);
+
+    datasource.schema.total = function(){
+      return datasource.transport.options.cronappDatasource.getRowsCount();
+    };
+    return datasource;
+  },
     getEventReadCombo: function (e) {
         for (key in e.data) {
             if(e.data[key] == undefined) {
