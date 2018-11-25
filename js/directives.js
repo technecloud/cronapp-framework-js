@@ -2076,11 +2076,13 @@
                     return false;
                 },
                 getModelParent: function (parametersExpression) {
-                    if (typeof parametersExpression === 'string' && parametersExpression.length > 9) {
+                    if (typeof parametersExpression === 'string' && parametersExpression.length > 9 && parametersExpression.indexOf('|raw}}') > 0) {
                         parametersExpression = parametersExpression.trim();
                         var model = parametersExpression.substr(parametersExpression.indexOf('{{') + 2);
                         model = model.substr(0, model.indexOf('|raw}}'))
                         return model.trim();
+                    } else {
+                        return null;
                     }
                 },
                 link: function (scope, element, attrs, ngModelCtrl) {
@@ -2157,51 +2159,86 @@
                      * firstValue() - Método utilizado para setar o valor do primeiro registro no model e no componente.
                      */
                     var _ngModelCtrl = ngModelCtrl;
+                    var _goTo = this.goTo;
                     var firstValue = function(data) {
                         if (dataSourceScreen && dataSourceScreen.active &&
-                            dataSourceScreen.active[select.dataValueField] && !parentDS) {
+                            dataSourceScreen.active[select.dataValueField]) {
                             combobox.value(dataSourceScreen.active[select.dataValueField]);
                             combobox.refresh();
-                            if (data) {
-                                combobox.dataSource.success(data);
-                            }
+                            combobox.dataSource.success(data);
 
                             $timeout(function() {
                                 _scope.$apply(function(){
-                                    _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
+                                    if (dataSourceScreen.active && dataSourceScreen.active[select.dataValueField]) {
+                                        _ngModelCtrl.$setViewValue(dataSourceScreen.active[select.dataValueField]);
+                                    }
                                 });
-
-                                if (select.changeCursor) {
-                                    _goTo(scope, combobox, dataSourceScreen.active[select.dataValueField]);
-                                }
                             });
                         }
                     }
 
                     /**
-                     * Escutando o model pai (caso exista). Caso o usuário configure para pegar o primeiro valor do dataset seta a váriavel firstValue para ser usada no addDataSourceEvents({read()).
-         */
-                    if (select.firstValue && dataSourceScreen.parametersExpression && this.getModelParent(dataSourceScreen.parametersExpression)) {
+                     * Escutando o model pai (caso exista). 
+                     */
+                    select.lazyFirstValue = false;
+                    select.lazyInitValue = null;
+                    if (dataSourceScreen.parametersExpression && this.getModelParent(dataSourceScreen.parametersExpression) != null) {
+                        select.lazyFirstValue = select.firstValue;
+                        select.lazyInitValue = select.initValue;
+                        select.firstValue = false;
+
+                        var resetValues = function() {
+                            $timeout(function() {
+                                select.initValue = null;
+                                select.lazyInitValue = null;
+                                dataSourceScreen.active = null;
+                                _scope.$apply(function(){
+                                    _ngModelCtrl.$setViewValue(null);
+                                });
+                                combobox.value(undefined);
+                                combobox.refresh();  
+                            });                              
+                        }
+
                         scope.$watch(this.getModelParent(dataSourceScreen.parametersExpression), function(newValue, oldValue) {
-                            select.firstValue = true;
+                            select.firstValue = false;
+                            if (newValue && newValue != null) {
+                                if (!select.changedNull) {
+                                    select.firstValue = select.lazyFirstValue;
+                                }
+                                select.changedNull = false;
+                                if (oldValue && newValue != oldValue) {
+                                    resetValues();
+                                }
+                            } else if (oldValue && oldValue != null && !newValue && !select.changedNull) {
+                                select.changedNull = true;
+                                resetValues();      
+                            }
                         });
                     }
 
                     /**
                      * Observa o read do datasource para setar o primeiro valor ou valor inicial.
                      */
-                    var _goTo = this.goTo;
                     if (dataSourceScreen != null && dataSourceScreen != undefined) {
                         dataSourceScreen.addDataSourceEvents({
                             read: function(data) {
                                 if (select.firstValue) {
                                     firstValue(data);
                                     select.firstValue = false;
-                                } else if (select.initValue && select.initValue != null && !parentDS) {
+                                } else if (select.initValue && select.initValue != null) {
                                     if (select.changeCursor) {
                                         _goTo(scope, combobox, select.initValue);
-                                    }
-                                    select.initValue = undefined;
+                                    }                                   
+                                } else if (select.lazyInitValue && select.lazyInitValue != null) {
+                                    $timeout(function() {
+                                        _ngModelCtrl.$setViewValue(select.lazyInitValue);
+                                        combobox.value(select.lazyInitValue);
+                                        combobox.refresh();
+                                        if (select.changeCursor) {
+                                            _goTo(scope, combobox, select.lazyInitValue);
+                                        }   
+                                    });
                                 }
                             }
                         });
@@ -2211,20 +2248,34 @@
                      * Observando se houve mudança no valor do DropdownList.
                      */
                     var _isDefaultEntity = this.isDefaultEntity;
-                    $element.on('change', function (event) {
+                    $element.on('change', function (event) {                         
+                        select.initValue = null;
+
+                        var dataItem;
+                        if (combobox.dataItem() == null || combobox.dataItem()[select.dataValueField] == null || combobox.dataItem()[select.dataValueField] == '') {
+                            dataItem = null;
+                        } else {
+                            dataItem = combobox.dataItem();    
+                        }
+
                         _scope.$apply(function () {
-                            _ngModelCtrl.$setViewValue(combobox.dataItem());
-                            if (select.changeCursor) {
-                                _goTo(scope, combobox, combobox.dataItem());
-                            }
+                            _ngModelCtrl.$setViewValue(dataItem);
                         });
+                        
+                        if (select.changeCursor) {
+                            if (dataItem != null) {
+                                _goTo(scope, combobox, dataItem);
+                            } else {
+                                dataSourceScreen.active = null;
+                            }
+                        }
                         _compileAngular(scope, options.combobox.element[0]);
 
-                        if (parentDS && parentDS.active && textField && parentDS.active.hasOwnProperty(textField) && _isDefaultEntity(parentDS)) {
-                            if (typeof combobox.dataItem() === 'string') {
-                                parentDS.active[textField] = combobox.dataItem();
+                        if (dataItem != null && parentDS && parentDS.active && textField && parentDS.active.hasOwnProperty(textField) && _isDefaultEntity(parentDS)) {
+                            if (typeof dataItem === 'string') {
+                                parentDS.active[textField] = dataItem;
                             } else {
-                                parentDS.active[textField] = combobox.dataItem()[select.dataTextField];
+                                parentDS.active[textField] = dataItem[select.dataTextField];
                             }
                         }
                     });
@@ -2234,6 +2285,7 @@
                      */
                     if (ngModelCtrl) {
                         ngModelCtrl.$formatters.push(function (value) {
+                            select.initValue = null;
                             var result = '';
 
                             if ((typeof value === 'boolean') || value) {
@@ -2278,7 +2330,7 @@
                         combobox.dataSource.transport.options.scope = scope;
                         combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
                         combobox.dataSource.transport.options.initRead = true;
-                        if (select.initValue && select.initValue != null && !parentDS) {
+                        if (select.initValue && select.initValue != null && select.lazyInitValue == null) {
                             ngModelCtrl.$setViewValue(select.initValue);
                             dataSourceScreen.busy = false;
                             combobox.value(select.initValue);
