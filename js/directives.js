@@ -2001,7 +2001,7 @@
 
                     $element.on('change', function (event) {
                         _scope.$apply(function () {
-                            _ngModelCtrl.$setViewValue(eval(this.value()));
+                            _ngModelCtrl.$setViewValue(this.value());
                         }.bind(combobox));
                     });
 
