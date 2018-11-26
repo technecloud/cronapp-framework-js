@@ -1476,7 +1476,7 @@
                 }
 
                 function getAggregate(column) {
-                  if (column.aggregates) {
+                  if (column && column.aggregates) {
                     var aggregates = [];
                     column.aggregates.forEach(function(a) {
                       aggregates.push(a.type);
@@ -1488,7 +1488,7 @@
                 }
 
                 function getAggregateFooter(column, group) {
-                  if (column.aggregates) {
+                  if (column && column.aggregates) {
                     var footer = [];
                     column.aggregates.forEach(function(a) {
 
@@ -3378,13 +3378,15 @@ app.kendoHelper = {
 
     function getAggregate(columns) {
       var aggregates = [];
-      columns.forEach(function(c) {
-        if (c.aggregates) {
-          c.aggregates.forEach(function(ag) {
-            aggregates.push({field: c.field, aggregate: ag.type});
-          });
-        }
-      });
+      if (columns) {
+        columns.forEach(function(c) {
+          if (c.aggregates) {
+            c.aggregates.forEach(function(ag) {
+              aggregates.push({field: c.field, aggregate: ag.type});
+            });
+          }
+        });
+      }
       return aggregates;
     }
 
