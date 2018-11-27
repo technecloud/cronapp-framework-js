@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="" />
+    <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="[QAIBT-184] correção,">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/templates/image.default.template.html" beforeDir="false" afterPath="$PROJECT_DIR$/components/templates/image.default.template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/components/templates/image.default.template.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/components/templates/image.default.template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/js/directives.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/js/directives.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,42 +70,73 @@
     <session id="1540370795">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="4" />
-          <entry key="json" value="2" />
+          <entry key="html" value="8" />
+          <entry key="js" value="1" />
+          <entry key="json" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="4" />
-          <entry key="JSON" value="2" />
+          <entry key="HTML" value="8" />
+          <entry key="JSON" value="3" />
+          <entry key="JavaScript" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="2" />
+          <entry key="html" value="7" />
           <entry key="json" value="25" />
-          <entry key="txt" value="37" />
+          <entry key="txt" value="53" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="2" />
+          <entry key="HTML" value="7" />
           <entry key="JSON" value="25" />
-          <entry key="PLAIN_TEXT" value="37" />
+          <entry key="PLAIN_TEXT" value="53" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/components.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="1321" column="21" selection-start-line="1321" selection-start-column="21" selection-end-line="1321" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/templates/image.default.template.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="73" selection-start-column="73" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dist/components/templates/image.default.template.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="120" selection-start-column="120" selection-end-column="120" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -129,6 +166,10 @@
       <find>.navbar</find>
       <find>col-md</find>
       <find>crn-tabs</find>
+      <find>777</find>
+      <find>cronappFilter</find>
+      <find>&quot;cronappFilter&quot;</find>
+      <find>crn-image</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -181,6 +222,8 @@
         <option value="$PROJECT_DIR$/css/themes/custom/material/custom-material.css" />
         <option value="$PROJECT_DIR$/components/components.json" />
         <option value="$PROJECT_DIR$/components/templates/tabs.template.html" />
+        <option value="$PROJECT_DIR$/dist/components/templates/image.default.template.html" />
+        <option value="$PROJECT_DIR$/components/templates/image.default.template.html" />
       </list>
     </option>
   </component>
@@ -205,17 +248,16 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
+    <option name="x" value="-48" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="width" value="1939" />
+    <option name="height" value="1059" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -244,27 +286,31 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="cron-gr&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/templates/cron-grid.designtime.html&#10;components.json&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;custom-mater&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;component&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
+    <property name="SearchEverywhereHistoryKey" value="image.de&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/dist/components/templates/image.default.template.html&#10;image.defaul&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/dist/components/templates/image.default.template.html&#10;image.defa&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/components/templates/image.default.template.html&#10;componen&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/components/components.json&#10;directives.js&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/js/directives.js&#10;cron-gr&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/templates/cron-grid.designtime.html&#10;components.json&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;custom-mater&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;component&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;compon&#9;null&#9;null&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542752810650" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543282522847" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../cronapp-common-js" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom" />
+      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\paper" />
+      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\libs\material" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\img" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\yeti" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\united" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\superhero" />
       <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\spacelab" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom" />
-      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\custom\paper" />
-      <recent name="C:\Cronapp\cronapp-platform\cronapp-framework-js\css\themes\libs\material" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -298,6 +344,9 @@
       <workItem from="1542196654356" duration="2810000" />
       <workItem from="1542718533247" duration="227000" />
       <workItem from="1542751773687" duration="971000" />
+      <workItem from="1542916935801" duration="600000" />
+      <workItem from="1542977909661" duration="2949000" />
+      <workItem from="1543281677625" duration="840000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -478,12 +527,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43158000" />
+    <option name="totallyTimeSpent" value="47547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27919462" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29127517" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -559,19 +609,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="atualização no componente de abas" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/controllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-111" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/app.authentication.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/themes/libs/material/kendo.material-v2.min.css" />
     <entry file="file://$PROJECT_DIR$/js/controllers.authentication.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -870,6 +907,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/directives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="965" column="28" selection-start-line="965" selection-start-column="28" selection-end-line="965" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/components.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="1321" column="21" selection-start-line="1321" selection-start-column="21" selection-end-line="1321" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/templates/tabs.template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -877,12 +939,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/components.json">
+    <entry file="file://$PROJECT_DIR$/components/templates/image.default.template.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="1121" column="48" selection-start-line="1121" selection-start-column="48" selection-end-line="1121" selection-end-column="48" />
+        <state>
+          <caret column="73" selection-start-column="73" selection-end-column="73" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dist/components/templates/image.default.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="120" selection-start-column="120" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>cronapp-framework-js</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
