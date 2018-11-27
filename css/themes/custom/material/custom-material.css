@@ -1,4 +1,4 @@
-/*Ajustes Maurício*/
+/*Ajustes MaurĂ­cio*/
 
 .k-grid th {
     padding: 7px 22px;
@@ -103,7 +103,7 @@ a.k-link {
     min-height: 24px;
 }
 
-/*Ajustes Maurício F I N A L*/
+/*Ajustes MaurĂ­cio F I N A L*/
 
 
 ::-webkit-scrollbar {
@@ -338,6 +338,8 @@ k-grid-header .k-header>.k-link {
 
 .k-filter-help-text {
     font-weight: 400;
+    font-size: 14px;
+    color: #626262;
 }
 
 .k-animation-container>.k-list-container>.k-list-scroller>.k-list {
@@ -351,6 +353,19 @@ k-grid-header .k-header>.k-link {
 
 .k-list .k-item:hover.k-state-selected {
     color: #3f51b5;
+}
+
+.k-dropdown-wrap>.k-input {
+    -ms-flex: 1;
+    flex: 1;
+    font-weight: normal;
+    color: #686868;
+}
+
+.k-button.k-primary, .k-slider .k-draghandle, .k-switch-on .k-switch-handle {
+    color: hsla(0,0%,100%,.87);
+    background-color: #3a4091;
+    border-color: #3a4091;
 }
 
 /*
@@ -376,8 +391,8 @@ Material Grid - F I N A L
 }
 
 .navbar-default {
-    background-color: #5665be;
-    border-color: #5665be;
+    background-color: #3b448e;
+    border-color: #3a4091;
 }
 
 .navbar-default .navbar-brand {
@@ -524,7 +539,9 @@ textarea.form-control.k-textbox {
     border-color: rgba(0,0,0,.42);
     border-radius: 0;
     box-shadow: none;
+    font-weight: normal;
     font-size: 14px;
+    color: #6b6b6b;
 }
 
 .login-view {
