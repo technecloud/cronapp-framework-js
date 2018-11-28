@@ -36,7 +36,10 @@
         "href": {
           "removable": false,
           "type": "projectResource",
-          "resourceType": "text/html"
+          "resourceType": "text/html",
+          "extraOptions": {
+            "underViewsFolder": true
+          }
         },
         "class": {
           "order": 9999
