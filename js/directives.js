@@ -3645,86 +3645,91 @@ app.kendoHelper = {
     };
     return datasource;
   },
-    getEventReadCombo: function (e) {
+  getEventReadCombo: function (e) {
 
-       var cronappDatasource = this.options.cronappDatasource;
+    var cronappDatasource = this.options.cronappDatasource;
 
-       if (!cronappDatasource) {
-           e.error("canceled", "canceled", "canceled");
-           return;
-       }
+    if (!cronappDatasource) {
+        e.error("canceled", "canceled", "canceled");
+        return;
+    }
 
-       if (this.options.combobox.options.readData) {
-            e.success(this.options.combobox.options.readData);
-            this.options.combobox.options.readData = null;
-            return;
-       }
+    var isFirst; 
+    if (this.options.combobox && this.options.combobox.options.readData) {
+         e.success(this.options.combobox.options.readData);
+         this.options.combobox.options.readData = null;
+         return;
+    } else if (this.options.combobox) {
+        var isFirst = !this.options.alreadyLoaded; 
+    } else {
+        isFirst = false;
+    }
+    
+    this.options.alreadyLoaded = true;
 
-       var isFirst = !this.options.alreadyLoaded;
-       this.options.alreadyLoaded = true;
+    var doFetch = true;
 
-       var doFetch = true;
+    if (isFirst) {
+      doFetch = false;
+      if (cronappDatasource.lazy) {
+        e.success([{}]);
+      } else {
+        e.success([]);
+      }
+    }
 
-       if (isFirst) {
-         doFetch = false;
-         if (cronappDatasource.lazy) {
-           e.success([{}]);
-         } else {
-           e.success([]);
+    if (doFetch) {
+         for (key in e.data) {
+             if(e.data[key] == undefined) {
+                 delete e.data[key];
+             }
          }
-       }
+         var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
 
-       if (doFetch) {
-          //  if (!cronappDatasource.hasMoreResults && cronappDatasource.fetched) {
-          //      e.success(cronappDatasource.data);
-           //     return;
-          //  }
+         cronappDatasource.rowsPerPage = e.data.pageSize;
+         cronappDatasource.offset = (e.data.page - 1);
 
-            for (key in e.data) {
-                if(e.data[key] == undefined) {
-                    delete e.data[key];
-                }
-            }
-            var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
-
-            cronappDatasource.rowsPerPage = e.data.pageSize;
-            cronappDatasource.offset = (e.data.page - 1);
-
-            var self = this;
-            var silentActive = true;
-            var fetchData = {};
-            fetchData.params = paramsOData;
-            self.options.combobox.options.fromCombo = true;
-            cronappDatasource.fetch(fetchData, {
-                    success:  function(data) {
-                        if (e.success) {
-                            e.success(data);
-                            if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
-                                var expToFind = " .k-animation-container";
-                                var x = angular.element($(expToFind));
-                                self.options.$compile(x)(self.options.scope);
-                            }
-                        }
-                    },
-                    canceled:  function(data) {
-                        self.options.combobox.options.fromCombo = false;
-                        if (e.success) {
-                            e.error("canceled", "canceled", "canceled");
-                        }
-                    },
-                    error:  function(data) {
-                        self.options.combobox.options.fromCombo = false;
-                        if (e.success) {
-                            e.error("error", "error", "error");
-                        }
-                    }
-                },
-                false,
-                {ignoreAtive: true}
-            );
-        }
-    },
-    getConfigCombobox: function(options, scope) {
+         var self = this;
+         var silentActive = true;
+         var fetchData = {};
+         fetchData.params = paramsOData;
+         if (self.options.combobox) {
+             self.options.combobox.options.fromCombo = true;
+         }
+         cronappDatasource.fetch(fetchData, {
+                 success:  function(data) {
+                     if (e.success) {
+                         e.success(data);
+                         if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
+                             var expToFind = " .k-animation-container";
+                             var x = angular.element($(expToFind));
+                             self.options.$compile(x)(self.options.scope);
+                         }
+                     }
+                 },
+                 canceled:  function(data) {
+                     if (self.options.combobox) {
+                         self.options.combobox.options.fromCombo = false;
+                     }
+                     if (e.success) {
+                         e.error("canceled", "canceled", "canceled");
+                     }
+                 },
+                 error:  function(data) {
+                     if (self.options.combobox) {
+                         self.options.combobox.options.fromCombo = false;
+                     }
+                     if (e.success) {
+                         e.error("error", "error", "error");
+                     }
+                 }
+             },
+             false,
+             {ignoreAtive: true}
+        );
+    }
+   },
+   getConfigCombobox: function(options, scope) {
         var valuePrimitive = false;
         var dataSource = {};
         var dataSource = {};
