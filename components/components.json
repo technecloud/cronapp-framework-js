@@ -4240,13 +4240,6 @@
           "type": "event"
         },
         {
-          "name": "ng-change",
-          "selector": "cron-multi-select",
-          "displayName_pt_BR": "Ao Alterar",
-          "displayName_en_US": "On Change",
-          "type": "event"
-        },
-        {
           "name": "ng-deselect",
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Remover Seleção",

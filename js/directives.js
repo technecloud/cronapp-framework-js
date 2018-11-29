@@ -1997,12 +1997,16 @@
                     var $element = $(parent).find('input.cronSelect');
 
                     var options = app.kendoHelper.getConfigCombobox(select, scope);
-                    options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
                     options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
                     options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
                     options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
                     options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
                     options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
+                    options.change = function() {
+                      _scope.$apply(function () {
+                        _ngModelCtrl.$setViewValue(eval(this.value()));
+                      }.bind(combobox));
+                    }
 
                     var combobox = $element.kendoComboBox(options).data('kendoComboBox');
                     $(element).remove();
@@ -2010,32 +2014,29 @@
                     var _scope = scope;
                     var _ngModelCtrl = ngModelCtrl;
 
-                    $element.on('change', function (event) {
-                        _scope.$apply(function () {
-                            _ngModelCtrl.$setViewValue(this.value());
-                        }.bind(combobox));
-                    });
-
+                    var initializing = true;
                     if (ngModelCtrl) {
                         ngModelCtrl.$formatters.push(function (value) {
-                            var result = '';
+                        var result = '';
 
-                            if ((typeof value === 'boolean') || (value)) {
-                                result = value;
-                            }
+                        if ((typeof value === 'boolean') || (value)) {
+                          result = value;
+                        }
+                        combobox.value(result);
 
-                            combobox.value(result);
-
-                            return result;
-                        });
-
-                        ngModelCtrl.$parsers.push(function (value) {
-                            if ((typeof value === 'boolean') || value) {
-                                return value;
-                            }
-
-                            return null;
-                        });
+                        if (!initializing) {
+                            if (attrs.ngChange) scope.$eval(attrs.ngChange);
+                        }
+                        initializing = false;
+                        combobox.value(result);
+                        return result;
+                      });
+                      ngModelCtrl.$parsers.push(function (value) {
+                        if ((typeof value === 'boolean') || value) {
+                          return value;
+                        }
+                        return null;
+                      });
                     }
                 }
             };
@@ -2677,7 +2678,8 @@
                     }
 
                     var config = app.kendoHelper.getConfigSlider(slider);
-                    config.change = attrs.ngChange ? function (){
+                    config.change = attrs.ngChange ?
+                        function (){
                             scope.$apply(function () {
                                 scope.$eval(attrs.ngSlide)
                                 ngModelCtrl.$setViewValue(parseInt($(element).val()));
