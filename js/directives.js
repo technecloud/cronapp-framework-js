@@ -1253,7 +1253,7 @@
                   var template = "#=showTreatedValue("+column.field+")#";
                   if (column.inputType == 'switch') {
                     template =
-                        '<span class="k-switch km-switch k-widget km-widget k-switch-off km-switch-off" style="width: 100%">\
+                        '<span class="k-switch km-switch k-widget km-widget #='+column.field+' ? "k-switch-on km-switch-on": "k-switch-off km-switch-off"#" style="width: 100%">\
                           <span class="k-switch-wrapper km-switch-wrapper">\
                             <span class="k-switch-background km-switch-background" style="margin-left: #=' + column.field + ' ? "80%": "0%" #"></span>\
                   </span>\
