@@ -186,6 +186,7 @@ input:-webkit-autofill:focus {
 
 .form-control {
     width:100%;
+    box-shadow: none;
 }
 
 .k-checkbox-label {
