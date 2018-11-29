@@ -1,4 +1,4 @@
-//Version 2.0.2
+//Version 2.0.3
 (function($app) {
 
     app.common = {
@@ -3255,7 +3255,7 @@ app.kendoHelper = {
     getSchema: function(dataSource) {
         var parseAttribute = [
             { kendoType: "string", entityType: ["string", "character", "uuid", "guid"] },
-            { kendoType: "number", entityType: ["integer", "long", "double", "int", "float", "bigdecimal", "single", "int32", "int64", "decimal"] },
+            { kendoType: "number", entityType: ["integer", "long", "double", "int", "float", "bigdecimal", "single", "int32", "int64", "decimal", "byte"] },
             { kendoType: "date", entityType: ["date", "time", "datetime"] },
             { kendoType: "boolean", entityType: ["boolean"] }
         ];
