@@ -2257,7 +2257,10 @@
                                 } 
                                 
                                 else if (select.initValue && select.initValue != null) {
-                                    nextValue = select.initValue;                             
+                                    found = dataSourceScreen.goTo(select.initValue);
+                                    if (found) {
+                                      nextValue = select.initValue;   
+                                    }                         
                                 }
 
                                 modelSetter(_scope, nextValue);    
