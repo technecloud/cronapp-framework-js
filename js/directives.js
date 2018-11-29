@@ -1507,6 +1507,16 @@
                   return undefined;
                 }
 
+                function getAggregateHeader(column) {
+                  if (column.type.startsWith('date') || column.type.startsWith('month')
+                      || column.type.startsWith('time') || column.type.startsWith('week')
+                      || column.type.startsWith('money') || column.type.startsWith('number')
+                      || column.type.startsWith('tel') || (column.format && column.format != 'null')   ) {
+                    return column.headerText +": #=useMask(value,'"+column.format+"','"+column.type+"')#";
+                  }
+                  return undefined;
+                }
+
                 var columns = [];
                 if (options.columns) {
                   options.columns.forEach(function(column)  {
@@ -1527,6 +1537,7 @@
                       addColumn.aggregates = getAggregate(column);
                       addColumn.footerTemplate = getAggregateFooter(column, false);
                       addColumn.groupFooterTemplate = getAggregateFooter(column, true);
+                      addColumn.groupHeaderTemplate = getAggregateHeader(column);
                       columns.push(addColumn);
                     }
                     else if (column.dataType == "Command") {
