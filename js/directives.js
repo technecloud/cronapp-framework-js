@@ -1,6 +1,5 @@
 (function($app) {
 
-
     app.common = {
         generateId: function() {
             var numbersOnly = '0123456789';
