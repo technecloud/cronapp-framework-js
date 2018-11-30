@@ -625,3 +625,11 @@ textarea.form-control.k-textbox {
     background-color: #3f51b5;
     color: #ffffff;
 }
+
+.k-grid .k-grid-header-wrap, .k-grid table {
+    border-width: 0px;
+}
+
+div.k-grid-footer, div.k-grid-header {
+    background-color: #3d488b;
+}
