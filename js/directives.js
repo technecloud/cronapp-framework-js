@@ -2895,6 +2895,9 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
 
       var $element = $(element);
+      if ($element.data('alreadycompiled'))
+        return;
+      $element.data('alreadycompiled', true);
 
       var type = $element.attr("type");
 
