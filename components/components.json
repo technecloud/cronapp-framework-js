@@ -3977,12 +3977,12 @@
           "text_en_US": "Item List"
         },
         {
-          "selector": "div#comboBox{id}-select-list>div>ul>li.k-state-hover",
+          "selector": "div#cron-{id}-list>div>ul>li.k-state-hover",
           "text_pt_BR": "Item da Lista Hover",
           "text_en_US": "Item List Hover"
         },
         {
-          "selector": "div#comboBox{id}-select-list>div>ul>li.k-state-focused",
+          "selector": "div#cron-{id}-list>div>ul>li.k-state-focused",
           "text_pt_BR": "Item Selecionado",
           "text_en_US": "Selected Item"
         }
@@ -4168,12 +4168,12 @@
           "text_en_US": "Item List"
         },
         {
-          "selector": "div#combobox{id}-select-list>div>div>ul>li.k-state-hover",
+          "selector": "div#cron-{id}-list>div>div>ul>li.k-state-hover",
           "text_pt_BR": "Item da Lista Hover",
           "text_en_US": "Item List Hover"
         },
         {
-          "selector": "div#combobox{id}-select-list>div>div>ul>li.k-state-focused",
+          "selector": "div#cron-{id}-list>div>div>ul>li.k-state-focused",
           "text_pt_BR": "Item Selecionado",
           "text_en_US": "Selected Item"
         }
@@ -4214,12 +4214,12 @@
           "text_en_US": "Item List"
         },
         {
-          "selector": "div#combobox{id}-select-list>div>ul>li.k-state-hover",
+          "selector": "div#cron-{id}-list>div>ul>li.k-state-hover",
           "text_pt_BR": "Item da Lista Hover",
           "text_en_US": "Item List Hover"
         },
         {
-          "selector": "div#combobox{id}-select-list>div>ul>li.k-state-selected",
+          "selector": "div#cron-{id}-list>div>ul>li.k-state-selected",
           "text_pt_BR": "Itens Selecionados Na Lista",
           "text_en_US": "Selected Itens On List"
         }
