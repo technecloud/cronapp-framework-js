@@ -1,4 +1,4 @@
-//Version 2.0.5
+//Version 2.0.6
 (function($app) {
 
   app.common = {
@@ -1567,13 +1567,16 @@
               }
             }
             else if (column.dataType == "Blockly" || column.dataType == "Customized") {
+              var label = column.headerText == undefined ? '': column.headerText;
+              if (column.iconClass && label)
+                label = '&nbsp;' + label;
 
               var addColumn = {
                 command: [{
                   name: app.common.generateId(),
-                  text: column.headerText == undefined ? '': column.headerText,
+                  text: label,
                   hidden: !column.visible,
-                  className: "k-custom-command",
+                  className: "k-custom-command" + (label ? ' k-button-with-label' : ''),
                   iconClass: column.iconClass,
                   click: function(e) {
                     e.preventDefault();

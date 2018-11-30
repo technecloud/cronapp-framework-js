@@ -633,3 +633,10 @@ textarea.form-control.k-textbox {
 div.k-grid-footer, div.k-grid-header {
     background-color: #3d488b;
 }
+
+.k-button-with-label {
+    width: max-content !important;
+    height: 33px !important;
+    padding: 10px !important;
+    border-radius: 0% !important;
+}
