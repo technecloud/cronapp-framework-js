@@ -1048,6 +1048,7 @@
                 }
             };
         })
+
         .directive('cronGrid', ['$compile', '$translate', function($compile, $translate) {
             return {
                 restrict: 'E',
@@ -1253,7 +1254,7 @@
                   var template = "#=showTreatedValue("+column.field+")#";
                   if (column.inputType == 'switch') {
                     template =
-                        '<span class="k-switch km-switch k-widget km-widget #='+column.field+' ? "k-switch-on km-switch-on": "k-switch-off km-switch-off"#" style="width: 100%">\
+                        '<span class="k-switch km-switch k-widget km-widget k-switch-off km-switch-off" style="width: 100%">\
                           <span class="k-switch-wrapper km-switch-wrapper">\
                             <span class="k-switch-background km-switch-background" style="margin-left: #=' + column.field + ' ? "80%": "0%" #"></span>\
                   </span>\
@@ -1775,14 +1776,15 @@
                     };
 
                     var compileListing = function(e) {
-                        //Compilando as diretivas de exibição da grade (listagem)
-                        if (e.sender.tbody && e.sender.tbody.length) {
-                            scope.safeApply(function() {
-                                var trs = $(e.sender.tbody).find('tr');
-                                var x = angular.element(trs);
-                                $compile(x)(scope);
-                            });
-                        }
+                        setTimeout(function() {
+                            if (e.sender.tbody && e.sender.tbody.length) {
+                                scope.safeApply(function() {
+                                    var trs = $(e.sender.tbody);
+                                    var x = angular.element(trs);
+                                    $compile(x)(scope);
+                                });
+                            }
+                        }.bind(this));
                     };
 
                     var anyFilterableColumn = function(options) {
@@ -1877,9 +1879,7 @@
                         },
                         dataBound: function(e) {
                             this.dataSource.transport.options.selectActiveInGrid();
-                            //Colocando para compilar a listagem no databound quando a grade não permitir seleção, pois não passa no change
-                            if (!options.allowSelectionRow)
-                                compileListing(e);
+                            compileListing(e);
                         }
                     };
 
