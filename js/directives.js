@@ -2861,21 +2861,25 @@
 
 }(app));
 
-function maskDirectiveAsDate($compile, $translate) {
-    return maskDirective($compile, $translate, 'as-date');
+function maskDirectiveAsDate($compile, $translate, $parse) {
+    return maskDirective($compile, $translate, $parse, 'as-date');
 }
 
-function maskDirectiveMask($compile, $translate) {
-    return maskDirective($compile, $translate, 'mask');
+function maskDirectiveMask($compile, $translate, $parse) {
+    return maskDirective($compile, $translate, $parse, 'mask');
 }
 
-function maskDirective($compile, $translate, attrName) {
+function maskDirective($compile, $translate, $parse, attrName) {
     return {
         restrict: 'A',
         require: '?ngModel',
         link: function (scope, element, attrs, ngModelCtrl) {
             if(attrName == 'as-date' && attrs.mask !== undefined)
                 return;
+
+            var modelGetter = $parse(attrs['ngModel']);
+
+            var modelSetter = modelGetter.assign;
 
 
             var $element = $(element);
@@ -3017,8 +3021,9 @@ function maskDirective($compile, $translate, attrName) {
                             } else {
                                 momentDate = moment(value, mask);
                             }
-                            if (momentDate.isValid() && ngModelCtrl)
-                                ngModelCtrl.$setViewValue(momentDate.toDate());
+                            if (momentDate.isValid() && ngModelCtrl) {
+                                modelSetter(scope, momentDate.toDate());
+                            }
                         });
                     }
                 });
@@ -3042,6 +3047,9 @@ function maskDirective($compile, $translate, attrName) {
 
                     ngModelCtrl.$parsers.push(function (value) {
                         if (value) {
+                            if (value instanceof Date) {
+                                return value;
+                            }
                             var momentDate = null;
                             if (useUTC) {
                                 momentDate = moment.utc(value, mask);
