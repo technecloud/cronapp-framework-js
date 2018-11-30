@@ -370,6 +370,148 @@ k-grid-header .k-header>.k-link {
 }
 
 /*
+Background Calendário
+*/
+
+.k-calendar-container {
+    padding: 0;
+    background-color: #383838;
+}
+
+.k-calendar .k-header {
+    background-color: #383838;
+}
+
+.k-calendar .k-content {
+    background-color: #383838;
+}
+
+.k-calendar .k-footer {
+    background-color: #383838;
+}
+
+.k-calendar-container .k-calendar {
+    border-width: 0;
+    background: #383838;
+}
+
+/*
+Background Calendário F I N A L
+*/
+
+.k-calendar:not(.k-calendar-infinite) .k-content .k-link {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.k-calendar .k-state-focused .k-link {
+    color: #ffffff;
+    background-color: rgb(29, 119, 186);
+    border-color: rgb(10, 58, 94);
+}
+
+.k-calendar .k-state-hover {
+    background-color:#ffffff;
+    color: #383838;
+}
+
+.k-calendar:not(.k-calendar-infinite) .k-state-hover .k-link {
+    background-color:#ffffff;
+    color:#383838;
+}
+
+.k-calendar .k-other-month .k-link {
+    background-color: transparent;
+    color:rgba(241, 241, 241, 0.2);
+    border-radius:0%;
+}
+
+.k-content tr th {
+    background-color: #35a9fb;
+    color: #383838;
+    font-weight: bold!important;
+    font-size: 12px;
+    padding: 3px 0px;
+}
+
+.k-content thead {
+    margin-bottom:15px;
+}
+
+.k-calendar:not(.k-calendar-infinite) .k-content .k-state-selected .k-link {
+    background-color: #1d77ba;
+    border-color: rgba(0,0,0,.1);
+}
+
+.k-calendar .k-nav-prev {
+    padding: 0;
+    width: 3em;
+    height: 3em;
+    box-sizing: content-box;
+    border-radius: 1000px!important;
+    margin-bottom:10px;
+    margin-top: -9px;
+}
+
+.k-calendar .k-nav-prev:hover {
+    color: #fff;
+    background-color: #1d77ba;
+    border-color: rgba(0,0,0,.1);
+}
+
+.k-calendar .k-nav-next {
+    padding: 0;
+    width: 3em;
+    height: 3em;
+    box-sizing: content-box;
+    border-radius: 1000px!important;
+    margin-bottom:10px;
+    margin-top: -9px;
+}
+
+.k-calendar .k-nav-next:hover {
+    color: #fff;
+    background-color: #1d77ba;
+    border-color: rgba(0,0,0,.1);
+}
+
+.k-calendar .k-nav-fast:hover {
+    color: #fff;
+    background-color: rgb(29, 119, 186);
+    border-color: rgba(0,0,0,.15);
+    margin-bottom:15px;
+    margin-top:-10px;
+}
+
+.k-calendar .k-nav-fast {
+    border-color: rgba(0,0,0,.15);
+    margin-bottom:15px;
+    margin-top:-10px;
+}
+
+.k-calendar .k-footer .k-nav-today {
+    color: #1d77ba;
+    font-size: 10px;
+}
+
+.k-calendar .k-footer .k-nav-today:hover {
+    color: #42b9e6;
+}
+
+.k-calendar:not(.k-calendar-infinite) .k-meta-view td {
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 1000px;
+}
+
+.k-calendar:not(.k-calendar-infinite) .k-content .k-state-selected.k-state-hover .k-link {
+    background-color:#1d77ba;
+}
+
+/*
 ==========================
 Material Grid - F I N A L
 ==========================
@@ -630,18 +772,6 @@ textarea.form-control.k-textbox {
     border-width: 0px;
 }
 
-div.k-grid-header {
+div.k-grid-footer, div.k-grid-header {
     background-color: #3d488b;
-}
-
-.k-grid-footer, .k-grid-footer-locked, .k-grid-footer-wrap {
-    border-right-width: 0px;
-    border-bottom-width: 0px;
-}
-
-.k-button-with-label {
-    width: max-content !important;
-    height: 33px !important;
-    padding: 10px !important;
-    border-radius: 0% !important;
 }
