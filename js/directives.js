@@ -1778,15 +1778,13 @@
         };
 
         var compileListing = function(e) {
-          setTimeout(function() {
-            if (e.sender.tbody && e.sender.tbody.length) {
-              scope.safeApply(function() {
-                var trs = $(e.sender.tbody);
-                var x = angular.element(trs);
-                $compile(x)(scope);
-              });
-            }
-          }.bind(this));
+          if (e.sender.tbody && e.sender.tbody.length) {
+            scope.safeApply(function() {
+              var trs = $(e.sender.tbody);
+              var x = angular.element(trs);
+              $compile(x)(scope);
+            });
+          }
         };
 
         var anyFilterableColumn = function(options) {
@@ -1877,7 +1875,9 @@
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
-            compileListing(e)
+            setTimeout(function() {
+              compileListing(e);
+            }.bind(this));
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
