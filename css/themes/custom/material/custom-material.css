@@ -772,6 +772,18 @@ textarea.form-control.k-textbox {
     border-width: 0px;
 }
 
-div.k-grid-footer, div.k-grid-header {
+div.k-grid-header {
     background-color: #3d488b;
+}
+
+.k-grid-footer, .k-grid-footer-locked, .k-grid-footer-wrap {
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+}
+
+.k-button-with-label {
+    width: max-content !important;
+    height: 33px !important;
+    padding: 10px !important;
+    border-radius: 0% !important;
 }
