@@ -1494,7 +1494,7 @@
 
               var typeForLabel = '#='+ a.type + '#';
               if (a.type == 'average' || a.type == 'sum') {
-                typeForLabel = "#=kendo.toString("+ a.type + ",'0.00')#";
+                typeForLabel = "#=useMask("+ a.type + ",'"+column.format+"','"+column.type+"')#";
               }
 
               if (!group)
@@ -1779,8 +1779,13 @@
 
         var compileListing = function(e) {
           if (e.sender.tbody && e.sender.tbody.length) {
+
+            var toCompile = e.sender.tbody;
+            if (toCompile.parent() && toCompile.parent().parent() && toCompile.parent().parent().parent() )
+              toCompile = toCompile.parent().parent().parent();
+
             scope.safeApply(function() {
-              var trs = $(e.sender.tbody);
+              var trs = $(toCompile);
               var x = angular.element(trs);
               $compile(x)(scope);
             });
@@ -1881,7 +1886,7 @@
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
-              compileListing(e);
+            compileListing(e);
           }
         };
 
