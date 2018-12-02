@@ -1,7 +1,7 @@
 .navbar {
-    border: 0;
-    border-radius: 0;
-    margin-bottom: 0;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
 }
 
 .qrCodeCronapp {
@@ -10,17 +10,17 @@
 }
 
 .login-panel {
-    margin: 11% auto  0 auto;
+  margin: 11% auto  0 auto;
 }
 
 .social-button-face:hover {
-    background-color: #3b5998!important;
-    color:#ffffff;
+  background-color: #3b5998!important;
+  color:#ffffff;
 }
 
 .social-button-google:hover {
-    background-color: #d81c1c!important;    
-    color:#ffffff;
+  background-color: #d81c1c!important;
+  color:#ffffff;
 }
 
 .upload-image-component {
@@ -86,4 +86,23 @@
   z-index: 999998;
   top: 50%;
   left: 50%;
+}
+
+.crn-grid-title {
+  float: left;
+  color: #337ab7;
+  font-size: 20px;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-left: 7px;
+  margin-top: 6px;
+}
+
+.k-grid-toolbar {
+  text-align: right;
+}
+
+.k-footer-template td {
+  border-width: 0px;
 }

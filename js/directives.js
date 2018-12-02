@@ -1494,7 +1494,7 @@
 
               var typeForLabel = '#='+ a.type + '#';
               if (a.type == 'average' || a.type == 'sum') {
-                typeForLabel = "#=kendo.toString("+ a.type + ",'0.00')#";
+                typeForLabel = "#=useMask("+ a.type + ",'"+column.format+"','"+column.type+"')#";
               }
 
               if (!group)
@@ -1778,15 +1778,18 @@
         };
 
         var compileListing = function(e) {
-          setTimeout(function() {
-            if (e.sender.tbody && e.sender.tbody.length) {
-              scope.safeApply(function() {
-                var trs = $(e.sender.tbody);
-                var x = angular.element(trs);
-                $compile(x)(scope);
-              });
-            }
-          }.bind(this));
+          if (e.sender.tbody && e.sender.tbody.length) {
+
+            var toCompile = e.sender.tbody;
+            if (toCompile.parent() && toCompile.parent().parent() && toCompile.parent().parent().parent() )
+              toCompile = toCompile.parent().parent().parent();
+
+            scope.safeApply(function() {
+              var trs = $(toCompile);
+              var x = angular.element(trs);
+              $compile(x)(scope);
+            });
+          }
         };
 
         var anyFilterableColumn = function(options) {
@@ -1877,11 +1880,13 @@
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
-            compileListing(e)
+            setTimeout(function() {
+              compileListing(e);
+            }.bind(this));
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
-              compileListing(e);
+            compileListing(e);
           }
         };
 
@@ -2898,6 +2903,9 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
 
       var $element = $(element);
+      if ($element.data('alreadycompiled'))
+        return;
+      $element.data('alreadycompiled', true);
 
       var type = $element.attr("type");
 
