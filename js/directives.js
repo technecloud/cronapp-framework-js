@@ -2594,8 +2594,11 @@
 
         var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
 
+        var $element = $(element);
+        if ($element.data('alreadycompiled'))
+          return;
+        $element.data('alreadycompiled',true);
 
-        var $element;
         if (attrs.fromGrid) {
           $element = $(element);
         }
