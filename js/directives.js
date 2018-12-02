@@ -3705,6 +3705,7 @@ app.kendoHelper = {
     if (this.options.combobox && this.options.combobox.options.readData) {
       e.success(this.options.combobox.options.readData);
       this.options.combobox.options.readData = null;
+      this.options.alreadyLoaded = true;
       return;
     } else if (this.options.combobox) {
       var isFirst = !this.options.alreadyLoaded;
