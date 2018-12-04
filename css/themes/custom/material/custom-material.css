@@ -796,3 +796,10 @@ div.k-grid-header {
 .k-grid-content {
     overflow-y: auto;
 }
+
+/* Somente para o menu vertical */
+
+.crn-navigator-vertical-navbar {
+    background-color: #3f51b5;
+}
+
