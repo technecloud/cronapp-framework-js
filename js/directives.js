@@ -1567,7 +1567,7 @@
               }
             }
             else if (column.dataType == "Blockly" || column.dataType == "Customized") {
-              var label = column.headerText == undefined ? '': column.headerText;
+              var label = column.label == undefined ? '': column.label;
               if (column.iconClass && label)
                 label = '&nbsp;' + label;
 
@@ -1617,7 +1617,8 @@
                     return;
                   }
                 }],
-                width: column.width
+                width: column.width,
+                title: column.headerText ? column.headerText: ''
               };
               columns.push(addColumn);
             }
@@ -2106,9 +2107,7 @@
       },
       link: function (scope, element, attrs, ngModelCtrl) {
         var modelGetter = $parse(attrs['ngModel']);
-
         var modelSetter = modelGetter.assign;
-
         var select = {};
         var self = this;
         var parentDS = {};
@@ -2204,12 +2203,20 @@
         var parent = element.parent();
         var id = attrs.id ? ' id="' + attrs.id + '"' : '';
         var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-        $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
+        var required = '';
+        if (attrs.ngRequired || attrs.required) {
+          required = ' required ';
+        }
+        $(parent).append('<input style="width: 100%;"' + id + name + required + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
         var $element = $(parent).find('input.cronDynamicSelect');
         var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
         options.combobox = combobox;
         if (dataSourceScreen != null && dataSourceScreen != undefined) {
           $(combobox).data('dataSourceScreen', dataSourceScreen);
+        }
+        if (attrs.ngRequired || attrs.required) {
+          $(combobox.element[0]).attr('style','');
+          $(combobox.element[0]).attr('class','cron-select-offscreen');
         }
 
         var forceChangeModel = function(value) {
@@ -2529,7 +2536,11 @@
         var parent = element.parent();
         var id = attrs.id ? ' id="' + attrs.id + '"' : '';
         var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-        $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronAutoComplete" ng-model="' + attrs.ngModel + '"/>');
+        var required = '';
+        if (attrs.ngRequired || attrs.required) {
+          required = ' required ';
+        }        
+        $(parent).append('<input style="width: 100%;" ' + id + name + required + ' class="cronAutoComplete" ng-model="' + attrs.ngModel + '"/>');
         var $element = $(parent).find('input.cronAutoComplete');
         $(element).remove();
 
@@ -2543,19 +2554,8 @@
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            var result = '';
-
-            if (value) {
-              if (typeof value == 'string') {
-                result = value;
-              } else if (value[select.dataTextField]) {
-                result = value[select.dataTextField];
-              }
-            }
-
-            autoComplete.value(result);
-
-            return result;
+            autoComplete.value(value);
+            return value;
           });
 
           ngModelCtrl.$parsers.push(function (value) {
@@ -2688,6 +2688,15 @@
     return {
       restrict: 'E',
       require: 'ngModel',
+      getActive: function(active, scope) {
+        if (active && active.indexOf('.active.')) {
+          try {
+            return scope.$eval(active.substr(0, active.indexOf('.active.')));
+          } catch(e) {}
+        }
+
+        return undefined;
+      },
       link: function (scope, element, attrs, ngModelCtrl) {
         var slider = {};
 
@@ -2698,23 +2707,31 @@
         }
 
         var config = app.kendoHelper.getConfigSlider(slider);
-        config.change = attrs.ngChange ?
-            function (){
-              scope.$apply(function () {
-                scope.$eval(attrs.ngSlide)
-                ngModelCtrl.$setViewValue(parseInt($(element).val()));
-              });
-            } :
-            function(event) {
-              scope.$apply(function () {
-                ngModelCtrl.$setViewValue(parseInt($(element).val()));
-              });
+        var dataSource = this.getActive(attrs.ngModel, scope);
+        config.change = function (){
+          scope.$apply(function () {
+            var value = $(element).val();
+            if (dataSource) {
+              value = dataSource.normalizeValue(value, true)
             }
+            ngModelCtrl.$setViewValue(value);
+            if (attrs.ngChange) {
+              scope.$eval(attrs.ngChange);
+            }
+          });
+        }
 
         config.slide = attrs.ngSlide ? function (){scope.$eval(attrs.ngSlide)}: undefined;
-
-        $(element).empty();
         var slider = $(element).kendoSlider(config).data("kendoSlider");
+
+        if (attrs.ngRequired || attrs.required) {
+          var id = attrs.id ? ' id="input' + app.common.generateId() + '"' : '';
+          var name = attrs.name ? ' name="input' + app.common.generateId() + '"' : '';
+          var parent = element.parent();
+          $(parent).append('<input autocomplete="off" tabindex="-1" style="width: 100%;"' + id + name + ' required class="cronSlider cron-select-offscreen" ng-model="' + attrs.ngModel + '"/>');
+          var input = $(parent).find("input.cronSlider");
+          $compile(input)(element.scope());
+        }
 
         scope.$watch(function(){return ngModelCtrl.$modelValue}, function(value, old){
           if (value !== old) {
@@ -3705,6 +3722,7 @@ app.kendoHelper = {
     if (this.options.combobox && this.options.combobox.options.readData) {
       e.success(this.options.combobox.options.readData);
       this.options.combobox.options.readData = null;
+      this.options.alreadyLoaded = true;
       return;
     } else if (this.options.combobox) {
       var isFirst = !this.options.alreadyLoaded;
