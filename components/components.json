@@ -1389,8 +1389,8 @@
     },
     {
       "name": "crn-vertical-container",
-      "text_pt_BR": "Grade vertical",
-      "text_en_US": "Vertical Grid",
+      "text_pt_BR": "Layout vertical",
+      "text_en_US": "Vertical Layout",
       "class": "adjust-icon mdi mdi-drag-vertical",
       "properties": {
         "class": {
@@ -1435,8 +1435,8 @@
     },
     {
       "name": "crn-horizontal-container",
-      "text_pt_BR": "Grade horizontal",
-      "text_en_US": "Horizontal Grid",
+      "text_pt_BR": "Layout horizontal",
+      "text_en_US": "Horizontal Layout",
       "class": "adjust-icon mdi mdi-drag-horizontal",
       "properties": {
         "class": {
