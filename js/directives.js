@@ -1567,7 +1567,7 @@
               }
             }
             else if (column.dataType == "Blockly" || column.dataType == "Customized") {
-              var label = column.headerText == undefined ? '': column.headerText;
+              var label = column.label == undefined ? '': column.label;
               if (column.iconClass && label)
                 label = '&nbsp;' + label;
 
@@ -1617,7 +1617,8 @@
                     return;
                   }
                 }],
-                width: column.width
+                width: column.width,
+                title: column.headerText ? column.headerText: ''
               };
               columns.push(addColumn);
             }
