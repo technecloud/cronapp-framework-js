@@ -2011,7 +2011,7 @@
         options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
         options.change = function() {
           _scope.$apply(function () {
-            _ngModelCtrl.$setViewValue(eval(this.value()));
+            _ngModelCtrl.$setViewValue(this.value());
           }.bind(combobox));
         }
 
@@ -3791,7 +3791,7 @@ app.kendoHelper = {
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
         for (i = 0; i < dataSource.data.length; i++) {
           try {
-            dataSource.data[i].key = eval(dataSource.data[i].key);
+            dataSource.data[i].key = scope.$eval(dataSource.data[i].key);
           }
           catch (e) {
             dataSource.data[i].key = dataSource.data[i].key;
