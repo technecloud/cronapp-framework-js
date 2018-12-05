@@ -111,7 +111,8 @@
 }
 
 @media only screen and (min-width: 768px){
-    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu > li > a, .dropdown-menu  {
+    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu > li > a, 
+    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu  {
         position: static;
         float: none;
         width: auto;
