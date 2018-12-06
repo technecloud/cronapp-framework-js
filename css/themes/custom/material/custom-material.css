@@ -797,9 +797,11 @@ div.k-grid-header {
     overflow-y: auto;
 }
 
-/* Somente para o menu vertical */
-
-.crn-navigator-vertical-navbar {
-    background-color: #3f51b5;
+.k-autocomplete .k-input, .k-dateinput-wrap .k-input, .k-dropdown-wrap .k-input, .k-multiselect-wrap .k-input, .k-numeric-wrap .k-input, .k-picker-wrap .k-input {
+    padding: 0px 0;
+    height: calc(10px + 1.125em);
 }
 
+.k-dateinput-wrap .k-select, .k-dropdown-wrap .k-select, .k-numeric-wrap .k-select, .k-picker-wrap .k-select {
+    padding: 4px 4px;
+}
