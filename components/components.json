@@ -787,8 +787,8 @@
         {
           "name": "content",
           "selector": "label",
-          "displayName_pt_BR": "Rótulo",
-          "displayName_en_US": "Label",
+          "displayName_pt_BR": "Conteúdo",
+          "displayName_en_US": "Content",
           "type": "content",
           "order": 3
         },
@@ -892,8 +892,8 @@
         {
           "name": "content",
           "selector": "label",
-          "displayName_pt_BR": "Rótulo",
-          "displayName_en_US": "Label",
+          "displayName_pt_BR": "Conteúdo",
+          "displayName_en_US": "Content",
           "type": "content",
           "order": 3
         },
@@ -2586,8 +2586,8 @@
           "name": "content",
           "selector": "a > span:first",
           "type": "content",
-          "displayName_pt_BR": "Rótulo",
-          "displayName_en_US": "Label"
+          "displayName_pt_BR": "Conteúdo",
+          "displayName_en_US": "Content"
         },
         {
           "name": "class",
