@@ -1703,7 +1703,7 @@
         }
         return editable;
       },
-      generateKendoGridInit: function(options, scope, ngModelCtrl) {
+      generateKendoGridInit: function(options, scope, ngModelCtrl, attrs) {
 
         var helperDirective = this;
         function detailInit(e) {
@@ -1865,7 +1865,12 @@
                 cronappDatasource.startEditing(currentItem, function(xxx) {});
               });
             }
-            compileListing(e)
+            
+            if (attrs.ngEdit) { 
+              scope.$eval(attrs.ngEdit);
+            }
+
+            compileListing(e);
           },
           change: function(e) {
             var item = this.dataItem(this.select());
@@ -1875,21 +1880,41 @@
               ngModelCtrl.$setViewValue(cronappDatasource.active);
             }
             collapseAllExcecptCurrent(this, this.select().next(), this.select());
-            compileListing(e);
+            
+            if (attrs.ngChange) { 
+              scope.$eval(attrs.ngChange);
+            }
+
+            compileListing(e);            
           },
           cancel: function(e) {
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
             setTimeout(function() {
+              if (attrs.ngCancel) { 
+                scope.$eval(attrs.ngCancel);
+              }
+
               compileListing(e);
             }.bind(this));
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
+            
+            if (attrs.ngDataBound) { 
+              scope.$eval(attrs.ngDataBound);
+            }
+
             compileListing(e);
           }
         };
+
+        kendoGridInit.beforeEdit = attrs.ngBeforeEdit ? function(e) {scope.$eval(attrs.ngBeforeEdit);} : undefined;
+        kendoGridInit.dataBinding = attrs.ngDataBinding ? function(e) {scope.$eval(attrs.ngDataBinding);} : undefined;
+        kendoGridInit.save = attrs.ngSave ? function(e) {scope.$eval(attrs.ngSave);} : undefined;
+        kendoGridInit.saveChanges = attrs.ngSaveChanges ? function(e) {scope.$eval(attrs.ngSaveChanges);} : undefined;
+        kendoGridInit.remove = attrs.ngRemove ? function(e) {scope.$eval(attrs.ngRemove);} : undefined;
 
         return kendoGridInit;
 
@@ -1928,7 +1953,7 @@
 
 
 
-          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl);
+          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
