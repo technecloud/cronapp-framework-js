@@ -3491,6 +3491,7 @@ app.kendoHelper = {
               function(data) {
                 this.options.enableAndSelect(e);
                 e.success(data);
+                this.options.grid.dataSource._pristineTotal = this.options.grid.dataSource._pristineData.push(data);
               }.bind(this),
               function(data) {
                 this.options.enableAndSelect(e);
