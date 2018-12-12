@@ -1866,7 +1866,7 @@
               });
             }
             
-            if (attrs.ngEdit) { 
+            if (attrs && attrs.ngEdit) { 
               scope.$eval(attrs.ngEdit);
             }
 
@@ -1881,7 +1881,7 @@
             }
             collapseAllExcecptCurrent(this, this.select().next(), this.select());
             
-            if (attrs.ngChange) { 
+            if (attrs && attrs.ngChange) { 
               scope.$eval(attrs.ngChange);
             }
 
@@ -1892,7 +1892,7 @@
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
             setTimeout(function() {
-              if (attrs.ngCancel) { 
+              if (attrs && attrs.ngCancel) { 
                 scope.$eval(attrs.ngCancel);
               }
 
@@ -1902,7 +1902,7 @@
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
             
-            if (attrs.ngDataBound) { 
+            if (attrs && attrs.ngDataBound) { 
               scope.$eval(attrs.ngDataBound);
             }
 
@@ -1910,11 +1910,21 @@
           }
         };
 
-        kendoGridInit.beforeEdit = attrs.ngBeforeEdit ? function(e) {scope.$eval(attrs.ngBeforeEdit);} : undefined;
-        kendoGridInit.dataBinding = attrs.ngDataBinding ? function(e) {scope.$eval(attrs.ngDataBinding);} : undefined;
-        kendoGridInit.save = attrs.ngSave ? function(e) {scope.$eval(attrs.ngSave);} : undefined;
-        kendoGridInit.saveChanges = attrs.ngSaveChanges ? function(e) {scope.$eval(attrs.ngSaveChanges);} : undefined;
-        kendoGridInit.remove = attrs.ngRemove ? function(e) {scope.$eval(attrs.ngRemove);} : undefined;
+        if (attrs && attrs.ngBeforeEdit) {
+          kendoGridInit.beforeEdit =  function(e) {scope.$eval(attrs.ngBeforeEdit);};
+        }
+        if (attrs && attrs.ngDataBinding) {
+          kendoGridInit.dataBinding = function(e) {scope.$eval(attrs.ngDataBinding);};
+        }
+        if (attrs && attrs.ngSave) {
+          kendoGridInit.save = function(e) {scope.$eval(attrs.ngSave);};
+        }
+        if (attrs && attrs.ngSaveChanges) {
+          kendoGridInit.saveChanges = function(e) {scope.$eval(attrs.ngSaveChanges);};
+        }
+        if (attrs && attrs.ngRemove) {
+          kendoGridInit.remove = function(e) {scope.$eval(attrs.ngRemove);};
+        }
 
         return kendoGridInit;
 
