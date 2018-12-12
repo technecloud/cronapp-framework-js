@@ -2492,12 +2492,29 @@
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/navbar.template.html",
       "properties": {
         "class": {
-          "order": 9999
+          "order": 9999,
+          "onSave":"javascript:function(){if(arguments[0].indexOf('horizontal') > -1){this.currentObject.parent().find('div[ui-view]').removeClass('main-view-vertical').addClass('main-view-horizontal');this.currentObject.parent().find('.main-title').removeClass('hide');}else{this.currentObject.parent().find('div[ui-view]').removeClass('main-view-horizontal').addClass('main-view-vertical');this.currentObject.parent().find('.main-title').addClass('hide');} return arguments[0];}"
         },
         "id": {
           "order": 2
         }
       },
+      "attributesForPreview": [
+        {
+          "name": "class",
+          "type": "options",
+          "target": "class",
+          "values": [
+            {
+              "key": "crn-navigator-horizontal",
+              "value": "Horizontal"
+            },
+            {
+              "key": "crn-navigator-vertical",
+              "value": "Vertical"
+            }
+          ]
+        }],
       "styles": [
         {
           "selector": "div#{id} .navbar",
