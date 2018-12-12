@@ -504,7 +504,7 @@
         };
 
         scope.$watch(function(){return ngModel.$modelValue}, function(value, old){
-          if (value !== old) {
+          if (value !== old || value !== scope.TEXT) {
             scope.text = ngModel.$modelValue;
             scope.TEXT = getText();
             scope.INPUT_MODE = getInputMode(scope.TEXT);
@@ -1703,7 +1703,7 @@
         }
         return editable;
       },
-      generateKendoGridInit: function(options, scope, ngModelCtrl) {
+      generateKendoGridInit: function(options, scope, ngModelCtrl, attrs) {
 
         var helperDirective = this;
         function detailInit(e) {
@@ -1865,7 +1865,12 @@
                 cronappDatasource.startEditing(currentItem, function(xxx) {});
               });
             }
-            compileListing(e)
+            
+            if (attrs && attrs.ngEdit) { 
+              scope.$eval(attrs.ngEdit);
+            }
+
+            compileListing(e);
           },
           change: function(e) {
             var item = this.dataItem(this.select());
@@ -1875,21 +1880,51 @@
               ngModelCtrl.$setViewValue(cronappDatasource.active);
             }
             collapseAllExcecptCurrent(this, this.select().next(), this.select());
-            compileListing(e);
+            
+            if (attrs && attrs.ngChange) { 
+              scope.$eval(attrs.ngChange);
+            }
+
+            compileListing(e);            
           },
           cancel: function(e) {
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
             setTimeout(function() {
+              if (attrs && attrs.ngCancel) { 
+                scope.$eval(attrs.ngCancel);
+              }
+
               compileListing(e);
             }.bind(this));
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
+            
+            if (attrs && attrs.ngDataBound) { 
+              scope.$eval(attrs.ngDataBound);
+            }
+
             compileListing(e);
           }
         };
+
+        if (attrs && attrs.ngBeforeEdit) {
+          kendoGridInit.beforeEdit =  function(e) {scope.$eval(attrs.ngBeforeEdit);};
+        }
+        if (attrs && attrs.ngDataBinding) {
+          kendoGridInit.dataBinding = function(e) {scope.$eval(attrs.ngDataBinding);};
+        }
+        if (attrs && attrs.ngSave) {
+          kendoGridInit.save = function(e) {scope.$eval(attrs.ngSave);};
+        }
+        if (attrs && attrs.ngSaveChanges) {
+          kendoGridInit.saveChanges = function(e) {scope.$eval(attrs.ngSaveChanges);};
+        }
+        if (attrs && attrs.ngRemove) {
+          kendoGridInit.remove = function(e) {scope.$eval(attrs.ngRemove);};
+        }
 
         return kendoGridInit;
 
@@ -1928,7 +1963,7 @@
 
 
 
-          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl);
+          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
@@ -3466,6 +3501,7 @@ app.kendoHelper = {
               function(data) {
                 this.options.enableAndSelect(e);
                 e.success(data);
+                this.options.grid.dataSource._pristineTotal = this.options.grid.dataSource._pristineData.push(data);
               }.bind(this),
               function(data) {
                 this.options.enableAndSelect(e);
