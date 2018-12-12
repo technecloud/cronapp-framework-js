@@ -2495,13 +2495,20 @@
           "order": 9999,
           "onSave":"javascript:function(){if(arguments[0].indexOf('horizontal') > -1){this.currentObject.parent().find('div[ui-view]').removeClass('main-view-vertical').addClass('main-view-horizontal');this.currentObject.parent().find('.main-title').removeClass('hide');}else{this.currentObject.parent().find('div[ui-view]').removeClass('main-view-horizontal').addClass('main-view-vertical');this.currentObject.parent().find('.main-title').addClass('hide');} return arguments[0];}"
         },
+        "xattr-class": {
+          "order": 998,
+          "fixed": true,
+          "displayName_pt_BR": "Posição",
+          "displayName_en_US": "Position",
+          "selector": "div"
+        },
         "id": {
           "order": 2
         }
       },
       "attributesForPreview": [
         {
-          "name": "class",
+          "name": "xattr-class",
           "type": "options",
           "target": "class",
           "values": [
