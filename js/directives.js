@@ -504,7 +504,7 @@
         };
 
         scope.$watch(function(){return ngModel.$modelValue}, function(value, old){
-          if (value !== old) {
+          if (value !== old || value !== scope.TEXT) {
             scope.text = ngModel.$modelValue;
             scope.TEXT = getText();
             scope.INPUT_MODE = getInputMode(scope.TEXT);
