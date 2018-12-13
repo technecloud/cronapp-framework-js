@@ -309,13 +309,25 @@
       var total = scriptsStimulsoft.length;
       var totalAdded = 0;
 
+      Pace.options.initialRate = 0.7;
+      Pace.options.minTime = 1750;
+      Pace.options.maxProgressPerFrame = 1;
+      Pace.options.ghostTime = 120000;
+      Pace.restart();
+
       scriptsStimulsoft.forEach(function(url, idx) {
         this.loadScript(url, function(success) {
           totalAdded++;
           if (!success)
             loadedAllSuccess = false;
-          if (totalAdded == total)
+          if (totalAdded == total) {
+            Pace.options.initialRate = 0.03;
+            Pace.options.minTime = 250;
+            Pace.options.maxProgressPerFrame = 20;
+            Pace.options.ghostTime = 10;
+            Pace.stop();
             callback(loadedAllSuccess);
+          }
         });
       }.bind(this));
     }
