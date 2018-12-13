@@ -123,10 +123,10 @@
 
 .right-block {
   display: block;
-  magin-right: auto;
+  margin-left: auto;
 }
 
 .left-block {
   display: block;
-  magin-left: auto;
+  magin-right: auto;
 }
