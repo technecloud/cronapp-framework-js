@@ -778,7 +778,20 @@
             }
             var bindedFilter = filterTemplate.split('{value}').join(value);
             if (typeof value == 'string') {
-              bindedFilter = bindedFilter.split('{value.lower}').join(value.toLowerCase());
+              if (bindedFilter.startsWith('substringof({')) {
+                var values = value.split("'").join("").toLowerCase().trim().split(' ');
+                var fulltextIndexFilter = '';
+                values.forEach(function(v, ix) {
+                  fulltextIndexFilter += bindedFilter.split('{value.lower}').join("'" + v + "'");
+                  if (ix < (values.length - 1)) {
+                    fulltextIndexFilter += ' or ';
+                  }
+                });
+                bindedFilter = fulltextIndexFilter;
+              }
+              else {
+                bindedFilter = bindedFilter.split('{value.lower}').join(value.toLowerCase());
+              }
             } else {
               bindedFilter = bindedFilter.split('{value.lower}').join(value);
             }
