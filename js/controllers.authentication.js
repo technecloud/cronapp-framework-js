@@ -29,8 +29,8 @@
     $rootScope.Notification = Notification;
     $rootScope.UploadService = UploadService;
 
-    $rootScope.getReport = function(reportName, params) {
-      ReportService.openReport(reportName, params);
+    $rootScope.getReport = function(reportName, params, config) {
+      ReportService.openReport(reportName, params, config);
     }
 
     $scope.autoLogin = function(){
@@ -122,8 +122,8 @@
     $rootScope.Notification = Notification;
     $rootScope.UploadService = UploadService;
 
-    $rootScope.getReport = function(reportName, params) {
-      ReportService.openReport(reportName, params);
+    $rootScope.getReport = function(reportName, params, config) {
+      ReportService.openReport(reportName, params, config);
     }
 
     $scope.message = {};

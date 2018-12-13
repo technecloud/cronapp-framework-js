@@ -554,6 +554,29 @@
     }
   })
 
+  .filter('js',function($translate) {
+    return function(o) {
+      if (o != null && o !== undefined) {
+        if (typeof o == 'number' || typeof o == 'boolean') {
+          return o + "";
+        }
+        if (o instanceof Date) {
+          return cronapi.toDate(o.toISOString());
+        }
+        else {
+          if (o.length >= 10 && o.match(ISO_PATTERN)) {
+            return cronapi.toDate(o);
+          } else {
+            return "'" + o + "'";
+          }
+        }
+      }
+      else {
+        return "undefined";
+      }
+    }
+  })
+
   .filter('mask',function($translate) {
     return function(value, maskValue) {
       maskValue = parseMaskType(maskValue, $translate);
@@ -1045,6 +1068,40 @@
         element.append(x);
         element.attr('id' , null);
         $compile(x)(scope);
+      }
+    };
+  })
+  .directive('cronReportViewer', function ($compile) {
+    return {
+      restrict: 'E',
+      replace: true,
+      require: 'ngModel',
+      link: function (scope, element, attrs, ngModelCtrl) {
+
+        function executeReport(attrsOptions) {
+          var config = JSON.parse(attrsOptions);
+          var contextVars = { 'element': element };
+          scope.$eval(config.reportCommand, contextVars);
+        }
+
+        executeReport(attrs.options);
+
+        var filterTimeout = null;
+        scope.$watch(function(){ return attrs.options }, function(value, old){
+          if (value !== old) {
+
+            if (filterTimeout) {
+              clearInterval(filterTimeout);
+              filterTimeout = null;
+            }
+
+            filterTimeout = setTimeout(function() {
+              executeReport(value);
+            }.bind(this), 500);
+          }
+        });
+
+
       }
     };
   })

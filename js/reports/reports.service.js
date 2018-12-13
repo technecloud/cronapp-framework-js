@@ -109,22 +109,30 @@
       }
     }
 
-    this.openStimulsoftReport = function(json, parameters, datasourcesInBand) {
+    this.openStimulsoftReport = function(json, parameters, datasourcesInBand, config) {
       var context = $('#reportViewContext');
       if(!context.get(0)) {
-        console.log('include[#reportViewContext]');
         body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
         $compile(body)(scope);
       }
 
-
       var h = parseInt($(window).height());
+      var heightRepo = (h - 200) + "px";
 
       var options = new Stimulsoft.Viewer.StiViewerOptions();
-      options.appearance.scrollbarsMode = true;
-      options.height = (h - 200) + "px";
+      if (config) {
+        options.toolbar.visible = config.showToolbar;
+        options.appearance.scrollbarsMode = config.showScrollbar;
+        if (config.height != undefined)
+          options.height = config.height + "px";
+      }
+      else {
+        options.appearance.scrollbarsMode = true;
+        options.height = heightRepo;
+      }
 
-      var viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
+      var viewerId = "StiViewer" + app.common.generateId();
+      var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
       var report = new Stimulsoft.Report.StiReport();
       report.load(json);
 
@@ -146,27 +154,79 @@
       stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, datasourcesInBand.datasources);
       viewer.report = report;
 
-      var include = setInterval(function() {
-        var div = $('<div/>');
-        div.attr('id',"contentReport");
-        div.attr('width', '100%');
-        var m = $('#reportView .modal-body');
-        if(m.get(0)) {
-          m.html(div);
-          $('#reportViewContext .modal-dialog').css('width', '95%');
-          setTimeout(function() {
-            console.log('open[#reportViewContext]');
-            $('body').append(context);
-            $('#reportView').modal();
-            viewer.renderHtml("contentReport");
-          }, 100);
+      if (config && config.$element) {
+        viewer.renderHtml(config.$element[0]);
+      }
+      else {
 
-          clearInterval(include);
+        function observeFullScreen() {
+          var $contentReport;
+          var $modalBody;
+          var $headerBody;
+          var $otherHeader;
+          var $reportView;
+          var observerInterval = setInterval(function() {
+            var $renderedReport = $('#'+viewerId);
+            if ($renderedReport.length) {
+              if (!$contentReport) {
+                $contentReport = $renderedReport.parent();
+                $modalBody = $contentReport.parent();
+                $headerBody = $modalBody.parent();
+                $otherHeader = $headerBody.parent(); //coloca o css e coloca o 100% do width (remove modal-dialog modal-lg)
+                $reportView = $otherHeader.parent(); //coloca o css (remove modal fade ng-scope in)
+              }
+              if ($renderedReport.css('position') == 'absolute' && $modalBody.data('applied') != 'absolute') {
+                $modalBody.data('applied', 'absolute');
+                $modalBody.removeClass('modal-body');
+                $headerBody.removeClass('modal-content');
+
+                $otherHeader.attr('style','top: 0px;right: 0px;bottom: 0px;left: 0px;z-index: 1000000;position: absolute;');
+                $otherHeader.removeClass('modal-dialog');
+                $otherHeader.removeClass('modal-lg');
+
+              }
+              else if ($renderedReport.css('position') == 'static' && $modalBody.data('applied') != 'static' ) {
+                $modalBody.data('applied', 'static');
+                $modalBody.addClass('modal-body');
+                $headerBody.addClass('modal-content');
+
+                $otherHeader.attr('style','width:95%');
+                $otherHeader.addClass('modal-dialog');
+                $otherHeader.addClass('modal-lg');
+
+              }
+            }
+            else {
+              console.log('cleared interval: ' + viewerId);
+              clearInterval(observerInterval);
+            }
+          }, 100);
         }
-      }, 200);
+
+        var include = setInterval(function() {
+          var div = $('<div/>');
+          div.attr('id',"contentReport");
+          div.attr('width', '100%');
+          // div.css('height', heightRepo);
+          var m = $('#reportView .modal-body');
+          if(m.get(0)) {
+            m.html(div);
+            $('#reportViewContext .modal-dialog').css('width', '95%');
+            setTimeout(function() {
+              console.log('open[#reportViewContext]');
+              $('body').append(context);
+              $('#reportView').modal();
+              viewer.renderHtml("contentReport");
+              setTimeout(function() { observeFullScreen() },100);
+            }, 100);
+
+            clearInterval(include);
+          }
+        }, 200);
+      }
+
 
     };
-
 
     this.showParameters = function(report) {
       var parameters = report.parameters;
@@ -310,7 +370,7 @@
       }
     }
 
-    this.openReport = function(reportName, params) {
+    this.openReport = function(reportName, params, config) {
       this.getReport(reportName).then(function(result) {
         if(result && result.data) {
           if (result.data.reportName.endsWith('.report')) {
@@ -334,7 +394,7 @@
                         if (params) {
                           result.data.parameters = this.mergeParam(result.data.parameters, params);
                         }
-                        if (this.hasParameterWithOutValue(result.data.parameters)) {
+                        if (this.hasParameterWithOutValue(result.data.parameters) && !config) {
                           //Traduz o nome dos parametros
                           result.data.parameters.forEach(function (p) {
                             p.name = $translate.instant(p.name);
@@ -342,12 +402,10 @@
                           this.showParameters(JSON.parse(JSON.stringify(result.data)));
                         }
                         else {
-                          this.openStimulsoftReport(content.data, result.data.parameters, result.data.datasourcesInBand);
+                          this.openStimulsoftReport(content.data, result.data.parameters, result.data.datasourcesInBand, config);
                         }
 
                       }.bind(this));
-
-
 
                     }.bind(this),
                     function (data) {
