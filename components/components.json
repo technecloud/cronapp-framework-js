@@ -1366,20 +1366,20 @@
         {
           "name": "xattr-position",
           "type": "btngroup",
-          "target": "style",
+          "target": "class",
           "values": [
             {
-              "key": "magin-right:auto;",
+              "key": "left-block",
               "value": "Standard",
               "icon": "mdi mdi-ray-start"
             },
             {
-              "key": "margin-left:auto; margin-right:auto;",
+              "key": "center-block",
               "value": "Middle",
               "icon": "mdi mdi-ray-vertex"
             },
             {
-              "key": "margin-left:auto;",
+              "key": "right-block",
               "value": "Right",
               "icon": "mdi mdi-ray-end"
             }
