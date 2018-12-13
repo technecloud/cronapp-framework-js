@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f618cd7c-7f95-411a-9481-adf996e0a1d8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/components.json" beforeDir="false" afterPath="$PROJECT_DIR$/components/components.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,14 +67,14 @@
     <session id="1540370795">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
-          <entry key="project.open.time.1" value="8" />
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -96,14 +97,14 @@
         <counts>
           <entry key="html" value="7" />
           <entry key="json" value="73" />
-          <entry key="txt" value="285" />
+          <entry key="txt" value="308" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="7" />
           <entry key="JSON" value="73" />
-          <entry key="PLAIN_TEXT" value="285" />
+          <entry key="PLAIN_TEXT" value="308" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -118,8 +119,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/components.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="2587" column="4" selection-start-line="2587" selection-start-column="4" selection-end-line="2587" selection-end-column="4" />
+            <state relative-caret-position="265">
+              <caret line="2488" column="29" selection-start-line="2488" selection-start-column="29" selection-end-line="2488" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -251,7 +252,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -280,13 +280,14 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="components.js&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/components/components.json&#10;custom&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;compon&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/components/components.json&#10;custom-m&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;image.de&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/dist/components/templates/image.default.template.html&#10;image.defaul&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/dist/components/templates/image.default.template.html&#10;image.defa&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/components/templates/image.default.template.html&#10;componen&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/components/components.json&#10;directives.js&#9;FILE&#9;file://C:/CronApp/cronapp-framework-js/js/directives.js&#10;cron-gr&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/templates/cron-grid.designtime.html&#10;components.json&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;custom-mater&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/themes/custom/material/custom-material.css&#10;component&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.jso&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;components.&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/components/components.json&#10;cronos.css&#9;FILE&#9;file://C:/Cronapp/cronapp-platform/cronapp-framework-js/css/cronos.css" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544646844578" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544646847987" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -347,7 +348,9 @@
       <workItem from="1543615331254" duration="46000" />
       <workItem from="1544115358220" duration="1340000" />
       <workItem from="1544183853832" duration="1323000" />
-      <workItem from="1544643310222" duration="2334000" />
+      <workItem from="1544643310222" duration="2367000" />
+      <workItem from="1544708434775" duration="638000" />
+      <workItem from="1544720966743" duration="15000" />
     </task>
     <task id="LOCAL-00001" summary="movendo para libs e material">
       <created>1541695254038</created>
@@ -559,17 +562,24 @@
       <option name="project" value="LOCAL" />
       <updated>1544646473622</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Menu customizavel por css, ajuste de onSave.">
+      <created>1544646858955</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1544646858955</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55658000" />
+    <option name="totallyTimeSpent" value="56344000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25906184" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26119402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -598,7 +608,7 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
       <window_info anchor="right" id="Database" order="7" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="8" visible="true" weight="0.108208954" />
+      <window_info active="true" anchor="right" id="Maven Projects" order="8" visible="true" weight="0.10927505" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +628,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mudança no template de login web" />
     <MESSAGE value="remoção do cronos.css + mudanças para o app.css" />
     <MESSAGE value="temas antigos com cronos.css + remoção de bordas e ajustes de espaço do navbar" />
     <MESSAGE value="remoção de box-shadow" />
@@ -643,7 +652,8 @@
     <MESSAGE value="[CRONIDE-191] Mudança aplicada." />
     <MESSAGE value="Menu customizavel." />
     <MESSAGE value="Menu customizavel por css." />
-    <option name="LAST_COMMIT_MESSAGE" value="Menu customizavel por css." />
+    <MESSAGE value="Menu customizavel por css, ajuste de onSave." />
+    <option name="LAST_COMMIT_MESSAGE" value="Menu customizavel por css, ajuste de onSave." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/controllers.authentication.js">
@@ -974,8 +984,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/components.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="2587" column="4" selection-start-line="2587" selection-start-column="4" selection-end-line="2587" selection-end-column="4" />
+        <state relative-caret-position="265">
+          <caret line="2488" column="29" selection-start-line="2488" selection-start-column="29" selection-end-line="2488" selection-end-column="29" />
         </state>
       </provider>
     </entry>
