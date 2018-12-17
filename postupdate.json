@@ -2,18 +2,15 @@
   "copies": [
     {
       "from": "plugins/cronapp-framework-js/js/custom.controllers.js",
-      "to": "js/custom.controllers.js",
-	  "replace":true
+      "to": "js/custom.controllers.js"
     },
     {
       "from": "plugins/cronapp-framework-js/js/customModules.js",
-      "to": "js/customModules.js",
-	  "replace":true
+      "to": "js/customModules.js"
     },
     {
       "from": "plugins/cronapp-framework-js/js/customStateProvider.js",
-      "to": "js/customStateProvider.js",
-	  "replace":true
+      "to": "js/customStateProvider.js"
     }
   ],
   "includes": [
