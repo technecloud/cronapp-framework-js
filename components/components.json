@@ -3622,25 +3622,19 @@
           "type": "text"
         },
         {
-          "name": "ng-cron-init",
+          "name": "ng-init",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Iniciar",
-          "displayName_en_US": "On Start"
+          "type": "event"
         },
         {
-          "name": "ng-cron-focus",
+          "name": "ng-focus",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Focar",
-          "displayName_en_US": "On Focus"
+          "type": "event"
         },
         {
-          "name": "ng-cron-blur",
+          "name": "ng-blur",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Sair do Foco",
-          "displayName_en_US": "On Blur"
+          "type": "event"
         },
         {
           "name": "ng-before-set-content",
@@ -3685,28 +3679,28 @@
           "displayName_en_US": "On Node Change"
         },
         {
-          "name": "ng-cron-undo",
+          "name": "ng-undo",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Desfazer",
           "displayName_en_US": "On Undo"
         },
         {
-          "name": "ng-cron-redo",
+          "name": "ng-redo",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Refazer",
           "displayName_en_US": "On Redo"
         },
         {
-          "name": "ng-cron-change",
+          "name": "ng-change",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change"
         },
         {
-          "name": "ng-cron-dirty",
+          "name": "ng-dirty",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Sujar Editor",
@@ -3734,60 +3728,44 @@
           "displayName_en_US": "On Paste Post Process"
         },
         {
-          "name": "ng-cron-click",
+          "name": "ng-click",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Clicar",
-          "displayName_en_US": "On Click"
+          "type": "event"
         },
         {
-          "name": "ng-cron-dblclick",
+          "name": "ng-dblclick",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Duplo Clicar",
-          "displayName_en_US": "On Double Click"
+          "type": "event"
         },
         {
-          "name": "ng-cron-keydown",
+          "name": "ng-keydown",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Apertar Tecla",
-          "displayName_en_US": "On Keydown"
+          "type": "event"
         },
         {
-          "name": "ng-cron-keyup",
+          "name": "ng-keyup",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Soltar Tecla",
-          "displayName_en_US": "On Keyup"
+          "type": "event"
         },
         {
-          "name": "ng-cron-mouseenter",
+          "name": "ng-mouseenter",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Entrar com Mouse",
-          "displayName_en_US": "On Mouse Enter"
+          "type": "event"
         },
         {
-          "name": "ng-cron-mouseleave",
+          "name": "ng-mouseleave",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Sair com Mouse",
-          "displayName_en_US": "On Mouse Leave"
+          "type": "event"
         },
         {
-          "name": "ng-cron-mousemove",
+          "name": "ng-mousemove",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Mover Mouse",
-          "displayName_en_US": "On Mouse Move"
+          "type": "event"
         },
         {
-          "name": "ng-cron-paste",
+          "name": "ng-paste",
           "selector": "cron-rich-editor",
-          "type": "event",
-          "displayName_pt_BR": "Ao Colar",
-          "displayName_en_US": "On Paste"
+          "type": "event"
         }
       ]
     },
