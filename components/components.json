@@ -3622,17 +3622,17 @@
           "type": "text"
         },
         {
-          "name": "ng-init",
+          "name": "ng-cron-init",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-focus",
+          "name": "ng-cron-focus",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-blur",
+          "name": "ng-cron-blur",
           "selector": "cron-rich-editor",
           "type": "event"
         },
@@ -3679,28 +3679,28 @@
           "displayName_en_US": "On Node Change"
         },
         {
-          "name": "ng-undo",
+          "name": "ng-cron-undo",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Desfazer",
           "displayName_en_US": "On Undo"
         },
         {
-          "name": "ng-redo",
+          "name": "ng-cron-redo",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Refazer",
           "displayName_en_US": "On Redo"
         },
         {
-          "name": "ng-change",
+          "name": "ng-cron-change",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Alterar",
           "displayName_en_US": "On Change"
         },
         {
-          "name": "ng-dirty",
+          "name": "ng-cron-dirty",
           "selector": "cron-rich-editor",
           "type": "event",
           "displayName_pt_BR": "Ao Sujar Editor",
@@ -3728,42 +3728,42 @@
           "displayName_en_US": "On Paste Post Process"
         },
         {
-          "name": "ng-click",
+          "name": "ng-cron-click",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-dblclick",
+          "name": "ng-cron-dblclick",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-keydown",
+          "name": "ng-cron-keydown",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-keyup",
+          "name": "ng-cron-keyup",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-mouseenter",
+          "name": "ng-cron-mouseenter",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-mouseleave",
+          "name": "ng-cron-mouseleave",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-mousemove",
+          "name": "ng-cron-mousemove",
           "selector": "cron-rich-editor",
           "type": "event"
         },
         {
-          "name": "ng-paste",
+          "name": "ng-cron-paste",
           "selector": "cron-rich-editor",
           "type": "event"
         }
