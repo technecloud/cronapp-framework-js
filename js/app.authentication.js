@@ -31,7 +31,8 @@ var app = (function() {
           'pt_br': 'Portugues (Brasil)',
           'en_us': 'English'
         },
-        'preferredLocale': 'pt_br'
+        'preferredLocale': 'pt_br',
+        'urlPrefix': ''
       })
       .config([
         '$httpProvider',
