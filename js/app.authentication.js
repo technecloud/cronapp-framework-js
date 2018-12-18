@@ -27,9 +27,11 @@ var app = (function() {
 
   return angular.module('MyApp', cronappModules)
       .constant('LOCALES', {
-        'locales': window.translations.locales,
-        'preferredLocale': 'pt_br',
-        'urlPrefix': ''
+        'locales': {
+          'pt_br': 'Portugues (Brasil)',
+          'en_us': 'English'
+        },
+        'preferredLocale': 'pt_br'
       })
       .config([
         '$httpProvider',
