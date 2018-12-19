@@ -1633,17 +1633,24 @@
                 columns.push(addColumn);
               }
             }
-            else if (column.dataType == "Blockly" || column.dataType == "Customized") {
+            else if (column.dataType == "Blockly" || column.dataType == "Customized" || column.dataType == "CustomizedLink") {
               var label = column.label == undefined ? '': column.label;
               if (column.iconClass && label)
                 label = '&nbsp;' + label;
 
+              var className = '';
+              if (column.dataType == "CustomizedLink") {
+                className = 'k-custom-link';
+              }
+              else {
+                className = 'k-custom-command' + (label ? ' k-button-with-label' : '');
+              }
               var addColumn = {
                 command: [{
                   name: app.common.generateId(),
                   text: label,
                   hidden: !column.visible,
-                  className: "k-custom-command" + (label ? ' k-button-with-label' : ''),
+                  className: className,
                   iconClass: column.iconClass,
                   click: function(e) {
                     e.preventDefault();
@@ -1658,7 +1665,7 @@
                     }
 
                     var call = undefined;
-                    if (column.dataType == "Customized")
+                    if (column.dataType == "Customized" || column.dataType == "CustomizedLink")
                       call = column.execute;
                     else
                       call = directiveContext.generateBlocklyCall(column.blocklyInfo);

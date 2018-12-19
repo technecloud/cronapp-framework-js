@@ -805,3 +805,20 @@ div.k-grid-header {
 .k-dateinput-wrap .k-select, .k-dropdown-wrap .k-select, .k-numeric-wrap .k-select, .k-picker-wrap .k-select {
     padding: 4px 4px;
 }
+
+a.k-custom-link {
+    background-color: transparent !important;
+    color: blue !important;
+    text-decoration: underline !important;
+    transform-box: unset !important;
+    border-radius: unset !important;
+    transform-style: unset !important;
+    text-transform: capitalize !important;
+    transition: unset !important;
+    background: transparent !important;
+}
+
+a.k-custom-link:hover {
+    background-color: #ededed !important;
+    background: #ededed !important;
+}
