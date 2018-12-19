@@ -959,7 +959,6 @@
       replace: true,
       require: 'ngModel',
       parseToTinyMCEOptions: function(optionsSelected) {
-
         var toolbarGroup = {};
         toolbarGroup["allowFullScreen"] = "fullscreen |";
         toolbarGroup["allowPage"] = "fullpage newdocument code pagebreak |";
@@ -972,7 +971,6 @@
         toolbarGroup["allowLinks"] = "link unlink anchor |";
         toolbarGroup["allowParagraph"] = "alignleft aligncenter alignright alignjustify numlist bullist outdent indent blockquote hr |";
         toolbarGroup["allowFormulas"] = "tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry tiny_mce_wiris_CAS |";
-
 
         var tinyMCEOptions = {
           menubar: false,
@@ -995,7 +993,6 @@
         return JSON.stringify(tinyMCEOptions);
       },
       link: function (scope, element, attrs, ngModelCtrl) {
-
         var optionsSelected = JSON.parse(attrs.options);
         var tinyMCEOptions = this.parseToTinyMCEOptions(optionsSelected);
 
@@ -1004,68 +1001,68 @@
                     ui-tinymce="$options$" \
                     ng-model="$ngModel$" \
                     id="$id$" \
-                    ng-click="$ngClick$" \
-                    ng-dblclick="$ngDblclick$" \
-                    ng-mousedown="$ngMouseDown$" \
-                    ng-mouseup="$ngMouseUp$" \
-                    ng-mousemove="$ngMouseMove$" \
-                    ng-mouseover="$ngMouseOver$" \
-                    ng-mouseenter="$ngMouseEnter$" \
-                    ng-mouseleave="$ngMouseLeave$" \
-                    ng-keydown="$ngKeydown$" \
-                    ng-keyup="$ngKeyup$" \
-                    ng-keypress="$ngKeypress$"\
+                    ng-cron-click="$ngClick$" \
+                    ng-cron-dblclick="$ngDblclick$" \
+                    ng-cron-mousedown="$ngMouseDown$" \
+                    ng-cron-mouseup="$ngMouseUp$" \
+                    ng-cron-mousemove="$ngMouseMove$" \
+                    ng-cron-mouseover="$ngMouseOver$" \
+                    ng-cron-mouseenter="$ngMouseEnter$" \
+                    ng-cron-mouseleave="$ngMouseLeave$" \
+                    ng-cron-keydown="$ngKeydown$" \
+                    ng-cron-keyup="$ngKeyup$" \
+                    ng-cron-keypress="$ngKeypress$"\
                     ng-context-menu="$ngContextMenu$" \
-                    ng-paste="$ngPaste$" \
-                    ng-init="$ngInit$" \
-                    ng-focus="$ngFocus$" \
-                    ng-blur="$ngBlur$" \
+                    ng-cron-paste="$ngPaste$" \
+                    ng-cron-init="$ngInit$" \
+                    ng-cron-focus="$ngFocus$" \
+                    ng-cron-blur="$ngBlur$" \
                     ng-before-set-content="$ngBeforeSetContent$" \
                     ng-set-content="$ngSetContent$" \
                     ng-get-content="$ngGetContent$" \
                     ng-pre-process="$ngPreProcess$" \
                     ng-post-process"$ngPostProcess$" \
                     ng-node-change="$ngNodeChange$" \
-                    ng-undo="$ngUndo$" \
-                    ng-redo="$ngRedo$" \
-                    ng-change="$ngChange$" \
-                    ng-dirty="$ngDirty$" \
-                    ng-remove="$ngRemove$" \
+                    ng-cron-undo="$ngUndo$" \
+                    ng-cron-redo="$ngRedo$" \
+                    ng-cron-change="$ngChange$" \
+                    ng-cron-dirty="$ngDirty$" \
+                    ng-cron-remove="$ngRemove$" \
                     ng-exec-command="$ngExecCommand$" \
                     ng-paste-pre-process="$ngPastePreProcess$" \
                     ng-paste-post-process="$ngPastePostProcess$" \
                     ng-add-editor="$ngAddEditor$" \
-                    ng-remove-editor="$ngRemoveEditor$" \
+                    ng-remove-editor="$ngRemoveEditor$"> \
                   </textarea> \
                 ';
         templateDyn = $(templateDyn
             .split('$ngModel$').join(attrs.ngModel)
-            .split('$ngClick$').join(attrs.ngClick || "")
-            .split('$ngDblclick$').join(attrs.ngDblclick || "")
-            .split('$ngMouseDown$').join(attrs.ngMouseDown || "")
-            .split('$ngMouseUp$').join(attrs.ngMouseUp || "")
-            .split('$ngMouseMove$').join(attrs.ngMouseMove|| "")
-            .split('$ngMouseOver$').join(attrs.ngMouseOver|| "")
-            .split('$ngMouseEnter$').join(attrs.ngMouseEnter|| "")
-            .split('$ngMouseLeave$').join(attrs.ngMouseLeave|| "")
-            .split('$ngKeydown$').join(attrs.ngKeydown|| "")
-            .split('$ngKeyup$').join(attrs.ngKeyup|| "")
-            .split('$ngKeypress$').join(attrs.ngKeypress|| "")
+            .split('$ngClick$').join(attrs.ngCronClick || "")
+            .split('$ngDblclick$').join(attrs.ngCronDblclick || "")
+            .split('$ngMouseDown$').join(attrs.ngCronMouseDown || "")
+            .split('$ngMouseUp$').join(attrs.ngCronMouseUp || "")
+            .split('$ngMouseMove$').join(attrs.ngCronMouseMove|| "")
+            .split('$ngMouseOver$').join(attrs.ngCronMouseOver|| "")
+            .split('$ngMouseEnter$').join(attrs.ngCronMouseEnter|| "")
+            .split('$ngMouseLeave$').join(attrs.ngCronMouseLeave|| "")
+            .split('$ngKeydown$').join(attrs.ngCronKeydown|| "")
+            .split('$ngKeyup$').join(attrs.ngCronKeyup|| "")
+            .split('$ngKeypress$').join(attrs.ngCronKeypress|| "")
             .split('$ngContextMenu$').join(attrs.ngContextMenu|| "")
-            .split('$ngPaste$').join(attrs.ngPaste|| "")
-            .split('$ngInit$').join(attrs.ngInit|| "")
-            .split('$ngFocus$').join(attrs.ngFocus|| "")
-            .split('$ngBlur$').join(attrs.ngBlur|| "")
+            .split('$ngPaste$').join(attrs.ngCronPaste|| "")
+            .split('$ngInit$').join(attrs.ngCronInit|| "")
+            .split('$ngFocus$').join(attrs.ngCronFocus|| "")
+            .split('$ngBlur$').join(attrs.ngCronBlur|| "")
             .split('$ngBeforeSetContent$').join(attrs.ngBeforeSetContent|| "")
             .split('$ngSetContent$').join(attrs.ngSetContent|| "")
             .split('$ngGetContent$').join(attrs.ngGetContent|| "")
             .split('$ngPreProcess$').join(attrs.ngPreProcess|| "")
             .split('$ngPostProcess$').join(attrs.ngPostProcess|| "")
             .split('$ngNodeChange$').join(attrs.ngNodeChange|| "")
-            .split('$ngUndo$').join(attrs.ngUndo|| "")
-            .split('$ngRedo$').join(attrs.ngRedo|| "")
-            .split('$ngChange$').join(attrs.ngChange|| "")
-            .split('$ngDirty$').join(attrs.ngDirty|| "")
+            .split('$ngUndo$').join(attrs.ngCronUndo|| "")
+            .split('$ngRedo$').join(attrs.ngCronRedo|| "")
+            .split('$ngChange$').join(attrs.ngCronChange|| "")
+            .split('$ngDirty$').join(attrs.ngCronDirty|| "")
             .split('$ngRemove$').join(attrs.ngRemove|| "")
             .split('$ngExecCommand$').join(attrs.ngExecCommand|| "")
             .split('$ngPastePreProcess$').join(attrs.ngPastePreProcess|| "")
