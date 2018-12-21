@@ -10,13 +10,18 @@
     margin-right: 3vw;
 }
 
-
 @media only screen and (min-width: 768px){
     .crn-navigator-vertical {
-        height: -webkit-fill-available;
+        height: 100%;
         width: 19vw;
         display: fixed;
         float: left;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .crn-navigator-vertical > .navbar {
+        height: inherit;
     }
 }
 
