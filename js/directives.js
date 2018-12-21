@@ -372,8 +372,9 @@
       restrict: 'A',
       link: function(scope, element, attrs) {
         var roles = [];
-        if (scope.session && scope.session.roles) {
-          roles = scope.session.roles.toLowerCase().split(",");
+        var user = JSON.parse(localStorage.getItem('_u'))
+        if (user && user.roles) {
+            roles = user.roles.toLowerCase().split(",");
         }
 
         var perms = parsePermission(attrs.cronappSecurity);
