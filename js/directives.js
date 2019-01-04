@@ -3075,6 +3075,18 @@
     }
   }])
 
+  .directive('crnInitialValue', function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, element, attrs, ngModelCtrl) {
+        var modelGetter = $parse(attrs['ngModel']);
+        var modelSetter = modelGetter.assign;
+        modelSetter(scope, $scope.eval(attrs.crnInitialValue));
+      }
+    }
+  })
+
 }(app));
 
 function maskDirectiveAsDate($compile, $translate, $parse) {

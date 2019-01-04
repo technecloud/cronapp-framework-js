@@ -4802,6 +4802,14 @@
       },
       "childrenProperties": [
         {
+          "name": "crn-initial-value",
+          "selector": "input",
+          "displayName_pt_BR": "Valor Inicial",
+          "displayName_en_US": "Initial Value",
+          "type": "logic",
+          "order": 3
+        },
+        {
           "name": "ng-model",
           "selector": "input",
           "type": "text",
