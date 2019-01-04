@@ -3075,14 +3075,14 @@
     }
   }])
 
-  .directive('crnInitialValue', function() {
+  .directive('crnInitialValue', function($parse) {
     return {
       restrict: 'A',
       require: 'ngModel',
       link: function(scope, element, attrs, ngModelCtrl) {
         var modelGetter = $parse(attrs['ngModel']);
         var modelSetter = modelGetter.assign;
-        modelSetter(scope, $scope.eval(attrs.crnInitialValue));
+        modelSetter(scope, scope.$eval(attrs.crnInitialValue));
       }
     }
   })

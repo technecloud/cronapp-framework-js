@@ -4806,7 +4806,7 @@
           "selector": "input",
           "displayName_pt_BR": "Valor Inicial",
           "displayName_en_US": "Initial Value",
-          "type": "logic",
+          "type": "content",
           "order": 3
         },
         {
