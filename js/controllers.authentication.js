@@ -102,7 +102,14 @@
     }
 
     function handleError(data, status, headers, config) {
-      var error = status == 401 ? $translate.instant('Login.view.invalidPassword') : data;
+      var error;
+      if (status == 401) {
+        error = $translate.instant('Login.view.invalidPassword');
+      } else if (status == 403) {
+        error = $translate.instant('Admin.view.Access Denied');
+      } else {
+        error = data;
+      }
       Notification.error(error);
     }
 
