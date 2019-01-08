@@ -1565,10 +1565,15 @@
                 typeForLabel = "#=useMask(data." + column.field  + " ? data." + column.field + "." + a.type + " : 0" + ",'" + column.format + "','" + column.type + "')#";
               }
 
-              if (!group)
-                footer.push(a.footerTemplate + ': ' + typeForLabel);
-              else
-                footer.push(a.groupFooterTemplate + ': ' + typeForLabel);
+              var typeForTemplate = group ? a.groupFooterTemplate : a.footerTemplate;
+
+              if (typeForTemplate) {
+                typeForTemplate = typeForTemplate + ': ';
+              } else {
+                typeForTemplate = '';
+              }
+
+              footer.push(typeForTemplate + typeForLabel);
             });
             return footer.join('<br/>');
           }
