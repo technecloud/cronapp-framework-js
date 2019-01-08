@@ -1560,9 +1560,9 @@
             var footer = [];
             column.aggregates.forEach(function(a) {
 
-              var typeForLabel = '#='+ a.type + '#';
+              var typeForLabel = '#=data.' + column.field + ' ? data.' + column.field + '.' + a.type + ' : 0 #';
               if (a.type == 'average' || a.type == 'sum') {
-                typeForLabel = "#=useMask("+ a.type + ",'"+column.format+"','"+column.type+"')#";
+                typeForLabel = "#=useMask(data." + column.field  + " ? data." + column.field + "." + a.type + " : 0" + ",'" + column.format + "','" + column.type + "')#";
               }
 
               if (!group)
@@ -1883,7 +1883,7 @@
           return hasFilterableColumn;
         };
 
-        var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns);
+        var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns, options.groupings);
 
         var columns = this.getColumns(options, datasource, scope);
         var pageAble = this.getPageAble(options);
@@ -3531,7 +3531,7 @@ app.kendoHelper = {
     }
     return schema;
   },
-  getDataSource: function(dataSource, scope, allowPaging, pageCount, columns) {
+  getDataSource: function(dataSource, scope, allowPaging, pageCount, columns, groupings) {
     var schema = this.getSchema(dataSource);
     if (columns) {
       columns.forEach(function(c) {
@@ -3899,6 +3899,21 @@ app.kendoHelper = {
     datasource.schema.total = function(){
       return datasource.transport.options.cronappDatasource.getRowsCount();
     };
+
+    if (groupings) {
+      datasource.group = [];
+
+      groupings.forEach(function(g) {
+        var group = { field: g.field };
+        if (g.aggregates) {
+          g.aggregates.forEach(function(ag) {
+            group.aggregates.push({ field: g.field, aggregate: ag.type });
+          });
+        }
+        datasource.group.push(group);
+      });
+    }
+
     return datasource;
   },
   getEventReadCombo: function (e) {
