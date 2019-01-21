@@ -1573,7 +1573,13 @@
                 typeForTemplate = '';
               }
 
-              footer.push(typeForTemplate + typeForLabel);
+              var footerTemplate = typeForTemplate + typeForLabel;
+
+              if (column.alignment) {
+                footerTemplate = '<div style="text-align: ' + column.alignment + '">' + footerTemplate + '</div>';
+              }
+
+              footer.push(footerTemplate);
             });
             return footer.join('<br/>');
           }
@@ -1586,6 +1592,17 @@
               || column.type.startsWith('money') || column.type.startsWith('number')
               || column.type.startsWith('tel') || (column.format && column.format != 'null')   ) {
             return column.headerText +": #=useMask(value,'"+column.format+"','"+column.type+"')#";
+          }
+          return undefined;
+        }
+
+        function getAttributes(column) {
+          if (column && column.alignment) {
+            var attributes = {
+              style: "text-align: " + column.alignment + ";"
+            };
+
+            return attributes;
           }
           return undefined;
         }
@@ -1611,6 +1628,7 @@
               addColumn.footerTemplate = getAggregateFooter(column, false);
               addColumn.groupFooterTemplate = getAggregateFooter(column, true);
               addColumn.groupHeaderTemplate = getAggregateHeader(column);
+              addColumn.attributes = getAttributes(column);
               columns.push(addColumn);
             }
             else if (column.dataType == "Command") {
