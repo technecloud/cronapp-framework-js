@@ -80,7 +80,7 @@
               data: formData,
               headers:  {
                 'Content-Type': undefined,
-                'X-AUTH-TOKEN': _u.token
+                'X-AUTH-TOKEN': (_u ?_u.token : '')
               },
               onProgress: function(event) {
                 this.safeApply(function() {
