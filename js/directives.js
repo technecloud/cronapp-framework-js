@@ -3023,7 +3023,11 @@
             var title = '<span>' + item.title + '</span>';
 
             template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>'; 
-          })
+          });
+
+          if (template != '') {
+            template = '<ul class="dropdown-menu">' + template + '</ul>';
+          }
         }
 
         return template;
@@ -3044,9 +3048,8 @@
             template = template  + '\
               <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
                 <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
-                ' + iconClass + title + caret + '\
+                ' + iconClass + title + caret + _populateItems(menu.menuItems) + '\
                 </a> \
-                <ul class="dropdown-menu">' + _populateItems(menu.menuItems) + '</ul>\
               </li>';
           })
         }
