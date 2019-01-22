@@ -3110,8 +3110,15 @@
         if (attrs.ngInitialValue) {
           var modelGetter = $parse(attrs['ngModel']);
           var modelSetter = modelGetter.assign;
-          var evaluated = scope.$eval(attrs.ngInitialValue);
+          var evaluated;
 
+          try {
+            evaluated = scope.$eval(attrs.ngInitialValue);
+          } catch (e) {
+            evaluated = attrs.ngInitialValue;
+          }
+
+          // check if is checkbox to transform to a boolean value
           if (element[0].type == 'checkbox' && evaluated) {
             evaluated = ('' + evaluated).toLowerCase() == 'true';
           }
