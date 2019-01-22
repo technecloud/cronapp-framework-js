@@ -4810,12 +4810,20 @@
       },
       "childrenProperties": [
         {
-          "name": "crn-initial-value",
+          "name": "ng-initial-value",
           "selector": "input",
           "displayName_pt_BR": "Valor Inicial",
           "displayName_en_US": "Initial Value",
           "type": "logic",
           "order": 3
+        },
+        {
+          "name": "crn-allow-null-values",
+          "selector": "input",
+          "displayName_pt_BR": "Permite Valores Nulos",
+          "displayName_en_US": "Allow Null Values",
+          "type": "logic",
+          "order": 4
         },
         {
           "name": "ng-model",

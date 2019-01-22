@@ -3102,17 +3102,69 @@
     }
   }])
 
-  .directive('crnInitialValue', function($parse) {
+  .directive('ngInitialValue', function($parse) {
     return {
       restrict: 'A',
       require: 'ngModel',
       link: function(scope, element, attrs, ngModelCtrl) {
-        var modelGetter = $parse(attrs['ngModel']);
-        var modelSetter = modelGetter.assign;
-        modelSetter(scope, scope.$eval(attrs.crnInitialValue));
+        if (attrs.ngInitialValue) {
+          var modelGetter = $parse(attrs['ngModel']);
+          var modelSetter = modelGetter.assign;
+          var evaluated = scope.$eval(attrs.ngInitialValue);
+
+          if (element[0].type == 'checkbox' && evaluated) {
+            evaluated = evaluated.toLowerCase() == 'true';
+          }
+
+          modelSetter(scope, evaluated);
+        }
       }
     }
   })
+
+  .directive('crnAllowNullValues', [function () {
+    return {
+      restrict: 'A',
+      require: '?ngModel',
+      link: function (scope, el, attrs, ctrl) {
+        if (attrs.crnAllowNullValues == 'true') {
+          ctrl.$formatters = [];
+          ctrl.$parsers = [];
+          ctrl.$render = function () {
+            var viewValue = ctrl.$viewValue;
+            el.data('checked', viewValue);
+            switch (viewValue) {
+              case true:
+                el.prop('indeterminate', false);
+                el.prop('checked', true);
+                break;
+              case false:
+                el.prop('indeterminate', false);
+                el.prop('checked', false);
+                break;
+              default:
+                el.prop('indeterminate', true);
+            }
+          };
+          el.bind('click', function () {
+            var checked;
+            switch (el.data('checked')) {
+              case false:
+                checked = true;
+                break;
+              case true:
+                checked = null;
+                break;
+              default:
+                checked = false;
+            }
+            ctrl.$setViewValue(checked);
+            scope.$apply(ctrl.$render);
+          });
+        }
+      }
+    };
+  }])
 
 }(app));
 
