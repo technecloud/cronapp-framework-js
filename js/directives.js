@@ -1629,6 +1629,7 @@
               addColumn.groupFooterTemplate = getAggregateFooter(column, true);
               addColumn.groupHeaderTemplate = getAggregateHeader(column);
               addColumn.attributes = getAttributes(column);
+              addColumn.headerAttributes = addColumn.attributes;
               columns.push(addColumn);
             }
             else if (column.dataType == "Command") {
