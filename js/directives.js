@@ -3113,7 +3113,7 @@
           var evaluated = scope.$eval(attrs.ngInitialValue);
 
           if (element[0].type == 'checkbox' && evaluated) {
-            evaluated = evaluated.toLowerCase() == 'true';
+            evaluated = ('' + evaluated).toLowerCase() == 'true';
           }
 
           modelSetter(scope, evaluated);
