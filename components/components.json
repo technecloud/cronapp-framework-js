@@ -82,8 +82,8 @@
       "text_en_US": "Button",
       "order": 5,
       "class": "adjust-icon mdi mdi-stop",
-      "wrapper": false,
-      "autoWrapper": true,
+      "wrapper": true,
+      "autoWrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
       "properties": {
         "ng-init": {
@@ -256,6 +256,22 @@
           "name": "content",
           "selector": "span",
           "type": "content"
+        },
+        {
+          "name": "xattr-size",
+          "selector": "button"
+        },
+        {
+          "name": "xattr-theme",
+          "selector": "button"
+        },
+        {
+          "name": "xattr-fullsize",
+          "selector": "button"
+        },
+        {
+          "name": "xattr-disabled",
+          "selector": "button"
         }
       ]
     },
