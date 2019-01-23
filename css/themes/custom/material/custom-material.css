@@ -1,5 +1,15 @@
-/*Ajustes MaurĂ­cio*/
+/*Ajustes Mauricio*/
+button.btn-default {
+	color: white;
+	background: #3d488b;
+}
 
+button.btn-default:hover{
+	opacity: 1 !important;
+	background: #272f61;
+	color:rgb(255, 230, 0) !important;
+}
+	
 .k-grid-header .k-header, .k-grid-header .k-header a.k-link {
     color: white !important;
 }
