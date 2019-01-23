@@ -1578,7 +1578,7 @@
               if (column.alignment) {
                 // alinha o rodapé ao conteúdo quando o alinhamento selecionado for 'Direita'
                 if (column.alignment === 'right' && !group) {
-                  footerTemplate = '<div style="text-align: ' + column.alignment + '; margin-right: -15px;">' + footerTemplate + '</div>';
+                  footerTemplate = '<div style="text-align: ' + column.alignment + '" class="k-fix-margin">' + footerTemplate + '</div>';
                 } else {
                   footerTemplate = '<div style="text-align: ' + column.alignment + '">' + footerTemplate + '</div>';
                 }
