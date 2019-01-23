@@ -6921,3 +6921,16 @@ a.list-group-item-danger.active:focus {
 .jumbotron h6 {
     color: #fff;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+} 
+
+table a:not(.btn), .table a:not(.btn), .k-command-cell button{
+    color: #333 !important;
+    text-decoration: none;
+    font-size: 0.8em;
+}

@@ -7169,3 +7169,15 @@ a.list-group-item-danger.active:focus {
 .popover {
     color: #555555;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+}
+
+table a:not(.btn), .table a:not(.btn), .k-command-cell button{
+    text-decoration: none;
+    font-size: 0.8em;
+}

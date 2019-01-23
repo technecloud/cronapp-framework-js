@@ -1,5 +1,13 @@
 /*Ajustes MaurĂ­cio*/
 
+.k-grid-header .k-header, .k-grid-header .k-header a.k-link {
+    color: white !important;
+}
+
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:rgb(255, 230, 0) !important;
+}  
+
 .k-grid th {
     padding: 7px 22px;
     white-space: nowrap;

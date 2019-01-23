@@ -7274,3 +7274,10 @@ a.list-group-item-danger.active:focus {
 .panel-info .panel-heading {
     border-color: #000;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+}  

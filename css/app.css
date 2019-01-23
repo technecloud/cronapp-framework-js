@@ -130,3 +130,18 @@
   display: block;
   magin-right: auto;
 }
+
+li[data-component="crn-menu-item"] ul li a.bg-primary{
+    color: white !important;
+}
+
+li[data-component="crn-menu-item"] ul li a.bg-primary:hover{
+    color: #333 !important;
+}
+
+.k-grid-header .k-header, .k-grid-header .k-header a.k-link {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 12px;
+    text-decoration: none !important;
+}

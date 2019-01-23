@@ -6908,3 +6908,10 @@ input:focus,
 .panel-default .panel-footer {
     color: #98978b;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+}

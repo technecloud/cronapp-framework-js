@@ -6899,3 +6899,10 @@ button.close {
 .panel-info .panel-title {
     color: #fff;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+}

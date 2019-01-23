@@ -8194,3 +8194,10 @@ legend {
 .modal .close {
     color: #333333
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+}

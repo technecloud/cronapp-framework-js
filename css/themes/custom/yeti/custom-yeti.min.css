@@ -7068,3 +7068,10 @@ input[type="checkbox"] {
 .panel-default .close {
     color: #222222;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+} 

@@ -6908,3 +6908,10 @@ label {
 .pager .disabled > a {
     border-color: #dddddd;
 }
+
+/*!
+ * Customizations for kendo
+*/
+.k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
+    color:#317eac !important;
+}
