@@ -1576,7 +1576,12 @@
               var footerTemplate = typeForTemplate + typeForLabel;
 
               if (column.alignment) {
-                footerTemplate = '<div style="text-align: ' + column.alignment + '">' + footerTemplate + '</div>';
+                // alinha o rodapé ao conteúdo quando o alinhamento selecionado for 'Direita'
+                if (column.alignment === 'right' && !group) {
+                  footerTemplate = '<div style="text-align: ' + column.alignment + '; margin-right: -15px;">' + footerTemplate + '</div>';
+                } else {
+                  footerTemplate = '<div style="text-align: ' + column.alignment + '">' + footerTemplate + '</div>';
+                }
               }
 
               footer.push(footerTemplate);
@@ -3118,7 +3123,7 @@
             evaluated = attrs.ngInitialValue;
           }
 
-          // check if is checkbox to transform to a boolean value
+          // verifica se é um checkbox para transformar para um valor booleano
           if (element[0].type == 'checkbox' && evaluated) {
             evaluated = ('' + evaluated).toLowerCase() == 'true';
           }
