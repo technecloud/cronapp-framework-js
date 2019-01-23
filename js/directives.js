@@ -3990,12 +3990,8 @@ app.kendoHelper = {
       datasource.group = [];
 
       groupings.forEach(function(g) {
-        var group = { field: g.field };
-        if (g.aggregates) {
-          g.aggregates.forEach(function(ag) {
-            group.aggregates.push({ field: g.field, aggregate: ag.type });
-          });
-        }
+        var group = { field: g.field, aggregates: datasource.aggregate };
+
         datasource.group.push(group);
       });
     }
