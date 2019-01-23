@@ -1,4 +1,8 @@
 /*Ajustes Mauricio*/
+button.btn-default:focus, button.btn-default:active{
+    background: #272f61;
+}
+
 button.btn-default {
 	color: white;
 	background: #3d488b;
