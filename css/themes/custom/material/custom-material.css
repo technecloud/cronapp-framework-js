@@ -182,28 +182,28 @@ input:-webkit-autofill:focus {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #337ab7;
+    color: #fff !important;
+    background-color: #337ab7 !important;
 }
 
 .btn-success {
-    color: #fff;
-    background-color: #5cb85c;
+    color: #fff !important;
+    background-color: #5cb85c !important;
 }
 
 .btn-info {
-    color: #fff;
-    background-color: #5bc0de;
+    color: #fff !important;
+    background-color: #5bc0de !important;
 }
 
 .btn-warning {
-    color: #fff;
-    background-color: #f0ad4e;
+    color: #fff !important;
+    background-color: #f0ad4e !important;
 }
 
 .btn-danger {
-    color: #fff;
-    background-color: #d9534f;
+    color: #fff !important;
+    background-color: #d9534f !important;
 }
 
 .form-control {

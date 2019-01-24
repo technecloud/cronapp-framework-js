@@ -1675,6 +1675,9 @@
               else {
                 className = 'k-custom-command' + (label ? ' k-button-with-label' : '');
               }
+              if (column.theme)
+                className += ' ' + column.theme;
+
               var addColumn = {
                 command: [{
                   name: app.common.generateId(),
