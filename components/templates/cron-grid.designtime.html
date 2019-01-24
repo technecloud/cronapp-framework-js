@@ -52,7 +52,7 @@
       <tbody role="rowgroup">
       <tr class="k-alt" data-uid="fd166d69-f2aa-486c-8462-be82e88edf29" role="row">
         <td role="gridcell">{{'DATA'|translate}}</td>
-        <td class="k-command-cell k-command-cell" role="gridcell"><a role="button" class="k-button k-button-icontext k-grid-edit" href="#"><span class="k-icon k-i-edit"></span> </a><a role="button" class="k-button k-button-icontext k-grid-delete" href="#"><span class="k-icon k-i-close"></span> </a></td>
+        <td ng-repeat="item in attrs.options.columns" ng-if="item.command == 'edit|destroy'" class="k-command-cell k-command-cell" role="gridcell"><a role="button" class="k-button k-button-icontext k-grid-edit" href="#"><span class="k-icon k-i-edit"></span> </a><a role="button" class="k-button k-button-icontext k-grid-delete" href="#"><span class="k-icon k-i-close"></span> </a></td>
       </tr>
       </tbody>
     </table>
