@@ -3365,6 +3365,9 @@ function maskDirective($compile, $translate, $parse, attrName) {
                 }
               } else {
                 momentDate = moment(value);
+                if(!momentDate.isValid()){
+                  momentDate = moment(value, mask);
+                }
               }
 
               return momentDate.format(mask);
