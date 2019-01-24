@@ -3357,6 +3357,9 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
               if (useUTC) {
                 momentDate = moment.utc(value);
+                if(!momentDate.isValid()){
+                  momentDate = moment.utc(value, mask);
+                }
               } else {
                 momentDate = moment(value);
               }
