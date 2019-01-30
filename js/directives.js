@@ -1725,7 +1725,8 @@
                   }
                 }],
                 width: column.width,
-                title: column.headerText ? column.headerText: ''
+                title: column.headerText ? column.headerText: '',
+                hidden: !column.visible
               };
               columns.push(addColumn);
             }
