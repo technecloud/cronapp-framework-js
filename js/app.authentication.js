@@ -387,7 +387,7 @@ app.factory('customTranslateLoader', function ($http, $q) {
       }, options.$http)).success(function (data) {
         deferred.resolve(data);
       }).error(function () {
-        deferred.reject({});
+        deferred.resolve({});
       });
 
       return deferred.promise;
