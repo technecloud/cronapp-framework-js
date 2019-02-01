@@ -114,5 +114,8 @@
   "Upload.multipleFile": "Selecione ou arraste um ou mais arquivos",
   "Upload.errorValidation": "Seleção inválida: Tamanho máximo %s e Tipos permitidos: %s",
   "SaveChanges": "Salvar alterações",
-  "CancelChanges": "Cancelar alterações"
+  "CancelChanges": "Cancelar alterações",
+  "Edit": "Editar",
+  "Remove": "Excluir",
+  "Cancel": "Cancelar"
 }
