@@ -13,14 +13,14 @@ button.btn-default:hover{
 	background: #272f61;
 	color:rgb(255, 230, 0) !important;
 }
-	
+
 .k-grid-header .k-header, .k-grid-header .k-header a.k-link {
     color: white !important;
 }
 
 .k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
     color:rgb(255, 230, 0) !important;
-}  
+}
 
 .k-grid th {
     padding: 7px 22px;
@@ -273,7 +273,8 @@ Material Grid
 ==============
 */
 
-.k-grid tbody .k-button {
+.k-grid tbody .k-grid-edit, .k-grid tbody .k-grid-delete,
+.k-grid tbody .k-grid-update, .k-grid tbody .k-grid-cancel{
     width: 28px;
     height: 28px;
     padding: 0;
@@ -282,6 +283,7 @@ Material Grid
     background-color: #fff;
     color: #000;
 }
+
 
 .k-grid tbody .k-button:hover {
     background-color:#008dcd;
@@ -848,3 +850,11 @@ a.k-custom-link:hover {
 .k-edit-field {
     display: block !important;
 }
+
+.k-detail-cell .k-grid .k-header .k-button:hover{
+    background-color:#3d488b;
+    text-transform:uppercase;
+    color:#fff;
+    transition:200ms;
+}
+
