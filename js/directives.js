@@ -602,6 +602,21 @@
     };
   })
 
+  .directive('screenParams', [function() {
+      'use strict';
+      return {
+          link: function(scope, elem, attrs, ctrl) {
+              var screenParams = eval(attrs.screenParams);
+              if (screenParams && screenParams.length) {
+                  screenParams.forEach(function(screenParam) {
+                      if (scope.params && !scope.params[screenParam.key])
+                          scope.params[screenParam.key] = screenParam.value || '';
+                  });
+              }
+          }
+      }
+  }])
+
   .directive('mask', maskDirectiveMask)
 
   .directive('cronappFilter', function($compile) {
