@@ -1,3 +1,13 @@
+.table.table-borderless>thead>tr>td,
+.table.table-borderless>thead>tr>th,
+.table.table-borderless>tfoot>tr>td,
+.table.table-borderless>tfoot>tr>th,
+.table.table-borderless>tbody>tr>td,
+.table.table-borderless>tbody>tr>th {
+  border-top: 0 none transparent;
+  border-bottom: 0 none transparent;
+}
+
 .navbar {
   border: 0;
   border-radius: 0;

@@ -1329,7 +1329,7 @@
         .replace(/&lt;/g, '<')
         .replace(/&amp;/g, '&');
       },
-      getColumns: function(options, datasource, scope) {
+      getColumns: function(options, datasource, scope, tooltips) {
         var directiveContext = this;
 
         function getTemplate(column) {
@@ -1693,6 +1693,18 @@
               if (column.theme)
                 className += ' ' + column.theme;
 
+              var tooltip = '';
+              if (column.tooltip && column.tooltip.length)
+                tooltip = column.tooltip;
+              else if (column.label && column.label.length)
+                tooltip = column.label;
+
+              if (tooltip)  {
+                var classForTooltip = app.common.generateId();
+                tooltips[classForTooltip] = tooltip;
+                className += ' ' + classForTooltip;
+              }
+
               var addColumn = {
                 command: [{
                   name: app.common.generateId(),
@@ -1740,7 +1752,8 @@
                   }
                 }],
                 width: column.width,
-                title: column.headerText ? column.headerText: ''
+                title: column.headerText ? column.headerText: '',
+                hidden: !column.visible
               };
               columns.push(addColumn);
             }
@@ -1825,7 +1838,28 @@
         }
         return editable;
       },
-      generateKendoGridInit: function(options, scope, ngModelCtrl, attrs) {
+      getTooltipsDefault: function() {
+        var tooltips = {
+          k_grid_edit : $translate.instant('Edit'),
+          k_grid_delete: $translate.instant('Remove'),
+          k_grid_update: $translate.instant('Save'),
+          k_grid_cancel: $translate.instant('Cancel')
+        };
+        return tooltips;
+      },
+      setTooltips: function($divContainer, tooltips) {
+        for (var key in tooltips) {
+          var classFilter = '.' + key.replace(/_/g,'-');
+          $divContainer.kendoTooltip({
+            filter: classFilter,
+            content: function(e){
+              var classKey = e.sender.options.filter.substr(1).replace(/-/g,'_');
+              return tooltips[classKey];
+            }
+          });
+        }
+      },
+      generateKendoGridInit: function(options, scope, ngModelCtrl, attrs, tooltips) {
 
         var helperDirective = this;
         function detailInit(e) {
@@ -1846,10 +1880,13 @@
             }
             //Obtendo todos os detalhes da grade atual, fechando e removendo todos (exceto o que esta sendo aberto agora)
             e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
-              var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope);
+              var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope, undefined, undefined, tooltips);
 
-              var grid = $("<div/>").appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
+              var $gridDiv = $("<div/>");
+              var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
+
+              helperDirective.setTooltips($gridDiv, tooltips);
             });
           }
           else
@@ -1932,7 +1969,7 @@
 
         var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns, options.groupings);
 
-        var columns = this.getColumns(options, datasource, scope);
+        var columns = this.getColumns(options, datasource, scope, tooltips);
         var pageAble = this.getPageAble(options);
         var toolbar = this.getToolbar(options, scope);
         var editable = this.getEditable(options);
@@ -2083,12 +2120,13 @@
             });
           }
 
-
-
-          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs);
+          var tooltips = helperDirective.getTooltipsDefault();
+          var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs, tooltips);
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
+
+          helperDirective.setTooltips($templateDyn, tooltips);
 
           scope.safeApply(function() {
             if (scope[options.dataSourceScreen.entityDataSource.name]) {
