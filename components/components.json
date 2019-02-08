@@ -2575,7 +2575,7 @@
         ]
       },
       "childrenProperties": [
-	    {
+        {
           "name": "options",
           "selector": "cron-dynamic-menu",
           "displayName_pt_BR": "Configuração",
@@ -4189,6 +4189,11 @@
           "selector": "label",
           "type": "text",
           "order": 2
+        },
+        {
+          "name": "ng-required",
+          "selector": "cron-select",
+          "type": "logic"
         }
       ]
     },
@@ -4588,6 +4593,11 @@
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
           "type": "event"
+        },
+        {
+          "name": "ng-required",
+          "selector": "cron-auto-complete",
+          "type": "logic"
         }
       ],
       "styles": [
@@ -4699,6 +4709,11 @@
           "displayName_pt_BR": "Ao Abrir",
           "displayName_en_US": "On Open",
           "type": "event"
+        },
+        {
+          "name": "ng-required",
+          "selector": "cron-auto-complete",
+          "type": "logic"
         }
       ],
       "styles": [
@@ -5034,11 +5049,11 @@
       "text_pt_BR": "Menu Dinâmico",
       "text_en_US": "Dynamic Menu",
       "class": "adjust-icon mdi mdi-menu",
-      "order": 11,  
+      "order": 11,
       "wrapper": false,
       "designTimeDynamic": true,
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-menu.designtime.html",
-      "designTimeSelector": ":self",      
+      "designTimeSelector": ":self",
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-menu.template.html",
       "properties": {
         "class": {
@@ -5059,7 +5074,7 @@
         }
       ]
     },
-	  {
+    {
       "name": "crn-table",
       "designTimeSelector": "table",
       "wrapper": false,
