@@ -1502,7 +1502,10 @@
                 var item = this.dataItem(tr);
                 var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
                 scope.safeApply(function() {
-                  directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
+                  if (!options.hideModalButtons) {
+                    directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
+                  }
+
                   var currentItem = cronappDatasource.goTo(item);
                   cronappDatasource.startEditing(currentItem, function(xxx) {});
                   if (opt.editable != 'datasource') {
@@ -1790,7 +1793,10 @@
                 }
                 var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                 toolbar.push(button);
-                this.addButtonsInModal(popupInsert, datasourceName, scope);
+                
+                if (!options.hideModalButtons) {
+                  this.addButtonsInModal(popupInsert, datasourceName, scope);
+                }
               }
               else
                 toolbar.push(toolbarButton.title);
