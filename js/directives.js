@@ -2096,6 +2096,7 @@
         else
           baseUrl += "en-US.min.js";
 
+
         this.initCulture();
         var helperDirective = this;
         $.getScript(baseUrl, function () {
