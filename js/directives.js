@@ -2102,13 +2102,15 @@
         else
           baseUrl += "en-US.min.js";
 
+
         this.initCulture();
         var helperDirective = this;
         $.getScript(baseUrl, function () {
 
           var options = JSON.parse(attrs.options || "{}");
 
-          if (options.editable != 'datasource' && scope[options.dataSourceScreen.entityDataSource.name] && !scope[options.dataSourceScreen.entityDataSource.name].dependentLazyPost) {
+          var batchMode = options.batchMode == undefined || options.batchMode;
+          if (batchMode && options.editable != 'datasource' && scope[options.dataSourceScreen.entityDataSource.name] && !scope[options.dataSourceScreen.entityDataSource.name].dependentLazyPost) {
             scope[options.dataSourceScreen.entityDataSource.name].batchPost = true;
 
             options.toolBarButtons = options.toolBarButtons || [];
