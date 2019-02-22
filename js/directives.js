@@ -1351,31 +1351,32 @@
                 "<label class='k-checkbox-label k-no-text'></label>"
           }
           else if (column.displayField && column.displayField.length > 0) {
-            if (column.type.startsWith('date') || column.type.startsWith('month')
-                || column.type.startsWith('time') || column.type.startsWith('week')
-                || column.type.startsWith('money') || column.type.startsWith('number')
-                || column.type.startsWith('tel') || (column.format && column.format != 'null')) {
+            if (hasMask(column.type) || (column.format && column.format != 'null')) {
               template = "#= useMask("+column.displayField+",'"+column.format+"','"+column.type+"') #";
             }
             else {
               template = "#="+column.displayField+"#";
             }
           }
-          else if (column.type.startsWith('date') || column.type.startsWith('month')
-              || column.type.startsWith('time') || column.type.startsWith('week')
-              || column.type.startsWith('money') || column.type.startsWith('number')
-              || column.type.startsWith('tel') || (column.format && column.format != 'null')   ) {
+          else if (hasMask(column.type) || (column.format && column.format != 'null')   ) {
             template = "#= useMask("+column.field+",'"+column.format+"','"+column.type+"') #";
           }
           return template;
         }
 
+        function hasMask(type){
+          if(type && (typeof type === "string")){
+            return (type.startsWith('date') || type.startsWith('month')
+                || type.startsWith('time') || type.startsWith('week')
+                || type.startsWith('money') || type.startsWith('number')
+                || type.startsWith('tel') || type.startsWith('integer'));
+          }else{
+            return false;
+          }
+        }
+
         function getFormat(column) {
-          if (!column.type.startsWith('date') && !column.type.startsWith('month')
-              && !column.type.startsWith('time') && !column.type.startsWith('week')
-              && !column.type.startsWith('money') && !column.type.startsWith('number')
-              && !column.type.startsWith('tel')
-          )
+          if (!hasMask(column.type))
             return column.format;
           return undefined;
         }
@@ -1610,10 +1611,7 @@
         }
 
         function getAggregateHeader(column) {
-          if (column.type.startsWith('date') || column.type.startsWith('month')
-              || column.type.startsWith('time') || column.type.startsWith('week')
-              || column.type.startsWith('money') || column.type.startsWith('number')
-              || column.type.startsWith('tel') || (column.format && column.format != 'null')   ) {
+          if (hasMask(column.type) || (column.format && column.format != 'null')) {
             return column.headerText +": #=useMask(value,'"+column.format+"','"+column.type+"')#";
           }
           return undefined;
@@ -3621,7 +3619,7 @@ function parseMaskType(type, $translate) {
   else if (type == "number") {
     type = $translate.instant('Format.Decimal');
     if (type == 'Format.Decimal')
-      type = '0,00'
+      type = '#.#00,00'
   }
 
   else if (type == "money") {
@@ -3631,7 +3629,9 @@ function parseMaskType(type, $translate) {
   }
 
   else if (type == "integer") {
-    type = '0';
+    type = $translate.instant('Format.Integer');
+    if (type == 'Format.Integer')
+      type = '###,###.';
   }
 
   else if (type == "week") {
