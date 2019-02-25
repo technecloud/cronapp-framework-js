@@ -1971,6 +1971,42 @@
           return hasFilterableColumn;
         };
 
+        var getVisibleColumnByIdx = function(idx) {
+          var result;
+          var currIdx = 0;
+          options.columns.forEach(function(column)  {
+            if (currIdx == idx && column.visible) {
+              result = column;
+            }
+            if (column.visible)
+              currIdx++;
+          });
+          return result;
+        };
+
+        var excelExport = function(e) {
+          var sheet = e.workbook.sheets[0];
+
+          for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
+            var row = sheet.rows[rowIndex];
+            for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex ++) {
+
+              var column = getVisibleColumnByIdx(cellIndex);
+              //Formata pro excel e adiciona o timezone
+              if (column && row.cells[cellIndex].value instanceof Date) {
+                var dateValue = new Date(row.cells[cellIndex].value.getTime());
+                dateValue.setMinutes(dateValue.getMinutes() + dateValue.getTimezoneOffset());
+                dateValue.setSeconds(dateValue.getSeconds() + 4);
+                row.cells[cellIndex].value = dateValue;
+                if (column.type == 'time')
+                  row.cells[cellIndex].format = "[$-x-systime]hh:mm:ss";
+                else if (column.type == 'datetime')
+                  row.cells[cellIndex].format = "dd/mm/yyyy hh:mm:ss;@";
+              }
+            }
+          }
+        };
+
         var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns, options.groupings);
 
         var columns = this.getColumns(options, datasource, scope, tooltips);
@@ -2001,6 +2037,7 @@
           selectable: options.allowSelectionRow,
           detailInit: (options.details && options.details.length > 0) ? detailInit : undefined,
           listCurrentOptions: (options.details && options.details.length > 0) ? options.details : undefined,
+          excelExport: excelExport,
           edit: function(e) {
             this.dataSource.transport.options.disableAndSelect(e);
             var container = e.container;
