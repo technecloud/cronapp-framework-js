@@ -155,3 +155,8 @@ li[data-component="crn-menu-item"] ul li a.bg-primary:hover{
     font-size: 12px;
     text-decoration: none !important;
 }
+
+img.user-avatar {
+    width: 1.572em !important;
+    max-width: 1.572em !important;
+}
