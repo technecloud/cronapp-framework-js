@@ -184,15 +184,7 @@ var app = (function() {
         }
       ])
       // General controller
-    .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope, $location, $stateParams) {
-
-      $scope.params = $stateParams;
-      var queryStringParams = $location.search();
-      for (var key in queryStringParams) {
-        if (queryStringParams.hasOwnProperty(key)) {
-          $scope.params[key] = queryStringParams[key];
-        }
-      }
+    .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
 
       for (var x in app.userEvents)
           $scope[x] = app.userEvents[x].bind($scope);
