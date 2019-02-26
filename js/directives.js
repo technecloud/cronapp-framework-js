@@ -1975,11 +1975,13 @@
           var result;
           var currIdx = 0;
           options.columns.forEach(function(column)  {
-            if (currIdx == idx && column.visible) {
-              result = column;
+            if (column.dataType == "Database") {
+              if (currIdx == idx && column.visible) {
+                result = column;
+              }
+              if (column.visible)
+                currIdx++;
             }
-            if (column.visible)
-              currIdx++;
           });
           return result;
         };
