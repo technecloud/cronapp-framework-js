@@ -20,9 +20,10 @@
     });
   };
 
-  app.controller('LoginController', function($controller, $scope, $http, $location, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService) {
+  app.controller('LoginController', function($controller, $scope, $http, $location, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams) {
 
     $scope.$http = $http;
+    $scope.params = $stateParams;
     app.registerEventsCronapi($scope, $translate);
 
     $rootScope.http = $http;
@@ -31,6 +32,13 @@
 
     $rootScope.getReport = function(reportName, params, config) {
       ReportService.openReport(reportName, params, config);
+    }
+
+    var queryStringParams = $location.search();
+    for (var key in queryStringParams) {
+      if (queryStringParams.hasOwnProperty(key)) {
+        $scope.params[key] = queryStringParams[key];
+      }
     }
 
     $scope.autoLogin = function(){
@@ -120,9 +128,10 @@
     try { if ($scope.blockly.events.afterLoginRender) $scope.blockly.events.afterLoginRender(); } catch(e) {};
   });
 
-  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
+  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams) {
 
     $scope.$http = $http;
+    $scope.params = $stateParams;
     app.registerEventsCronapi($scope, $translate);
 
     $rootScope.http = $http;
@@ -131,6 +140,13 @@
 
     $rootScope.getReport = function(reportName, params, config) {
       ReportService.openReport(reportName, params, config);
+    }
+
+    var queryStringParams = $location.search();
+    for (var key in queryStringParams) {
+      if (queryStringParams.hasOwnProperty(key)) {
+        $scope.params[key] = queryStringParams[key];
+      }
     }
 
     $scope.message = {};
@@ -188,8 +204,6 @@
     };
 
     $scope.changePassword = function() {
-
-
       if(verifyCredentials()) {
         var user = {
           oldPassword : oldPassword.value,
@@ -207,14 +221,22 @@
         }).success(changeSuccess).error(changeError);
       }
 
-
       function changeSuccess(data, status, headers, config) {
         Notification.info($translate.instant('Home.view.passwordChanged'));
         cleanPasswordFields();
       }
 
       function changeError(data, status, headers, config) {
-        var error = status >= 401 ? $translate.instant('Home.view.InvalidPassword') : data;
+        var error;
+
+        if (status === 422) {
+          error = data;
+        } else if (status >= 401) {
+          error = $translate.instant('Home.view.InvalidPassword');
+        } else {
+          error = data;
+        }
+
         Notification.error(error);
       }
 

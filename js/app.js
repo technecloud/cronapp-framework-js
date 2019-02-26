@@ -184,9 +184,9 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
+    .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
 
-        for (var x in app.userEvents)
+      for (var x in app.userEvents)
           $scope[x] = app.userEvents[x].bind($scope);
 
         try {
