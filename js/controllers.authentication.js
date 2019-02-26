@@ -188,8 +188,6 @@
     };
 
     $scope.changePassword = function() {
-
-
       if(verifyCredentials()) {
         var user = {
           oldPassword : oldPassword.value,
@@ -207,14 +205,22 @@
         }).success(changeSuccess).error(changeError);
       }
 
-
       function changeSuccess(data, status, headers, config) {
         Notification.info($translate.instant('Home.view.passwordChanged'));
         cleanPasswordFields();
       }
 
       function changeError(data, status, headers, config) {
-        var error = status >= 401 ? $translate.instant('Home.view.InvalidPassword') : data;
+        var error;
+
+        if (status === 422) {
+          error = data;
+        } else if (status >= 401) {
+          error = $translate.instant('Home.view.InvalidPassword');
+        } else {
+          error = data;
+        }
+
         Notification.error(error);
       }
 
