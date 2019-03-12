@@ -4104,7 +4104,7 @@ app.kendoHelper = {
                       break;
                     }
                   }
-                  if (idxSelected >-1)
+                  if (idxSelected >-1 && !this.grid.selectable.options.multiple)
                     this.grid.select(this.grid.table.find('tr')[idxSelected]);
                 }
               }
