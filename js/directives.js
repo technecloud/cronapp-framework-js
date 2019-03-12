@@ -1218,6 +1218,17 @@
               });
 
               $('#' + buttonId).click(function() {
+
+                var currentGrid = options.grid;
+                var selectedRows = [];
+                currentGrid.select().each(function() {
+                  var gridRow = currentGrid.dataItem(this);
+                  cronappDatasource.data.forEach(function(dsRow) {
+                    if (dsRow.__$id == gridRow.__$id)
+                      selectedRows.push(dsRow);
+                  });
+                });
+
                 var consolidated = {
                   item: cronappDatasource.active,
                   index: cronappDatasource.cursor
@@ -1230,7 +1241,8 @@
                   'selectedRow': cronappDatasource.active,
                   'consolidated': consolidated,
                   'item': cronappDatasource.active,
-                  'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true)
+                  'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true),
+                  'selectedRows': selectedRows
                 };
 
                 scope.$eval(functionToCall, contextVars) ;
@@ -1732,6 +1744,16 @@
                       call = directiveContext.generateBlocklyCall(column.blocklyInfo);
 
                     var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                    var currentGrid = options.grid;
+                    var selectedRows = [];
+                    currentGrid.select().each(function() {
+                      var gridRow = currentGrid.dataItem(this);
+                      cronappDatasource.data.forEach(function(dsRow) {
+                        if (dsRow.__$id == gridRow.__$id)
+                          selectedRows.push(dsRow);
+                      });
+                    });
+
                     if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
                       var tr = e.currentTarget.parentElement.parentElement;
                       this.select(tr);
@@ -1745,7 +1767,8 @@
                       'selectedRow': item,
                       'consolidated': consolidated,
                       'item': item,
-                      'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true)
+                      'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true),
+                      'selectedRows': selectedRows
                     };
 
                     scope.$eval(call, contextVars);
@@ -1757,6 +1780,12 @@
                 hidden: !column.visible
               };
               columns.push(addColumn);
+            }
+            else if (column.dataType == "Selectable") {
+              var checkColumn = {
+                selectable: true
+              };
+              columns.push(checkColumn);
             }
           }.bind(this));
         }
@@ -1889,6 +1918,7 @@
               var $gridDiv = $("<div/>");
               var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
+              currentOptions.grid = grid;
 
               helperDirective.setTooltips($gridDiv, tooltips);
             });
@@ -2112,6 +2142,13 @@
           }
         };
 
+        if (kendoGridInit.selectable) {
+          if ("multiple" == options.allowSelectionRowType) {
+            kendoGridInit.selectable = "multiple"
+          }
+        }
+        kendoGridInit.originalSelectable = kendoGridInit.selectable;
+
         if (attrs && attrs.ngBeforeEdit) {
           kendoGridInit.beforeEdit =  function(e) {scope.$eval(attrs.ngBeforeEdit);};
         }
@@ -2170,6 +2207,7 @@
 
           var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
           grid.dataSource.transport.options.grid = grid;
+          options.grid = grid;
 
           helperDirective.setTooltips($templateDyn, tooltips);
 
@@ -4046,7 +4084,7 @@ app.kendoHelper = {
           },
           enableAndSelect: function(e) {
             if (this.isGridInDocument(this.grid)) {
-              this.grid.options.selectable = "row";
+              this.grid.options.selectable = this.grid.options.originalSelectable;
               this.grid._selectable();
               this.grid.select(e.container);
             }
