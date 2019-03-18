@@ -284,6 +284,19 @@
       return parameters;
     };
 
+    this.setVariablesBasedOnParams = function(variablesReference, variables){
+      for(var variableIndex in variables){
+        var variableName = Object.keys(variables[variableIndex])[0];
+        var variableValue = variables[variableIndex][variableName];
+        for(var variableReferenceKey in variablesReference){
+          if(variablesReference[variableReferenceKey] && variablesReference[variableReferenceKey].Name && variablesReference[variableReferenceKey].Name === variableName){
+            variablesReference[variableReferenceKey].Value = variableValue;
+            break;
+          }
+        }
+      }
+    };
+
     this.hasParameterWithOutValue = function(parameters) {
       var hasWithOutValue = false;
       for (var i in Object.keys(parameters)) {
@@ -405,6 +418,8 @@
 
                         if (params) {
                           result.data.parameters = this.mergeParam(result.data.parameters, params);
+                          result.data.contentData.Dictionary = result.data.contentData.Dictionary || {};
+                          this.setVariablesBasedOnParams(result.data.contentData.Dictionary.Variables, params);
                         }
                         if (this.hasParameterWithOutValue(result.data.parameters) && !config) {
                           //Traduz o nome dos parametros
