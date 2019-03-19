@@ -2189,13 +2189,13 @@
           {
             "activeSelector": ".table-header th.active",
             "activeClass": "active",
-            "sourceHTML": "<th class=\"k-header\"><div data-container=\"true\">New Title</div></th>",
+            "sourceHTML": "<th class=\"k-header\" data-container=\"true\" rowspan=\"\" colspan=\"\"><div data-container=\"true\" data-replace=\"true\">New Title</div></th>",
             "targetSelector": ".table-header"
           },
           {
             "activeSelector": ".table-content td.active",
             "activeClass": "active",
-            "sourceHTML": "<td><div data-container=\"true\">New Content</div></td>",
+            "sourceHTML": "<td class=\"\" data-container=\"true\" data-component=\"crn-cell\" rowspan=\"\" colspan=\"\"><div class=\"\" data-component=\"crn-horizontal-container\" data-container=\"true\" data-replace=\"true\">New Content</div></td>",
             "targetSelector": ".table-content"
           }
         ]
