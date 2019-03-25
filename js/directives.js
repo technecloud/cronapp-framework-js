@@ -2481,13 +2481,11 @@
         var parent = element.parent();
         var id = attrs.id ? ' id="' + attrs.id + '"' : '';
         var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-        var inputSelect = $('<input style="width: 100%;"' + id + name + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
-
-        //https://stackoverflow.com/questions/21948067/issues-with-ng-required-directive-angular-js
-        attrs.$observe('required', function(value) {
-          inputSelect.prop('required', value);
-        });
-        $(parent).append(inputSelect);
+        var required = '';
+        if (attrs.ngRequired || attrs.required) {
+          required = ' required ';
+        }
+        $(parent).append('<input style="width: 100%;"' + id + name + required + ' class="cronDynamicSelect" ng-model="' + attrs.ngModel + '"/>');
         var $element = $(parent).find('input.cronDynamicSelect');
         var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
         options.combobox = combobox;
