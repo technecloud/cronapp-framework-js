@@ -312,6 +312,7 @@ app.registerEventsCronapi = function($scope, $translate) {
     $scope[x] = app.userEvents[x].bind($scope);
 
   $scope.vars = {};
+  $scope.$evt = $evt;
 
   try {
     if (cronapi) {
