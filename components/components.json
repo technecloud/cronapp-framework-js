@@ -2387,7 +2387,7 @@
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<div class=\"k-content\" data-component=\"crn-radioOption\">    <span class=\"\">New option</span>     <input class=\"k-radio\" type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\" checked=\"\">    <label class=\"k-radio-label\" crn-value=\"\" for=\"optionsRadios${RANDOM}\" value=\"value${RANDOM}\"></label>  </div>",
+            "sourceHTML": "<div class=\"k-content\" data-component=\"crn-radioOption\">    <span class=\"\">New option</span>     <input class=\"k-radio\" crn-value=\"\" value=\"value${RANDOM}\" type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\">    <label class=\"k-radio-label\" for=\"optionsRadios${RANDOM}\"></label>  </div>",
             "targetSelector": ":self"
           }
         ]
@@ -2399,17 +2399,17 @@
       "childrenProperties": [
         {
           "name": "value",
-          "selector": "label[value]",
+          "selector": "input[value]",
           "displayName_pt_BR": "Valor do campo",
           "displayName_en_US": "Field value",
           "type": "text"
         },
         {
-          "name": "crn-view-value",
+          "name": "content",
           "selector": "span",
-          "displayName_pt_BR": "Valor de exibição",
-          "displayName_en_US": "Text value",
-          "type": "text"
+          "displayName_pt_BR": "Conteúdo",
+          "displayName_en_US": "Content",
+          "type": "content"
         },
         {
           "name": "ng-click",
