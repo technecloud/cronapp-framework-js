@@ -154,22 +154,40 @@ var app = (function() {
         return {
           restrict: 'A',
           require: '^ngModel',
-          link: function(scope, element, attr, ngModel) {
+          link: function(scope, element, attr, ngModelCtrl) {
             var evaluatedValue;
             if (attr.value) {
               evaluatedValue = attr.value;
             } else {
               evaluatedValue = $parse(attr.crnValue)(scope);
             }
+
             element.attr("data-evaluated", JSON.stringify(evaluatedValue));
             element.bind("click", function(event) {
               scope.$apply(function() {
-                ngModel.$setViewValue(evaluatedValue);
+                ngModelCtrl.$setViewValue(evaluatedValue);
+                $(element).data('changed', true);
               }.bind(element));
             });
+
+            scope.$watch(function(){return ngModelCtrl.$modelValue}, function(value, old){
+              if (value !== old) {
+                var dataEvaluated = element.attr("data-evaluated");
+                var changed = $(element).data('changed');
+                $(element).data('changed', false);
+                if (!changed) {
+                  if (value && JSON.stringify(''+value) == dataEvaluated) {
+                    $(element)[0].checked = true
+                  } else {
+                    $(element)[0].checked = false;
+                  }
+                }
+              }
+            });           
           }
         };
       }])
+	  
       .decorator("$xhrFactory", [
         "$delegate", "$injector",
         function($delegate, $injector) {

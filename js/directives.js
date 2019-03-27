@@ -4246,8 +4246,8 @@ app.kendoHelper = {
     if (options) {
       if (!options.dynamic || options.dynamic=='false') {
         valuePrimitive = true;
-        options.dataValueField = 'value';
-        options.dataTextField = 'key';
+		options.dataValueField = options.dataValueField || 'value';
+        options.dataTextField = options.dataTextField || 'key';
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
         for (i = 0; i < dataSource.data.length; i++) {
           try {
