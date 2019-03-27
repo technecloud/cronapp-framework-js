@@ -3532,9 +3532,8 @@ function maskDirective($compile, $translate, $parse, attrName) {
           });
         }
 
-      } else if (type == 'number' || type == 'money' || type == 'integer') {
+      } else if (type == 'number' || type == 'money' || type == 'integer' || type == 'money-decimal') {
         removeMask = true;
-        textMask = false;
 
         var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, '');
 
@@ -3583,6 +3582,10 @@ function maskDirective($compile, $translate, $parse, attrName) {
         if (precision == 0)
           inputmaskType = 'integer';
 
+        if(type == 'money-decimal'){
+          inputmaskType = type;
+        }
+
         var ipOptions = {
           'rightAlign':  (type == 'money'),
           'unmaskAsNumber': true,
@@ -3590,7 +3593,8 @@ function maskDirective($compile, $translate, $parse, attrName) {
           'prefix': prefix,
           'suffix': suffix,
           'radixPoint': decimal,
-          'digits': precision
+          'digits': precision,
+          'numericInput' :  (type == 'money-decimal')
         };
 
         if (thousands) {
