@@ -2387,7 +2387,7 @@
         "canIncrement": true,
         "rules": [
           {
-            "sourceHTML": "<div class=\"k-content\" data-component=\"crn-radioOption\">    <span class=\"\">New option</span>     <input class=\"k-radio\" crn-value=\"\" value=\"value${RANDOM}\" type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\">    <label class=\"k-radio-label\" for=\"optionsRadios${RANDOM}\"></label>  </div>",
+            "sourceHTML": "<div class=\"k-content\" data-component=\"crn-radioOption\"><input class=\"k-radio\" crn-value=\"\" value=\"value${RANDOM}\" type=\"radio\" name=\"optionsRadios\" id=\"optionsRadios${RANDOM}\">    <label class=\"k-radio-label\" for=\"optionsRadios${RANDOM}\">New option</label>  </div>",
             "targetSelector": ":self"
           }
         ]
@@ -2406,7 +2406,7 @@
         },
         {
           "name": "content",
-          "selector": "span",
+          "selector": "label",
           "displayName_pt_BR": "Conteúdo",
           "displayName_en_US": "Content",
           "type": "content"
