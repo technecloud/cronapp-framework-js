@@ -3543,12 +3543,18 @@ function maskDirective($compile, $translate, $parse, attrName) {
         var decimal = ',';
         var precision = 0;
 
-        if (mask.startsWith(currency)) {
-          prefix = currency;
+        if(type != 'money-decimal'){
+          if (mask.startsWith(currency)) {
+            prefix = currency;
+          }
+          else if (mask.endsWith(currency)) {
+            suffix = currency;
+          }
         }
-
-        else if (mask.endsWith(currency)) {
-          suffix = currency;
+        else {
+          if (mask == 'money-decimal'){
+            mask = "#.##0,00";
+          }
         }
 
         var pureMask = mask.trim().replace(prefix, '').replace(suffix, '').trim();
@@ -3576,18 +3582,17 @@ function maskDirective($compile, $translate, $parse, attrName) {
           precision = strD.length;
         }
 
-
         var inputmaskType = 'numeric';
 
         if (precision == 0)
           inputmaskType = 'integer';
 
         if(type == 'money-decimal'){
-          inputmaskType = type;
+          inputmaskType = 'currency';
         }
 
         var ipOptions = {
-          'rightAlign':  (type == 'money'),
+          'rightAlign':  (type == 'money' || type == 'money-decimal'),
           'unmaskAsNumber': true,
           'allowMinus': true,
           'prefix': prefix,
