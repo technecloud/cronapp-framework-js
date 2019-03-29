@@ -3532,9 +3532,8 @@ function maskDirective($compile, $translate, $parse, attrName) {
           });
         }
 
-      } else if (type == 'number' || type == 'money' || type == 'integer') {
+      } else if (type == 'number' || type == 'money' || type == 'integer' || type == 'money-decimal') {
         removeMask = true;
-        textMask = false;
 
         var currency = mask.trim().replace(/\./g, '').replace(/\,/g, '').replace(/#/g, '').replace(/0/g, '').replace(/9/g, '');
 
@@ -3547,7 +3546,6 @@ function maskDirective($compile, $translate, $parse, attrName) {
         if (mask.startsWith(currency)) {
           prefix = currency;
         }
-
         else if (mask.endsWith(currency)) {
           suffix = currency;
         }
@@ -3577,20 +3575,24 @@ function maskDirective($compile, $translate, $parse, attrName) {
           precision = strD.length;
         }
 
-
         var inputmaskType = 'numeric';
 
         if (precision == 0)
           inputmaskType = 'integer';
 
+        if(type == 'money-decimal'){
+          inputmaskType = 'currency';
+        }
+
         var ipOptions = {
-          'rightAlign':  (type == 'money'),
+          'rightAlign':  (type == 'money' || type == 'money-decimal'),
           'unmaskAsNumber': true,
           'allowMinus': true,
           'prefix': prefix,
           'suffix': suffix,
           'radixPoint': decimal,
-          'digits': precision
+          'digits': precision,
+          'numericInput' :  (type == 'money-decimal')
         };
 
         if (thousands) {
@@ -3701,7 +3703,7 @@ function parseMaskType(type, $translate) {
       type = '#.#00,00'
   }
 
-  else if (type == "money") {
+  else if (type == "money" || type == "money-decimal") {
     type = $translate.instant('Format.Money');
     if (type == 'Format.Money')
       type = '#.#00,00'
