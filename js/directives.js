@@ -36,6 +36,12 @@
       },
       enabled: {
         public: true
+      },
+      notvisible: {
+        public: false
+      },
+      notenabled: {
+        public: false
       }
     }
 
@@ -388,6 +394,18 @@
             }
             if (perms.enabled[role]) {
               enabled = true;
+            }
+          }
+        }
+
+        for (var i=0;i<roles.length;i++) {
+          var role = roles[i].trim();
+          if (role) {
+            if (perms.notvisible[role]) {
+              show = false;
+            }
+            if (perms.notenabled[role]) {
+              enabled = false;
             }
           }
         }
