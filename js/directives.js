@@ -2694,11 +2694,15 @@
     };
   })
 
-  .directive('cronMultiSelect', function ($compile) {
+  .directive('cronMultiSelect', function ($compile, $parse) {
     return {
       restrict: 'E',
       require: 'ngModel',
       link: function (scope, element, attrs, ngModelCtrl) {
+        var modelGetter = $parse(attrs['ngModel']);
+        var modelSetter = modelGetter.assign;
+        var model = attrs['ngModel'];
+        
         var _self = this;
         var select = {};
         try {
@@ -2750,24 +2754,51 @@
               $(combobox).data('silent', true);
               this.relationDataSource.removeSilent(selectItem, null, null);
             }
-
-            if (deselect) {
-              deselect();
+          } else {
+            if (model) {
+              _scope.$apply(function () {
+                try {
+                  var data = eval('_scope.' + model);                  
+                  data = data.filter(it => it[dataValueField] !== dataItem[dataValueField]);
+                  $(combobox).data('silent', true);
+                  modelSetter(_scope, data);
+                } catch (e) {}
+              });
             }
           }
+
+          if (deselect) {
+            deselect();
+          }
+
         }.bind(relactionDS);
 
         options['select'] = function(e) {
           var dataItem = e.dataItem;
           var dataValueField = e.sender.options.dataValueField;
+          var combobox = e.sender;
+
           if (this.relationDataSource && dataItem[dataValueField]) {
             var obj = {};
             obj[this.relationField] = dataItem[dataValueField];
-            var combobox = e.sender;
             $(combobox).data('silent', true);
             this.relationDataSource.startInserting(obj, function(data){
               this.postSilent();
             }.bind(this.relationDataSource));
+          } else {
+            if (model) {
+              _scope.$apply(function () {
+                try {
+                  var data = eval('_scope.' + model);
+                  if (!data) {
+                    data = [];    
+                  }
+                  data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                  $(combobox).data('silent', true);
+                  modelSetter(_scope, data);
+                } catch(e) {}
+              });
+            }
           }
 
           if (evtSelect) {
@@ -2801,7 +2832,11 @@
           var silent = $(combobox).data('silent');
           $(combobox).data('silent', false);
           if (!silent && (JSON.stringify(value) !== JSON.stringify(old))) {
-            combobox.value(convertArray(value));
+            if (relactionDS.relationDataSource && relactionDS.relationField) { 
+              combobox.value(convertArray(value));
+            } else {
+              combobox.value(value);
+            }
           }
         });
       }
