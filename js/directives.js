@@ -3662,7 +3662,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            if (value != undefined && value != null && value != '') {
+            if (value != undefined && value != null && value !== '') {
               return format(mask, value);
             }
 
@@ -3670,9 +3670,9 @@ function maskDirective($compile, $translate, $parse, attrName) {
           });
 
           ngModelCtrl.$parsers.push(function (value) {
-            if (value != undefined && value != null && value != '') {
+            if (value != undefined && value != null && value !== '') {
               var unmaskedvalue = $element.inputmask('unmaskedvalue');
-              if (unmaskedvalue != '')
+              if (unmaskedvalue !== '')
                 return unmaskedvalue;
             }
 
@@ -3765,7 +3765,7 @@ function parseMaskType(type, $translate) {
   else if (type == "integer") {
     type = $translate.instant('Format.Integer');
     if (type == 'Format.Integer')
-      type = '###,###.';
+      type = '#,##0.####';
   }
 
   else if (type == "week") {
