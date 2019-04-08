@@ -125,7 +125,12 @@ var app = (function() {
               .state('home', {
                 url: "/home",
                 controller: 'HomeController',
-                templateUrl: 'views/logged/home.view.html'
+                templateUrl: 'views/logged/home.view.html',
+                resolve: {
+                  data: function ($translate) {
+                    $translate.refresh();
+                  }
+                }
               })
 
               .state('home.pages', {
