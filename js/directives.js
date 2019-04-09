@@ -3525,11 +3525,13 @@ function maskDirective($compile, $translate, $parse, attrName) {
         else
           $element.wrap("<div style=\"position:relative\"></div>");
         $element.datetimepicker(options);
+        var dtp = $element.datetimepicker(options).data('DateTimePicker');
 
         $element.on('dp.change', function () {
+          $element.data('silent', true);
           if ($(this).is(":visible")) {
             $(this).trigger('change');
-            scope.$apply(function () {
+            scope.safeApply(function () {
               var value = $element.val();
               var momentDate = null;
               if (useUTC) {
@@ -3546,6 +3548,8 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
+            var silent = $element.data('silent');
+            $element.data('silent', false);
             if (value) {
               var momentDate = null;
 
@@ -3561,7 +3565,15 @@ function maskDirective($compile, $translate, $parse, attrName) {
                 }
               }
 
+              if (!silent) {
+                dtp.date(value);
+              }
+
               return momentDate.format(mask);
+            }
+
+            if (!silent) {
+              dtp.date(null);
             }
 
             return null;
