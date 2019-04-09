@@ -3566,7 +3566,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
               }
 
               if (!silent) {
-                dtp.date(value);
+                dtp.date(momentDate.format(mask));
               }
 
               return momentDate.format(mask);
