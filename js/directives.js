@@ -4557,17 +4557,22 @@ window.useMask = function(value, format, type) {
 
   if (value != null && value != undefined) {
     if (value instanceof Date) {
-      resolvedValue = '"'+value.toISOString()+'"';
-    }
 
+      var useUTC = type == 'date' || type == 'datetime' || type == 'time';
+      var momentDate = moment(value);
+
+      if (!useUTC) {
+        momentDate.add(momentDate.utcOffset(), 'm');
+      }
+
+      resolvedValue = '"'+momentDate.format()+'"';
+    }
     else if (typeof value == 'number') {
       resolvedValue = value;
     }
-
     else {
       resolvedValue = '"'+value+'"';
     }
-
     mask = '{{ ' + resolvedValue + '  | mask:"' + resolvedType + '"}}';
   }
 
