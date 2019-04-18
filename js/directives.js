@@ -4313,7 +4313,7 @@ app.kendoHelper = {
     if (options) {
       if (!options.dynamic || options.dynamic=='false') {
         valuePrimitive = true;
-		options.dataValueField = options.dataValueField || 'value';
+        options.dataValueField = options.dataValueField || 'value';
         options.dataTextField = options.dataTextField || 'key';
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
         for (i = 0; i < dataSource.data.length; i++) {
@@ -4348,11 +4348,8 @@ app.kendoHelper = {
         return null;
       }
 
-      if (!options.template && options.format) {
+      if (!options.customTemplate && options.format) {
         options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
-      }
-
-      if (!options.valueTemplate && options.format) {
         options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
       }
 
