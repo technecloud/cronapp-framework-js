@@ -603,11 +603,20 @@
         return value;
 
       maskValue = maskValue.replace(';1', '').replace(';0', '').trim();
-
+      var useUTC = maskValue.indexOf(";local") == -1;
+      maskValue = maskValue.replace(';local', '').trim();
       if (typeof value == "string" && value.match(isoDate)) {
-        return moment.utc(value).format(maskValue);
+        if (useUTC) {
+          return moment.utc(value).format(maskValue);
+        } else {
+          return moment(value).format(maskValue);
+        }
       } else if (value instanceof Date) {
-        return moment.utc(value).format(maskValue);
+        if (useUTC) {
+          return moment.utc(value).format(maskValue);
+        } else {
+          return moment(value).format(maskValue);
+        }
       } else if (typeof value == 'number') {
         return format(maskValue, value);
       }  else if (value != undefined && value != null && value != "") {
@@ -3433,7 +3442,10 @@ function maskDirective($compile, $translate, $parse, attrName) {
         removeMask = true;
       }
 
-      var mask = attrMask.replace(';1', '').replace(';0', '').trim();
+      var isLocal = attrMask != undefined && attrMask != null && attrMask.indexOf(';local') > 0;
+
+      var mask = attrMask.replace(';1', '').replace(';0', '').replace(';local', '').trim();
+
       if (mask == undefined || mask.length == 0) {
         return;
       }
@@ -3468,6 +3480,10 @@ function maskDirective($compile, $translate, $parse, attrName) {
         }
 
         var useUTC = type == 'date' || type == 'datetime' || type == 'time';
+
+        if (isLocal) {
+          useUTC = false;
+        }
 
         if ($element.attr('from-grid')) {
           var openPopup = function() {
