@@ -318,7 +318,7 @@ app.bindScope = function($scope, obj) {
   var newObj = {};
 
   for (var x in obj) {
-    if (typeof obj[x] == 'string')
+    if (typeof obj[x] == 'string' || typeof obj[x] == 'boolean')
       newObj[x] = obj[x];
     else if (typeof obj[x] == 'function')
       newObj[x] = obj[x].bind($scope);

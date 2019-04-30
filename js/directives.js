@@ -380,7 +380,7 @@
         var roles = [];
         var user = JSON.parse(localStorage.getItem('_u'))
         if (user && user.roles) {
-            roles = user.roles.toLowerCase().split(",");
+          roles = user.roles.toLowerCase().split(",");
         }
 
         var perms = parsePermission(attrs.cronappSecurity);
@@ -597,21 +597,30 @@
   })
 
   .filter('mask',function($translate) {
-    return function(value, maskValue) {
+    return function(value, maskValue, type) {
       maskValue = parseMaskType(maskValue, $translate);
       if (!maskValue)
         return value;
 
-      maskValue = maskValue.replace(';1', '').replace(';0', '').trim();
-      var useUTC = maskValue.indexOf(";local") == -1;
-      maskValue = maskValue.replace(';local', '').trim();
-      if (typeof value == "string" && value.match(isoDate)) {
-        if (useUTC) {
-          return moment.utc(value).format(maskValue);
-        } else {
-          return moment(value).format(maskValue);
+
+      var useUTC;
+
+      if (type !== undefined) {
+        useUTC = type == 'date' || type == 'datetime' || type == 'time';
+
+        if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+          useUTC = false;
         }
-      } else if (value instanceof Date) {
+      } else {
+        useUTC = window.utcTimeZone === undefined || window.utcTimeZone === null || window.utcTimeZone === true;
+      }
+
+      if (maskValue.indexOf(";local") > 0) {
+        useUTC = false;
+      }
+
+      maskValue = maskValue.replace(';1', '').replace(';0', '').replace(';local', '').trim();
+      if ((typeof value == "string" && value.match(isoDate)) || value instanceof Date) {
         if (useUTC) {
           return moment.utc(value).format(maskValue);
         } else {
@@ -630,18 +639,18 @@
   })
 
   .directive('screenParams', [function() {
-      'use strict';
-      return {
-          link: function(scope, elem, attrs, ctrl) {
-              var screenParams = eval(attrs.screenParams);
-              if (screenParams && screenParams.length) {
-                  screenParams.forEach(function(screenParam) {
-                      if (scope.params && !scope.params[screenParam.key])
-                          scope.params[screenParam.key] = screenParam.value || '';
-                  });
-              }
-          }
+    'use strict';
+    return {
+      link: function(scope, elem, attrs, ctrl) {
+        var screenParams = eval(attrs.screenParams);
+        if (screenParams && screenParams.length) {
+          screenParams.forEach(function(screenParam) {
+            if (scope.params && !scope.params[screenParam.key])
+              scope.params[screenParam.key] = screenParam.value || '';
+          });
+        }
       }
+    }
   }])
 
   .directive('mask', maskDirectiveMask)
@@ -1847,7 +1856,7 @@
                 }
                 var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                 toolbar.push(button);
-                
+
                 if (!options.hideModalButtons) {
                   this.addButtonsInModal(popupInsert, datasourceName, scope);
                 }
@@ -2124,8 +2133,8 @@
                 cronappDatasource.startEditing(currentItem, function(xxx) {});
               });
             }
-            
-            if (attrs && attrs.ngEdit) { 
+
+            if (attrs && attrs.ngEdit) {
               scope.$eval(attrs.ngEdit);
             }
 
@@ -2139,19 +2148,19 @@
               ngModelCtrl.$setViewValue(cronappDatasource.active);
             }
             collapseAllExcecptCurrent(this, this.select().next(), this.select());
-            
-            if (attrs && attrs.ngChange) { 
+
+            if (attrs && attrs.ngChange) {
               scope.$eval(attrs.ngChange);
             }
 
-            compileListing(e);            
+            compileListing(e);
           },
           cancel: function(e) {
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
             setTimeout(function() {
-              if (attrs && attrs.ngCancel) { 
+              if (attrs && attrs.ngCancel) {
                 scope.$eval(attrs.ngCancel);
               }
 
@@ -2160,8 +2169,8 @@
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
-            
-            if (attrs && attrs.ngDataBound) { 
+
+            if (attrs && attrs.ngDataBound) {
               scope.$eval(attrs.ngDataBound);
             }
 
@@ -2711,7 +2720,7 @@
         var modelGetter = $parse(attrs['ngModel']);
         var modelSetter = modelGetter.assign;
         var model = attrs['ngModel'];
-        
+
         var _self = this;
         var select = {};
         try {
@@ -2767,7 +2776,7 @@
             if (model) {
               _scope.$apply(function () {
                 try {
-                  var data = eval('_scope.' + model);                  
+                  var data = eval('_scope.' + model);
                   data = data.filter(it => it[dataValueField] !== dataItem[dataValueField]);
                   $(combobox).data('silent', true);
                   modelSetter(_scope, data);
@@ -2800,7 +2809,7 @@
                 try {
                   var data = eval('_scope.' + model);
                   if (!data) {
-                    data = [];    
+                    data = [];
                   }
                   data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
                   $(combobox).data('silent', true);
@@ -2841,7 +2850,7 @@
           var silent = $(combobox).data('silent');
           $(combobox).data('silent', false);
           if (!silent && (JSON.stringify(value) !== JSON.stringify(old))) {
-            if (relactionDS.relationDataSource && relactionDS.relationField) { 
+            if (relactionDS.relationDataSource && relactionDS.relationField) {
               combobox.value(convertArray(value));
             } else {
               combobox.value(value);
@@ -2881,7 +2890,7 @@
         var required = '';
         if (attrs.ngRequired || attrs.required) {
           required = ' required ';
-        }        
+        }
         $(parent).append('<input style="width: 100%;" ' + id + name + required + ' class="cronAutoComplete" ng-model="' + attrs.ngModel + '"/>');
         var $element = $(parent).find('input.cronAutoComplete');
         $(element).remove();
@@ -2940,6 +2949,10 @@
         }
 
         var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
+
+        if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+          useUTC = false;
+        }
 
         var $element = $(element);
         if ($element.data('alreadycompiled'))
@@ -3237,7 +3250,7 @@
       }
     }
   })
-  
+
   .directive('cronDynamicMenu', ['$compile', function($compile){
     'use strict';
 
@@ -3245,7 +3258,7 @@
       restrict: 'EA',
       populateItems: function(items) {
         var template = '';
-        
+
         if (items && items != null && Array.isArray(items)) {
           items.forEach(function(item) {
             var security = (item.security && item.security != null) ? ' cronapp-security="' + item.security + '" ' : '';
@@ -3254,7 +3267,7 @@
             var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>' : '';
             var title = '<span>' + item.title + '</span>';
 
-            template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>'; 
+            template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>';
           });
 
           if (template != '') {
@@ -3276,7 +3289,7 @@
             var hide = (menu.hide && menu.hide != null) ? ' ng-hide="' + menu.hide + '" ' : '';
             var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>' : '';
             var title = '<span>' + menu.title + '</span>';
-            
+
             template = template  + '\
               <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
                 <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
@@ -3289,7 +3302,7 @@
         return template;
       },
       link: function(scope, element, attrs) {
-        var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';  
+        var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
         var options = {};
         try {
           options = JSON.parse(attrs.options);
@@ -3442,9 +3455,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
         removeMask = true;
       }
 
-      var isLocal = attrMask != undefined && attrMask != null && attrMask.indexOf(';local') > 0;
-
-      var mask = attrMask.replace(';1', '').replace(';0', '').replace(';local', '').trim();
+      var mask = attrMask.replace(';1', '').replace(';0', '').trim();
 
       if (mask == undefined || mask.length == 0) {
         return;
@@ -3481,7 +3492,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
         var useUTC = type == 'date' || type == 'datetime' || type == 'time';
 
-        if (isLocal) {
+        if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
           useUTC = false;
         }
 
@@ -4454,6 +4465,10 @@ app.kendoHelper = {
   buildKendoMomentPicker : function($element, options, scope, ngModelCtrl) {
     var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
 
+    if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+      useUTC = false;
+    }
+
     if (!$element.attr('from-grid')) {
       var onChange = function() {
         var value = $element.val();
@@ -4571,12 +4586,7 @@ window.useMask = function(value, format, type) {
   if (value != null && value != undefined) {
     if (value instanceof Date) {
 
-      var useUTC = type == 'date' || type == 'datetime' || type == 'time';
       var momentDate = moment(value);
-
-      if (!useUTC) {
-        momentDate.add(momentDate.utcOffset(), 'm');
-      }
 
       resolvedValue = '"'+momentDate.format()+'"';
     }
@@ -4586,7 +4596,7 @@ window.useMask = function(value, format, type) {
     else {
       resolvedValue = '"'+value+'"';
     }
-    mask = '{{ ' + resolvedValue + '  | mask:"' + resolvedType + '"}}';
+    mask = '{{ ' + resolvedValue + '  | mask:"' + resolvedType + '":"'+type+'"}}';
   }
 
   return mask;
