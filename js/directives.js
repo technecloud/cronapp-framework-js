@@ -608,11 +608,11 @@
       if (type !== undefined) {
         useUTC = type == 'date' || type == 'datetime' || type == 'time';
 
-        if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+        if (!window.fixedTimeZone) {
           useUTC = false;
         }
       } else {
-        useUTC = window.utcTimeZone === undefined || window.utcTimeZone === null || window.utcTimeZone === true;
+        useUTC = window.fixedTimeZone;
       }
 
       if (maskValue.indexOf(";local") > 0) {
@@ -622,13 +622,13 @@
       maskValue = maskValue.replace(';1', '').replace(';0', '').replace(';local', '').trim();
       if ((typeof value == "string" && value.match(isoDate)) || value instanceof Date) {
         if (useUTC) {
-          return moment.utc(value).format(maskValue);
+          return moment(value).utcOffset(window.timeZoneOffset).format(maskValue);
         } else {
           return moment(value).format(maskValue);
         }
       } else if (typeof value == 'number') {
         return format(maskValue, value);
-      }  else if (value != undefined && value != null && value != "") {
+      }  else if (value != undefined && value != null && value != "" && maskValue != '') {
         var input = $("<input type=\"text\">");
         input.mask(maskValue);
         return input.masked(value);
@@ -2950,7 +2950,7 @@
 
         var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
 
-        if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+        if (!window.fixedTimeZone) {
           useUTC = false;
         }
 
@@ -2985,7 +2985,7 @@
             }
 
             if (useUTC) {
-              momentDate = moment.utc(valueDate, options.momentFormat);
+              momentDate = moment(valueDate, options.momentFormat).utcOffset(window.timeZoneOffset);
             } else {
               momentDate = moment(valueDate, options.momentFormat);
             }
@@ -3005,7 +3005,7 @@
                 var momentDate = null;
 
                 if (useUTC) {
-                  momentDate = moment.utc(value);
+                  momentDate = moment(value).utcOffset(window.timeZoneOffset);;
                 } else {
                   momentDate = moment(value);
                 }
@@ -3022,7 +3022,7 @@
               if (value) {
                 var momentDate = null;
                 if (useUTC) {
-                  momentDate = moment.utc(datePicker._oldText, options.momentFormat);
+                  momentDate = moment(datePicker._oldText, options.momentFormat).utcOffset(window.timeZoneOffset);;
                 } else {
                   momentDate = moment(datePicker._oldText, options.momentFormat);
                 }
@@ -3456,7 +3456,6 @@ function maskDirective($compile, $translate, $parse, attrName) {
       }
 
       var mask = attrMask.replace(';1', '').replace(';0', '').trim();
-
       if (mask == undefined || mask.length == 0) {
         return;
       }
@@ -3492,7 +3491,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
         var useUTC = type == 'date' || type == 'datetime' || type == 'time';
 
-        if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+        if (!window.fixedTimeZone) {
           useUTC = false;
         }
 
@@ -3530,7 +3529,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
           $element.on('dp.change', function () {
             var momentDate = null;
             if (useUTC) {
-              momentDate = moment.utc($element.val(), mask);
+              momentDate = moment($element.val(), mask).utcOffset(window.timeZoneOffset);
             } else {
               momentDate = moment($element.val(), mask);
             }
@@ -3540,7 +3539,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
             var initialValue = $element.data('initial-value');
             var momentDate = null;
             if (useUTC) {
-              momentDate = moment.utc(initialValue);
+              momentDate = moment(initialValue).utcOffset(window.timeZoneOffset);
             } else {
               momentDate = moment(initialValue);
             }
@@ -3549,20 +3548,19 @@ function maskDirective($compile, $translate, $parse, attrName) {
           }
 
         }
-        else
+        else {
           $element.wrap("<div style=\"position:relative\"></div>");
+        }
         $element.datetimepicker(options);
-        var dtp = $element.datetimepicker(options).data('DateTimePicker');
 
         $element.on('dp.change', function () {
-          $element.data('silent', true);
           if ($(this).is(":visible")) {
             $(this).trigger('change');
             scope.safeApply(function () {
               var value = $element.val();
               var momentDate = null;
               if (useUTC) {
-                momentDate = moment.utc(value, mask);
+                momentDate = moment(value, mask).utcOffset(window.timeZoneOffset, true);
               } else {
                 momentDate = moment(value, mask);
               }
@@ -3575,15 +3573,13 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
-            var silent = $element.data('silent');
-            $element.data('silent', false);
             if (value) {
               var momentDate = null;
 
               if (useUTC) {
-                momentDate = moment.utc(value);
+                momentDate = moment(value).utcOffset(window.timeZoneOffset);
                 if(!momentDate.isValid()){
-                  momentDate = moment.utc(value, mask);
+                  momentDate = moment(value, mask).utcOffset(window.timeZoneOffset);
                 }
               } else {
                 momentDate = moment(value);
@@ -3592,15 +3588,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
                 }
               }
 
-              if (!silent) {
-                dtp.date(momentDate.format(mask));
-              }
-
               return momentDate.format(mask);
-            }
-
-            if (!silent) {
-              dtp.date(null);
             }
 
             return null;
@@ -3613,7 +3601,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
               }
               var momentDate = null;
               if (useUTC) {
-                momentDate = moment.utc(value, mask);
+                momentDate = moment(value, mask).utcOffset(window.timeZoneOffset);
               } else {
                 momentDate = moment(value, mask);
               }
@@ -3816,6 +3804,10 @@ function parseMaskType(type, $translate) {
   }
 
   else if (type == "text") {
+    type = '';
+  }
+
+  else if (type == "string") {
     type = '';
   }
 
@@ -4465,7 +4457,7 @@ app.kendoHelper = {
   buildKendoMomentPicker : function($element, options, scope, ngModelCtrl) {
     var useUTC = options.type == 'date' || options.type == 'datetime' || options.type == 'time';
 
-    if (window.utcTimeZone !== undefined && window.utcTimeZone !== null && window.utcTimeZone === false) {
+    if (!window.fixedTimeZone) {
       useUTC = false;
     }
 
@@ -4479,7 +4471,7 @@ app.kendoHelper = {
           var momentDate = null;
 
           if (useUTC) {
-            momentDate = moment.utc(value, options.momentFormat);
+            momentDate = moment(value, options.momentFormat).utcOffset(window.timeZoneOffset);
           } else {
             momentDate = moment(value, options.momentFormat);
           }
@@ -4586,7 +4578,7 @@ window.useMask = function(value, format, type) {
   if (value != null && value != undefined) {
     if (value instanceof Date) {
 
-      var momentDate = moment(value);
+      var momentDate = moment(value).utcOffset(window.timeZoneOffset);
 
       resolvedValue = '"'+momentDate.format()+'"';
     }
