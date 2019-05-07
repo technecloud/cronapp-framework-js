@@ -3591,6 +3591,11 @@ function maskDirective($compile, $translate, $parse, attrName) {
               return momentDate.format(mask);
             }
 
+            if(value === null){
+              var dp = $element.datetimepicker(options).data('DateTimePicker');
+              dp.date(null);
+            }
+
             return null;
           });
 
