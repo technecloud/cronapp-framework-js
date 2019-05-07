@@ -4367,9 +4367,19 @@ app.kendoHelper = {
         return null;
       }
 
-      if (!options.customTemplate && options.format) {
-        options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
-        options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "') #";
+      var isValidDateType = function(field) {
+        var dateTypes = ["date", "time", "datetime"];
+        if(dateTypes.indexOf(field) > -1){
+          return field;
+        }
+        return null;
+      }
+
+      if (!options.customTemplate) {
+        if (options.format || (isValidDateType(getFieldType(options.dataTextField)))) {
+          options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
+          options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
+        }
       }
 
       var config = {
