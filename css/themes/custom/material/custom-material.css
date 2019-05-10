@@ -858,3 +858,7 @@ a.k-custom-link:hover {
     transition:200ms;
 }
 
+.k-scheduler-toolbar{
+    background-color: #3b448e;
+    color:#fff;
+}
