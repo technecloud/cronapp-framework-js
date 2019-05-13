@@ -1838,7 +1838,7 @@
                 }
                 var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                 toolbar.push(button);
-                
+
                 if (!options.hideModalButtons) {
                   this.addButtonsInModal(popupInsert, datasourceName, scope);
                 }
@@ -2115,8 +2115,8 @@
                 cronappDatasource.startEditing(currentItem, function(xxx) {});
               });
             }
-            
-            if (attrs && attrs.ngEdit) { 
+
+            if (attrs && attrs.ngEdit) {
               scope.$eval(attrs.ngEdit);
             }
 
@@ -2130,19 +2130,19 @@
               ngModelCtrl.$setViewValue(cronappDatasource.active);
             }
             collapseAllExcecptCurrent(this, this.select().next(), this.select());
-            
-            if (attrs && attrs.ngChange) { 
+
+            if (attrs && attrs.ngChange) {
               scope.$eval(attrs.ngChange);
             }
 
-            compileListing(e);            
+            compileListing(e);
           },
           cancel: function(e) {
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             scope.safeApply(cronappDatasource.cancel());
             this.dataSource.transport.options.enableAndSelect(e);
             setTimeout(function() {
-              if (attrs && attrs.ngCancel) { 
+              if (attrs && attrs.ngCancel) {
                 scope.$eval(attrs.ngCancel);
               }
 
@@ -2151,8 +2151,8 @@
           },
           dataBound: function(e) {
             this.dataSource.transport.options.selectActiveInGrid();
-            
-            if (attrs && attrs.ngDataBound) { 
+
+            if (attrs && attrs.ngDataBound) {
               scope.$eval(attrs.ngDataBound);
             }
 
@@ -2837,7 +2837,7 @@
         var required = '';
         if (attrs.ngRequired || attrs.required) {
           required = ' required ';
-        }        
+        }
         $(parent).append('<input style="width: 100%;" ' + id + name + required + ' class="cronAutoComplete" ng-model="' + attrs.ngModel + '"/>');
         var $element = $(parent).find('input.cronAutoComplete');
         $(element).remove();
@@ -3193,7 +3193,58 @@
       }
     }
   })
-  
+
+      .directive('cronappStars', [function() {
+        'use strict';
+        return {
+          restrict: 'A',
+          require: 'ngModel',
+          link: function(scope, elem, attrs, ngModelCtrl) {
+
+            var $elem = $(elem);
+            var $star = $('<i style="font-size: 200%" class="component-holder fa fa-star-o" style="" xattr-size="" data-component="crn-icon"></i>' );
+
+            $elem.html("");
+            var stars = [];
+
+            for (var i=1;i<=5;i++) {
+              var clonned = $star.clone();
+              $elem.append(clonned);
+
+              clonned.attr("idx", i);
+              clonned.click(function() {
+                scope.$apply(function() {
+                  ngModelCtrl.$viewValue = parseInt($(this).attr("idx")); //set new view value
+                  ngModelCtrl.$commitViewValue();
+
+                }.bind(this));
+              });
+
+              stars.push(clonned);
+            }
+
+            function changeStars(value) {
+              for (var i=1;i<=5;i++) {
+                stars[i-1].removeClass('fa fa-star-o');
+                stars[i-1].removeClass('ifa fa-star');
+                if (i <= value) {
+                  stars[i-1].addClass('fa fa-star');
+                } else {
+                  stars[i-1].addClass('fa fa-star-o');
+                }
+              }
+
+              return value;
+            }
+
+            ngModelCtrl.$parsers.push(changeStars);
+            ngModelCtrl.$formatters.push(changeStars);
+
+          }
+        }
+      }])
+
+
   .directive('cronDynamicMenu', ['$compile', function($compile){
     'use strict';
 
@@ -3201,7 +3252,7 @@
       restrict: 'EA',
       populateItems: function(items) {
         var template = '';
-        
+
         if (items && items != null && Array.isArray(items)) {
           items.forEach(function(item) {
             var security = (item.security && item.security != null) ? ' cronapp-security="' + item.security + '" ' : '';
@@ -3210,7 +3261,7 @@
             var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>' : '';
             var title = '<span>' + item.title + '</span>';
 
-            template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>'; 
+            template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>';
           });
 
           if (template != '') {
@@ -3232,7 +3283,7 @@
             var hide = (menu.hide && menu.hide != null) ? ' ng-hide="' + menu.hide + '" ' : '';
             var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>' : '';
             var title = '<span>' + menu.title + '</span>';
-            
+
             template = template  + '\
               <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
                 <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
@@ -3245,7 +3296,7 @@
         return template;
       },
       link: function(scope, element, attrs) {
-        var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';  
+        var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
         var options = {};
         try {
           options = JSON.parse(attrs.options);

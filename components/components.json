@@ -5234,6 +5234,48 @@
       "class": "adjust-icon mdi mdi-login",
       "wrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/social-button-bar.template.html"
+    },
+    {
+      "name": "crn-evaluation",
+      "text_pt_BR": "Avaliação",
+      "text_en_US": "Evaluation",
+      "class": "adjust-icon mdi mdi-star-outline",
+      "wrapper": false,
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/evaluation.designtime.html",
+      "designTimeSelector": ":self",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/evaluation.template.html",
+      "properties": {
+        "ng-model": {
+          "onSave": "javascript:function() { var result \u003d arguments[0]; if (result.indexOf(\u0027.\u0027) \u003d\u003d -1 \u0026\u0026 result.trim().length \u003e 0 ) { result \u003d \u0027vars.\u0027+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace(\u0027vars.\u0027,\u0027\u0027); }",
+          "order": 1
+        },
+        "cronapp-stars": {
+          "order": 2
+        },
+        "id": {
+          "order": 3
+        },
+        "class": {
+          "order": 9999
+        },
+        "ng-click": {
+          "removable": false,
+          "type": "event"
+        }
+      },
+      "styles": [
+        {
+          "selector": "div#{id} i.ion-android-star",
+          "text_pt_BR": "Ícone Estrela Preenchido",
+          "text_en_US": "Filled Star Icon"
+        },
+        {
+          "selector": "div#{id} i.ion-android-star-outline",
+          "text_pt_BR": "Ícone Estrela Contorno",
+          "text_en_US": "Outlined Star Icon"
+        }
+      ]
     }
   ]
 }
