@@ -3251,7 +3251,7 @@
     }
   })
 
-  .directive('cronappRating', [function() {
+  .directive('cronappRating', function() {
     'use strict';
     return {
       restrict: 'E',
@@ -3268,8 +3268,6 @@
           starArray.push($(elem).find('i').get(i - 1));
           $(starArray[i-1]).addClass(attrs.iconOff || "fa fa-star-o");
         }
-
-        $star.addClass(attrs.iconOff || "fa fa-star-o");
 
         $elem.html("");
         var stars = [];
@@ -3310,7 +3308,7 @@
 
       }
     }
-  }])
+  })
 
   .directive('cronDynamicMenu', ['$compile', function($compile){
     'use strict';
