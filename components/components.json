@@ -5301,13 +5301,8 @@
       "styles": [
         {
           "selector": "div#{id} i",
-          "text_pt_BR": "Ícone Ativo",
-          "text_en_US": "Active Icon"
-        },
-        {
-          "selector": "div#{id} i",
-          "text_pt_BR": "Ícone Inativo",
-          "text_en_US": "Inactive Icon"
+          "text_pt_BR": "Ícone",
+          "text_en_US": "Icon"
         }
       ],
       "attributesForPreview": [
