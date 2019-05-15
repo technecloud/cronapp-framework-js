@@ -5289,7 +5289,7 @@
       "class": "adjust-icon mdi mdi-star-outline",
       "wrapper": true,
       "autoWrapper": false,
-      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/evaluation.template.html",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/evaluation.template.html",
       "properties": {
         "id": {
           "order": 1
