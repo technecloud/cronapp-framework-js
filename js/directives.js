@@ -3194,55 +3194,61 @@
     }
   })
 
-      .directive('cronappStars', [function() {
-        'use strict';
-        return {
-          restrict: 'A',
-          require: 'ngModel',
-          link: function(scope, elem, attrs, ngModelCtrl) {
+  .directive('cronappStars', [function() {
+    'use strict';
+    return {
+      restrict: 'E',
+      require: 'ngModel',
+      link: function(scope, elem, attrs, ngModelCtrl) {
 
-            var $elem = $(elem);
-            var $star = $('<i style="font-size: 200%" class="component-holder fa fa-star-o" style="" xattr-size="" data-component="crn-icon"></i>' );
+        attrs.theme = $(elem).find('i').attr('xattr-theme');
+        attrs.iconOn = $(elem).find('i').attr('class');
 
-            $elem.html("");
-            var stars = [];
+        var $elem = $(elem);
+        var $star = $('<i style="font-size: 200%" class="component-holder" data-component="crn-icon" xattr-theme=""></i>' );
 
-            for (var i=1;i<=5;i++) {
-              var clonned = $star.clone();
-              $elem.append(clonned);
+        $star.addClass(attrs.iconOff || "fa fa-star-o");
 
-              clonned.attr("idx", i);
-              clonned.click(function() {
-                scope.$apply(function() {
-                  ngModelCtrl.$viewValue = parseInt($(this).attr("idx")); //set new view value
-                  ngModelCtrl.$commitViewValue();
+        $elem.html("");
+        var stars = [];
 
-                }.bind(this));
-              });
+        for (var i=1;i<=5;i++) {
+          var clonned = $star.clone();
+          $elem.append(clonned);
 
-              stars.push(clonned);
-            }
+          clonned.attr("idx", i);
+          clonned.click(function() {
+            scope.$apply(function() {
+              ngModelCtrl.$viewValue = parseInt($(this).attr("idx")); //set new view value
+              ngModelCtrl.$commitViewValue();
 
-            function changeStars(value) {
-              for (var i=1;i<=5;i++) {
-                stars[i-1].removeClass('fa fa-star-o');
-                stars[i-1].removeClass('ifa fa-star');
-                if (i <= value) {
-                  stars[i-1].addClass('fa fa-star');
-                } else {
-                  stars[i-1].addClass('fa fa-star-o');
-                }
-              }
+            }.bind(this));
+          });
 
-              return value;
-            }
-
-            ngModelCtrl.$parsers.push(changeStars);
-            ngModelCtrl.$formatters.push(changeStars);
-
-          }
+          stars.push(clonned);
         }
-      }])
+
+        function changeStars(value) {
+          for (var i=1;i<=5;i++) {
+            stars[i-1].removeClass(attrs.iconOff || 'fa fa-star-o');
+            stars[i-1].removeClass(attrs.iconOn);
+            stars[i-1].removeClass(attrs.theme);
+            if (i <= value) {
+              stars[i-1].addClass(attrs.iconOn);
+              stars[i-1].addClass(attrs.theme);
+            } else {
+              stars[i-1].addClass(attrs.iconOff || 'fa fa-star-o');
+              stars[i-1].addClass(attrs.theme);
+            }
+          }
+          return value;
+        }
+        ngModelCtrl.$parsers.push(changeStars);
+        ngModelCtrl.$formatters.push(changeStars);
+
+      }
+    }
+  }])
 
 
   .directive('cronDynamicMenu', ['$compile', function($compile){
