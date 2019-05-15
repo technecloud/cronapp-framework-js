@@ -3251,7 +3251,7 @@
     }
   })
 
-  .directive('cronappStars', [function() {
+  .directive('cronappRating', [function() {
     'use strict';
     return {
       restrict: 'E',
