@@ -3262,7 +3262,12 @@
         attrs.iconOn = $(elem).find('i').attr('class');
 
         var $elem = $(elem);
-        var $star = $('<i style="font-size: 200%" class="component-holder" data-component="crn-icon" xattr-theme=""></i>' );
+        var starArray = []
+
+        for (var i=1;i<=5;i++) {
+          starArray.push($(elem).find('i').get(i - 1));
+          $(starArray[i-1]).addClass(attrs.iconOff || "fa fa-star-o");
+        }
 
         $star.addClass(attrs.iconOff || "fa fa-star-o");
 
@@ -3270,7 +3275,7 @@
         var stars = [];
 
         for (var i=1;i<=5;i++) {
-          var clonned = $star.clone();
+          var clonned = $(starArray[i-1]).clone();
           $elem.append(clonned);
 
           clonned.attr("idx", i);
