@@ -1519,15 +1519,18 @@
             $input.appendTo(container);
 
             var waitRender = setInterval(function() {
-              if ($('#' + buttonId).length > 0) {
-                $('#' + buttonId ).off('change');
-                $('#' + buttonId ).on('change', function() {
-                  opt.model[opt.field] = $('#' + buttonId ).data('rawvalue');
+              let myElement = $('#' + buttonId);
+              if (myElement.length > 0) {
+                myElement.off('change');
+                myElement.on('change', function() {
+                  let rawValue = myElement.data('rawvalue');
+                  let value = myElement.val();
+                  opt.model[opt.field] = rawValue || value;
                   opt.model.dirty = true;
                   opt.model.dirtyFields[opt.field] = true;
                 });
 
-                var x = angular.element($('#' + buttonId ));
+                var x = angular.element(myElement);
                 $compile(x)(scope);
                 clearInterval(waitRender);
               }
