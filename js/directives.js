@@ -4461,10 +4461,23 @@ app.kendoHelper = {
         footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
         filter: (options.filter == null ? undefined : options.filter),
         valuePrimitive : valuePrimitive,
-        optionLabel : (options.optionLabel == null || options.optionLabel == "" ? " " : options.optionLabel),
         valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
         suggest: true
       };
+
+      if (options.optionLabel) {
+        options.optionLabelText = options.optionLabel;
+        options.optionLabelValue = '';
+      }
+
+      if (options.optionLabelText) {
+        config.optionLabel = {};
+        if(options.optionLabelValue === '' && options.optionLabelDefaultValue === true){
+          options.optionLabelValue = null;
+        }
+        config.optionLabel[config.dataTextField] = options.optionLabelText;
+        config.optionLabel[config.dataValueField] = options.optionLabelValue;
+      }
     }
 
     return config;
