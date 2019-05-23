@@ -2464,7 +2464,11 @@
            */
           options.virtual.valueMapper = function(options) {
             var _combobox = _options.combobox;
-            if (options.value) {
+            if (options.value || options.value === "") {
+              if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
+                options.success(null);
+              }
+              else{
               _combobox.isEvaluating = true;
               var _dataSource = _options.dataSource.transport.options.cronappDatasource;
               _dataSource.findObj([options.value], false, function(data) {
@@ -2493,6 +2497,7 @@
                 options.success(null);
                 _combobox.isEvaluating = false;
               });
+              }
             } else {
               options.success(null);
             }
@@ -4461,10 +4466,24 @@ app.kendoHelper = {
         footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
         filter: (options.filter == null ? undefined : options.filter),
         valuePrimitive : valuePrimitive,
-        optionLabel : (options.optionLabel == null || options.optionLabel == "" ? " " : options.optionLabel),
         valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
         suggest: true
       };
+
+      if (options.optionLabel) {
+        options.optionLabelText = options.optionLabel;
+        options.optionLabelValue = '';
+      }
+
+      if(!options.optionLabel && options.optionLabelValue === undefined) {
+        options.optionLabelValue = null;
+      }
+
+      if (options.optionLabelText) {
+        config.optionLabel = {};
+        config.optionLabel[config.dataTextField] = options.optionLabelText;
+        config.optionLabel[config.dataValueField] = options.optionLabelValue;
+      }
     }
 
     return config;
