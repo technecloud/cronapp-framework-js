@@ -4470,11 +4470,12 @@ app.kendoHelper = {
         options.optionLabelValue = '';
       }
 
+      if(!options.optionLabel && options.optionLabelValue === undefined) {
+        options.optionLabelValue = null;
+      }
+
       if (options.optionLabelText) {
         config.optionLabel = {};
-        if(options.optionLabelValue === '' && options.optionLabelDefaultValue === true){
-          options.optionLabelValue = null;
-        }
         config.optionLabel[config.dataTextField] = options.optionLabelText;
         config.optionLabel[config.dataValueField] = options.optionLabelValue;
       }
