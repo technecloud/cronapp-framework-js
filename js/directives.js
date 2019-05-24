@@ -4475,14 +4475,10 @@ app.kendoHelper = {
         options.optionLabelValue = '';
       }
 
-      if(!options.optionLabel && options.optionLabelValue === undefined) {
-        options.optionLabelValue = null;
-      }
-
       if (options.optionLabelText) {
         config.optionLabel = {};
         config.optionLabel[config.dataTextField] = options.optionLabelText;
-        config.optionLabel[config.dataValueField] = options.optionLabelValue;
+        config.optionLabel[config.dataValueField] = options.optionLabelValue === undefined ? null : options.optionLabelValue;
       }
     }
 
