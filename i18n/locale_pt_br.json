@@ -118,5 +118,6 @@
   "CancelChanges": "Cancelar alterações",
   "Edit": "Editar",
   "Remove": "Excluir",
-  "Cancel": "Cancelar"
+  "Cancel": "Cancelar",
+  "InvalidDate": "Data Inválida"
 }
