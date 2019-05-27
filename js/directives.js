@@ -4475,11 +4475,9 @@ app.kendoHelper = {
         options.optionLabelValue = '';
       }
 
-      if (options.optionLabelText) {
-        config.optionLabel = {};
-        config.optionLabel[config.dataTextField] = options.optionLabelText;
-        config.optionLabel[config.dataValueField] = options.optionLabelValue === undefined ? null : options.optionLabelValue;
-      }
+      config.optionLabel = {};
+      config.optionLabel[config.dataTextField] = options.optionLabelText === undefined ? "" : options.optionLabelText;
+      config.optionLabel[config.dataValueField] = options.optionLabelValue === undefined ? null : options.optionLabelValue;
     }
 
     return config;
