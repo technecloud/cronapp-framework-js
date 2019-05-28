@@ -3461,6 +3461,25 @@
     };
   }])
 
+  .directive('cronChat',  ['$compile', '$translate', function($compile, $translate) {
+    return {
+      restrict: 'E',
+      replace: true,
+      link: function (scope, element, attrs, ngModelCtrl) {
+
+        var options = JSON.parse(attrs.options || "{}");
+        if (options.token && options.urlCronchat) {
+
+          var urlChat = options.urlCronchat.endsWith("/") ? options.urlCronchat : options.urlCronchat + '/';
+          var token = options.token;
+
+          var $templateDyn = $(`<script src="${urlChat}get-chat?token=${token}" type="text/javascript"></script>`);
+          element.html($templateDyn);
+        }
+
+      }
+    };
+  }])
 }(app));
 
 function maskDirectiveAsDate($compile, $translate, $parse) {
