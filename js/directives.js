@@ -4467,7 +4467,7 @@ app.kendoHelper = {
       }
 
       if (!options.customTemplate) {
-        if(options.dataSourceScreen.entityDataSource) {
+        if(options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
           if (options.format || (isValidDateType(getFieldType(options.dataTextField)))) {
             options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
             options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
