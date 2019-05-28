@@ -13,6 +13,27 @@
     }
   }
 
+    app.directive('input', function($compile) {
+        return {
+            restrict: 'E',
+            require: '?ngModel',
+            link: function(scope, elem, attrs, ngModel) {
+                if (!ngModel) {
+                    return;
+                }
+
+                ngModel.$parsers.push(function(value) {
+                    if(elem.hasClass("crn-uppercase")){
+                        return value.toUpperCase();
+                    } else if(elem.hasClass("crn-lowercase")){
+                        return value.toLowerCase();
+                    }
+                    return value
+                });
+            }
+        }
+    })
+
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
   var ISO_PATTERN = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 
