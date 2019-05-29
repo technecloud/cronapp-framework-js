@@ -71,6 +71,9 @@
     }
     return result;
   }
+  app.directive('input', transformText);
+
+  app.directive('textarea', transformText);
 
   app.directive('asDate', maskDirectiveAsDate)
 
@@ -3903,6 +3906,39 @@ function parseMaskType(type, $translate) {
   }
 
   return type;
+}
+
+function transformText() {
+    return {
+        restrict: 'E',
+        require: '?ngModel',
+        scope: {
+            ngModel: '='
+        },
+        link: function(scope, elem, attrs, ngModelCtrl) {
+
+            var textTransform = function(element, value) {
+                if (element && value) {
+                    if(element.css('text-transform') === 'uppercase'){
+                        return value.toUpperCase();
+                    } else if(element.css('text-transform') === 'lowercase'){
+                        return value.toLowerCase();
+                    }
+                    return value
+                }
+            }
+
+            if (ngModelCtrl) {
+                ngModelCtrl.$formatters.push(function (result) {
+                    return textTransform(elem,result)
+                });
+
+                ngModelCtrl.$parsers.push(function (result) {
+                    return textTransform(elem,result)
+                });
+            }
+        }
+    }
 }
 
 
