@@ -13,39 +13,6 @@
     }
   }
 
-    app.directive('input', function() {
-        return {
-            restrict: 'E',
-            require: '?ngModel',
-            scope: {
-                ngModel: '='
-            },
-            link: function(scope, elem, attrs, ngModelCtrl) {
-
-                var textTransform = function(element, value) {
-                    if (element && value) {
-                        if(element.hasClass("crn-uppercase")){
-                            return value.toUpperCase();
-                        } else if(element.hasClass("crn-lowercase")){
-                            return value.toLowerCase();
-                        }
-                        return value
-                    }
-                }
-
-                if (ngModelCtrl) {
-                    ngModelCtrl.$formatters.push(function (result) {
-                        return textTransform(elem,result)
-                    });
-
-                    ngModelCtrl.$parsers.push(function (result) {
-                        return textTransform(elem,result)
-                    });
-                }
-            }
-        }
-    })
-
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
   var ISO_PATTERN = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
 
@@ -104,6 +71,9 @@
     }
     return result;
   }
+  app.directive('input', transformText);
+
+  app.directive('textarea', transformText);
 
   app.directive('asDate', maskDirectiveAsDate)
 
@@ -3917,6 +3887,39 @@ function parseMaskType(type, $translate) {
   }
 
   return type;
+}
+
+function transformText() {
+    return {
+        restrict: 'E',
+        require: '?ngModel',
+        scope: {
+            ngModel: '='
+        },
+        link: function(scope, elem, attrs, ngModelCtrl) {
+
+            var textTransform = function(element, value) {
+                if (element && value) {
+                    if(element.css('text-transform') === 'uppercase'){
+                        return value.toUpperCase();
+                    } else if(element.css('text-transform') === 'lowercase'){
+                        return value.toLowerCase();
+                    }
+                    return value
+                }
+            }
+
+            if (ngModelCtrl) {
+                ngModelCtrl.$formatters.push(function (result) {
+                    return textTransform(elem,result)
+                });
+
+                ngModelCtrl.$parsers.push(function (result) {
+                    return textTransform(elem,result)
+                });
+            }
+        }
+    }
 }
 
 
