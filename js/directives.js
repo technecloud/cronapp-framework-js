@@ -3893,9 +3893,6 @@ function transformText() {
     return {
         restrict: 'E',
         require: '?ngModel',
-        scope: {
-            ngModel: '='
-        },
         link: function(scope, elem, attrs, ngModelCtrl) {
 
             var textTransform = function(element, value) {
