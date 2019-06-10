@@ -5405,6 +5405,7 @@
       "name": "crn-cron-chat",
       "text_pt_BR": "Chat",
       "text_en_US": "Chat",
+      "pallete": false,
       "order": 2,
       "class": "adjust-icon mdi mdi-nutrition",
       "designTimeDynamic": true,
