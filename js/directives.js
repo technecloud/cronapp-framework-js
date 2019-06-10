@@ -2633,6 +2633,14 @@
         $element.on('change', function (event) {
           _scope.$apply(function () {
             modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
+            if(select.changeValueBasedOnLabel){
+              let comboLabelValue = combobox.dataItem()[select.dataTextField];
+              try {
+                eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
+              }catch (e) {
+                console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+              }
+            }
           });
 
           _compileAngular(scope, options.combobox.element[0]);
