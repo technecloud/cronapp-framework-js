@@ -2635,10 +2635,15 @@
             modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
             if(select.changeValueBasedOnLabel){
               let comboLabelValue = combobox.dataItem()[select.dataTextField];
+              // Try to eval it first in pure vanilla and then if it was not possible in angular context.
               try {
                 eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
               }catch (e) {
-                console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                try {
+                  _scope.$eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"')
+                }catch (e) {
+                  console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                }
               }
             }
           });
