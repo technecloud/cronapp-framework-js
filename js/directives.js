@@ -71,6 +71,9 @@
     }
     return result;
   }
+  app.directive('input', transformText);
+
+  app.directive('textarea', transformText);
 
   app.directive('asDate', maskDirectiveAsDate)
 
@@ -2630,6 +2633,19 @@
         $element.on('change', function (event) {
           _scope.$apply(function () {
             modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
+            if(select.changeValueBasedOnLabel){
+              let comboLabelValue = combobox.dataItem()[select.dataTextField];
+              // Try to eval it first in pure vanilla and then if it was not possible in angular context.
+              try {
+                eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
+              }catch (e) {
+                try {
+                  _scope.$eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"')
+                }catch (e) {
+                  console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                }
+              }
+            }
           });
 
           _compileAngular(scope, options.combobox.element[0]);
@@ -3903,6 +3919,36 @@ function parseMaskType(type, $translate) {
   }
 
   return type;
+}
+
+function transformText() {
+    return {
+        restrict: 'E',
+        require: '?ngModel',
+        link: function(scope, elem, attrs, ngModelCtrl) {
+
+            var textTransform = function(element, value) {
+                if (element && value) {
+                    if(element.css('text-transform') === 'uppercase'){
+                        return value.toUpperCase();
+                    } else if(element.css('text-transform') === 'lowercase'){
+                        return value.toLowerCase();
+                    }
+                    return value
+                }
+            }
+
+            if (ngModelCtrl) {
+                ngModelCtrl.$formatters.push(function (result) {
+                    return textTransform(elem,result)
+                });
+
+                ngModelCtrl.$parsers.push(function (result) {
+                    return textTransform(elem,result)
+                });
+            }
+        }
+    }
 }
 
 
