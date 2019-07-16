@@ -372,7 +372,7 @@ app.copyContext = function(fromContext, toContext, controllerName) {
   }
 };
 
-app.factory('customTranslateLoader', function ($http, $q, $compile) {
+app.factory('customTranslateLoader', function ($http, $q) {
 
   return function (options) {
 
@@ -434,8 +434,7 @@ app.factory('customTranslateLoader', function ($http, $q, $compile) {
       }
 
       deferred.resolve(mergedData);
-      var $body = $('body');
-      $compile($body)(angular.element($body[0]).scope());
+
     }, function (data) {
       deferred.reject(data);
     });
