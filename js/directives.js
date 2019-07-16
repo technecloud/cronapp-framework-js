@@ -3390,11 +3390,9 @@
       },
       link: function(scope, element, attrs) {
         $translate.onReady(() => {
-          debugger;
           var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
           var options = {};
           try {
-            console.log(attrs.options);
             options = JSON.parse(attrs.options);
           } catch(e) {
             console.log('CronDynamicMenu: Invalid configuration!')
