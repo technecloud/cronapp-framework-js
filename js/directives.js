@@ -3334,7 +3334,7 @@
     }
   })
 
-  .directive('cronDynamicMenu', ['$compile', function($compile){
+  .directive('cronDynamicMenu', ['$compile', '$translate', function($compile, $translate){
     'use strict';
 
     return {
@@ -3348,7 +3348,9 @@
             var action = (item.action && item.action != null) ? ' ng-click="' + item.action + '" ' : '';
             var hide = (item.hide && item.hide != null) ? ' ng-hide="' + item.hide + '" ' : '';
             var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>' : '';
-            var title = '<span>' + item.title + '</span>';
+            var title = '<span></span>';
+            if (item.title)
+              title = '<span>' + $translate.instant(item.title) + '</span>';
 
             template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>';
           });
@@ -3371,7 +3373,9 @@
             var caret = (menu.menuItems && Array.isArray(menu.menuItems) && (menu.menuItems.length > 0)) ? '<span class="caret"></span>' : '';
             var hide = (menu.hide && menu.hide != null) ? ' ng-hide="' + menu.hide + '" ' : '';
             var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>' : '';
-            var title = '<span>' + menu.title + '</span>';
+            var title = '<span></span>'
+            if (menu.title)
+              title = '<span>' + $translate.instant(menu.title) + '</span>';
 
             template = template  + '\
               <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
@@ -3385,23 +3389,28 @@
         return template;
       },
       link: function(scope, element, attrs) {
-        var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
-        var options = {};
-        try {
-          options = JSON.parse(attrs.options);
-        } catch(e) {
-          console.log('CronDynamicMenu: Invalid configuration!')
-        }
+        $translate.onReady(() => {
+          debugger;
+          var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
+          var options = {};
+          try {
+            console.log(attrs.options);
+            options = JSON.parse(attrs.options);
+          } catch(e) {
+            console.log('CronDynamicMenu: Invalid configuration!')
+          }
 
-        var main = $(TEMPLATE_MAIN);
-        var menus = this.populateMenu(options);
-        main.append(menus);
+          var main = $(TEMPLATE_MAIN);
+          var menus = this.populateMenu(options);
+          main.append(menus);
 
-        var newElement = angular.element(main);
-        element.html('');
-        element.append(main);
-        element.attr('id' , null);
-        $compile(newElement)(scope);
+          var newElement = angular.element(main);
+          element.html('');
+          element.append(main);
+          element.attr('id' , null);
+          $compile(newElement)(scope);
+
+        });
       }
     }
   }])
