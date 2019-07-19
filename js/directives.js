@@ -2600,6 +2600,9 @@
               forceChangeModel(nextValue);
             }
           }
+          else {
+            setTimeout(()=>defineInitialValue(),300);
+          }
         }
 
         var _ngModelCtrl = ngModelCtrl;
