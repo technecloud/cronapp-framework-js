@@ -1380,6 +1380,14 @@
         .replace(/&lt;/g, '<')
         .replace(/&amp;/g, '&');
       },
+      getColumnByField: function(options, fieldName) {
+        var selected = null;
+        options.columns.forEach(function(column)  {
+          if (column.field == fieldName)
+            selected = column;
+        });
+        return selected;
+      },
       getColumns: function(options, datasource, scope, tooltips) {
         var directiveContext = this;
 
@@ -1432,15 +1440,6 @@
           return undefined;
         }
 
-        function getColumnByField(fieldName) {
-          var selected = null;
-          options.columns.forEach(function(column)  {
-            if (column.field == fieldName)
-              selected = column;
-          });
-          return selected;
-        }
-
         function isRequired(fieldName) {
           var required = false;
           var selected = null;
@@ -1458,7 +1457,7 @@
 
         function editor(container, opt) {
 
-          var column = getColumnByField(opt.field);
+          var column = this.getColumnByField(options, opt.field);
           if (column.visibleCrud != undefined && !column.visibleCrud) {
             container.parent().find('.k-edit-label [for='+ column.field +']').parent().remove();
             container.remove();
@@ -2179,6 +2178,15 @@
             if (attrs && attrs.ngDataBound) {
               scope.$eval(attrs.ngDataBound);
             }
+
+            for(let i=0;i<this.columns.length;i++){
+              let col = helperDirective.getColumnByField(options, this.columns[i].field);
+              if (col.visible)
+                this.showColumn(i);
+            }
+            $("div.k-group-indicator").each((i,v) => {
+              this.hideColumn($(v).data("field"));
+            });
 
             compileListing(e);
           }
