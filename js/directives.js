@@ -1203,70 +1203,94 @@
     };
   })
 
-  .directive('cronScheduler', ['$compile', '$translate', function($compile, $translate){
+    .directive('cronScheduler', ['$compile', '$translate', function ($compile, $translate) {
       return {
-          estrict: 'E',
-          replace: true,
-          require: 'ngModel',
-          initCulture: function () {
-              var culture = $translate.use();
-              culture = culture.replace(/_/gm, '-');
-              var parts = culture.split('-');
-              parts[parts.length - 1] = parts[parts.length - 1].toUpperCase();
-              culture = parts.join('-');
-              kendo.culture(culture);
-          },
-          getSchedulerModel: function (datasourceFields) {
-              let model = {
-                  id: "id", // The "id" of the event is the "taskId" field
-                  fields: {}
-              };
-              for (let key in datasourceFields) {
-                  model.fields[key] = {from: datasourceFields[key].name};
-              }
-              return model
-          },
-          getSchedulerProperties: function (options, datasource) {
-            let schedulerStartDate = (options.initialDateStrategy === 'Expression' ? scope.$eval(generateBlocklyCall(options.initialDateBlocklyInfo)) : options.initialDate);
-            return {
-              date: schedulerStartDate,
-              allDaySlot: options.allDaySlot,
-              timezone: "Etc/UTC", // Setting the timezone is recommended when binding to a remote service.
-              currentTimeMarker: (options.currentTimeMarker ? {
-                updateInterval: 10000,
-                useLocalTimezone: false
-              } : options.currentTimeMarker),
-              views: ["day",
-                {type: "workWeek", selected: true},
-                "week",
-                "month",
-                "agenda",
-                {type: "timeline", eventHeight: 50}],
-              navigate: function (e) {
-                //Navigated from
-                let view = e.sender.view();
+        estrict: 'E',
+        replace: true,
+        initCulture: function () {
+          var culture = $translate.use();
+          culture = culture.replace(/_/gm, '-');
+          var parts = culture.split('-');
+          parts[parts.length - 1] = parts[parts.length - 1].toUpperCase();
+          culture = parts.join('-');
+          kendo.culture(culture);
+        },
+        getSchedulerModel: function (datasourceFields) {
+          let model = {
+            id: "id", // The "id" of the event is the "taskId" field
+            fields: {}
+          };
+          for (let key in datasourceFields) {
+            model.fields[key] = {from: datasourceFields[key].name};
+          }
+          return model
+        },
+        getSchedulerProperties: function (options, datasource) {
+          let schedulerStartDate = (options.initialDateStrategy === 'Expression' ? scope.$eval(generateBlocklyCall(options.initialDateBlocklyInfo)) : options.initialDate);
+          let lastSearchedPeriod = {start: null, end: null};
+          let needsToFetchData = function (searchablePeriod) {
+            return !angular.equals(lastSearchedPeriod, searchablePeriod);
+          };
+          let visibleViews = [];
+          if(options.showDayTab){
+            visibleViews.push('day');
+          }if(options.showAgendaTab){
+            visibleViews.push('agenda');
+          }if(options.showMonthTab){
+            visibleViews.push('month');
+          }if(options.showTimelineTab){
+            visibleViews.push('timeline');
+          }if(options.showWeekTab){
+            visibleViews.push('week');
+          }if(options.showWorkWeekTab){
+            visibleViews.push('workWeek');
+          }
+          // ["day",
+          //   {type: "workWeek", selected: true},
+          //   "week",
+          //   "month",
+          //   "agenda",
+          //   {type: "timeline", eventHeight: 50}]
+          return {
+            showWorkHours: options.showWorkHours,
+            editable: options.editable,
+            date: schedulerStartDate,
+            allDaySlot: options.allDaySlot,
+            timezone: "Etc/UTC", // Setting the timezone is recommended when binding to a remote service.
+            currentTimeMarker: (options.currentTimeMarker ? {
+              updateInterval: 10000,
+              useLocalTimezone: false
+            } : options.currentTimeMarker),
+            views: visibleViews,
+            navigate: function (e) {
+              //Navigated from
+              let view = e.sender.view();
 
-                // The view has:
-                // A startDate method which returns the start date of the view.
-                // An endDate method which returns the end date of the view.
+              // The view has:
+              // A startDate method which returns the start date of the view.
+              // An endDate method which returns the end date of the view.
 
-                //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
-              },
-              dataBound: function (e) {
-                //Navigated to
-                let view = e.sender.view();
+              //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
+            },
+            dataBound: function (e) {
+              //Navigated to
+              let view = e.sender.view();
 
-                // The view has:
-                // A startDate method which returns the start date of the view.
-                // An endDate method which returns the end date of the view.
+              // The view has:
+              // A startDate method which returns the start date of the view.
+              // An endDate method which returns the end date of the view.
 
-                //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
-              },
-              dataSource: {
-                batch: false, // Enable batch updates
-                transport: {
-                  read: function (read) {
-                    read.data = read.data || {};
+              //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
+            },
+            dataSource: {
+              batch: false, // Enable batch updates
+              transport: {
+                read: function (read) {
+                  read.data = read.data || {};
+                  // verify if lastSearchedPeriod is the same searched now. If so ignore search.
+                  if (needsToFetchData(read.data)) {
+                    lastSearchedPeriod = read.data;
+
                     if (jQuery.isEmptyObject(read.data)) {
                       read.data[options.schedulerDataModel.start.name] = schedulerStartDate;
                     }
@@ -1283,150 +1307,161 @@
                         read.error(angular.copy(data));
                       }
                     }, false);
-                  }.bind(this),
-                  update: function (update) {
-                    datasource.update(
-                      this.parseToDatasourceSchema(datasource, update.data),
-                      function (data) {
-                        update.success(angular.copy(data));
-                      },
-                      function (data) {
-                        update.error(angular.copy(data));
-                      }
-                    );
-                  }.bind(this),
-                  create: function (create) {
-                    datasource.insert(
-                      this.parseToDatasourceSchema(datasource, create.data),
-                      function (data) {
-                        create.success(angular.copy(data));
-                      },
-                      function (data) {
-                        create.error(angular.copy(data));
-                      }
-                    );
-                  }.bind(this),
-                  destroy: function (destroy) {
-                    datasource.removeSilent(
-                      this.parseToDatasourceSchema(datasource, destroy.data),
-                      function (data) {
-                        destroy.success(angular.copy(data));
-                      },
-                      function (data) {
-                        destroy.error(angular.copy(data));
-                      }
-                    );
-                  }.bind(this)
-                },
-                schema: {
-                  model: this.getSchedulerModel(options.schedulerDataModel)
-                }
-              }
-            };
-          },
-          updateDatasourceActive: function(datasource, object){
-              if (!datasource.active) {
-                  datasource.active = {};
-              }
-              for (let key in datasource.schema) {
-                  let name = datasource.schema[key].name;
-                  datasource.active[name] = (object[name] ? object[name] : null);
-              }
-          },
-          parseToDatasourceSchema: function(datasource, object){
-              let parsedObj = {};
-              for (let key in datasource.schema) {
-                  let name = datasource.schema[key].name;
-                  parsedObj[name] = (object[name] ? object[name] : null);
-              }
-              return parsedObj;
-          },
-          link: function (scope, element, attrs, ngModelCtrl) {
-              let schedulerElement = $('<div></div>');
-              let options = JSON.parse(attrs.options || "{}");
-
-              let datasource = eval(options.dataSourceScreen.entityDataSource.name);
-
-              let baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
-              if ($translate.use() === 'pt_br') {
-                  baseUrl += "pt-BR.min.js";
-              } else {
-                  baseUrl += "en-US.min.js";
-              }
-
-              this.initCulture();
-
-            $.getScript(baseUrl, function () {
-
-              let kendoDatasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
-
-              let schedulerProperties = this.getSchedulerProperties(options, datasource);
-
-              schedulerElement.kendoScheduler(schedulerProperties);
-
-              // Get reference to the kendo.ui.Scheduler instance
-              let scheduler = schedulerElement.data("kendoScheduler");
-              let lastView;
-
-              scheduler.bind('navigate', function (e) {
-                scheduler._previousView = e.sender.view();
-              });
-              scheduler.bind('dataBound', function (e) {
-                scheduler._currentView = e.sender.view();
-                if(scheduler._previousView){
-                  let sameView = compare(scheduler._previousView._dates, scheduler._currentView._dates);
-                  if (!sameView) {
-                    let params = {};
-                    params[options.schedulerDataModel.start.name] = scheduler._currentView._startDate;
-                    params[options.schedulerDataModel.end.name] = scheduler._currentView._endDate;
-                    scheduler.dataSource.read(params);
-                    scheduler._previousView = scheduler._currentView;
-                  }
-                }
-
-              });
-
-              function compare(arr1, arr2) {
-                if (!arr1 || !arr2) return
-                let result;
-                arr1.forEach((e1, i) => arr2.forEach(e2 => {
-                  if (e1.getTime() !== e2.getTime()) {
-                    result = false
                   } else {
-                    result = true
+                    read.error();
                   }
-                }));
-                return result
+                }.bind(this),
+                update: function (update) {
+                  datasource.update(
+                    this.parseToDatasourceSchema(datasource, update.data),
+                    function (data) {
+                      update.success(angular.copy(data));
+                    },
+                    function (data) {
+                      update.error(angular.copy(data));
+                    }
+                  );
+                }.bind(this),
+                create: function (create) {
+                  datasource.insert(
+                    this.parseToDatasourceSchema(datasource, create.data),
+                    function (data) {
+                      create.success(angular.copy(data));
+                    },
+                    function (data) {
+                      create.error(angular.copy(data));
+                    }
+                  );
+                }.bind(this),
+                destroy: function (destroy) {
+                  datasource.removeSilent(
+                    this.parseToDatasourceSchema(datasource, destroy.data),
+                    function (data) {
+                      destroy.success(angular.copy(data));
+                    },
+                    function (data) {
+                      destroy.error(angular.copy(data));
+                    }
+                  );
+                }.bind(this)
+              },
+              schema: {
+                model: this.getSchedulerModel(options.schedulerDataModel)
               }
-            }.bind(this));
-
-
-              // {
-              //   date: options.date || new Date(), // The current date of the scheduler
-              //       allDaySlot: options.allDaySlot || true,
-              //     dataSource: [ // The kendo.data.SchedulerDataSource configuration
-              //   // First scheduler event
-              //   {
-              //     id: 1, // Unique identifier. Needed for editing.
-              //     start: new Date("2013/6/6 08:00 AM"), // Start of the event
-              //     end: new Date("2013/6/6 09:00 AM"), // End of the event
-              //     title: "Breakfast" // Title of the event
-              //   },
-              //   // Second scheduler event
-              //   {
-              //     id: 2,
-              //     start: new Date("2013/6/6 10:15 AM"),
-              //     end: new Date("2013/6/6 12:30 PM"),
-              //     title: "Job Interview"
-              //   }
-              // ]
-              // }
-
-              element.html(schedulerElement);
-              $compile(schedulerElement)(element.scope());
+            }
+          };
+        },
+        showError: function (scope, title, message) {
+          let info = {
+            message: message,
+            title: title,
+            delay: null
+          };
+          scope.Notification.error(info);
+        },
+        parseToDatasourceSchema: function (datasource, object) {
+          let parsedObj = {};
+          for (let key in datasource.schema) {
+            let name = datasource.schema[key].name;
+            parsedObj[name] = (object[name] ? object[name] : null);
           }
+          return parsedObj;
+        },
+        link: function (scope, element, attrs, ngModelCtrl) {
+          let schedulerElement = $('<div></div>');
+          let options = JSON.parse(attrs.options || "{}");
+          let datasource;
+          if (options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
+            datasource = eval(options.dataSourceScreen.entityDataSource.name);
+          }
+          if (!datasource) {
+            // There is no Datasource
+            this.showError(scope, 'Datasource não encontrado',
+              'Nenhum <i>Datasource</i> foi vinculado ao componente de <i>Scheduler</i>.<br>Verifique se as configurações do componente foram preenchidas corretamente.' +
+              '<br>Para mais detalhes acesse a nossa <a href="https://docs.cronapp.io/" target="_blank"><b><u>documentação</u></b></a>');
+            return;
+          }
+
+          let baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+          if ($translate.use() === 'pt_br') {
+            baseUrl += "pt-BR.min.js";
+          } else {
+            baseUrl += "en-US.min.js";
+          }
+
+          this.initCulture();
+
+          $.getScript(baseUrl, function () {
+
+            let kendoDatasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
+
+            let schedulerProperties = this.getSchedulerProperties(options, datasource);
+
+            schedulerElement.kendoScheduler(schedulerProperties);
+
+            // Get reference to the kendo.ui.Scheduler instance
+            let scheduler = schedulerElement.data("kendoScheduler");
+            let lastView;
+
+            scheduler.bind('navigate', function (e) {
+              scheduler._previousView = e.sender.view();
+            });
+            scheduler.bind('dataBound', function (e) {
+              scheduler._currentView = e.sender.view();
+              if (scheduler._previousView) {
+                let sameView = compare(scheduler._previousView._dates, scheduler._currentView._dates);
+                if (!sameView) {
+                  let params = {};
+                  params[options.schedulerDataModel.start.name] = scheduler._currentView._startDate;
+                  params[options.schedulerDataModel.end.name] = scheduler._currentView._endDate;
+                  scheduler.dataSource.read(params);
+                  scheduler._previousView = scheduler._currentView;
+                }
+              }
+
+            });
+
+            function compare(arr1, arr2) {
+              if (!arr1 || !arr2) return
+              let result;
+              arr1.forEach((e1, i) => arr2.forEach(e2 => {
+                if (e1.getTime() !== e2.getTime()) {
+                  result = false
+                } else {
+                  result = true
+                }
+              }));
+              return result
+            }
+          }.bind(this));
+
+
+          // {
+          //   date: options.date || new Date(), // The current date of the scheduler
+          //       allDaySlot: options.allDaySlot || true,
+          //     dataSource: [ // The kendo.data.SchedulerDataSource configuration
+          //   // First scheduler event
+          //   {
+          //     id: 1, // Unique identifier. Needed for editing.
+          //     start: new Date("2013/6/6 08:00 AM"), // Start of the event
+          //     end: new Date("2013/6/6 09:00 AM"), // End of the event
+          //     title: "Breakfast" // Title of the event
+          //   },
+          //   // Second scheduler event
+          //   {
+          //     id: 2,
+          //     start: new Date("2013/6/6 10:15 AM"),
+          //     end: new Date("2013/6/6 12:30 PM"),
+          //     title: "Job Interview"
+          //   }
+          // ]
+          // }
+
+          element.html(schedulerElement);
+          $compile(schedulerElement)(element.scope());
+        }
       }
-  }])
+    }])
 
 
   .directive('cronGrid', ['$compile', '$translate', function($compile, $translate) {
