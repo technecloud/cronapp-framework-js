@@ -1648,6 +1648,14 @@
             .replace(/&lt;/g, '<')
             .replace(/&amp;/g, '&');
         },
+      getColumnByField: function(options, fieldName) {
+        var selected = null;
+        options.columns.forEach(function(column)  {
+          if (column.field == fieldName)
+            selected = column;
+        });
+        return selected;
+      },
         getColumns: function (options, datasource, scope, tooltips) {
           var directiveContext = this;
 
@@ -1696,15 +1704,6 @@
             return undefined;
           }
 
-          function getColumnByField(fieldName) {
-            var selected = null;
-            options.columns.forEach(function (column) {
-              if (column.field == fieldName)
-                selected = column;
-            });
-            return selected;
-          }
-
           function isRequired(fieldName) {
             var required = false;
             var selected = null;
@@ -1722,7 +1721,7 @@
 
           function editor(container, opt) {
 
-            var column = getColumnByField(opt.field);
+          var column = this.getColumnByField(options, opt.field);
             if (column.visibleCrud != undefined && !column.visibleCrud) {
               container.parent().find('.k-edit-label [for=' + column.field + ']').parent().remove();
               container.remove();
@@ -2428,6 +2427,15 @@
                 scope.$eval(attrs.ngDataBound);
               }
 
+            for(let i=0;i<this.columns.length;i++){
+              let col = helperDirective.getColumnByField(options, this.columns[i].field);
+              if (col.visible)
+                this.showColumn(i);
+            }
+            $("div.k-group-indicator").each((i,v) => {
+              this.hideColumn($(v).data("field"));
+            });
+
               compileListing(e);
             }
           };
@@ -2883,6 +2891,9 @@
                 forceChangeModel(nextValue);
               }
             }
+          else {
+            setTimeout(()=>defineInitialValue(),300);
+          }
           }
 
           var _ngModelCtrl = ngModelCtrl;
@@ -3662,7 +3673,7 @@
       }
     })
 
-    .directive('cronDynamicMenu', ['$compile', function ($compile) {
+  .directive('cronDynamicMenu', ['$compile', '$translate', function($compile, $translate){
       'use strict';
 
       return {
@@ -3676,7 +3687,9 @@
               var action = (item.action && item.action != null) ? ' ng-click="' + item.action + '" ' : '';
               var hide = (item.hide && item.hide != null) ? ' ng-hide="' + item.hide + '" ' : '';
               var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="' + item.iconClass + '"></i>' : '';
-              var title = '<span>' + item.title + '</span>';
+            var title = '<span></span>';
+            if (item.title)
+              title = '<span>' + $translate.instant(item.title) + '</span>';
 
               template = template + '<li' + hide + '><a href=""' + security + action + '>' + iconClass + title + '</a></li>';
             });
@@ -3699,7 +3712,9 @@
               var caret = (menu.menuItems && Array.isArray(menu.menuItems) && (menu.menuItems.length > 0)) ? '<span class="caret"></span>' : '';
               var hide = (menu.hide && menu.hide != null) ? ' ng-hide="' + menu.hide + '" ' : '';
               var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="' + menu.iconClass + '"></i>' : '';
-              var title = '<span>' + menu.title + '</span>';
+            var title = '<span></span>'
+            if (menu.title)
+              title = '<span>' + $translate.instant(menu.title) + '</span>';
 
               template = template + '\
               <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
@@ -3713,11 +3728,12 @@
           return template;
         },
         link: function (scope, element, attrs) {
+        $translate.onReady(() => {
           var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
           var options = {};
           try {
             options = JSON.parse(attrs.options);
-          } catch (e) {
+          } catch(e) {
             console.log('CronDynamicMenu: Invalid configuration!')
           }
 
@@ -3728,8 +3744,10 @@
           var newElement = angular.element(main);
           element.html('');
           element.append(main);
-          element.attr('id', null);
+          element.attr('id' , null);
           $compile(newElement)(scope);
+
+        });
         }
       }
     }])
