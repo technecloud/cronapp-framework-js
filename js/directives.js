@@ -106,6 +106,38 @@
 
   }
 
+  var generateBlocklyCall = function(blocklyInfo) {
+    var call;
+    if (blocklyInfo.type == "client")  {
+      call = "cronapi.client('" + blocklyInfo.blocklyClass + "." +  blocklyInfo.blocklyMethod + "')";
+      var params = "";
+      blocklyInfo.blocklyParams.forEach(function(p) {
+        if (params.length  > 0) {
+          params += ", ";
+        }
+        params += (p.value ? p.value : "null");
+      });
+      call += ".run("+params+")";
+    }
+    else if (blocklyInfo.type == "server") {
+      var blocklyName = blocklyInfo.blocklyClass + '.' + blocklyInfo.blocklyMethod;
+      call = "cronapi.server('"+blocklyName+"')";
+
+      var params = "";
+      blocklyInfo.blocklyParams.forEach(function(p) {
+        if (params.length  > 0) {
+          params += ", ";
+        }
+        params += (p.value ? p.value : "null");
+      });
+
+      call += ".run("+params+")";
+
+    }
+    return call;
+
+  }
+
   app.directive('asDate', maskDirectiveAsDate)
 
     .directive('ngDestroy', function () {
