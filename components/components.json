@@ -4122,6 +4122,7 @@
     },
     {
       "name": "crn-cron-scheduler",
+      "pallete": false,
       "text_pt_BR": "Agendador",
       "text_en_US": "Scheduler",
       "order": 2,
