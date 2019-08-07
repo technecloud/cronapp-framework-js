@@ -3719,9 +3719,9 @@
       restrict: 'A',
       require: '?ngModel',
       link: function (scope, el, attrs, ctrl) {
+        ctrl.$formatters = [];
+        ctrl.$parsers = [];
         if (attrs.crnAllowNullValues == 'true') {
-          ctrl.$formatters = [];
-          ctrl.$parsers = [];
           ctrl.$render = function () {
             var viewValue = ctrl.$viewValue;
             el.data('checked', viewValue);
@@ -3746,6 +3746,36 @@
                 break;
               case true:
                 checked = null;
+                break;
+              default:
+                checked = false;
+            }
+            ctrl.$setViewValue(checked);
+            scope.$apply(ctrl.$render);
+          });
+        } else if (attrs.crnAllowNullValues == 'false'){
+          ctrl.$render = function () {
+            var viewValue = ctrl.$viewValue;
+            if(viewValue === null) {
+              viewValue = false;
+            }
+            el.data('checked', viewValue);
+            switch (viewValue) {
+              case true:
+                el.prop('indeterminate', false);
+                el.prop('checked', true);
+                break;
+              default:
+                el.prop('indeterminate', false);
+                el.prop('checked', false);
+                break;
+            }
+          };
+          el.bind('click', function () {
+            var checked;
+            switch (el.data('checked')) {
+              case false:
+                checked = true;
                 break;
               default:
                 checked = false;
