@@ -1669,7 +1669,7 @@
                 </span>';
           }
           else if (column.inputType == 'checkbox' || column.type == 'boolean') {
-            template = "<input type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
+            template = "<input crn-set-indeterminate=#=" + column.field + "# type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
                 "<label class='k-checkbox-label k-no-text'></label>"
           }
           else if (column.displayField && column.displayField.length > 0) {
@@ -3714,6 +3714,18 @@
     }
   })
 
+  .directive('crnSetIndeterminate', function($parse) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        let value = eval(attrs.crnSetIndeterminate);
+        if(value === null){
+          $(element).prop("indeterminate", true);
+        }
+      }
+    }
+  })
+
   .directive('crnAllowNullValues', [function () {
     return {
       restrict: 'A',
@@ -3756,7 +3768,8 @@
         } else if (attrs.crnAllowNullValues == 'false'){
           ctrl.$render = function () {
             var viewValue = ctrl.$viewValue;
-            if(viewValue === null) {
+            if(viewValue === undefined || viewValue === null){
+              ctrl.$setViewValue(false);
               viewValue = false;
             }
             el.data('checked', viewValue);
@@ -5031,8 +5044,9 @@ app.kendoHelper = {
 };
 
 window.showTreatedValue = function(value) {
-  if (value)
+  if (value || value === false){
     return value;
+  }
   return '';
 };
 
