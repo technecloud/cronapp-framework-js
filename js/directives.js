@@ -2447,10 +2447,16 @@
               if (col.visible)
                 this.showColumn(i);
             }
-            $("div.k-group-indicator").each((i,v) => {
-              this.hideColumn($(v).data("field"));
-            });
-
+            if ($('div.k-grouping-header').length == 0) {
+              if (options.groupings) {
+                  options.groupings.forEach((c) => this.hideColumn(c.field));
+              }
+            }
+            else {
+              $("div.k-group-indicator").each((i,v) => {
+                  this.hideColumn($(v).data("field"));
+              });
+            }
             compileListing(e);
           }
         };
