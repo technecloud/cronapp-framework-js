@@ -993,7 +993,7 @@
       "properties": {
         "crn-datasource": {
           "displayName_pt_BR": "Fonte de dados",
-          "displayName_en_US": "datasource",
+          "displayName_en_US": "Datasource",
           "removable": false,
           "type": "pageDatasource",
           "selector": "input",
