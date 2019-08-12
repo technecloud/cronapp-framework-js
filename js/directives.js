@@ -2711,6 +2711,13 @@
           console.log('DynamicComboBox invalid configuration! ' + err);
         }
 
+        //Rotina pra setar textField no model
+        let lastFieldInModel = attrs['ngModel'].split('.');
+        lastFieldInModel = lastFieldInModel[lastFieldInModel.length-1];
+        let modelForTextField = attrs['ngModel'].replace(lastFieldInModel, textField);
+        let modelTextFieldGetter = $parse(modelForTextField);
+        let modelTextFieldSetter = modelTextFieldGetter.assign;
+
         /**
          * Configurações do componente
          */
@@ -2907,6 +2914,7 @@
         $element.on('change', function (event) {
           _scope.$apply(function () {
             modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
+            modelTextFieldSetter(_scope, combobox.dataItem()[select.dataTextField]);
             if(select.changeValueBasedOnLabel){
               let comboLabelValue = combobox.dataItem()[select.dataTextField];
               // Try to eval it first in pure vanilla and then if it was not possible in angular context.
