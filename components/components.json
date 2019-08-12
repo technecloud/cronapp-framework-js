@@ -992,8 +992,8 @@
       ],
       "properties": {
         "crn-datasource": {
-          "displayName_pt_BR": "Configurações",
-          "displayName_en_US": "Configuration",
+          "displayName_pt_BR": "Fonte de dados",
+          "displayName_en_US": "Datasource",
           "removable": false,
           "type": "pageDatasource",
           "selector": "input",
@@ -1145,6 +1145,7 @@
       "text_pt_BR": "Filtro Complexo",
       "text_en_US": "Complex Filter",
       "class": "adjust-icon mdi mdi-filter",
+      "pallete": false,
       "properties": {
         "class": {
           "order": 9999
@@ -1200,8 +1201,8 @@
       ],
       "properties": {
         "crn-datasource": {
-          "displayName_pt_BR": "Configurações",
-          "displayName_en_US": "Configuration",
+          "displayName_pt_BR": "Fonte de dados",
+          "displayName_en_US": "Datasource",
           "removable": false,
           "type": "pageDatasource",
           "order": 1
@@ -2161,8 +2162,8 @@
         {
           "name": "crn-datasource",
           "selector": "div[crn-datasource]",
-          "displayName_pt_BR": "Configurações",
-          "displayName_en_US": "Configuration",
+          "displayName_pt_BR": "Fonte de dados",
+          "displayName_en_US": "Datasource",
           "type": "pageDatasource"
         },
         {
@@ -5406,12 +5407,16 @@
       "text_pt_BR": "Avaliação",
       "text_en_US": "Evaluation",
       "class": "adjust-icon mdi mdi-star-outline",
-      "wrapper": true,
+      "wrapper": false,
       "autoWrapper": false,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/rating.template.html",
       "properties": {
         "id": {
           "order": 1
+        },
+        "xattr-theme": {
+          "displayName": "Theme",
+          "order": 3
         },
         "class": {
           "order": 9999
@@ -5485,7 +5490,7 @@
         },
         {
           "name": "xattr-theme",
-          "selector": "i",
+          "selector": "div",
           "type": "text",
           "order": 3
         },

@@ -1672,7 +1672,7 @@
                 </span>';
           }
           else if (column.inputType == 'checkbox' || column.type == 'boolean') {
-            template = "<input type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
+            template = "<input crn-set-indeterminate=#=" + column.field + "# type='checkbox' class='k-checkbox' #=" + column.field + " ? \"checked='checked'\": '' # />" +
                 "<label class='k-checkbox-label k-no-text'></label>"
           }
           else if (column.displayField && column.displayField.length > 0) {
@@ -2450,10 +2450,16 @@
               if (col.visible)
                 this.showColumn(i);
             }
-            $("div.k-group-indicator").each((i,v) => {
-              this.hideColumn($(v).data("field"));
-            });
-
+            if ($('div.k-grouping-header').length == 0) {
+              if (options.groupings) {
+                  options.groupings.forEach((c) => this.hideColumn(c.field));
+              }
+            }
+            else {
+              $("div.k-group-indicator").each((i,v) => {
+                  this.hideColumn($(v).data("field"));
+              });
+            }
             compileListing(e);
           }
         };
@@ -2714,6 +2720,13 @@
           console.log('DynamicComboBox invalid configuration! ' + err);
         }
 
+        //Rotina pra setar textField no model
+        let lastFieldInModel = attrs['ngModel'].split('.');
+        lastFieldInModel = lastFieldInModel[lastFieldInModel.length-1];
+        let modelForTextField = attrs['ngModel'].replace(lastFieldInModel, textField);
+        let modelTextFieldGetter = $parse(modelForTextField);
+        let modelTextFieldSetter = modelTextFieldGetter.assign;
+
         /**
          * Configurações do componente
          */
@@ -2910,6 +2923,7 @@
         $element.on('change', function (event) {
           _scope.$apply(function () {
             modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
+            modelTextFieldSetter(_scope, combobox.dataItem()[select.dataTextField]);
             if(select.changeValueBasedOnLabel){
               let comboLabelValue = combobox.dataItem()[select.dataTextField];
               // Try to eval it first in pure vanilla and then if it was not possible in angular context.
@@ -3717,14 +3731,26 @@
     }
   })
 
+  .directive('crnSetIndeterminate', function($parse) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        let value = eval(attrs.crnSetIndeterminate);
+        if(value === null){
+          $(element).prop("indeterminate", true);
+        }
+      }
+    }
+  })
+
   .directive('crnAllowNullValues', [function () {
     return {
       restrict: 'A',
       require: '?ngModel',
       link: function (scope, el, attrs, ctrl) {
+        ctrl.$formatters = [];
+        ctrl.$parsers = [];
         if (attrs.crnAllowNullValues == 'true') {
-          ctrl.$formatters = [];
-          ctrl.$parsers = [];
           ctrl.$render = function () {
             var viewValue = ctrl.$viewValue;
             el.data('checked', viewValue);
@@ -3749,6 +3775,37 @@
                 break;
               case true:
                 checked = null;
+                break;
+              default:
+                checked = false;
+            }
+            ctrl.$setViewValue(checked);
+            scope.$apply(ctrl.$render);
+          });
+        } else if (attrs.crnAllowNullValues == 'false'){
+          ctrl.$render = function () {
+            var viewValue = ctrl.$viewValue;
+            if(viewValue === undefined || viewValue === null){
+              ctrl.$setViewValue(false);
+              viewValue = false;
+            }
+            el.data('checked', viewValue);
+            switch (viewValue) {
+              case true:
+                el.prop('indeterminate', false);
+                el.prop('checked', true);
+                break;
+              default:
+                el.prop('indeterminate', false);
+                el.prop('checked', false);
+                break;
+            }
+          };
+          el.bind('click', function () {
+            var checked;
+            switch (el.data('checked')) {
+              case false:
+                checked = true;
                 break;
               default:
                 checked = false;
@@ -5004,8 +5061,9 @@ app.kendoHelper = {
 };
 
 window.showTreatedValue = function(value) {
-  if (value)
+  if (value || value === false){
     return value;
+  }
   return '';
 };
 
