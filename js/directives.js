@@ -2948,6 +2948,8 @@
         if (ngModelCtrl) {
           ngModelCtrl.$formatters.push(function (value) {
             var x = combobox.value();
+            if (value === undefined)
+              value = null;
             return forceChangeModel(value);
           });
 
