@@ -5429,7 +5429,22 @@
           "text_en_US": "Icon"
         }
       ],
-      "attributesForPreview": [
+      "attributesForPreview":
+        {
+          "name": "xattr-default-value",
+          "type": "options",
+          "target": "default",
+          "values": [
+            {
+              "key": "",
+              "value": "null"
+            },
+            {
+              "key": "0",
+              "value": "zero"
+            }
+          ]
+        },
         {
           "name": "xattr-theme",
           "type": "options",
@@ -5493,6 +5508,14 @@
           "selector": "div",
           "type": "text",
           "order": 3
+        },
+        {
+          "name": "xattr-default-value",
+          "selector": "cronapp-rating",
+          "displayName_pt_BR": "Valor Padrão",
+          "displayName_en_US": "Default Value",
+          "type": "text",
+          "order": 4
         },
         {
           "name": "ng-init",

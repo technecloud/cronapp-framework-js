@@ -3579,7 +3579,12 @@
         attrs.iconOn = $(elem).find('i').attr('class');
 
         var $elem = $(elem);
-        var starArray = []
+        var starArray = [];
+
+        if (attrs.xattrDefaultValue) {
+          ngModelCtrl.$viewValue = 0; //set new view value
+          ngModelCtrl.$commitViewValue();
+        }
 
         for (var i=1;i<=5;i++) {
           starArray.push($(elem).find('i').get(i - 1));
