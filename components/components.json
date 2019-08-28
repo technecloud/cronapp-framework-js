@@ -5429,7 +5429,7 @@
           "text_en_US": "Icon"
         }
       ],
-      "attributesForPreview":
+      "attributesForPreview": [
         {
           "name": "xattr-default-value",
           "type": "options",
