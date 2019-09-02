@@ -4285,13 +4285,15 @@ function transformText() {
     link: function(scope, elem, attrs, ngModelCtrl) {
 
       var textTransform = function(element, value) {
-        if (element && value) {
-          if(element.css('text-transform') === 'uppercase'){
-            return value.toUpperCase();
-          } else if(element.css('text-transform') === 'lowercase'){
-            return value.toLowerCase();
+        if (element) {
+          if (value !== undefined && value !== null) {
+            if(element.css('text-transform') === 'uppercase'){
+              return value.toUpperCase();
+            } else if(element.css('text-transform') === 'lowercase'){
+              return value.toLowerCase();
+            }
           }
-          return value
+          return value;
         }
       }
 
