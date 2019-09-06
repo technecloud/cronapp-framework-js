@@ -94,10 +94,6 @@
           "displayName": "Theme",
           "order": 1
         },
-        "xattr-size": {
-          "displayName": "Size",
-          "order": 2
-        },
         "xattr-disabled": {
           "displayName": "Disabled",
           "order": 4
@@ -127,29 +123,6 @@
         }
       ],
       "attributesForPreview": [
-        {
-          "name": "xattr-size",
-          "type": "options",
-          "target": "class",
-          "values": [
-            {
-              "key": "",
-              "value": "Standard"
-            },
-            {
-              "key": "btn-lg",
-              "value": "Large"
-            },
-            {
-              "key": "btn-sm",
-              "value": "Small"
-            },
-            {
-              "key": "btn-xs",
-              "value": "Extra Small"
-            }
-          ]
-        },
         {
           "name": "xattr-fullsize",
           "type": "options",
@@ -262,10 +235,6 @@
           "name": "content",
           "selector": "span",
           "type": "content"
-        },
-        {
-          "name": "xattr-size",
-          "selector": "button"
         },
         {
           "name": "xattr-theme",
