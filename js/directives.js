@@ -1654,6 +1654,67 @@
             });
             return selected;
           },
+
+          resizeGridUsingWidthForDevice: function(grid){
+            for (let idx = 0; idx < grid.columns.length; idx++) {
+              let widthDevice = this.getWidthForDevice(grid.columns[idx]);
+              grid.columns[idx].width = widthDevice.width;
+              if (!widthDevice.visible)
+                grid.hideColumn(idx);
+              else
+                grid.showColumn(idx);
+            }
+          },
+
+          getWidthForDevice: function(column) {
+            let widthDeviceBig = 1210;
+            let widthDeviceDesktop = 1002;
+            let widthDeviceMedium = 778;
+            let widthDeviceSmall = 424;
+
+            let currentWindowWidth = $(window).width();
+
+            let getDevice = function(device) {
+              let wd;
+              column.widthDevices.forEach( d => {
+                if (d.device === device)
+                  wd = d;
+              });
+
+              //Se não tiver definido o width para determinada resolução procura a proxima acima, se n tiver acima, pega a que existir
+              if (wd === undefined) {
+                if (device === "deviceSmall")
+                  wd = getDevice("deviceMedium");
+                else if (device === "deviceMedium")
+                  wd = getDevice("deviceDesktop");
+                else if (device === "deviceDesktop")
+                  wd = getDevice("deviceBig");
+                else
+                  wd = column.widthDevices[0];
+              }
+              return wd;
+            };
+
+
+            let widthDevice = { width: column.width };
+            if (column.visible !== undefined && column.visible !== null)
+              widthDevice.visible = column.visible;
+            else
+              widthDevice.visible = !column.hidden;
+
+            if (column.widthDevices !== null && column.widthDevices !== undefined && column.widthDevices.length > 0) {
+              if (currentWindowWidth >= widthDeviceBig)
+                widthDevice = getDevice("deviceBig");
+              else if (currentWindowWidth >= widthDeviceDesktop && currentWindowWidth < widthDeviceBig)
+                widthDevice = getDevice("deviceDesktop");
+              else if (currentWindowWidth >= widthDeviceMedium && currentWindowWidth < widthDeviceDesktop)
+                widthDevice = getDevice("deviceMedium");
+              else
+                widthDevice = getDevice("deviceSmall");
+            }
+            return widthDevice;
+          },
+
           getColumns: function(options, datasource, scope, tooltips) {
             var directiveContext = this;
 
@@ -1950,16 +2011,19 @@
             var columns = [];
             if (options.columns) {
               options.columns.forEach(function(column)  {
+
+                let widthDevice = this.getWidthForDevice(column);
+
                 if (column.dataType == "Database") {
 
                   var addColumn = {
                     field: column.field,
                     title: column.headerText,
                     type: column.type,
-                    width: column.width,
+                    width: widthDevice.width,
                     sortable: column.sortable,
                     filterable: column.filterable,
-                    hidden: !column.visible
+                    hidden: !widthDevice.visible
                   };
                   addColumn.template = getTemplate(column);
                   addColumn.format = getFormat(column);
@@ -1970,6 +2034,7 @@
                   addColumn.groupHeaderTemplate = getAggregateHeader(column);
                   addColumn.attributes = getAttributes(column);
                   addColumn.headerAttributes = addColumn.attributes;
+                  addColumn.widthDevices = column.widthDevices;
                   columns.push(addColumn);
                 }
                 else if (column.dataType == "Command") {
@@ -1992,8 +2057,8 @@
                     var addColumn = {
                       command: commands,
                       title: column.headerText,
-                      width: column.width ? column.width : 155,
-                      hidden: !column.visible
+                      width: widthDevice.width ? widthDevice.width : 155,
+                      hidden: !widthDevice.visible
                     };
                     columns.push(addColumn);
                   }
@@ -2029,7 +2094,7 @@
                     command: [{
                       name: app.common.generateId(),
                       text: label,
-                      hidden: !column.visible,
+                      hidden: !widthDevice.visible,
                       className: className,
                       iconClass: column.iconClass,
                       click: function(e) {
@@ -2082,9 +2147,9 @@
                         return;
                       }
                     }],
-                    width: column.width,
+                    width: widthDevice.width,
                     title: column.headerText ? column.headerText: '',
-                    hidden: !column.visible
+                    hidden: !widthDevice.visible
                   };
                   columns.push(addColumn);
                 }
@@ -2226,6 +2291,8 @@
                   var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
                   grid.dataSource.transport.options.grid = grid;
                   currentOptions.grid = grid;
+                  //Resize da tela para ajustar obter o widthDevices correto
+                  window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
                   helperDirective.setTooltips($gridDiv, tooltips);
                 });
@@ -2530,6 +2597,9 @@
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
               options.grid = grid;
+
+              //Resize da tela para ajustar obter o widthDevices correto
+              window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
               helperDirective.setTooltips($templateDyn, tooltips);
 
