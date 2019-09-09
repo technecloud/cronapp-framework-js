@@ -978,6 +978,7 @@
       "name": "crn-datasource-filter",
       "text_pt_BR": "Filtro",
       "text_en_US": "Filter",
+      "pallete": false,
       "class": "adjust-icon mdi mdi-filter",
       "order": 4,
       "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/datasourcefilter.template.html",
