@@ -2834,6 +2834,16 @@
             }
 
             var forceChangeModel = function(value) {
+              if (combobox.isEvaluating) {
+                setTimeout(function() {
+                  forceChangeModel(value);
+                }, 100);
+                return;
+              }
+
+              if (value === undefined) {
+                value = null;
+              }
 
               combobox.value(value);
 
