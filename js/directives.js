@@ -1225,7 +1225,25 @@
             }
             return model
           },
-          getSchedulerProperties: function(options, datasource) {
+          mergeSchedulerEventWithDatasourceActive: (datasource, item) => {
+            //In order to merge the new event info with the active item from datasorce.
+            return Object.assign(datasource.active, item);
+          },
+          setDatasourceActiveItem: function (datasource, item, keyField) {
+            if (item) {
+              for (let key in datasource.data) {
+                let dsItem = datasource.data[key][keyField];
+                if (dsItem && dsItem === item[keyField]) {
+                  datasource.active = datasource.copy(datasource.data[key], {});
+                  return datasource.active;
+                }
+              }
+              // If item is not present clean active
+              datasource.startEditing({});
+              return datasource.active;
+            }
+          },
+          getSchedulerProperties: function(options, datasource, scope) {
             let schedulerStartDate = (options.initialDateStrategy === 'Expression' ? scope.$eval(generateBlocklyCall(options.initialDateBlocklyInfo)) : options.initialDate);
             let lastSearchedPeriod = {start: null, end: null};
             let needsToFetchData = function(searchablePeriod) {
@@ -1263,6 +1281,7 @@
 
             let cronSchedulerProperties = {
               showWorkHours: options.showWorkHours,
+              selectable: true,
               date: schedulerStartDate,
               mobile: true,
               allDaySlot: options.allDaySlot,
@@ -1291,6 +1310,37 @@
                 // An endDate method which returns the end date of the view.
 
                 //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
+              },
+              change: (e) => {
+                if (e && e.events && e.events.length) {
+                  this.setDatasourceActiveItem(datasource, e.events[0], 'id');
+                } else {
+                  datasource.startInserting({});
+                }
+                console.log('Active: ', datasource.active);
+              },
+              edit: function(e) {
+                let container = e.container;
+
+                /* ACTION: ADD custom button */
+                let detailButton = $('<a class="k-button">Detalhes</a>');
+
+                //wire its click event
+                detailButton.click(function (e) {
+                  scope.safeApply(() => {
+                    cronapi.screen.showModal('modal8267')
+                  });
+                });
+
+                //add the button to the container
+                let buttonsContainer = container.find(".k-edit-buttons");
+                buttonsContainer.append(detailButton);
+
+                // /* ACTION: Accessing dropdownlist widget */
+                // container.find("[data-container-for=ownerId]")
+                // .find("[data-role=dropdownlist]")
+                // .data("kendoDropDownList")
+                // .wrapper.width("400px");
               },
               dataSource: {
                 batch: false, // Enable batch updates
@@ -1321,28 +1371,51 @@
                       read.error();
                     }
                   }.bind(this),
-                  update: function(update) {
+                  update: (update) => {
+                    let item = this.parseToDatasourceSchema(datasource, update.data);
+                    datasource.startEditing(datasource.active);
+                    this.mergeSchedulerEventWithDatasourceActive(datasource, item);
                     datasource.update(
-                        this.parseToDatasourceSchema(datasource, update.data),
-                        function(data) {
-                          update.success(angular.copy(data));
-                        },
-                        function(data) {
-                          update.error(angular.copy(data));
-                        }
+                      datasource.active,
+                      (data) => {
+                        let updatedItem = angular.copy(data);
+                        update.success(updatedItem);
+                        datasource.fetch({}, {
+                          success: (allData) => {
+                            this.setDatasourceActiveItem(datasource, updatedItem, 'id');
+                          },
+                          canceled: (data) => {
+                            // notify the data source that the request failed
+                          }
+                        }, false);
+                      },
+                      (data) => {
+                        update.error(angular.copy(data));
+                      }
                     );
-                  }.bind(this),
-                  create: function(create) {
+                  },
+                  create: (create) => {
+                    let item = this.parseToDatasourceSchema(datasource, create.data);
+                    this.mergeSchedulerEventWithDatasourceActive(datasource, item);
                     datasource.insert(
-                        this.parseToDatasourceSchema(datasource, create.data),
-                        function(data) {
-                          create.success(angular.copy(data));
-                        },
-                        function(data) {
-                          create.error(angular.copy(data));
-                        }
+                      datasource.active,
+                      (data) => {
+                        let newItem = angular.copy(data);
+                        create.success(newItem);
+                        datasource.fetch({}, {
+                          success: (allData) => {
+                            this.setDatasourceActiveItem(datasource, newItem, 'id');
+                          },
+                          canceled: function(data) {
+                            // notify the data source that the request failed
+                          }
+                        }, false);
+                      },
+                      (data) => {
+                        create.error(angular.copy(data));
+                      }
                     );
-                  }.bind(this),
+                  },
                   destroy: function(destroy) {
                     datasource.removeSilent(
                         this.parseToDatasourceSchema(datasource, destroy.data),
@@ -1421,7 +1494,7 @@
 
               let kendoDatasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
 
-              let schedulerProperties = this.getSchedulerProperties(options, datasource);
+              let schedulerProperties = this.getSchedulerProperties(options, datasource, scope);
 
               schedulerElement.kendoScheduler(schedulerProperties);
 
