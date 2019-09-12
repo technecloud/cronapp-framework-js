@@ -1233,7 +1233,7 @@
             if (item) {
               for (let key in datasource.data) {
                 let dsItem = datasource.data[key][keyField];
-                if (dsItem && dsItem === item[keyField]) {
+                if (dsItem !== null && dsItem === item[keyField]) {
                   datasource.active = datasource.copy(datasource.data[key], {});
                   return datasource.active;
                 }
