@@ -1319,28 +1319,25 @@
                 }
                 console.log('Active: ', datasource.active);
               },
-              edit: function(e) {
-                let container = e.container;
+              edit: function (e) {
+                if (options && options.allowCustomAction) {
+                  let container = e.container;
 
-                /* ACTION: ADD custom button */
-                let detailButton = $('<a class="k-button">Detalhes</a>');
+                  let btnLabel = options.customActionLabel ? options.customActionLabel : $translate.instant(Details);
+                  /* ACTION: ADD custom button */
+                  let detailButton = $('<a class="k-button">' + btnLabel + '</a>');
 
-                //wire its click event
-                detailButton.click(function (e) {
-                  scope.safeApply(() => {
-                    cronapi.screen.showModal('modal8267')
+                  //wire its click event
+                  detailButton.click(function (e) {
+                    scope.safeApply(() => {
+                      scope.$eval(generateBlocklyCall(options.customActionBlockly));
+                    });
                   });
-                });
 
-                //add the button to the container
-                let buttonsContainer = container.find(".k-edit-buttons");
-                buttonsContainer.append(detailButton);
-
-                // /* ACTION: Accessing dropdownlist widget */
-                // container.find("[data-container-for=ownerId]")
-                // .find("[data-role=dropdownlist]")
-                // .data("kendoDropDownList")
-                // .wrapper.width("400px");
+                  //add the button to the container
+                  let buttonsContainer = container.find(".k-edit-buttons");
+                  buttonsContainer.append(detailButton);
+                }
               },
               dataSource: {
                 batch: false, // Enable batch updates
