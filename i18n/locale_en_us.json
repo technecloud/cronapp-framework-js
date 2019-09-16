@@ -93,7 +93,8 @@
   "Format.Date" : "MM/DD/YYYY",
   "Format.Hour" : "h:mm:ss a",
   "Format.Money" : "#,#00.00",
-  "Format.Decimal" : "0.00",
+  "Format.Decimal" : "#,#00.00",
+  "Format.Integer" : "#,##0.####",
   "DatePicker.today": "Today",
   "DatePicker.clear": "Clean",
   "DatePicker.close": "Close",
@@ -114,5 +115,13 @@
   "Upload.multipleFile": "Select or drop files",
   "Upload.errorValidation": "Invalid selection: Max size %s e Allowed types: %s",
   "SaveChanges": "Save changes",
-  "CancelChanges": "Cancel changes"
+  "CancelChanges": "Cancel changes",
+  "Edit": "Edit",
+  "Remove": "Remove",
+  "Cancel": "Cancel",
+  "FieldIsInvalid": "Field '{0}' is invalid!",
+  "FieldIsRequired": "Field '{0}' is required!",
+  "Scheduler": "Scheduler",
+  "DatasourceNotFoundMessage": "No <i>Datasource</i> was defined to the component <i>'{0}'</i>.<br>Please, check if its configurations were set correctly. <br>For more information, please visit our <a href='https://docs.cronapp.io/' target='_blank'><b><u>documentation</u></b></a>",
+  "DatasourceNotFoundTitle": "Datasource not found"
 }

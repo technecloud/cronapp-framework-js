@@ -1,11 +1,19 @@
 (function($app) {
   angular.module('custom.controllers', []);
 
-  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService) {
+  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams) {
 
     $rootScope.http = $http;
     $rootScope.Notification = Notification;
+    $scope.params = $stateParams;
     $rootScope.UploadService = UploadService;
+
+    var queryStringParams = $location.search();
+    for (var key in queryStringParams) {
+      if (queryStringParams.hasOwnProperty(key)) {
+        $scope.params[key] = queryStringParams[key];
+      }
+    }
 
     $rootScope.getReport = function(reportName, params) {
       ReportService.openReport(reportName, params);

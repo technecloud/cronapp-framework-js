@@ -15,8 +15,7 @@ var cronappModules = [
   'ui.bootstrap',
   'ngFileUpload',
   'report.services',
-  'upload.services',
-  'summernote'
+  'upload.services'
 ];
 
 if (window.customModules) {
@@ -42,7 +41,7 @@ var app = (function() {
             function($q, $rootScope) {
               var service = {
                 'request': function(config) {
-                  var _u = JSON.parse(sessionStorage.getItem('_u'));
+                  var _u = JSON.parse(localStorage.getItem('_u'));
                   if (_u && _u.token) {
                     config.headers['X-AUTH-TOKEN'] = _u.token;
                     window.uToken = _u.token;
@@ -155,22 +154,40 @@ var app = (function() {
         return {
           restrict: 'A',
           require: '^ngModel',
-          link: function(scope, element, attr, ngModel) {
+          link: function(scope, element, attr, ngModelCtrl) {
             var evaluatedValue;
             if (attr.value) {
               evaluatedValue = attr.value;
             } else {
               evaluatedValue = $parse(attr.crnValue)(scope);
             }
+
             element.attr("data-evaluated", JSON.stringify(evaluatedValue));
             element.bind("click", function(event) {
               scope.$apply(function() {
-                ngModel.$setViewValue(evaluatedValue);
+                ngModelCtrl.$setViewValue(evaluatedValue);
+                $(element).data('changed', true);
               }.bind(element));
             });
+
+            scope.$watch(function(){return ngModelCtrl.$modelValue}, function(value, old){
+              if (value !== old) {
+                var dataEvaluated = element.attr("data-evaluated");
+                var changed = $(element).data('changed');
+                $(element).data('changed', false);
+                if (!changed) {
+                  if (value && JSON.stringify(''+value) == dataEvaluated) {
+                    $(element)[0].checked = true
+                  } else {
+                    $(element)[0].checked = false;
+                  }
+                }
+              }
+            });           
           }
         };
       }])
+	  
       .decorator("$xhrFactory", [
         "$delegate", "$injector",
         function($delegate, $injector) {
@@ -185,9 +202,9 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
+    .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
 
-        for (var x in app.userEvents)
+      for (var x in app.userEvents)
           $scope[x] = app.userEvents[x].bind($scope);
 
         try {
@@ -249,7 +266,7 @@ app.bindScope = function($scope, obj) {
   for (var x in obj) {
     // var name = parentName+'.'+x;
     // console.log(name);
-    if (typeof obj[x] == 'string')
+    if (typeof obj[x] == 'string' || typeof obj[x] == 'boolean')
       newObj[x] = obj[x];
     else if (typeof obj[x] == 'function')
       newObj[x] = obj[x].bind($scope);
@@ -281,8 +298,10 @@ app.registerEventsCronapi = function($scope, $translate) {
     console.info(e);
   }
   try {
-    if (blockly)
+    if (blockly) {
+      blockly.cronapi = cronapi;
       $scope['blockly'] = app.bindScope($scope, blockly);
+    }
   } catch (e) {
     console.info('Not loaded blockly functions');
     console.info(e);
