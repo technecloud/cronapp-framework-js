@@ -24,6 +24,7 @@
 
     $scope.$http = $http;
     $scope.params = $stateParams;
+    $scope.$state = $state;
     app.registerEventsCronapi($scope, $translate);
 
     $rootScope.http = $http;
@@ -144,6 +145,7 @@
 
     $scope.$http = $http;
     $scope.params = $stateParams;
+    $scope.$state = $state;
     app.registerEventsCronapi($scope, $translate);
 
     $rootScope.http = $http;
