@@ -256,12 +256,13 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout) {
+      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state) {
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
         $scope.Notification = Notification;
         $scope.UploadService = UploadService;
+        $scope.$state = $state;
 
         app.registerEventsCronapi($scope, $translate);
         
