@@ -1225,7 +1225,25 @@
             }
             return model
           },
-          getSchedulerProperties: function(options, datasource) {
+          mergeSchedulerEventWithDatasourceActive: (datasource, item) => {
+            //In order to merge the new event info with the active item from datasorce.
+            return Object.assign(datasource.active, item);
+          },
+          setDatasourceActiveItem: function (datasource, item, keyField) {
+            if (item) {
+              for (let key in datasource.data) {
+                let dsItem = datasource.data[key][keyField];
+                if (dsItem !== null && dsItem === item[keyField]) {
+                  datasource.active = datasource.copy(datasource.data[key], {});
+                  return datasource.active;
+                }
+              }
+              // If item is not present clean active
+              datasource.startEditing({});
+              return datasource.active;
+            }
+          },
+          getSchedulerProperties: function(options, datasource, scope) {
             let schedulerStartDate = (options.initialDateStrategy === 'Expression' ? scope.$eval(generateBlocklyCall(options.initialDateBlocklyInfo)) : options.initialDate);
             let lastSearchedPeriod = {start: null, end: null};
             let needsToFetchData = function(searchablePeriod) {
@@ -1263,6 +1281,7 @@
 
             let cronSchedulerProperties = {
               showWorkHours: options.showWorkHours,
+              selectable: true,
               date: schedulerStartDate,
               mobile: true,
               allDaySlot: options.allDaySlot,
@@ -1291,6 +1310,34 @@
                 // An endDate method which returns the end date of the view.
 
                 //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
+              },
+              change: (e) => {
+                if (e && e.events && e.events.length) {
+                  this.setDatasourceActiveItem(datasource, e.events[0], 'id');
+                } else {
+                  datasource.startInserting({});
+                }
+                console.log('Active: ', datasource.active);
+              },
+              edit: function (e) {
+                if (options && options.allowCustomAction) {
+                  let container = e.container;
+
+                  let btnLabel = options.customActionLabel ? options.customActionLabel : $translate.instant(Details);
+                  /* ACTION: ADD custom button */
+                  let detailButton = $('<a class="k-button">' + btnLabel + '</a>');
+
+                  //wire its click event
+                  detailButton.click(function (e) {
+                    scope.safeApply(() => {
+                      scope.$eval(generateBlocklyCall(options.customActionBlockly));
+                    });
+                  });
+
+                  //add the button to the container
+                  let buttonsContainer = container.find(".k-edit-buttons");
+                  buttonsContainer.append(detailButton);
+                }
               },
               dataSource: {
                 batch: false, // Enable batch updates
@@ -1321,28 +1368,51 @@
                       read.error();
                     }
                   }.bind(this),
-                  update: function(update) {
+                  update: (update) => {
+                    let item = this.parseToDatasourceSchema(datasource, update.data);
+                    datasource.startEditing(datasource.active);
+                    this.mergeSchedulerEventWithDatasourceActive(datasource, item);
                     datasource.update(
-                        this.parseToDatasourceSchema(datasource, update.data),
-                        function(data) {
-                          update.success(angular.copy(data));
-                        },
-                        function(data) {
-                          update.error(angular.copy(data));
-                        }
+                      datasource.active,
+                      (data) => {
+                        let updatedItem = angular.copy(data);
+                        update.success(updatedItem);
+                        datasource.fetch({}, {
+                          success: (allData) => {
+                            this.setDatasourceActiveItem(datasource, updatedItem, 'id');
+                          },
+                          canceled: (data) => {
+                            // notify the data source that the request failed
+                          }
+                        }, false);
+                      },
+                      (data) => {
+                        update.error(angular.copy(data));
+                      }
                     );
-                  }.bind(this),
-                  create: function(create) {
+                  },
+                  create: (create) => {
+                    let item = this.parseToDatasourceSchema(datasource, create.data);
+                    this.mergeSchedulerEventWithDatasourceActive(datasource, item);
                     datasource.insert(
-                        this.parseToDatasourceSchema(datasource, create.data),
-                        function(data) {
-                          create.success(angular.copy(data));
-                        },
-                        function(data) {
-                          create.error(angular.copy(data));
-                        }
+                      datasource.active,
+                      (data) => {
+                        let newItem = angular.copy(data);
+                        create.success(newItem);
+                        datasource.fetch({}, {
+                          success: (allData) => {
+                            this.setDatasourceActiveItem(datasource, newItem, 'id');
+                          },
+                          canceled: function(data) {
+                            // notify the data source that the request failed
+                          }
+                        }, false);
+                      },
+                      (data) => {
+                        create.error(angular.copy(data));
+                      }
                     );
-                  }.bind(this),
+                  },
                   destroy: function(destroy) {
                     datasource.removeSilent(
                         this.parseToDatasourceSchema(datasource, destroy.data),
@@ -1421,7 +1491,7 @@
 
               let kendoDatasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
 
-              let schedulerProperties = this.getSchedulerProperties(options, datasource);
+              let schedulerProperties = this.getSchedulerProperties(options, datasource, scope);
 
               schedulerElement.kendoScheduler(schedulerProperties);
 
@@ -2483,7 +2553,19 @@
                 setToActiveInCronappDataSource.bind(this)(item);
                 var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
                 if (ngModelCtrl) {
-                  ngModelCtrl.$setViewValue(cronappDatasource.active);
+
+                  if ("multiple" === options.allowSelectionRowType) {
+                    let selecteds = [];
+                    this.select().each((i, row)=> {
+                      let item = this.dataItem(row);
+                      let objInDs = cronappDatasource.findObjInDs(item, false);
+                      if (objInDs !== null)
+                        selecteds.push(objInDs);
+                    });
+                    ngModelCtrl.$setViewValue(selecteds);
+                  }
+                  else
+                    ngModelCtrl.$setViewValue(cronappDatasource.active);
                 }
                 collapseAllExcecptCurrent(this, this.select().next(), this.select());
 
@@ -2904,6 +2986,16 @@
             }
 
             var forceChangeModel = function(value) {
+              if (combobox.isEvaluating) {
+                setTimeout(function() {
+                  forceChangeModel(value);
+                }, 100);
+                return;
+              }
+
+              if (value === undefined) {
+                value = null;
+              }
 
               combobox.value(value);
 
@@ -4215,65 +4307,20 @@ function maskDirective($compile, $translate, $parse, attrName) {
         }
 
         $(element).inputmask(inputmaskType, ipOptions);
-
-        var unmaskedvalue = function() {
-          $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
-        }
-        $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
-
-        if (ngModelCtrl) {
-          ngModelCtrl.$formatters.push(function (value) {
-            if (value != undefined && value != null && value !== '') {
-              return format(mask, value);
-            }
-
-            return null;
-          });
-
-          ngModelCtrl.$parsers.push(function (value) {
-            if (value != undefined && value != null && value !== '') {
-              var unmaskedvalue = $element.inputmask('unmaskedvalue');
-              if (unmaskedvalue !== '')
-                return unmaskedvalue;
-            }
-
-            return null;
-          });
-        }
-
+        useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter);
       }
-
       else if (type == 'text' || type == 'tel') {
-
-        var options = {};
-        if (attrs.maskPlaceholder) {
-          options.placeholder = attrs.maskPlaceholder
+        if(!attrs.maskPlaceholder){
+          $element.mask(mask);
+          useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask);
         }
-
-        $element.mask(mask, options);
-
-        var unmaskedvalue = function() {
-          if (removeMask)
-            $(this).data('rawvalue',$(this).cleanVal());
-        }
-        $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
-
-        if (removeMask && ngModelCtrl) {
-          ngModelCtrl.$formatters.push(function (value) {
-            if (value) {
-              return $element.masked(value);
-            }
-
-            return null;
-          });
-
-          ngModelCtrl.$parsers.push(function (value) {
-            if (value) {
-              return $element.cleanVal();
-            }
-
-            return null;
-          });
+        else{  
+          options = {};
+          options['placeholder'] = attrs.maskPlaceholder
+          $(element).inputmask(mask, options);
+          if(removeMask){
+            useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter);
+          }
         }
       }
       else {
@@ -4285,6 +4332,58 @@ function maskDirective($compile, $translate, $parse, attrName) {
         }
       }
     }
+  }
+}
+
+function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter){ 
+  var $element = $(element); 
+  var unmaskedvalue = function() {
+    $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
+  }
+  $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
+  if (ngModelCtrl) {
+    ngModelCtrl.$formatters.push(function (value) {
+      if (value != undefined && value != null && value !== '') {
+        return format(mask, value);
+      }
+      return null;
+    });
+
+    ngModelCtrl.$parsers.push(function (value) {
+      if (value != undefined && value != null && value !== '') {
+        var unmaskedvalue = $element.inputmask('unmaskedvalue');
+        if (unmaskedvalue !== '')
+          return unmaskedvalue;
+      }
+      return null;
+    });
+  }
+}
+
+function useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask){
+  var $element = $(element); 
+  var unmaskedvalue = function() {
+    if (removeMask)
+      $(this).data('rawvalue',$(this).cleanVal());
+  }
+  $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
+
+  if (removeMask && ngModelCtrl) {
+    ngModelCtrl.$formatters.push(function (value) {
+      if (value) {
+        return $element.masked(value);
+      }
+
+      return null;
+    });
+
+    ngModelCtrl.$parsers.push(function (value) {
+      if (value) {
+        return $element.cleanVal();
+      }
+
+      return null;
+    });
   }
 }
 
