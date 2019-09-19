@@ -2486,7 +2486,19 @@
                 setToActiveInCronappDataSource.bind(this)(item);
                 var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
                 if (ngModelCtrl) {
-                  ngModelCtrl.$setViewValue(cronappDatasource.active);
+
+                  if ("multiple" === options.allowSelectionRowType) {
+                    let selecteds = [];
+                    this.select().each((i, row)=> {
+                      let item = this.dataItem(row);
+                      let objInDs = cronappDatasource.findObjInDs(item, false);
+                      if (objInDs !== null)
+                        selecteds.push(objInDs);
+                    });
+                    ngModelCtrl.$setViewValue(selecteds);
+                  }
+                  else
+                    ngModelCtrl.$setViewValue(cronappDatasource.active);
                 }
                 collapseAllExcecptCurrent(this, this.select().next(), this.select());
 
