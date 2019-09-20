@@ -3236,7 +3236,17 @@
                       if (!data) {
                         data = [];
                       }
-                      data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                      if(select.fieldType && select.fieldType === 'key'){
+                        var keyValues = combobox.dataSource.options.transport.options.cronappDatasource.getKeyValues(dataItem);
+                        var keys = Object.keys(keyValues);
+                        if(keys.length === 1){
+                          keyValues = keyValues[keys];
+                        }
+                        data.push(keyValues)
+                      }
+                      else{
+                        data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                      }
                       $(combobox).data('silent', true);
                       modelSetter(_scope, data);
                     } catch(e) {}
