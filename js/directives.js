@@ -2483,6 +2483,15 @@
               }
             };
 
+            var changeObjectField = function(dataSource, obj){
+              obj = dataSource.getKeyValues(obj);
+              var keys = Object.keys(obj);
+              if(keys.length === 1){
+                obj = obj[keys];
+              }
+              return obj;
+            };
+
             var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns, options.groupings);
 
             var columns = this.getColumns(options, datasource, scope, tooltips);
@@ -2552,20 +2561,27 @@
                 var item = this.dataItem(this.select());
                 setToActiveInCronappDataSource.bind(this)(item);
                 var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                if(options.fieldType && options.fieldType === 'key'){
+                   cronappDatasource.active = changeObjectField(cronappDatasource, cronappDatasource.active);
+                }
                 if (ngModelCtrl) {
-
                   if ("multiple" === options.allowSelectionRowType) {
                     let selecteds = [];
                     this.select().each((i, row)=> {
                       let item = this.dataItem(row);
                       let objInDs = cronappDatasource.findObjInDs(item, false);
-                      if (objInDs !== null)
+                      if(options.fieldType && options.fieldType === 'key'){
+                        objInDs = changeObjectField(cronappDatasource, objInDs);
+                      }
+                      if (objInDs !== null){
                         selecteds.push(objInDs);
+                      }
                     });
                     ngModelCtrl.$setViewValue(selecteds);
                   }
-                  else
+                  else{
                     ngModelCtrl.$setViewValue(cronappDatasource.active);
+                  }
                 }
                 collapseAllExcecptCurrent(this, this.select().next(), this.select());
 
@@ -3290,7 +3306,17 @@
                       if (!data) {
                         data = [];
                       }
-                      data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                      if(select.fieldType && select.fieldType === 'key'){
+                        var keyValues = combobox.dataSource.options.transport.options.cronappDatasource.getKeyValues(dataItem);
+                        var keys = Object.keys(keyValues);
+                        if(keys.length === 1){
+                          keyValues = keyValues[keys];
+                        }
+                        data.push(keyValues)
+                      }
+                      else{
+                        data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                      }
                       $(combobox).data('silent', true);
                       modelSetter(_scope, data);
                     } catch(e) {}
