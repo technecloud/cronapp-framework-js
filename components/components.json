@@ -4173,6 +4173,46 @@
       ]
     },
     {
+      "name": "crn-cron-chart",
+      "pallete": true,
+      "text_pt_BR": "Gráfico",
+      "text_en_US": "Chart",
+      "order": 2,
+      "class": "adjust-icon mdi mdi-chart-areaspline",
+      "designTimeDynamic": true,
+      "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-chart.designtime.html",
+      "designTimeSelector": "cron-chart",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-chart.template.html",
+      "properties": {
+        "class": {
+          "order": 9999
+        },
+        "id": {
+          "order": 1
+        }
+      },
+      "childrenProperties": [
+        {
+          "name": "options",
+          "displayName_pt_BR": "Configurações",
+          "displayName_en_US": "Configuration",
+          "removable": false,
+          "global": "true",
+          "selector": "cron-chart",
+          "type": "text",
+          "order": 1
+        },
+        {
+          "name": "ng-model",
+          "selector": "cron-chart",
+          "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+          "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+          "type": "text",
+          "order": 2
+        }
+      ]
+    },
+    {
       "name": "crn-enterprise-combobox",
       "onDrop": "openEditor",
       "onDoubleClick": "openEditor",
