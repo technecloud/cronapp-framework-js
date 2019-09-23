@@ -3330,14 +3330,14 @@
 
             }.bind(relactionDS);
 
-            options['change'] = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
-            options['close'] = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
-            options['dataBound'] = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
-            options['filtering'] = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
-            options['open'] = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
-            options['cascade'] = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
-            evtSelect = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
-            deselect = attrs.onDeselect ? function (){eval(attrs.onDeselect)}: undefined;
+            options['change'] = attrs.ngChange ? function (){_scope.$eval(attrs.ngChange)}: undefined;
+            options['close'] = attrs.ngClose ? function (){_scope.$eval(attrs.ngClose)}: undefined;
+            options['dataBound'] = attrs.ngDatabound ? function (){_scope.$eval(attrs.ngDatabound)}: undefined;
+            options['filtering'] = attrs.ngFiltering ? function (){_scope.$eval(attrs.ngFiltering)}: undefined;
+            options['open'] = attrs.ngOpen ? function (){_scope.$eval(attrs.ngOpen)}: undefined;
+            options['cascade'] = attrs.ngCascade ? function (){_scope.$eval(attrs.ngCascade)}: undefined;
+            evtSelect = attrs.ngSelect ? function (){_scope.$eval(attrs.ngSelect)}: undefined;
+            deselect = attrs.ngDeselect ? function (){_scope.$eval(attrs.ngDeselect)}: undefined;
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
 
