@@ -2561,7 +2561,7 @@
                 var item = this.dataItem(this.select());
                 setToActiveInCronappDataSource.bind(this)(item);
                 var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                if(options.fieldType && options.fieldType == "key"){
+                if(options.fieldType && options.fieldType === 'key'){
                    cronappDatasource.active = changeObjectField(cronappDatasource, cronappDatasource.active);
                 }
                 if (ngModelCtrl) {
@@ -2570,7 +2570,7 @@
                     this.select().each((i, row)=> {
                       let item = this.dataItem(row);
                       let objInDs = cronappDatasource.findObjInDs(item, false);
-                      if(options.fieldType && options.fieldType == "key"){
+                      if(options.fieldType && options.fieldType === 'key'){
                         objInDs = changeObjectField(cronappDatasource, objInDs);
                       }
                       if (objInDs !== null){
