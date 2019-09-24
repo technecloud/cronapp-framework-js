@@ -3272,7 +3272,12 @@
                   _scope.$apply(function () {
                     try {
                       var data = eval('_scope.' + model);
-                      data = data.filter(it => it[dataValueField] !== dataItem[dataValueField]);
+                      data = data.filter(it => { 
+                        if(typeof(it) === "object"){
+                          return  it[dataValueField] !== dataItem[dataValueField];
+                        }
+                        return it !== dataItem[dataValueField];
+                      });
                       $(combobox).data('silent', true);
                       modelSetter(_scope, data);
                     } catch (e) {}
