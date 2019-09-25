@@ -4267,13 +4267,6 @@
           "type": "event"
         },
         {
-          "name": "ng-open",
-          "selector": "cron-select",
-          "displayName_pt_BR": "Ao Abrir",
-          "displayName_en_US": "On Open",
-          "type": "event"
-        },
-        {
           "name": "options",
           "selector": "cron-select",
           "displayName_pt_BR": "Configuração",
@@ -4364,13 +4357,6 @@
           "selector": "cron-dynamic-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type": "event"
-        },
-        {
-          "name": "ng-open",
-          "selector": "cron-dynamic-select",
-          "displayName_pt_BR": "Ao Abrir",
-          "displayName_en_US": "On Open",
           "type": "event"
         },
         {
@@ -4527,13 +4513,6 @@
           "selector": "cron-multi-select",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type": "event"
-        },
-        {
-          "name": "ng-open",
-          "selector": "cron-multi-select",
-          "displayName_pt_BR": "Ao Abrir",
-          "displayName_en_US": "On Open",
           "type": "event"
         },
         {
@@ -4714,13 +4693,6 @@
           "type": "event"
         },
         {
-          "name": "ng-open",
-          "selector": "cron-auto-complete",
-          "displayName_pt_BR": "Ao Abrir",
-          "displayName_en_US": "On Open",
-          "type": "event"
-        },
-        {
           "name": "ng-required",
           "selector": "cron-auto-complete",
           "type": "logic"
@@ -4831,13 +4803,6 @@
           "selector": "cron-auto-complete",
           "displayName_pt_BR": "Ao Filtrar",
           "displayName_en_US": "On Filtering",
-          "type": "event"
-        },
-        {
-          "name": "ng-open",
-          "selector": "cron-auto-complete",
-          "displayName_pt_BR": "Ao Abrir",
-          "displayName_en_US": "On Open",
           "type": "event"
         },
         {
