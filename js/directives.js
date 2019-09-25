@@ -2678,7 +2678,6 @@
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
             options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
-            options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
             options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
             options.change = function() {
               _scope.$apply(function () {
@@ -2873,8 +2872,6 @@
                 combobox.options.firstLazyRead = true;
                 combobox.dataSource.read();
               }
-
-              if (attrs.ngOpen) { scope.$eval(attrs.ngOpen)(e); };
             }
 
             options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
@@ -3279,7 +3276,6 @@
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
             options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
-            options.open = attrs.ngOpen ? function (){scope.$eval(attrs.ngOpen)}: undefined;
             options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
             var parent = element.parent();
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
