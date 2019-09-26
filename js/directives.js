@@ -1724,6 +1724,67 @@
             });
             return selected;
           },
+
+          resizeGridUsingWidthForDevice: function(grid){
+            for (let idx = 0; idx < grid.columns.length; idx++) {
+              let widthDevice = this.getWidthForDevice(grid.columns[idx]);
+              grid.columns[idx].width = widthDevice.width;
+              if (!widthDevice.visible)
+                grid.hideColumn(idx);
+              else
+                grid.showColumn(idx);
+            }
+          },
+
+          getWidthForDevice: function(column) {
+            let widthDeviceBig = 1210;
+            let widthDeviceDesktop = 1002;
+            let widthDeviceMedium = 778;
+            let widthDeviceSmall = 424;
+
+            let currentWindowWidth = $(window).width();
+
+            let getDevice = function(device) {
+              let wd;
+              column.widthDevices.forEach( d => {
+                if (d.device === device)
+                  wd = d;
+              });
+
+              //Se não tiver definido o width para determinada resolução procura a proxima acima, se n tiver acima, pega a que existir
+              if (wd === undefined) {
+                if (device === "deviceSmall")
+                  wd = getDevice("deviceMedium");
+                else if (device === "deviceMedium")
+                  wd = getDevice("deviceDesktop");
+                else if (device === "deviceDesktop")
+                  wd = getDevice("deviceBig");
+                else
+                  wd = column.widthDevices[0];
+              }
+              return wd;
+            };
+
+
+            let widthDevice = { width: column.width };
+            if (column.visible !== undefined && column.visible !== null)
+              widthDevice.visible = column.visible;
+            else
+              widthDevice.visible = !column.hidden;
+
+            if (column.widthDevices !== null && column.widthDevices !== undefined && column.widthDevices.length > 0) {
+              if (currentWindowWidth >= widthDeviceBig)
+                widthDevice = getDevice("deviceBig");
+              else if (currentWindowWidth >= widthDeviceDesktop && currentWindowWidth < widthDeviceBig)
+                widthDevice = getDevice("deviceDesktop");
+              else if (currentWindowWidth >= widthDeviceMedium && currentWindowWidth < widthDeviceDesktop)
+                widthDevice = getDevice("deviceMedium");
+              else
+                widthDevice = getDevice("deviceSmall");
+            }
+            return widthDevice;
+          },
+
           getColumns: function(options, datasource, scope, tooltips) {
             var directiveContext = this;
 
@@ -2020,16 +2081,19 @@
             var columns = [];
             if (options.columns) {
               options.columns.forEach(function(column)  {
+
+                let widthDevice = this.getWidthForDevice(column);
+
                 if (column.dataType == "Database") {
 
                   var addColumn = {
                     field: column.field,
                     title: column.headerText,
                     type: column.type,
-                    width: column.width,
+                    width: widthDevice.width,
                     sortable: column.sortable,
                     filterable: column.filterable,
-                    hidden: !column.visible
+                    hidden: !widthDevice.visible
                   };
                   addColumn.template = getTemplate(column);
                   addColumn.format = getFormat(column);
@@ -2040,6 +2104,7 @@
                   addColumn.groupHeaderTemplate = getAggregateHeader(column);
                   addColumn.attributes = getAttributes(column);
                   addColumn.headerAttributes = addColumn.attributes;
+                  addColumn.widthDevices = column.widthDevices;
                   columns.push(addColumn);
                 }
                 else if (column.dataType == "Command") {
@@ -2062,8 +2127,8 @@
                     var addColumn = {
                       command: commands,
                       title: column.headerText,
-                      width: column.width ? column.width : 155,
-                      hidden: !column.visible
+                      width: widthDevice.width ? widthDevice.width : 155,
+                      hidden: !widthDevice.visible
                     };
                     columns.push(addColumn);
                   }
@@ -2099,7 +2164,7 @@
                     command: [{
                       name: app.common.generateId(),
                       text: label,
-                      hidden: !column.visible,
+                      hidden: !widthDevice.visible,
                       className: className,
                       iconClass: column.iconClass,
                       click: function(e) {
@@ -2152,9 +2217,9 @@
                         return;
                       }
                     }],
-                    width: column.width,
+                    width: widthDevice.width,
                     title: column.headerText ? column.headerText: '',
-                    hidden: !column.visible
+                    hidden: !widthDevice.visible
                   };
                   columns.push(addColumn);
                 }
@@ -2296,6 +2361,8 @@
                   var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
                   grid.dataSource.transport.options.grid = grid;
                   currentOptions.grid = grid;
+                  //Resize da tela para ajustar obter o widthDevices correto
+                  window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
                   helperDirective.setTooltips($gridDiv, tooltips);
                 });
@@ -2416,6 +2483,15 @@
               }
             };
 
+            var changeObjectField = function(dataSource, obj){
+              obj = dataSource.getKeyValues(obj);
+              var keys = Object.keys(obj);
+              if(keys.length === 1){
+                obj = obj[keys];
+              }
+              return obj;
+            };
+
             var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns, options.groupings);
 
             var columns = this.getColumns(options, datasource, scope, tooltips);
@@ -2485,8 +2561,27 @@
                 var item = this.dataItem(this.select());
                 setToActiveInCronappDataSource.bind(this)(item);
                 var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                if(options.fieldType && options.fieldType === 'key'){
+                   cronappDatasource.active = changeObjectField(cronappDatasource, cronappDatasource.active);
+                }
                 if (ngModelCtrl) {
-                  ngModelCtrl.$setViewValue(cronappDatasource.active);
+                  if ("multiple" === options.allowSelectionRowType) {
+                    let selecteds = [];
+                    this.select().each((i, row)=> {
+                      let item = this.dataItem(row);
+                      let objInDs = cronappDatasource.findObjInDs(item, false);
+                      if(options.fieldType && options.fieldType === 'key'){
+                        objInDs = changeObjectField(cronappDatasource, objInDs);
+                      }
+                      if (objInDs !== null){
+                        selecteds.push(objInDs);
+                      }
+                    });
+                    ngModelCtrl.$setViewValue(selecteds);
+                  }
+                  else{
+                    ngModelCtrl.$setViewValue(cronappDatasource.active);
+                  }
                 }
                 collapseAllExcecptCurrent(this, this.select().next(), this.select());
 
@@ -2600,6 +2695,9 @@
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
               options.grid = grid;
+
+              //Resize da tela para ajustar obter o widthDevices correto
+              window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
               helperDirective.setTooltips($templateDyn, tooltips);
 
@@ -3171,7 +3269,12 @@
                   _scope.$apply(function () {
                     try {
                       var data = eval('_scope.' + model);
-                      data = data.filter(it => it[dataValueField] !== dataItem[dataValueField]);
+                      data = data.filter(it => { 
+                        if(typeof(it) === "object"){
+                          return  it[dataValueField] !== dataItem[dataValueField];
+                        }
+                        return it !== dataItem[dataValueField];
+                      });
                       $(combobox).data('silent', true);
                       modelSetter(_scope, data);
                     } catch (e) {}
@@ -3205,7 +3308,17 @@
                       if (!data) {
                         data = [];
                       }
-                      data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                      if(select.fieldType && select.fieldType === 'key'){
+                        var keyValues = combobox.dataSource.options.transport.options.cronappDatasource.getKeyValues(dataItem);
+                        var keys = Object.keys(keyValues);
+                        if(keys.length === 1){
+                          keyValues = keyValues[keys];
+                        }
+                        data.push(keyValues)
+                      }
+                      else{
+                        data.push(objectClone(dataItem, combobox.dataSource.options.schema.model.fields));
+                      }
                       $(combobox).data('silent', true);
                       modelSetter(_scope, data);
                     } catch(e) {}
@@ -3219,14 +3332,14 @@
 
             }.bind(relactionDS);
 
-            options['change'] = attrs.onChange ? function (){eval(attrs.onChange)}: undefined;
-            options['close'] = attrs.onClose ? function (){eval(attrs.onClose)}: undefined;
-            options['dataBound'] = attrs.onDatabound ? function (){eval(attrs.onDatabound)}: undefined;
-            options['filtering'] = attrs.onFiltering ? function (){eval(attrs.onFiltering)}: undefined;
-            options['open'] = attrs.onOpen ? function (){eval(attrs.onOpen)}: undefined;
-            options['cascade'] = attrs.onCascade ? function (){eval(attrs.onCascade)}: undefined;
-            evtSelect = attrs.onSelect ? function (){eval(attrs.onSelect)}: undefined;
-            deselect = attrs.onDeselect ? function (){eval(attrs.onDeselect)}: undefined;
+            options['change'] = attrs.ngChange ? function (){_scope.$eval(attrs.ngChange)}: undefined;
+            options['close'] = attrs.ngClose ? function (){_scope.$eval(attrs.ngClose)}: undefined;
+            options['dataBound'] = attrs.ngDatabound ? function (){_scope.$eval(attrs.ngDatabound)}: undefined;
+            options['filtering'] = attrs.ngFiltering ? function (){_scope.$eval(attrs.ngFiltering)}: undefined;
+            options['open'] = attrs.ngOpen ? function (){_scope.$eval(attrs.ngOpen)}: undefined;
+            options['cascade'] = attrs.ngCascade ? function (){_scope.$eval(attrs.ngCascade)}: undefined;
+            evtSelect = attrs.ngSelect ? function (){_scope.$eval(attrs.ngSelect)}: undefined;
+            deselect = attrs.ngDeselect ? function (){_scope.$eval(attrs.ngDeselect)}: undefined;
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
 
@@ -4221,65 +4334,20 @@ function maskDirective($compile, $translate, $parse, attrName) {
         }
 
         $(element).inputmask(inputmaskType, ipOptions);
-
-        var unmaskedvalue = function() {
-          $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
-        }
-        $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
-
-        if (ngModelCtrl) {
-          ngModelCtrl.$formatters.push(function (value) {
-            if (value != undefined && value != null && value !== '') {
-              return format(mask, value);
-            }
-
-            return null;
-          });
-
-          ngModelCtrl.$parsers.push(function (value) {
-            if (value != undefined && value != null && value !== '') {
-              var unmaskedvalue = $element.inputmask('unmaskedvalue');
-              if (unmaskedvalue !== '')
-                return unmaskedvalue;
-            }
-
-            return null;
-          });
-        }
-
+        useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter);
       }
-
       else if (type == 'text' || type == 'tel') {
-
-        var options = {};
-        if (attrs.maskPlaceholder) {
-          options.placeholder = attrs.maskPlaceholder
+        if(!attrs.maskPlaceholder){
+          $element.mask(mask);
+          useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask);
         }
-
-        $element.mask(mask, options);
-
-        var unmaskedvalue = function() {
-          if (removeMask)
-            $(this).data('rawvalue',$(this).cleanVal());
-        }
-        $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
-
-        if (removeMask && ngModelCtrl) {
-          ngModelCtrl.$formatters.push(function (value) {
-            if (value) {
-              return $element.masked(value);
-            }
-
-            return null;
-          });
-
-          ngModelCtrl.$parsers.push(function (value) {
-            if (value) {
-              return $element.cleanVal();
-            }
-
-            return null;
-          });
+        else{  
+          options = {};
+          options['placeholder'] = attrs.maskPlaceholder
+          $(element).inputmask(mask, options);
+          if(removeMask){
+            useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter);
+          }
         }
       }
       else {
@@ -4291,6 +4359,58 @@ function maskDirective($compile, $translate, $parse, attrName) {
         }
       }
     }
+  }
+}
+
+function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter){ 
+  var $element = $(element); 
+  var unmaskedvalue = function() {
+    $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
+  }
+  $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
+  if (ngModelCtrl) {
+    ngModelCtrl.$formatters.push(function (value) {
+      if (value != undefined && value != null && value !== '') {
+        return format(mask, value);
+      }
+      return null;
+    });
+
+    ngModelCtrl.$parsers.push(function (value) {
+      if (value != undefined && value != null && value !== '') {
+        var unmaskedvalue = $element.inputmask('unmaskedvalue');
+        if (unmaskedvalue !== '')
+          return unmaskedvalue;
+      }
+      return null;
+    });
+  }
+}
+
+function useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask){
+  var $element = $(element); 
+  var unmaskedvalue = function() {
+    if (removeMask)
+      $(this).data('rawvalue',$(this).cleanVal());
+  }
+  $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
+
+  if (removeMask && ngModelCtrl) {
+    ngModelCtrl.$formatters.push(function (value) {
+      if (value) {
+        return $element.masked(value);
+      }
+
+      return null;
+    });
+
+    ngModelCtrl.$parsers.push(function (value) {
+      if (value) {
+        return $element.cleanVal();
+      }
+
+      return null;
+    });
   }
 }
 
