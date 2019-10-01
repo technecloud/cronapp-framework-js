@@ -713,6 +713,11 @@
           "type": "event"
         },
         {
+          "name": "ng-change",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -3282,6 +3287,11 @@
           "type": "event"
         },
         {
+          "name": "ng-change",
+          "selector": "input",
+          "type": "event"
+        },
+        {
           "name": "ng-click",
           "selector": "input",
           "type": "event"
@@ -3414,6 +3424,11 @@
         },
         {
           "name": "ng-init",
+          "selector": "input",
+          "type": "event"
+        },
+        {
+          "name": "ng-change",
           "selector": "input",
           "type": "event"
         },
