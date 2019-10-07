@@ -4251,7 +4251,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
               }
               var momentDate = null;
               if (useUTC) {
-                momentDate = moment(value, mask).utcOffset(window.timeZoneOffset);
+                momentDate = moment(value, mask).utcOffset(window.timeZoneOffset, true);
               } else {
                 momentDate = moment(value, mask);
               }
