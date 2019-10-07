@@ -397,7 +397,7 @@
             ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
               var value = modelValue || viewValue;
               var fieldValid = validator[attrs.valid].isValid(value);
-              if (!fieldValid) {
+              if (!fieldValid && value !== null) {
                 element.scope().$applyAsync(function(){ element[0].setCustomValidity(element[0].dataset['errorMessage']); }) ;
               } else {
                 element[0].setCustomValidity("");
