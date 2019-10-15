@@ -3867,8 +3867,9 @@
                 template = template  + '\
               <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
                 <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
-                ' + iconClass + title + caret + _populateItems(menu.menuItems) + '\
+                ' + iconClass + title + caret +  '\
                 </a> \
+                ' + _populateItems(menu.menuItems) + '\
               </li>';
               })
             }
