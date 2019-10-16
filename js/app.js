@@ -246,7 +246,13 @@ var app = (function() {
         try { if ($scope.blockly.events.afterPageRender) $scope.blockly.events.afterPageRender(); } catch(e) {};
       })
 
-      .run(function($rootScope, $state) {
+      .run(function($rootScope, $state, $stateParams, $timeout) {
+        // It's very handy to add references to $state and $stateParams to the $rootScope
+        // so that you can access them from any scope within your applications.For example,
+        // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
+        // to active whenever 'contacts.list' or one of its decendents is active.
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
         $rootScope.$on('$stateChangeError', function() {
           if (arguments.length >= 6) {
             var requestObj = arguments[5];
@@ -256,6 +262,23 @@ var app = (function() {
           } else {
             $state.go('404');
           }
+        });
+
+        $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
+          $timeout(() => {
+              let title = $('h1:first').length ? $('h1:first').text() + ' - ' : '';
+
+              let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
+              let pageName = splitedHash?splitedHash[splitedHash.length-1] : null;
+              let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
+
+              if ($('h2.title').length)
+                  title += $('h2.title').text();
+              else if (prettyPageName)
+                  title += prettyPageName;
+
+              $rootScope.viewTitle = title || currentRoute.name;
+            });
         });
       });
 
@@ -335,3 +358,22 @@ var registerComponentScripts = function() {
     $(currentCarousel + ' #carousel-example-generic').carousel(index);
   });
 }
+
+window.toCamelCase = function(str) {
+    // Lower cases the string
+    return str.toLowerCase()
+    // Replaces any - or _ or . characters with a space
+        .replace( /[-_\.]+/g, ' ')
+        // Removes any non alphanumeric characters
+        .replace( /[^\w\s]/g, '')
+        // Uppercases the first character in each group immediately following a space
+        // (delimited by spaces)
+        .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
+        // Removes spaces
+        .replace( / /g, '' );
+};
+
+window.camelCaseToSentenceCase = function(str){
+    let result = str.replace( /([A-Z])/g, " $1" );
+    return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
+};
