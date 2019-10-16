@@ -57,6 +57,13 @@ var app = (function() {
           $httpProvider.interceptors.push(interceptor);
         }
       ])
+      .config( [
+          '$compileProvider',
+          function( $compileProvider )
+          {
+              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|javascript|chrome-extension):/);
+          }
+      ])
       .config(function($stateProvider, $urlRouterProvider, NotificationProvider) {
         NotificationProvider.setOptions({
           delay: 5000,
