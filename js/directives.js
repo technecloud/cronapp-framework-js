@@ -1940,12 +1940,13 @@
 
             function getCommandForEditButtonDatabase(opt, command) {
               var cmd;
+              let classForAriaLabel = app.common.generateId();
               if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
                 cmd = {
                   name: app.common.generateId(),
                   text: '',
                   iconClass: "k-icon k-i-edit",
-                  className: "k-grid-edit",
+                  className: "k-grid-edit " + classForAriaLabel,
                   click: function(e) {
                     e.preventDefault();
                     var tr = $(e.target).closest("tr");
@@ -1970,20 +1971,23 @@
               else {
                 cmd = {
                   name: command,
-                  text: { edit: " ", update: " ", cancel: " " }
+                  text: { edit: " ", update: " ", cancel: " " },
+                  className: classForAriaLabel
                 };
               }
+              setAriaLabelOnRender(classForAriaLabel, $translate.instant('Edit'));
               return cmd;
             }
 
             function getCommandForRemoveButtonDatabase(opt, command) {
               var cmd;
+              let classForAriaLabel = app.common.generateId();
               if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
                 cmd = {
                   name: app.common.generateId(),
                   text: '',
                   iconClass: "k-icon k-i-close",
-                  className: "k-grid-delete",
+                  className: "k-grid-delete " + classForAriaLabel,
                   click: function(e) {
                     e.preventDefault();
                     var tr = $(e.target).closest("tr");
@@ -2006,9 +2010,11 @@
               } else {
                 cmd = {
                   name: command,
-                  text: " "
+                  text: " ",
+                  className: classForAriaLabel
                 };
               }
+              setAriaLabelOnRender(classForAriaLabel, $translate.instant('Remove'));
               return cmd;
             }
 
@@ -2076,6 +2082,15 @@
                 return attributes;
               }
               return undefined;
+            }
+
+            function setAriaLabelOnRender(classToFind, ariaLabel) {
+              let waitRender = setInterval(() => {
+                if ($(`.${classToFind}`).length) {
+                  $(`.${classToFind}`).attr('aria-label', ariaLabel);
+                  clearInterval(waitRender);
+                }
+              }, 200);
             }
 
             var columns = [];
@@ -2160,6 +2175,9 @@
                     className += ' ' + classForTooltip;
                   }
 
+                  let classForAriaLabel = app.common.generateId();
+                  className += ' ' + classForAriaLabel;
+
                   var addColumn = {
                     command: [{
                       name: app.common.generateId(),
@@ -2221,6 +2239,7 @@
                     title: column.headerText ? column.headerText: '',
                     hidden: !widthDevice.visible
                   };
+                  setAriaLabelOnRender(classForAriaLabel, tooltip || label || app.common.generateId());
                   columns.push(addColumn);
                 }
                 else if (column.dataType == "Selectable") {
