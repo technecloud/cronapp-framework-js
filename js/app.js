@@ -266,15 +266,17 @@ var app = (function() {
 
         $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
           $timeout(() => {
-              let title = $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
+              let systemName = $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
               let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
               let pageName = splitedHash?splitedHash[splitedHash.length-1] : null;
               let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
 
+              let title = '';
+
               if ($('h2.title').length)
-                  title +=  title.length ? ' - ' + $('h2.title').text() : $('h2.title').text();
+                  title = $('h2.title').text() + (systemName.length ? ' - ' + systemName : ''  );
               else if (prettyPageName)
-                  title += title.length ? ' - ' + prettyPageName : prettyPageName;
+                  title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
 
               $rootScope.viewTitle = title || currentRoute.name;
             });
