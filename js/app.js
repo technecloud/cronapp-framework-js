@@ -266,16 +266,15 @@ var app = (function() {
 
         $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
           $timeout(() => {
-              let title = $('h1:first').length ? $('h1:first').text() + ' - ' : '';
-
+              let title = $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
               let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
               let pageName = splitedHash?splitedHash[splitedHash.length-1] : null;
               let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
 
               if ($('h2.title').length)
-                  title += $('h2.title').text();
+                  title +=  title.length ? ' - ' + $('h2.title').text() : $('h2.title').text();
               else if (prettyPageName)
-                  title += prettyPageName;
+                  title += title.length ? ' - ' + prettyPageName : prettyPageName;
 
               $rootScope.viewTitle = title || currentRoute.name;
             });
@@ -360,20 +359,26 @@ var registerComponentScripts = function() {
 }
 
 window.toCamelCase = function(str) {
-    // Lower cases the string
-    return str.toLowerCase()
-    // Replaces any - or _ or . characters with a space
-        .replace( /[-_\.]+/g, ' ')
-        // Removes any non alphanumeric characters
-        .replace( /[^\w\s]/g, '')
-        // Uppercases the first character in each group immediately following a space
-        // (delimited by spaces)
-        .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
-        // Removes spaces
-        .replace( / /g, '' );
+    if (str !== null) {
+        // Lower cases the string
+        return str.toLowerCase()
+        // Replaces any - or _ or . characters with a space
+            .replace( /[-_\.]+/g, ' ')
+            // Removes any non alphanumeric characters
+            .replace( /[^\w\s]/g, '')
+            // Uppercases the first character in each group immediately following a space
+            // (delimited by spaces)
+            .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
+            // Removes spaces
+            .replace( / /g, '' );
+    }
+    return str;
 };
 
 window.camelCaseToSentenceCase = function(str){
-    let result = str.replace( /([A-Z])/g, " $1" );
-    return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
+    if (str !== null) {
+        let result = str.replace( /([A-Z])/g, " $1" );
+        return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
+    }
+    return str;
 };

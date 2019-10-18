@@ -1942,81 +1942,79 @@
 
             function getCommandForEditButtonDatabase(opt, command) {
               var cmd;
-              let classForAriaLabel = app.common.generateId();
+              let idForCommand = app.common.generateId();
+              let ariaLabel = $translate.instant('Edit');
+              let template = `<a class='k-button k-grid-edit k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-edit'></span></a>`;
               if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
-                cmd = {
-                  name: app.common.generateId(),
-                  text: '',
-                  iconClass: "k-icon k-i-edit",
-                  className: "k-grid-edit " + classForAriaLabel,
-                  click: function(e) {
-                    e.preventDefault();
-                    var tr = $(e.target).closest("tr");
-                    var grid = tr.closest('table');
-                    var item = this.dataItem(tr);
-                    var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                    scope.safeApply(function() {
-                      if (!options.hideModalButtons) {
-                        directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
-                      }
+                  cmd = {
+                      name: idForCommand,
+                      template: template,
+                      click: function(e) {
+                          e.preventDefault();
+                          var tr = $(e.target).closest("tr");
+                          var grid = tr.closest('table');
+                          var item = this.dataItem(tr);
+                          var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                          scope.safeApply(function() {
+                              if (!options.hideModalButtons) {
+                                  directiveContext.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
+                              }
 
-                      var currentItem = cronappDatasource.goTo(item);
-                      cronappDatasource.startEditing(currentItem, function(xxx) {});
-                      if (opt.editable != 'datasource') {
-                        cronapi.screen.showModal(options.popupEdit);
+                              var currentItem = cronappDatasource.goTo(item);
+                              cronappDatasource.startEditing(currentItem, function(xxx) {});
+                              if (opt.editable != 'datasource') {
+                                  cronapi.screen.showModal(options.popupEdit);
+                              }
+                          });
+                          return;
                       }
-                    });
-                    return;
-                  }
-                };
+                  };
               }
               else {
-                cmd = {
-                  name: command,
-                  text: { edit: " ", update: " ", cancel: " " },
-                  className: classForAriaLabel
-                };
+                  cmd = {
+                      name: command,
+                      template: template,
+                      text: { edit: " ", update: " ", cancel: " " },
+                  };
               }
-              setAriaLabelOnRender(classForAriaLabel, $translate.instant('Edit'));
               return cmd;
             }
 
             function getCommandForRemoveButtonDatabase(opt, command) {
               var cmd;
-              let classForAriaLabel = app.common.generateId();
-              if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
-                cmd = {
-                  name: app.common.generateId(),
-                  text: '',
-                  iconClass: "k-icon k-i-close",
-                  className: "k-grid-delete " + classForAriaLabel,
-                  click: function(e) {
-                    e.preventDefault();
-                    var tr = $(e.target).closest("tr");
-                    var item = this.dataItem(tr);
-                    var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                    var self = this;
-                    scope.safeApply(function() {
-                      var currentItem = cronappDatasource.goTo(item);
-                      var fn;
-                      if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
-                        fn = function(e) {
-                          self.dataSource.remove(item);
-                        }
-                      }
+              let idForCommand = app.common.generateId();
+              let ariaLabel = $translate.instant('Remove');
+              let template = `<a class='k-button k-grid-delete k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-close'></span></a>`;
 
-                      cronappDatasource.remove(currentItem, fn);
-                    });
-                  }
-                };
+              if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
+                  cmd = {
+                      name: idForCommand,
+                      template: template,
+                      click: function(e) {
+                          e.preventDefault();
+                          var tr = $(e.target).closest("tr");
+                          var item = this.dataItem(tr);
+                          var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                          var self = this;
+                          scope.safeApply(function() {
+                              var currentItem = cronappDatasource.goTo(item);
+                              var fn;
+                              if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
+                                  fn = function(e) {
+                                      self.dataSource.remove(item);
+                                  }
+                              }
+
+                              cronappDatasource.remove(currentItem, fn);
+                          });
+                      }
+                  };
               } else {
-                cmd = {
-                  name: command,
-                  text: " ",
-                  className: classForAriaLabel
-                };
+                  cmd = {
+                      name: command,
+                      template: template
+                  };
               }
-              setAriaLabelOnRender(classForAriaLabel, $translate.instant('Remove'));
               return cmd;
             }
 
@@ -2086,15 +2084,6 @@
               return undefined;
             }
 
-            function setAriaLabelOnRender(classToFind, ariaLabel) {
-              let waitRender = setInterval(() => {
-                if ($(`.${classToFind}`).length) {
-                  $(`.${classToFind}`).attr('aria-label', ariaLabel);
-                  clearInterval(waitRender);
-                }
-              }, 200);
-            }
-
             var columns = [];
             if (options.columns) {
               options.columns.forEach(function(column)  {
@@ -2151,98 +2140,95 @@
                   }
                 }
                 else if (column.dataType == "Blockly" || column.dataType == "Customized" || column.dataType == "CustomizedLink") {
-                  var label = column.label == undefined ? '': column.label;
-                  if (column.iconClass && label)
-                    label = '&nbsp;' + label;
+                    var label = column.label == undefined ? '': column.label;
+                    if (column.iconClass && label)
+                        label = '&nbsp;' + label;
 
-                  var className = '';
-                  if (column.dataType == "CustomizedLink") {
-                    className = 'k-custom-link';
-                  }
-                  else {
-                    className = 'k-custom-command' + (label ? ' k-button-with-label' : '');
-                  }
-                  if (column.theme)
-                    className += ' ' + column.theme;
+                    var className = '';
+                    if (column.dataType == "CustomizedLink") {
+                        className = 'k-custom-link';
+                    }
+                    else {
+                        className = 'k-custom-command' + (label ? ' k-button-with-label' : '');
+                    }
+                    if (column.theme)
+                        className += ' ' + column.theme;
 
-                  var tooltip = '';
-                  if (column.tooltip && column.tooltip.length)
-                    tooltip = column.tooltip;
-                  else if (column.label && column.label.length)
-                    tooltip = column.label;
+                    var tooltip = '';
+                    if (column.tooltip && column.tooltip.length)
+                        tooltip = column.tooltip;
+                    else if (column.label && column.label.length)
+                        tooltip = column.label;
 
-                  if (tooltip)  {
-                    var classForTooltip = app.common.generateId();
-                    tooltips[classForTooltip] = tooltip;
-                    className += ' ' + classForTooltip;
-                  }
+                    if (tooltip)  {
+                        var classForTooltip = app.common.generateId();
+                        tooltips[classForTooltip] = tooltip;
+                        className += ' ' + classForTooltip;
+                    }
 
-                  let classForAriaLabel = app.common.generateId();
-                  className += ' ' + classForAriaLabel;
+                    let idForCommand = app.common.generateId();
+                    let ariaLabel = tooltip || label || idForCommand;
+                    let template = `<a class='k-button ${className} k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='${column.iconClass}'></span>${label}</a>`;
 
-                  var addColumn = {
-                    command: [{
-                      name: app.common.generateId(),
-                      text: label,
-                      hidden: !widthDevice.visible,
-                      className: className,
-                      iconClass: column.iconClass,
-                      click: function(e) {
-                        e.preventDefault();
-                        var tr = $(e.target).closest("tr");
-                        var grid = tr.closest('table');
+                    var addColumn = {
+                        command: [{
+                            name: idForCommand,
+                            template: template,
+                            click: function(e) {
+                                e.preventDefault();
+                                var tr = $(e.target).closest("tr");
+                                var grid = tr.closest('table');
 
-                        var item = this.dataItem(tr);
-                        var index = $(grid.find('tbody')[0]).children().index(tr)
-                        var consolidated = {
-                          item: item,
-                          index: index
-                        }
+                                var item = this.dataItem(tr);
+                                var index = $(grid.find('tbody')[0]).children().index(tr)
+                                var consolidated = {
+                                    item: item,
+                                    index: index
+                                }
 
-                        var call = undefined;
-                        if (column.dataType == "Customized" || column.dataType == "CustomizedLink")
-                          call = column.execute;
-                        else
-                          call = generateBlocklyCall(column.blocklyInfo);
+                                var call = undefined;
+                                if (column.dataType == "Customized" || column.dataType == "CustomizedLink")
+                                    call = column.execute;
+                                else
+                                    call = generateBlocklyCall(column.blocklyInfo);
 
-                        var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                        var currentGrid = options.grid;
-                        var selectedRows = [];
-                        currentGrid.select().each(function() {
-                          var gridRow = currentGrid.dataItem(this);
-                          cronappDatasource.data.forEach(function(dsRow) {
-                            if (dsRow.__$id == gridRow.__$id)
-                              selectedRows.push(dsRow);
-                          });
-                        });
+                                var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                                var currentGrid = options.grid;
+                                var selectedRows = [];
+                                currentGrid.select().each(function() {
+                                    var gridRow = currentGrid.dataItem(this);
+                                    cronappDatasource.data.forEach(function(dsRow) {
+                                        if (dsRow.__$id == gridRow.__$id)
+                                            selectedRows.push(dsRow);
+                                    });
+                                });
 
-                        if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
-                          var tr = e.currentTarget.parentElement.parentElement;
-                          this.select(tr);
-                        }
+                                if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
+                                    var tr = e.currentTarget.parentElement.parentElement;
+                                    this.select(tr);
+                                }
 
-                        var contextVars = {
-                          'currentData': cronappDatasource.data,
-                          'datasource': cronappDatasource,
-                          'selectedIndex': index,
-                          'index': index,
-                          'selectedRow': item,
-                          'consolidated': consolidated,
-                          'item': item,
-                          'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true),
-                          'selectedRows': selectedRows
-                        };
+                                var contextVars = {
+                                    'currentData': cronappDatasource.data,
+                                    'datasource': cronappDatasource,
+                                    'selectedIndex': index,
+                                    'index': index,
+                                    'selectedRow': item,
+                                    'consolidated': consolidated,
+                                    'item': item,
+                                    'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.active, true),
+                                    'selectedRows': selectedRows
+                                };
 
-                        scope.$eval(call, contextVars);
-                        return;
-                      }
-                    }],
-                    width: widthDevice.width,
-                    title: column.headerText ? column.headerText: '',
-                    hidden: !widthDevice.visible
-                  };
-                  setAriaLabelOnRender(classForAriaLabel, tooltip || label || app.common.generateId());
-                  columns.push(addColumn);
+                                scope.$eval(call, contextVars);
+                                return;
+                            }
+                        }],
+                        width: widthDevice.width,
+                        title: column.headerText ? column.headerText: '',
+                        hidden: !widthDevice.visible
+                    };
+                    columns.push(addColumn);
                 }
                 else if (column.dataType == "Selectable") {
                   var checkColumn = {
