@@ -3885,7 +3885,7 @@
           },
           link: function(scope, element, attrs) {
             $translate.onReady(() => {
-              var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:none"></ul>';
+              var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:left"></ul>';
             var options = {};
             try {
               options = JSON.parse(attrs.options);
