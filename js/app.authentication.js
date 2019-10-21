@@ -341,6 +341,10 @@ var app = (function() {
                     title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
 
                   $rootScope.viewTitle = title || currentRoute.name;
+                  let $inputsMain = $('[role=main]').find('input');
+                  if ($inputsMain && $inputsMain.length) {
+                      $inputsMain[0].focus();
+                  }
               });
           });
       });

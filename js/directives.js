@@ -1965,6 +1965,9 @@
                               if (opt.editable != 'datasource') {
                                   cronapi.screen.showModal(options.popupEdit);
                               }
+                              else {
+                                  cronapi.internal.focusFormInput();
+                              }
                           });
                           return;
                       }
@@ -2266,6 +2269,9 @@
                     toolbarButton.methodCall = datasourceName + ".startInserting();";
                     if (options.editable == 'popupCustom') {
                       toolbarButton.methodCall = toolbarButton.methodCall + " cronapi.screen.showModal('"+popupInsert+"');";
+                    }
+                    else {
+                      toolbarButton.methodCall += "cronapi.internal.focusFormInput();"
                     }
                     var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                     toolbar.push(button);
