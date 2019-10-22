@@ -1944,7 +1944,7 @@
               var cmd;
               let idForCommand = app.common.generateId();
               let ariaLabel = $translate.instant('Edit');
-              let template = `<a class='k-button k-grid-edit k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-edit'></span></a>`;
+              let template = `<a href class='k-button k-grid-edit k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-edit'></span></a>`;
               if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
                   cmd = {
                       name: idForCommand,
@@ -1987,7 +1987,7 @@
               var cmd;
               let idForCommand = app.common.generateId();
               let ariaLabel = $translate.instant('Remove');
-              let template = `<a class='k-button k-grid-delete k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-close'></span></a>`;
+              let template = `<a href class='k-button k-grid-delete k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-close'></span></a>`;
 
               if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
                   cmd = {
@@ -2171,7 +2171,7 @@
 
                     let idForCommand = app.common.generateId();
                     let ariaLabel = tooltip || label || idForCommand;
-                    let template = `<a class='k-button ${className} k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='${column.iconClass}'></span>${label}</a>`;
+                    let template = `<a href class='k-button ${className} k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='${column.iconClass}'></span>${label}</a>`;
 
                     var addColumn = {
                         command: [{
@@ -2636,8 +2636,14 @@
                 else {
                   $("div.k-group-indicator").each((i,v) => {
                     this.hideColumn($(v).data("field"));
-                });
+                  });
                 }
+                //Colocando tabindex para poder focar - acessibilidade
+                let grid = this;
+                setTimeout(function() {
+                    grid.pager.element.find("a").not(".k-state-disabled").attr("tabindex", "0");
+                });
+
                 compileListing(e);
               }
             };

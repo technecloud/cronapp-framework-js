@@ -14,12 +14,29 @@ button.btn-default:hover{
 	color:rgb(255, 230, 0) !important;
 }
 
+.k-grid-header .k-header:focus, .k-grid-header .k-header a.k-link:focus {
+    color: rgb(255, 229, 0) !important;
+    opacity: 1;
+}
+
 .k-grid-header .k-header, .k-grid-header .k-header a.k-link {
     color: white !important;
 }
 
 .k-grid-header .k-header:hover, .k-grid-header .k-header:hover a{
     color:rgb(255, 230, 0) !important;
+}
+
+.k-pager-wrap .k-link:focus, .k-pager-wrap .k-pager-nav:focus{
+    background-color:rgba(0,0,0,.07)
+}
+
+.k-link.k-pager-nav {
+    color: #000 !important;
+}
+
+.k-grid-header .k-grid-filter:focus {
+    color: rgb(255, 229, 0) !important;
 }
 
 .k-grid th {
