@@ -90,7 +90,7 @@ a.k-link {
     justify-content: center;
     position: absolute;
     top: 5px;
-    color: #7078a9;
+    color: #b2b3b9;
     right: 5px;
     bottom: calc(8px + .28571429em);
     z-index: 1;
@@ -220,7 +220,7 @@ input:-webkit-autofill:focus {
 
 .btn-danger {
     color: #fff !important;
-    background-color: #d9534f !important;
+    background-color: #ce3a36 !important;
 }
 
 .form-control {
@@ -303,7 +303,7 @@ Material Grid
 
 
 .k-grid tbody .k-button:hover {
-    background-color:#008dcd;
+    background-color: #0470a0;
     color:#ffffff;
 }
 
@@ -401,7 +401,7 @@ k-grid-header .k-header>.k-link {
     -ms-flex: 1;
     flex: 1;
     font-weight: normal;
-    color: #686868;
+    color: #000;
 }
 
 .k-button.k-primary, .k-slider .k-draghandle, .k-switch-on .k-switch-handle {
@@ -958,4 +958,20 @@ cron-scheduler a.k-link {
 .k-scheduler-refresh{
     right: 10px;
     position: relative;
+}
+
+.k-dropdown-wrap .k-select {
+    opacity: 1;
+}
+
+.k-dropdown-wrap {
+    border-color: #000;
+}
+
+.k-pager-sizes.k-label {
+    color: #000;
+}
+
+.k-pager-info.k-label {
+    color: #000;
 }
