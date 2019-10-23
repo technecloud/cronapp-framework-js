@@ -62,7 +62,7 @@
       if($('form').find('*[class=g-recaptcha]').length){
         $scope.captcha_token = window.grecaptcha.getResponse();
         if(!$scope.captcha_token){
-          Notification.error('Captcha Inválido');
+          Notification.error($translate.instant('Login.view.InvalidCaptcha'));
           return;
         }
       }
