@@ -2836,7 +2836,7 @@
         };
       })
 
-      .directive('cronDynamicSelect', function ($compile, $timeout, $parse) {
+      .directive('cronDynamicSelect', function ($compile, $timeout, $parse, $translate) {
         return {
           restrict: 'E',
           replace: true,
@@ -3219,6 +3219,7 @@
             _compileAngular(scope, combobox.ul);
 
             $(element).remove();
+            $("[aria-owns='" + `${attrs.id}_listbox` + "']").attr('aria-label', $translate.instant('template.crud.search'));
           }
         };
       })
