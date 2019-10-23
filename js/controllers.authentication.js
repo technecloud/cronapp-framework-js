@@ -59,14 +59,10 @@
     };
     $scope.login = function(username, password, token) {
       $scope.message.error = undefined;
-      if($('form').children('*[class=g-recaptcha]').length){
+      if($('form').find('*[class=g-recaptcha]').length){
         $scope.captcha_token = window.grecaptcha.getResponse();
-        if(!$scope.captcha_token !== ""){
-          window.grecaptcha.execute(function(token){}).then(function(token){
-            angular.element($('form[ng-submit="login()"]')[0]).scope().login();
-          },function(){
-            Notification.error('Error on recaptcha');
-          });
+        if(!$scope.captcha_token){
+          Notification.error('Captcha Inválido');
           return;
         }
       }
