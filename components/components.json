@@ -5609,6 +5609,16 @@
           "selector": "div > div",
           "type": "text",
           "order": 1
+        },
+        {
+          "name": "data-size",
+          "displayName_pt_BR": "Tamanho",
+          "displayName_en_US": "Size",
+          "removable": false,
+          "global": "true",
+          "selector": "div > div",
+          "type": "text",
+          "order": 1
         }
       ]
     }
