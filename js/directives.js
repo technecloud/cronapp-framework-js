@@ -1089,6 +1089,7 @@
                     ui-tinymce="$options$" \
                     ng-model="$ngModel$" \
                     id="$id$" \
+                    aria-label="cronRichEditor" \
                     ng-cron-click="$ngClick$" \
                     ng-cron-dblclick="$ngDblclick$" \
                     ng-cron-mousedown="$ngMouseDown$" \
@@ -1166,6 +1167,18 @@
             element.append(x);
             element.attr('id' , null);
             $compile(x)(scope);
+
+            let $containerCronRichEditor = $(`cron-rich-editor[ng-model="${attrs.ngModel}"]`);
+            let waitRenderTinyMCE = setInterval(() => {
+              if ($containerCronRichEditor.find('.mce-container').length) {
+                $containerCronRichEditor.find('button').each((idx, button) => {
+                  let $button = $(button);
+                  let ariaLabel = $button.parent().attr('aria-label') || app.common.generateId();
+                  $button.attr('aria-label', ariaLabel);
+                });
+                clearInterval(waitRenderTinyMCE);
+              }
+            }, 100);
           }
         };
       })
