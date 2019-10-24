@@ -281,7 +281,10 @@ var app = (function() {
               $rootScope.viewTitle = title || currentRoute.name;
               let $inputsMain = $('[role=main]').find('input');
               if ($inputsMain && $inputsMain.length) {
-                  $inputsMain[0].focus();
+                let $firstInput = $($inputsMain[0]);
+                if ($firstInput.data('type') !== 'date' && $firstInput.data('type') !== 'datetime') {
+                  $firstInput.focus();
+                }
               }
             });
         });
