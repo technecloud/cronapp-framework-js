@@ -343,7 +343,9 @@ var app = (function() {
                   $rootScope.viewTitle = title || currentRoute.name;
                   let $inputsMain = $('[role=main]').find('input');
                   if ($inputsMain && $inputsMain.length) {
+                    if ($($inputsMain[0]).data('type') !== 'date') {
                       $inputsMain[0].focus();
+                    }
                   }
               });
           });
