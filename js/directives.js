@@ -4335,7 +4335,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
         }
 
         $(element).inputmask(inputmaskType, ipOptions);
-        useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter);
+        useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask);
       }
       else if (type == 'text' || type == 'tel') {
         if(!attrs.maskPlaceholder){
@@ -4347,7 +4347,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
           options['placeholder'] = attrs.maskPlaceholder
           $(element).inputmask(mask, options);
           if(removeMask){
-            useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter);
+            useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask);
           }
         }
       }
@@ -4363,7 +4363,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
   }
 }
 
-function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter){ 
+function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask){
   var $element = $(element); 
   var unmaskedvalue = function() {
     $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
