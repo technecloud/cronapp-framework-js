@@ -343,8 +343,9 @@ var app = (function() {
                   $rootScope.viewTitle = title || currentRoute.name;
                   let $inputsMain = $('[role=main]').find('input');
                   if ($inputsMain && $inputsMain.length) {
+                    let cantFocus = ['date', 'datetime', 'time'];
                     let $firstInput = $($inputsMain[0]);
-                    if ($firstInput.data('type') !== 'date' && $firstInput.data('type') !== 'datetime') {
+                    if ( !cantFocus.includes($firstInput.data('type')) ) {
                       $firstInput.focus();
                     }
                   }

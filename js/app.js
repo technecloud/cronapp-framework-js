@@ -282,8 +282,12 @@ var app = (function() {
               let $inputsMain = $('[role=main]').find('input');
               if ($inputsMain && $inputsMain.length) {
                 let $firstInput = $($inputsMain[0]);
-                if ($firstInput.data('type') !== 'date' && $firstInput.data('type') !== 'datetime') {
-                  $firstInput.focus();
+                if ($inputsMain && $inputsMain.length) {
+                  let cantFocus = ['date', 'datetime', 'time'];
+                  let $firstInput = $($inputsMain[0]);
+                  if ( !cantFocus.includes($firstInput.data('type')) ) {
+                      $firstInput.focus();
+                  }
                 }
               }
             });
