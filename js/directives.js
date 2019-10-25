@@ -1173,7 +1173,7 @@
               if ($containerCronRichEditor.find('.mce-container').length) {
                 $containerCronRichEditor.find('button').each((idx, button) => {
                   let $button = $(button);
-                  let ariaLabel = $button.parent().attr('aria-label') || app.common.generateId();
+                  let ariaLabel = $button.parent().attr('aria-label') || "";
                   $button.attr('aria-label', ariaLabel);
                 });
                 clearInterval(waitRenderTinyMCE);
