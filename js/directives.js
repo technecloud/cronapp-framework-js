@@ -1076,6 +1076,7 @@
             tinyMCEOptions.menubar = optionsSelected.showMenuBar;
             tinyMCEOptions.statusbar = optionsSelected.showStatusBar;
             tinyMCEOptions.content_style = optionsSelected.contentStyle;
+            tinyMCEOptions.readonly = optionsSelected.allowReadonly;
 
             return JSON.stringify(tinyMCEOptions);
           },

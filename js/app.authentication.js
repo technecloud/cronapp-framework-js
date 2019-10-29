@@ -23,6 +23,11 @@ if (window.customModules) {
   cronappModules = cronappModules.concat(window.customModules);
 }
 
+var onloadCallback = function() {
+  window.grecaptcha.render('loginRecaptcha');
+  window.grecaptcha.reset();
+};
+
 var app = (function() {
 
   return angular.module('MyApp', cronappModules)
