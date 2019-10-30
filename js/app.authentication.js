@@ -208,6 +208,9 @@ var app = (function() {
         if (moment)
           moment.locale(locale);
       })
+      .config(function($sceProvider) {
+        $sceProvider.enabled(false);
+      })
 
       .directive('crnValue', ['$parse', function($parse) {
         return {
