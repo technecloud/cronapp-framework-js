@@ -20,7 +20,7 @@
         });
     };
 
-  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout) {
+  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies) {
 
     $scope.$http = $http;
     $scope.params = $stateParams;
@@ -52,6 +52,12 @@
       }
     };
     $scope.autoLogin();
+    if ($cookies.get('_u')) {
+      var decodedUser = decodeURIComponent($cookies.get('_u'));
+      localStorage.setItem("_u", decodedUser);
+      $cookies.remove("_u");
+      $state.go('home');
+    }
     $scope.message = {};
     $scope.renderRecaptcha = function(){
       window.grecaptcha.render('loginRecaptcha');
