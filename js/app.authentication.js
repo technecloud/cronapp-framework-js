@@ -16,7 +16,8 @@ var cronappModules = [
   'ngFileUpload',
   'report.services',
   'upload.services',
-  'ui.tinymce'
+  'ui.tinymce',
+  'ngCookies'
 ];
 
 if (window.customModules) {
