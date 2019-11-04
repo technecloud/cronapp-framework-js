@@ -2787,6 +2787,128 @@
         };
       }])
 
+      .directive('cronTreeView', ['$compile', '$translate', function($compile, $translate) {
+          return {
+              restrict: 'E',
+              replace: true,
+              require: 'ngModel',
+              getDataSource: function(dataSource, scope, foreignKey) {
+
+                  let id = dataSource.schema.filter(field => { return field.key === true })[0].name;
+
+                  let schema = {
+                      model: {
+                          id: id,
+                          hasChildren: function(item) {
+                              return item["hasChildren"];
+                          }
+                      }
+                  }
+
+                  let datasource = new kendo.data.HierarchicalDataSource({
+                      transport: {
+
+                          read:  function (e) {
+
+                              for (key in e.data)
+                                  if(e.data[key] == undefined)
+                                      delete e.data[key];
+
+                              let logicFilter = { filter: { logic: "and", filters:[] } };
+                              let paramsOData = {};
+                              for (let key in e.data) {
+                                  let kendoFilter = {
+                                      field: foreignKey,
+                                      operator: "eq",
+                                      value: e.data[key]
+                                  };
+                                  logicFilter.filter.filters.push(kendoFilter);
+                              }
+                              if (logicFilter.filter.filters.length) {
+                                  paramsOData = kendo.data.transports.odata.parameterMap(logicFilter, 'read');
+                              }
+                              else {
+                                  paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${foreignKey} eq null`};
+                              }
+
+                              let cronappDatasource = this.options.cronappDatasource;
+                              cronappDatasource.rowsPerPage = e.data.pageSize;
+                              cronappDatasource.offset = (e.data.page - 1);
+
+
+                              let fetchData = {};
+                              fetchData.params = paramsOData;
+
+                              cronappDatasource.fetch(fetchData, {
+                                  success:  function(data) {
+
+                                      let all = data.map(item => {
+                                          let odataUrl = `${this.entity}/$count?$filter=${foreignKey} eq '${item[schema.model.id]}'`;
+                                          return new Promise((resolve, reject)=> {
+                                              $.get( odataUrl)
+                                              .done(function( count ) {
+                                                  item["hasChildren"] = count > 0;
+                                                  resolve();
+                                              });
+                                          });
+                                      });
+                                      Promise.all(all).then(() => e.success(data));
+                                  },
+                                  canceled:  function(data) {
+                                      e.error("canceled", "canceled", "canceled");
+                                  }
+                              }, true);
+
+                          },
+                          options: {
+                              fromRead: false,
+                              cronappDatasource: scope[dataSource.name]
+                          }
+                      },
+                      schema: schema
+                  });
+                  return datasource;
+              },
+              link: function (scope, element, attrs, ngModelCtrl) {
+
+                  let $templateDyn = $('<div></div>');
+                  let options = JSON.parse(attrs.options);
+
+                  let helperDirective = this;
+
+
+                  let changeObjectField = function(dataSource, obj){
+                      obj = dataSource.getKeyValues(obj);
+                      var keys = Object.keys(obj);
+                      if(keys.length === 1){
+                          obj = obj[keys];
+                      }
+                      return obj;
+                  };
+
+                  $templateDyn.kendoTreeView({
+                      dataSource: helperDirective.getDataSource(options.dataSourceScreen, scope, options.selfRelationshipField),
+                      dataTextField: options.textField,
+                      change: function(e) {
+                          let item = this.dataItem(this.select());
+
+                          let cronappDatasource = this.dataSource.transport.options.cronappDatasource;
+                          scope.safeApply(cronappDatasource.goTo(item));
+
+                          if(options.fieldType && options.fieldType === 'key')
+                              cronappDatasource.active = changeObjectField(cronappDatasource, cronappDatasource.active);
+
+                          ngModelCtrl.$setViewValue(cronappDatasource.active);
+                      }
+                  });
+
+                  element.html($templateDyn);
+                  $compile($templateDyn)(element.scope());
+
+              }
+          };
+      }])
+
       .directive('cronSelect', function ($compile) {
         return {
           restrict: 'E',
