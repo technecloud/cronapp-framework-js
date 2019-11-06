@@ -2792,9 +2792,9 @@
               restrict: 'E',
               replace: true,
               require: 'ngModel',
-              getDataSource: function(dataSource, scope, foreignKey) {
+              getDataSource: function(options, scope) {
 
-                  let id = dataSource.schema.filter(field => { return field.key === true })[0].name;
+                  let id = options.dataSourceScreen.schema.filter(field => { return field.key === true })[0].name;
 
                   let schema = {
                       model: {
@@ -2818,7 +2818,7 @@
                               let paramsOData = {};
                               for (let key in e.data) {
                                   let kendoFilter = {
-                                      field: foreignKey,
+                                      field: options.selfRelationshipField,
                                       operator: "eq",
                                       value: e.data[key]
                                   };
@@ -2828,7 +2828,7 @@
                                   paramsOData = kendo.data.transports.odata.parameterMap(logicFilter, 'read');
                               }
                               else {
-                                  paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${foreignKey} eq null`};
+                                  paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${options.selfRelationshipField} eq null`};
                               }
 
                               let cronappDatasource = this.options.cronappDatasource;
@@ -2843,15 +2843,15 @@
                                   success:  function(data) {
 
                                       let all = data.map(item => {
-                                          let odataUrl = `${this.entity}/$count?$filter=${foreignKey} eq '${item[schema.model.id]}'`;
-                                          return new Promise((resolve, reject)=> {
-                                              $.get( odataUrl)
-                                              .done(function( count ) {
-                                                  item["hasChildren"] = count > 0;
-                                                  resolve();
-                                              });
+                                          let odataUrl = `${this.entity}/$count?$filter=${options.selfRelationshipField} eq '${item[schema.model.id]}'`;
+                                      return new Promise((resolve, reject)=> {
+                                          $.get( odataUrl)
+                                          .done(function( count ) {
+                                              item["hasChildren"] = count > 0;
+                                              resolve();
                                           });
-                                      });
+                                  });
+                                  });
                                       Promise.all(all).then(() => e.success(data));
                                   },
                                   canceled:  function(data) {
@@ -2862,7 +2862,7 @@
                           },
                           options: {
                               fromRead: false,
-                              cronappDatasource: scope[dataSource.name]
+                              cronappDatasource: scope[options.dataSourceScreen.name]
                           }
                       },
                       schema: schema
@@ -2887,8 +2887,9 @@
                   };
 
                   $templateDyn.kendoTreeView({
-                      dataSource: helperDirective.getDataSource(options.dataSourceScreen, scope, options.selfRelationshipField),
+                      dataSource: helperDirective.getDataSource(options, scope),
                       dataTextField: options.textField,
+                      dataImageUrlField: options.imageUrlField,
                       change: function(e) {
                           let item = this.dataItem(this.select());
 
