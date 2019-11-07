@@ -55,7 +55,6 @@
     if ($cookies.get('_u') && !localStorage.getItem('_u')) {
       var decodedUser = decodeURIComponent($cookies.get('_u'));
       localStorage.setItem("_u", decodedUser);
-      $cookies.remove("_u");
       $state.go('home');
     }
     $scope.message = {};
