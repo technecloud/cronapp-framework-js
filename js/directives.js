@@ -2845,11 +2845,22 @@
                                       let all = data.map(item => {
                                           let odataUrl = `${this.entity}/$count?$filter=${foreignKey} eq '${item[schema.model.id]}'`;
                                           return new Promise((resolve, reject)=> {
-                                              $.get( odataUrl)
-                                              .done(function( count ) {
-                                                  item["hasChildren"] = count > 0;
+
+                                              $.ajax({
+                                                url: odataUrl,
+                                                success: (count) => {
+                                                  item["hasChildren"] = eval(count) > 0;
                                                   resolve();
+                                                },
+                                                beforeSend: (xhr) => {
+                                                  if (window.uToken) {
+                                                    xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
+                                                  }
+                                                },
+                                                error: () => reject(),
+                                                type: 'GET',
                                               });
+
                                           });
                                       });
                                       Promise.all(all).then(() => e.success(data));
