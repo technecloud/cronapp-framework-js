@@ -2792,10 +2792,10 @@
               restrict: 'E',
               replace: true,
               require: 'ngModel',
-              getDataSource: function(dataSource, scope, foreignKey) {
+              scope: true,
+              getDataSource: function(options, scope) {
 
-                  let id = dataSource.schema.filter(field => { return field.key === true })[0].name;
-
+                  let id = options.dataSourceScreen.schema.filter(field => { return field.key === true })[0].name;
                   let schema = {
                       model: {
                           id: id,
@@ -2805,8 +2805,73 @@
                       }
                   }
 
+                  let getAllParent = function(cronappDatasource, item, ids, resolve, reject) {
+
+                      if (item[schema.model.id])
+                          ids.push(item[schema.model.id]);
+
+                      let odataUrl = `${cronappDatasource.entity}?$filter=${schema.model.id} eq '${item[options.selfRelationshipField]}'&$format=json&$inlinecount=allpages`;
+                      if (item[options.selfRelationshipField]) {
+                          $.ajax({
+                              url: odataUrl,
+                              success: (itemResult) => {
+                                  getAllParent(cronappDatasource, itemResult.d.results[0], ids, resolve, reject);
+                              },
+                              beforeSend: (xhr) => {
+                                  if (window.uToken) {
+                                      xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
+                                  }
+                              },
+                              error: () => reject(),
+                              type: 'GET',
+                          });
+                      }
+                      else {
+                          resolve(ids);
+                      }
+                  };
+
+                  let reloadAndExpand = function(data) {
+                      let finish = () => {
+                          let promise = new Promise((resolve, reject) => {
+                              getAllParent(this.options.cronappDatasource, data, [], resolve, reject);
+                          });
+                          promise.then(expandIds => {
+                              this.options.kendoObj.expandPath(expandIds.reverse());
+                          });
+                      };
+                      this.options.kendoObj.dataSource.bind("requestEnd", finish);
+                      this.options.kendoObj.dataSource.read();
+                  };
+
+                  let helperDirective = this;
                   let datasource = new kendo.data.HierarchicalDataSource({
                       transport: {
+                          push: function(callback) {
+
+                              if (!helperDirective.dataSourceEventsPush && this.options.cronappDatasource) {
+                                  helperDirective.dataSourceEventsPush = {
+                                      create: function(data) {
+
+                                          reloadAndExpand.bind(this)(data);
+
+                                      }.bind(this),
+                                      update: function(data) {
+
+                                          reloadAndExpand.bind(this)(data);
+
+                                      }.bind(this),
+                                      delete: function(data) {
+
+                                          reloadAndExpand.bind(this)(data);
+
+                                      }.bind(this)
+
+                                  };
+
+                                  this.options.cronappDatasource.addDataSourceEvents(helperDirective.dataSourceEventsPush);
+                              }
+                          },
 
                           read:  function (e) {
 
@@ -2818,7 +2883,7 @@
                               let paramsOData = {};
                               for (let key in e.data) {
                                   let kendoFilter = {
-                                      field: foreignKey,
+                                      field: options.selfRelationshipField,
                                       operator: "eq",
                                       value: e.data[key]
                                   };
@@ -2828,7 +2893,7 @@
                                   paramsOData = kendo.data.transports.odata.parameterMap(logicFilter, 'read');
                               }
                               else {
-                                  paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${foreignKey} eq null`};
+                                  paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${options.selfRelationshipField} eq null`};
                               }
 
                               let cronappDatasource = this.options.cronappDatasource;
@@ -2843,25 +2908,23 @@
                                   success:  function(data) {
 
                                       let all = data.map(item => {
-                                          let odataUrl = `${this.entity}/$count?$filter=${foreignKey} eq '${item[schema.model.id]}'`;
+                                          let odataUrl = `${this.entity}/$count?$filter=${options.selfRelationshipField} eq '${item[schema.model.id]}'`;
                                           return new Promise((resolve, reject)=> {
-
-                                              $.ajax({
-                                                url: odataUrl,
-                                                success: (count) => {
-                                                  item["hasChildren"] = eval(count) > 0;
-                                                  resolve();
-                                                },
-                                                beforeSend: (xhr) => {
+                                            $.ajax({
+                                              url: odataUrl,
+                                              success: (count) => {
+                                                item["hasChildren"] = eval(count) > 0;
+                                                resolve();
+                                              },
+                                              beforeSend: (xhr) => {
                                                   if (window.uToken) {
-                                                    xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
+                                                      xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
                                                   }
-                                                },
-                                                error: () => reject(),
-                                                type: 'GET',
-                                              });
-
-                                          });
+                                              },
+                                              error: () => reject(),
+                                              type: 'GET',
+                                            });
+                                        });
                                       });
                                       Promise.all(all).then(() => e.success(data));
                                   },
@@ -2869,11 +2932,10 @@
                                       e.error("canceled", "canceled", "canceled");
                                   }
                               }, true);
-
                           },
                           options: {
                               fromRead: false,
-                              cronappDatasource: scope[dataSource.name]
+                              cronappDatasource: scope[options.dataSourceScreen.name]
                           }
                       },
                       schema: schema
@@ -2887,7 +2949,6 @@
 
                   let helperDirective = this;
 
-
                   let changeObjectField = function(dataSource, obj){
                       obj = dataSource.getKeyValues(obj);
                       var keys = Object.keys(obj);
@@ -2897,9 +2958,10 @@
                       return obj;
                   };
 
-                  $templateDyn.kendoTreeView({
-                      dataSource: helperDirective.getDataSource(options.dataSourceScreen, scope, options.selfRelationshipField),
+                  let kendoObj = $templateDyn.kendoTreeView({
+                      dataSource: helperDirective.getDataSource(options, scope),
                       dataTextField: options.textField,
+                      dataImageUrlField: options.imageUrlField,
                       change: function(e) {
                           let item = this.dataItem(this.select());
 
@@ -2911,7 +2973,8 @@
 
                           ngModelCtrl.$setViewValue(cronappDatasource.active);
                       }
-                  });
+                  }).data('kendoTreeView');
+                  kendoObj.dataSource.transport.options.kendoObj = kendoObj;
 
                   element.html($templateDyn);
                   $compile($templateDyn)(element.scope());
