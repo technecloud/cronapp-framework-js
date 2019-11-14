@@ -975,3 +975,7 @@ cron-scheduler a.k-link {
 .k-pager-info.k-label {
     color: #000;
 }
+
+caption {
+    color: #4a4747;
+}
