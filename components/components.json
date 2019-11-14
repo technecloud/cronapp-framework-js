@@ -3933,6 +3933,12 @@
           "selector": "cron-tree-view",
           "removable": true,
           "type": "event"
+        },
+        {
+          "name": "ng-dblclick",
+          "selector": "cron-tree-view",
+          "removable": true,
+          "type": "event"
         }
       ],
       "styles": [
