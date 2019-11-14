@@ -61,6 +61,10 @@ button.btn-default:hover{
 
 }
 
+.carousel-caption {
+    color: #524646;
+}
+
 .k-link:link {
     color: #ffffff;
 }
