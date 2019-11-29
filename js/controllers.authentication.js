@@ -52,9 +52,15 @@
       }
     };
     $scope.autoLogin();
-    if ($cookies.get('_u') && !localStorage.getItem('_u')) {
-      var decodedUser = decodeURIComponent($cookies.get('_u'));
-      localStorage.setItem("_u", decodedUser);
+    if (localStorage.getItem('redir_mob')) {
+        localStorage.removeItem('redir_mob');
+        $window.location.href = '/mobileapp';
+    }
+    if ($cookies.get('_u')) {
+      if (!localStorage.getItem('_u')) {
+          var decodedUser = decodeURIComponent($cookies.get('_u'));
+          localStorage.setItem("_u", decodedUser);
+      }
       $state.go('home');
     }
     $scope.message = {};
