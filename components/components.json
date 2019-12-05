@@ -4385,6 +4385,7 @@
       "text_en_US": "Dynamic Combobox",
       "class": "adjust-icon mdi mdi-nutrition",
       "order": 3,
+      "setRandomId":false,
       "designTimeDynamic": true,
       "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.designtime.html",
       "designTimeSelector": "cron-dynamic-select",
@@ -4459,6 +4460,12 @@
           "name": "ng-required",
           "selector": "cron-dynamic-select",
           "type": "logic"
+        },
+        {
+          "name": "id",
+          "selector": "cron-dynamic-select",
+          "type": "text",
+          "onSave":"javascript:(value)=> {this.currentObject.parent().find('label').attr('for', arguments[0]); return arguments[0];}"
         }
       ],
       "styles": [
