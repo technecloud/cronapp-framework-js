@@ -41,7 +41,9 @@
         $scope.params[key] = queryStringParams[key];
       }
     }
-
+    $scope.redirectToLogin = function() {
+      $window.location.href = '/login';
+    };
     $scope.autoLogin = function(){
       if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token ){
         refreshToken($http, function(){
