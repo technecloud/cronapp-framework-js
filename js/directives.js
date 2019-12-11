@@ -575,6 +575,17 @@
           restrict: 'E',
           require: 'ngModel',
           link: function (scope, element, attrs, ngModelCtrl) {
+
+            let waitAngularReady = () => {
+                if (scope.$$phase !== '$apply' && scope.$$phase !== '$digest') {
+                    element.find('i').remove();
+                }
+                else {
+                    setTimeout( () => waitAngularReady(), 200);
+                }
+            };
+            waitAngularReady();
+
             if (attrs.required != undefined || attrs.ngRequired === "true") {
               $(element).append("<input autocomplete=\"off\" tabindex=\"-1\" class=\"uiSelectRequired ui-select-offscreen\" style=\"left: 50%!important; top: 100%!important;\" type=text ng-model=\""+attrs.ngModel+"\" required>");
               var input = $(element).find("input.uiSelectRequired");
