@@ -2826,16 +2826,16 @@
                           $.ajax({
                               url: odataUrl,
                               success: (itemResult) => {
-                                  getAllParent(cronappDatasource, itemResult.d.results[0], ids, resolve, reject);
-                              },
-                              beforeSend: (xhr) => {
-                                  if (window.uToken) {
-                                      xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
-                                  }
-                              },
-                              error: () => reject(),
+                              getAllParent(cronappDatasource, itemResult.d.results[0], ids, resolve, reject);
+                      },
+                          beforeSend: (xhr) => {
+                              if (window.uToken) {
+                                  xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
+                              }
+                          },
+                          error: () => reject(),
                               type: 'GET',
-                          });
+                      });
                       }
                       else {
                           resolve(ids);
@@ -2846,10 +2846,10 @@
                       let finish = () => {
                           let promise = new Promise((resolve, reject) => {
                               getAllParent(this.options.cronappDatasource, data, [], resolve, reject);
-                          });
+                      });
                           promise.then(expandIds => {
                               this.options.kendoObj.expandPath(expandIds.reverse());
-                          });
+                      });
                       };
                       this.options.kendoObj.dataSource.bind("requestEnd", finish);
                       this.options.kendoObj.dataSource.read();
@@ -2876,8 +2876,13 @@
 
                                           reloadAndExpand.bind(this)(data);
 
-                                      }.bind(this)
+                                      }.bind(this),
+                                      overRideRefresh: function(data) {
 
+                                          this.options.fromRefresh = true;
+                                          this.options.kendoObj.dataSource.read();
+
+                                      }.bind(this)
                                   };
 
                                   this.options.cronappDatasource.addDataSourceEvents(helperDirective.dataSourceEventsPush);
@@ -2886,12 +2891,28 @@
 
                           read:  function (e) {
 
+                              let conditionIsEmpty = (condition) => {
+                                  let result = true;
+                                  if (condition) {
+                                      let jsonCondition = JSON.parse(condition);
+                                      if (jsonCondition.expression && jsonCondition.expression.args) {
+                                          jsonCondition.expression.args.forEach((a)=> {
+                                              if (a.right !== '' && a.right !== "''" && a.right !== undefined)
+                                          result = false;
+                                      });
+                                      }
+                                  }
+                                  return result;
+                              };
+
+
+                              let cronappDatasource = this.options.cronappDatasource;
+
                               for (key in e.data)
                                   if(e.data[key] == undefined)
                                       delete e.data[key];
 
                               let logicFilter = { filter: { logic: "and", filters:[] } };
-                              let paramsOData = {};
                               for (let key in e.data) {
                                   let kendoFilter = {
                                       field: options.selfRelationshipField,
@@ -2900,14 +2921,23 @@
                                   };
                                   logicFilter.filter.filters.push(kendoFilter);
                               }
+
+                              let condition = cronappDatasource.condition;
+                              let conditionEmpty = conditionIsEmpty(condition);
+                              let paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${options.selfRelationshipField} eq null`};
+
                               if (logicFilter.filter.filters.length) {
+                                  cronappDatasource.condition = '';
                                   paramsOData = kendo.data.transports.odata.parameterMap(logicFilter, 'read');
                               }
-                              else {
-                                  paramsOData = { $inlinecount: "allpages", $format: "json", $filter: `${options.selfRelationshipField} eq null`};
+                              else if (this.options.fromRefresh) {
+                                  this.options.fromRefresh = false;
+                                  if (!conditionEmpty) {
+                                      cronappDatasource.cleanup();
+                                      paramsOData = { $inlinecount: "allpages", $format: "json"};
+                                  }
                               }
 
-                              let cronappDatasource = this.options.cronappDatasource;
                               cronappDatasource.rowsPerPage = e.data.pageSize;
                               cronappDatasource.offset = (e.data.page - 1);
 
@@ -2915,34 +2945,40 @@
                               let fetchData = {};
                               fetchData.params = paramsOData;
 
+                              helperKendoDs = this;
+
                               cronappDatasource.fetch(fetchData, {
                                   success:  function(data) {
 
                                       let all = data.map(item => {
                                           let odataUrl = `${this.entity}/$count?$filter=${options.selfRelationshipField} eq '${item[schema.model.id]}'`;
-                                          return new Promise((resolve, reject)=> {
-                                            $.ajax({
-                                              url: odataUrl,
-                                              success: (count) => {
-                                                item["hasChildren"] = eval(count) > 0;
-                                                resolve();
-                                              },
-                                              beforeSend: (xhr) => {
-                                                  if (window.uToken) {
-                                                      xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
-                                                  }
-                                              },
-                                              error: () => reject(),
-                                              type: 'GET',
-                                            });
-                                        });
-                                      });
+                                      return new Promise((resolve, reject)=> {
+                                          $.ajax({
+                                          url: odataUrl,
+                                          success: (count) => {
+                                          item["hasChildren"] = eval(count) > 0;
+                                      resolve();
+                                  },
+                                      beforeSend: (xhr) => {
+                                          if (window.uToken) {
+                                              xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
+                                          }
+                                      },
+                                      error: () => reject(),
+                                          type: 'GET',
+                                  });
+                                  });
+                                  });
                                       Promise.all(all).then(() => e.success(data));
                                   },
                                   canceled:  function(data) {
                                       e.error("canceled", "canceled", "canceled");
                                   }
                               }, true);
+
+                              if (condition)
+                                  cronappDatasource.condition = condition;
+
                           },
                           options: {
                               fromRead: false,
