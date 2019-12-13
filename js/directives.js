@@ -2893,12 +2893,6 @@
                                               ngModelCtrl.$setViewValue(null);
                                           }
 
-                                      }.bind(this),
-                                      overRideRefresh: function(data) {
-
-                                          this.options.fromRefresh = true;
-                                          this.options.kendoObj.dataSource.read();
-
                                       }.bind(this)
                                   };
 
