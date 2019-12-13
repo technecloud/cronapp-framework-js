@@ -2804,7 +2804,7 @@
               replace: true,
               require: 'ngModel',
               scope: true,
-              getDataSource: function(options, scope) {
+              getDataSource: function(options, scope, ngModelCtrl) {
 
                   let id = options.dataSourceScreen.schema.filter(field => { return field.key === true })[0].name;
                   let schema = {
@@ -2856,6 +2856,7 @@
                   };
 
                   let helperDirective = this;
+                  let waitingPromise = false;
                   let datasource = new kendo.data.HierarchicalDataSource({
                       transport: {
                           push: function(callback) {
@@ -2875,12 +2876,22 @@
                                       delete: function(data) {
 
                                           reloadAndExpand.bind(this)(data);
+                                          ngModelCtrl.$setViewValue(null);
 
                                       }.bind(this),
                                       overRideRefresh: function(data) {
 
                                           this.options.fromRefresh = true;
                                           this.options.kendoObj.dataSource.read();
+                                          ngModelCtrl.$setViewValue(null);
+
+                                      }.bind(this),
+                                      read: function(data) {
+
+                                          if (!waitingPromise) {
+                                              this.options.kendoObj.dataSource.read();
+                                              ngModelCtrl.$setViewValue(null);
+                                          }
 
                                       }.bind(this)
                                   };
@@ -2952,24 +2963,28 @@
 
                                       let all = data.map(item => {
                                           let odataUrl = `${this.entity}/$count?$filter=${options.selfRelationshipField} eq '${item[schema.model.id]}'`;
-                                      return new Promise((resolve, reject)=> {
-                                          $.ajax({
-                                          url: odataUrl,
-                                          success: (count) => {
-                                          item["hasChildren"] = eval(count) > 0;
-                                      resolve();
-                                  },
-                                      beforeSend: (xhr) => {
-                                          if (window.uToken) {
-                                              xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
-                                          }
-                                      },
-                                      error: () => reject(),
-                                          type: 'GET',
-                                  });
-                                  });
-                                  });
-                                      Promise.all(all).then(() => e.success(data));
+                                          return new Promise((resolve, reject)=> {
+                                              $.ajax({
+                                                url: odataUrl,
+                                                success: (count) => {
+                                                  item["hasChildren"] = eval(count) > 0;
+                                                  resolve();
+                                                },
+                                                beforeSend: (xhr) => {
+                                                  if (window.uToken) {
+                                                      xhr.setRequestHeader ("X-AUTH-TOKEN", window.uToken);
+                                                  }
+                                                },
+                                                error: () => reject(),
+                                                type: 'GET',
+                                              });
+                                          });
+                                      });
+                                      waitingPromise = true;
+                                      Promise.all(all).then(() => {
+                                        e.success(data);
+                                        waitingPromise = false;
+                                      });
                                   },
                                   canceled:  function(data) {
                                       e.error("canceled", "canceled", "canceled");
@@ -3006,7 +3021,7 @@
                   };
 
                   let kendoObj = $templateDyn.kendoTreeView({
-                      dataSource: helperDirective.getDataSource(options, scope),
+                      dataSource: helperDirective.getDataSource(options, scope, ngModelCtrl),
                       dataTextField: options.textField,
                       dataImageUrlField: options.imageUrlField,
                       change: function(e) {
