@@ -983,3 +983,7 @@ cron-scheduler a.k-link {
 caption {
     color: #4a4747;
 }
+
+.k-treeview .k-in.k-state-selected {
+    color: #a00404;
+}
