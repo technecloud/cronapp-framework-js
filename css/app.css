@@ -166,5 +166,6 @@ img.user-avatar {
 }
 
 a {
-  cursor: pointer;  
+  cursor: pointer;
+  color: #034d8c;
 }
