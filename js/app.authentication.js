@@ -77,7 +77,8 @@ var app = (function() {
           verticalSpacing: 20,
           horizontalSpacing: 20,
           positionX: 'right',
-          positionY: 'top'
+          positionY: 'top',
+          templateUrl: 'plugins/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
         });
 
         if (window.customStateProvider) {
