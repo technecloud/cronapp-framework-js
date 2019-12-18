@@ -129,5 +129,6 @@
   "StartEditing": "Iniciar edição",
   "Before": "Anterior",
   "Next": "Próximo",
-  "Action": "Ação"
+  "Action": "Ação",
+  "Admin.view.UserLocked": "Usuário Bloqueado"
 }
