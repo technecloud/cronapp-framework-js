@@ -133,6 +133,8 @@
         error = $translate.instant('Login.view.invalidPassword');
       } else if (status === 403) {
         error = $translate.instant('Admin.view.Access Denied');
+      } else if (status === 423) {
+        error = $translate.instant('Admin.view.UserLocked')
       } else {
         error = data;
       }
