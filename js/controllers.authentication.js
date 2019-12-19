@@ -73,6 +73,10 @@
     $scope.login = function(username, password, token) {
       $scope.message.error = undefined;
       if($('form').find('*[class=g-recaptcha]').length){
+        if(!$scope.captcha_token && $('form').find('*[class=g-recaptcha]').attr("data-sitekey")=== ""){
+          Notification.error($translate.instant('Login.view.EmptySiteKeyCaptcha'));
+          return;
+        }
         $scope.captcha_token = window.grecaptcha.getResponse();
         if(!$scope.captcha_token && $('form').find('*[class=g-recaptcha]').attr("data-size") !== "invisible"){
           Notification.error($translate.instant('Login.view.InvalidCaptcha'));

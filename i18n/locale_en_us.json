@@ -86,7 +86,6 @@
   "WhatsRemove": "Want to remove?",
   "EditingParameters" : "Editing parameters",
   "Print" : "Print",
-  "Cancel" : "Cancel",
   "GeneratePDF" : "Generate report PDF file",
   "Close" : "Close",
   "Format.DateTime" : "MM/DD/YYYY h:mm:ss a",
@@ -130,5 +129,6 @@
   "Before": "Before",
   "Next": "Next",
   "Action": "Action",
-  "Admin.view.UserLocked": "User Locked"
+  "Admin.view.UserLocked": "User Locked",
+  "Login.view.EmptySiteKeyCaptcha": "Website key not entered"
 }
