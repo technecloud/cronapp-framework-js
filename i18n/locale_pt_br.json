@@ -118,7 +118,6 @@
   "CancelChanges": "Cancelar alterações",
   "Edit": "Editar",
   "Remove": "Excluir",
-  "Cancel": "Cancelar",
   "FieldIsInvalid": "Campo '{0}' é inválido!",
   "FieldIsRequired": "Campo '{0}' é requerido!",
   "Scheduler": "Agendador",
@@ -130,5 +129,6 @@
   "Before": "Anterior",
   "Next": "Próximo",
   "Action": "Ação",
-  "Admin.view.UserLocked": "Usuário bloqueado"
+  "Admin.view.UserLocked": "Usuário bloqueado",
+  "Login.view.EmptySiteKeyCaptcha": "Chave do site não informado"
 }
