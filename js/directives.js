@@ -3532,7 +3532,7 @@
             var parent = element.parent();
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-            $(parent).append('<input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/>');
+            $(parent).append('<label for="' + attrs.id + '" style="width: 100%;"> <input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/> </label');
             var $element = $(parent).find('input.cronMultiSelect');
             $(element).remove();
 
