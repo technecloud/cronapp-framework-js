@@ -130,5 +130,6 @@
   "Next": "Next",
   "Action": "Action",
   "Admin.view.UserLocked": "User Locked",
-  "Login.view.EmptySiteKeyCaptcha": "Website key not entered"
+  "Login.view.EmptySiteKeyCaptcha": "Website key not entered",
+  "download": "Download"
 }

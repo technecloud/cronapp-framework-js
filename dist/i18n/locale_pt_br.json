@@ -130,5 +130,6 @@
   "Next": "Próximo",
   "Action": "Ação",
   "Admin.view.UserLocked": "Usuário bloqueado",
-  "Login.view.EmptySiteKeyCaptcha": "Chave do site não informado"
+  "Login.view.EmptySiteKeyCaptcha": "Chave do site não informado",
+  "download": "Baixar"
 }
