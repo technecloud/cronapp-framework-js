@@ -235,7 +235,7 @@
           }
         }
       })
-      .directive('dynamicFile', function($compile) {
+      .directive('dynamicFile', function($compile, $translate) {
         var template = '';
         return {
           restrict: 'A',
@@ -273,7 +273,7 @@
                                   </div> \
                                   <div> \
                                     <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
-                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">download</a> \
+                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">$lblDownload$</a> \
                                   </div> \
                                 </div> \
                                 ';
@@ -285,6 +285,7 @@
                 .split('$required$').join(required)
                 .split('$userHtml$').join(content)
                 .split('$maxFileSize$').join(maxFileSize)
+                .split('$lblDownload$').join($translate.instant('download'))
 
             );
 
