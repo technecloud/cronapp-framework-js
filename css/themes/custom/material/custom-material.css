@@ -311,12 +311,17 @@ Material Grid
     color:#ffffff;
 }
 
-
 .k-button{
     font-weight: 400;
     transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
     text-transform: capitalize;
     transition: 200ms;
+}
+
+.k-button[disabled]{
+    background-color:#DCDCDC;
+    color:#616161;
+    opacity: 1;
 }
 
 .k-button-icontext .k-icon {
