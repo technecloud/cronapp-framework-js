@@ -1,17 +1,13 @@
-/*Ajustes Mauricio*/
-button.btn-default:focus, button.btn-default:active{
-    background: #272f61;
-}
-
 button.btn-default {
 	color: white;
-	background: #3d488b;
+	background: #3b448e;
 }
 
-button.btn-default:hover{
+button.btn-default:hover, button.btn-default:focus, button.btn-default:active{
 	opacity: 1 !important;
-	background: #272f61;
-	color:rgb(255, 230, 0) !important;
+	background: #282d57;
+    color:white !important;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
 }
 
 .k-grid-header .k-header:focus, .k-grid-header .k-header a.k-link:focus {
