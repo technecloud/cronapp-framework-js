@@ -598,12 +598,12 @@ Material Grid - F I N A L
 
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
-    background-color: transparent;
+    background-color: #282d57;
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: #d8cece;
-    background-color: transparent;
+    color: #fff;
+    background-color: #282d57;
 }
 
 .dropdown-menu {
