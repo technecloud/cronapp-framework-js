@@ -302,7 +302,7 @@ Material Grid
 }
 
 
-.k-grid tbody .k-button:hover {
+.k-grid tbody .k-button:hover, .k-grid tbody .k-button:focus {
     background-color: #0470a0;
     color:#ffffff;
 }
