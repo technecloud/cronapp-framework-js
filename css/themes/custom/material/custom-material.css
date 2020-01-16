@@ -708,8 +708,8 @@ textarea.form-control.k-textbox {
 .k-button:focus, .k-button:hover {
     text-decoration: none;
     outline: 0;
-    background-color: #008dcd;
-    color: #fff;
+    /* background-color: #008dcd;
+    color: #fff; */
 }
 
 .k-checkbox:checked+.k-checkbox-label:before {
