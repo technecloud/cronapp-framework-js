@@ -175,11 +175,11 @@
                                   <img class="$class$" style="$style$; height: $height$; width: $width$;" ng-if="!$ngModel$" data-ng-src="/plugins/cronapp-framework-js/img/selectImg.svg" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" accept="image/*;capture=camera">\
                                   <button class="remove btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
                                     <span class="glyphicon glyphicon-remove"></span>\
-                                    <span class="sr-only">Remove</span>\
+                                    <span class="sr-only">{{"Remove" | translate}}</span>\
                                   </button>\
                                   <button class="btn btn-info btn-xs start-camera-button" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
                                     <span class="glyphicon glyphicon-facetime-video"></span>\
-                                    <span class="sr-only">Upload</span>\
+                                    <span class="sr-only">{{"Upload.camera" | translate}}</span>\
                                   </button>\
                                   <input ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
                                 </div>';
@@ -210,16 +210,16 @@
                 '<div ngf-drop="" ngf-drag-over-class="dragover">\
            <img alt="$picture$" style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
            <input aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-           <div class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
+           <button class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
              $userHtml$\
-           </div>\
+           </button>\
            <button class="remove-image-button btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
              <span class="glyphicon glyphicon-remove"></span>\
-             <span class="sr-only">Remove</span>\
+             <span class="sr-only">{{"Remove" | translate}}</span>\
            </button>\
            <button class="btn btn-info btn-xs start-camera-button-attribute" ng-if="!$ngModel$" ng-click="cronapi.internal.startCamera(\'$ngModel$\')">\
              <span class="glyphicon glyphicon-facetime-video"></span>\
-             <span class="sr-only">Upload</span>\
+             <span class="sr-only">{{"Upload.camera" | translate}}</span>\
            </button>\
          </div>';
             var maxFileSize = "";
@@ -262,9 +262,9 @@
             var templateDyn    = '\
                                 <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
                                   <input aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-                                  <div class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                  <button class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
                                     $userHtml$\
-                                  </div>\
+                                  </button>\
                                   <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
                                     <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%">\
                                       <span class="sr-only"></span>\
@@ -272,9 +272,10 @@
                                   </div>\
                                 </div> \
                                 <div ng-show="$ngModel$" class="upload-image-component-attribute"> \
-                                  <div class="btn btn-danger btn-xs ng-scope" style="float:right;" ng-if="$ngModel$" ng-click="$ngModel$=null"> \
+                                  <button class="btn btn-danger btn-xs ng-scope" style="float:right;" ng-if="$ngModel$" ng-click="$ngModel$=null"> \
                                     <span class="glyphicon glyphicon-remove"></span> \
-                                  </div> \
+                                    <span class="sr-only">{{"Remove" | translate}}</span> \
+                                  </button> \
                                   <div> \
                                     <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
                                     <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">$lblDownload$</a> \
