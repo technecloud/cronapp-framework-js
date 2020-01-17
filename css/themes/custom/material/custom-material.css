@@ -1,3 +1,8 @@
+.k-checkbox:focus+.k-checkbox-label:before, .k-checkbox:hover+.k-checkbox-label:before, .k-radio:focus+.k-radio-label:before, .k-radio:hover+.k-radio-label:before {
+    box-shadow: 0 0 5px 0 rgb(59, 68, 142);
+    border-color: rgb(59, 68, 142);
+}
+
 button.btn-default {
 	color: white;
 	background: #3b448e;
