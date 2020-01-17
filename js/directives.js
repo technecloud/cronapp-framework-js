@@ -3289,6 +3289,7 @@
             var $element = $(parent).find('input.cronDynamicSelect');
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
             options.combobox = combobox;
+            $(combobox.element[0]).attr('tabindex','-1');
             if (dataSourceScreen != null && dataSourceScreen != undefined) {
               $(combobox).data('dataSourceScreen', dataSourceScreen);
             }
