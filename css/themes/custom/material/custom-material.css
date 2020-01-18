@@ -1006,3 +1006,7 @@ caption {
 .btn-success:focus, .btn-success:hover {
     background-color:#3bbd3b !important;
 }
+
+div .messages {
+    float: left;
+}
