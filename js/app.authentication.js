@@ -337,26 +337,25 @@ var app = (function() {
           });
           $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
               $timeout(() => {
-                  let systemName = $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
+                  let systemName = $('#projectName').length ? $('#projectName').val() : $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
                   let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
-                  let pageName = splitedHash?splitedHash[splitedHash.length-1] : null;
+                  let pageName = splitedHash?splitedHash[splitedHash.length-1] : currentRoute.name;
                   let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
+                  if ($('h2.title').length)
+                      prettyPageName = $('h2.title').text();
 
                   let title = '';
 
-                  if ($('h2.title').length)
-                    title = $('h2.title').text() + (systemName.length ? ' - ' + systemName : ''  );
-                  else if (prettyPageName)
-                    title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
+                  title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
 
                   $rootScope.viewTitle = title || currentRoute.name;
                   let $inputsMain = $('[role=main]').find('input');
                   if ($inputsMain && $inputsMain.length) {
-                    let cantFocus = ['date', 'datetime', 'time'];
-                    let $firstInput = $($inputsMain[0]);
-                    if ( !cantFocus.includes($firstInput.data('type')) ) {
-                      $firstInput.focus();
-                    }
+                      let cantFocus = ['date', 'datetime', 'time'];
+                      let $firstInput = $($inputsMain[0]);
+                      if ( !cantFocus.includes($firstInput.data('type')) ) {
+                          $firstInput.focus();
+                      }
                   }
               });
           });
