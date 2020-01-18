@@ -3056,7 +3056,7 @@
         return {
           restrict: 'E',
           replace: true,
-          require: 'ngModel',
+          require: '?ngModel',
           link: function (scope, element, attrs, ngModelCtrl) {
             var select = {};
             try {
@@ -3068,7 +3068,7 @@
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             var parent = element.parent();
-            $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
+            $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-required="' + attrs.ngRequired + '" ng-model="' + attrs.ngModel + '" ' + (attrs.ngRequired ? "required " : "") + '/>');
             var $element = $(parent).find('input.cronSelect');
 
             var options = app.kendoHelper.getConfigCombobox(select, scope);
@@ -3096,13 +3096,16 @@
                 if ((typeof value === 'boolean') || (value)) {
                   result = value;
                 }
-                combobox.value(result);
+
+                if (combobox !== undefined)
+                  combobox.value(result);
 
                 if (!initializing) {
                   if (attrs.ngChange) scope.$eval(attrs.ngChange);
                 }
                 initializing = false;
-                combobox.value(result);
+                if (combobox !== undefined)
+                  combobox.value(result);
                 return result;
               });
               ngModelCtrl.$parsers.push(function (value) {
@@ -3570,7 +3573,7 @@
                   _scope.$apply(function () {
                     try {
                       var data = eval('_scope.' + model);
-                      data = data.filter(it => { 
+                      data = data.filter(it => {
                         if(typeof(it) === "object"){
                           return  it[dataValueField] !== dataItem[dataValueField];
                         }
@@ -4658,7 +4661,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
           $element.mask(mask);
           useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask);
         }
-        else{  
+        else{
           options = {};
           options['placeholder'] = attrs.maskPlaceholder
           $(element).inputmask(mask, options);
@@ -4680,7 +4683,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 }
 
 function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask){
-  var $element = $(element); 
+  var $element = $(element);
   var unmaskedvalue = function() {
     $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
   }
@@ -4705,7 +4708,7 @@ function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask){
 }
 
 function useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask){
-  var $element = $(element); 
+  var $element = $(element);
   var unmaskedvalue = function() {
     if (removeMask)
       $(this).data('rawvalue',$(this).cleanVal());
