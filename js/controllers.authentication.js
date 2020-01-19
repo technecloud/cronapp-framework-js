@@ -141,10 +141,12 @@
         error = $translate.instant('Admin.view.UserLocked')
       } else if (status === -1 && data === null) {
         error = $translate.instant('Admin.server.out')
-        alert(error);
-        return;
-      } else {
+      } else if (data !== null && data.message) {
+        error = data.message
+      } else if (typeof data == 'string') {
         error = data;
+      } else {
+        error = $translate.instant('Admin.server.out');
       }
       Notification.error(error);
     }
