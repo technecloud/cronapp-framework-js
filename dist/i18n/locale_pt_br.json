@@ -132,6 +132,5 @@
   "Action": "Ação",
   "Admin.view.UserLocked": "Usuário bloqueado",
   "Login.view.EmptySiteKeyCaptcha": "Chave do site não informado",
-  "download": "Baixar",
-  "Admin.server.out": "Erro ao contactar o servidor"
+  "download": "Baixar"
 }

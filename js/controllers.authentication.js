@@ -139,10 +139,6 @@
         error = $translate.instant('Admin.view.Access Denied');
       } else if (status === 423) {
         error = $translate.instant('Admin.view.UserLocked')
-      } else if (status === -1 && data === null) {
-        error = $translate.instant('Admin.server.out')
-        alert(error);
-        return;
       } else {
         error = data;
       }
