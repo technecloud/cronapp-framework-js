@@ -132,5 +132,6 @@
   "Action": "Action",
   "Admin.view.UserLocked": "User Locked",
   "Login.view.EmptySiteKeyCaptcha": "Website key not entered",
-  "download": "Download"
+  "download": "Download",
+  "Admin.server.out": "Error contacting the server"
 }
