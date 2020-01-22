@@ -4343,6 +4343,9 @@
                       var defaultLang = "en",
                           currentlang = translationResp.language;
 
+                      if (currentlang  === 'pt_br')
+                          currentlang = "pt-br";
+
                       element.attr("lang", currentlang || defaultLang );
                   };
 
