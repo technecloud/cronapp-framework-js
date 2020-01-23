@@ -349,13 +349,20 @@ var app = (function() {
                   title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
 
                   $rootScope.viewTitle = title || currentRoute.name;
-                  let $inputsMain = $('[role=main]').find('input');
-                  if ($inputsMain && $inputsMain.length) {
+                  let $mainLinks = $('.main-nav-link');
+                  if ($mainLinks && $mainLinks.length && $($('.main-nav-link').get(0)).is(":visible")) {
+                    $(".main-access").focus();
+                    // $($('.main-nav-link').get(0)).focus();
+                    // $($('.main-nav-link').get(0)).blur();
+                  } else {
+                    let $inputsMain = $('[role=main]').find('input');
+                    if ($inputsMain && $inputsMain.length) {
                       let cantFocus = ['date', 'datetime', 'time'];
                       let $firstInput = $($inputsMain[0]);
                       if ( !cantFocus.includes($firstInput.data('type')) ) {
-                          $firstInput.focus();
+                        $firstInput.focus();
                       }
+                    }
                   }
               });
           });
