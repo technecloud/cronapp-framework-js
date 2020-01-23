@@ -4344,7 +4344,9 @@
                           currentlang = translationResp.language;
 
                       if (currentlang  === 'pt_br')
-                          currentlang = "pt-br";
+                        currentlang = "pt-br";
+                      else if (currentlang.startsWith('en'))
+                        currentlang = "en";
 
                       element.attr("lang", currentlang || defaultLang );
                   };
