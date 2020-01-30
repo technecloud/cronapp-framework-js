@@ -119,22 +119,7 @@
       var h = parseInt($(window).height());
       var heightRepo = (h - 200) + "px";
 
-      /*var options = new Stimulsoft.Viewer.StiViewerOptions();
-      options.toolbar.showAboutButton = false;
-      if (config) {
-        options.toolbar.visible = config.showToolbar;
-        options.appearance.scrollbarsMode = config.showScrollbar;
-        if (config.height != undefined)
-          options.height = config.height + "px";
-      }
-      else {
-        options.appearance.scrollbarsMode = true;
-        options.height = heightRepo;
-      }
-
-      */
       var viewerId = "StiViewer" + app.common.generateId();
-      //var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
       var report = new Stimulsoft.Report.StiReport();
       report.load(json);
 
@@ -154,9 +139,26 @@
         });
       }
       stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, datasourcesInBand.datasources);
-      //viewer.report = report;
 
       if (config && config.$element) {
+
+        var options = new Stimulsoft.Viewer.StiViewerOptions();
+        options.toolbar.showAboutButton = false;
+        if (config) {
+          options.toolbar.visible = config.showToolbar;
+          options.appearance.scrollbarsMode = config.showScrollbar;
+          if (config.height != undefined)
+            options.height = config.height + "px";
+        }
+        else {
+          options.appearance.scrollbarsMode = true;
+          options.height = heightRepo;
+        }
+
+
+        var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
+        viewer.report = report;
+
         viewer.renderHtml(config.$element[0]);
       }
       else {
@@ -231,16 +233,16 @@
 
 
         report.renderAsync(function(){
-            var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
+          var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
 
-            var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
-              type: 'application/pdf'
-            });
+          var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
+            type: 'application/pdf'
+          });
 
-            var url = URL.createObjectURL(blob);
-            //$window.open(URL.createObjectURL(blob));
+          var url = URL.createObjectURL(blob);
+          //$window.open(URL.createObjectURL(blob));
 
-           startShow(url);
+          startShow(url);
 
         });
 
