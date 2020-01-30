@@ -220,7 +220,8 @@
               setTimeout(function() {
                 console.log('open[#reportViewContext]');
                 $('body').append(context);
-                $('#reportView').modal();
+                cronapi.screen.showModal('reportView');
+                //$('#reportView').modal();
                 $('#contentReport').html('<iframe src="'+url+'" width="100%" height="'+heightRepo+'"></iframe>');
                 //viewer.renderHtml("contentReport");
                 setTimeout(function() { observeFullScreen() },100);
@@ -233,16 +234,16 @@
 
 
         report.renderAsync(function(){
-          var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
+            var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
 
-          var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
-            type: 'application/pdf'
-          });
+            var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
+              type: 'application/pdf'
+            });
 
-          var url = URL.createObjectURL(blob);
-          //$window.open(URL.createObjectURL(blob));
+            var url = URL.createObjectURL(blob);
+            //$window.open(URL.createObjectURL(blob));
 
-          startShow(url);
+           startShow(url);
 
         });
 
