@@ -1,5 +1,5 @@
 (function($app) {
-  angular.module('report.services', []).service('ReportService', function($http, $compile, $modal, $translate) {
+  angular.module('report.services', []).service('ReportService', function($http, $compile, $modal, $translate, $window) {
     var body = $('body');
     var scope = angular.element(body.get(0)).scope();
     var scriptsStimulsoft = [
@@ -119,7 +119,7 @@
       var h = parseInt($(window).height());
       var heightRepo = (h - 200) + "px";
 
-      var options = new Stimulsoft.Viewer.StiViewerOptions();
+      /*var options = new Stimulsoft.Viewer.StiViewerOptions();
       options.toolbar.showAboutButton = false;
       if (config) {
         options.toolbar.visible = config.showToolbar;
@@ -132,8 +132,9 @@
         options.height = heightRepo;
       }
 
+      */
       var viewerId = "StiViewer" + app.common.generateId();
-      var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
+      //var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
       var report = new Stimulsoft.Report.StiReport();
       report.load(json);
 
@@ -153,7 +154,7 @@
         });
       }
       stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, datasourcesInBand.datasources);
-      viewer.report = report;
+      //viewer.report = report;
 
       if (config && config.$element) {
         viewer.renderHtml(config.$element[0]);
@@ -204,26 +205,45 @@
           }, 100);
         }
 
-        var include = setInterval(function() {
-          var div = $('<div/>');
-          div.attr('id',"contentReport");
-          div.attr('width', '100%');
-          // div.css('height', heightRepo);
-          var m = $('#reportView .modal-body');
-          if(m.get(0)) {
-            m.html(div);
-            $('#reportViewContext .modal-dialog').css('width', '95%');
-            setTimeout(function() {
-              console.log('open[#reportViewContext]');
-              $('body').append(context);
-              $('#reportView').modal();
-              viewer.renderHtml("contentReport");
-              setTimeout(function() { observeFullScreen() },100);
-            }, 100);
+        function startShow(url) {
+          var include = setInterval(function() {
+            var div = $('<div/>');
+            div.attr('id',"contentReport");
+            div.attr('width', '100%');
+            // div.css('height', heightRepo);
+            var m = $('#reportView .modal-body');
+            if(m.get(0)) {
+              m.html(div);
+              $('#reportViewContext .modal-dialog').css('width', '95%');
+              setTimeout(function() {
+                console.log('open[#reportViewContext]');
+                $('body').append(context);
+                $('#reportView').modal();
+                $('#contentReport').html('<iframe src="'+url+'" width="100%" height="'+heightRepo+'"></iframe>');
+                //viewer.renderHtml("contentReport");
+                setTimeout(function() { observeFullScreen() },100);
+              }, 100);
 
-            clearInterval(include);
-          }
-        }, 200);
+              clearInterval(include);
+            }
+          }, 200);
+        }
+
+
+        report.renderAsync(function(){
+            var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
+
+            var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
+              type: 'application/pdf'
+            });
+
+            var url = URL.createObjectURL(blob);
+            //$window.open(URL.createObjectURL(blob));
+
+           startShow(url);
+
+        });
+
       }
       $(`#${viewerId}`).find('img').attr('alt','');
       $(`#${viewerId}`).find('input').attr('aria-label', viewerId);
