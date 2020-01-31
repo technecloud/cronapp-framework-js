@@ -341,8 +341,12 @@ var app = (function() {
                   let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
                   let pageName = splitedHash?splitedHash[splitedHash.length-1] : currentRoute.name;
                   let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
-                  if ($('h2.title').length)
-                      prettyPageName = $('h2.title').text();
+                  // Get the H1 or H2 text to concat with the App name to set the title page
+                  if ($('h1.title').length){
+                    prettyPageName = $('h1.title').text();
+                  } else if ($('h2.title').length){
+                    prettyPageName = $('h2.title').text();
+                  }
 
                   let title = '';
 
