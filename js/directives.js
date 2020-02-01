@@ -2725,6 +2725,10 @@
 
           },
           link: function (scope, element, attrs, ngModelCtrl) {
+
+            if (element.children().length)
+              return;
+
             var $templateDyn = $('<div></div>');
             var baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
             if ($translate.use() == 'pt_br')
@@ -2761,6 +2765,7 @@
 
               var tooltips = helperDirective.getTooltipsDefault();
               var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs, tooltips);
+              kendoGridInit.scrollable = attrs.scrollable !== "false";
 
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;

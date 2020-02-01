@@ -4001,6 +4001,16 @@
           "mandatory": true
         },
         {
+          "name": "scrollable",
+          "displayName_pt_BR": "Fixar cabeçalho",
+          "displayName_en_US": "Pin header",
+          "selector": "cron-grid",
+          "type": "text",
+          "mandatory": false,
+          "global": "false",
+          "removable": true
+        },
+        {
           "name": "ng-edit",
           "selector": "cron-grid",
           "displayName_pt_BR": "Ao Editar",
