@@ -240,12 +240,16 @@
             if (attr.maxFileSize)
               maxFileSize = attr.maxFileSize;
 
+            var imgAltText = "";
+
+            attr.imgAltText ? imgAltText = attr.imgAltText : imgAltText = "Admin.view.Picture";
+
             templateDyn = $(templateDyn
                 .split('$ngModel$').join(attr.ngModel)
                 .split('$required$').join(required)
                 .split('$userHtml$').join(content)
                 .split('$maxFileSize$').join(maxFileSize)
-                .split('$picture$').join($translate.instant('Admin.view.Picture'))
+                .split('$picture$').join($translate.instant(imgAltText))
             );
 
             element.html(templateDyn);
