@@ -223,8 +223,8 @@
             var templateDyn    =
                 '<div ngf-drop="" ngf-drag-over-class="dragover">\
            <img alt="$picture$" style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
-           <input id="$id$-input" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-           <button class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
+           <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+           <button id="$idbutton$" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
              $userHtml$\
            </button>\
            <button class="remove-image-button btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
@@ -245,7 +245,8 @@
             attr.imgAltText ? imgAltText = attr.imgAltText : imgAltText = "Admin.view.Picture";
 
             templateDyn = $(templateDyn
-                .split('$id$').join(attr.id)
+                .split('$id$').join(attr.id?attr.id+"-input":"textinput-picture")
+                .split('$idbutton$').join(attr.id?attr.id+"-button":"textinput-picture-button")
                 .split('$ngModel$').join(attr.ngModel)
                 .split('$required$').join(required)
                 .split('$userHtml$').join(content)
@@ -280,8 +281,8 @@
 
             var templateDyn    = '\
                                 <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
-                                  <input id="$id$-input" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-                                  <button class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                  <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+                                  <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
                                     $userHtml$\
                                   </button>\
                                   <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
@@ -302,7 +303,8 @@
                                 </div> \
                                 ';
             templateDyn = $(templateDyn
-                .split('$id$').join(attr.id)
+                .split('$id$').join(attr.id?attr.id+"-input":"textinput-file")
+                .split('$idbutton$').join(attr.id?attr.id+"-button":"textinput-file-button")
                 .split('$ngModel$').join(attr.ngModel)
                 .split('$datasource$').join(datasource)
                 .split('$field$').join(field)
