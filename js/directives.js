@@ -3224,7 +3224,7 @@
              * Configurações do componente
              */
             var options = app.kendoHelper.getConfigCombobox(select, scope);
-            options.autoBind = false;
+            options.autoBind = true;
             var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
@@ -3344,6 +3344,7 @@
                   if (value == null || value == undefined) {
                     dataSourceScreen.active = {};
                     dataSourceScreen.cursor = -1;
+                    modelSetter(_scope, null);
                   } else {
                     var found = _goTo(_scope, combobox, combobox.dataItem());
 
