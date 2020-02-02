@@ -223,7 +223,7 @@
             var templateDyn    =
                 '<div ngf-drop="" ngf-drag-over-class="dragover">\
            <img alt="$picture$" style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
-           <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+           <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important; display: none;" type=text ng-model="$ngModel$" $required$>\
            <button id="$idbutton$" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
              $userHtml$\
            </button>\
@@ -281,7 +281,7 @@
 
             var templateDyn    = '\
                                 <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
-                                  <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
+                                  <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important; display: none;" type=text ng-model="$ngModel$" $required$>\
                                   <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
                                     $userHtml$\
                                   </button>\
