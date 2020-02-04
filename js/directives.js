@@ -5374,7 +5374,7 @@ app.kendoHelper = {
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
         for (i = 0; i < dataSource.data.length; i++) {
           try {
-            dataSource.data[i].key = scope.$eval(dataSource.data[i].key);
+            dataSource.data[i].key = scope.$eval(dataSource.data[i].key) ? scope.$eval(dataSource.data[i].key) : dataSource.data[i].key
           }
           catch (e) {
             dataSource.data[i].key = dataSource.data[i].key;
