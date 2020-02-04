@@ -353,6 +353,7 @@ var app = (function() {
                   title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
 
                   $rootScope.viewTitle = title || currentRoute.name;
+                  $rootScope.viewTitleOnly = prettyPageName || currentRoute.name;
                   let $mainLinks = $('.main-nav-link');
                   if ($mainLinks && $mainLinks.length && $($('.main-nav-link').get(0)).is(":visible")) {
                     $(".main-access").focus();

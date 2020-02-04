@@ -1051,3 +1051,7 @@ div .messages {
 .main-access {
     list-style: none;
 }
+
+.k-list-optionlabel.k-state-focused{
+    background-color: #ededed !important;
+}

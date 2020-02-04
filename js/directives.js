@@ -223,8 +223,8 @@
             var templateDyn    =
                 '<div ngf-drop="" ngf-drag-over-class="dragover">\
            <img alt="$picture$" style="width: 100%;" ng-if="$ngModel$" data-ng-src="{{$ngModel$.startsWith(\'http\') || ($ngModel$.startsWith(\'/\') && $ngModel$.length < 1000)? $ngModel$ : \'data:image/png;base64,\' + $ngModel$}}">\
-           <input aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-           <button class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
+           <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important; margin-left: 85px !important;margin-top: 50px !important; display: none;" type=text ng-model="$ngModel$" $required$>\
+           <button id="$idbutton$" class="btn" ng-if="!$ngModel$" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.setFile(\'$ngModel$\', $file)" ngf-pattern="\'image/*\'" ngf-max-size="$maxFileSize$">\
              $userHtml$\
            </button>\
            <button class="remove-image-button btn btn-danger btn-xs" ng-if="$ngModel$" ng-click="$ngModel$=null">\
@@ -245,6 +245,8 @@
             attr.imgAltText ? imgAltText = attr.imgAltText : imgAltText = "Admin.view.Picture";
 
             templateDyn = $(templateDyn
+                .split('$id$').join(attr.id?attr.id+"-input":"textinput-picture")
+                .split('$idbutton$').join(attr.id?attr.id+"-button":"textinput-picture-button")
                 .split('$ngModel$').join(attr.ngModel)
                 .split('$required$').join(required)
                 .split('$userHtml$').join(content)
@@ -279,8 +281,8 @@
 
             var templateDyn    = '\
                                 <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
-                                  <input aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important;" type=text ng-model="$ngModel$" $required$>\
-                                  <button class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                  <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important; display: none;" type=text ng-model="$ngModel$" $required$>\
+                                  <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
                                     $userHtml$\
                                   </button>\
                                   <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
@@ -301,6 +303,8 @@
                                 </div> \
                                 ';
             templateDyn = $(templateDyn
+                .split('$id$').join(attr.id?attr.id+"-input":"textinput-file")
+                .split('$idbutton$').join(attr.id?attr.id+"-button":"textinput-file-button")
                 .split('$ngModel$').join(attr.ngModel)
                 .split('$datasource$').join(datasource)
                 .split('$field$').join(field)
@@ -3220,7 +3224,7 @@
              * Configurações do componente
              */
             var options = app.kendoHelper.getConfigCombobox(select, scope);
-            options.autoBind = false;
+            options.autoBind = true;
             var dataSourceScreen = null;
             try {
               delete options.dataSource.schema.model.id;
@@ -3229,59 +3233,59 @@
               options.dataSource.transport.origin = 'combobox';
             } catch(e){}
 
-            options.virtual = {};
-            options.virtual.itemHeight = 26;
+            // options.virtual = {};
+            // options.virtual.itemHeight = 26;
             var _scope = scope;
             var _goTo = this.goTo;
             var _compileAngular = this.compileAngular;
-            if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
-              options.height = (options.dataSource.pageSize) * options.virtual.itemHeight / 4;
-              options.virtual.mapValueTo = 'dataItem';
-              var _options = options;
-              /**
-               * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
-               */
-              options.virtual.valueMapper = function(options) {
-                var _combobox = _options.combobox;
-                if (options.value || options.value === "") {
-                  if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
-                    options.success(null);
-                  }
-                  else{
-                    _combobox.isEvaluating = true;
-                    var _dataSource = _options.dataSource.transport.options.cronappDatasource;
-                    _dataSource.findObj([options.value], false, function(data) {
-                      options.success(data);
-                      _combobox.isEvaluating = false;
-
-                      if (select.changeCursor) {
-                        scope.safeApply(function() {
-                          if (data != null) {
-                            var found = _goTo(_scope, _combobox, data);
-                            if (!found) {
-                              _dataSource.data.push(data);
-                              _goTo(_scope, _combobox, data);
-                            }
-                          } else {
-                            modelSetter(_scope, null);
-                          }
-                        });
-                      } else {
-                        if (data == null) {
-                          modelSetter(_scope, null);
-                        }
-                      }
-
-                    }, function() {
-                      options.success(null);
-                      _combobox.isEvaluating = false;
-                    });
-                  }
-                } else {
-                  options.success(null);
-                }
-              };
-            }
+            // if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
+            //   options.height = (options.dataSource.pageSize) * options.virtual.itemHeight / 4;
+            //   options.virtual.mapValueTo = 'dataItem';
+            //   var _options = options;
+            //   /**
+            //    * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
+            //    */
+            //   options.virtual.valueMapper = function(options) {
+            //     var _combobox = _options.combobox;
+            //     if (options.value || options.value === "") {
+            //       if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
+            //         options.success(null);
+            //       }
+            //       else{
+            //         _combobox.isEvaluating = true;
+            //         var _dataSource = _options.dataSource.transport.options.cronappDatasource;
+            //         _dataSource.findObj([options.value], false, function(data) {
+            //           options.success(data);
+            //           _combobox.isEvaluating = false;
+            //
+            //           if (select.changeCursor) {
+            //             scope.safeApply(function() {
+            //               if (data != null) {
+            //                 var found = _goTo(_scope, _combobox, data);
+            //                 if (!found) {
+            //                   _dataSource.data.push(data);
+            //                   _goTo(_scope, _combobox, data);
+            //                 }
+            //               } else {
+            //                 modelSetter(_scope, null);
+            //               }
+            //             });
+            //           } else {
+            //             if (data == null) {
+            //               modelSetter(_scope, null);
+            //             }
+            //           }
+            //
+            //         }, function() {
+            //           options.success(null);
+            //           _combobox.isEvaluating = false;
+            //         });
+            //       }
+            //     } else {
+            //       options.success(null);
+            //     }
+            //   };
+            // }
 
             options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
@@ -3340,6 +3344,7 @@
                   if (value == null || value == undefined) {
                     dataSourceScreen.active = {};
                     dataSourceScreen.cursor = -1;
+                    modelSetter(_scope, null);
                   } else {
                     var found = _goTo(_scope, combobox, combobox.dataItem());
 
@@ -3562,7 +3567,7 @@
             var parent = element.parent();
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-            $(parent).append('<label for="' + attrs.id + '" style="width: 100%;"> <input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/> </label');
+            $(parent).append('<div style="width: 100%;"> <input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/> </div>');
             var $element = $(parent).find('input.cronMultiSelect');
             $(element).remove();
 
