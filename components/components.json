@@ -4005,7 +4005,7 @@
           "displayName_pt_BR": "Fixar cabeçalho",
           "displayName_en_US": "Pin header",
           "selector": "cron-grid",
-          "type": "text",
+          "type": "logic",
           "mandatory": false,
           "global": "false",
           "removable": true
