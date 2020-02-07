@@ -837,11 +837,6 @@
           "order": 5
         },
         {
-          "name": "img-alt-text",
-          "selector": "div[dynamic-image]",
-          "type": "text"
-        },
-        {
           "name": "max-file-size",
           "selector": "div[dynamic-image]",
           "type": "text"
