@@ -1,5 +1,5 @@
 (function($app) {
-  angular.module('report.services', []).service('ReportService', function($http, $compile, $modal, $translate, $window, $rootScope) {
+  angular.module('report.services', []).service('ReportService', function($http, $compile, $modal, $translate, $window) {
     var body = $('body');
     var scope = angular.element(body.get(0)).scope();
     var scriptsStimulsoft = [
@@ -121,7 +121,6 @@
 
       var viewerId = "StiViewer" + app.common.generateId();
       var report = new Stimulsoft.Report.StiReport();
-      $rootScope.viewTitleOnly = json.ReportAlias;
       report.load(json);
 
       if (!datasourcesInBand)
