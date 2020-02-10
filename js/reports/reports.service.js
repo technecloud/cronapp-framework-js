@@ -121,7 +121,7 @@
 
       var viewerId = "StiViewer" + app.common.generateId();
       var report = new Stimulsoft.Report.StiReport();
-      $rootScope.viewTitleOnly = json.ReportAlias;
+      $rootScope.reportTitle = json.ReportAlias;
       report.load(json);
 
       if (!datasourcesInBand)
