@@ -5126,6 +5126,13 @@
       "properties": {
         "screen-params": {
           "removable": false
+        },
+        "primary-datasource": {
+          "displayName_pt_BR": "Fonte de dados principal",
+          "displayName_en_US": "Primary datasource",
+          "removable": false,
+          "type": "pageDatasource",
+          "order": 2
         }
       }
     },
