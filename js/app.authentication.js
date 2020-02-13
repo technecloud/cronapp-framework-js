@@ -338,9 +338,18 @@ var app = (function() {
           $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
               $timeout(() => {
                   let systemName = $('#projectName').length ? $('#projectName').val() : $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
-                  let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
-                  let pageName = splitedHash?splitedHash[splitedHash.length-1] : currentRoute.name;
-                  let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
+
+                  const urlPattern = /\/(?:.(?!\/))+$/gm;
+                  let currentWindow = window.location.hash;
+                  let pageName;
+
+                  if ((m = urlPattern.exec(currentWindow)) !== null) {
+                    m.forEach(match => pageName = match);
+                  } else {
+                    pageName = currentRoute.name
+                  }
+
+                  let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName.replace("/", "")));
                   // Get the H1 or H2 text to concat with the App name to set the title page
                   if ($('h1.title').length){
                     prettyPageName = $('h1.title').text();

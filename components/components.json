@@ -5133,12 +5133,12 @@
     },
     {
       "name": "crn-text-component",
-      "text_pt_BR": "Texto",
-      "text_en_US": "Text",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title",
       "wrapper": false,
       "class": "adjust-icon mdi mdi-format-header-pound",
       "order": 10,
-      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/text.template.html",
+      "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamictitle.template.html",
       "properties": {
         "xattr-position": {
           "displayName": "Position"
@@ -5197,15 +5197,15 @@
           "values": [
             {
               "key": "h1",
-              "value": "Title"
+              "value": "Major Title"
             },
             {
               "key": "h3",
-              "value": "Sub-Title"
+              "value": "Medium Title"
             },
             {
               "key": "h5",
-              "value": "Text"
+              "value": "Minor Title"
             }
           ]
         }
