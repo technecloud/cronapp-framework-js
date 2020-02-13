@@ -2769,7 +2769,7 @@
 
               var tooltips = helperDirective.getTooltipsDefault();
               var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs, tooltips);
-              kendoGridInit.scrollable = attrs.scrollable !== "false";
+              kendoGridInit.scrollable = attrs.scrollable !== "true";
 
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
