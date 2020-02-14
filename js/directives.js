@@ -2769,7 +2769,7 @@
 
               var tooltips = helperDirective.getTooltipsDefault();
               var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs, tooltips);
-              kendoGridInit.scrollable = attrs.scrollable !== "true";
+              kendoGridInit.scrollable = attrs.scrollable === "true";
 
               var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
               grid.dataSource.transport.options.grid = grid;
@@ -3566,9 +3566,8 @@
 
             var parent = element.parent();
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
-            var containerId = attrs.id ? ' id="' + attrs.id + '-container"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
-            $(parent).append('<div style="width: 100%;"'+ containerId + '> <input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/> </div>');
+            $(parent).append('<div style="width: 100%;"> <input style="width: 100%;"' + id + name + ' class="cronMultiSelect" ng-model="' + attrs.ngModel + '"/> </div>');
             var $element = $(parent).find('input.cronMultiSelect');
             $(element).remove();
 
@@ -3672,6 +3671,8 @@
             deselect = attrs.ngDeselect ? function (){_scope.$eval(attrs.ngDeselect)}: undefined;
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
+
+            $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
             var convertArray = function(value) {
               var result = [];
