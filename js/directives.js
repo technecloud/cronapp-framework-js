@@ -4708,6 +4708,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
             $(this).data('rawvalue',$(this).val());
           }
           $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
+          $element.mask(mask);
         }
       }
     }
