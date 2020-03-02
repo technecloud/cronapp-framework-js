@@ -2055,14 +2055,7 @@
                           var self = this;
                           scope.safeApply(function() {
                               var currentItem = cronappDatasource.goTo(item);
-                              var fn;
-                              if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
-                                  fn = function(e) {
-                                      self.dataSource.remove(item);
-                                  }
-                              }
-
-                              cronappDatasource.remove(currentItem, fn);
+                              cronappDatasource.remove(currentItem);
                           });
                       }
                   };
@@ -2277,6 +2270,7 @@
                                     'selectedRows': selectedRows
                                 };
 
+                                cronappDatasource.goTo(item);
                                 scope.$eval(call, contextVars);
                                 return;
                             }
