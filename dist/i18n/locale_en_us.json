@@ -86,7 +86,6 @@
   "WhatsRemove": "Want to remove?",
   "EditingParameters" : "Editing parameters",
   "Print" : "Print",
-  "Cancel" : "Cancel",
   "GeneratePDF" : "Generate report PDF file",
   "Close" : "Close",
   "Format.DateTime" : "MM/DD/YYYY h:mm:ss a",
@@ -114,6 +113,7 @@
   "Upload.oneFile": "Select or drop one file",
   "Upload.multipleFile": "Select or drop files",
   "Upload.errorValidation": "Invalid selection: Max size %s e Allowed types: %s",
+  "Upload.camera": "Get image from device camera",
   "SaveChanges": "Save changes",
   "CancelChanges": "Cancel changes",
   "Edit": "Edit",
@@ -124,5 +124,16 @@
   "Scheduler": "Scheduler",
   "DatasourceNotFoundMessage": "No <i>Datasource</i> was defined to the component <i>'{0}'</i>.<br>Please, check if its configurations were set correctly. <br>For more information, please visit our <a href='https://docs.cronapp.io/' target='_blank'><b><u>documentation</u></b></a>",
   "DatasourceNotFoundTitle": "Datasource not found",
-  "Details": "Details"
+  "Details": "Details",
+  "StartInserting": "Start inserting",
+  "StartEditing": "Start editing",
+  "Before": "Before",
+  "Next": "Next",
+  "Action": "Action",
+  "Admin.view.UserLocked": "User Locked",
+  "Login.view.EmptySiteKeyCaptcha": "Website key not entered",
+  "download": "Download",
+  "Admin.server.out": "Error contacting the server",
+  "Inserting": "Inserting",
+  "Editing": "Editing"
 }

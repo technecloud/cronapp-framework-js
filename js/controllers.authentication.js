@@ -20,7 +20,7 @@
         });
     };
 
-  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout) {
+  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies) {
 
     $scope.$http = $http;
     $scope.params = $stateParams;
@@ -41,7 +41,9 @@
         $scope.params[key] = queryStringParams[key];
       }
     }
-
+    $scope.redirectToLogin = function() {
+      $window.location.href = '/login';
+    };
     $scope.autoLogin = function(){
       if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token ){
         refreshToken($http, function(){
@@ -52,6 +54,17 @@
       }
     };
     $scope.autoLogin();
+    if (localStorage.getItem('redir_mob')) {
+        localStorage.removeItem('redir_mob');
+        $window.location.href = '/mobileapp';
+    }
+    if ($cookies.get('_u')) {
+      if (!localStorage.getItem('_u')) {
+          var decodedUser = decodeURIComponent($cookies.get('_u'));
+          localStorage.setItem("_u", decodedUser);
+      }
+      $state.go('home');
+    }
     $scope.message = {};
     $scope.renderRecaptcha = function(){
       window.grecaptcha.render('loginRecaptcha');
@@ -60,6 +73,10 @@
     $scope.login = function(username, password, token) {
       $scope.message.error = undefined;
       if($('form').find('*[class=g-recaptcha]').length){
+        if(!$scope.captcha_token && $('form').find('*[class=g-recaptcha]').attr("data-sitekey")=== ""){
+          Notification.error($translate.instant('Login.view.EmptySiteKeyCaptcha'));
+          return;
+        }
         $scope.captcha_token = window.grecaptcha.getResponse();
         if(!$scope.captcha_token && $('form').find('*[class=g-recaptcha]').attr("data-size") !== "invisible"){
           Notification.error($translate.instant('Login.view.InvalidCaptcha'));
@@ -120,8 +137,16 @@
         error = $translate.instant('Login.view.invalidPassword');
       } else if (status === 403) {
         error = $translate.instant('Admin.view.Access Denied');
-      } else {
+      } else if (status === 423) {
+        error = $translate.instant('Admin.view.UserLocked')
+      } else if (status === -1 && data === null) {
+        error = $translate.instant('Admin.server.out')
+      } else if (data !== null && data.message) {
+        error = data.message
+      } else if (typeof data == 'string') {
         error = data;
+      } else {
+        error = $translate.instant('Admin.server.out');
       }
       Notification.error(error);
     }

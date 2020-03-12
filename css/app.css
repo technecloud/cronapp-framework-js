@@ -164,3 +164,8 @@ img.user-avatar {
 .modal{
   z-index: 10020;
 }
+
+a {
+  cursor: pointer;
+  color: #034d8c;
+}

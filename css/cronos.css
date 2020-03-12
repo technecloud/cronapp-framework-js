@@ -257,3 +257,7 @@ div[data-component="crn-button"] {
 .dragover {
   border: 2px dashed blue;
 }
+
+.crn-fieldset {
+  diplay: flow-root;
+}

@@ -1,6 +1,5 @@
 var cronappModules = [
   'ui.router',
-  'ui.select',
   'ui-select-infinity',
   'ngResource',
   'ngSanitize',
@@ -16,7 +15,8 @@ var cronappModules = [
   'ngFileUpload',
   'report.services',
   'upload.services',
-  'ui.tinymce'
+  'ui.tinymce',
+  'ngCookies'
 ];
 
 if (window.customModules) {
@@ -62,6 +62,13 @@ var app = (function() {
           $httpProvider.interceptors.push(interceptor);
         }
       ])
+      .config( [
+          '$compileProvider',
+          function( $compileProvider )
+          {
+              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|javascript|chrome-extension):/);
+          }
+      ])
       .config(function($stateProvider, $urlRouterProvider, NotificationProvider) {
         NotificationProvider.setOptions({
           delay: 5000,
@@ -70,7 +77,8 @@ var app = (function() {
           verticalSpacing: 20,
           horizontalSpacing: 20,
           positionX: 'right',
-          positionY: 'top'
+          positionY: 'top',
+          templateUrl: 'plugins/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
         });
 
         if (window.customStateProvider) {
@@ -308,18 +316,71 @@ var app = (function() {
 
       })
 
-      .run(function($rootScope, $state) {
-        $rootScope.$on('$stateChangeError', function() {
-          if (arguments.length >= 6) {
-            var requestObj = arguments[5];
-            if (requestObj.status === 404 || requestObj.status === 403) {
-              localStorage.removeItem('_u');
-              $state.go('login');
-            }
-          } else {
-            $state.go('404');
-          }
-        });
+      .run(function($rootScope, $state, $stateParams, $timeout) {
+          // It's very handy to add references to $state and $stateParams to the $rootScope
+          // so that you can access them from any scope within your applications.For example,
+          // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
+          // to active whenever 'contacts.list' or one of its decendents is active.
+          $rootScope.$state = $state;
+          $rootScope.$stateParams = $stateParams;
+
+          $rootScope.$on('$stateChangeError', function() {
+              if (arguments.length >= 6) {
+                  var requestObj = arguments[5];
+                  if (requestObj.status === 404 || requestObj.status === 403) {
+                      localStorage.removeItem('_u');
+                      $state.go('login');
+                  }
+              } else {
+                  $state.go('404');
+              }
+          });
+          $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
+              $timeout(() => {
+                  let systemName = $('#projectName').length ? $('#projectName').val() : $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
+
+                  const urlPattern = /\/(?:.(?!\/))+$/gm;
+                  let currentWindow = window.location.hash;
+                  let pageName;
+
+                  if ((m = urlPattern.exec(currentWindow)) !== null) {
+                    m.forEach(match => pageName = match);
+                  } else {
+                    pageName = currentRoute.name
+                  }
+
+                  let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName.replace("/", "")));
+                  // Get the H1 or H2 text to concat with the App name to set the title page
+                  if ($('h1.title').length){
+                    prettyPageName = $('h1.title').text();
+                  } else if ($('h2.title').length){
+                    prettyPageName = $('h2.title').text();
+                  }
+
+                  let title = '';
+
+                  title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
+
+                  $rootScope.viewTitle = title || currentRoute.name;
+                  $rootScope.viewTitleOnly = prettyPageName || currentRoute.name;
+                  $rootScope.systemName = systemName;
+                  let $mainLinks = $('.main-nav-link');
+                  if ($mainLinks && $mainLinks.length && $($('.main-nav-link').get(0)).is(":visible")) {
+                    $(".main-access").focus();
+                    // $($('.main-nav-link').get(0)).focus();
+                    // $($('.main-nav-link').get(0)).blur();
+                  } else {
+                    let $inputsMain = $('[role=main]').find('input');
+                    if ($inputsMain && $inputsMain.length) {
+                      let cantFocus = ['date', 'datetime', 'time'];
+                      let $firstInput = $($inputsMain[0]);
+                      if ( !cantFocus.includes($firstInput.data('type')) ) {
+                        $firstInput.focus();
+                      }
+                    }
+                  }
+              });
+          });
       });
 
 }(window));
@@ -469,4 +530,29 @@ window.safeApply = function(fn) {
   } else {
     this.$apply(fn);
   }
+};
+
+window.toCamelCase = function(str) {
+  if (str !== null) {
+      // Lower cases the string
+      return str.toLowerCase()
+      // Replaces any - or _ or . characters with a space
+          .replace( /[-_\.]+/g, ' ')
+          // Removes any non alphanumeric characters
+          .replace( /[^\w\s]/g, '')
+          // Uppercases the first character in each group immediately following a space
+          // (delimited by spaces)
+          .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
+          // Removes spaces
+          .replace( / /g, '' );
+  }
+  return str;
+};
+
+window.camelCaseToSentenceCase = function(str){
+  if (str !== null) {
+      let result = str.replace( /([A-Z])/g, " $1" );
+      return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
+  }
+  return str;
 };
