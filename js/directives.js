@@ -408,49 +408,50 @@
         }
       }])
 
-      /**
-       * Validação de campos CPF e CNPJ,
-       * para utilizar essa diretiva, adicione o atributo valid com o valor
-       * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
-       */
-      .directive('valid', function() {
-        return {
-          require: '?ngModel',
-          restrict: 'A',
-          link: function(scope, element, attrs, ngModel) {
-            var validator = {
-              'cpf': CPF,
-              'cnpj': CNPJ
-            };
-
-            if (ngModel) {
-              ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
-                var value = modelValue || viewValue;
-                var fieldValid = validator[attrs.valid].isValid(value);
-                if (!fieldValid && value !== null) {
-                  element.scope().$applyAsync(function(){ element[0].setCustomValidity(element[0].dataset['errorMessage']); }) ;
-                } else {
-                  element[0].setCustomValidity("");
-                }
-                return (fieldValid || !value);
+        /**
+         * Validação de campos CPF e CNPJ,
+         * para utilizar essa diretiva, adicione o atributo valid com o valor
+         * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf">
+         */
+        .directive('valid', function() {
+          return {
+            require: '?ngModel',
+            restrict: 'A',
+            link: function(scope, element, attrs, ngModel) {
+              var validator = {
+                'cpf': CPF,
+                'cnpj': CNPJ
               };
-            } else {
-              let validate = function() {
-                setTimeout(()=>{
-                  var value = element.data('rawvalue');
+
+              if (ngModel) {
+                ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
+                  var value = modelValue || viewValue;
                   var fieldValid = validator[attrs.valid].isValid(value);
                   if (!fieldValid && value !== null) {
-                    element.addClass('k-invalid');
+                    element.scope().$applyAsync(function(){ element[0].setCustomValidity(element[0].dataset['errorMessage']); }) ;
                   } else {
-                    element.removeClass('k-invalid');
+                    element[0].setCustomValidity("");
                   }
-                })
-              };
-              element.on('keydown', validate).on('keyup', validate);
+                  return (fieldValid || !value);
+                };
+              } else {
+                 let validate = function() {
+                   setTimeout(()=>{
+                      var value = element.data('rawvalue');
+                      var fieldValid = validator[attrs.valid].isValid(value);
+                      if (!fieldValid && value !== null) {
+                        element.addClass('k-invalid');
+                      } else {
+                        element[0].setCustomValidity("");
+                      }
+                   })
+                  };
+                  element.on('keydown', validate).on('keyup', validate);
+              }
+
             }
           }
-        }
-      })
+        })
 
       .directive('cronappSecurity', function($rootScope) {
         return {
