@@ -7,6 +7,12 @@
             method: 'GET',
             url: 'auth/refresh'
         }).success(function (data, status, headers, config) {
+            //Keeping the user information, the auth/refresh only has name and username info
+            if (localStorage.getItem("_u")) {
+              let currentSession = JSON.parse(localStorage.getItem("_u"));
+              if (currentSession.user.username === data.user.username)
+                data.user = currentSession.user;
+            }
             // Store data response on local storage
             localStorage.setItem("_u", JSON.stringify(data));
             // Recussive
