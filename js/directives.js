@@ -1679,7 +1679,7 @@
                     }
                     var contextVars = {
                       'currentData': cronappDatasource.data,
-                      'datasource': cronappDatasource,
+                      'datasource': cronappDatasource.copyWithoutAngularObj(),
                       'selectedIndex': cronappDatasource.cursor,
                       'index': cronappDatasource.cursor,
                       'selectedRow': cronappDatasource.active,
@@ -2279,7 +2279,7 @@
 
                                 var contextVars = {
                                     'currentData': cronappDatasource.data,
-                                    'datasource': cronappDatasource,
+                                    'datasource': cronappDatasource.copyWithoutAngularObj(),
                                     'selectedIndex': index,
                                     'index': index,
                                     'selectedRow': item,
