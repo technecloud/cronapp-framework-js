@@ -415,7 +415,7 @@
        */
       .directive('valid', function() {
         return {
-          require: '^ngModel',
+          require: '?ngModel',
           restrict: 'A',
           link: function(scope, element, attrs, ngModel) {
             var validator = {
@@ -423,16 +423,31 @@
               'cnpj': CNPJ
             };
 
-            ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
-              var value = modelValue || viewValue;
-              var fieldValid = validator[attrs.valid].isValid(value);
-              if (!fieldValid && value !== null) {
-                element.scope().$applyAsync(function(){ element[0].setCustomValidity(element[0].dataset['errorMessage']); }) ;
-              } else {
-                element[0].setCustomValidity("");
-              }
-              return (fieldValid || !value);
-            };
+            if (ngModel) {
+              ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
+                var value = modelValue || viewValue;
+                var fieldValid = validator[attrs.valid].isValid(value);
+                if (!fieldValid && value !== null) {
+                  element.scope().$applyAsync(function(){ element[0].setCustomValidity(element[0].dataset['errorMessage']); }) ;
+                } else {
+                  element[0].setCustomValidity("");
+                }
+                return (fieldValid || !value);
+              };
+            } else {
+              let validate = function() {
+                setTimeout(()=>{
+                  var value = element.data('rawvalue');
+                  var fieldValid = validator[attrs.valid].isValid(value);
+                  if (!fieldValid && value !== null) {
+                    element.addClass('k-invalid');
+                  } else {
+                    element.removeClass('k-invalid');
+                  }
+                })
+              };
+              element.on('keydown', validate).on('keyup', validate);
+            }
           }
         }
       })
@@ -1969,6 +1984,10 @@
               else {
                 $input.attr('type', column.type);
                 $input.attr('mask', column.format ? column.format : '');
+                if (column.format === '999.999.999-99;0' || column.format === '99.999.999/9999-99;0') {
+                  $input.attr('valid', column.format === '999.999.999-99;0' ? 'cpf' : 'cnpj');
+                  $input.attr('data-' + column.field.toLocaleLowerCase() + 'validation-msg', $translate.instant('invalid.' + $input.attr('valid')));
+                }
                 $input.attr('class', 'k-input k-textbox');
                 $input.data('initial-value', opt.model[opt.field]);
                 $input.appendTo(container);
@@ -2055,14 +2074,7 @@
                           var self = this;
                           scope.safeApply(function() {
                               var currentItem = cronappDatasource.goTo(item);
-                              var fn;
-                              if (cronappDatasource.active.__status && cronappDatasource.active.__status == 'inserted') {
-                                  fn = function(e) {
-                                      self.dataSource.remove(item);
-                                  }
-                              }
-
-                              cronappDatasource.remove(currentItem, fn);
+                              cronappDatasource.remove(currentItem);
                           });
                       }
                   };
@@ -2277,6 +2289,7 @@
                                     'selectedRows': selectedRows
                                 };
 
+                                cronappDatasource.goTo(item);
                                 scope.$eval(call, contextVars);
                                 return;
                             }
@@ -3598,7 +3611,7 @@
                   _scope.$apply(function () {
                     try {
                       var data = eval('_scope.' + model);
-                      data = data.filter(it => { 
+                      data = data.filter(it => {
                         if(typeof(it) === "object"){
                           return  it[dataValueField] !== dataItem[dataValueField];
                         }
@@ -4271,80 +4284,85 @@
         }
       })
 
-      .directive('crnAllowNullValues', [function () {
-        return {
-          restrict: 'A',
-          require: '?ngModel',
-          link: function (scope, el, attrs, ctrl) {
-            ctrl.$formatters = [];
-            ctrl.$parsers = [];
-            if (attrs.crnAllowNullValues == 'true') {
-              ctrl.$render = function () {
-                var viewValue = ctrl.$viewValue;
-                el.data('checked', viewValue);
-                switch (viewValue) {
-                  case true:
-                    el.prop('indeterminate', false);
-                    el.prop('checked', true);
-                    break;
-                  case false:
-                    el.prop('indeterminate', false);
-                    el.prop('checked', false);
-                    break;
-                  default:
-                    el.prop('indeterminate', true);
-                }
-              };
-              el.bind('click', function () {
-                var checked;
-                switch (el.data('checked')) {
-                  case false:
-                    checked = true;
-                    break;
-                  case true:
-                    checked = null;
-                    break;
-                  default:
-                    checked = false;
-                }
-                ctrl.$setViewValue(checked);
-                scope.$apply(ctrl.$render);
-              });
-            } else if (attrs.crnAllowNullValues == 'false'){
-              ctrl.$render = function () {
-                var viewValue = ctrl.$viewValue;
-                if(viewValue === undefined || viewValue === null){
-                  ctrl.$setViewValue(false);
-                  viewValue = false;
-                }
-                el.data('checked', viewValue);
-                switch (viewValue) {
-                  case true:
-                    el.prop('indeterminate', false);
-                    el.prop('checked', true);
-                    break;
-                  default:
-                    el.prop('indeterminate', false);
-                    el.prop('checked', false);
-                    break;
-                }
-              };
-              el.bind('click', function () {
-                var checked;
-                switch (el.data('checked')) {
-                  case false:
-                    checked = true;
-                    break;
-                  default:
-                    checked = false;
-                }
-                ctrl.$setViewValue(checked);
-                scope.$apply(ctrl.$render);
-              });
+  .directive('crnAllowNullValues', [function () {
+    return {
+      restrict: 'A',
+      require: '?ngModel',
+      link: function (scope, el, attrs, ctrl) {
+        ctrl.$formatters = [];
+        ctrl.$parsers = [];
+        let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : null;
+        let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : null;
+
+        if (attrs.crnAllowNullValues == 'true') {
+          ctrl.$render = function () {
+            let viewValue = ctrl.$viewValue;
+            el.data('checked', viewValue);
+            switch (viewValue) {
+              case true:
+              case trueValue:
+                el.prop('indeterminate', false);
+                el.prop('checked', true);
+                break;
+              case false:
+              case falseValue:
+                el.prop('indeterminate', false);
+                el.prop('checked', false);
+                break;
+              default:
+                el.prop('indeterminate', true);
             }
-          }
-        };
-      }])
+          };
+          el.bind('click', function () {
+            let checked;
+            switch (el.data('checked')) {
+              case false:
+              case falseValue:
+                checked = attrs.ngTrueValue ? trueValue : true;
+                break;
+              default:
+                checked = attrs.ngFalseValue ? falseValue : false;
+            }
+            ctrl.$setViewValue(checked);
+            scope.$apply(ctrl.$render);
+          });
+        } else if (attrs.crnAllowNullValues == 'false'){
+          ctrl.$render = function () {
+            let viewValue = ctrl.$viewValue;
+            if(viewValue === undefined || viewValue === null){
+              ctrl.$setViewValue(false);
+              viewValue = false;
+            }
+            el.data('checked', viewValue);
+            switch (viewValue) {
+              case true:
+              case trueValue:
+                el.prop('indeterminate', false);
+                el.prop('checked', true);
+                break;
+              default:
+                el.prop('indeterminate', false);
+                el.prop('checked', false);
+                break;
+            }
+          };
+          el.bind('click', function () {
+            let checked;
+            switch (el.data('checked')) {
+              case false:
+              case falseValue:
+                checked = attrs.ngTrueValue ? trueValue : true;
+                break;
+              default:
+                checked = attrs.ngFalseValue ? falseValue : false;
+            }
+            ctrl.$setViewValue(checked);
+            scope.$apply(ctrl.$render);
+          });
+        }
+      }
+    };
+  }])
 
       .directive('cronChat',  ['$compile', '$translate', function($compile, $translate) {
         return {
@@ -4708,6 +4726,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
             $(this).data('rawvalue',$(this).val());
           }
           $(element).on('keydown', unmaskedvalue).on('keyup', unmaskedvalue);
+          $element.mask(mask);
         }
       }
     }
@@ -4909,6 +4928,18 @@ app.kendoHelper = {
           if (c.dataType == "Database" && c.field == key ) {
             schema.model.fields[key].nullable = !c.required;
             schema.model.fields[key].validation.required = c.required;
+            if (c.format === "999.999.999-99;0" || c.format === "99.999.999/9999-99;0") {
+              let toValid = c.format === "999.999.999-99;0" ? "cpf" : "cnpj";
+              let validator = {"cpf": CPF, "cnpj": CNPJ };
+              let validatorName = key.toLocaleLowerCase() + 'validation';
+
+              schema.model.fields[key].validation[validatorName] = function (input) {
+                if (input.is("[name='"+key+"']") && input.val() != "") {
+                  return validator[toValid].isValid(input.val());
+                }
+                return true;
+              }
+            }
             break;
           }
         }
