@@ -2585,7 +2585,7 @@
                 if (column && row.cells[cellIndex].value instanceof Date) {
                   var dateValue = new Date(row.cells[cellIndex].value.getTime());
                   dateValue.setMinutes(dateValue.getMinutes() + dateValue.getTimezoneOffset());
-                  dateValue.setSeconds(dateValue.getSeconds() + 4);
+                  dateValue.setSeconds(dateValue.getSeconds());
                   row.cells[cellIndex].value = dateValue;
                   if (column.type == 'time')
                     row.cells[cellIndex].format = "[$-x-systime]hh:mm:ss";
