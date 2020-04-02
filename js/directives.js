@@ -1185,7 +1185,7 @@
                 .split('$ngDblclick$').join(attrs.ngCronDblclick || "")
                 .split('$ngMouseDown$').join(attrs.ngCronMouseDown || "")
                 .split('$ngMouseUp$').join(attrs.ngCronMouseUp || "")
-                .split('$ngMouseMove$').join(attrs.ngCronMouseMove|| "")
+                .split('$ngMouseMove$').join(attrs.ngCronMousemove|| "")
                 .split('$ngMouseOver$').join(attrs.ngCronMouseOver|| "")
                 .split('$ngMouseEnter$').join(attrs.ngCronMouseEnter|| "")
                 .split('$ngMouseLeave$').join(attrs.ngCronMouseLeave|| "")
