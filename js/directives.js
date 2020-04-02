@@ -1187,7 +1187,7 @@
                 .split('$ngMouseUp$').join(attrs.ngCronMouseUp || "")
                 .split('$ngMouseMove$').join(attrs.ngCronMousemove|| "")
                 .split('$ngMouseOver$').join(attrs.ngCronMouseOver|| "")
-                .split('$ngMouseEnter$').join(attrs.ngCronMouseEnter|| "")
+                .split('$ngMouseEnter$').join(attrs.ngCronMouseenter|| "")
                 .split('$ngMouseLeave$').join(attrs.ngCronMouseleave|| "")
                 .split('$ngKeydown$').join(attrs.ngCronKeydown|| "")
                 .split('$ngKeyup$').join(attrs.ngCronKeyup|| "")
