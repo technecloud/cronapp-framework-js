@@ -3277,59 +3277,59 @@
               options.dataSource.transport.origin = 'combobox';
             } catch(e){}
 
-            // options.virtual = {};
-            // options.virtual.itemHeight = 26;
             var _scope = scope;
             var _goTo = this.goTo;
             var _compileAngular = this.compileAngular;
-            // if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
-            //   options.height = (options.dataSource.pageSize) * options.virtual.itemHeight / 4;
-            //   options.virtual.mapValueTo = 'dataItem';
-            //   var _options = options;
-            //   /**
-            //    * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
-            //    */
-            //   options.virtual.valueMapper = function(options) {
-            //     var _combobox = _options.combobox;
-            //     if (options.value || options.value === "") {
-            //       if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
-            //         options.success(null);
-            //       }
-            //       else{
-            //         _combobox.isEvaluating = true;
-            //         var _dataSource = _options.dataSource.transport.options.cronappDatasource;
-            //         _dataSource.findObj([options.value], false, function(data) {
-            //           options.success(data);
-            //           _combobox.isEvaluating = false;
-            //
-            //           if (select.changeCursor) {
-            //             scope.safeApply(function() {
-            //               if (data != null) {
-            //                 var found = _goTo(_scope, _combobox, data);
-            //                 if (!found) {
-            //                   _dataSource.data.push(data);
-            //                   _goTo(_scope, _combobox, data);
-            //                 }
-            //               } else {
-            //                 modelSetter(_scope, null);
-            //               }
-            //             });
-            //           } else {
-            //             if (data == null) {
-            //               modelSetter(_scope, null);
-            //             }
-            //           }
-            //
-            //         }, function() {
-            //           options.success(null);
-            //           _combobox.isEvaluating = false;
-            //         });
-            //       }
-            //     } else {
-            //       options.success(null);
-            //     }
-            //   };
-            // }
+            options.virtual = {};
+            options.virtual.itemHeight = 26;
+            if (options.dataSource.pageSize && options.dataSource.pageSize > 0) {
+              options.height = (options.dataSource.pageSize) * options.virtual.itemHeight / 4;
+              options.virtual.mapValueTo = 'dataItem';
+              var _options = options;
+              /**
+               * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
+               */
+              options.virtual.valueMapper = function(options) {
+                var _combobox = _options.combobox;
+                if (options.value || options.value === "") {
+                  if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
+                    options.success(null);
+                  }
+                  else{
+                    _combobox.isEvaluating = true;
+                    var _dataSource = _options.dataSource.transport.options.cronappDatasource;
+                    _dataSource.findObj([options.value], false, function(data) {
+                      options.success(data);
+                      _combobox.isEvaluating = false;
+
+                      if (select.changeCursor) {
+                        scope.safeApply(function() {
+                          if (data != null) {
+                            var found = _goTo(_scope, _combobox, data);
+                            if (!found) {
+                              _dataSource.data.push(data);
+                              _goTo(_scope, _combobox, data);
+                            }
+                          } else {
+                            modelSetter(_scope, null);
+                          }
+                        });
+                      } else {
+                        if (data == null) {
+                          modelSetter(_scope, null);
+                        }
+                      }
+
+                    }, function() {
+                      options.success(null);
+                      _combobox.isEvaluating = false;
+                    });
+                  }
+                } else {
+                  options.success(null);
+                }
+              };
+            }
 
             options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
