@@ -2539,6 +2539,9 @@
                 var trs = $(toCompile);
                 var x = angular.element(trs);
                 $compile(x)(scope);
+                if (options.grid) {
+                  helperDirective.resizeGridUsingWidthForDevice(options.grid);
+                }
               });
             }
           };
