@@ -264,7 +264,7 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state) {
+      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state, ReportService) {
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
@@ -273,6 +273,10 @@ var app = (function() {
         $scope.$state = $state;
 
         app.registerEventsCronapi($scope, $translate);
+  
+        $rootScope.getReport = function(reportName, params, config) {
+          ReportService.openReport(reportName, params, config);
+        };
         
         // Query string params
         var queryStringParams = $location.search();
