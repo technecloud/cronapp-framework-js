@@ -3432,9 +3432,11 @@
                       nextValue = dataSourceScreen.data[0][select.dataValueField];
                     }
                   }
-
-                  modelSetter(_scope, nextValue);
-                  forceChangeModel(nextValue);
+  
+                  if(ngModelCtrl.$modelValue != currentValue) {
+                    modelSetter(_scope, nextValue);
+                    forceChangeModel(nextValue);
+                  }
                 }
               }
               else {
