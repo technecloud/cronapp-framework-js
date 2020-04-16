@@ -1942,7 +1942,7 @@
             return editor.bind(this);
           }
         
-          function editor(container, opt) {
+          async function editor(container, opt) {
           
             var column = this.getColumnByField(options, opt.field);
             if (column.visibleCrud != undefined && !column.visibleCrud) {
@@ -1953,7 +1953,7 @@
             var buttonId = app.common.generateId();
             var $input = $('<input '+required+' name="' + opt.field + '" id="' + buttonId + '"from-grid=true />');
             if (column.inputType == 'dynamicComboBox' || column.inputType == 'comboBox') {
-              var kendoConfig = app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
+              var kendoConfig = await app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
               kendoConfig.autoBind = true;
               kendoConfig.optionLabel = undefined;
               if (column.displayField) {
@@ -3131,7 +3131,7 @@
           restrict: 'E',
           replace: true,
           require: 'ngModel',
-          link: function (scope, element, attrs, ngModelCtrl) {
+          link: async function (scope, element, attrs, ngModelCtrl) {
             var select = {};
             try {
               select =  JSON.parse(attrs.options);
@@ -3145,7 +3145,7 @@
             $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
             var $element = $(parent).find('input.cronSelect');
 
-            var options = app.kendoHelper.getConfigCombobox(select, scope);
+            var options = await app.kendoHelper.getConfigCombobox(select, scope);
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
             options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
@@ -3245,7 +3245,7 @@
               return null;
             }
           },
-          link: function (scope, element, attrs, ngModelCtrl) {
+          link: async function (scope, element, attrs, ngModelCtrl) {
             var modelGetter = $parse(attrs['ngModel']);
             var modelSetter = modelGetter.assign;
             var select = {};
@@ -3270,7 +3270,7 @@
             /**
              * Configurações do componente
              */
-            var options = app.kendoHelper.getConfigCombobox(select, scope);
+            var options = await app.kendoHelper.getConfigCombobox(select, scope);
             options.autoBind = true;
             var dataSourceScreen = null;
             try {
@@ -3586,7 +3586,7 @@
         return {
           restrict: 'E',
           require: 'ngModel',
-          link: function (scope, element, attrs, ngModelCtrl) {
+          link: async function (scope, element, attrs, ngModelCtrl) {
             var modelGetter = $parse(attrs['ngModel']);
             var modelSetter = modelGetter.assign;
             var model = attrs['ngModel'];
@@ -3607,7 +3607,7 @@
               relationField: (select.relationField != null ? select.relationField : '')
             }
 
-            var options = app.kendoHelper.getConfigCombobox(select, scope);
+            var options = await app.kendoHelper.getConfigCombobox(select, scope);
 
             try {
               delete options.dataSource.schema.model.id;
@@ -3752,7 +3752,7 @@
         return {
           restrict: 'E',
           require: 'ngModel',
-          link: function (scope, element, attrs, ngModelCtrl) {
+          link: async function (scope, element, attrs, ngModelCtrl) {
             var select = {};
             try {
               select = JSON.parse(attrs.options);
@@ -3764,7 +3764,7 @@
               delete options.dataSource.schema.model.id;
             } catch(e){}
 
-            var options = app.kendoHelper.getConfigCombobox(select, scope);
+            var options = await app.kendoHelper.getConfigCombobox(select, scope);
             options.change = attrs.ngChange ? function (){scope.$eval(attrs.ngChange)}: undefined;
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
@@ -5434,7 +5434,7 @@ app.kendoHelper = {
       );
     }
   },
-  getConfigCombobox: function(options, scope) {
+  getConfigCombobox: async function(options, scope) {
     var valuePrimitive = false;
     var dataSource = {};
     var dataSource = {};
@@ -5448,7 +5448,12 @@ app.kendoHelper = {
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
         for (i = 0; i < dataSource.data.length; i++) {
           try {
-            dataSource.data[i].key = scope.$eval(dataSource.data[i].key) ? scope.$eval(dataSource.data[i].key) : dataSource.data[i].key
+            if (dataSource.data[i].key && dataSource.data[i].key.startsWith('cronapi.server(')) {
+              dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.toPromise().run(');
+            }
+  
+            let keyEvaluated =  await scope.$eval(dataSource.data[i].key);
+            dataSource.data[i].key = keyEvaluated !== undefined && keyEvaluated !== null ? keyEvaluated : dataSource.data[i].key;
           }
           catch (e) {
             dataSource.data[i].key = dataSource.data[i].key;
