@@ -178,28 +178,6 @@
                 $otherHeader = $headerBody.parent(); //coloca o css e coloca o 100% do width (remove modal-dialog modal-lg)
                 $reportView = $otherHeader.parent(); //coloca o css (remove modal fade ng-scope in)
               }
-              /*
-              Retirado para mostra o botão de close, devido a responsividade. Estou deixado o código para manuteção futura.
-              if ($renderedReport.css('position') == 'absolute' && $modalBody.data('applied') != 'absolute') {
-                $modalBody.data('applied', 'absolute');
-                $modalBody.removeClass('modal-body');
-                $headerBody.removeClass('modal-content');
-
-                $otherHeader.attr('style','top: 0px;right: 0px;bottom: 0px;left: 0px;z-index: 1000000;position: absolute;');
-                $otherHeader.removeClass('modal-dialog');
-                $otherHeader.removeClass('modal-lg');
-
-              }
-              else if ($renderedReport.css('position') == 'static' && $modalBody.data('applied') != 'static' ) {
-                $modalBody.data('applied', 'static');
-                $modalBody.addClass('modal-body');
-                $headerBody.addClass('modal-content');
-
-                $otherHeader.attr('style','width:95%');
-                $otherHeader.addClass('modal-dialog');
-                $otherHeader.addClass('modal-lg');
-
-              }*/
             }
             else {
               console.log('cleared interval: ' + viewerId);
