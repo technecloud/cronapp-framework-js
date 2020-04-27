@@ -3158,6 +3158,7 @@
 
             var combobox = $element.kendoComboBox(options).data('kendoComboBox');
             $(element).remove();
+            combobox.enable(true);
 
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
@@ -3577,6 +3578,7 @@
             _compileAngular(scope, combobox.ul);
 
             $(element).remove();
+            combobox.enable(true);
             $("[aria-owns='" + `${attrs.id}_listbox` + "']").attr('aria-label', $translate.instant('template.crud.search'));
           }
         };
@@ -3720,7 +3722,8 @@
             deselect = attrs.ngDeselect ? function (){_scope.$eval(attrs.ngDeselect)}: undefined;
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
-
+            combobox.enable(true);
+            
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
             var convertArray = function(value) {
