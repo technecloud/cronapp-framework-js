@@ -3125,7 +3125,7 @@
               }
           };
       }])
-
+  
       .directive('cronSelect', function ($compile) {
         return {
           restrict: 'E',
@@ -3138,13 +3138,13 @@
             } catch(err) {
               console.log('ComboBox invalid configuration! ' + err);
             }
-
+          
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             var parent = element.parent();
-            $(parent).append('<input style="width: 100%;" ' + id + name + ' class="cronSelect" ng-model="' + attrs.ngModel + '"/>');
+            $(parent).append('<input style="width: 100%;" ' + name + ' class="cronSelect"/>');
             var $element = $(parent).find('input.cronSelect');
-
+          
             var options = await app.kendoHelper.getConfigCombobox(select, scope);
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
@@ -3155,32 +3155,63 @@
                 _ngModelCtrl.$setViewValue(this.value());
               }.bind(combobox));
             }
-
+          
             var combobox = $element.kendoComboBox(options).data('kendoComboBox');
             $(element).remove();
+          
+            let internalInput;
+            let waitRenderInput = setInterval(()=> {
+              internalInput = $(parent).find('.k-input.cronSelect');
+              if (internalInput.length) {
+                clearInterval(waitRenderInput);
+                internalInput.attr("ng-required", attrs.ngRequired);
+                if (attrs.ngRequired === 'true')
+                  internalInput.attr("required", "required");
+                internalInput.attr("ng-model", attrs.ngModel);
+                internalInput.attr("id", attrs.id);
+                let $parent = internalInput.parent();
+                internalInput.on('change',() => {
+                  if (attrs.ngRequired === "true") {
+                    if (internalInput.val().length == 0) {
+                      $parent.addClass('ng-invalid-required');
+                      internalInput.addClass('ng-invalid-required');
+                    }
+                    else {
+                      $parent.removeClass('ng-invalid-required');
+                      internalInput.removeClass('ng-invalid-required');
+                    }
+                  }
+                });
+              }
+            },200);
             combobox.enable(true);
-
+          
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
-
+          
             var initializing = true;
             if (ngModelCtrl) {
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
-
+              
                 if ((typeof value === 'boolean') || (value)) {
                   result = value;
                 }
                 combobox.value(result);
-
+              
                 if (!initializing) {
                   if (attrs.ngChange) scope.$eval(attrs.ngChange);
                 }
+              
+              
                 initializing = false;
                 combobox.value(result);
                 return result;
               });
               ngModelCtrl.$parsers.push(function (value) {
+                if (internalInput) {
+                  internalInput.trigger('change');
+                }
                 if ((typeof value === 'boolean') || value) {
                   return value;
                 }
@@ -3293,45 +3324,49 @@
               /**
                * O método ValueMapper é utilizado para buscar um valor que não esteja em cache.
                */
-              options.virtual.valueMapper = function(options) {
-                var _combobox = _options.combobox;
-                if (options.value || options.value === "") {
-                  if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
-                    options.success(null);
-                  }
-                  else{
-                    _combobox.isEvaluating = true;
-                    var _dataSource = _options.dataSource.transport.options.cronappDatasource;
-                    _dataSource.findObj([options.value], false, function(data) {
-                      options.success(data);
-                      _combobox.isEvaluating = false;
-
-                      if (select.changeCursor) {
-                        scope.safeApply(function() {
-                          if (data != null) {
-                            var found = _goTo(_scope, _combobox, data);
-                            if (!found) {
-                              _dataSource.data.push(data);
-                              _goTo(_scope, _combobox, data);
-                            }
-                          } else {
-                            modelSetter(_scope, null);
-                          }
-                        });
-                      } else {
-                        if (data == null) {
-                          modelSetter(_scope, null);
-                        }
+              options.virtual.valueMapper = async function(options) {
+                let waitRenderCombo = setInterval(() => {
+                  var _combobox = _options.combobox;
+                  if (_combobox) {
+                    clearInterval(waitRenderCombo);
+                    if (options.value || options.value === "") {
+                      if(_combobox.options.optionLabel[_combobox.options.dataValueField] !== null && options.value === ""){
+                        options.success(null);
                       }
-
-                    }, function() {
+                      else{
+                        _combobox.isEvaluating = true;
+                        var _dataSource = _options.dataSource.transport.options.cronappDatasource;
+                        _dataSource.findObj([options.value], false, function(data) {
+                          options.success(data);
+                          _combobox.isEvaluating = false;
+            
+                          if (select.changeCursor) {
+                            scope.safeApply(function() {
+                              if (data != null) {
+                                var found = _goTo(_scope, _combobox, data);
+                                if (!found) {
+                                  _dataSource.data.push(data);
+                                  _goTo(_scope, _combobox, data);
+                                }
+                              } else {
+                                modelSetter(_scope, null);
+                              }
+                            });
+                          } else {
+                            if (data == null) {
+                              modelSetter(_scope, null);
+                            }
+                          }
+                        }, function() {
+                          options.success(null);
+                          _combobox.isEvaluating = false;
+                        });
+                      }
+                    } else {
                       options.success(null);
-                      _combobox.isEvaluating = false;
-                    });
+                    }
                   }
-                } else {
-                  options.success(null);
-                }
+                });
               };
             }
 
