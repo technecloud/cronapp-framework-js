@@ -1,6 +1,7 @@
 {
   "name": "crn-cron-scheduler",
-  "pallete": false,
+  "onDrop": "openEditor",
+  "onDoubleClick": "openEditor",
   "text_pt_BR": "Agendador",
   "text_en_US": "Scheduler",
   "order": 2,
