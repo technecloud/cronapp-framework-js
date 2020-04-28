@@ -138,18 +138,11 @@
     }
 
     function handleError(data, status, headers, config) {
-      var error;
-      if (status === 401) {
-        error = $translate.instant('Login.view.invalidPassword');
-      } else if (status === 403) {
-        error = $translate.instant('Admin.view.Access Denied');
-      } else if (status === 423) {
-        error = $translate.instant('Admin.view.UserLocked')
-      } else if (status === -1 && data === null) {
-        error = $translate.instant('Admin.server.out')
-      } else if (data !== null && data.message) {
-        error = data.message
-      } else if (typeof data == 'string') {
+      let error;
+      if (data !== null && data.message) {
+        let message = JSON.parse(data.message);
+        error = message.exception
+      } else if (typeof data === 'string') {
         error = data;
       } else {
         error = $translate.instant('Admin.server.out');
