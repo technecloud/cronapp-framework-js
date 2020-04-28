@@ -1055,3 +1055,7 @@ div .messages {
 .k-list-optionlabel.k-state-focused{
     background-color: #ededed !important;
 }
+
+.k-dropdown-wrap.ng-invalid-required {
+    border-color: #f31700;
+}
