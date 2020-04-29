@@ -5283,6 +5283,9 @@ app.kendoHelper = {
               },
               canceled:  function(data) {
                 e.error("canceled", "canceled", "canceled");
+              },
+              error:  function(data) {
+                e.error("canceled", "canceled", "canceled");
               }
             }, append);
           }
