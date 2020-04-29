@@ -5487,7 +5487,7 @@ app.kendoHelper = {
         options.dataValueField = options.dataValueField || 'value';
         options.dataTextField = options.dataTextField || 'key';
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
-        for (i = 0; i < dataSource.data.length; i++) {
+        for (let i = 0; i < dataSource.data.length; i++) {
           try {
             if (dataSource.data[i].key && dataSource.data[i].key.startsWith('cronapi.server(')) {
               dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.toPromise().run(');
