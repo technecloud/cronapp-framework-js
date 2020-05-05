@@ -1953,7 +1953,7 @@
             var buttonId = app.common.generateId();
             var $input = $('<input '+required+' name="' + opt.field + '" id="' + buttonId + '"from-grid=true />');
             if (column.inputType == 'dynamicComboBox' || column.inputType == 'comboBox') {
-              var kendoConfig = await app.kendoHelper.getConfigCombobox(column.comboboxOptions, scope);
+              var kendoConfig = app.kendoHelper.getConfigComboboxSync(column.comboboxOptions, scope);
               kendoConfig.autoBind = true;
               kendoConfig.optionLabel = undefined;
               if (column.displayField) {
@@ -5475,25 +5475,92 @@ app.kendoHelper = {
       );
     }
   },
-  getConfigCombobox: async function(options, scope) {
-    var valuePrimitive = false;
+  parseOptionsCronToConfigKendo: function(options, dataSource, scope) {
+    
+    let valuePrimitive = false;
+    
+    if (!options.dynamic || options.dynamic=='false') {
+      valuePrimitive = true;
+      options.dataValueField = options.dataValueField || 'value';
+      options.dataTextField = options.dataTextField || 'key';
+    }
+    else if (options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
+      options.dataSourceScreen.entityDataSource.append = true;
+      dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
+      dataSource.transport.read = app.kendoHelper.getEventReadCombo;
+      valuePrimitive = true;
+    }
+    
+    if (!options.dataValueField || options.dataValueField.trim() == '') {
+      options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
+    }
+    
+    var getFieldType = function(field) {
+      var fields = options.dataSourceScreen.entityDataSource.schemaFields;
+      for (count = 0; count < fields.length; count++) {
+        if (field == fields[count].name) {
+          return fields[count].type.toLowerCase();
+          break;
+        }
+      }
+      
+      return null;
+    }
+    
+    var isValidDateType = function(field) {
+      var dateTypes = ["date", "time", "datetime"];
+      if(dateTypes.indexOf(field) > -1){
+        return field;
+      }
+      return null;
+    }
+    
+    if (!options.customTemplate) {
+      if(options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
+        if (options.format || (isValidDateType(getFieldType(options.dataTextField)))) {
+          options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
+          options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
+        }
+      }
+    }
+    
+    var config = {
+      dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
+      dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
+      dataSource: dataSource,
+      headerTemplate: (options.headerTemplate == null ? undefined : options.headerTemplate),
+      template: (options.template == null ? undefined : options.template),
+      placeholder: (options.placeholder == null ? undefined : options.placeholder),
+      footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
+      filter: (options.filter == null ? undefined : options.filter),
+      valuePrimitive : valuePrimitive,
+      valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
+      suggest: true
+    };
+    
+    if (options.optionLabel) {
+      options.optionLabelText = options.optionLabel;
+      options.optionLabelValue = '';
+    }
+    
+    config.optionLabel = {};
+    config.optionLabel[config.dataTextField] = options.optionLabelText === undefined ? "" : options.optionLabelText;
+    config.optionLabel[config.dataValueField] = options.optionLabelValue === undefined ? null : options.optionLabelValue;
+    return config;
+  },
+  getConfigComboboxSync: function(options, scope) {
     var dataSource = {};
-    var dataSource = {};
-    var config = {};
-
+    
     if (options) {
       if (!options.dynamic || options.dynamic=='false') {
-        valuePrimitive = true;
-        options.dataValueField = options.dataValueField || 'value';
-        options.dataTextField = options.dataTextField || 'key';
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
         for (let i = 0; i < dataSource.data.length; i++) {
           try {
             if (dataSource.data[i].key && dataSource.data[i].key.startsWith('cronapi.server(')) {
-              dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.toPromise().run(');
+              dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.notAsync().run(');
             }
-  
-            let keyEvaluated =  await scope.$eval(dataSource.data[i].key);
+            
+            let keyEvaluated = scope.$eval(dataSource.data[i].key);
             dataSource.data[i].key = keyEvaluated !== undefined && keyEvaluated !== null ? keyEvaluated : dataSource.data[i].key;
           }
           catch (e) {
@@ -5501,71 +5568,41 @@ app.kendoHelper = {
           }
         }
       }
-      else if (options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
-        options.dataSourceScreen.entityDataSource.append = true;
-        dataSource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
-        dataSource.transport.read = app.kendoHelper.getEventReadCombo;
-        valuePrimitive = (options.valuePrimitive == null ? false : (typeof options.valuePrimitive == 'string' ? options.valuePrimitive == 'true' : options.valuePrimitive));
-      }
-
-      if (!options.dataValueField || options.dataValueField.trim() == '') {
-        options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
-      }
-
-      var getFieldType = function(field) {
-        var fields = options.dataSourceScreen.entityDataSource.schemaFields;
-        for (count = 0; count < fields.length; count++) {
-          if (field == fields[count].name) {
-            return fields[count].type.toLowerCase();
-            break;
-          }
-        }
-
-        return null;
-      }
-
-      var isValidDateType = function(field) {
-        var dateTypes = ["date", "time", "datetime"];
-        if(dateTypes.indexOf(field) > -1){
-          return field;
-        }
-        return null;
-      }
-
-      if (!options.customTemplate) {
-        if(options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
-          if (options.format || (isValidDateType(getFieldType(options.dataTextField)))) {
-            options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
-            options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
-          }
-        }
-      }
-
-      var config = {
-        dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
-        dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
-        dataSource: dataSource,
-        headerTemplate: (options.headerTemplate == null ? undefined : options.headerTemplate),
-        template: (options.template == null ? undefined : options.template),
-        placeholder: (options.placeholder == null ? undefined : options.placeholder),
-        footerTemplate: (options.footerTemplate == null ? undefined : options.footerTemplate),
-        filter: (options.filter == null ? undefined : options.filter),
-        valuePrimitive : valuePrimitive,
-        valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
-        suggest: true
-      };
-
-      if (options.optionLabel) {
-        options.optionLabelText = options.optionLabel;
-        options.optionLabelValue = '';
-      }
-
-      config.optionLabel = {};
-      config.optionLabel[config.dataTextField] = options.optionLabelText === undefined ? "" : options.optionLabelText;
-      config.optionLabel[config.dataValueField] = options.optionLabelValue === undefined ? null : options.optionLabelValue;
+      
+      config = this.parseOptionsCronToConfigKendo(options, dataSource, scope);
+      
+      return config;
     }
-
-    return config;
+    
+    return {};
+  },
+  getConfigCombobox: async function(options, scope) {
+    var dataSource = {};
+    
+    if (options) {
+      if (!options.dynamic || options.dynamic=='false') {
+        dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
+        for (let i = 0; i < dataSource.data.length; i++) {
+          try {
+            if (dataSource.data[i].key && dataSource.data[i].key.startsWith('cronapi.server(')) {
+              dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.toPromise().run(');
+            }
+            
+            let keyEvaluated = await scope.$eval(dataSource.data[i].key);
+            dataSource.data[i].key = keyEvaluated !== undefined && keyEvaluated !== null ? keyEvaluated : dataSource.data[i].key;
+          }
+          catch (e) {
+            dataSource.data[i].key = dataSource.data[i].key;
+          }
+        }
+      }
+      
+      config = this.parseOptionsCronToConfigKendo(options, dataSource, scope);
+      
+      return config;
+    }
+    
+    return {};
   },
   getConfigDate: function(translate, options) {
     var config = {};
