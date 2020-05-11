@@ -95,6 +95,11 @@
       "file": "index.html",
       "script": "plugins/cronapi-js/dist/cronapi.min.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/angular-ui-select/dist/select.min.js",
+      "type": "script"
     }
   ],
   "removes": [
