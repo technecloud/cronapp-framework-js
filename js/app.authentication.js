@@ -1,6 +1,7 @@
 var cronappModules = [
   'ui.router',
   'ui-select-infinity',
+  'ui.select',
   'ngResource',
   'ngSanitize',
   'custom.controllers',
