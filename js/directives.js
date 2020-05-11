@@ -3826,6 +3826,7 @@
             }
 
             var autoComplete = $element.kendoAutoComplete(options).data('kendoAutoComplete');
+            autoComplete.enable(true);
 
             if (ngModelCtrl) {
               ngModelCtrl.$formatters.push(function (value) {
