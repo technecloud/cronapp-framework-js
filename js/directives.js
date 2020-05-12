@@ -451,17 +451,18 @@
           }
         }
       })
-
-      .directive('cronappSecurity', function() {
+  
+      .directive('cronappSecurity', function($rootScope) {
         return {
           restrict: 'A',
+          priority: Number.MIN_SAFE_INTEGER,
           link: function(scope, element, attrs) {
             var roles = [];
             var user = JSON.parse(localStorage.getItem('_u'))
             if (user && user.roles) {
               roles = user.roles.toLowerCase().split(",");
             }
-
+          
             var perms = parsePermission(attrs.cronappSecurity);
             var show = false;
             var enabled = false;
@@ -476,7 +477,7 @@
                 }
               }
             }
-
+          
             for (var i=0;i<roles.length;i++) {
               var role = roles[i].trim();
               if (role) {
@@ -488,18 +489,28 @@
                 }
               }
             }
-
-            if (!show) {
-              $(element).hide();
-            }
-
-            if (!enabled) {
-              $(element).find('*').addBack().attr('disabled', true);
-            }
+          
+            let $element = $(element);
+            let applyPermission = () => {
+              if (!show) {
+                $element.hide();
+              }
+              if (!enabled) {
+                $element.find('*').addBack().attr('disabled', true);
+              }
+            };
+          
+            let wait = setInterval(()=>{
+              if ($rootScope.renderFinished) {
+                applyPermission();
+                clearInterval(wait);
+              }
+            });
+          
           }
         }
       })
-
+    
       .directive('qr', ['$window', function($window){
         return {
           restrict: 'A',
