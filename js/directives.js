@@ -1461,26 +1461,28 @@
                     );
                   },
                   create: (create) => {
-                    let item = this.parseToDatasourceSchema(datasource, create.data);
-                    this.mergeSchedulerEventWithDatasourceActive(datasource, item);
-                    datasource.insert(
-                      datasource.active,
-                      (data) => {
-                        let newItem = angular.copy(data);
-                        create.success(newItem);
-                        datasource.fetch({}, {
-                          success: (allData) => {
-                            this.setDatasourceActiveItem(datasource, newItem, 'id');
-                          },
-                          canceled: function(data) {
-                            // notify the data source that the request failed
-                          }
-                        }, false);
-                      },
-                      (data) => {
-                        create.error(angular.copy(data));
-                      }
-                    );
+                    datasource.startInserting(null, (active) => {
+                      let item = this.parseToDatasourceSchema(datasource, create.data);
+                      this.mergeSchedulerEventWithDatasourceActive(datasource, item);
+                      datasource.insert(
+                        datasource.active,
+                        (data) => {
+                          let newItem = angular.copy(data);
+                          create.success(newItem);
+                          datasource.fetch({}, {
+                            success: (allData) => {
+                              this.setDatasourceActiveItem(datasource, newItem, 'id');
+                            },
+                            canceled: function(data) {
+                              // notify the data source that the request failed
+                            }
+                          }, false);
+                        },
+                        (data) => {
+                          create.error(angular.copy(data));
+                        }
+                      );
+                    });
                   },
                   destroy: function(destroy) {
                     datasource.removeSilent(
@@ -1516,7 +1518,8 @@
             let parsedObj = {};
             for(let key in datasource.schema) {
               let name = datasource.schema[key].name;
-              parsedObj[name] = (object[name] ? object[name] : null);
+              if (object[name])
+                parsedObj[name] = object[name];
             }
             return parsedObj;
           },
