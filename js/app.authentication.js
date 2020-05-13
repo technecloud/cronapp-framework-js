@@ -385,6 +385,8 @@ var app = (function() {
                       }
                     }
                   }
+  
+                  $rootScope.renderFinished = true;
               });
           });
       });
