@@ -1300,9 +1300,13 @@
               id: "id", // The "id" of the event is the "taskId" field
               fields: {}
             };
+            //Leaving the user to decide which fields will be mandatory
             for(let key in datasourceFields) {
-              model.fields[key] = {from: datasourceFields[key].name};
+              model.fields[key] = {from: datasourceFields[key].name, validation: { required: !datasourceFields[key].nullable } };
             }
+            //Forcing the title to be mandatory
+            model.fields["title"].validation.require = true;
+    
             return model
           },
           mergeSchedulerEventWithDatasourceActive: (datasource, item) => {
