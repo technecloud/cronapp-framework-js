@@ -4253,15 +4253,15 @@
           }
         }
       })
-
+  
       .directive('cronDynamicMenu', ['$compile', '$translate', function($compile, $translate){
         'use strict';
-
+      
         return {
           restrict: 'EA',
           populateItems: function(items) {
             var template = '';
-
+          
             if (items && items != null && Array.isArray(items)) {
               items.forEach(function(item) {
                 var security = (item.security && item.security != null) ? ' cronapp-security="' + item.security + '" ' : '';
@@ -4271,20 +4271,20 @@
                 var title = '<span></span>';
                 if (item.title)
                   title = '<span>' + $translate.instant(item.title) + '</span>';
-
+              
                 template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>';
               });
-
+            
               if (template != '') {
                 template = '<ul class="dropdown-menu">' + template + '</ul>';
               }
             }
-
+          
             return template;
           },
-          populateMenu: function(menuOptions) {
+          populateMenu: function(menuOptions, isVertical) {
             var template = '';
-
+          
             if (menuOptions && menuOptions!= null && menuOptions.subMenuOptions && menuOptions.subMenuOptions != null && Array.isArray(menuOptions.subMenuOptions)){
               var _populateItems = this.populateItems;
               menuOptions.subMenuOptions.forEach(function(menu) {
@@ -4296,43 +4296,48 @@
                 var title = '<span></span>'
                 if (menu.title)
                   title = '<span>' + $translate.instant(menu.title) + '</span>';
-
+              
                 template = template  + '\
-              <li class="dropdown component-holder crn-menu-item" data-component="crn-menu-item"' + security + hide + '>\
-                <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
-                ' + iconClass + title + caret +  '\
-                </a> \
-                ' + _populateItems(menu.menuItems) + '\
-              </li>';
+                <li class="dropdown component-holder crn-menu-item '+(isVertical?'col-md-12 padding-0':'')+'" data-component="crn-menu-item"' + security + hide + '>\
+                  <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
+                  ' + iconClass + title + caret +  '\
+                  </a> \
+                  ' + _populateItems(menu.menuItems) + '\
+                </li>';
               })
             }
-
+          
             return template;
           },
           link: function(scope, element, attrs) {
             $translate.onReady(() => {
-              var TEMPLATE_MAIN = '<ul class="nav navbar-nav" style="float:left"></ul>';
-            var options = {};
-            try {
-              options = JSON.parse(attrs.options);
-            } catch(e) {
-              console.log('CronDynamicMenu: Invalid configuration!')
-            }
-
-            var main = $(TEMPLATE_MAIN);
-            var menus = this.populateMenu(options);
-            main.append(menus);
-
-            var newElement = angular.element(main);
-            element.html('');
-            element.append(main);
-            element.attr('id' , null);
-            $compile(newElement)(scope);
-
-          });
+              //Somente fica na vertical se for o menu principal da IDE (E estiver configurado para isso)
+              let isVertical =  element.closest('.crn-navigator-vertical').length;
+            
+              var TEMPLATE_MAIN = '<ul class="nav navbar-nav '+(isVertical?'col-md-12 padding-0':'')+' " style="float:left"></ul>';
+              var options = {};
+              try {
+                options = JSON.parse(attrs.options);
+              } catch(e) {
+                console.log('CronDynamicMenu: Invalid configuration!')
+              }
+            
+              var main = $(TEMPLATE_MAIN);
+              var menus = this.populateMenu(options, isVertical);
+              main.append(menus);
+              if (isVertical) {
+                main.append( $('#navbar2 li:first').addClass('col-md-12 padding-0') );
+              }
+            
+              var newElement = angular.element(main);
+              element.html('');
+              element.append(main);
+              element.attr('id' , null);
+              $compile(newElement)(scope);
+            });
           }
         }
-      }])
+    }])
 
       .directive('ngInitialValue', function($parse) {
         return {
