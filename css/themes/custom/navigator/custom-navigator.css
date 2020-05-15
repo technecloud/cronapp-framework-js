@@ -2,6 +2,14 @@
     margin-top: 7.5vh;
 }
 
+#navbar {
+    overflow: hidden !important;
+}
+
+.padding-0 {
+    padding: 0px;
+}
+
 .main-view-vertical{
     display: inline-block;
     width: 73vw;
