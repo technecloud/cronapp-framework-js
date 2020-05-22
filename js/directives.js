@@ -451,7 +451,7 @@
           }
         }
       })
-  
+
       .directive('cronappSecurity', function($rootScope) {
         return {
           restrict: 'A',
@@ -462,7 +462,7 @@
             if (user && user.roles) {
               roles = user.roles.toLowerCase().split(",");
             }
-          
+
             var perms = parsePermission(attrs.cronappSecurity);
             var show = false;
             var enabled = false;
@@ -477,7 +477,7 @@
                 }
               }
             }
-          
+
             for (var i=0;i<roles.length;i++) {
               var role = roles[i].trim();
               if (role) {
@@ -489,7 +489,7 @@
                 }
               }
             }
-          
+
             let $element = $(element);
             let applyPermission = () => {
               if (!show) {
@@ -499,18 +499,18 @@
                 $element.find('*').addBack().attr('disabled', true);
               }
             };
-          
+
             let wait = setInterval(()=>{
               if ($rootScope.renderFinished) {
                 applyPermission();
                 clearInterval(wait);
               }
             });
-          
+
           }
         }
       })
-    
+
       .directive('qr', ['$window', function($window){
         return {
           restrict: 'A',
@@ -1282,7 +1282,7 @@
           }
         };
       })
-  
+
     .directive('cronScheduler', ['$compile', '$translate', function($compile, $translate) {
       return {
         estrict: 'E',
@@ -1303,7 +1303,7 @@
           for(let key in datasourceFields) {
             model.fields[key] = {from: datasourceFields[key].name, validation: { required: !datasourceFields[key].nullable } };
           }
-        
+
           return model
         },
         mergeSchedulerEventWithDatasourceActive: (datasource, item) => {
@@ -1358,8 +1358,8 @@
               visibleViews.push('workWeek');
             }
           }
-        
-        
+
+
           let cronSchedulerProperties = {
             showWorkHours: options.showWorkHours,
             selectable: true,
@@ -1375,21 +1375,21 @@
             navigate: function(e) {
               //Navigated from
               let view = e.sender.view();
-            
+
               // The view has:
               // A startDate method which returns the start date of the view.
               // An endDate method which returns the end date of the view.
-            
+
               //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
             },
             dataBound: function(e) {
               //Navigated to
               let view = e.sender.view();
-            
+
               // The view has:
               // A startDate method which returns the start date of the view.
               // An endDate method which returns the end date of the view.
-            
+
               //kendo.format("view:: start: {0:d}; end: {1:d};", view.startDate(), view.endDate())
             },
             change: (e) => {
@@ -1403,24 +1403,24 @@
             edit: function (e) {
               if (options && options.allowCustomAction) {
                 let container = e.container;
-              
+
                 let btnLabel = options.customActionLabel ? options.customActionLabel : $translate.instant(Details);
                 /* ACTION: ADD custom button */
                 let detailButton = $('<a class="k-button">' + btnLabel + '</a>');
-              
+
                 //wire its click event
                 detailButton.click(function (e) {
                   scope.safeApply(() => {
                     scope.$eval(generateBlocklyCall(options.customActionBlockly));
                   });
                 });
-              
+
                 //add the button to the container
                 let buttonsContainer = container.find(".k-edit-buttons");
                 buttonsContainer.append(detailButton);
-              
+
               }
-            
+
             },
             dataSource: {
               batch: false, // Enable batch updates
@@ -1430,7 +1430,7 @@
                   // verify if lastSearchedPeriod is the same searched now. If so ignore search.
                   if(needsToFetchData(read.data)) {
                     lastSearchedPeriod = read.data;
-                  
+
                     if(jQuery.isEmptyObject(read.data)) {
                       read.data[options.schedulerDataModel.start.name] = schedulerStartDate;
                     }
@@ -1533,7 +1533,7 @@
             let name = datasource.schema[key].name;
             parsedObj[name] = object[name];
           }
-        
+
           parsedObj[options.schedulerDataModel.isAllDay.name] = parsedObj[options.schedulerDataModel.isAllDay.name] === true;
           if (!parsedObj[options.schedulerDataModel.id.name])
             delete parsedObj[options.schedulerDataModel.id.name];
@@ -1565,28 +1565,28 @@
             //TODO ADD Message to not relation fields added
             return;
           }
-        
+
           let baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
           if($translate.use() === 'pt_br') {
             baseUrl += "pt-BR.min.js";
           } else {
             baseUrl += "en-US.min.js";
           }
-        
+
           this.initCulture();
-        
+
           $.getScript(baseUrl, function() {
-          
+
             let kendoDatasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, true, options.dataSourceScreen.rowsPerPage);
-          
+
             let schedulerProperties = this.getSchedulerProperties(options, datasource, scope);
-          
+
             schedulerElement.kendoScheduler(schedulerProperties);
-          
+
             // Get reference to the kendo.ui.Scheduler instance
             let scheduler = schedulerElement.data("kendoScheduler");
             let lastView;
-          
+
             scheduler.bind('navigate', function(e) {
               scheduler._previousView = e.sender.view();
             });
@@ -1602,9 +1602,9 @@
                   scheduler._previousView = scheduler._currentView;
                 }
               }
-            
+
             });
-          
+
             function compare(arr1, arr2) {
               if(!arr1 || !arr2) return
               let result;
@@ -1618,14 +1618,14 @@
               return result
             }
           }.bind(this));
-        
+
           element.html(schedulerElement);
           $compile(schedulerElement)(element.scope());
         }
       }
     }])
-  
-  
+
+
     .directive('cronGrid', ['$compile', '$translate', function($compile, $translate) {
       return {
         restrict: 'E',
@@ -1658,7 +1658,7 @@
             };
             return obj;
           }.bind(this);
-        
+
           var createTemplateButton = function(buttonId, functionToCall, title, iconClass) {
             var template = '';
             if (toolbarButton.type == "SaveOrCancelChanges") {
@@ -1673,24 +1673,24 @@
             else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
               template = '<a role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
             }
-          
+
             template = template
               .split('#BUTTONID#').join(buttonId)
               .split('#FUNCTIONCALL#').join(this.encodeHTML(functionToCall))
               .split('#TITLE#').join(title)
               .split('#ICONCLASS#').join(iconClass);
-          
+
             var cronappDatasource = eval(options.dataSourceScreen.entityDataSource.name);
-          
+
             var waitRender = setInterval(function() {
               if ($('#' + buttonId).length > 0) {
                 scope.safeApply(function() {
                   var x = angular.element($('#' + buttonId ));
                   $compile(x)(scope);
                 });
-              
+
                 $('#' + buttonId).click(function() {
-                
+
                   var currentGrid = options.grid;
                   var selectedRows = [];
                   currentGrid.select().each(function() {
@@ -1700,12 +1700,12 @@
                         selectedRows.push(dsRow);
                     });
                   });
-                
+
                   var consolidated = {
                     item: selectedRows.length ? cronappDatasource.active : null,
                     index: selectedRows.length ? cronappDatasource.cursor : null
                   }
-                
+
                   let selectedRowsKeyOrObj = [];
                   if(options.fieldType && options.fieldType === 'key') {
                     selectedRows.forEach(item => {
@@ -1715,7 +1715,7 @@
                   else {
                     selectedRowsKeyOrObj = selectedRows;
                   }
-                
+
                   var contextVars = {
                     'currentData': cronappDatasource.data,
                     'datasource': cronappDatasource.copyWithoutAngularObj(),
@@ -1727,17 +1727,17 @@
                     'selectedKeys': selectedRows.length ? cronappDatasource.getKeyValues(cronappDatasource.findObjInDs(selectedRows[0]), true) : null,
                     'selectedRows': selectedRowsKeyOrObj
                   };
-                
+
                   scope.$eval(functionToCall, contextVars) ;
                 }.bind(this));
-              
+
                 clearInterval(waitRender);
               }
             }.bind(this),200);
-          
+
             return template;
           }.bind(this);
-        
+
           var call = '';
           if (toolbarButton.type == 'Customized')
             call = toolbarButton.execute;
@@ -1745,13 +1745,13 @@
             call = toolbarButton.methodCall;
           else
             call = generateBlocklyCall(toolbarButton.blocklyInfo);
-        
+
           var title = toolbarButton.title == undefined ? '': toolbarButton.title;
           buttonCall = generateObjTemplate(call, title, toolbarButton.iconClass);
           return buttonCall;
         },
         generateModalSaveOrCancelButtonCall: function(buttonType, functionToCall, datasourceName, modalId, scope) {
-        
+
           var buttonId = app.common.generateId();
           var compileTemplateAngular = function(buttonType, functionToCall, datasourceName, modalId) {
             var template;
@@ -1766,7 +1766,7 @@
               .split('#ARIALABELSAVE#').join($translate.instant('SaveChanges'))
               .split('#ARIALABELCANCEL#').join($translate.instant('CancelChanges'))
               .split('#MODALID#').join(modalId);
-          
+
             var waitRender = setInterval(function() {
               if ($('#' + buttonId).length > 0) {
                 scope.safeApply(function() {
@@ -1776,7 +1776,7 @@
                 });
               }
             },200);
-          
+
             return template;
           };
           buttonCall = compileTemplateAngular(buttonType, functionToCall, datasourceName, modalId);
@@ -1834,7 +1834,7 @@
           });
           return selected;
         },
-      
+
         resizeGridUsingWidthForDevice: function(grid){
           for (let idx = 0; idx < grid.columns.length; idx++) {
             let widthDevice = this.getWidthForDevice(grid.columns[idx]);
@@ -1845,22 +1845,22 @@
               grid.showColumn(idx);
           }
         },
-      
+
         getWidthForDevice: function(column) {
           let widthDeviceBig = 1210;
           let widthDeviceDesktop = 1002;
           let widthDeviceMedium = 778;
           let widthDeviceSmall = 424;
-        
+
           let currentWindowWidth = $(window).width();
-        
+
           let getDevice = function(device) {
             let wd;
             column.widthDevices.forEach( d => {
               if (d.device === device)
                 wd = d;
             });
-          
+
             //Se não tiver definido o width para determinada resolução procura a proxima acima, se n tiver acima, pega a que existir
             if (wd === undefined) {
               if (device === "deviceSmall")
@@ -1874,14 +1874,14 @@
             }
             return wd;
           };
-        
-        
+
+
           let widthDevice = { width: column.width };
           if (column.visible !== undefined && column.visible !== null)
             widthDevice.visible = column.visible;
           else
             widthDevice.visible = !column.hidden;
-        
+
           if (column.widthDevices !== null && column.widthDevices !== undefined && column.widthDevices.length > 0) {
             if (currentWindowWidth >= widthDeviceBig)
               widthDevice = getDevice("deviceBig");
@@ -1894,10 +1894,10 @@
           }
           return widthDevice;
         },
-      
+
         getColumns: function(options, datasource, scope, tooltips) {
           var helperDirective = this;
-        
+
           function getTemplate(column) {
             var template = "#=showTreatedValue("+column.field+")#";
             if (column.inputType == 'switch') {
@@ -1929,7 +1929,7 @@
             }
             return template;
           }
-        
+
           function hasMask(type){
             if(type && (typeof type === "string")){
               return (type.startsWith('date') || type.startsWith('month')
@@ -1940,13 +1940,13 @@
               return false;
             }
           }
-        
+
           function getFormat(column) {
             if (!hasMask(column.type))
               return column.format;
             return undefined;
           }
-        
+
           function isRequired(fieldName) {
             var required = false;
             var selected = null;
@@ -1957,13 +1957,13 @@
               required = !selected.nullable;
             return required;
           }
-        
+
           function getEditor(column) {
             return editor.bind(this);
           }
-        
+
           async function editor(container, opt) {
-          
+
             var column = this.getColumnByField(options, opt.field);
             if (column.visibleCrud != undefined && !column.visibleCrud) {
               container.parent().find('.k-edit-label [for='+ column.field +']').parent().remove();
@@ -2008,14 +2008,14 @@
                   var x = angular.element($('#' + buttonId ));
                   $compile(x)(scope);
                   clearInterval(waitRender);
-                
+
                   $('#' + buttonId).on('change', function() {
                     setTimeout(function() {
                       opt.model[opt.field] = $('#' + buttonId ).data('rawvalue');
                       opt.model.dirty = true;
                       opt.model.dirtyFields[opt.field] = true;
                     }.bind(this));
-                  
+
                   });
                 }
               },10);
@@ -2030,7 +2030,7 @@
               $input.attr('class', 'k-input k-textbox');
               $input.data('initial-value', opt.model[opt.field]);
               $input.appendTo(container);
-            
+
               var waitRender = setInterval(function() {
                 let myElement = $('#' + buttonId);
                 if (myElement.length > 0) {
@@ -2042,16 +2042,16 @@
                     opt.model.dirty = true;
                     opt.model.dirtyFields[opt.field] = true;
                   });
-                
+
                   var x = angular.element(myElement);
                   $compile(x)(scope);
                   clearInterval(waitRender);
                 }
               },10);
             }
-          
+
           }
-        
+
           function getCommandForEditButtonDatabase(opt, command) {
             var cmd;
             let idForCommand = app.common.generateId();
@@ -2071,7 +2071,7 @@
                     if (!options.hideModalButtons) {
                       helperDirective.addButtonsInModal(options.popupEdit, cronappDatasource.name, scope);
                     }
-                  
+
                     var currentItem = cronappDatasource.goTo(item);
                     cronappDatasource.startEditing(currentItem, function(xxx) {});
                     if (opt.editable != 'datasource') {
@@ -2094,13 +2094,13 @@
             }
             return cmd;
           }
-        
+
           function getCommandForRemoveButtonDatabase(opt, command) {
             var cmd;
             let idForCommand = app.common.generateId();
             let ariaLabel = $translate.instant('Remove');
             let template = `<a href class='k-button k-grid-delete k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='k-icon k-i-close'></span></a>`;
-          
+
             if ((opt.editable == 'popupCustom') || (opt.editable == 'datasource')) {
               cmd = {
                 name: idForCommand,
@@ -2125,7 +2125,7 @@
             }
             return cmd;
           }
-        
+
           function getAggregate(column) {
             if (column && column.aggregates) {
               var aggregates = [];
@@ -2137,27 +2137,27 @@
             }
             return undefined;
           }
-        
+
           function getAggregateFooter(column, group) {
             if (column && column.aggregates) {
               var footer = [];
               column.aggregates.forEach(function(a) {
-              
+
                 var typeForLabel = '#=data.' + column.field + ' ? data.' + column.field + '.' + a.type + ' : 0 #';
                 if (a.type == 'average' || a.type == 'sum') {
                   typeForLabel = "#=useMask(data." + column.field  + " ? data." + column.field + "." + a.type + " : 0" + ",'" + column.format + "','" + column.type + "')#";
                 }
-              
+
                 var typeForTemplate = group ? a.groupFooterTemplate : a.footerTemplate;
-              
+
                 if (typeForTemplate) {
                   typeForTemplate = typeForTemplate + ': ';
                 } else {
                   typeForTemplate = '';
                 }
-              
+
                 var footerTemplate = typeForTemplate + typeForLabel;
-              
+
                 if (column.alignment) {
                   // alinha o rodapé ao conteúdo quando o alinhamento selecionado for 'Direita'
                   if (column.alignment === 'right' && !group) {
@@ -2166,40 +2166,40 @@
                     footerTemplate = '<div style="text-align: ' + column.alignment + '">' + footerTemplate + '</div>';
                   }
                 }
-              
+
                 footer.push(footerTemplate);
               });
               return footer.join('<br/>');
             }
             return undefined;
           }
-        
+
           function getAggregateHeader(column) {
             if (hasMask(column.type) || (column.format && column.format != 'null')) {
               return column.headerText +": #=useMask(value,'"+column.format+"','"+column.type+"')#";
             }
             return undefined;
           }
-        
+
           function getAttributes(column) {
             if (column && column.alignment) {
               var attributes = {
                 style: "text-align: " + column.alignment + ";"
               };
-            
+
               return attributes;
             }
             return undefined;
           }
-        
+
           var columns = [];
           if (options.columns) {
             options.columns.forEach(function(column)  {
-            
+
               let widthDevice = this.getWidthForDevice(column);
-            
+
               if (column.dataType == "Database") {
-              
+
                 var addColumn = {
                   field: column.field,
                   title: column.headerText,
@@ -2225,7 +2225,7 @@
                 //Se não for editavel, não adiciona colunas de comando
                 if (options.editable != 'no') {
                   var command = column.command.split('|');
-                
+
                   var commands = [];
                   command.forEach(function(f) {
                     var cmd;
@@ -2237,7 +2237,7 @@
                     }
                     commands.push(cmd);
                   }.bind(this));
-                
+
                   var addColumn = {
                     command: commands,
                     title: column.headerText,
@@ -2251,7 +2251,7 @@
                 var label = column.label == undefined ? '': column.label;
                 if (column.iconClass && label)
                   label = '&nbsp;' + label;
-              
+
                 var className = '';
                 if (column.dataType == "CustomizedLink") {
                   className = 'k-custom-link';
@@ -2261,23 +2261,23 @@
                 }
                 if (column.theme)
                   className += ' ' + column.theme;
-              
+
                 var tooltip = '';
                 if (column.tooltip && column.tooltip.length)
                   tooltip = column.tooltip;
                 else if (column.label && column.label.length)
                   tooltip = column.label;
-              
+
                 if (tooltip)  {
                   var classForTooltip = app.common.generateId();
                   tooltips[classForTooltip] = tooltip;
                   className += ' ' + classForTooltip;
                 }
-              
+
                 let idForCommand = app.common.generateId();
                 let ariaLabel = tooltip || label || idForCommand;
                 let template = `<a href class='k-button ${className} k-grid-${idForCommand}' aria-label='${ariaLabel}'><span class='${column.iconClass}'></span>${label}</a>`;
-              
+
                 var addColumn = {
                   command: [{
                     name: idForCommand,
@@ -2286,18 +2286,18 @@
                       e.preventDefault();
                       var tr = $(e.target).closest("tr");
                       var grid = tr.closest('table');
-                    
+
                       var itemAsObj = this.dataItem(tr);
                       var item = this.dataItem(tr);
                       var index = $(grid.find('tbody')[0]).children().index(tr)
-                    
-                    
+
+
                       var call = undefined;
                       if (column.dataType == "Customized" || column.dataType == "CustomizedLink")
                         call = column.execute;
                       else
                         call = generateBlocklyCall(column.blocklyInfo);
-                    
+
                       var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
                       var currentGrid = options.grid;
                       var selectedRows = [];
@@ -2308,12 +2308,12 @@
                             selectedRows.push(dsRow);
                         });
                       });
-                    
+
                       if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
                         var tr = e.currentTarget.parentElement.parentElement;
                         this.select(tr);
                       }
-                    
+
                       let selectedRowsKeyOrObj = [];
                       if(options.fieldType && options.fieldType === 'key') {
                         item = helperDirective.changeObjectField(cronappDatasource, cronappDatasource.findObjInDs(item));
@@ -2324,12 +2324,12 @@
                       else {
                         selectedRowsKeyOrObj = selectedRows;
                       }
-                    
+
                       var consolidated = {
                         item: item,
                         index: index
                       }
-                    
+
                       var contextVars = {
                         'currentData': cronappDatasource.data,
                         'datasource': cronappDatasource.copyWithoutAngularObj(),
@@ -2341,7 +2341,7 @@
                         'selectedKeys': cronappDatasource.getKeyValues(cronappDatasource.findObjInDs(itemAsObj), true),
                         'selectedRows': selectedRowsKeyOrObj
                       };
-                    
+
                       cronappDatasource.goTo(itemAsObj);
                       scope.$eval(call, contextVars);
                       return;
@@ -2361,7 +2361,7 @@
               }
             }.bind(this));
           }
-        
+
           return columns;
         },
         getPageAble: function(options) {
@@ -2370,15 +2370,15 @@
             pageSizes: options.allowSelectionTotalPageToShow,
             buttonCount: 5
           };
-        
+
           if (!options.allowPaging)
             pageable = options.allowPaging;
-        
+
           return pageable;
         },
         getToolbar: function(options, scope) {
           var toolbar = [];
-        
+
           options.toolBarButtons.forEach(function(toolbarButton) {
             if (toolbarButton.type == "Native") {
               //Se a grade for editavel, adiciona todos os commands
@@ -2395,7 +2395,7 @@
                   }
                   var button = this.generateToolbarButtonCall(toolbarButton, scope, options);
                   toolbar.push(button);
-                
+
                   if (!options.hideModalButtons) {
                     this.addButtonsInModal(popupInsert, datasourceName, scope);
                   }
@@ -2426,9 +2426,9 @@
               };
               toolbar.push(buttonTemplate);
             }
-          
+
           }.bind(this));
-        
+
           if (toolbar.length == 0)
             toolbar = undefined;
           return toolbar;
@@ -2468,7 +2468,7 @@
           }
         },
         generateKendoGridInit: function(options, scope, ngModelCtrl, attrs, tooltips) {
-        
+
           var helperDirective = this;
           function detailInit(e) {
             //Significa que está fechando o detalhe (não é para fazer nada)
@@ -2476,7 +2476,7 @@
               collapseCurrent(this, e.detailRow, e.masterRow);
               return;
             }
-          
+
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             if (!(cronappDatasource.inserting || cronappDatasource.editing)) {
               if (this.selectable) {
@@ -2489,72 +2489,72 @@
               //Obtendo todos os detalhes da grade atual, fechando e removendo todos (exceto o que esta sendo aberto agora)
               e.sender.options.listCurrentOptions.forEach(function(currentOptions) {
                 var currentKendoGridInit = helperDirective.generateKendoGridInit(currentOptions, scope, undefined, undefined, tooltips);
-              
+
                 var $gridDiv = $("<div/>");
                 var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
                 grid.dataSource.transport.options.grid = grid;
                 currentOptions.grid = grid;
                 //Resize da tela para ajustar obter o widthDevices correto
                 window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
-              
+
                 helperDirective.setTooltips($gridDiv, tooltips);
               });
             }
             else
               collapseAllExcecptCurrent(this, null, null);
-          
-          
+
+
           }
-        
+
           var collapseAllExcecptCurrent = function(grid, trDetail, trMaster) {
-          
+
             var masters = grid.table.find('.k-master-row');
             masters.each(function() {
               if (trMaster == null || this != trMaster[0]) {
                 grid.collapseRow(this);
               }
             });
-          
+
             var details = grid.table.find('.k-detail-row');
             details.each(function() {
               if (trDetail == null || this != trDetail[0]) {
                 $(this).remove();
               }
             });
-          
+
           };
-        
+
           var collapseCurrent = function(grid, trDetail, trMaster) {
-          
+
             var masters = grid.table.find('.k-master-row');
             masters.each(function() {
               if (trMaster != null || this == trMaster[0]) {
                 grid.collapseRow(this);
               }
             });
-          
+
             var details = grid.table.find('.k-detail-row');
             details.each(function() {
               if (trDetail != null || this == trDetail[0]) {
                 $(this).remove();
               }
             });
-          
+
           };
-        
+
           var setToActiveInCronappDataSource = function(item) {
             var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
             if (!(cronappDatasource.inserting || cronappDatasource.editing))
               scope.safeApply(cronappDatasource.goTo(item));
           };
-        
+
           var compileListing = function(e) {
             if (e.sender.tbody && e.sender.tbody.length) {
-            
+
               var toCompile = e.sender.tbody;
               if (toCompile.parent() && toCompile.parent().parent() && toCompile.parent().parent().parent() )
                 toCompile = toCompile.parent().parent().parent();
-            
+
               scope.safeApply(function() {
                 var trs = $(toCompile);
                 var x = angular.element(trs);
@@ -2565,7 +2565,7 @@
               });
             }
           };
-        
+
           var anyFilterableColumn = function(options) {
             var hasFilterableColumn = false;
             if (options.columns) {
@@ -2580,7 +2580,7 @@
             }
             return hasFilterableColumn;
           };
-        
+
           var getVisibleColumnByIdx = function(idx) {
             var result;
             var currIdx = 0;
@@ -2595,14 +2595,14 @@
             });
             return result;
           };
-        
+
           var excelExport = function(e) {
             var sheet = e.workbook.sheets[0];
-          
+
             for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
               var row = sheet.rows[rowIndex];
               for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex ++) {
-              
+
                 var column = getVisibleColumnByIdx(cellIndex);
                 //Formata pro excel e adiciona o timezone
                 if (column && row.cells[cellIndex].value instanceof Date) {
@@ -2618,17 +2618,17 @@
               }
             }
           };
-        
-        
-        
+
+
+
           var datasource = app.kendoHelper.getDataSource(options.dataSourceScreen.entityDataSource, scope, options.allowPaging, options.pageCount, options.columns, options.groupings);
-        
+
           var columns = this.getColumns(options, datasource, scope, tooltips);
           var pageAble = this.getPageAble(options);
           var toolbar = this.getToolbar(options, scope);
           var editable = this.getEditable(options);
           var filterable = anyFilterableColumn(options);
-        
+
           var kendoGridInit = {
             toolbar: toolbar,
             pdf: {
@@ -2679,11 +2679,11 @@
                   cronappDatasource.startEditing(currentItem, function(xxx) {});
                 });
               }
-            
+
               if (attrs && attrs.ngEdit) {
                 scope.$eval(attrs.ngEdit);
               }
-            
+
               compileListing(e);
             },
             change: function(e) {
@@ -2718,11 +2718,11 @@
                 }
               }
               collapseAllExcecptCurrent(this, this.select().next(), this.select());
-            
+
               if (attrs && attrs.ngChange) {
                 scope.$eval(attrs.ngChange);
               }
-            
+
               compileListing(e);
             },
             cancel: function(e) {
@@ -2733,17 +2733,17 @@
                 if (attrs && attrs.ngCancel) {
                   scope.$eval(attrs.ngCancel);
                 }
-              
+
                 compileListing(e);
               }.bind(this));
             },
             dataBound: function(e) {
               this.dataSource.transport.options.selectActiveInGrid();
-            
+
               if (attrs && attrs.ngDataBound) {
                 scope.$eval(attrs.ngDataBound);
               }
-            
+
               for(let i=0;i<this.columns.length;i++){
                 let col = helperDirective.getColumnByField(options, this.columns[i].field);
                 if (col.visible)
@@ -2764,18 +2764,18 @@
               setTimeout(function() {
                 grid.pager.element.find("a").not(".k-state-disabled").attr("tabindex", "0");
               });
-            
+
               compileListing(e);
             }
           };
-        
+
           if (kendoGridInit.selectable) {
             if ("multiple" == options.allowSelectionRowType) {
               kendoGridInit.selectable = "multiple"
             }
           }
           kendoGridInit.originalSelectable = kendoGridInit.selectable;
-        
+
           if (attrs && attrs.ngBeforeEdit) {
             kendoGridInit.beforeEdit =  function(e) {scope.$eval(attrs.ngBeforeEdit);};
           }
@@ -2791,34 +2791,34 @@
           if (attrs && attrs.ngRemove) {
             kendoGridInit.remove = function(e) {scope.$eval(attrs.ngRemove);};
           }
-        
+
           return kendoGridInit;
-        
+
         },
         link: function (scope, element, attrs, ngModelCtrl) {
-        
+
           if (element.children().length)
             return;
-        
+
           var $templateDyn = $('<div></div>');
           var baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
           if ($translate.use() == 'pt_br')
             baseUrl += "pt-BR.min.js";
           else
             baseUrl += "en-US.min.js";
-        
-        
+
+
           this.initCulture();
           var helperDirective = this;
           $.getScript(baseUrl, function () {
-          
+
             var options = JSON.parse(attrs.options || "{}");
-          
+
             scope[options.dataSourceScreen.entityDataSource.name].batchPost = false;
             var batchMode = options.batchMode == undefined || options.batchMode;
             if (batchMode && options.editable != 'datasource' && scope[options.dataSourceScreen.entityDataSource.name] && !scope[options.dataSourceScreen.entityDataSource.name].dependentLazyPost) {
               scope[options.dataSourceScreen.entityDataSource.name].batchPost = true;
-            
+
               options.toolBarButtons = options.toolBarButtons || [];
               options.toolBarButtons.push({
                 type: "SaveOrCancelChanges",
@@ -2833,30 +2833,30 @@
                 saveButton: false
               });
             }
-          
+
             var tooltips = helperDirective.getTooltipsDefault();
             var kendoGridInit = helperDirective.generateKendoGridInit(options, scope, ngModelCtrl, attrs, tooltips);
             kendoGridInit.scrollable = attrs.scrollable === "true";
-          
+
             var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
             grid.dataSource.transport.options.grid = grid;
             options.grid = grid;
-          
+
             //Resize da tela para ajustar obter o widthDevices correto
             window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
-          
+
             helperDirective.setTooltips($templateDyn, tooltips);
-          
+
             scope.safeApply(function() {
               if (scope[options.dataSourceScreen.entityDataSource.name]) {
-              
+
                 $templateDyn.find('.k-filter-row').show();
                 $templateDyn.find('.k-pager-sizes').show();
                 $templateDyn.find('.k-pager-nav').show();
                 $templateDyn.find('.k-pager-numbers').show();
                 $templateDyn.find('.k-pager-refresh.k-link').show();
                 $templateDyn.find('.saveorcancelchanges').hide();
-              
+
                 scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
                   {
                     "pendingchanges": function(value) {
@@ -2878,7 +2878,7 @@
                     }
                   }
                 );
-              
+
                 scope[options.dataSourceScreen.entityDataSource.name].addDataSourceEvents(
                   {
                     "afterchanges": function(value) {
@@ -2889,12 +2889,12 @@
                 );
               }
             });
-          
+
           });
-        
+
           element.html($templateDyn);
           $compile($templateDyn)(element.scope());
-        
+
         }
       };
     }])
@@ -3145,7 +3145,7 @@
               }
           };
       }])
-  
+
       .directive('cronSelect', function ($compile) {
         return {
           restrict: 'E',
@@ -3158,13 +3158,13 @@
             } catch(err) {
               console.log('ComboBox invalid configuration! ' + err);
             }
-          
+
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             var parent = element.parent();
             $(parent).append('<input style="width: 100%;" ' + name + ' class="cronSelect"/>');
             var $element = $(parent).find('input.cronSelect');
-          
+
             var options = await app.kendoHelper.getConfigCombobox(select, scope);
             options.close = attrs.ngClose ? function (){scope.$eval(attrs.ngClose)}: undefined;
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
@@ -3175,10 +3175,10 @@
                 _ngModelCtrl.$setViewValue(this.value());
               }.bind(combobox));
             }
-          
+
             var combobox = $element.kendoComboBox(options).data('kendoComboBox');
             $(element).remove();
-          
+
             let internalInput;
             let waitRenderInput = setInterval(()=> {
               internalInput = $(parent).find('.k-input.cronSelect');
@@ -3205,25 +3205,25 @@
               }
             },200);
             combobox.enable(true);
-          
+
             var _scope = scope;
             var _ngModelCtrl = ngModelCtrl;
-          
+
             var initializing = true;
             if (ngModelCtrl) {
               ngModelCtrl.$formatters.push(function (value) {
                 var result = '';
-              
+
                 if ((typeof value === 'boolean') || (value)) {
                   result = value;
                 }
                 combobox.value(result);
-              
+
                 if (!initializing) {
                   if (attrs.ngChange) scope.$eval(attrs.ngChange);
                 }
-              
-              
+
+
                 initializing = false;
                 combobox.value(result);
                 return result;
@@ -3356,31 +3356,36 @@
                       else{
                         _combobox.isEvaluating = true;
                         var _dataSource = _options.dataSource.transport.options.cronappDatasource;
-                        _dataSource.findObj([options.value], false, function(data) {
-                          options.success(data);
-                          _combobox.isEvaluating = false;
-            
-                          if (select.changeCursor) {
-                            scope.safeApply(function() {
-                              if (data != null) {
-                                var found = _goTo(_scope, _combobox, data);
-                                if (!found) {
-                                  _dataSource.data.push(data);
-                                  _goTo(_scope, _combobox, data);
-                                }
-                              } else {
-                                modelSetter(_scope, null);
-                              }
-                            });
-                          } else {
-                            if (data == null) {
-                              modelSetter(_scope, null);
-                            }
-                          }
-                        }, function() {
+                        if (options.value === undefined || options.value === null || options.value === "") {
                           options.success(null);
                           _combobox.isEvaluating = false;
-                        });
+                        } else {
+                          _dataSource.findObj([options.value], false, function(data) {
+                            options.success(data);
+                            _combobox.isEvaluating = false;
+
+                            if (select.changeCursor) {
+                              scope.safeApply(function() {
+                                if (data != null) {
+                                  var found = _goTo(_scope, _combobox, data);
+                                  if (!found) {
+                                    _dataSource.data.push(data);
+                                    _goTo(_scope, _combobox, data);
+                                  }
+                                } else {
+                                  modelSetter(_scope, null);
+                                }
+                              });
+                            } else {
+                              if (data == null) {
+                                modelSetter(_scope, null);
+                              }
+                            }
+                          }, function() {
+                            options.success(null);
+                            _combobox.isEvaluating = false;
+                          });
+                        }
                       }
                     } else {
                       options.success(null);
@@ -3488,7 +3493,7 @@
                       nextValue = dataSourceScreen.data[0][select.dataValueField];
                     }
                   }
-  
+
                   if(ngModelCtrl.$modelValue != currentValue) {
                     modelSetter(_scope, nextValue);
                     forceChangeModel(nextValue);
@@ -3778,7 +3783,7 @@
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
             combobox.enable(true);
-            
+
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
             var convertArray = function(value) {
@@ -4259,15 +4264,15 @@
           }
         }
       })
-  
+
       .directive('cronDynamicMenu', ['$compile', '$translate', function($compile, $translate){
         'use strict';
-      
+
         return {
           restrict: 'EA',
           populateItems: function(items) {
             var template = '';
-          
+
             if (items && items != null && Array.isArray(items)) {
               items.forEach(function(item) {
                 var security = (item.security && item.security != null) ? ' cronapp-security="' + item.security + '" ' : '';
@@ -4277,20 +4282,20 @@
                 var title = '<span></span>';
                 if (item.title)
                   title = '<span>' + $translate.instant(item.title) + '</span>';
-              
+
                 template = template + '<li'+ hide +'><a href=""' + security + action + '>' + iconClass + title + '</a></li>';
               });
-            
+
               if (template != '') {
                 template = '<ul class="dropdown-menu">' + template + '</ul>';
               }
             }
-          
+
             return template;
           },
           populateMenu: function(menuOptions, isVertical) {
             var template = '';
-          
+
             if (menuOptions && menuOptions!= null && menuOptions.subMenuOptions && menuOptions.subMenuOptions != null && Array.isArray(menuOptions.subMenuOptions)){
               var _populateItems = this.populateItems;
               menuOptions.subMenuOptions.forEach(function(menu) {
@@ -4302,7 +4307,7 @@
                 var title = '<span></span>'
                 if (menu.title)
                   title = '<span>' + $translate.instant(menu.title) + '</span>';
-              
+
                 template = template  + '\
                 <li class="dropdown component-holder crn-menu-item '+(isVertical?'col-md-12 padding-0':'')+'" data-component="crn-menu-item"' + security + hide + '>\
                   <a href="" ' + action + ' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">\
@@ -4312,14 +4317,14 @@
                 </li>';
               })
             }
-          
+
             return template;
           },
           link: function(scope, element, attrs) {
             $translate.onReady(() => {
               //Somente fica na vertical se for o menu principal da IDE (E estiver configurado para isso)
               let isVertical =  element.closest('.crn-navigator-vertical').length;
-            
+
               var TEMPLATE_MAIN = '<ul class="nav navbar-nav '+(isVertical?'col-md-12 padding-0':'')+' " style="float:left"></ul>';
               var options = {};
               try {
@@ -4327,14 +4332,14 @@
               } catch(e) {
                 console.log('CronDynamicMenu: Invalid configuration!')
               }
-            
+
               var main = $(TEMPLATE_MAIN);
               var menus = this.populateMenu(options, isVertical);
               main.append(menus);
               if (isVertical) {
                 main.append( $('#navbar2 li:first').addClass('col-md-12 padding-0') );
               }
-            
+
               var newElement = angular.element(main);
               element.html('');
               element.append(main);
@@ -4811,7 +4816,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
           $element.mask(mask);
           useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask);
         }
-        else{  
+        else{
           options = {};
           options['placeholder'] = attrs.maskPlaceholder
           $(element).inputmask(mask, options);
@@ -4834,7 +4839,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 }
 
 function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask){
-  var $element = $(element); 
+  var $element = $(element);
   var unmaskedvalue = function() {
     $(this).data('rawvalue',$(this).inputmask('unmaskedvalue'));
   }
@@ -4859,7 +4864,7 @@ function useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask){
 }
 
 function useMaskPlugin(element, ngModelCtrl, scope, modelSetter, removeMask){
-  var $element = $(element); 
+  var $element = $(element);
   var unmaskedvalue = function() {
     if (removeMask)
       $(this).data('rawvalue',$(this).cleanVal());
@@ -5502,9 +5507,9 @@ app.kendoHelper = {
     }
   },
   parseOptionsCronToConfigKendo: function(options, dataSource, scope) {
-    
+
     let valuePrimitive = false;
-    
+
     if (!options.dynamic || options.dynamic=='false') {
       valuePrimitive = true;
       options.dataValueField = options.dataValueField || 'value';
@@ -5516,11 +5521,11 @@ app.kendoHelper = {
       dataSource.transport.read = app.kendoHelper.getEventReadCombo;
       valuePrimitive = true;
     }
-    
+
     if (!options.dataValueField || options.dataValueField.trim() == '') {
       options.dataValueField = (options.dataTextField == null ? undefined : options.dataTextField);
     }
-    
+
     var getFieldType = function(field) {
       var fields = options.dataSourceScreen.entityDataSource.schemaFields;
       for (count = 0; count < fields.length; count++) {
@@ -5529,10 +5534,10 @@ app.kendoHelper = {
           break;
         }
       }
-      
+
       return null;
     }
-    
+
     var isValidDateType = function(field) {
       var dateTypes = ["date", "time", "datetime"];
       if(dateTypes.indexOf(field) > -1){
@@ -5540,7 +5545,7 @@ app.kendoHelper = {
       }
       return null;
     }
-    
+
     if (!options.customTemplate) {
       if(options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
         if (options.format || (isValidDateType(getFieldType(options.dataTextField)))) {
@@ -5549,7 +5554,7 @@ app.kendoHelper = {
         }
       }
     }
-    
+
     var config = {
       dataTextField: (options.dataTextField == null ? undefined : options.dataTextField),
       dataValueField: (options.dataValueField == null ? undefined : options.dataValueField),
@@ -5563,12 +5568,12 @@ app.kendoHelper = {
       valueTemplate : (options.valueTemplate == null ? undefined : options.valueTemplate),
       suggest: true
     };
-    
+
     if (options.optionLabel) {
       options.optionLabelText = options.optionLabel;
       options.optionLabelValue = '';
     }
-    
+
     config.optionLabel = {};
     config.optionLabel[config.dataTextField] = options.optionLabelText === undefined ? "" : options.optionLabelText;
     config.optionLabel[config.dataValueField] = options.optionLabelValue === undefined ? null : options.optionLabelValue;
@@ -5576,7 +5581,7 @@ app.kendoHelper = {
   },
   getConfigComboboxSync: function(options, scope) {
     var dataSource = {};
-    
+
     if (options) {
       if (!options.dynamic || options.dynamic=='false') {
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
@@ -5585,7 +5590,7 @@ app.kendoHelper = {
             if (dataSource.data[i].key && dataSource.data[i].key.startsWith('cronapi.server(')) {
               dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.notAsync().run(');
             }
-            
+
             let keyEvaluated = scope.$eval(dataSource.data[i].key);
             dataSource.data[i].key = keyEvaluated !== undefined && keyEvaluated !== null ? keyEvaluated : dataSource.data[i].key;
           }
@@ -5594,17 +5599,17 @@ app.kendoHelper = {
           }
         }
       }
-      
+
       config = this.parseOptionsCronToConfigKendo(options, dataSource, scope);
-      
+
       return config;
     }
-    
+
     return {};
   },
   getConfigCombobox: async function(options, scope) {
     var dataSource = {};
-    
+
     if (options) {
       if (!options.dynamic || options.dynamic=='false') {
         dataSource.data = (options.staticDataSource == null ? undefined : options.staticDataSource);
@@ -5613,7 +5618,7 @@ app.kendoHelper = {
             if (dataSource.data[i].key && dataSource.data[i].key.startsWith('cronapi.server(')) {
               dataSource.data[i].key = dataSource.data[i].key.replace('.run(','.toPromise().run(');
             }
-            
+
             let keyEvaluated = await scope.$eval(dataSource.data[i].key);
             dataSource.data[i].key = keyEvaluated !== undefined && keyEvaluated !== null ? keyEvaluated : dataSource.data[i].key;
           }
@@ -5622,12 +5627,12 @@ app.kendoHelper = {
           }
         }
       }
-      
+
       config = this.parseOptionsCronToConfigKendo(options, dataSource, scope);
-      
+
       return config;
     }
-    
+
     return {};
   },
   getConfigDate: function(translate, options) {
