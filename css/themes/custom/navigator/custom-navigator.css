@@ -1,3 +1,5 @@
+
+
 #view-canvas .main-view-vertical{
     margin-top: 7.5vh;
 }
@@ -24,6 +26,24 @@
 }
 
 @media only screen and (min-width: 768px){
+    .crn-navigator-vertical > .navbar > .container-fluid >.navbar-header {
+        padding-left: 15px;
+    }
+}
+
+@media only screen and  (min-width: 768px) {
+    .col-md-12 {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .crn-navigator-vertical > .navbar > .container-fluid > #navbar {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 768px){
     .crn-navigator-vertical > .navbar {
         height: inherit;
     }
@@ -33,17 +53,18 @@
     .crn-navigator-vertical > .navbar > .container-fluid {
         padding-right: 0px;
         padding-left: 0px;
-        margin-left: 20px;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         height: -webkit-fill-available;
     }
+
 }
+
 
 @media only screen and (min-width: 768px){
     .crn-navigator-vertical >  .navbar > .container-fluid >.navbar-collapse,
-    .crn-navigator-vertical > .navbar > .container-fluid >.navbar-header, 
+    .crn-navigator-vertical > .navbar > .container-fluid >.navbar-header,
     .crn-navigator-vertical > .navbar > .container-fluid .navbar-collapse,
     .crn-navigator-vertical > .navbar > .container-fluid .navbar-header {
         margin-right: 0;
@@ -59,9 +80,8 @@
 
 @media only screen and (min-width: 768px){
     .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse.collapse{
-        margin-left: -25px;
-        padding-right: 15px;
-        padding-left: 15px;
+        padding-right: 0px;
+        padding-left: 0px;
         overflow-x: visible;
         -webkit-overflow-scrolling: touch;
         border-top: 1px solid transparent;
@@ -100,7 +120,7 @@
 }
 
 @media only screen and (min-width: 768px){
-    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu .dropdown-header, 
+    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu .dropdown-header,
     .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu>li>a {
         padding: 5px 15px 5px 25px;
     }
@@ -120,7 +140,7 @@
 }
 
 @media only screen and (min-width: 768px){
-    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu > li > a, 
+    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu > li > a,
     .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu  {
         position: static;
         float: none;
@@ -131,11 +151,16 @@
         -webkit-box-shadow: none;
         box-shadow: none;
         color: darkgray;
+
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 }
 
 @media only screen and (min-width: 768px){
-    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu > li > a:hover, 
+    .crn-navigator-vertical > .navbar > .container-fluid > .navbar-collapse > .navbar-nav .open .dropdown-menu > li > a:hover,
     .crn-navigator-vertical > .navbar > .navbar-nav .open .dropdown-menu > li > a:focus  {
         color: white;
     }
