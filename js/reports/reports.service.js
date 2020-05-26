@@ -106,25 +106,25 @@
         Stimulsoft.Base.StiLicense.Key = stimulsoftHelper.getKey();
       }
     }
-
+  
     this.openStimulsoftReport = function(json, parameters, datasourcesInBand, config) {
       var context = $('#reportViewContext');
       if(!context.get(0)) {
         body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
         $compile(body)(scope);
       }
-
+    
       var h = parseInt($(window).height());
       var heightRepo = (h - 200) + "px";
-
+    
       var viewerId = "StiViewer" + app.common.generateId();
       var report = new Stimulsoft.Report.StiReport();
       $rootScope.reportTitle = json.ReportAlias;
       report.load(json);
-
+    
       if (!datasourcesInBand)
         datasourcesInBand = stimulsoftHelper.getDatasourcesInBand(report);
-
+    
       if (parameters) {
         parameters.forEach(function(p) {
           datasourcesInBand.datasources.forEach(function(sp) {
@@ -138,9 +138,8 @@
         });
       }
       stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, datasourcesInBand.datasources);
-
-      if (config && config.$element) {
-
+    
+      var getViewer = () => {
         var options = new Stimulsoft.Viewer.StiViewerOptions();
         options.toolbar.showAboutButton = false;
         if (config) {
@@ -153,15 +152,16 @@
           options.appearance.scrollbarsMode = true;
           options.height = heightRepo;
         }
-
-
         var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
         viewer.report = report;
-
-        viewer.renderHtml(config.$element[0]);
+        return viewer;
+      };
+    
+      if (config && config.$element) {
+        getViewer(config).renderHtml(config.$element[0]);
       }
       else {
-
+      
         function observeFullScreen() {
           var $contentReport;
           var $modalBody;
@@ -185,13 +185,12 @@
             }
           }, 100);
         }
-
+      
         function startShow(url) {
           var include = setInterval(function() {
             var div = $('<div/>');
             div.attr('id',"contentReport");
             div.attr('width', '100%');
-            // div.css('height', heightRepo);
             var m = $('#reportView .modal-body');
             if(m.get(0)) {
               m.html(div);
@@ -200,36 +199,40 @@
                 console.log('open[#reportViewContext]');
                 $('body').append(context);
                 cronapi.screen.showModal('reportView');
-                //$('#reportView').modal();
-                $('#contentReport').html('<iframe src="'+url+'" width="100%" height="'+heightRepo+'"></iframe>');
-                //viewer.renderHtml("contentReport");
+                if (json.reportConfig && json.reportConfig.renderType === "HTML") {
+                  getViewer(config).renderHtml("contentReport");
+                }
+                else {
+                  $('#contentReport').html('<iframe src="'+url+'" width="100%" height="'+heightRepo+'"></iframe>');
+                }
                 setTimeout(function() { observeFullScreen() },100);
               }, 100);
-
+            
               clearInterval(include);
             }
           }, 200);
         }
-
-
+      
+      
         report.renderAsync(function(){
+          let url = undefined;
+          if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
             var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
-
+          
             var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
               type: 'application/pdf'
             });
-
-            var url = URL.createObjectURL(blob);
-            //$window.open(URL.createObjectURL(blob));
-
-           startShow(url);
-
+          
+            url = URL.createObjectURL(blob);
+          }
+          startShow(url);
+        
         });
-
+      
       }
       $(`#${viewerId}`).find('img').attr('alt','');
       $(`#${viewerId}`).find('input').attr('aria-label', viewerId);
-
+    
     };
 
     this.showParameters = function(report) {
