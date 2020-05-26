@@ -40,12 +40,12 @@
     "napa": "^3.0.0"
   },
   "dependencies": {
-    "@bower_components/ngMask": "candreoliveira/ngMask#3.0.12",
-    "@bower_components/pace": "HubSpot/pace#v0.7.8",
-    "@bower_components/raphael": "DmitryBaranovskiy/raphael#v2.1.4",
-    "@bower_components/ui-select-infinity": "hyzhak/ui-select-infinity#v0.1.5",
-    "@bower_components/angular-ui-router": "angular-ui/ui-router#0.2.15",
-    "@bower_components/eonasdan-bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#4.17.37",
+    "ngMask": "candreoliveira/ngMask#3.0.12",
+    "pace": "HubSpot/pace#v0.7.8",
+    "raphael": "DmitryBaranovskiy/raphael#v2.1.4",
+    "ui-select-infinity": "hyzhak/ui-select-infinity#v0.1.5",
+    "angular-ui-router": "angular-ui/ui-router#0.2.15",
+    "eonasdan-bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#4.17.37",
     "natives": "1.1.6",
     "angular": "1.5.9",
     "angular-ui-bootstrap": "0.13.0",
