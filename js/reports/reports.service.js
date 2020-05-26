@@ -216,7 +216,7 @@
       
         report.renderAsync(function(){
           let url = undefined;
-          if (!json.reportConfig || json.reportConfig.renderType === "PDF") {
+          if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
             var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
           
             var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
