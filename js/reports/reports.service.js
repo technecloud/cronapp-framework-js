@@ -249,7 +249,7 @@
       var next = function() {
         if(index < parameters.length) {
           var parameter = parameters[index++];
-          $.get("plugins/cronapp-framework-js/components/reports/" + parameter.type + ".parameter.html").done(function(result) {
+          $.get("node_modules/cronapp-framework-js/components/reports/" + parameter.type + ".parameter.html").done(function(result) {
             htmlParameters.push(replaceAll(result, "_field_", parameter.name));
             next();
           });
