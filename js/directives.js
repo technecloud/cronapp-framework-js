@@ -3494,10 +3494,8 @@
                     }
                   }
 
-                  if(ngModelCtrl.$modelValue != currentValue) {
-                    modelSetter(_scope, nextValue);
-                    forceChangeModel(nextValue);
-                  }
+                  modelSetter(_scope, nextValue);
+                  forceChangeModel(nextValue);
                 }
               }
               else {
@@ -3534,25 +3532,35 @@
              */
             var _isDefaultEntity = this.isDefaultEntity;
             $element.on('change', function (event) {
-              _scope.$apply(function () {
-                modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
-                modelTextFieldSetter(_scope, combobox.dataItem()[select.dataTextField]);
-                if(select.changeValueBasedOnLabel){
-                  let comboLabelValue = combobox.dataItem()[select.dataTextField];
-                  // Try to eval it first in pure vanilla and then if it was not possible in angular context.
-                  try {
-                    eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
-                  }catch (e) {
+              let applyChange = function () {
+                if (combobox.isEvaluating) {
+                  setTimeout(applyChange, 100);
+                  return;
+                }
+                _scope.$apply(function() {
+                  modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
+                  modelTextFieldSetter(_scope, combobox.dataItem()[select.dataTextField]);
+                  if(select.changeValueBasedOnLabel){
+                    let comboLabelValue = combobox.dataItem()[select.dataTextField];
+                    // Try to eval it first in pure vanilla and then if it was not possible in angular context.
                     try {
-                      _scope.$eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"')
+                      eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
                     }catch (e) {
-                      console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                      try {
+                        _scope.$eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"')
+                      }catch (e) {
+                        console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                      }
                     }
                   }
-                }
-              });
 
-              _compileAngular(scope, options.combobox.element[0]);
+                 _compileAngular(scope, options.combobox.element[0]);
+                });
+
+              }
+
+              applyChange();
+
             });
 
             /**
@@ -5437,9 +5445,9 @@ app.kendoHelper = {
       this.options.alreadyLoaded = true;
       return;
     } else if (this.options.combobox) {
-      var isFirst = !this.options.alreadyLoaded;
+      isFirst = !this.options.alreadyLoaded;
     } else {
-      isFirst = false;
+      isFirst = true;
     }
 
     this.options.alreadyLoaded = true;
