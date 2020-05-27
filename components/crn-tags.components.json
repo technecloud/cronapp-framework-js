@@ -5,7 +5,7 @@
   "pallete": false,
   "dependences": {
     "editor": [
-      "node_modules/cronapp-framework-js/components/css/multiselect-editor.css"
+      "plugins/cronapp-framework-js/components/css/multiselect-editor.css"
     ]
   },
   "class": "adjust-icon mdi mdi-format-list-bulleted",

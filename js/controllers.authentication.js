@@ -205,7 +205,7 @@
         $rootScope.myTheme = $rootScope.session.user.theme;
       $scope.$watch('myTheme', function(value) {
         if(value !== undefined && value !== "") {
-          $('#themeSytleSheet').attr('href', "node_modules/cronapp-framework-js/css/themes/" + value + ".min.css");
+          $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + value + ".min.css");
         }
       });
       if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token){
@@ -333,7 +333,7 @@
           'display' : 'block'
         });
         $('#transition').fadeIn(800, function() {
-          $('#themeSytleSheet').attr('href', "node_modules/cronapp-framework-js/css/themes/" + theme + ".min.css");
+          $('#themeSytleSheet').attr('href', "plugins/cronapp-framework-js/css/themes/" + theme + ".min.css");
           $rootScope.myTheme = theme;
           $('#transition').fadeOut(1000, function() {
             $('#transition').remove();
