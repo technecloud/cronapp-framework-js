@@ -1,4 +1,3 @@
-
 var cronappModules = [
   'ui.router',
   'ui-select-infinity',
