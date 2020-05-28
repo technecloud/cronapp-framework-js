@@ -201,30 +201,56 @@
             }
           }, 100);
         }
+      
+        function startShow(url) {
+          var include = setInterval(function() {
+            var div = $('<div/>');
+            div.attr('id',"contentReport");
+            div.attr('width', '100%');
+            var m = $('#reportView .modal-body');
+            if(m.get(0)) {
+              m.html(div);
+              $('#reportViewContext .modal-dialog').css('width', '95%');
+              setTimeout(function() {
+                console.log('open[#reportViewContext]');
+                $('body').append(context);
+                cronapi.screen.showModal('reportView');
+                if (json.reportConfig && json.reportConfig.renderType === "HTML") {
+                  getViewer(config).renderHtml("contentReport");
+                }
+                else {
+                  $('#contentReport').html('<iframe src="'+url+'" width="100%" height="'+heightRepo+'"></iframe>');
+                }
+                setTimeout(function() { observeFullScreen() },100);
+              }, 100);
+            
+              clearInterval(include);
+            }
+          }, 200);
+        }
 
-        var include = setInterval(function() {
-          var div = $('<div/>');
-          div.attr('id',"contentReport");
-          div.attr('width', '100%');
-          // div.css('height', heightRepo);
-          var m = $('#reportView .modal-body');
-          if(m.get(0)) {
-            m.html(div);
-            $('#reportViewContext .modal-dialog').css('width', '95%');
-            setTimeout(function() {
-              console.log('open[#reportViewContext]');
-              $('body').append(context);
-              $('#reportView').modal();
-              viewer.renderHtml("contentReport");
-              setTimeout(function() { observeFullScreen() },100);
-            }, 100);
 
-            clearInterval(include);
+        var pdfSettings = new Stimulsoft.Report.Export.StiPdfExportSettings();
+        var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
+        var stream = new Stimulsoft.System.IO.MemoryStream();
+        report.renderAsync(function () {
+          if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
+            pdfService.exportToAsync(function () {
+              var data = stream.toArray();
+              var blob = new Blob([new Uint8Array(data)], { type: "application/pdf" });
+              var fileUrl = URL.createObjectURL(blob);
+              startShow(fileUrl);
+            }, report, stream, pdfSettings);
           }
-        }, 200);
+          else {
+            startShow(null);
+          }
+        }, false);
+      
       }
-
-
+      $(`#${viewerId}`).find('img').attr('alt','');
+      $(`#${viewerId}`).find('input').attr('aria-label', viewerId);
+    
     };
 
     this.showParameters = function(report) {
