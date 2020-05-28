@@ -212,22 +212,24 @@
             }
           }, 200);
         }
-      
-      
-        report.renderAsync(function(){
-          let url = undefined;
+  
+  
+        var pdfSettings = new Stimulsoft.Report.Export.StiPdfExportSettings();
+        var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
+        var stream = new Stimulsoft.System.IO.MemoryStream();
+        report.renderAsync(function () {
           if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
-            var pdf = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf); // Export report to PDF format
-          
-            var blob = new Blob([new Uint8Array(pdf, 0, pdf.length)], {
-              type: 'application/pdf'
-            });
-          
-            url = URL.createObjectURL(blob);
+            pdfService.exportToAsync(function () {
+              var data = stream.toArray();
+              var blob = new Blob([new Uint8Array(data)], { type: "application/pdf" });
+              var fileUrl = URL.createObjectURL(blob);
+              startShow(fileUrl);
+            }, report, stream, pdfSettings);
           }
-          startShow(url);
-        
-        });
+          else {
+            startShow(null);
+          }
+        }, false);
       
       }
       $(`#${viewerId}`).find('img').attr('alt','');
