@@ -100,6 +100,16 @@
       "file": "index.html",
       "script": "plugins/angular-ui-select/dist/select.min.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/ng-file-upload/dist/ng-file-upload.min.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/angular-translate/dist/angular-translate.min.js",
+      "type": "script"
     }
   ],
   "removes": [
@@ -236,6 +246,16 @@
     {
       "file": "index.html",
       "script": "https://www.gstatic.com/firebasejs/4.9.0/firebase.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/ng-file-upload/ng-file-upload.min.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/angular-translate/angular-translate.min.js",
       "type": "script"
     }
   ]
