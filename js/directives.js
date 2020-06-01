@@ -3371,10 +3371,7 @@
                                   var found = _goTo(_scope, _combobox, data);
                                   if (!found) {
                                     _dataSource.data.push(data);
-                                    found = _goTo(_scope, _combobox, data);
-                                  }
-                                  if (found) {
-                                   modelSetter(_scope, found[select.dataValueField]);
+                                    _goTo(_scope, _combobox, data);
                                   }
                                 } else {
                                   modelSetter(_scope, null);
@@ -3476,9 +3473,6 @@
              */
 
             var defineInitialValue = function() {
-              if (combobox.definingInitialValue) {
-                return;
-              }
               if (!combobox.isEvaluating) {
                 var currentValue = combobox.value();
                 var nextValue = null;
@@ -3496,35 +3490,13 @@
 
 
                   if (nextValue == null && select.firstValue) {
-                    if (dataSourceScreen) {
-                      combobox.definingInitialValue = true;
-                      dataSourceScreen.fetch({
-                        params: {
-                          $top: 1
-                          }
-                      }, {
-                        success: function(data) {
-                          if (data.length) {
-                            dataSourceScreen.data.push(data[0]);
-                            nextValue = data[0][select.dataValueField];
-                          }
-                          modelSetter(_scope, nextValue);
-                          forceChangeModel(nextValue);
-                          combobox.definingInitialValue = false;
-                        },
-                        error: function() {
-                          combobox.definingInitialValue = false;
-                        },
-                        canceled: function() {
-                          combobox.definingInitialValue = false;
-                        }
-                      }, undefined, {lookup : true});
+                    if (dataSourceScreen && dataSourceScreen.data.length) {
+                      nextValue = dataSourceScreen.data[0][select.dataValueField];
                     }
-                  } else {
-                    modelSetter(_scope, nextValue);
-                    forceChangeModel(nextValue);
-                    combobox.definingInitialValue = false;
                   }
+
+                  modelSetter(_scope, nextValue);
+                  forceChangeModel(nextValue);
                 }
               }
               else {
@@ -3535,11 +3507,24 @@
             var _ngModelCtrl = ngModelCtrl;
             if (dataSourceScreen != null && dataSourceScreen != undefined) {
               dataSourceScreen.addDataSourceEvents({
-                overRideRefresh: function() {
-                  dataSourceScreen.fetched = false;
-                  dataSourceScreen.cleanup();
+                refresh: function() {
                   defineInitialValue();
-                }
+                },
+                read: function(data) {
+
+                  var fromCombo = combobox.options.fromCombo;
+                  combobox.options.fromCombo = false;
+                  if (!fromCombo) {
+                    combobox.options.readData = data;
+                    this.dataSource.read();
+
+
+                    if (combobox.options.lazyFirstValue) {
+                      combobox.options.lazyFirstValue = false;
+                      defineInitialValue();
+                    }
+                  }
+                }.bind(combobox)
               });
             }
 
@@ -3629,7 +3614,11 @@
                 combobox.options.lazyFirstInitialValue = true;
               }
               else if (select.firstValue) {
-                defineInitialValue();
+                combobox.options.lazyFirstValue = true;
+
+                if (dataSourceScreen.lazy && !dataSourceScreen.fetched) {
+                  dataSourceScreen.fetch({});
+                }
               }
 
             }
@@ -5486,9 +5475,6 @@ app.kendoHelper = {
       cronappDatasource.fetch(fetchData, {
             success:  function(data) {
               if (e.success) {
-                if (self.options.combobox) {
-                  self.options.combobox.options.expanded = true;
-                }
                 e.success(data);
                 if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
                   var expToFind = " .k-animation-container";
