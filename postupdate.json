@@ -98,7 +98,7 @@
     },
     {
       "file": "index.html",
-      "script": "plugins/angular-ui-select/dist/select.min.js",
+      "script": "plugins/ui-select/dist/select.min.js",
       "type": "script"
     },
     {
