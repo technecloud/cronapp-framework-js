@@ -40,7 +40,7 @@
     "napa": "^3.0.0"
   },
   "dependencies": {
-    "ngMask": "candreoliveira/ngMask#3.0.12",
+    "ng-mask": "3.0.12",
     "pace": "HubSpot/pace#v0.7.8",
     "raphael": "DmitryBaranovskiy/raphael#v2.1.4",
     "ui-select-infinity": "hyzhak/ui-select-infinity#v0.1.5",
