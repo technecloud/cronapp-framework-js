@@ -63,7 +63,7 @@
       }
     ]
   },
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/carousel.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",
   "childrenProperties": [
     {
       "name": "ng-init",

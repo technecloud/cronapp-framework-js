@@ -6,7 +6,7 @@
   "class": "adjust-icon mdi mdi-stop",
   "wrapper": true,
   "autoWrapper": false,
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/button.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/button.template.html",
   "properties": {
     "xattr-fullsize": {
       "displayName": "Width",

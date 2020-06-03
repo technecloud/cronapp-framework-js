@@ -3,7 +3,7 @@
   "text_pt_BR": "Entrada de texto com botão",
   "text_en_US": "Input with button",
   "class": "adjust-icon mdi mdi-label-outline",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/textinputbutton.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinputbutton.template.html",
   "forcedGroupd": true,
   "properties": {
     "class": {

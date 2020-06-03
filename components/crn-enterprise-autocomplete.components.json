@@ -6,9 +6,9 @@
   "text_en_US": "Auto Complete",
   "class": "adjust-icon mdi mdi-receipt",
   "designTimeDynamic": true,
-  "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
   "designTimeSelector": "cron-auto-complete",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-autocomplete.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.template.html",
   "properties": {
     "class": {
       "order": 9999

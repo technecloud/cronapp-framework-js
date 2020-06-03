@@ -7,9 +7,9 @@
   "order": 2,
   "class": "adjust-icon mdi mdi-calendar-range",
   "designTimeDynamic": true,
-  "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-scheduler.designtime.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-scheduler.designtime.html",
   "designTimeSelector": "cron-scheduler",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-scheduler.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-scheduler.template.html",
   "properties": {
     "class": {
       "order": 9999

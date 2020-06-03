@@ -7,9 +7,9 @@
   "order": 2,
   "class": "adjust-icon mdi mdi-file-tree",
   "designTimeDynamic": true,
-  "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/cron-tree-view.designtime.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-tree-view.designtime.html",
   "designTimeSelector": "cron-tree-view",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/components/templates/cron-tree-view.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-tree-view.template.html",
   "properties": {
     "class": {
       "order": 9999

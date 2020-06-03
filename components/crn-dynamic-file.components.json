@@ -3,7 +3,7 @@
   "text_pt_BR": "Envio de Arquivo Dinâmico",
   "text_en_US": "Dynamic File Upload",
   "class": "adjust-icon mdi mdi-cloud-upload",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/dynamicfile.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamicfile.template.html",
   "styles": [
     {
       "selector": "div#{id} .dynamic-image-container",

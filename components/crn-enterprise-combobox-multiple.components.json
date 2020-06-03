@@ -7,9 +7,9 @@
   "class": "adjust-icon mdi mdi-nutrition",
   "order": 9,
   "designTimeDynamic": true,
-  "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.designtime.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.designtime.html",
   "designTimeSelector": "cron-multi-select",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.template.html",
   "properties": {
     "class": {
       "order": 9999

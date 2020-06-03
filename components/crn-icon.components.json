@@ -2,7 +2,7 @@
   "name": "crn-icon",
   "text": "Icon",
   "class": "adjust-icon mdi mdi-star",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/icon.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/icon.template.html",
   "wrapper": false,
   "autoWrapper": false,
   "properties": {
