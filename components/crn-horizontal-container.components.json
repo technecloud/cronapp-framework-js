@@ -39,5 +39,5 @@
       "text_en_US": "General"
     }
   ],
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/grid-horizontal.template.html"
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/grid-horizontal.template.html"
 }

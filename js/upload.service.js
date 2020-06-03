@@ -6,7 +6,7 @@
 
     this.upload = function(data) {
       $modal.open({
-        templateUrl : 'plugins/cronapp-framework-js/components/upload/upload.html',
+        templateUrl : 'node_modules/cronapp-framework-js/components/upload/upload.html',
         controller : 'UploadController',
         resolve : {
           data : function() {

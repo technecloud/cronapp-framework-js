@@ -7,7 +7,7 @@
   "class": "adjust-icon mdi mdi-server-network",
   "designTimeHTML": "<input type='range' min='1' max='10' value='5' class='slider'/>",
   "designTimeSelector": "cron-slider",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-slider.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-slider.template.html",
   "properties": {
     "class": {
       "order": 9999

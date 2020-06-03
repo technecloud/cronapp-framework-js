@@ -4,7 +4,7 @@
   "wrapper": false,
   "pallete": false,
   "class": "adjust-icon mdi mdi-cloud-upload",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/fileupload-button.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/fileupload-button.template.html",
   "properties": {
     "ng-model": {
       "displayName": "Field",

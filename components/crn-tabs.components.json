@@ -42,7 +42,7 @@
       "text_en_US": "Default Tab"
     }
   ],
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/tabs.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/tabs.template.html",
   "childrenProperties": [
     {
       "name": "ng-init",

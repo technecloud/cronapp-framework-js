@@ -80,7 +80,7 @@ var app = (function() {
           horizontalSpacing: 20,
           positionX: 'right',
           positionY: 'top',
-          templateUrl: 'plugins/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
+          templateUrl: 'node_modules/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
         });
 
         if (window.customStateProvider) {
@@ -198,7 +198,7 @@ var app = (function() {
               suffix: '.json'
             },
             {
-              prefix: 'plugins/cronapp-framework-js/i18n/locale_',
+              prefix: 'node_modules/cronapp-framework-js/i18n/locale_',
               suffix: '.json'
             }]
         });
@@ -213,7 +213,7 @@ var app = (function() {
         $translateProvider.use(locale.toLowerCase());
         $translateProvider.useSanitizeValueStrategy('escaped');
 
-        tmhDynamicLocaleProvider.localeLocationPattern('plugins/angular-i18n/angular-locale_{{locale}}.js');
+        tmhDynamicLocaleProvider.localeLocationPattern('node_modules/angular-i18n/angular-locale_{{locale}}.js');
 
         if (moment)
           moment.locale(locale);

@@ -3,8 +3,8 @@
     var body = $('body');
     var scope = angular.element(body.get(0)).scope();
     var scriptsStimulsoft = [
-      'plugins/cronapp-lib-js/dist/js/stimulsoft/stimulsoft-all.js',
-      'plugins/cronapp-lib-js/dist/js/stimulsoft/stimulsoft-helper.js'
+      'node_modules/cronapp-lib-js/dist/js/stimulsoft/stimulsoft-all.js',
+      'node_modules/cronapp-lib-js/dist/js/stimulsoft/stimulsoft-helper.js'
     ];
     var loadedScripts = [];
 
@@ -66,7 +66,7 @@
 
       if(!context.get(0)) {
         console.log('include[#reportViewContext]');
-        body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
+        body.append('<div id="reportViewContext" ng-include="\'node_modules/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
         $compile(body)(scope);
       }
 
@@ -110,7 +110,7 @@
     this.openStimulsoftReport = function(json, parameters, datasourcesInBand, config) {
       var context = $('#reportViewContext');
       if(!context.get(0)) {
-        body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
+        body.append('<div id="reportViewContext" ng-include="\'node_modules/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
         $compile(body)(scope);
       }
     
@@ -251,14 +251,14 @@
       var next = function() {
         if(index < parameters.length) {
           var parameter = parameters[index++];
-          $.get("plugins/cronapp-framework-js/components/reports/" + parameter.type + ".parameter.html").done(function(result) {
+          $.get("node_modules/cronapp-framework-js/components/reports/" + parameter.type + ".parameter.html").done(function(result) {
             htmlParameters.push(replaceAll(result, "_field_", parameter.name));
             next();
           });
         }
         else if(htmlParameters.length > 0) {
           $modal.open({
-            templateUrl : 'plugins/cronapp-framework-js/components/reports/reports.parameters.html',
+            templateUrl : 'node_modules/cronapp-framework-js/components/reports/reports.parameters.html',
             controller : 'ParameterController',
             resolve : {
               report : function() {

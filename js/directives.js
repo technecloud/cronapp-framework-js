@@ -1566,7 +1566,7 @@
             return;
           }
 
-          let baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+          let baseUrl = 'node_modules/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
           if($translate.use() === 'pt_br') {
             baseUrl += "pt-BR.min.js";
           } else {
@@ -2801,7 +2801,7 @@
             return;
 
           var $templateDyn = $('<div></div>');
-          var baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+          var baseUrl = 'node_modules/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
           if ($translate.use() == 'pt_br')
             baseUrl += "pt-BR.min.js";
           else

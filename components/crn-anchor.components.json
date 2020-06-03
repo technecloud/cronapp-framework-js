@@ -4,7 +4,7 @@
   "text_en_US": "Link",
   "class": "adjust-icon mdi mdi-link",
   "wrapper": false,
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/anchor.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/anchor.template.html",
   "properties": {
     "target": {
       "removable": false,

@@ -4,5 +4,5 @@
   "text_en_US": "Social Login",
   "class": "adjust-icon mdi mdi-login",
   "wrapper": false,
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/social-button-bar.template.html"
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/social-button-bar.template.html"
 }
