@@ -3425,6 +3425,9 @@
             });
             $(parent).append(inputSelect);
             var $element = $(parent).find('input.cronDynamicSelect');
+            if (dataSourceScreen) {
+              dataSourceScreen.__ignoreFirstFetch = true;
+            }
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
             options.combobox = combobox;
             $(combobox.element[0]).attr('tabindex','-1');
@@ -5457,8 +5460,11 @@ app.kendoHelper = {
       return;
     } else if (this.options.combobox) {
       isFirst = !this.options.alreadyLoaded;
-    } else {
+    } else if (cronappDatasource.__ignoreFirstFetch) {
       isFirst = true;
+      delete cronappDatasource.__ignoreFirstFetch;
+    } else {
+      isFirst = false;
     }
 
     this.options.alreadyLoaded = true;
