@@ -2898,6 +2898,19 @@
         }
       };
     }])
+  
+    .directive('src', function($compile) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ctrl) {
+          if (element[0].tagName === "IMG" ) {
+            if (cronapi.internal.isBase64(attrs.src) ) {
+              setTimeout(() => $(element[0]).attr("src", "data:image/png;base64," + attrs.src));
+            }
+          }
+        }
+      }
+    })
 
       .directive('cronTreeView', ['$compile', '$translate', function($compile, $translate) {
           return {
