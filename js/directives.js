@@ -259,7 +259,7 @@
           }
         }
       })
-      .directive('dynamicFile', function($compile, $translate) {
+    .directive('dynamicFile', function($compile, $translate) {
         var template = '';
         return {
           restrict: 'A',
@@ -268,21 +268,22 @@
           link: function(scope, element, attr) {
             var s = scope;
             var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
-
+          
             var splitedNgModel = attr.ngModel.split('.');
             var datasource = splitedNgModel[0];
             var field = splitedNgModel[splitedNgModel.length-1];
             var number = Math.floor((Math.random() * 1000) + 20);
             var content = element.html();
-
+          
             var maxFileSize = "";
             if (attr.maxFileSize)
               maxFileSize = attr.maxFileSize;
-
+            let fileInfo = attr.fileInfo ? `'${attr.fileInfo}'`: 'undefined';
+          
             var templateDyn    = '\
                                 <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
                                   <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important; display: none;" type=text ng-model="$ngModel$" $required$>\
-                                  <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                  <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\', $fileInfo$)" ngf-max-size="$maxFileSize$">\
                                     $userHtml$\
                                   </button>\
                                   <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
@@ -297,8 +298,8 @@
                                     <span class="sr-only">{{"Remove" | translate}}</span> \
                                   </button> \
                                   <div> \
-                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
-                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">$lblDownload$</a> \
+                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$, $fileInfo$)"></div> \
+                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\', undefined, $fileInfo$)">$lblDownload$</a> \
                                   </div> \
                                 </div> \
                                 ';
@@ -313,9 +314,9 @@
                 .split('$userHtml$').join(content)
                 .split('$maxFileSize$').join(maxFileSize)
                 .split('$lblDownload$').join($translate.instant('download'))
-
+                .split('$fileInfo$').join(fileInfo)
             );
-
+          
             element.html(templateDyn);
             $compile(templateDyn)(element.scope());
           }
