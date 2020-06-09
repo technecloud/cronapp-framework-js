@@ -50,6 +50,12 @@
       "mandatory": true
     },
     {
+      "name": "file-info",
+      "selector": "div[dynamic-file]",
+      "type": "text",
+      "order": 3
+    },
+    {
       "name": "content",
       "selector": "label",
       "displayName_pt_BR": "Conteúdo",
