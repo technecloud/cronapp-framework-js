@@ -111,7 +111,7 @@
       var context = $('#reportViewContext');
       if(!context.get(0)) {
         body.append('<div id="reportViewContext" ng-include="\'node_modules/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
-        $compile(body)(scope);
+        context = $('#reportViewContext');
       }
     
       var h = parseInt($(window).height());
