@@ -70,7 +70,56 @@
       }
     }
     return result;
-  }
+  };
+
+  app.directive('justGage', ['$timeout', function ($timeout) {
+    return {
+      restrict: 'EA',
+      scope: {
+        id: '@',
+        class: '@',
+        min: '=',
+        max: '=',
+        title: '@',
+        label: '@',
+        value: '@',
+        options: '='
+      },
+      template: '<div id="{{id}}-justgage" class="{{class}}"></div>',
+      link: function (scope, element, attrs) {
+        $timeout(function () {
+          var options = {
+            id: scope.id + '-justgage',
+            min: scope.min || 0,
+            max: scope.max || 100,
+            title: scope.title,
+            label: scope.label || '',
+            value: scope.value
+          };
+
+          if (scope.options) {
+            for (var key in scope.options) {
+              options[key] = scope.options[key];
+            }
+          }
+
+          var graph = new JustGage(options);
+
+          scope.$watch('max', function (updatedMax) {
+            if (updatedMax !== undefined) {
+              graph.refresh(scope.value, updatedMax);
+            }
+          }, true);
+
+          scope.$watch('value', function (updatedValue) {
+            if (updatedValue !== undefined) {
+              graph.refresh(updatedValue);
+            }
+          }, true);
+        });
+      }
+    };
+  }]);
 
   app.directive('crnAnchor', ['$rootScope', '$location', '$anchorScroll', function ($rootScope, $location, $anchorScroll) {
     return {
@@ -259,7 +308,7 @@
           }
         }
       })
-      .directive('dynamicFile', function($compile, $translate) {
+    .directive('dynamicFile', function($compile, $translate) {
         var template = '';
         return {
           restrict: 'A',
@@ -268,21 +317,22 @@
           link: function(scope, element, attr) {
             var s = scope;
             var required = (attr.ngRequired && attr.ngRequired == "true"?"required":"");
-
+          
             var splitedNgModel = attr.ngModel.split('.');
             var datasource = splitedNgModel[0];
             var field = splitedNgModel[splitedNgModel.length-1];
             var number = Math.floor((Math.random() * 1000) + 20);
             var content = element.html();
-
+          
             var maxFileSize = "";
             if (attr.maxFileSize)
               maxFileSize = attr.maxFileSize;
-
+            let fileInfo = attr.fileInfo ? `'${attr.fileInfo}'`: 'undefined';
+          
             var templateDyn    = '\
                                 <div ng-show="!$ngModel$" ngf-drop="" ngf-drag-over-class="dragover">\
                                   <input id="$id$" aria-label="$userHtml$" ng-if="!$ngModel$" autocomplete="off" tabindex="-1" class="uiSelectRequired ui-select-offscreen" style="top: inherit !important;margin-left: 85px !important;margin-top: 50px !important; display: none;" type=text ng-model="$ngModel$" $required$>\
-                                  <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\')" ngf-max-size="$maxFileSize$">\
+                                  <button id="$idbutton$" class="btn" ngf-drop="" ngf-select="" ngf-change="cronapi.internal.uploadFile(\'$ngModel$\', $file, \'uploadprogress$number$\', $fileInfo$)" ngf-max-size="$maxFileSize$">\
                                     $userHtml$\
                                   </button>\
                                   <div class="progress" data-type="bootstrapProgress" id="uploadprogress$number$" style="display:none">\
@@ -297,8 +347,8 @@
                                     <span class="sr-only">{{"Remove" | translate}}</span> \
                                   </button> \
                                   <div> \
-                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$)"></div> \
-                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\')">$lblDownload$</a> \
+                                    <div ng-bind-html="cronapi.internal.generatePreviewDescriptionByte($ngModel$, $fileInfo$)"></div> \
+                                    <a href="javascript:void(0)" ng-click="cronapi.internal.downloadFileEntity($datasource$,\'$field$\', undefined, $fileInfo$)">$lblDownload$</a> \
                                   </div> \
                                 </div> \
                                 ';
@@ -313,9 +363,9 @@
                 .split('$userHtml$').join(content)
                 .split('$maxFileSize$').join(maxFileSize)
                 .split('$lblDownload$').join($translate.instant('download'))
-
+                .split('$fileInfo$').join(fileInfo)
             );
-
+          
             element.html(templateDyn);
             $compile(templateDyn)(element.scope());
           }
@@ -1566,7 +1616,7 @@
             return;
           }
 
-          let baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+          let baseUrl = 'node_modules/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
           if($translate.use() === 'pt_br') {
             baseUrl += "pt-BR.min.js";
           } else {
@@ -2801,7 +2851,7 @@
             return;
 
           var $templateDyn = $('<div></div>');
-          var baseUrl = 'plugins/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
+          var baseUrl = 'node_modules/cronapp-lib-js/dist/js/kendo-ui/js/messages/kendo.messages.';
           if ($translate.use() == 'pt_br')
             baseUrl += "pt-BR.min.js";
           else
@@ -2898,6 +2948,19 @@
         }
       };
     }])
+  
+    .directive('src', function($compile) {
+      return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ctrl) {
+          if (element[0].tagName === "IMG" ) {
+            if (cronapi.internal.isBase64(attrs.src) ) {
+              setTimeout(() => $(element[0]).attr("src", "data:image/png;base64," + attrs.src));
+            }
+          }
+        }
+      }
+    })
 
       .directive('cronTreeView', ['$compile', '$translate', function($compile, $translate) {
           return {
@@ -3370,7 +3433,10 @@
                                   var found = _goTo(_scope, _combobox, data);
                                   if (!found) {
                                     _dataSource.data.push(data);
-                                    _goTo(_scope, _combobox, data);
+                                    found = _goTo(_scope, _combobox, data);
+                                  }
+                                  if (found) {
+                                   modelSetter(_scope, found[select.dataValueField]);
                                   }
                                 } else {
                                   modelSetter(_scope, null);
@@ -3422,6 +3488,9 @@
             });
             $(parent).append(inputSelect);
             var $element = $(parent).find('input.cronDynamicSelect');
+            if (dataSourceScreen) {
+              dataSourceScreen.__ignoreFirstFetch = true;
+            }
             var combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
             options.combobox = combobox;
             $(combobox.element[0]).attr('tabindex','-1');
@@ -3472,6 +3541,9 @@
              */
 
             var defineInitialValue = function() {
+              if (combobox.definingInitialValue) {
+                return;
+              }
               if (!combobox.isEvaluating) {
                 var currentValue = combobox.value();
                 var nextValue = null;
@@ -3489,14 +3561,34 @@
 
 
                   if (nextValue == null && select.firstValue) {
-                    if (dataSourceScreen && dataSourceScreen.data.length) {
-                      nextValue = dataSourceScreen.data[0][select.dataValueField];
+                    if (dataSourceScreen) {
+                      combobox.definingInitialValue = true;
+                      dataSourceScreen.fetch({
+                        params: {
+                          $top: 1
+                          }
+                      }, {
+                        success: function(data) {
+                          if (data.length) {
+                            dataSourceScreen.data.push(data[0]);
+                            nextValue = data[0][select.dataValueField];
+                          }
+                          modelSetter(_scope, nextValue);
+                          forceChangeModel(nextValue);
+                          combobox.definingInitialValue = false;
+                        },
+                        error: function() {
+                          combobox.definingInitialValue = false;
+                        },
+                        canceled: function() {
+                          combobox.definingInitialValue = false;
+                        }
+                      }, undefined, {lookup : true});
                     }
-                  }
-
-                  if(ngModelCtrl.$modelValue != currentValue) {
+                  } else {
                     modelSetter(_scope, nextValue);
                     forceChangeModel(nextValue);
+                    combobox.definingInitialValue = false;
                   }
                 }
               }
@@ -3508,24 +3600,11 @@
             var _ngModelCtrl = ngModelCtrl;
             if (dataSourceScreen != null && dataSourceScreen != undefined) {
               dataSourceScreen.addDataSourceEvents({
-                refresh: function() {
+                overRideRefresh: function() {
+                  dataSourceScreen.fetched = false;
+                  dataSourceScreen.cleanup();
                   defineInitialValue();
-                },
-                read: function(data) {
-
-                  var fromCombo = combobox.options.fromCombo;
-                  combobox.options.fromCombo = false;
-                  if (!fromCombo) {
-                    combobox.options.readData = data;
-                    this.dataSource.read();
-
-
-                    if (combobox.options.lazyFirstValue) {
-                      combobox.options.lazyFirstValue = false;
-                      defineInitialValue();
-                    }
-                  }
-                }.bind(combobox)
+                }
               });
             }
 
@@ -3534,25 +3613,35 @@
              */
             var _isDefaultEntity = this.isDefaultEntity;
             $element.on('change', function (event) {
-              _scope.$apply(function () {
-                modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
-                modelTextFieldSetter(_scope, combobox.dataItem()[select.dataTextField]);
-                if(select.changeValueBasedOnLabel){
-                  let comboLabelValue = combobox.dataItem()[select.dataTextField];
-                  // Try to eval it first in pure vanilla and then if it was not possible in angular context.
-                  try {
-                    eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
-                  }catch (e) {
+              let applyChange = function () {
+                if (combobox.isEvaluating) {
+                  setTimeout(applyChange, 100);
+                  return;
+                }
+                _scope.$apply(function() {
+                  modelSetter(_scope, combobox.dataItem()[select.dataValueField]);
+                  modelTextFieldSetter(_scope, combobox.dataItem()[select.dataTextField]);
+                  if(select.changeValueBasedOnLabel){
+                    let comboLabelValue = combobox.dataItem()[select.dataTextField];
+                    // Try to eval it first in pure vanilla and then if it was not possible in angular context.
                     try {
-                      _scope.$eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"')
+                      eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"');
                     }catch (e) {
-                      console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                      try {
+                        _scope.$eval(select.changeValueBasedOnLabel + '=' + '"' + comboLabelValue + '"')
+                      }catch (e) {
+                        console.error("Não foi possível atribuir o texto do combobox ", comboLabelValue, " no compo informado ", select.changeValueBasedOnLabel);
+                      }
                     }
                   }
-                }
-              });
 
-              _compileAngular(scope, options.combobox.element[0]);
+                 _compileAngular(scope, options.combobox.element[0]);
+                });
+
+              }
+
+              applyChange();
+
             });
 
             /**
@@ -3615,11 +3704,7 @@
                 combobox.options.lazyFirstInitialValue = true;
               }
               else if (select.firstValue) {
-                combobox.options.lazyFirstValue = true;
-
-                if (dataSourceScreen.lazy && !dataSourceScreen.fetched) {
-                  dataSourceScreen.fetch({});
-                }
+                defineInitialValue();
               }
 
             }
@@ -5437,7 +5522,10 @@ app.kendoHelper = {
       this.options.alreadyLoaded = true;
       return;
     } else if (this.options.combobox) {
-      var isFirst = !this.options.alreadyLoaded;
+      isFirst = !this.options.alreadyLoaded;
+    } else if (cronappDatasource.__ignoreFirstFetch) {
+      isFirst = true;
+      delete cronappDatasource.__ignoreFirstFetch;
     } else {
       isFirst = false;
     }
@@ -5476,6 +5564,9 @@ app.kendoHelper = {
       cronappDatasource.fetch(fetchData, {
             success:  function(data) {
               if (e.success) {
+                if (self.options.combobox) {
+                  self.options.combobox.options.expanded = true;
+                }
                 e.success(data);
                 if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
                   var expToFind = " .k-animation-container";

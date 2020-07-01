@@ -4,7 +4,7 @@
   "text_en_US": "Lista Simples",
   "class": "adjust-icon mdi mdi-login",
   "wrapper": false,
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/list.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/list.template.html",
   "properties": {
     "crn-datasource": {
       "order": 1,

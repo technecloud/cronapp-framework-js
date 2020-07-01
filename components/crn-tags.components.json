@@ -5,11 +5,11 @@
   "pallete": false,
   "dependences": {
     "editor": [
-      "plugins/cronapp-framework-js/components/css/multiselect-editor.css"
+      "node_modules/cronapp-framework-js/components/css/multiselect-editor.css"
     ]
   },
   "class": "adjust-icon mdi mdi-format-list-bulleted",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/multiselect.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/multiselect.template.html",
   "childrenProperties": [
     {
       "name": "crn-datasource",

@@ -41,7 +41,7 @@
       "text_en_US": "Accordion Title"
     }
   ],
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/accordion.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/accordion.template.html",
   "properties": {
     "class": {
       "order": 9999

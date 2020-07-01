@@ -8,9 +8,9 @@
   "order": 3,
   "setRandomId": false,
   "designTimeDynamic": true,
-  "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.designtime.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.designtime.html",
   "designTimeSelector": "cron-dynamic-select",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-dynamic-combobox.template.html",
   "properties": {
     "class": {
       "order": 9999

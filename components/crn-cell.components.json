@@ -5,7 +5,7 @@
   "class": "adjust-icon mdi mdi-apps",
   "wrapper": false,
   "pallete": false,
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cell.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cell.template.html",
   "properties": {
     "class": {
       "order": 9999

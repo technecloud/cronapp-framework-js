@@ -4,8 +4,7 @@
   "description": "Javascript library for CronApp's projects",
   "main": "cronapp.framework.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "napa mattlaver/angular-justgage#1.0.1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -36,11 +35,10 @@
     "gulp-notify": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.2",
-    "gulp-uglifycss": "^1.0.8",
-    "napa": "^3.0.0"
+    "gulp-uglifycss": "^1.0.8"
   },
   "dependencies": {
-    "ngMask": "candreoliveira/ngMask#3.0.12",
+    "ng-mask": "3.0.12",
     "pace": "HubSpot/pace#v0.7.8",
     "raphael": "DmitryBaranovskiy/raphael#v2.1.4",
     "ui-select-infinity": "hyzhak/ui-select-infinity#v0.1.5",

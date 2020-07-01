@@ -8,9 +8,9 @@
   "order": 11,
   "wrapper": false,
   "designTimeDynamic": true,
-  "designTimeHTMLURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-menu.designtime.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-dynamic-menu.designtime.html",
   "designTimeSelector": ":self",
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/cron-dynamic-menu.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-dynamic-menu.template.html",
   "properties": {
     "class": {
       "order": 9999

@@ -98,7 +98,17 @@
     },
     {
       "file": "index.html",
-      "script": "node_modules/angular-ui-select/dist/select.min.js",
+      "script": "node_modules/ui-select/dist/select.min.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/ng-file-upload/dist/ng-file-upload.min.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/angular-translate/dist/angular-translate.min.js",
       "type": "script"
     }
   ],
@@ -237,6 +247,42 @@
       "file": "index.html",
       "script": "https://www.gstatic.com/firebasejs/4.9.0/firebase.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/ng-file-upload/ng-file-upload.min.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/angular-translate/angular-translate.min.js",
+      "type": "script"
+    }
+  ],
+  "replaces": [
+    {
+      "old": "node_modules/angular-bootstrap/ui-bootstrap.min.js",
+      "new": "node_modules/angular-ui-bootstrap/ui-bootstrap.min.js"
+    },
+    {
+      "old": "node_modules/angular-bootstrap/ui-bootstrap-tpls.min.js",
+      "new": "node_modules/angular-ui-bootstrap/ui-bootstrap-tpls.min.js"
+    },
+    {
+      "old": "node_modules/justgage-toorshia/justgage.js",
+      "new": "node_modules/justgage/justgage.js"
+    },
+    {
+      "old": "node_modules/angular-ui-select/dist/select.min.js",
+      "new": "node_modules/ui-select/dist/select.min.js"
+    },
+    {
+      "old": "node_modules/ng-file-upload/ng-file-upload.min.js",
+      "new": "node_modules/ng-file-upload/dist/ng-file-upload.min.js"
+    },
+    {
+      "old": "node_modules/angular-translate/angular-translate.min.js",
+      "new": "node_modules/angular-translate/dist/angular-translate.min.js"
     }
   ]
 }

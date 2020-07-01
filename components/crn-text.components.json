@@ -6,7 +6,7 @@
   "pallete": false,
   "class": "adjust-icon mdi mdi-format-annotation-plus",
   "order": 10,
-  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/text.template.html",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/text.template.html",
   "properties": {
     "xattr-position": {
       "displayName": "Position"
