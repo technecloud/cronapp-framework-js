@@ -209,22 +209,14 @@ var app = (function() {
             .registerAvailableLanguageKeys(
                 ['pt_br', 'en_us'], {
                   'en*': 'en_us',
-                  'pt*': 'pt_br'
+                  'pt*': 'pt_br',
+                  '*': 'pt_br'
                 })
             .determinePreferredLanguage();
 
-        var locale = '';//(window.navigator.userLanguage || window.navigator.language).replace('-', '_');
-
-        var browserLanguages = window.navigator.languages.map(lang => lang.toLowerCase().replace('-', '_'));
-        $translateProvider.registerAvailableLanguageKeys().forEach(language => {
-          if (browserLanguages.includes(language)) {
-            console.log(language);
-            locale = language;
-          }
-        })
+        window.navigator.languages.map(lang => lang.toLowerCase().replace('-', '_'));
+        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_');
         $translateProvider.use(locale);
-
-        //locale = locale.toLowerCase();
 
         $translateProvider.useSanitizeValueStrategy('escaped');
 
