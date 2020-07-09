@@ -26,8 +26,11 @@
         });
     };
 
-  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies) {
-
+  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies, $templateCache) {
+  
+    $http.get(window.NotificationProviderOptions.templateUrl, {cache: true})
+    .then((response) => $templateCache.put(window.NotificationProviderOptions.templateUrl, response.data));
+    
     $scope.$http = $http;
     $scope.params = $stateParams;
     $scope.$state = $state;
