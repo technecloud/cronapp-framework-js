@@ -81,6 +81,7 @@ var app = (function() {
           positionY: 'top',
           templateUrl: 'node_modules/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
         });
+        window.NotificationProviderOptions = NotificationProvider.options;
 
         if (window.customStateProvider) {
           window.customStateProvider($stateProvider);
