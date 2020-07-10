@@ -64,11 +64,11 @@ var app = (function() {
         }
       ])
       .config( [
-          '$compileProvider',
-          function( $compileProvider )
-          {
-              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|javascript|chrome-extension):/);
-          }
+        '$compileProvider',
+        function( $compileProvider )
+        {
+          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|javascript|chrome-extension):/);
+        }
       ])
       .config(function($stateProvider, $urlRouterProvider, NotificationProvider) {
         NotificationProvider.setOptions({
@@ -81,6 +81,7 @@ var app = (function() {
           positionY: 'top',
           templateUrl: 'node_modules/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
         });
+        window.NotificationProviderOptions = NotificationProvider.options;
 
         if (window.customStateProvider) {
           window.customStateProvider($stateProvider);
@@ -189,27 +190,35 @@ var app = (function() {
       }])
       .config(function($translateProvider, tmhDynamicLocaleProvider) {
 
+        $translateProvider.uniformLanguageTag('bcp47');
         $translateProvider.useMissingTranslationHandlerLog();
-
+        $translateProvider.preferredLanguage('pt_br');
         $translateProvider.useLoader('customTranslateLoader', {
-            files: [{
-              prefix: 'i18n/locale_',
-              suffix: '.json'
-            },
+          files: [{
+            prefix: 'i18n/locale_',
+            suffix: '.json'
+          },
             {
               prefix: 'node_modules/cronapp-framework-js/i18n/locale_',
               suffix: '.json'
             }]
         });
 
-        $translateProvider.registerAvailableLanguageKeys(
-            window.translations.localesKeys,
-            window.translations.localesRef
-        );
+        $translateProvider
+            .translations('pt', { /* ... */ })
+            .translations('en', { /* ... */ })
+            .registerAvailableLanguageKeys(
+                ['pt_br', 'en_us'], {
+                  'en*': 'en_us',
+                  'pt*': 'pt_br',
+                  '*': 'pt_br'
+                })
+            .determinePreferredLanguage();
 
-        var locale = (window.navigator.userLanguage || window.navigator.language || 'pt_br').replace('-', '_');
+        window.navigator.languages.map(lang => lang.toLowerCase().replace('-', '_'));
+        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_');
+        $translateProvider.use(locale);
 
-        $translateProvider.use(locale.toLowerCase());
         $translateProvider.useSanitizeValueStrategy('escaped');
 
         tmhDynamicLocaleProvider.localeLocationPattern('node_modules/angular-i18n/angular-locale_{{locale}}.js');
@@ -254,11 +263,11 @@ var app = (function() {
                   }
                 }
               }
-            });           
+            });
           }
         };
       }])
-	  
+
       .decorator("$xhrFactory", [
         "$delegate", "$injector",
         function($delegate, $injector) {
@@ -282,11 +291,11 @@ var app = (function() {
         $scope.$state = $state;
 
         app.registerEventsCronapi($scope, $translate);
-  
+
         $rootScope.getReport = function(reportName, params, config) {
           ReportService.openReport(reportName, params, config);
         };
-        
+
         // Query string params
         var queryStringParams = $location.search();
         for (var key in queryStringParams) {
@@ -322,72 +331,72 @@ var app = (function() {
       })
 
       .run(function($rootScope, $state, $stateParams, $timeout) {
-          // It's very handy to add references to $state and $stateParams to the $rootScope
-          // so that you can access them from any scope within your applications.For example,
-          // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
-          // to active whenever 'contacts.list' or one of its decendents is active.
-          $rootScope.$state = $state;
-          $rootScope.$stateParams = $stateParams;
+        // It's very handy to add references to $state and $stateParams to the $rootScope
+        // so that you can access them from any scope within your applications.For example,
+        // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
+        // to active whenever 'contacts.list' or one of its decendents is active.
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
 
-          $rootScope.$on('$stateChangeError', function() {
-              if (arguments.length >= 6) {
-                  var requestObj = arguments[5];
-                  if (requestObj.status === 404 || requestObj.status === 403 || requestObj.status === 401) {
-                      localStorage.removeItem('_u');
-                      $state.go('login');
-                  }
-              } else {
-                  $state.go('404');
+        $rootScope.$on('$stateChangeError', function() {
+          if (arguments.length >= 6) {
+            var requestObj = arguments[5];
+            if (requestObj.status === 404 || requestObj.status === 403 || requestObj.status === 401) {
+              localStorage.removeItem('_u');
+              $state.go('login');
+            }
+          } else {
+            $state.go('404');
+          }
+        });
+        $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
+          $timeout(() => {
+            let systemName = $('#projectName').length ? $('#projectName').val() : $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
+
+            const urlPattern = /\/(?:.(?!\/))+$/gm;
+            let currentWindow = window.location.hash;
+            let pageName;
+
+            if ((m = urlPattern.exec(currentWindow)) !== null) {
+              m.forEach(match => pageName = match);
+            } else {
+              pageName = currentRoute.name
+            }
+
+            let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName.replace("/", "")));
+            // Get the H1 or H2 text to concat with the App name to set the title page
+            if ($('h1.title').length){
+              prettyPageName = $('h1.title').text();
+            } else if ($('h2.title').length){
+              prettyPageName = $('h2.title').text();
+            }
+
+            let title = '';
+
+            title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
+
+            $rootScope.viewTitle = title || currentRoute.name;
+            $rootScope.viewTitleOnly = prettyPageName || currentRoute.name;
+            $rootScope.systemName = systemName;
+            let $mainLinks = $('.main-nav-link');
+            if ($mainLinks && $mainLinks.length && $($('.main-nav-link').get(0)).is(":visible")) {
+              $(".main-access").focus();
+              // $($('.main-nav-link').get(0)).focus();
+              // $($('.main-nav-link').get(0)).blur();
+            } else {
+              let $inputsMain = $('[role=main]').find('input');
+              if ($inputsMain && $inputsMain.length) {
+                let cantFocus = ['date', 'datetime', 'time'];
+                let $firstInput = $($inputsMain[0]);
+                if ( !cantFocus.includes($firstInput.data('type')) ) {
+                  $firstInput.focus();
+                }
               }
+            }
+
+            $rootScope.renderFinished = true;
           });
-          $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
-              $timeout(() => {
-                  let systemName = $('#projectName').length ? $('#projectName').val() : $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
-
-                  const urlPattern = /\/(?:.(?!\/))+$/gm;
-                  let currentWindow = window.location.hash;
-                  let pageName;
-
-                  if ((m = urlPattern.exec(currentWindow)) !== null) {
-                    m.forEach(match => pageName = match);
-                  } else {
-                    pageName = currentRoute.name
-                  }
-
-                  let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName.replace("/", "")));
-                  // Get the H1 or H2 text to concat with the App name to set the title page
-                  if ($('h1.title').length){
-                    prettyPageName = $('h1.title').text();
-                  } else if ($('h2.title').length){
-                    prettyPageName = $('h2.title').text();
-                  }
-
-                  let title = '';
-
-                  title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
-
-                  $rootScope.viewTitle = title || currentRoute.name;
-                  $rootScope.viewTitleOnly = prettyPageName || currentRoute.name;
-                  $rootScope.systemName = systemName;
-                  let $mainLinks = $('.main-nav-link');
-                  if ($mainLinks && $mainLinks.length && $($('.main-nav-link').get(0)).is(":visible")) {
-                    $(".main-access").focus();
-                    // $($('.main-nav-link').get(0)).focus();
-                    // $($('.main-nav-link').get(0)).blur();
-                  } else {
-                    let $inputsMain = $('[role=main]').find('input');
-                    if ($inputsMain && $inputsMain.length) {
-                      let cantFocus = ['date', 'datetime', 'time'];
-                      let $firstInput = $($inputsMain[0]);
-                      if ( !cantFocus.includes($firstInput.data('type')) ) {
-                        $firstInput.focus();
-                      }
-                    }
-                  }
-  
-                  $rootScope.renderFinished = true;
-              });
-          });
+        });
       });
 
 }(window));
@@ -541,25 +550,25 @@ window.safeApply = function(fn) {
 
 window.toCamelCase = function(str) {
   if (str !== null) {
-      // Lower cases the string
-      return str.toLowerCase()
-      // Replaces any - or _ or . characters with a space
-          .replace( /[-_\.]+/g, ' ')
-          // Removes any non alphanumeric characters
-          .replace( /[^\w\s]/g, '')
-          // Uppercases the first character in each group immediately following a space
-          // (delimited by spaces)
-          .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
-          // Removes spaces
-          .replace( / /g, '' );
+    // Lower cases the string
+    return str.toLowerCase()
+        // Replaces any - or _ or . characters with a space
+        .replace( /[-_\.]+/g, ' ')
+        // Removes any non alphanumeric characters
+        .replace( /[^\w\s]/g, '')
+        // Uppercases the first character in each group immediately following a space
+        // (delimited by spaces)
+        .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
+        // Removes spaces
+        .replace( / /g, '' );
   }
   return str;
 };
 
 window.camelCaseToSentenceCase = function(str){
   if (str !== null) {
-      let result = str.replace( /([A-Z])/g, " $1" );
-      return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
+    let result = str.replace( /([A-Z])/g, " $1" );
+    return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
   }
   return str;
 };

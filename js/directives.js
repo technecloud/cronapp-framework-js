@@ -1806,7 +1806,7 @@
           var compileTemplateAngular = function(buttonType, functionToCall, datasourceName, modalId) {
             var template;
             if (buttonType == 'save')
-              template = '<button id="#BUTTONID#" aria-label="#ARIALABELSAVE#" class="btn btn-primary btn-fab ng-binding grid-save-button-modal k-button" data-component="crn-button" ng-click="#FUNCTIONCALL#" onclick="(!#DATASOURCENAME#.missingRequiredField()?$(\'##MODALID#\').modal(\'hide\'):void(0))"><span class="k-icon k-i-check"></span></button>';
+              template = '<button id="#BUTTONID#" aria-label="#ARIALABELSAVE#" class="btn btn-primary btn-fab ng-binding grid-save-button-modal k-button" data-component="crn-button" ng-click="#FUNCTIONCALL#" onclick="(!#DATASOURCENAME#.missingRequiredField(true)?$(\'##MODALID#\').modal(\'hide\'):void(0))"><span class="k-icon k-i-check"></span></button>';
             else
               template = '<button id="#BUTTONID#" aria-label="#ARIALABELCANCEL#" type="button" class="btn btn-default btn-fab ng-binding k-button" data-component="crn-button" data-dismiss="modal"><span class="k-icon k-i-cancel"></span></button>'
             template = template
