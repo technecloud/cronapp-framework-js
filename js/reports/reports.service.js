@@ -68,6 +68,7 @@
         console.log('include[#reportViewContext]');
         body.append('<div id="reportViewContext" ng-include="\'node_modules/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
         $compile(body)(scope);
+        context = $('#reportViewContext');
       }
 
       var include = function() {
@@ -111,6 +112,7 @@
       var context = $('#reportViewContext');
       if(!context.get(0)) {
         body.append('<div id="reportViewContext" ng-include="\'node_modules/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
+        $compile(body)(scope);
         context = $('#reportViewContext');
       }
     
