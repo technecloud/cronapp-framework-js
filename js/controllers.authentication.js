@@ -145,7 +145,7 @@
       if (data !== null && data.message) {
         let message = JSON.parse(data.message);
         error = message.exception
-      } else if (typeof data === 'string') {
+      } else if (typeof data === 'string' && status !== 502) {
         error = data;
       } else {
         error = $translate.instant('Admin.server.out');
