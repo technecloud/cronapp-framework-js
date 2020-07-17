@@ -504,6 +504,14 @@
     {
       "old" : "plugins/cronapp-framework-js/dist/js/reports/reports.service.js",
       "new" : "node_modules/cronapp-framework-js/dist/js/reports/reports.service.js"
+    },
+    {
+      "old" : "plugins/cronapp-framework-js/dist/js/app.authentication.js",
+      "new" : "node_modules/cronapp-framework-js/dist/js/app.authentication.js"
+    },
+    {
+      "old" : "plugins/cronapp-framework-js/dist/js/controllers.authentication.js",
+      "new" : "node_modules/cronapp-framework-js/dist/js/app.authentication.js"
     }
   ]
 }
