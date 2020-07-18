@@ -302,6 +302,10 @@
       "new": "node_modules/ui-select/dist/select.min.js"
     },
     {
+      "old": "plugins/angular-ui-select/dist/select.min.css",
+      "new": "node_modules/ui-select/dist/select.min.css"
+    },
+    {
       "old": "plugins/ng-file-upload/ng-file-upload.min.js",
       "new": "node_modules/ng-file-upload/dist/ng-file-upload.min.js"
     },
@@ -511,7 +515,7 @@
     },
     {
       "old" : "plugins/cronapp-framework-js/dist/js/controllers.authentication.js",
-      "new" : "node_modules/cronapp-framework-js/dist/js/app.authentication.js"
+      "new" : "node_modules/cronapp-framework-js/dist/js/controllers.authentication.js"
     }
   ]
 }
