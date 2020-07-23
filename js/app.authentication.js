@@ -216,7 +216,7 @@ var app = (function() {
             .determinePreferredLanguage();
 
         window.navigator.languages.map(lang => lang.toLowerCase().replace('-', '_'));
-        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_');
+        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_').toLowerCase();
         $translateProvider.use(locale);
 
         $translateProvider.useSanitizeValueStrategy('escaped');
