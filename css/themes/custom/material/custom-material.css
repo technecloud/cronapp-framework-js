@@ -660,6 +660,7 @@ Material Grid - F I N A L
 .nav-tabs {
     background: #5665be;
     border-bottom: 1px solid #ddd;
+    height: 100%;
 }
 
 .nav-tabs>li {
