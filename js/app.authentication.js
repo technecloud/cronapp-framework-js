@@ -192,6 +192,7 @@ var app = (function() {
 
         $translateProvider.uniformLanguageTag('bcp47');
         $translateProvider.useMissingTranslationHandlerLog();
+        $translateProvider.fallbackLanguage('pt_br');
         $translateProvider.preferredLanguage('pt_br');
         $translateProvider.useLoader('customTranslateLoader', {
           files: [{
@@ -215,8 +216,7 @@ var app = (function() {
                 })
             .determinePreferredLanguage();
 
-        window.navigator.languages.map(lang => lang.toLowerCase().replace('-', '_'));
-        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_');
+        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_').toLowerCase();
         $translateProvider.use(locale);
 
         $translateProvider.useSanitizeValueStrategy('escaped');
