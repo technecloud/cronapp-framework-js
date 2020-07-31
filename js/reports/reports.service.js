@@ -216,22 +216,30 @@
         }
   
   
-        var pdfSettings = new Stimulsoft.Report.Export.StiPdfExportSettings();
-        var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
-        var stream = new Stimulsoft.System.IO.MemoryStream();
-        report.renderAsync(function () {
-          if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
-            pdfService.exportToAsync(function () {
-              var data = stream.toArray();
-              var blob = new Blob([new Uint8Array(data)], { type: "application/pdf" });
-              var fileUrl = URL.createObjectURL(blob);
-              startShow(fileUrl);
-            }, report, stream, pdfSettings);
-          }
-          else {
-            startShow(null);
-          }
-        }, false);
+        if (!json.reportConfig || json.reportConfig.renderType === "PDFSERVER" ) {
+          this.getPDF({ 'reportName': json.reportName , 'parameters' : parameters}).then(function(reportData) {
+            var blob = new Blob([new Uint8Array(reportData.data)], { type: "application/pdf" });
+            var fileUrl = URL.createObjectURL(blob);
+            startShow(fileUrl);
+          }.bind(this));
+        } else {
+          var pdfSettings = new Stimulsoft.Report.Export.StiPdfExportSettings();
+          var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
+          var stream = new Stimulsoft.System.IO.MemoryStream();
+          report.renderAsync(function () {
+            if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
+              pdfService.exportToAsync(function () {
+                var data = stream.toArray();
+                var blob = new Blob([new Uint8Array(data)], {type: "application/pdf"});
+                var fileUrl = URL.createObjectURL(blob);
+                startShow(fileUrl);
+              }, report, stream, pdfSettings);
+            }
+            else {
+              startShow(null);
+            }
+          }, false);
+        }
       
       }
       $(`#${viewerId}`).find('img').attr('alt','');
