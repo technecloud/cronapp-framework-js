@@ -2608,10 +2608,13 @@
               scope.safeApply(function() {
                 var trs = $(toCompile);
                 var x = angular.element(trs);
-                $compile(x)(scope);
-                if (options.grid) {
-                  helperDirective.resizeGridUsingWidthForDevice(options.grid);
-                }
+                //setTimeout apenas para sair da thread
+                setTimeout(()=> {
+                  $compile(x)(scope);
+                  if (options.grid) {
+                    helperDirective.resizeGridUsingWidthForDevice(options.grid);
+                  }
+                },100);
               });
             }
           };
