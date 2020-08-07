@@ -5,5 +5,5 @@
   "order": 2,
   "class": "adjust-icon mdi mdi-format-align-justify",
   "designTimeSelector": "form",
-  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/form.template.html"
+  "templateURL": "src/main/webapp/plugins/cronapp-framework-js/dist/components/templates/form.template.html"
 }
