@@ -106,38 +106,26 @@
         Stimulsoft.Base.StiLicense.Key = stimulsoftHelper.getKey();
       }
     }
-
+  
     this.openStimulsoftReport = function(json, parameters, datasourcesInBand, config) {
       var context = $('#reportViewContext');
       if(!context.get(0)) {
         body.append('<div id="reportViewContext" ng-include="\'plugins/cronapp-framework-js/components/reports/reports.view.html\'"></div>');
         $compile(body)(scope);
+        context = $('#reportViewContext');
       }
-
+    
       var h = parseInt($(window).height());
       var heightRepo = (h - 200) + "px";
-
-      var options = new Stimulsoft.Viewer.StiViewerOptions();
-      options.toolbar.showAboutButton = false;
-      if (config) {
-        options.toolbar.visible = config.showToolbar;
-        options.appearance.scrollbarsMode = config.showScrollbar;
-        if (config.height != undefined)
-          options.height = config.height + "px";
-      }
-      else {
-        options.appearance.scrollbarsMode = true;
-        options.height = heightRepo;
-      }
-
+    
       var viewerId = "StiViewer" + app.common.generateId();
-      var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
       var report = new Stimulsoft.Report.StiReport();
+      $rootScope.reportTitle = json.ReportAlias;
       report.load(json);
-
+    
       if (!datasourcesInBand)
         datasourcesInBand = stimulsoftHelper.getDatasourcesInBand(report);
-
+    
       if (parameters) {
         parameters.forEach(function(p) {
           datasourcesInBand.datasources.forEach(function(sp) {
@@ -151,13 +139,30 @@
         });
       }
       stimulsoftHelper.setParamsInFilter(report.dictionary.dataSources, datasourcesInBand.datasources);
-      viewer.report = report;
-
+    
+      var getViewer = () => {
+        var options = new Stimulsoft.Viewer.StiViewerOptions();
+        options.toolbar.showAboutButton = false;
+        if (config) {
+          options.toolbar.visible = config.showToolbar;
+          options.appearance.scrollbarsMode = config.showScrollbar;
+          if (config.height != undefined)
+            options.height = config.height + "px";
+        }
+        else {
+          options.appearance.scrollbarsMode = true;
+          options.height = heightRepo;
+        }
+        var viewer = new Stimulsoft.Viewer.StiViewer(options, viewerId, false);
+        viewer.report = report;
+        return viewer;
+      };
+    
       if (config && config.$element) {
-        viewer.renderHtml(config.$element[0]);
+        getViewer(config).renderHtml(config.$element[0]);
       }
       else {
-
+      
         function observeFullScreen() {
           var $contentReport;
           var $modalBody;
@@ -173,26 +178,6 @@
                 $headerBody = $modalBody.parent();
                 $otherHeader = $headerBody.parent(); //coloca o css e coloca o 100% do width (remove modal-dialog modal-lg)
                 $reportView = $otherHeader.parent(); //coloca o css (remove modal fade ng-scope in)
-              }
-              if ($renderedReport.css('position') == 'absolute' && $modalBody.data('applied') != 'absolute') {
-                $modalBody.data('applied', 'absolute');
-                $modalBody.removeClass('modal-body');
-                $headerBody.removeClass('modal-content');
-
-                $otherHeader.attr('style','top: 0px;right: 0px;bottom: 0px;left: 0px;z-index: 1000000;position: absolute;');
-                $otherHeader.removeClass('modal-dialog');
-                $otherHeader.removeClass('modal-lg');
-
-              }
-              else if ($renderedReport.css('position') == 'static' && $modalBody.data('applied') != 'static' ) {
-                $modalBody.data('applied', 'static');
-                $modalBody.addClass('modal-body');
-                $headerBody.addClass('modal-content');
-
-                $otherHeader.attr('style','width:95%');
-                $otherHeader.addClass('modal-dialog');
-                $otherHeader.addClass('modal-lg');
-
               }
             }
             else {
@@ -228,24 +213,32 @@
             }
           }, 200);
         }
-
-
-        var pdfSettings = new Stimulsoft.Report.Export.StiPdfExportSettings();
-        var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
-        var stream = new Stimulsoft.System.IO.MemoryStream();
-        report.renderAsync(function () {
-          if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
-            pdfService.exportToAsync(function () {
-              var data = stream.toArray();
-              var blob = new Blob([new Uint8Array(data)], { type: "application/pdf" });
-              var fileUrl = URL.createObjectURL(blob);
-              startShow(fileUrl);
-            }, report, stream, pdfSettings);
-          }
-          else {
-            startShow(null);
-          }
-        }, false);
+      
+      
+        if (json.reportConfig && json.reportConfig.renderType === "PDFSERVER" ) {
+          this.getPDF({ 'reportName': json.reportName , 'parameters' : parameters}).then(function(reportData) {
+            var blob = new Blob([new Uint8Array(reportData.data)], { type: "application/pdf" });
+            var fileUrl = URL.createObjectURL(blob);
+            startShow(fileUrl);
+          }.bind(this));
+        } else {
+          var pdfSettings = new Stimulsoft.Report.Export.StiPdfExportSettings();
+          var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
+          var stream = new Stimulsoft.System.IO.MemoryStream();
+          report.renderAsync(function () {
+            if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
+              pdfService.exportToAsync(function () {
+                var data = stream.toArray();
+                var blob = new Blob([new Uint8Array(data)], {type: "application/pdf"});
+                var fileUrl = URL.createObjectURL(blob);
+                startShow(fileUrl);
+              }, report, stream, pdfSettings);
+            }
+            else {
+              startShow(null);
+            }
+          }, false);
+        }
       
       }
       $(`#${viewerId}`).find('img').attr('alt','');
