@@ -282,6 +282,16 @@
       "file": "index.html",
       "script": "plugins/cronapp-framework-js/dist/components/js/qrcode.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/angular-justgage/ng-justgage.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "plugins/angular-justgage/ng-justgage.js",
+      "type": "script"
     }
   ],
   "replaces": [
@@ -414,10 +424,6 @@
       "new" : "node_modules/justgage/justgage.js"
     },
     {
-      "old" : "plugins/angular-justgage/ng-justgage.js",
-      "new" : "node_modules/angular-justgage/ng-justgage.js"
-    },
-    {
       "old" : "plugins/angular-translate/dist/angular-translate.min.js",
       "new" : "node_modules/angular-translate/dist/angular-translate.min.js"
     },
@@ -516,6 +522,10 @@
     {
       "old" : "plugins/cronapp-framework-js/dist/js/controllers.authentication.js",
       "new" : "node_modules/cronapp-framework-js/dist/js/controllers.authentication.js"
+    },
+    {
+      "old": "node_modules/angular-ui-select/dist/select.min.css",
+      "new": "node_modules/ui-select/dist/select.min.css"
     }
   ]
 }
