@@ -72,7 +72,7 @@
     return result;
   };
 
-  app.directive('cronCalendar',['$timeout',function($timeout){
+  app.directive('cronCalendar', ['$timeout', function ($timeout) {
     return {
       restrict: 'E',
       require: 'ngModel',
@@ -82,78 +82,58 @@
       link: function (scope, element, attrs, ngModelCtrl) {
         let options = {};
 
-        try{
+        try {
           options = JSON.parse(attrs.options);
-        }catch(e){
+        } catch (e) {
 
         }
 
-        let cronCalendarElement = $(element);
+        const cronCalendarElement = $(element);
 
-        let culture = navigator.language || navigator.userLanguage;
-        let expressionInitialDate = options.expressionInitialDate;
-        let expressionSelectDates= options.expressionSelectDates;
-        let expressionDisableDates= options.expressionDisableDates;
-        let expressionMinDate= options.expressionMinDate;
-        let expressionMaxDate= options.expressionMaxDate;
-        let expressionOnChange= options.expressionOnChange;
-        let expressionOnNavigate= options.expressionOnNavigate;
+        const culture = navigator.language || navigator.userLanguage;
+        const expressionInitialDate = options.expressionInitialDate;
+        const expressionSelectDates = options.expressionSelectDates;
+        const expressionDisableDates = options.expressionDisableDates;
+        const expressionMinDate = options.expressionMinDate;
+        const expressionMaxDate = options.expressionMaxDate;
+        const expressionOnChange = options.expressionOnChange;
+        const expressionOnNavigate = options.expressionOnNavigate;
+
+        const initialDate = expressionInitialDate ? scope.$eval(generateBlocklyCall(expressionInitialDate)) : null;
+        const selectDates = (expressionSelectDates && options.isSelectableMultiple) ? scope.$eval(generateBlocklyCall(expressionSelectDates)) : [];
+        const disableDates = expressionDisableDates ? scope.$eval(generateBlocklyCall(expressionDisableDates)) : null;
+        const min = expressionMinDate ? scope.$eval(generateBlocklyCall(expressionMinDate)) : new Date(1900, 0, 1);
+        const max = expressionMaxDate ? scope.$eval(generateBlocklyCall(expressionMaxDate)) : new Date(2099, 11, 31);
 
         cronCalendarElement.kendoCalendar({
-          culture: culture.startsWith('pt')?'pt-BR':'en-US',
-          componentType: options.isClassicType ?'clasic': 'modern',
-          selectable:options.isSelectableSingle? 'single':'multiple',
-          weekNumber:options.showWeekNumbers,
-          value : () => {
-            if (expressionInitialDate) {
-              return scope.$eval(generateBlocklyCall(expressionInitialDate));
-            }
-            return null;
-          },
-          selectDates: ()=>{
-            if(expressionSelectDates && options.isSelectableMultiple){
-              return scope.$eval(generateBlocklyCall(expressionSelectDates));
-            }
-            return [];
-          },
-          disableDates: ()=>{
-            if(expressionDisableDates){
-              return scope.$eval(generateBlocklyCall(expressionDisableDates));
-            }
-            return null;
-          },
-          min: ()=>{
-            if(expressionMinDate){
-              return scope.$eval(generateBlocklyCall(expressionMinDate));
-            }
-            return new Date(1900, 0, 1);
-          },
-          max:()=>{
-            if(expressionMaxDate){
-              return scope.$eval(generateBlocklyCall(expressionMaxDate));
-            }
-            return new Date(2099, 11, 31);
-          }
-
+          culture: culture.startsWith('pt') ? 'pt-BR' : 'en-US',
+          componentType: options.isClassicType ? 'clasic' : 'modern',
+          selectable: options.isSelectableSingle ? 'single' : 'multiple',
+          weekNumber: options.showWeekNumbers,
+          value: initialDate,
+          selectDates: selectDates,
+          disableDates: disableDates,
+          min: min,
+          max: max
         });
 
         let calendar = cronCalendarElement.data('kendoCalendar');
 
-        calendar.bind("change", function() {
+        calendar.bind("change", function () {
           let value = this.value();
           //value is the selected date in the calendar
-          if(expressionOnChange){
+          if (expressionOnChange) {
             scope.$eval(generateBlocklyCall(expressionOnChange));
           }
         });
 
-        calendar.bind("navigate", function() {
+        calendar.bind("navigate", function () {
           let view = this.view();
           //name of the current view
 
           let current = this.current();
           //currently focused date
-          if(expressionOnChange) {
+          if (expressionOnChange) {
             scope.$eval(generateBlocklyCall(expressionOnNavigate));
           }
         });
