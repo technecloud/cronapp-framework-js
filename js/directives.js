@@ -72,6 +72,68 @@
     return result;
   };
 
+  app.directive('cronCalendar',['$timeout',function($timeout){
+    return {
+      restrict: 'E',
+      require: 'ngModel',
+      scope: {
+        ngModel: '='
+      },
+      link: function (scope, element, attrs, ngModelCtrl) {
+        let options = {};
+
+        try{
+          options = JSON.parse(attrs.options);
+        }catch(e){
+
+        }
+
+        let cronCalendarElement = $(element);
+
+        let culture = navigator.language || navigator.userLanguage;
+        let expressionInitialDate = options.expressionInitialDate;
+        let expressionSelectDates= options.expressionSelectDates;
+        let expressionDisableDates= options.expressionDisableDates;
+        let expressionMinDate= options.expressionMinDate;
+        let expressionMaxDate= options.expressionMaxDate;
+        let expressionOnChange= options.expressionOnChange;
+        let expressionOnNavigate= options.expressionOnNavigate;
+
+        cronCalendarElement.kendoCalendar({
+          culture: culture.startsWith('pt')?'pt-BR':'en-US',
+          componentType: options.isClassicType ?'clasic': 'modern',
+          selectable:options.isSelectableSingle? 'single':'multiple',
+          weekNumber:options.showWeekNumbers
+        });
+
+        let calendar = cronCalendarElement.data('kendoCalendar');
+
+        calendar.bind("change", function() {
+          let value = this.value();
+          console.log(value); //value is the selected date in the calendar
+        });
+
+        calendar.bind("navigate", function() {
+          let view = this.view();
+          console.log(view.name); //name of the current view
+
+          let current = this.current();
+          console.log(current); //currently focused date
+        });
+
+        function updateView(value) {
+          ngModelCtrl.$viewValue = value;
+          ngModelCtrl.$render();
+        }
+
+        function updateModel(value) {
+          ngModelCtrl.$modelValue = value;
+          scope.ngModel = value; // overwrites ngModel value
+        }
+      }
+    }
+  }]);
+
   app.directive('justGage', ['$timeout', function ($timeout) {
     return {
       restrict: 'EA',
