@@ -103,22 +103,59 @@
           culture: culture.startsWith('pt')?'pt-BR':'en-US',
           componentType: options.isClassicType ?'clasic': 'modern',
           selectable:options.isSelectableSingle? 'single':'multiple',
-          weekNumber:options.showWeekNumbers
+          weekNumber:options.showWeekNumbers,
+          value : () => {
+            if (expressionInitialDate) {
+              return scope.$eval(generateBlocklyCall(expressionInitialDate));
+            }
+            return null;
+          },
+          selectDates: ()=>{
+            if(expressionSelectDates && options.isSelectableMultiple){
+              return scope.$eval(generateBlocklyCall(expressionSelectDates));
+            }
+            return [];
+          },
+          disableDates: ()=>{
+            if(expressionDisableDates){
+              return scope.$eval(generateBlocklyCall(expressionDisableDates));
+            }
+            return null;
+          },
+          min: ()=>{
+            if(expressionMinDate){
+              return scope.$eval(generateBlocklyCall(expressionMinDate));
+            }
+            return new Date(1900, 0, 1);
+          },
+          max:()=>{
+            if(expressionMaxDate){
+              return scope.$eval(generateBlocklyCall(expressionMaxDate));
+            }
+            return new Date(2099, 11, 31);
+          }
+
         });
 
         let calendar = cronCalendarElement.data('kendoCalendar');
 
         calendar.bind("change", function() {
           let value = this.value();
-          console.log(value); //value is the selected date in the calendar
+          //value is the selected date in the calendar
+          if(expressionOnChange){
+            scope.$eval(generateBlocklyCall(expressionOnChange));
+          }
         });
 
         calendar.bind("navigate", function() {
           let view = this.view();
-          console.log(view.name); //name of the current view
+          //name of the current view
 
           let current = this.current();
-          console.log(current); //currently focused date
+          //currently focused date
+          if(expressionOnChange) {
+            scope.$eval(generateBlocklyCall(expressionOnNavigate));
+          }
         });
 
         function updateView(value) {
