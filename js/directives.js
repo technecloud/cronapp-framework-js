@@ -99,7 +99,7 @@
         const expressionOnChange = options.expressionOnChange;
         const expressionOnNavigate = options.expressionOnNavigate;
 
-        const initialDate = expressionInitialDate ? scope.$eval(generateBlocklyCall(expressionInitialDate)) : null;
+        const initialDate = expressionInitialDate ? scope.$eval(generateBlocklyCall(expressionInitialDate)) : new Date();
         const selectDates = (expressionSelectDates && options.isSelectableMultiple) ? scope.$eval(generateBlocklyCall(expressionSelectDates)) : [];
         const disableDates = expressionDisableDates ? scope.$eval(generateBlocklyCall(expressionDisableDates)) : null;
         const min = expressionMinDate ? scope.$eval(generateBlocklyCall(expressionMinDate)) : new Date(1900, 0, 1);
