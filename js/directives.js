@@ -75,17 +75,13 @@
   app.directive('cronCalendar', ['$timeout', function ($timeout) {
     return {
       restrict: 'E',
-      require: 'ngModel',
-      scope: {
-        ngModel: '='
-      },
-      link: function (scope, element, attrs, ngModelCtrl) {
+      link: async function (scope, element, attrs, ngModelCtrl) {
         let options = {};
 
         try {
           options = JSON.parse(attrs.options);
         } catch (e) {
-
+          console.error(e);
         }
 
         const cronCalendarElement = $(element);
@@ -99,11 +95,11 @@
         const expressionOnChange = options.expressionOnChange;
         const expressionOnNavigate = options.expressionOnNavigate;
 
-        const initialDate = expressionInitialDate ? scope.$eval(generateBlocklyCall(expressionInitialDate)) : new Date();
-        const selectDates = (expressionSelectDates && options.isSelectableMultiple) ? scope.$eval(generateBlocklyCall(expressionSelectDates)) : [];
-        const disableDates = expressionDisableDates ? scope.$eval(generateBlocklyCall(expressionDisableDates)) : null;
-        const min = expressionMinDate ? scope.$eval(generateBlocklyCall(expressionMinDate)) : new Date(1900, 0, 1);
-        const max = expressionMaxDate ? scope.$eval(generateBlocklyCall(expressionMaxDate)) : new Date(2099, 11, 31);
+        const initialDate = expressionInitialDate ? await scope.$eval(generateBlocklyCall(expressionInitialDate)) : new Date();
+        const selectDates = (expressionSelectDates && options.isSelectableMultiple) ? await scope.$eval(generateBlocklyCall(expressionSelectDates)) : [];
+        const disableDates = expressionDisableDates ? await scope.$eval(generateBlocklyCall(expressionDisableDates)) : null;
+        const min = expressionMinDate ? await scope.$eval(generateBlocklyCall(expressionMinDate)) : new Date(1900, 0, 1);
+        const max = expressionMaxDate ? await scope.$eval(generateBlocklyCall(expressionMaxDate)) : new Date(2099, 11, 31);
 
         cronCalendarElement.kendoCalendar({
           culture: culture.startsWith('pt') ? 'pt-BR' : 'en-US',
