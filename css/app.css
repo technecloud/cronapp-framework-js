@@ -201,3 +201,7 @@ a {
     padding: 0.5em;
     background-color: #fff;
 }
+
+.nav.nav-tabs li.active {
+    background-color: #3b448e;
+}

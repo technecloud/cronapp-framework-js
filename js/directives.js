@@ -2608,10 +2608,13 @@
               scope.safeApply(function() {
                 var trs = $(toCompile);
                 var x = angular.element(trs);
-                $compile(x)(scope);
-                if (options.grid) {
-                  helperDirective.resizeGridUsingWidthForDevice(options.grid);
-                }
+                //setTimeout apenas para sair da thread
+                setTimeout(()=> {
+                  $compile(x)(scope);
+                  if (options.grid) {
+                    helperDirective.resizeGridUsingWidthForDevice(options.grid);
+                  }
+                },100);
               });
             }
           };
@@ -3238,8 +3241,14 @@
                 _ngModelCtrl.$setViewValue(this.value());
               }.bind(combobox));
             }
-
-            var combobox = $element.kendoComboBox(options).data('kendoComboBox');
+  
+            var combobox;
+            if (select.dontAllowOutsideList === true) {
+              combobox = $element.kendoDropDownList(options).data('kendoDropDownList');
+            }
+            else {
+              combobox = $element.kendoComboBox(options).data('kendoComboBox');
+            }
             $(element).remove();
 
             let internalInput;
@@ -5392,6 +5401,13 @@ app.kendoHelper = {
             if (dataSource.append) {
               append = dataSource.append;
             }
+  
+            var fetchOptions = {};
+            //indicates that the search has already been clicked, set the fetchOptions orign to loadDataStrategy
+            if (cronappDatasource.loadDataStrategy === "button" && cronappDatasource.data.length > 0) {
+              fetchOptions.origin = cronappDatasource.loadDataStrategy;
+            }
+  
             cronappDatasource.append = append;
             cronappDatasource.fetch(fetchData, {
               success:  function(data) {
@@ -5403,7 +5419,7 @@ app.kendoHelper = {
               error:  function(data) {
                 e.error("canceled", "canceled", "canceled");
               }
-            }, append);
+            }, append, fetchOptions);
           }
 
         },
@@ -5638,7 +5654,7 @@ app.kendoHelper = {
     }
 
     if (!options.customTemplate) {
-      if(options.dataSourceScreen && options.dataSourceScreen.entityDataSource) {
+      if(options.dataSourceScreen && options.dataSourceScreen.entityDataSource && options.dataSourceScreen.entityDataSource.schemaFields) {
         if (options.format || (isValidDateType(getFieldType(options.dataTextField)))) {
           options.template = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
           options.valueTemplate = "#= useMask(" + options.dataTextField + ",'" + options.format + "','" + getFieldType(options.dataTextField) + "') #";
