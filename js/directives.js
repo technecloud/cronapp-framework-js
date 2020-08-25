@@ -103,7 +103,7 @@
 
         cronCalendarElement.kendoCalendar({
           culture: culture.startsWith('pt') ? 'pt-BR' : 'en-US',
-          componentType: options.isClassicType ? 'clasic' : 'modern',
+          componentType: options.isClassicType ? 'classic' : 'modern',
           selectable: options.isSelectableSingle ? 'single' : 'multiple',
           weekNumber: options.showWeekNumbers,
           value: initialDate,
