@@ -4483,85 +4483,85 @@
         }
       })
 
-  .directive('crnAllowNullValues', [function () {
-    return {
-      restrict: 'A',
-      require: '?ngModel',
-      link: function (scope, el, attrs, ctrl) {
-        ctrl.$formatters = [];
-        ctrl.$parsers = [];
-        let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : null;
-        let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : null;
+      .directive('crnAllowNullValues', [function () {
+        return {
+          restrict: 'A',
+          require: '?ngModel',
+          link: function (scope, el, attrs, ctrl) {
+            ctrl.$formatters = [];
+            ctrl.$parsers = [];
+            let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : undefined;
+            let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : undefined;
 
-        if (attrs.crnAllowNullValues == 'true') {
-          ctrl.$render = function () {
-            let viewValue = ctrl.$viewValue;
-            el.data('checked', viewValue);
-            switch (viewValue) {
-              case true:
-              case trueValue:
-                el.prop('indeterminate', false);
-                el.prop('checked', true);
-                break;
-              case false:
-              case falseValue:
-                el.prop('indeterminate', false);
-                el.prop('checked', false);
-                break;
-              default:
-                el.prop('indeterminate', true);
+            if (attrs.crnAllowNullValues == 'true') {
+              ctrl.$render = function () {
+                let viewValue = ctrl.$viewValue;
+                el.data('checked', viewValue);
+                switch (viewValue) {
+                  case true:
+                  case trueValue:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', true);
+                    break;
+                  case false:
+                  case falseValue:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', false);
+                    break;
+                  default:
+                    el.prop('indeterminate', true);
+                }
+              };
+              el.bind('click', function () {
+                let checked;
+                switch (el.data('checked')) {
+                  case false:
+                  case falseValue:
+                    checked = attrs.ngTrueValue ? trueValue : true;
+                    break;
+                  default:
+                    checked = attrs.ngFalseValue ? falseValue : false;
+                }
+                ctrl.$setViewValue(checked);
+                scope.$apply(ctrl.$render);
+              });
+            } else if (attrs.crnAllowNullValues == 'false') {
+              ctrl.$render = function () {
+                let viewValue = ctrl.$viewValue;
+                if (viewValue === undefined || viewValue === null) {
+                  ctrl.$setViewValue(false);
+                  viewValue = false;
+                }
+                el.data('checked', viewValue);
+                switch (viewValue) {
+                  case true:
+                  case trueValue:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', true);
+                    break;
+                  default:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', false);
+                    break;
+                }
+              };
+              el.bind('click', function () {
+                let checked;
+                switch (el.data('checked')) {
+                  case false:
+                  case falseValue:
+                    checked = attrs.ngTrueValue ? trueValue : true;
+                    break;
+                  default:
+                    checked = attrs.ngFalseValue ? falseValue : false;
+                }
+                ctrl.$setViewValue(checked);
+                scope.$apply(ctrl.$render);
+              });
             }
-          };
-          el.bind('click', function () {
-            let checked;
-            switch (el.data('checked')) {
-              case false:
-              case falseValue:
-                checked = attrs.ngTrueValue ? trueValue : true;
-                break;
-              default:
-                checked = attrs.ngFalseValue ? falseValue : false;
-            }
-            ctrl.$setViewValue(checked);
-            scope.$apply(ctrl.$render);
-          });
-        } else if (attrs.crnAllowNullValues == 'false'){
-          ctrl.$render = function () {
-            let viewValue = ctrl.$viewValue;
-            if(viewValue === undefined || viewValue === null){
-              ctrl.$setViewValue(false);
-              viewValue = false;
-            }
-            el.data('checked', viewValue);
-            switch (viewValue) {
-              case true:
-              case trueValue:
-                el.prop('indeterminate', false);
-                el.prop('checked', true);
-                break;
-              default:
-                el.prop('indeterminate', false);
-                el.prop('checked', false);
-                break;
-            }
-          };
-          el.bind('click', function () {
-            let checked;
-            switch (el.data('checked')) {
-              case false:
-              case falseValue:
-                checked = attrs.ngTrueValue ? trueValue : true;
-                break;
-              default:
-                checked = attrs.ngFalseValue ? falseValue : false;
-            }
-            ctrl.$setViewValue(checked);
-            scope.$apply(ctrl.$render);
-          });
-        }
-      }
-    };
-  }])
+          }
+        };
+      }])
 
       .directive('cronChat',  ['$compile', '$translate', function($compile, $translate) {
         return {
