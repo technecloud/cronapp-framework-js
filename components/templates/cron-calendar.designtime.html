@@ -1,102 +1,147 @@
 <style>
-
-    .k-other-month .k-link:link{
+    .k-other-month .k-link:link {
         color: #c1c1c1
     }
 
     .k-link:link {
         color: #666774;
-        font-weight: bold;
     }
 
     .k-button {
         box-shadow: none;
     }
+
+    .k-state-selected{
+        background-color: #1d77ba;
+    }
+
+    .k-state-selected .k-link:link{
+        color: #fff;
+    }
 </style>
 
 <div id="calendar" data-role="calendar" class="k-widget k-openEditorcalendar" style="width: 300px;
-    height: 370px;">
-    <div class="k-calendar-header">
-        <a href="#" data-action="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-button k-title" aria-disabled="false">August 2020</a>
-        <span class="k-calendar-nav">
-            <a data-action="prev" class="k-button k-button-icon k-prev-view" aria-disabled="false">
-                <span class="k-icon k-i-arrow-60-left"></span>
-            </a>
-            <a data-action="today" class="k-today">Today</a>
-            <a data-action="next" class="k-button k-button-icon k-next-view" aria-disabled="false">
-                <span class="k-icon k-i-arrow-60-right"></span>
-            </a>
-        </span>
-    </div>
-    <div class="k-calendar-view k-calendar-monthview">
-        <table tabindex="0" role="grid" class="k-content k-calendar-content k-month" cellspacing="0" data-start="2020/6/26" aria-activedescendant="calendar_cell_selected">
+    height: 370px; display: flex;  flex-direction: column;">
+    <div class="k-header" style="display: flex; justify-content: space-between; padding:15px"><a href="#" role="button" class="k-link k-nav-prev" aria-label="Previous"
+                                                                                                 aria-disabled="false"><span class="k-icon k-i-arrow-60-left"></span></a><a href="#" role="button"
+                                                                                                                                                                            aria-live="assertive" aria-atomic="true" class="k-link k-nav-fast" aria-disabled="false">agosto 2020</a><a
+            href="#" role="button" class="k-link k-nav-next" aria-label="Next" aria-disabled="false"><span
+            class="k-icon k-i-arrow-60-right"></span></a></div>
+    <div class="k-calendar-view" style="height: 280px;">
+        <table tabindex="0" role="grid" class="k-content k-month" cellspacing="0" data-start="2020/6/26">
             <thead>
             <tr role="row">
-                <th scope="col" title="Sunday">Su</th>
-                <th scope="col" title="Monday">Mo</th>
-                <th scope="col" title="Tuesday">Tu</th>
-                <th scope="col" title="Wednesday">We</th>
-                <th scope="col" title="Thursday">Th</th>
-                <th scope="col" title="Friday">Fr</th>
-                <th scope="col" title="Saturday">Sa</th>
+                <th scope="col" title="domingo">D</th>
+                <th scope="col" title="segunda-feira">S</th>
+                <th scope="col" title="terça-feira">T</th>
+                <th scope="col" title="quarta-feira">Q</th>
+                <th scope="col" title="quinta-feira">Q</th>
+                <th scope="col" title="sexta-feira">S</th>
+                <th scope="col" title="sábado">S</th>
             </tr>
             </thead>
             <tbody>
             <tr role="row">
-                <td class="k-other-month k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/6/26" title="Sunday, July 26, 2020">26</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/6/27" title="Monday, July 27, 2020">27</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/6/28" title="Tuesday, July 28, 2020">28</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/6/29" title="Wednesday, July 29, 2020">29</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/6/30" title="Thursday, July 30, 2020">30</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/6/31" title="Friday, July 31, 2020">31</a></td>
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/1" title="Saturday, August 01, 2020">1</a></td>
+                <td class="k-other-month k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                                       data-value="2020/6/26" title="domingo, 26 de julho de 2020">26</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/6/27" title="segunda-feira, 27 de julho de 2020">27</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/6/28" title="terça-feira, 28 de julho de 2020">28</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/6/29" title="quarta-feira, 29 de julho de 2020">29</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/6/30" title="quinta-feira, 30 de julho de 2020">30</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/6/31" title="sexta-feira, 31 de julho de 2020">31</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/1"
+                                                         title="sábado, 1 de agosto de 2020">1</a></td>
             </tr>
             <tr role="row">
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/2" title="Sunday, August 02, 2020">2</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/3" title="Monday, August 03, 2020">3</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/4" title="Tuesday, August 04, 2020">4</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/5" title="Wednesday, August 05, 2020">5</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/6" title="Thursday, August 06, 2020">6</a></td>
-                <td class="k-today k-state-selected" role="gridcell" aria-selected="true" id="calendar_cell_selected"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/7" title="Friday, August 07, 2020">7</a></td>
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/8" title="Saturday, August 08, 2020">8</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/2"
+                                                         title="domingo, 2 de agosto de 2020">2</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/3"
+                                       title="segunda-feira, 3 de agosto de 2020">3</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/4"
+                                       title="terça-feira, 4 de agosto de 2020">4</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/5"
+                                       title="quarta-feira, 5 de agosto de 2020">5</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/6"
+                                       title="quinta-feira, 6 de agosto de 2020">6</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/7"
+                                       title="sexta-feira, 7 de agosto de 2020">7</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/8"
+                                                         title="sábado, 8 de agosto de 2020">8</a></td>
             </tr>
             <tr role="row">
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/9" title="Sunday, August 09, 2020">9</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/10" title="Monday, August 10, 2020">10</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/11" title="Tuesday, August 11, 2020">11</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/12" title="Wednesday, August 12, 2020">12</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/13" title="Thursday, August 13, 2020">13</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/14" title="Friday, August 14, 2020">14</a></td>
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/15" title="Saturday, August 15, 2020">15</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/9"
+                                                         title="domingo, 9 de agosto de 2020">9</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/10"
+                                       title="segunda-feira, 10 de agosto de 2020">10</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/11"
+                                       title="terça-feira, 11 de agosto de 2020">11</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/12"
+                                       title="quarta-feira, 12 de agosto de 2020">12</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/13"
+                                       title="quinta-feira, 13 de agosto de 2020">13</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/14"
+                                       title="sexta-feira, 14 de agosto de 2020">14</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                         data-value="2020/7/15" title="sábado, 15 de agosto de 2020">15</a></td>
             </tr>
             <tr role="row">
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/16" title="Sunday, August 16, 2020">16</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/17" title="Monday, August 17, 2020">17</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/18" title="Tuesday, August 18, 2020">18</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/19" title="Wednesday, August 19, 2020">19</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/20" title="Thursday, August 20, 2020">20</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/21" title="Friday, August 21, 2020">21</a></td>
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/22" title="Saturday, August 22, 2020">22</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                         data-value="2020/7/16" title="domingo, 16 de agosto de 2020">16</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/17"
+                                       title="segunda-feira, 17 de agosto de 2020">17</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/18"
+                                       title="terça-feira, 18 de agosto de 2020">18</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/19"
+                                       title="quarta-feira, 19 de agosto de 2020">19</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/20"
+                                       title="quinta-feira, 20 de agosto de 2020">20</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/21"
+                                       title="sexta-feira, 21 de agosto de 2020">21</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                         data-value="2020/7/22" title="sábado, 22 de agosto de 2020">22</a></td>
             </tr>
             <tr role="row">
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/23" title="Sunday, August 23, 2020">23</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/24" title="Monday, August 24, 2020">24</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/25" title="Tuesday, August 25, 2020">25</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/26" title="Wednesday, August 26, 2020">26</a></td>
-                <td role="gridcell" class=""><a tabindex="-1" class="k-link" href="#" data-value="2020/7/27" title="Thursday, August 27, 2020">27</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/28" title="Friday, August 28, 2020">28</a></td>
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/29" title="Saturday, August 29, 2020">29</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                         data-value="2020/7/23" title="domingo, 23 de agosto de 2020">23</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/24"
+                                       title="segunda-feira, 24 de agosto de 2020">24</a></td>
+                <td class="k-today k-state-selected" role="gridcell" aria-selected="true"><a tabindex="-1"
+                                                                                             class="k-link" href="#" data-value="2020/7/25"
+                                                                                             title="terça-feira, 25 de agosto de 2020">25</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/26"
+                                       title="quarta-feira, 26 de agosto de 2020">26</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/27"
+                                       title="quinta-feira, 27 de agosto de 2020">27</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/28"
+                                       title="sexta-feira, 28 de agosto de 2020">28</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                         data-value="2020/7/29" title="sábado, 29 de agosto de 2020">29</a></td>
             </tr>
             <tr role="row">
-                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/30" title="Sunday, August 30, 2020">30</a></td>
-                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/31" title="Monday, August 31, 2020">31</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/8/1" title="Tuesday, September 01, 2020">1</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/8/2" title="Wednesday, September 02, 2020">2</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/8/3" title="Thursday, September 03, 2020">3</a></td>
-                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/8/4" title="Friday, September 04, 2020">4</a></td>
-                <td class="k-other-month k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/8/5" title="Saturday, September 05, 2020">5</a></td>
+                <td class="k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                         data-value="2020/7/30" title="domingo, 30 de agosto de 2020">30</a></td>
+                <td role="gridcell"><a tabindex="-1" class="k-link" href="#" data-value="2020/7/31"
+                                       title="segunda-feira, 31 de agosto de 2020">31</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/8/1" title="terça-feira, 1 de setembro de 2020">1</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/8/2" title="quarta-feira, 2 de setembro de 2020">2</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/8/3" title="quinta-feira, 3 de setembro de 2020">3</a></td>
+                <td class="k-other-month" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                             data-value="2020/8/4" title="sexta-feira, 4 de setembro de 2020">4</a></td>
+                <td class="k-other-month k-weekend" role="gridcell"><a tabindex="-1" class="k-link" href="#"
+                                                                       data-value="2020/8/5" title="sábado, 5 de setembro de 2020">5</a></td>
             </tr>
             </tbody>
         </table>
     </div>
+    <div class="k-footer" style="display: flex;    justify-content: center;"><a href="#" class="k-link k-nav-today" title="terça-feira, 25 de agosto de 2020">terça-feira,
+        25 de agosto de 2020</a></div>
+
 </div>
