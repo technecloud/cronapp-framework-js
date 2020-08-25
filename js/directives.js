@@ -5401,6 +5401,13 @@ app.kendoHelper = {
             if (dataSource.append) {
               append = dataSource.append;
             }
+  
+            var fetchOptions = {};
+            //indicates that the search has already been clicked, set the fetchOptions orign to loadDataStrategy
+            if (cronappDatasource.loadDataStrategy === "button" && cronappDatasource.data.length > 0) {
+              fetchOptions.origin = cronappDatasource.loadDataStrategy;
+            }
+  
             cronappDatasource.append = append;
             cronappDatasource.fetch(fetchData, {
               success:  function(data) {
@@ -5412,7 +5419,7 @@ app.kendoHelper = {
               error:  function(data) {
                 e.error("canceled", "canceled", "canceled");
               }
-            }, append);
+            }, append, fetchOptions);
           }
 
         },
