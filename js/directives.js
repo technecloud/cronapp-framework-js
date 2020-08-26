@@ -72,6 +72,81 @@
     return result;
   };
 
+  app.directive('cronCalendar', ['$timeout', function ($timeout) {
+    return {
+      restrict: 'E',
+      link: async function (scope, element, attrs, ngModelCtrl) {
+        let options = {};
+
+        try {
+          options = JSON.parse(attrs.options);
+        } catch (e) {
+          console.error(e);
+        }
+
+        const cronCalendarElement = $(element);
+
+        const culture = navigator.language || navigator.userLanguage;
+        const expressionInitialDate = options.expressionInitialDate;
+        const expressionSelectDates = options.expressionSelectDates;
+        const expressionDisableDates = options.expressionDisableDates;
+        const expressionMinDate = options.expressionMinDate;
+        const expressionMaxDate = options.expressionMaxDate;
+        const expressionOnChange = options.expressionOnChange;
+        const expressionOnNavigate = options.expressionOnNavigate;
+
+        const initialDate = expressionInitialDate ? await scope.$eval(generateBlocklyCall(expressionInitialDate)) : new Date();
+        const selectDates = (expressionSelectDates && options.isSelectableMultiple) ? await scope.$eval(generateBlocklyCall(expressionSelectDates)) : [];
+        const disableDates = expressionDisableDates ? await scope.$eval(generateBlocklyCall(expressionDisableDates)) : null;
+        const min = expressionMinDate ? await scope.$eval(generateBlocklyCall(expressionMinDate)) : new Date(1900, 0, 1);
+        const max = expressionMaxDate ? await scope.$eval(generateBlocklyCall(expressionMaxDate)) : new Date(2099, 11, 31);
+
+        cronCalendarElement.kendoCalendar({
+          culture: culture.startsWith('pt') ? 'pt-BR' : 'en-US',
+          componentType: options.isClassicType ? 'classic' : 'modern',
+          selectable: options.isSelectableSingle ? 'single' : 'multiple',
+          weekNumber: options.showWeekNumbers,
+          value: initialDate,
+          selectDates: selectDates,
+          disableDates: disableDates,
+          min: min,
+          max: max
+        });
+
+        let calendar = cronCalendarElement.data('kendoCalendar');
+
+        calendar.bind("change", function () {
+          let value = this.value();
+          //value is the selected date in the calendar
+          if (expressionOnChange) {
+            scope.$eval(generateBlocklyCall(expressionOnChange));
+          }
+        });
+
+        calendar.bind("navigate", function () {
+          let view = this.view();
+          //name of the current view
+
+          let current = this.current();
+          //currently focused date
+          if (expressionOnChange) {
+            scope.$eval(generateBlocklyCall(expressionOnNavigate));
+          }
+        });
+
+        function updateView(value) {
+          ngModelCtrl.$viewValue = value;
+          ngModelCtrl.$render();
+        }
+
+        function updateModel(value) {
+          ngModelCtrl.$modelValue = value;
+          scope.ngModel = value; // overwrites ngModel value
+        }
+      }
+    }
+  }]);
+
   app.directive('justGage', ['$timeout', function ($timeout) {
     return {
       restrict: 'EA',
