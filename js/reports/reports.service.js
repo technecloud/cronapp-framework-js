@@ -199,7 +199,7 @@
                 console.log('open[#reportViewContext]');
                 $('body').append(context);
                 cronapi.screen.showModal('reportView');
-                if (json.reportConfig && json.reportConfig.renderType === "HTML") {
+                if (!json.reportConfig || json.reportConfig.renderType === "HTML") {
                   getViewer(config).renderHtml("contentReport");
                 }
                 else {
@@ -225,7 +225,7 @@
           var pdfService = new Stimulsoft.Report.Export.StiPdfExportService();
           var stream = new Stimulsoft.System.IO.MemoryStream();
           report.renderAsync(function () {
-            if (!json.reportConfig || json.reportConfig.renderType === "PDF" || json.reportConfig.renderType === undefined) {
+            if (json.reportConfig && json.reportConfig.renderType === "PDF") {
               pdfService.exportToAsync(function () {
                 var data = stream.toArray();
                 var blob = new Blob([new Uint8Array(data)], {type: "application/pdf"});
