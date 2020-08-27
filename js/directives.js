@@ -4607,6 +4607,10 @@
                   ctrl.$setViewValue(false);
                   viewValue = false;
                 }
+                if (viewValue === false) {
+                  let modelForEval = `${el.attr('ng-model')}=${viewValue}`;
+                  scope.$eval(modelForEval);
+                }
                 el.data('checked', viewValue);
                 switch (viewValue) {
                   case true:
