@@ -621,7 +621,7 @@
                 $element.hide();
               }
               if (!enabled) {
-                $element.find('*').addBack().attr('disabled', true);
+                $element.find('*').addBack().attr('disabled', true).off('click').on('click', e => e.preventDefault());
               }
             };
 
