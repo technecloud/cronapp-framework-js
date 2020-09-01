@@ -189,6 +189,20 @@
       }
     }
 
+    $scope.location = $location;
+    $scope.$on("$locationChangeSuccess", function (event, newUrl, oldUrl) {
+      console.info('$locationChangeSuccess');
+      console.info($location.search());
+      console.info($location.path());
+      if( $location.path().startsWith("/home/logged") && $location.search().token == undefined){
+        console.info("UnLogged");
+        //$state.go('/views/login');
+        $location.path('/views/login');
+        $location.replace();
+      }
+
+    });
+
     $scope.message = {};
 
     $scope.selecionado = {
