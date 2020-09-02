@@ -2052,6 +2052,10 @@
             else if (hasMask(column.type) || (column.format && column.format != 'null')   ) {
               template = "#= useMask("+column.field+",'"+column.format+"','"+column.type+"') #";
             }
+            else if (column.showAsImage) {
+              template = column.showAsImageTemplate ? column.showAsImageTemplate :  "<img src='#:${column.field}#'/>";
+              template = eval('`' + template + '`');
+            }
             return template;
           }
 
