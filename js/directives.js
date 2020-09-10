@@ -662,7 +662,10 @@
               return ngModel.$modelValue || "";
             };
             var getSize = function(){
-              return scope.size || $(element).outerWidth();
+              let outerWidth = $(element).outerWidth();
+              let outerHeight = $(element).outerHeight();
+              let bestFit = outerWidth < outerHeight ? outerWidth : outerHeight;
+              return scope.size || bestFit;
             };
             var isNUMBER = function(text){
               var ALLOWEDCHARS = /^[0-9]*$/;
