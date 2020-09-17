@@ -4456,7 +4456,7 @@
                 var security = (item.security && item.security != null) ? ' cronapp-security="' + item.security + '" ' : '';
                 var action = (item.action && item.action != null) ? ' ng-click="' + item.action + '" ' : '';
                 var hide = (item.hide && item.hide != null) ? ' ng-hide="' + item.hide + '" ' : '';
-                var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>' : '';
+                var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>&nbsp;' : '';
                 var title = '<span></span>';
                 if (item.title)
                   title = '<span>' + $translate.instant(item.title) + '</span>';
@@ -4481,7 +4481,7 @@
                 var action = (menu.action && menu.action != null) ? ' ng-click="' + menu.action + '" ' : '';
                 var caret = (menu.menuItems && Array.isArray(menu.menuItems) && (menu.menuItems.length > 0)) ? '<span class="caret"></span>' : '';
                 var hide = (menu.hide && menu.hide != null) ? ' ng-hide="' + menu.hide + '" ' : '';
-                var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>' : '';
+                var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>&nbsp;' : '';
                 var title = '<span></span>'
                 if (menu.title)
                   title = '<span>' + $translate.instant(menu.title) + '</span>';

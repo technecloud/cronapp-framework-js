@@ -219,4 +219,8 @@ a {
     .crn-navigator-horizontal #navbar, .float-left-desktop {
         float: none;
     }
+    
+    img.user-avatar {
+        margin-left: 0;
+    }
 }
