@@ -3962,6 +3962,12 @@
 
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
+            if (attrs.crnReadonly) {
+              _scope.$watch(attrs.crnReadonly, (newValue, oldValue) => {
+                combobox.readonly(_scope.$eval(attrs.crnReadonly));
+              });
+            }
+            
             var convertArray = function(value) {
               var result = [];
               if (value) {
