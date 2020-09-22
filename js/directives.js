@@ -2397,8 +2397,6 @@
                 var tooltip = '';
                 if (column.tooltip && column.tooltip.length)
                   tooltip = column.tooltip;
-                else if (column.label && column.label.length)
-                  tooltip = column.label;
 
                 if (tooltip)  {
                   var classForTooltip = app.common.generateId();
