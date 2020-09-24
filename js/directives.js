@@ -2397,8 +2397,6 @@
                 var tooltip = '';
                 if (column.tooltip && column.tooltip.length)
                   tooltip = column.tooltip;
-                else if (column.label && column.label.length)
-                  tooltip = column.label;
 
                 if (tooltip)  {
                   var classForTooltip = app.common.generateId();
@@ -3962,6 +3960,12 @@
 
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
+            if (attrs.crnReadonly) {
+              _scope.$watch(attrs.crnReadonly, (newValue, oldValue) => {
+                combobox.readonly(_scope.$eval(attrs.crnReadonly));
+              });
+            }
+            
             var convertArray = function(value) {
               var result = [];
               if (value) {
