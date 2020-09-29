@@ -503,7 +503,7 @@
       "new": "node_modules/cronapp-framework-js/dist/components/js/format.min.js"
     },
     {
-      "old": "plugins/cronapp-framework-js/dist/components/js/",
+      "old": "plugins/cronapp-framework-js/dist/components/js/qrcode.js",
       "new": "node_modules/cronapp-framework-js/dist/components/js/qrcode.js"
     }
   ]
