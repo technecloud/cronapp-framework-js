@@ -72,6 +72,81 @@
     return result;
   };
 
+  app.directive('cronCalendar', ['$timeout', function ($timeout) {
+    return {
+      restrict: 'E',
+      link: async function (scope, element, attrs, ngModelCtrl) {
+        let options = {};
+
+        try {
+          options = JSON.parse(attrs.options);
+        } catch (e) {
+          console.error(e);
+        }
+
+        const cronCalendarElement = $(element);
+
+        const culture = navigator.language || navigator.userLanguage;
+        const expressionInitialDate = options.expressionInitialDate;
+        const expressionSelectDates = options.expressionSelectDates;
+        const expressionDisableDates = options.expressionDisableDates;
+        const expressionMinDate = options.expressionMinDate;
+        const expressionMaxDate = options.expressionMaxDate;
+        const expressionOnChange = options.expressionOnChange;
+        const expressionOnNavigate = options.expressionOnNavigate;
+
+        const initialDate = expressionInitialDate ? await scope.$eval(generateBlocklyCall(expressionInitialDate)) : new Date();
+        const selectDates = (expressionSelectDates && options.isSelectableMultiple) ? await scope.$eval(generateBlocklyCall(expressionSelectDates)) : [];
+        const disableDates = expressionDisableDates ? await scope.$eval(generateBlocklyCall(expressionDisableDates)) : null;
+        const min = expressionMinDate ? await scope.$eval(generateBlocklyCall(expressionMinDate)) : new Date(1900, 0, 1);
+        const max = expressionMaxDate ? await scope.$eval(generateBlocklyCall(expressionMaxDate)) : new Date(2099, 11, 31);
+
+        cronCalendarElement.kendoCalendar({
+          culture: culture.startsWith('pt') ? 'pt-BR' : 'en-US',
+          componentType: options.isClassicType ? 'classic' : 'modern',
+          selectable: options.isSelectableSingle ? 'single' : 'multiple',
+          weekNumber: options.showWeekNumbers,
+          value: initialDate,
+          selectDates: selectDates,
+          disableDates: disableDates,
+          min: min,
+          max: max
+        });
+
+        let calendar = cronCalendarElement.data('kendoCalendar');
+
+        calendar.bind("change", function () {
+          let value = this.value();
+          //value is the selected date in the calendar
+          if (expressionOnChange) {
+            scope.$eval(generateBlocklyCall(expressionOnChange));
+          }
+        });
+
+        calendar.bind("navigate", function () {
+          let view = this.view();
+          //name of the current view
+
+          let current = this.current();
+          //currently focused date
+          if (expressionOnChange) {
+            scope.$eval(generateBlocklyCall(expressionOnNavigate));
+          }
+        });
+
+        function updateView(value) {
+          ngModelCtrl.$viewValue = value;
+          ngModelCtrl.$render();
+        }
+
+        function updateModel(value) {
+          ngModelCtrl.$modelValue = value;
+          scope.ngModel = value; // overwrites ngModel value
+        }
+      }
+    }
+  }]);
+
   app.directive('justGage', ['$timeout', function ($timeout) {
     return {
       restrict: 'EA',
@@ -546,7 +621,7 @@
                 $element.hide();
               }
               if (!enabled) {
-                $element.find('*').addBack().attr('disabled', true);
+                $element.find('*').addBack().attr('disabled', true).off('click').on('click', e => e.preventDefault());
               }
             };
 
@@ -587,7 +662,10 @@
               return ngModel.$modelValue || "";
             };
             var getSize = function(){
-              return scope.size || $(element).outerWidth();
+              let outerWidth = $(element).outerWidth();
+              let outerHeight = $(element).outerHeight();
+              let bestFit = outerWidth < outerHeight ? outerWidth : outerHeight;
+              return scope.size || bestFit;
             };
             var isNUMBER = function(text){
               var ALLOWEDCHARS = /^[0-9]*$/;
@@ -1977,6 +2055,10 @@
             else if (hasMask(column.type) || (column.format && column.format != 'null')   ) {
               template = "#= useMask("+column.field+",'"+column.format+"','"+column.type+"') #";
             }
+            else if (column.showAsImage) {
+              template = column.showAsImageTemplate ? column.showAsImageTemplate :  "<img src='#:${column.field}#'/>";
+              template = eval('`' + template + '`');
+            }
             return template;
           }
 
@@ -2315,8 +2397,6 @@
                 var tooltip = '';
                 if (column.tooltip && column.tooltip.length)
                   tooltip = column.tooltip;
-                else if (column.label && column.label.length)
-                  tooltip = column.label;
 
                 if (tooltip)  {
                   var classForTooltip = app.common.generateId();
@@ -3880,6 +3960,12 @@
 
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
+            if (attrs.crnReadonly) {
+              _scope.$watch(attrs.crnReadonly, (newValue, oldValue) => {
+                combobox.readonly(_scope.$eval(attrs.crnReadonly));
+              });
+            }
+            
             var convertArray = function(value) {
               var result = [];
               if (value) {
@@ -4328,7 +4414,9 @@
               clonned.attr("idx", i);
               clonned.click(function() {
                 scope.$apply(function() {
-                  ngModelCtrl.$viewValue = parseInt($(this).attr("idx")); //set new view value
+                  let idx = parseInt($(this).attr("idx"));
+                  //set new view value or reset the value
+                  ngModelCtrl.$viewValue = ( ngModelCtrl.$viewValue !== idx ) ? idx : 0;
                   ngModelCtrl.$commitViewValue();
 
                 }.bind(this));
@@ -4372,7 +4460,7 @@
                 var security = (item.security && item.security != null) ? ' cronapp-security="' + item.security + '" ' : '';
                 var action = (item.action && item.action != null) ? ' ng-click="' + item.action + '" ' : '';
                 var hide = (item.hide && item.hide != null) ? ' ng-hide="' + item.hide + '" ' : '';
-                var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>' : '';
+                var iconClass = (item.iconClass && item.iconClass != null) ? '<i class="'+ item.iconClass +'"></i>&nbsp;' : '';
                 var title = '<span></span>';
                 if (item.title)
                   title = '<span>' + $translate.instant(item.title) + '</span>';
@@ -4397,7 +4485,7 @@
                 var action = (menu.action && menu.action != null) ? ' ng-click="' + menu.action + '" ' : '';
                 var caret = (menu.menuItems && Array.isArray(menu.menuItems) && (menu.menuItems.length > 0)) ? '<span class="caret"></span>' : '';
                 var hide = (menu.hide && menu.hide != null) ? ' ng-hide="' + menu.hide + '" ' : '';
-                var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>' : '';
+                var iconClass = (menu.iconClass && menu.iconClass != null) ? '<i class="'+ menu.iconClass +'"></i>&nbsp;' : '';
                 var title = '<span></span>'
                 if (menu.title)
                   title = '<span>' + $translate.instant(menu.title) + '</span>';
@@ -4483,85 +4571,89 @@
         }
       })
 
-  .directive('crnAllowNullValues', [function () {
-    return {
-      restrict: 'A',
-      require: '?ngModel',
-      link: function (scope, el, attrs, ctrl) {
-        ctrl.$formatters = [];
-        ctrl.$parsers = [];
-        let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : null;
-        let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : null;
+      .directive('crnAllowNullValues', [function () {
+        return {
+          restrict: 'A',
+          require: '?ngModel',
+          link: function (scope, el, attrs, ctrl) {
+            ctrl.$formatters = [];
+            ctrl.$parsers = [];
+            let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : undefined;
+            let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : undefined;
 
-        if (attrs.crnAllowNullValues == 'true') {
-          ctrl.$render = function () {
-            let viewValue = ctrl.$viewValue;
-            el.data('checked', viewValue);
-            switch (viewValue) {
-              case true:
-              case trueValue:
-                el.prop('indeterminate', false);
-                el.prop('checked', true);
-                break;
-              case false:
-              case falseValue:
-                el.prop('indeterminate', false);
-                el.prop('checked', false);
-                break;
-              default:
-                el.prop('indeterminate', true);
+            if (attrs.crnAllowNullValues == 'true') {
+              ctrl.$render = function () {
+                let viewValue = ctrl.$viewValue;
+                el.data('checked', viewValue);
+                switch (viewValue) {
+                  case true:
+                  case trueValue:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', true);
+                    break;
+                  case false:
+                  case falseValue:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', false);
+                    break;
+                  default:
+                    el.prop('indeterminate', true);
+                }
+              };
+              el.bind('click', function () {
+                let checked;
+                switch (el.data('checked')) {
+                  case false:
+                  case falseValue:
+                    checked = attrs.ngTrueValue ? trueValue : true;
+                    break;
+                  default:
+                    checked = attrs.ngFalseValue ? falseValue : false;
+                }
+                ctrl.$setViewValue(checked);
+                scope.$apply(ctrl.$render);
+              });
+            } else if (attrs.crnAllowNullValues == 'false') {
+              ctrl.$render = function () {
+                let viewValue = ctrl.$viewValue;
+                if (viewValue === undefined || viewValue === null) {
+                  ctrl.$setViewValue(false);
+                  viewValue = false;
+                }
+                if (viewValue === false) {
+                  let modelForEval = `${el.attr('ng-model')}=${viewValue}`;
+                  scope.$eval(modelForEval);
+                }
+                el.data('checked', viewValue);
+                switch (viewValue) {
+                  case true:
+                  case trueValue:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', true);
+                    break;
+                  default:
+                    el.prop('indeterminate', false);
+                    el.prop('checked', false);
+                    break;
+                }
+              };
+              el.bind('click', function () {
+                let checked;
+                switch (el.data('checked')) {
+                  case false:
+                  case falseValue:
+                    checked = attrs.ngTrueValue ? trueValue : true;
+                    break;
+                  default:
+                    checked = attrs.ngFalseValue ? falseValue : false;
+                }
+                ctrl.$setViewValue(checked);
+                scope.$apply(ctrl.$render);
+              });
             }
-          };
-          el.bind('click', function () {
-            let checked;
-            switch (el.data('checked')) {
-              case false:
-              case falseValue:
-                checked = attrs.ngTrueValue ? trueValue : true;
-                break;
-              default:
-                checked = attrs.ngFalseValue ? falseValue : false;
-            }
-            ctrl.$setViewValue(checked);
-            scope.$apply(ctrl.$render);
-          });
-        } else if (attrs.crnAllowNullValues == 'false'){
-          ctrl.$render = function () {
-            let viewValue = ctrl.$viewValue;
-            if(viewValue === undefined || viewValue === null){
-              ctrl.$setViewValue(false);
-              viewValue = false;
-            }
-            el.data('checked', viewValue);
-            switch (viewValue) {
-              case true:
-              case trueValue:
-                el.prop('indeterminate', false);
-                el.prop('checked', true);
-                break;
-              default:
-                el.prop('indeterminate', false);
-                el.prop('checked', false);
-                break;
-            }
-          };
-          el.bind('click', function () {
-            let checked;
-            switch (el.data('checked')) {
-              case false:
-              case falseValue:
-                checked = attrs.ngTrueValue ? trueValue : true;
-                break;
-              default:
-                checked = attrs.ngFalseValue ? falseValue : false;
-            }
-            ctrl.$setViewValue(checked);
-            scope.$apply(ctrl.$render);
-          });
-        }
-      }
-    };
-  }])
+          }
+        };
+      }])
 
       .directive('cronChat',  ['$compile', '$translate', function($compile, $translate) {
         return {
