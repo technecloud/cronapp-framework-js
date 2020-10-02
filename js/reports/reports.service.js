@@ -61,6 +61,13 @@
 
     // open report
     this.openURLContent = function(url) {
+
+      // If Device is Mobile do not open modal. Open Report in new tab.
+      if(url && isMobile()) {
+        openReportOnMobile(url);
+        return;
+      }
+
       // Retrocompatibilidade
       var context = $('#reportViewContext');
 
@@ -189,6 +196,13 @@
         }
       
         function startShow(url) {
+
+          // If Device is Mobile do not open modal. Open Report in new tab.
+          if(url && isMobile()) {
+            openReportOnMobile(url);
+            return;
+          }
+
           var include = setInterval(function() {
             var div = $('<div/>');
             div.attr('id',"contentReport");
@@ -492,5 +506,18 @@
       }.bind(this));
     };
 
+    function isMobile() {
+      return (navigator.userAgent.match(/Android/i)
+          || navigator.userAgent.match(/webOS/i)
+          || navigator.userAgent.match(/iPhone/i)
+          || navigator.userAgent.match(/iPad/i)
+          || navigator.userAgent.match(/iPod/i)
+          || navigator.userAgent.match(/BlackBerry/i)
+          || navigator.userAgent.match(/Windows Phone/i))
+    }
+
+    function openReportOnMobile(url) {
+      window.open(url, '_blank');
+    }
   });
 }(app));
