@@ -1416,7 +1416,11 @@
             date: schedulerStartDate,
             mobile: true,
             allDaySlot: options.allDaySlot,
-            timezone: "Etc/UTC", // Setting the timezone is recommended when binding to a remote service.
+            messages: {
+              editor: {
+                timezone: $translate.instant('TimezoneEvent')
+              }
+            },
             currentTimeMarker: (options.currentTimeMarker ? {
               updateInterval: 10000,
               useLocalTimezone: false
@@ -1565,6 +1569,9 @@
           };
           if(!options.views) {
             cronSchedulerProperties.editable = options.editable;
+          }
+          if(window.fixedTimeZone && window.timeZone) {
+            cronSchedulerProperties.timezone = window.timeZone;
           }
           return cronSchedulerProperties;
         },
