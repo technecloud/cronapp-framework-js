@@ -135,5 +135,6 @@
   "download": "Baixar",
   "Admin.server.out": "Erro ao contactar o servidor",
   "Inserting": "Inserindo",
-  "Editing": "Editando"
+  "Editing": "Editando",
+  "TimezoneEvent": "Fuso Horário do Evento"
 }

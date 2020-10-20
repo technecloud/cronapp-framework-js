@@ -135,5 +135,6 @@
   "download": "Download",
   "Admin.server.out": "Error contacting the server",
   "Inserting": "Inserting",
-  "Editing": "Editing"
+  "Editing": "Editing",
+  "TimezoneEvent": "Event Timezone"
 }
