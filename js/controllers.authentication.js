@@ -147,6 +147,9 @@
         error = message.exception
       } else if (typeof data === 'string' && status !== 502) {
         error = data;
+        if (!error && status === 401) {
+          error = $translate.instant('Login.view.invalidPassword');
+        }
       } else {
         error = $translate.instant('Admin.server.out');
       }
