@@ -45,7 +45,7 @@
     "angular-ui-router": "angular-ui/ui-router#0.2.15",
     "eonasdan-bootstrap-datetimepicker": "Eonasdan/bootstrap-datetimepicker#4.17.37",
     "natives": "1.1.6",
-    "angular": "1.5.9",
+    "angular": "1.8.2",
     "angular-ui-bootstrap": "0.13.0",
     "angular-chart.js": "1.1.1",
     "angular-cookies": "1.5.8",
