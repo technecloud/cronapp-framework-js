@@ -85,6 +85,11 @@
       "file": "index.html",
       "script": "node_modules/angular-translate/dist/angular-translate.min.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/pace/themes/pace-theme-minimal.css",
+      "type": "style"
     }
   ],
   "removes": [
