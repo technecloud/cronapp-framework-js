@@ -214,7 +214,9 @@
   app.directive('textarea', transformText);
 
   var generateBlocklyCall = function(blocklyInfo) {
-    var call;
+    var call = "";
+    if (!blocklyInfo) return call;
+
     if (blocklyInfo.type == "client")  {
       call = "cronapi.client('" + blocklyInfo.blocklyClass + "." +  blocklyInfo.blocklyMethod + "')";
       var params = "";
@@ -1797,24 +1799,28 @@
 
           var createTemplateButton = function(buttonId, functionToCall, title, iconClass) {
             var template = '';
+
+            let security = toolbarButton.security ? `cronapp-security="${toolbarButton.security}"` : "";
+
             if (toolbarButton.type == "SaveOrCancelChanges") {
               if (toolbarButton.saveButton)
-                template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-check"></span>#TITLE#</a>';
+                template = '<a #SECURITY# role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-save-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-check"></span>#TITLE#</a>';
               else
-                template = '<a role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
+                template = '<a #SECURITY# role="button" class="saveorcancelchanges k-button k-button-icontext k-grid-cancel-changes" id="#BUTTONID#" href="javascript:void(0)"><span class="k-icon k-i-cancel" ></span>#TITLE#</a>';
             }
             else if (toolbarButton.type == "Blockly" || toolbarButton.type == "Customized") {
-              template = '<a class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)"><span class="#ICONCLASS#" ></span>#TITLE#</a>';
+              template = '<a #SECURITY# class="k-button k-grid-custom" id="#BUTTONID#" href="javascript:void(0)"><span class="#ICONCLASS#" ></span>#TITLE#</a>';
             }
             else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
-              template = '<a role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
+              template = '<a #SECURITY# role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
             }
 
             template = template
               .split('#BUTTONID#').join(buttonId)
               .split('#FUNCTIONCALL#').join(this.encodeHTML(functionToCall))
               .split('#TITLE#').join(title)
-              .split('#ICONCLASS#').join(iconClass);
+              .split('#ICONCLASS#').join(iconClass)
+              .split('#SECURITY#').join(security);
 
             var cronappDatasource = eval(options.dataSourceScreen.entityDataSource.name);
 
@@ -2322,14 +2328,16 @@
           }
 
           function getAttributes(column) {
-            if (column && column.alignment) {
-              var attributes = {
-                style: "text-align: " + column.alignment + ";"
-              };
-
-              return attributes;
+            let attributes = {};
+            if (column) {
+              if (column.alignment) {
+                attributes["style"] = "text-align: " + column.alignment + ";"
+              }
+              if (column.security) {
+                attributes["cronapp-security"] = column.security;
+              }
             }
-            return undefined;
+            return attributes;
           }
 
           var columns = [];
@@ -2538,8 +2546,10 @@
                     this.addButtonsInModal(popupInsert, datasourceName, scope);
                   }
                 }
-                else
-                  toolbar.push(toolbarButton.title);
+                else {
+                  let toolbarOp = this.generateToolbarButtonCall(toolbarButton, scope, options);
+                  toolbar.push(toolbarOp);
+                }
               }
               //Senão, adiciona somente commands que não sejam de crud
               else {
