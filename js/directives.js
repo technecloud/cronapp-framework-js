@@ -2390,7 +2390,8 @@
                     command: commands,
                     title: column.headerText,
                     width: widthDevice.width ? widthDevice.width : 155,
-                    hidden: !widthDevice.visible
+                    hidden: !widthDevice.visible,
+                    attributes: getAttributes(column)
                   };
                   columns.push(addColumn);
                 }
@@ -2496,12 +2497,14 @@
                   width: widthDevice.width,
                   title: column.headerText ? column.headerText: '',
                   hidden: !widthDevice.visible
+                  attributes: getAttributes(column)
                 };
                 columns.push(addColumn);
               }
               else if (column.dataType == "Selectable") {
                 var checkColumn = {
-                  selectable: true
+                  selectable: true,
+                  attributes: getAttributes(column)
                 };
                 columns.push(checkColumn);
               }
@@ -2523,6 +2526,15 @@
           return pageable;
         },
         getToolbar: function(options, scope) {
+
+          function generateToolbarTemplate(toolbarButton) {
+            let security = toolbarButton.security ? `cronapp-security="${toolbarButton.security}" class` : "class";
+            if (toolbarButton.template)
+              toolbarButton.template = toolbarButton.template.split("class").join(security);
+            let buttonTemplate =  { template: toolbarButton.template };
+            return buttonTemplate;
+          }
+
           var toolbar = [];
 
           options.toolBarButtons.forEach(function(toolbarButton) {
@@ -2569,9 +2581,7 @@
               }
             }
             else if (toolbarButton.type == "Template" || toolbarButton.type == "Title") {
-              var buttonTemplate =  {
-                template: toolbarButton.template
-              };
+              let buttonTemplate = generateToolbarTemplate(toolbarButton);
               toolbar.push(buttonTemplate);
             }
 
