@@ -1491,6 +1491,7 @@
 
 
           let cronSchedulerProperties = {
+            dateHeaderTemplate: kendo.template(`#=kendo.toString(date, ${kendo.culture().name.toLowerCase().includes('pt')?'\'ddd dd/M\'':'\'ddd M/dd\''})#`),
             showWorkHours: options.showWorkHours,
             selectable: true,
             date: schedulerStartDate,
