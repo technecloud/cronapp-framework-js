@@ -2496,7 +2496,7 @@
                   }],
                   width: widthDevice.width,
                   title: column.headerText ? column.headerText: '',
-                  hidden: !widthDevice.visible
+                  hidden: !widthDevice.visible,
                   attributes: getAttributes(column)
                 };
                 columns.push(addColumn);
