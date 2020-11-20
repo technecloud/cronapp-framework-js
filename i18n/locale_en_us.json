@@ -136,5 +136,7 @@
   "Admin.server.out": "Error contacting the server",
   "Inserting": "Inserting",
   "Editing": "Editing",
-  "TimezoneEvent": "Event Timezone"
+  "TimezoneEvent": "Event Timezone",
+  "exportExcel": "Export to Excel",
+  "exportPDF": "Export to PDF"
 }
