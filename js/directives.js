@@ -1814,6 +1814,12 @@
             else if (toolbarButton.type == "Native" && toolbarButton.title == 'create') {
               template = '<a #SECURITY# role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-add" href="javascript:void(0)"><span class="k-icon k-i-plus"></span>{{"Add" | translate}}</a>';
             }
+            else if (toolbarButton.type == "Native" && toolbarButton.title == 'excel') {
+              template = '<a #SECURITY# role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-excel" href="javascript:void(0)"><span class="k-icon k-i-file-excel"></span>{{"exportExcel" | translate}}</a>';
+            }
+            else if (toolbarButton.type == "Native" && toolbarButton.title == 'pdf') {
+              template = '<a #SECURITY# role="button" id="#BUTTONID#" class="k-button k-button-icontext k-grid-pdf" href="javascript:void(0)"><span class="k-icon k-i-file-pdf"></span>{{"exportPDF" | translate}}</a>';
+            }
 
             template = template
               .split('#BUTTONID#').join(buttonId)
