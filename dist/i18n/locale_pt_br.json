@@ -136,5 +136,7 @@
   "Admin.server.out": "Erro ao contactar o servidor",
   "Inserting": "Inserindo",
   "Editing": "Editando",
-  "TimezoneEvent": "Fuso Horário do Evento"
+  "TimezoneEvent": "Fuso Horário do Evento",
+  "exportExcel": "Exportar para Excel",
+  "exportPDF": "Exportar para PDF"
 }
