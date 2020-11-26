@@ -1992,6 +1992,10 @@
             else
               grid.showColumn(idx);
           }
+          if (grid.options.hasSecurity) {
+            let $lastCol = $(grid.element.find('col')).last();
+            $lastCol.css('width','0px');
+          }
         },
 
         getWidthForDevice: function(column) {
@@ -2797,6 +2801,7 @@
           var filterable = anyFilterableColumn(options);
 
           var kendoGridInit = {
+            hasSecurity: options.columns.filter(c => c.security).length,
             toolbar: toolbar,
             pdf: {
               allPages: true,
