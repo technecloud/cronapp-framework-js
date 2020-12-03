@@ -10,7 +10,7 @@
     "src": {
       "removable": false,
       "type": "projectResource",
-      "resourceType": "image/jpeg,image/gif,image/png",
+      "resourceType": "image/jpeg,image/gif,image/png,image/svg+xml",
       "mandatory": true
     },
     "ng-init": {
