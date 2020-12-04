@@ -4624,6 +4624,7 @@
               ctrl.$render = function () {
                 let viewValue = ctrl.$viewValue;
                 el.data('checked', viewValue);
+                viewValue =  '' + viewValue;
                 switch (viewValue) {
                   case true:
                   case trueValue:
@@ -4655,11 +4656,12 @@
             } else if (attrs.crnAllowNullValues == 'false') {
               ctrl.$render = function () {
                 let viewValue = ctrl.$viewValue;
+                viewValue =  '' + viewValue;
                 if (viewValue === undefined || viewValue === null) {
                   ctrl.$setViewValue(false);
                   viewValue = false;
                 }
-                if (viewValue === false) {
+                if (viewValue === falseValue) {
                   let modelForEval = `${el.attr('ng-model')}=${viewValue}`;
                   scope.$eval(modelForEval);
                 }
