@@ -3822,6 +3822,7 @@
 
             if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
               combobox.dataSource.transport.options.combobox = combobox;
+              combobox.dataSource.transport.options.grid = combobox;
               combobox.dataSource.transport.options.$compile = $compile;
               combobox.dataSource.transport.options.scope = scope;
               combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
@@ -5664,6 +5665,9 @@ app.kendoHelper = {
       return;
     }
 
+    if (!this.options.kendoCallback)
+      this.options.kendoCallback = e;
+
     var isFirst;
     if (this.options.combobox && this.options.combobox.options.readData) {
       e.success(this.options.combobox.options.readData);
@@ -5690,6 +5694,11 @@ app.kendoHelper = {
       } else {
         e.success([]);
       }
+    }
+
+    if (this.options.fromRead) {
+      this.options.kendoCallback.success(cronappDatasource.data);
+      doFetch = false;
     }
 
     if (doFetch) {
