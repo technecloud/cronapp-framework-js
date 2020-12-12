@@ -5697,6 +5697,7 @@ app.kendoHelper = {
     }
 
     if (this.options.fromRead) {
+      this.options.fromRead = false;
       this.options.kendoCallback.success(cronappDatasource.data);
       doFetch = false;
     }
