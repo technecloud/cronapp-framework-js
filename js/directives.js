@@ -5727,6 +5727,7 @@ app.kendoHelper = {
                   self.options.combobox.options.expanded = true;
                 }
                 e.success(data);
+                self.options.kendoCallback = e;
                 if (self.options && self.options.combobox && self.options.combobox.element[0].id) {
                   var expToFind = " .k-animation-container";
                   var x = angular.element($(expToFind));
