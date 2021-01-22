@@ -3594,11 +3594,11 @@
             options.dataBound = attrs.ngDataBound ? function (){scope.$eval(attrs.ngDataBound)}: undefined;
             options.filtering = attrs.ngFiltering ? function (){scope.$eval(attrs.ngFiltering)}: undefined;
             options.open = function(e) {
-              if (!dataSourceScreen.fetched) {
+              if (!dataSourceScreen.fetched || (dataSourceScreen.data.length > combobox.dataSource.data().length)) {
                 combobox.options.firstLazyRead = true;
                 combobox.dataSource.read();
               }
-            }
+            };
 
             options.select = attrs.ngSelect ? function (){scope.$eval(attrs.ngSelect);}: undefined;
 
@@ -3822,7 +3822,6 @@
 
             if (combobox.dataSource.transport && combobox.dataSource.transport.options) {
               combobox.dataSource.transport.options.combobox = combobox;
-              combobox.dataSource.transport.options.grid = combobox;
               combobox.dataSource.transport.options.$compile = $compile;
               combobox.dataSource.transport.options.scope = scope;
               combobox.dataSource.transport.options.ngModelCtrl = ngModelCtrl;
