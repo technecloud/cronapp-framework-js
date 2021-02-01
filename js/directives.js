@@ -4617,8 +4617,8 @@
           link: function (scope, el, attrs, ctrl) {
             ctrl.$formatters = [];
             ctrl.$parsers = [];
-            let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : undefined;
-            let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : undefined;
+            let falseValue = attrs.ngFalseValue ? attrs.ngFalseValue.split("'").join("") : "false";
+            let trueValue = attrs.ngTrueValue ? attrs.ngTrueValue.split("'").join("") : "true";
 
             if (attrs.crnAllowNullValues == 'true') {
               ctrl.$render = function () {
