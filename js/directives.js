@@ -2768,16 +2768,17 @@
           };
 
           var excelExport = function(e) {
-            var sheet = e.workbook.sheets[0];
+            let sheet = e.workbook.sheets[0];
+            let regexAngular = new RegExp("\{\{(.*?)\}\}");
 
-            for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
-              var row = sheet.rows[rowIndex];
-              for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex ++) {
+            for (let rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
+              let row = sheet.rows[rowIndex];
+              for (let cellIndex = 0; cellIndex < row.cells.length; cellIndex ++) {
 
-                var column = getVisibleColumnByIdx(cellIndex);
+                let column = getVisibleColumnByIdx(cellIndex);
                 //Formata pro excel e adiciona o timezone
                 if (column && row.cells[cellIndex].value instanceof Date) {
-                  var dateValue = new Date(row.cells[cellIndex].value.getTime());
+                  let dateValue = new Date(row.cells[cellIndex].value.getTime());
                   dateValue.setMinutes(dateValue.getMinutes() + dateValue.getTimezoneOffset());
                   dateValue.setSeconds(dateValue.getSeconds());
                   row.cells[cellIndex].value = dateValue;
@@ -2785,6 +2786,19 @@
                     row.cells[cellIndex].format = "[$-x-systime]hh:mm:ss";
                   else if (column.type == 'datetime')
                     row.cells[cellIndex].format = "dd/mm/yyyy hh:mm:ss;@";
+                }
+
+                if (row.type === "footer") {
+                  if (row.cells[cellIndex].value) {
+                    let rawValue = row.cells[cellIndex].value;
+                    let content = $(rawValue)[0].innerHTML;
+                    let regexExecution = regexAngular.exec(content);
+                    if (regexExecution && regexExecution.length > 1) {
+                      content = content.replace(regexExecution[0],"");
+                      let evaluatedExpression = scope.$eval(regexExecution[1]);
+                      row.cells[cellIndex].value = `${content}${evaluatedExpression}`;
+                    }
+                  }
                 }
               }
             }
