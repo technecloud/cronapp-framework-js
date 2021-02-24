@@ -26,6 +26,41 @@
         });
     };
 
+  app.controller('ResetPasswordController', function($scope, $translate, Notification, $location, $http, $state) {
+    $scope.resetPassword = function () {
+      if (passwordNew.value === '') {
+        Notification.error($translate.instant('ResetPasswordNewCanNotBeEmpty'));
+        return;
+      }
+
+      if (passwordConfirmation.value === '') {
+        Notification.error($translate.instant('ResetPasswordConfirmationCanNotBeEmpty'));
+        return;
+      }
+
+      if (passwordNew.value !== passwordConfirmation.value) {
+        Notification.error($translate.instant('ResetPasswordDoesNotMatch'));
+        return;
+      }
+
+      $http({
+        method: 'POST',
+        url: 'auth/confirm-reset-password',
+        data: $.param({password: passwordNew.value}),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-AUTH-TOKEN': $location.search().token
+        }
+      }).success(() => {
+        Notification.info($translate.instant('ResetPasswordSuccess'));
+        passwordNew.value = "";
+        passwordConfirmation.value = "";
+        $state.go('login');
+      }).error(data => Notification.error(data));
+      //
+    }
+  });
+
   app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies, $templateCache) {
   
     $http.get(window.NotificationProviderOptions.templateUrl, {cache: true})
@@ -115,6 +150,31 @@
         data : $.param(user),
         headers : headerValues
       }).success(handleSuccess).error(handleError);
+    };
+
+    $scope.forgotPassword = function () {
+      if (forgotPasswordEmail.value === '') {
+        Notification.error($translate.instant('ForgotPasswordEmailCanNotBeEmpty'));
+        return;
+      }
+
+      if (!forgotPasswordEmail.validity.valid) {
+        Notification.error($translate.instant('ForgotPasswordEmailInvalid'));
+        return;
+      }
+
+      $http({
+        method: 'POST',
+        url: 'auth/reset-password',
+        data: $.param({email: forgotPasswordEmail.value}),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).success(() => {
+        Notification.info($translate.instant('ForgotPasswordSent'));
+        forgotPasswordEmail.value = "";
+        $("#forgotPasswordModal").modal("hide");
+      }).error(data => Notification.error(data));
     };
 
     function handleSuccess(data, status, headers, config) {
