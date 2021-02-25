@@ -224,3 +224,8 @@ a {
         margin-left: 0;
     }
 }
+
+.form-control[ng-readonly=true] {
+    background-color: #eee;
+    opacity: 1;
+}
