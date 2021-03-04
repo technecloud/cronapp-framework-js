@@ -1,0 +1,159 @@
+/*
+*
+* MATERIAL -> CRN-CRON-CALENDAR
+*
+* Todo CSS destina ao componente do calendário.
+*
+*/
+
+/*
+Background Calendário
+*/
+
+.k-calendar-container {
+    padding: 0;
+    background-color: #383838;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-header {
+    background-color: #383838;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-content {
+    background-color: #383838;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-footer {
+    background-color: #383838;
+}
+
+.k-calendar-container .k-calendar:not(.k-scheduler-calendar) {
+    border-width: 0;
+    background: #383838;
+}
+
+/*
+Background Calendário F I N A L
+*/
+
+.k-calendar:not(.k-scheduler-calendar) .k-state-hover {
+    background-color: #ffffff;
+    color: #383838;
+}
+
+.k-content tr th :not(.k-scheduler-calendar) {
+    background-color: #35a9fb;
+    color: #383838;
+    font-weight: bold !important;
+    font-size: 12px;
+    padding: 3px 0px;
+}
+
+.k-content thead :not(.k-scheduler-calendar) {
+    margin-bottom: 15px;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-nav-prev,
+.k-calendar:not(.k-scheduler-calendar) .k-nav-next {
+    padding: 0;
+    width: 3em;
+    height: 3em;
+    box-sizing: content-box;
+    /* border-radius: 1000px !important; */
+    margin-bottom: 10px;
+    margin-top: -9px;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-nav-prev:hover,
+.k-calendar:not(.k-scheduler-calendar) .k-nav-next:hover {
+    color: #fff;
+    background-color: #1d77ba;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-nav-fast:hover {
+    color: #fff;
+    background-color: rgb(29, 119, 186);
+    border-color: rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-nav-fast {
+    border-color: rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-footer .k-nav-today {
+    color: #1d77ba;
+    font-size: 10px;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-footer .k-nav-today:hover {
+    color: #42b9e6;
+}
+
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-meta-view td {
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 1000px;
+}
+
+/**** CRON CALENDAR ****/
+
+cron-calendar.k-widget.k-calendar .k-header {
+    background-color: initial;
+}
+
+cron-calendar.k-widget.k-calendar .k-content {
+    background-color: initial;
+}
+
+cron-calendar.k-widget.k-calendar .k-footer {
+    background-color: initial;
+}
+
+cron-calendar.k-widget.k-calendar .k-link:link {
+    color: initial;
+}
+
+cron-calendar.k-widget.k-calendar .k-other-month .k-link:link {
+    color: rgba(0, 0, 0, 0.38);
+}
+
+cron-calendar.k-widget.k-calendar .k-calendar-view .k-content .k-link {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+}
+
+cron-calendar.k-widget.k-calendar .k-nav-fast:hover,
+cron-calendar.k-widget.k-calendar .k-nav-prev:hover,
+cron-calendar.k-widget.k-calendar .k-nav-next:hover,
+cron-calendar.k-widget.k-calendar .k-calendar-view .k-content .k-state-selected.k-state-hover .k-link {
+    color: #fff;
+}
+
+cron-calendar.k-widget.k-calendar .k-calendar-view .k-century .k-link {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+}
+
+cron-calendar.k-widget.k-calendar .k-calendar-view .k-content .k-state-hover .k-link,
+cron-calendar.k-widget.k-calendar .k-calendar-view .k-content .k-state-focused .k-link {
+    background-color: #1d77ba;
+    color: #fff;
+}
+
+cron-calendar.k-widget.k-calendar .k-footer .k-nav-today:hover {
+    color: #42b9e6;
+}
+
+cron-calendar .k-calendar-monthview:after,
+.k-calendar-view:after {
+    box-shadow: none;
+}
+
+/**** END CRON CALENDAR ***/
