@@ -157,3 +157,39 @@ cron-calendar .k-calendar-monthview:after,
 }
 
 /**** END CRON CALENDAR ***/
+
+
+
+/*crn-enterprise-date*/
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-state-focused .k-link {
+    color: #ffffff;
+    background-color: rgb(29, 119, 186);
+    border-color: rgb(10, 58, 94);
+}
+
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-state-selected .k-link {
+    background-color: #1d77ba;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-state-hover .k-link {
+    background-color: #ffffff;
+    color: #383838;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-other-month .k-link {
+    background-color: transparent;
+    color: rgba(241, 241, 241, 0.2);
+    border-radius: 0%;
+}
+
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-state-selected.k-state-hover .k-link {
+    background-color: #1d77ba;
+}
