@@ -1,0 +1,289 @@
+/*
+*
+* MATERIAL -> BUTTON
+*
+* Todo CSS destina ao elemento button.
+*
+*/
+
+.k-button {
+    font-weight: 400;
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: capitalize;
+    transition: 200ms;
+    font-weight: normal;
+}
+
+.k-button[disabled] {
+    background-color: #dcdcdc;
+    color: #616161;
+    opacity: 1;
+}
+
+.k-button:focus,
+.k-button:hover {
+    text-decoration: none;
+    outline: 0;
+    /* background-color: #008dcd;
+    color: #fff; */
+}
+
+.k-button-icontext .k-icon {
+    margin: 0;
+}
+
+.new-table-cron .btn-space-table .k-button {
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.k-detail-cell .k-grid .k-header .k-button:hover {
+    background-color: #3d488b;
+    text-transform: uppercase;
+    color: #fff;
+    transition: 200ms;
+}
+
+.btn-fab {
+    border-radius: 50%;
+    font-size: 12px;
+    height: 42px;
+    margin: auto;
+    min-width: 42px;
+    width: 42px;
+    padding: 0;
+    position: relative;
+}
+
+/* botão com texto */
+
+.k-button-with-label {
+    width: max-content !important;
+    height: 33px !important;
+    padding: 10px !important;
+    border-radius: 0% !important;
+}
+
+/* Ícones */
+
+.k-button i {
+    position: relative;
+    top: -2px;
+    margin-right: 3px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Alteração de cores através de classes */
+
+.k-button .k-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.k-button .k-primary:focus,
+.k-button .k-primary:hover {
+     /* background-color: #3bbd3b; */
+}
+
+.k-button .k-success {
+    color: #fff;
+    background-color: #257d25;
+    border-color: #257d25;
+}
+
+.k-button .k-success:focus,
+.k-button .k-success:hover {
+    background-color: #3bbd3b;
+}
+
+.k-button .k-info {
+    color: #fff;
+    background-color: #3b448e;
+    border-color: #3b448e;
+}
+
+.k-button .k-info:focus,
+.k-button .k-info:hover {
+     /* background-color: #3bbd3b; */
+}
+
+.k-button .k-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.k-button .k-warning:focus,
+.k-button .k-warning:hover {
+     /* background-color: #3bbd3b; */
+}
+
+.k-button .k-danger {
+    color: #fff;
+    background-color: #ce3a36;
+    border-color: #ce3a36;
+}
+
+.k-button .k-danger:focus, 
+.k-button .k-danger:hover{
+    background-color: #ff534e;
+}
+
+
+
+
+button.btn-default {
+    color: white;
+    background: #3b448e;
+}
+
+button.btn-default:hover,
+button.btn-default:focus,
+button.btn-default:active {
+    opacity: 1 !important;
+    background: #282d57;
+    color: white !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+.btn-space-table {
+    display: flex;
+    width: 80px;
+}
+
+
+
+/* Link */
+.k-link.k-pager-nav {
+    color: #000 !important;
+}
+
+
+.k-link:link {
+    color: #ffffff;
+}
+
+a.k-link {
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #ffffff;
+}
+
+
+
+
+.k-pager-wrap .k-link:hover,
+.k-pager-wrap .k-pager-nav:hover {
+    border-radius: 100%;
+}
+
+
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-state-focused .k-link {
+    color: #ffffff;
+    background-color: rgb(29, 119, 186);
+    border-color: rgb(10, 58, 94);
+}
+
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-state-selected .k-link {
+    background-color: #1d77ba;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-state-hover .k-link {
+    background-color: #ffffff;
+    color: #383838;
+}
+
+.k-calendar:not(.k-scheduler-calendar) .k-other-month .k-link {
+    background-color: transparent;
+    color: rgba(241, 241, 241, 0.2);
+    border-radius: 0%;
+}
+
+.k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-state-selected.k-state-hover .k-link {
+    background-color: #1d77ba;
+}
+
+a.k-custom-link {
+    background-color: transparent !important;
+    color: blue !important;
+    text-decoration: underline !important;
+    transform-box: unset !important;
+    border-radius: unset !important;
+    transform-style: unset !important;
+    text-transform: capitalize !important;
+    transition: unset !important;
+    background: transparent !important;
+}
+
+a.k-custom-link:hover {
+    background-color: #ededed !important;
+    background: #ededed !important;
+}
+
+
+/* ---- CRON-SCHEDULER ----*/
+
+cron-scheduler .k-link:link {
+    color: #000000;
+}
+
+cron-scheduler a.k-link {
+    color: #000;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+
+/* CÓDIGO À ELIMINAR
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #337ab7 !important;
+} 
+ .btn-success {
+    color: #fff !important;
+    background-color: #257d25 !important;
+} 
+.btn-info {
+    color: #fff !important;
+    background-color: #3b448e !important;
+} 
+
+.btn-warning {
+    color: #fff !important;
+    background-color: #f0ad4e !important;
+}
+
+.btn-danger {
+    color: #fff !important;
+    background-color: #ce3a36 !important;
+}
+
+.btn-danger:focus,
+.btn-danger:hover {
+    background-color: #ff534e !important;
+}
+
+
+*/
