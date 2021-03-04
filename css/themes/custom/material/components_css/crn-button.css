@@ -80,80 +80,64 @@
 
 /* Alteração de cores através de classes */
 
-.k-button .k-primary {
+.k-primary {
     color: #fff;
     background-color: #337ab7;
     border-color: #337ab7;
 }
 
-.k-button .k-primary:focus,
-.k-button .k-primary:hover {
-     /* background-color: #3bbd3b; */
+.k-primary:focus,
+.k-primary:hover {
+    /* background-color: #3bbd3b; */
 }
 
-.k-button .k-success {
+.k-success {
     color: #fff;
     background-color: #257d25;
     border-color: #257d25;
 }
 
-.k-button .k-success:focus,
-.k-button .k-success:hover {
+.k-success:focus,
+.k-success:hover {
     background-color: #3bbd3b;
 }
 
-.k-button .k-info {
+.k-info,
+.crnCSS-default {
     color: #fff;
     background-color: #3b448e;
     border-color: #3b448e;
 }
 
-.k-button .k-info:focus,
-.k-button .k-info:hover {
-     /* background-color: #3bbd3b; */
+.k-info:focus,
+.k-info:hover,
+.crnCSS-default:focus,
+.crnCSS-default:hover {
+    background-color: #232853;
+    color: #fff;
 }
 
-.k-button .k-warning {
+.k-warning {
     color: #fff;
     background-color: #f0ad4e;
     border-color: #f0ad4e;
 }
 
-.k-button .k-warning:focus,
-.k-button .k-warning:hover {
-     /* background-color: #3bbd3b; */
+.k-warning:focus,
+.k-warning:hover {
+    /* background-color: #3bbd3b; */
 }
 
-.k-button .k-danger {
+.k-danger {
     color: #fff;
     background-color: #ce3a36;
     border-color: #ce3a36;
 }
 
-.k-button .k-danger:focus, 
-.k-button .k-danger:hover{
+.k-danger:focus,
+.k-danger:hover {
     background-color: #ff534e;
 }
-
-
-
-
-button.btn-default {
-    color: white;
-    background: #3b448e;
-}
-
-button.btn-default:hover,
-button.btn-default:focus,
-button.btn-default:active {
-    opacity: 1 !important;
-    background: #282d57;
-    color: white !important;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-        0 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-
-
 
 
 .btn-space-table {
@@ -161,13 +145,10 @@ button.btn-default:active {
     width: 80px;
 }
 
-
-
 /* Link */
 .k-link.k-pager-nav {
     color: #000 !important;
 }
-
 
 .k-link:link {
     color: #ffffff;
@@ -181,14 +162,10 @@ a.k-link {
     color: #ffffff;
 }
 
-
-
-
 .k-pager-wrap .k-link:hover,
 .k-pager-wrap .k-pager-nav:hover {
     border-radius: 100%;
 }
-
 
 .k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
     width: 30px;
@@ -240,7 +217,6 @@ a.k-custom-link:hover {
     background: #ededed !important;
 }
 
-
 /* ---- CRON-SCHEDULER ----*/
 
 cron-scheduler .k-link:link {
@@ -253,7 +229,6 @@ cron-scheduler a.k-link {
     font-weight: normal;
     text-transform: uppercase;
 }
-
 
 /* CÓDIGO À ELIMINAR
 
@@ -286,4 +261,18 @@ cron-scheduler a.k-link {
 }
 
 
+button.btn-default {
+    color: white;
+    background: #3b448e;
+}
+
+button.btn-default:hover,
+button.btn-default:focus,
+button.btn-default:active {
+    opacity: 1 !important;
+    background: #282d57;
+    color: white !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
 */
