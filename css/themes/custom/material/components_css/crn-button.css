@@ -86,11 +86,6 @@
     border-color: #337ab7;
 }
 
-.k-primary:focus,
-.k-primary:hover {
-    /* background-color: #3bbd3b; */
-}
-
 .k-success {
     color: #fff;
     background-color: #257d25;
@@ -99,7 +94,8 @@
 
 .k-success:focus,
 .k-success:hover {
-    background-color: #3bbd3b;
+    background-color: #1e631e;
+    color: #fff;
 }
 
 .k-info,
@@ -125,7 +121,7 @@
 
 .k-warning:focus,
 .k-warning:hover {
-    /* background-color: #3bbd3b; */
+  color: #fff;
 }
 
 .k-danger {
@@ -136,14 +132,29 @@
 
 .k-danger:focus,
 .k-danger:hover {
-    background-color: #ff534e;
+    background-color: #c94642;
+    color: #fff;
 }
+/* ate aqui está ok nas cores*/
 
 
-.btn-space-table {
-    display: flex;
-    width: 80px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Link */
 .k-link.k-pager-nav {
@@ -161,6 +172,35 @@ a.k-link {
     text-transform: uppercase;
     color: #ffffff;
 }
+
+
+
+a.k-custom-link {
+    background-color: transparent !important;
+    color: blue !important;
+    text-decoration: underline !important;
+    transform-box: unset !important;
+    border-radius: unset !important;
+    transform-style: unset !important;
+    text-transform: capitalize !important;
+    transition: unset !important;
+    background: transparent !important;
+}
+
+a.k-custom-link:hover {
+    background-color: #ededed !important;
+    background: #ededed !important;
+}
+
+
+
+
+
+.btn-space-table {
+    display: flex;
+    width: 80px;
+}
+
 
 .k-pager-wrap .k-link:hover,
 .k-pager-wrap .k-pager-nav:hover {
@@ -200,22 +240,7 @@ a.k-link {
     background-color: #1d77ba;
 }
 
-a.k-custom-link {
-    background-color: transparent !important;
-    color: blue !important;
-    text-decoration: underline !important;
-    transform-box: unset !important;
-    border-radius: unset !important;
-    transform-style: unset !important;
-    text-transform: capitalize !important;
-    transition: unset !important;
-    background: transparent !important;
-}
 
-a.k-custom-link:hover {
-    background-color: #ededed !important;
-    background: #ededed !important;
-}
 
 /* ---- CRON-SCHEDULER ----*/
 
