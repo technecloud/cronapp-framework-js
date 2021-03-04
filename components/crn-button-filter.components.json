@@ -119,23 +119,23 @@
           "value": "Default"
         },
         {
-          "key": "btn-primary",
+          "key": "k-primary",
           "value": "Primary"
         },
         {
-          "key": "btn-success",
+          "key": "k-success",
           "value": "Success"
         },
         {
-          "key": "btn-info",
+          "key": "k-info",
           "value": "Info"
         },
         {
-          "key": "btn-warning",
+          "key": "k-warning",
           "value": "Warning"
         },
         {
-          "key": "btn-danger",
+          "key": "k-danger",
           "value": "Danger"
         },
         {
