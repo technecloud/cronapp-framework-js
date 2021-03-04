@@ -1,6 +1,42 @@
 @import "./components_css/crn-button.css";
 @import "./components_css/crn-cron-grid.css";
-@import "./components_css/crn-cron-calendar.css"
+@import "./components_css/crn-cron-calendar.css";
+
+
+
+
+/* Link */
+
+
+.k-link:link {
+    color: #ffffff;
+}
+
+a.k-link {
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+a.k-custom-link {
+    background-color: transparent !important;
+    color: blue !important;
+    text-decoration: underline !important;
+    transform-box: unset !important;
+    border-radius: unset !important;
+    transform-style: unset !important;
+    text-transform: capitalize !important;
+    transition: unset !important;
+    background: transparent !important;
+}
+
+a.k-custom-link:hover {
+    background-color: #ededed !important;
+    background: #ededed !important;
+}
+
+
 
 
 
