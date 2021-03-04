@@ -1,6 +1,6 @@
 /*
 *
-* MATERIAL -> BUTTON
+* MATERIAL -> CRN-BUTTON
 *
 * Todo CSS destina ao elemento button.
 *
@@ -24,58 +24,6 @@
 .k-button:hover {
     text-decoration: none;
     outline: 0;
-    /* background-color: #008dcd;
-    color: #fff; */
-}
-
-.k-button-icontext .k-icon {
-    margin: 0;
-}
-
-.new-table-cron .btn-space-table .k-button {
-    min-width: 24px;
-    min-height: 24px;
-}
-
-.k-detail-cell .k-grid .k-header .k-button:hover {
-    background-color: #3d488b;
-    text-transform: uppercase;
-    color: #fff;
-    transition: 200ms;
-}
-
-.btn-fab {
-    border-radius: 50%;
-    font-size: 12px;
-    height: 42px;
-    margin: auto;
-    min-width: 42px;
-    width: 42px;
-    padding: 0;
-    position: relative;
-}
-
-/* botão com texto */
-
-.k-button-with-label {
-    width: max-content !important;
-    height: 33px !important;
-    padding: 10px !important;
-    border-radius: 0% !important;
-}
-
-/* Ícones */
-
-.k-button i {
-    position: relative;
-    top: -2px;
-    margin-right: 3px;
-    display: inline-block;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Alteração de cores através de classes */
@@ -94,7 +42,7 @@
 
 .k-success:focus,
 .k-success:hover {
-    background-color: #1e631e;
+    background-color: #195419;
     color: #fff;
 }
 
@@ -121,7 +69,7 @@
 
 .k-warning:focus,
 .k-warning:hover {
-  color: #fff;
+    color: #fff;
 }
 
 .k-danger {
@@ -135,26 +83,46 @@
     background-color: #c94642;
     color: #fff;
 }
-/* ate aqui está ok nas cores*/
 
+/* botão com texto */
 
+.k-button-with-label {
+    width: max-content !important;
+    height: 33px !important;
+    padding: 10px !important;
+    border-radius: 0% !important;
+}
 
+/* Ícones */
 
+.k-button i {
+    position: relative;
+    top: -2px;
+    margin-right: 3px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
+/* crn-grid */
+.k-button-icontext .k-icon {
+    margin: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*form*/
+.btn-fab {
+    border-radius: 50%;
+    font-size: 12px;
+    height: 42px;
+    margin: auto;
+    min-width: 42px;
+    width: 42px;
+    padding: 0;
+    position: relative;
+}
 
 /* Link */
 .k-link.k-pager-nav {
@@ -170,10 +138,7 @@ a.k-link {
     font-size: 12px;
     font-weight: normal;
     text-transform: uppercase;
-    color: #ffffff;
 }
-
-
 
 a.k-custom-link {
     background-color: transparent !important;
@@ -196,17 +161,10 @@ a.k-custom-link:hover {
 
 
 
-.btn-space-table {
-    display: flex;
-    width: 80px;
-}
 
 
-.k-pager-wrap .k-link:hover,
-.k-pager-wrap .k-pager-nav:hover {
-    border-radius: 100%;
-}
 
+/*crn-enterprise-date*/
 .k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
     width: 30px;
     height: 30px;
@@ -240,7 +198,24 @@ a.k-custom-link:hover {
     background-color: #1d77ba;
 }
 
+/*??*/
 
+.btn-space-table {
+    display: flex;
+    width: 80px;
+}
+
+.new-table-cron .btn-space-table .k-button {
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.k-detail-cell .k-grid .k-header .k-button:hover {
+    background-color: #3d488b;
+    text-transform: uppercase;
+    color: #fff;
+    transition: 200ms;
+}
 
 /* ---- CRON-SCHEDULER ----*/
 
