@@ -6,6 +6,16 @@
 *
 */
 
+.k-grid th {
+    padding: 7px 22px;
+    white-space: nowrap;
+}
+
+.k-grid td,
+.k-grid th {
+    padding: 5px 24px;
+}
+
 .k-grid .k-grid-header-wrap,
 .k-grid table {
     border-width: 0px;
@@ -49,7 +59,6 @@ div.k-grid-header {
     color: rgb(255, 229, 0) !important;
     opacity: 1;
 }
-
 
 .k-grid-header .k-header:hover,
 .k-grid-header .k-header:hover a {
@@ -120,6 +129,8 @@ k-grid-header .k-header > .k-link {
     outline: 0;
 }
 
+/* Paginação da tabela */
+
 .k-pager-wrap .k-link:hover,
 .k-pager-wrap .k-pager-nav:hover {
     border-radius: 100%;
@@ -140,6 +151,12 @@ k-grid-header .k-header > .k-link {
     color: #ffffff;
 }
 
+.k-pager-wrap .k-pager-nav {
+    color: #000;
+}
+
+/* Corpo da tabela - tbody */
+
 .k-grid tbody .k-grid-edit,
 .k-grid tbody .k-grid-delete,
 .k-grid tbody .k-grid-update,
@@ -157,16 +174,6 @@ k-grid-header .k-header > .k-link {
 .k-grid tbody .k-button:focus {
     background-color: #0470a0;
     color: #ffffff;
-}
-
-.k-grid th {
-    padding: 7px 22px;
-    white-space: nowrap;
-}
-
-.k-grid td,
-.k-grid th {
-    padding: 5px 24px;
 }
 
 /* k-grid-edit */
