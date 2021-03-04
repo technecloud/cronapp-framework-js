@@ -66,7 +66,7 @@
       "target": "class",
       "values": [
         {
-          "key": "btn-default",
+          "key": "crnCSS-default",
           "value": "Default"
         },
         {
