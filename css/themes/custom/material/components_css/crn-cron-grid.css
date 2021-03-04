@@ -1,8 +1,8 @@
 /*
 *
-* MATERIAL -> CRN-GRID
+* MATERIAL -> CRN-CRON-GRID
 *
-* Todo CSS destina ao elemento da grade.
+* Todo CSS destina ao componente da grade.
 *
 */
 
@@ -56,17 +56,14 @@ div.k-grid-header {
 
 .k-grid-header .k-header:focus,
 .k-grid-header .k-header a.k-link:focus {
-    color: rgb(255, 229, 0) !important;
+    color: rgb(255, 229, 0);
     opacity: 1;
 }
 
 .k-grid-header .k-header:hover,
-.k-grid-header .k-header:hover a {
-    color: rgb(255, 230, 0) !important;
-}
-
+.k-grid-header .k-header:hover a,
 .k-grid-header .k-grid-filter:focus {
-    color: rgb(255, 229, 0) !important;
+    color: rgb(255, 230, 0);
 }
 
 .k-grid-header .k-header {
@@ -211,7 +208,6 @@ div.k-grid-footer {
 .k-grid-header .k-header a.k-link {
     color: white !important;
 }
-
 
 .k-grid-header .k-grid-filter {
     padding: 8px;
