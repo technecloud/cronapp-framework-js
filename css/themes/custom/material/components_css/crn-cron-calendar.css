@@ -158,8 +158,6 @@ cron-calendar .k-calendar-monthview:after,
 
 /**** END CRON CALENDAR ***/
 
-
-
 /*crn-enterprise-date*/
 .k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
     width: 30px;
