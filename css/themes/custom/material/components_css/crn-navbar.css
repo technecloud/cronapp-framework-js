@@ -135,3 +135,39 @@
 .caret {
     padding-top: 5px;
 }
+
+
+
+.main-view {
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .main-view {
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        background: #ffffff;
+        margin: 30px;
+        padding: 15px;
+        width: calc(100% - 60px);
+    }
+}
+
+
+.main-title {
+    padding: 20px 25px;
+    margin-bottom: 0;
+    color: inherit;
+    background-color: #282d57;
+    color: #fff;
+    display: block;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-title {
+        padding: 20px 25px;
+        margin-bottom: 0;
+        color: inherit;
+        background-color: #337ab7;
+        display: none;
+    }
+}
