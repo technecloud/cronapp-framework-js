@@ -1,12 +1,7 @@
 @import "./components_css/crn-button.css";
 @import "./components_css/crn-cron-grid.css";
 @import "./components_css/crn-cron-calendar.css";
-
-
-
-
-/* Link */
-
+@import "./components_css/crn-enterprise.css";
 
 .k-link:link {
     color: #ffffff;
@@ -37,40 +32,14 @@ a.k-custom-link:hover {
 }
 
 
-
-
-
-/****************/
-/**** INPUT ****/
-/**************/
-.k-checkbox:focus + .k-checkbox-label:before,
-.k-checkbox:hover + .k-checkbox-label:before,
-.k-radio:focus + .k-radio-label:before,
-.k-radio:hover + .k-radio-label:before {
-    box-shadow: 0 0 5px 0 rgb(59, 68, 142) !important;
-    border-color: rgb(59, 68, 142) !important;
-}
-
-
-
-
-
-
-
-
 .carousel-caption {
     color: #524646;
 }
-
 
 .navbar-default .navbar-nav > li > a > i {
     color: #fff;
     display: none;
 }
-
-
-
-
 
 /*Ajustes MaurĂ­cio F I N A L*/
 
@@ -122,9 +91,6 @@ input:-webkit-autofill:focus {
     box-shadow: none;
 }
 
-.k-checkbox-label {
-    font-weight: unset;
-}
 
 label {
     font-weight: 400;
@@ -188,19 +154,14 @@ html {
     height: 100%;
 }
 
-
-
 .k-input.k-textbox:focus,
 .k-textbox:focus {
     border-color: #3f51b5;
 }
 
-
-
 .k-widget {
     font-size: 12px;
 }
-
 
 .k-filter-help-text {
     font-weight: 400;
@@ -234,8 +195,6 @@ html {
     background-color: #3a4091;
     border-color: #3a4091;
 }
-
-
 
 /*
 ==========================
@@ -313,8 +272,6 @@ Material Grid - F I N A L
     background-color: #f6f6f6;
 }
 
-
-
 .nav-tabs {
     background: #5665be;
     border-bottom: 1px solid #ddd;
@@ -374,31 +331,6 @@ textarea.form-control.k-textbox {
         padding: 15px;
         width: calc(100% - 60px);
     }
-}
-
-
-.k-checkbox:checked + .k-checkbox-label:before {
-    background-color: #3f51b5;
-    border-color: #3f51b5;
-}
-
-.k-checkbox:checked + .k-checkbox-label:after,
-.k-checkbox:indeterminate + .k-checkbox-label:after {
-    background-color: #008dcd;
-    border-color: #3f51b5;
-}
-
-.k-input.k-textbox,
-.k-textarea,
-.k-textbox {
-    background-color: transparent;
-    border-width: 0 0 1px;
-    border-color: rgba(0, 0, 0, 0.42);
-    border-radius: 0;
-    box-shadow: none;
-    font-weight: normal;
-    font-size: 14px;
-    color: #6b6b6b;
 }
 
 .login-view {
@@ -469,13 +401,9 @@ textarea.form-control.k-textbox {
     margin-top: 0px;
 }
 
-
-
 .k-footer-template td {
     border-width: 0px;
 }
-
-
 
 .k-autocomplete .k-input,
 .k-dateinput-wrap .k-input,
@@ -497,7 +425,6 @@ textarea.form-control.k-textbox {
 .k-edit-field {
     display: block !important;
 }
-
 
 /* ---- CRON-SCHEDULER ----*/
 
@@ -641,4 +568,3 @@ div .messages {
 .k-dropdown-wrap.ng-invalid-required {
     border-color: #f31700;
 }
-
