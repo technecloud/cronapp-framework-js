@@ -35,7 +35,7 @@ cron-calendar .k-widget .k-calendar .k-calendar-view .k-content .k-link {
 cron-calendar .k-widget .k-calendar .k-nav-fast:hover,
 cron-calendar .k-widget .k-calendar .k-nav-prev:hover,
 cron-calendar .k-widget .k-calendar .k-nav-next:hover,
-cron-calendar .k-widget .k-calendar .k-calendar-view .k-content .k-state-selected.k-state-hover .k-link {
+cron-calendar .k-widget .k-calendar .k-calendar-view .k-content .k-state-selected .k-state-hover .k-link {
     color: #fff;
 }
 
@@ -65,26 +65,10 @@ cron-calendar .k-calendar-monthview:after,
     background-color: #383838;
 }
 
-.k-calendar:not(.k-scheduler-calendar) .k-header {
-    background-color: #383838;
-}
-
-.k-calendar:not(.k-scheduler-calendar) .k-content {
-    background-color: #383838;
-}
-
-.k-calendar:not(.k-scheduler-calendar) .k-footer {
-    background-color: #383838;
-}
-
 .k-calendar-container .k-calendar:not(.k-scheduler-calendar) {
     border-width: 0;
     background: #383838;
 }
-
-/*
-Background Calendário F I N A L
-*/
 
 .k-calendar:not(.k-scheduler-calendar) .k-state-hover {
     background-color: #ffffff;
@@ -94,7 +78,7 @@ Background Calendário F I N A L
 .k-content tr th :not(.k-scheduler-calendar) {
     background-color: #35a9fb;
     color: #383838;
-    font-weight: bold !important;
+    font-weight: bold;
     font-size: 12px;
     padding: 3px 0px;
 }
@@ -109,7 +93,6 @@ Background Calendário F I N A L
     width: 3em;
     height: 3em;
     box-sizing: content-box;
-    /* border-radius: 1000px !important; */
     margin-bottom: 10px;
     margin-top: -9px;
 }
@@ -150,17 +133,15 @@ Background Calendário F I N A L
     border-radius: 1000px;
 }
 
-/**** CRON CALENDAR ****/
 
-/**** END CRON CALENDAR ***/
-
-/*crn-enterprise-date*/
+/* Referente as datas */
 .k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
     width: 30px;
     height: 30px;
     line-height: 30px;
     margin: 0 auto;
     text-align: center;
+    /* color: red; */
 }
 
 .k-calendar:not(.k-scheduler-calendar) .k-state-focused .k-link {
