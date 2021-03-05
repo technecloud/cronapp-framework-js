@@ -6,8 +6,16 @@
 *
 */
 
-/* ---- CRON-SCHEDULER ----*/
+cron-scheduler .k-link:link {
+    color: #000000;
+}
 
+cron-scheduler a.k-link {
+    color: #000;
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
 cron-scheduler .k-link:link {
     color: #000000;
 }
@@ -19,13 +27,7 @@ cron-scheduler a.k-link {
     text-transform: uppercase;
 }
 
-/* ---- CRON-SCHEDULER CALENDAR ----*/
-
 .k-scheduler-calendar .k-link:link {
-    color: #000;
-}
-
-.k-calendar .k-footer .k-nav-today {
     color: #000;
 }
 
@@ -57,10 +59,9 @@ cron-scheduler a.k-link {
     text-align: center;
 }
 
-/* Fixe Views as Dropdown*/
-
 .k-scheduler-views * {
-    background-color: #3b448e !important;
+    /* background-color: #3b448e !important; */
+    background-color: #3b448e;
 }
 
 .k-scheduler-views .k-current-view {
@@ -94,19 +95,4 @@ cron-scheduler a.k-link {
 .k-scheduler-refresh {
     right: 10px;
     position: relative;
-}
-
-
-
-/* ---- CRON-SCHEDULER ----*/
-
-cron-scheduler .k-link:link {
-    color: #000000;
-}
-
-cron-scheduler a.k-link {
-    color: #000;
-    font-size: 12px;
-    font-weight: normal;
-    text-transform: uppercase;
 }
