@@ -203,6 +203,27 @@ div.k-grid-footer {
     overflow-y: auto;
 }
 
+.k-list .k-item.k-state-selected {
+    color: #3f51b5;
+}
+
+.k-list .k-item:hover.k-state-selected {
+    color: #3f51b5;
+}
+
+.k-pager-sizes.k-label {
+    color: #000;
+}
+
+.k-pager-info.k-label {
+    color: #000;
+}
+
+.k-animation-container > .k-list-container > .k-list-scroller > .k-list {
+    box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.02), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    font-weight: 400;
+}
+
 /* CÓDIGO PARA ELIMINAR
 
 .k-grid-header .k-header a.k-link {
