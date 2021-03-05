@@ -119,20 +119,19 @@ a.k-link {
 }
 
 a.k-custom-link {
-    background-color: transparent !important;
-    color: blue !important;
-    text-decoration: underline !important;
-    transform-box: unset !important;
-    border-radius: unset !important;
-    transform-style: unset !important;
-    text-transform: capitalize !important;
-    transition: unset !important;
-    background: transparent !important;
+    background-color: transparent;
+    color: blue;
+    text-decoration: underline;
+    transform-box: unset;
+    border-radius: unset;
+    transform-style: unset;
+    text-transform: capitalize;
+    transition: unset;
+    background: transparent;
 }
 
 a.k-custom-link:hover {
-    background-color: #ededed !important;
-    background: #ededed !important;
+    background-color: #ededed;
 }
 /* END BÁSICO */
 
@@ -237,7 +236,7 @@ div .messages {
     float: left;
 }
 
-.k-list-optionlabel.k-state-focused {
+.k-list-optionlabel .k-state-focused {
     background-color: #ededed !important;
 }
 

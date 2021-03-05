@@ -133,6 +133,9 @@ cron-calendar .k-calendar-monthview:after,
     border-radius: 1000px;
 }
 
+.k-calendar .k-footer .k-nav-today {
+    color: #000;
+}
 
 /* Referente as datas */
 .k-calendar:not(.k-calendar-infinite):not(.k-scheduler-calendar) .k-content .k-link {
