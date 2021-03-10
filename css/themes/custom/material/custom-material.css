@@ -30,15 +30,15 @@ body {
     background: #ffffff;
 }
 
-html {
-    width: 100%;
-    height: 100%;
-}
-
 @media only screen and (min-width: 768px) {
     body {
         background: #f1f1f1;
     }
+}
+
+html {
+    width: 100%;
+    height: 100%;
 }
 
 .bg {
@@ -59,33 +59,41 @@ html {
     width: 8px;
     height: 8px;
 }
+
 ::-webkit-scrollbar-button {
     width: 0px;
     height: 0px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #c0c0c082;
     border: 0px none #ffffff;
     border-radius: 0px;
     border-left: 1px solid #d7d7d7;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: #bdbdbd;
 }
+
 ::-webkit-scrollbar-thumb:active {
     background: #bdbdbd;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
     border: 0px none #ffffff;
     border-left: 1px solid #cecece96;
 }
+
 ::-webkit-scrollbar-track:hover {
     background: transparent;
 }
+
 ::-webkit-scrollbar-track:active {
     background: #333333;
 }
+
 ::-webkit-scrollbar-corner {
     background: transparent;
 }
@@ -106,6 +114,7 @@ input:-webkit-autofill:focus {
 label {
     font-weight: 400;
 }
+
 
 /* .k-link:link {
     color: #ffffff;
@@ -133,9 +142,13 @@ a.k-custom-link {
 a.k-custom-link:hover {
     background-color: #ededed;
 }
+
+
 /* END BÁSICO */
 
+
 /*Imagem dinamica*/
+
 .dynamic-image-container {
     border-style: dashed;
     border: 1px dashed #3f51b5;
@@ -144,8 +157,10 @@ a.k-custom-link:hover {
     padding: 20px;
 }
 
+
 /* Acordion + panel */
-.panel-default > .panel-heading {
+
+.panel-default>.panel-heading {
     color: #fff;
     background-color: #5665be;
     border-color: #ddd;
@@ -161,8 +176,7 @@ a.k-custom-link:hover {
     color: #626262;
 }
 
-
-.k-dropdown-wrap > .k-input {
+.k-dropdown-wrap>.k-input {
     -ms-flex: 1;
     flex: 1;
     font-weight: normal;
