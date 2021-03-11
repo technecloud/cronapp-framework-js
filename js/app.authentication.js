@@ -582,3 +582,10 @@ window.camelCaseToSentenceCase = function(str){
   }
   return str;
 };
+
+const keyCodeFormActions = {
+  initialize: () => $(document).on("keypress", "form[crn-datasource]", keyCodeFormActions.handle),
+  handle: (e) => !keyCodeFormActions[e.keyCode || e.which] || keyCodeFormActions[e.keyCode || e.which](e),
+  13: (e) => e.preventDefault()
+};
+keyCodeFormActions.initialize();
