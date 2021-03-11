@@ -235,7 +235,7 @@ textarea.form-control.k-textbox {
 }
 
 .k-edit-field {
-    display: block !important;
+    display: block;
 }
 
 caption {
@@ -251,7 +251,7 @@ div .messages {
 }
 
 .k-list-optionlabel .k-state-focused {
-    background-color: #ededed !important;
+    background-color: #ededed;
 }
 
 .k-dropdown-wrap.ng-invalid-required {
