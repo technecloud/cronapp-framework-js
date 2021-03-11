@@ -89,10 +89,10 @@
 /* botão com texto */
 
 .k-button-with-label {
-    width: max-content !important;
-    height: 33px !important;
-    padding: 10px !important;
-    border-radius: 0% !important;
+    width: max-content;
+    height: 33px;
+    padding: 10px;
+    border-radius: 0%;
 }
 
 
