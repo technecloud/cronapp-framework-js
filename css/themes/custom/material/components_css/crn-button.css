@@ -26,63 +26,65 @@
     outline: 0;
 }
 
+
 /* Alteração de cores através de classes */
 
-.k-primary {
+.btn-primary {
     color: #fff;
     background-color: #3f51b5;
     border-color: #3f51b5;
 }
 
-.k-success {
+.btn-success {
     color: #fff;
     background-color: #257d25;
     border-color: #257d25;
 }
 
-.k-success:focus,
-.k-success:hover {
+.btn-success:focus,
+.btn-success:hover {
     background-color: #195419;
     color: #fff;
 }
 
-.k-info,
-.crnCSS-default {
+.btn-info,
+.btn-default {
     color: #fff;
     background-color: #3b448e;
     border-color: #3b448e;
 }
 
-.k-info:focus,
-.k-info:hover,
-.crnCSS-default:focus,
-.crnCSS-default:hover {
+.btn-info:focus,
+.btn-info:hover,
+.btn-default:focus,
+.btn-default:hover {
     background-color: #232853;
     color: #fff;
 }
 
-.k-warning {
+.btn-warning {
     color: #fff;
     background-color: #f0ad4e;
     border-color: #f0ad4e;
 }
 
-.k-warning:focus,
-.k-warning:hover {
+.btn-warning:focus,
+.btn-warning:hover {
     color: #fff;
 }
 
-.k-danger {
+.btn-danger {
     color: #fff;
     background-color: #ce3a36;
     border-color: #ce3a36;
 }
 
-.k-danger:focus,
-.k-danger:hover {
+.btn-danger:focus,
+.btn-danger:hover {
     background-color: #c94642;
     color: #fff;
 }
+
 
 /* botão com texto */
 
@@ -92,6 +94,7 @@
     padding: 10px !important;
     border-radius: 0% !important;
 }
+
 
 /* Ícones */
 
@@ -107,12 +110,16 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 /* crn-grid */
+
 .k-button-icontext .k-icon {
     margin: 0;
 }
 
+
 /*form*/
+
 .btn-fab {
     border-radius: 50%;
     font-size: 12px;
@@ -123,6 +130,7 @@
     padding: 0;
     position: relative;
 }
+
 
 /*??*/
 
