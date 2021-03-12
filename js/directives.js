@@ -4003,12 +4003,18 @@
             options['close'] = attrs.ngClose ? function (){_scope.$eval(attrs.ngClose)}: undefined;
             options['dataBound'] = attrs.ngDatabound ? function (){_scope.$eval(attrs.ngDatabound)}: undefined;
             options['filtering'] = attrs.ngFiltering ? function (){_scope.$eval(attrs.ngFiltering)}: undefined;
-            options['open'] = attrs.ngOpen ? function (){_scope.$eval(attrs.ngOpen)}: undefined;
             options['cascade'] = attrs.ngCascade ? function (){_scope.$eval(attrs.ngCascade)}: undefined;
             evtSelect = attrs.ngSelect ? function (){_scope.$eval(attrs.ngSelect)}: undefined;
             deselect = attrs.ngDeselect ? function (){_scope.$eval(attrs.ngDeselect)}: undefined;
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
+
+            combobox.bind("open", (_e) => {
+              combobox.dataSource.data(options.dataSource.transport.options.cronappDatasource.data);
+              if (attrs.ngOpen) {
+                _scope.$eval(attrs.ngOpen);
+              }
+            });
             combobox.enable(true);
 
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
