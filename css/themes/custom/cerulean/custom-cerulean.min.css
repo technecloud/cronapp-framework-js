@@ -16,6 +16,27 @@
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+@import "./components_css/alert.css";
+@import "./components_css/badge.css";
+@import "./components_css/breadcrumb.css";
+@import "./components_css/btn.css";
+@import "./components_css/carousel.css";
+@import "./components_css/close.css";
+@import "./components_css/embed-responsive.css";
+@import "./components_css/glyphicon.css";
+@import "./components_css/hidden.css";
+@import "./components_css/list-group.css";
+@import "./components_css/media.css";
+@import "./components_css/modal.css";
+@import "./components_css/pager.css";
+@import "./components_css/pagination.css";
+@import "./components_css/panel.css";
+@import "./components_css/popover.css";
+@import "./components_css/progress.css";
+@import "./components_css/thumbnail.css";
+@import "./components_css/tooltip.css";
+@import "./components_css/visible.css";
+@import "./components_css/well.css";
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -3273,25 +3294,13 @@ a.label:focus {
     color: #317eac !important;
 }
 
-@import "./components_css/alert.css";
-@import "./components_css/badge.css";
-@import "./components_css/breadcrumb.css";
-@import "./components_css/btn.css";
-@import "./components_css/carousel.css";
-@import "./components_css/close.css";
-@import "./components_css/embed-responsive.css";
-@import "./components_css/glyphicon.css";
-@import "./components_css/hidden.css";
-@import "./components_css/list-group.css";
-@import "./components_css/media.css";
-@import "./components_css/modal.css";
-@import "./components_css/pager.css";
-@import "./components_css/pagination.css";
-@import "./components_css/panel.css";
-@import "./components_css/popover.css";
-@import "./components_css/progress.css";
-@import "./components_css/thumbnail.css";
-@import "./components_css/tooltip.css";
-@import "./components_css/visible.css";
-@import "./components_css/well.css";
-@import "./components_css/navbar.css";
+.navbar-default {
+    background-color: #2fa4e7;
+    border-color: #1995dc;
+}
+
+.navbar-default .navbar-text,
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-brand {
+    color: #fff;
+}
