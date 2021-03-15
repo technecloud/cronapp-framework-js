@@ -65,6 +65,11 @@
   
     $http.get(window.NotificationProviderOptions.templateUrl, {cache: true})
     .then((response) => $templateCache.put(window.NotificationProviderOptions.templateUrl, response.data));
+
+    $scope.goHome = () => {
+      $state.go('home');
+      $scope.cronapi.forceCloseAllModal();
+    };
     
     $scope.$http = $http;
     $scope.params = $stateParams;
@@ -91,7 +96,7 @@
     $scope.autoLogin = function(){
       if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token ){
         refreshToken($http, function(){
-          $state.go('home');
+          $scope.goHome();
         }, function(){
           localStorage.removeItem('_u');
         })
@@ -107,7 +112,7 @@
           var decodedUser = decodeURIComponent($cookies.get('_u'));
           localStorage.setItem("_u", decodedUser);
       }
-      $state.go('home');
+      $scope.goHome();
     }
     $scope.message = {};
     $scope.renderRecaptcha = function(){
@@ -192,7 +197,7 @@
       }
 
       // Redirect to home page
-      $state.go("home");
+      $scope.goHome();
 
       // Verify if the 'onLogin' event is defined and it is a function (it can be a string pointing to a non project blockly) and run it.
       if ($scope.blockly && $scope.blockly.events && $scope.blockly.events.onLogin && $scope.blockly.events.onLogin instanceof Function) {
