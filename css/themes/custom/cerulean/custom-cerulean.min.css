@@ -16,13 +16,16 @@
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+@import "./components_css/type_bootstrap.css";
 @import "./components_css/alert.css";
 @import "./components_css/badge.css";
+@import "./components_css/blockquote.css";
 @import "./components_css/breadcrumb.css";
 @import "./components_css/btn.css";
 @import "./components_css/carousel.css";
 @import "./components_css/close.css";
 @import "./components_css/embed-responsive.css";
+@import "./components_css/form.css";
 @import "./components_css/glyphicon.css";
 @import "./components_css/hidden.css";
 @import "./components_css/list-group.css";
@@ -33,6 +36,7 @@
 @import "./components_css/panel.css";
 @import "./components_css/popover.css";
 @import "./components_css/progress.css";
+@import "./components_css/table.css";
 @import "./components_css/thumbnail.css";
 @import "./components_css/tooltip.css";
 @import "./components_css/visible.css";
@@ -258,78 +262,6 @@ table {
 td,
 th {
     padding: 0;
-}
-
-
-/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
-
-@media print {
-    *,
-    *:before,
-    *:after {
-        background: transparent !important;
-        color: #000 !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
-        content: "";
-    }
-    pre,
-    blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-    thead {
-        display: table-header-group;
-    }
-    tr,
-    img {
-        page-break-inside: avoid;
-    }
-    img {
-        max-width: 100% !important;
-    }
-    p,
-    h2,
-    h3 {
-        orphans: 3;
-        widows: 3;
-    }
-    h2,
-    h3 {
-        page-break-after: avoid;
-    }
-    .btn>.caret,
-    .dropup>.btn>.caret {
-        border-top-color: #000 !important;
-    }
-    .label {
-        border: 1px solid #000;
-    }
-    .table {
-        border-collapse: collapse !important;
-    }
-    .table td,
-    .table th {
-        background-color: #fff !important;
-    }
-    .table-bordered th,
-    .table-bordered td {
-        border: 1px solid #ddd !important;
-    }
 }
 
 * {
@@ -1336,22 +1268,6 @@ a.label:focus {
     margin-right: auto;
 }
 
-.pull-right {
-    float: right !important;
-}
-
-.pull-left {
-    float: left !important;
-}
-
-.hide {
-    display: none !important;
-}
-
-.show {
-    display: block !important;
-}
-
 .invisible {
     visibility: hidden;
 }
@@ -1374,7 +1290,7 @@ a.label:focus {
 
 .k-grid-header .k-header:hover,
 .k-grid-header .k-header:hover a {
-    color: #317eac !important;
+    color: #317eac;
 }
 
 .navbar-default {
@@ -1386,4 +1302,92 @@ a.label:focus {
 .navbar-default .navbar-nav>li>a,
 .navbar-default .navbar-brand {
     color: #fff;
+}
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent;
+        color: #000;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        text-shadow: none;
+    }
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+    thead {
+        display: table-header-group;
+    }
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+    img {
+        max-width: 100%;
+    }
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+    .btn>.caret,
+    .dropup>.btn>.caret {
+        border-top-color: #000;
+    }
+    .label {
+        border: 1px solid #000;
+    }
+    .table {
+        border-collapse: collapse;
+    }
+    .table td,
+    .table th {
+        background-color: #fff;
+    }
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #ddd;
+    }
+}
+
+
+/* blockquote */
+
+.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
