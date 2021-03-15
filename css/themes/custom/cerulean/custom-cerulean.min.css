@@ -1377,17 +1377,9 @@ a.label:focus {
 /* blockquote */
 
 .pull-right {
-    float: right !important;
+    float: right;
 }
 
 .pull-left {
-    float: left !important;
-}
-
-.hide {
-    display: none;
-}
-
-.show {
-    display: block;
+    float: left;
 }
