@@ -392,6 +392,14 @@
     }
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
 .navbar-default {
     background-color: #2fa4e7;
     border-color: #1995dc;
