@@ -2,11 +2,11 @@
     *,
     *:before,
     *:after {
-        background: transparent !important;
-        color: #000 !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
+        background: transparent;
+        color: #000;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        text-shadow: none;
     }
     a,
     a:visited {
@@ -35,7 +35,7 @@
         page-break-inside: avoid;
     }
     img {
-        max-width: 100% !important;
+        max-width: 100%;
     }
     p,
     h2,
@@ -52,20 +52,20 @@
     }
     .btn>.caret,
     .dropup>.btn>.caret {
-        border-top-color: #000 !important;
+        border-top-color: #000;
     }
     .label {
         border: 1px solid #000;
     }
     .table {
-        border-collapse: collapse !important;
+        border-collapse: collapse;
     }
     .table td,
     .table th {
-        background-color: #fff !important;
+        background-color: #fff;
     }
     .table-bordered th,
     .table-bordered td {
-        border: 1px solid #ddd !important;
+        border: 1px solid #ddd;
     }
 }
