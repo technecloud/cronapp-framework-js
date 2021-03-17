@@ -1,0 +1,29 @@
+/*
+*
+* MATERIAL -> LOGIN
+*
+* Todo CSS destina a tela de login.
+*
+*/
+
+.login-view {
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    padding: 40px 30px 40px 30px;
+    border-radius: 3px;
+}
+
+.login-view .btn-primary{
+    color: #fff;
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+@media only screen and (max-width: 768px) {
+    .login-panel {
+        position: relative;
+        transform: translateY(40%);
+        vertical-align: middle;
+        width: 100%;
+    }
+}
