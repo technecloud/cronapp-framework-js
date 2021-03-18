@@ -2484,62 +2484,7 @@ hr {
 }
 
 
-/*  ??  */
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    list-style: none;
-    font-size: 14px;
-    text-align: left;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-}
-
-.dropdown-menu .divider {
-    background-color: #e5e5e5;
-}
-
-.dropdown-menu>li>a:hover,
-.dropdown-menu>li>a:focus {
-    text-decoration: none;
-    color: #ffffff;
-    background-color: #2fa4e7;
-}
-
-.dropdown-menu>.active>a,
-.dropdown-menu>.active>a:hover,
-.dropdown-menu>.active>a:focus {
-    color: #ffffff;
-    text-decoration: none;
-    outline: 0;
-    background-color: #2fa4e7;
-}
-
-[data-toggle="buttons"]>.btn input[type="radio"],
-[data-toggle="buttons"]>.btn-group>.btn input[type="radio"],
-[data-toggle="buttons"]>.btn input[type="checkbox"],
-[data-toggle="buttons"]>.btn-group>.btn input[type="checkbox"] {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-    pointer-events: none;
-}
-
-
-/*!
+/*
  * Customizations for kendo
 */
 
