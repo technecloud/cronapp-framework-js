@@ -1,0 +1,152 @@
+/*
+*
+* MATERIAL -> CRN-BUTTON
+*
+* Todo CSS destina ao elemento button.
+*
+*/
+
+.k-button {
+    font-weight: 400;
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: capitalize;
+    transition: 200ms;
+    font-weight: normal;
+}
+
+.k-button[disabled] {
+    background-color: #dcdcdc;
+    color: #616161;
+    opacity: 1;
+}
+
+.k-button:focus,
+.k-button:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+
+/* Alteração de cores através de classes */
+
+.btn-primary {
+    color: #fff;
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #257d25;
+    border-color: #257d25;
+}
+
+.btn-success:focus,
+.btn-success:hover {
+    background-color: #195419;
+    color: #fff;
+}
+
+.btn-info,
+.btn-default {
+    color: #fff;
+    background-color: #3b448e;
+    border-color: #3b448e;
+}
+
+.btn-info:focus,
+.btn-info:hover,
+.btn-default:focus,
+.btn-default:hover {
+    background-color: #232853;
+    color: #fff;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.btn-warning:focus,
+.btn-warning:hover {
+    color: #fff;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #ce3a36;
+    border-color: #ce3a36;
+}
+
+.btn-danger:focus,
+.btn-danger:hover {
+    background-color: #c94642;
+    color: #fff;
+}
+
+
+/* botão com texto */
+
+.k-button-with-label {
+    width: max-content;
+    height: 33px;
+    padding: 10px;
+    border-radius: 0%;
+}
+
+
+/* Ícones */
+
+.k-button i {
+    position: relative;
+    top: -2px;
+    margin-right: 3px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* crn-grid */
+
+.k-button-icontext .k-icon {
+    margin: 0;
+}
+
+
+/*form*/
+
+.btn-fab {
+    border-radius: 50%;
+    font-size: 12px;
+    height: 42px;
+    margin: auto;
+    min-width: 42px;
+    width: 42px;
+    padding: 0;
+    position: relative;
+}
+
+
+/*??*/
+
+.btn-space-table {
+    display: flex;
+    width: 80px;
+}
+
+.new-table-cron .btn-space-table .k-button {
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.k-detail-cell .k-grid .k-header .k-button:hover {
+    background-color: #3d488b;
+    text-transform: uppercase;
+    color: #fff;
+    transition: 200ms;
+}
