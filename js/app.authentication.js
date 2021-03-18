@@ -191,33 +191,26 @@ var app = (function() {
       .config(function($translateProvider, tmhDynamicLocaleProvider) {
 
         $translateProvider.uniformLanguageTag('bcp47');
-        $translateProvider.useMissingTranslationHandlerLog();
-        $translateProvider.fallbackLanguage('pt_br');
-        $translateProvider.preferredLanguage('pt_br');
         $translateProvider.useLoader('customTranslateLoader', {
           files: [{
             prefix: 'i18n/locale_',
             suffix: '.json'
           },
-          {
-            prefix: 'node_modules/cronapp-framework-js/i18n/locale_',
-            suffix: '.json'
-          },
-          {
-            prefix: 'node_modules/cronapi-js/i18n/locale_',
-            suffix: '.json'
-          }]
+            {
+              prefix: 'node_modules/cronapp-framework-js/i18n/locale_',
+              suffix: '.json'
+            },
+            {
+              prefix: 'node_modules/cronapi-js/i18n/locale_',
+              suffix: '.json'
+            }]
         });
 
         $translateProvider
-            .translations('pt', { /* ... */ })
-            .translations('en', { /* ... */ })
             .registerAvailableLanguageKeys(
-                ['pt_br', 'en_us'], {
-                  'en*': 'en_us',
-                  'pt*': 'pt_br',
-                  '*': 'pt_br'
-                })
+                window.translations.localesKeys,
+                window.translations.localesRef
+            )
             .determinePreferredLanguage();
 
         var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_').toLowerCase();

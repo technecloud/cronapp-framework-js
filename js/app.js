@@ -123,31 +123,32 @@ var app = (function() {
 
       .config(function($translateProvider, tmhDynamicLocaleProvider) {
 
-        $translateProvider.useMissingTranslationHandlerLog();
-
-        $translateProvider.useStaticFilesLoader({
-          files: [
+        $translateProvider.uniformLanguageTag('bcp47');
+        $translateProvider.useLoader('customTranslateLoader', {
+          files: [{
+            prefix: 'i18n/locale_',
+            suffix: '.json'
+          },
             {
-              prefix: 'i18n/locale_',
+              prefix: 'node_modules/cronapp-framework-js/i18n/locale_',
               suffix: '.json'
             },
             {
-              prefix: 'node_modules/cronapp-framework-js/i18n/locale_',
+              prefix: 'node_modules/cronapi-js/i18n/locale_',
               suffix: '.json'
             }]
         });
 
-        $translateProvider.registerAvailableLanguageKeys(
-            ['pt_br', 'en_us'], {
-              'en*': 'en_us',
-              'pt*': 'pt_br',
-              '*': 'pt_br'
-            }
-        );
+        $translateProvider
+            .registerAvailableLanguageKeys(
+                window.translations.localesKeys,
+                window.translations.localesRef
+            )
+            .determinePreferredLanguage();
 
-        var locale = (window.navigator.userLanguage || window.navigator.language || 'pt_br').replace('-', '_');
+        var locale = (window.navigator.userLanguage || window.navigator.language).replace('-', '_').toLowerCase();
+        $translateProvider.use(locale);
 
-        $translateProvider.use(locale.toLowerCase());
         $translateProvider.useSanitizeValueStrategy('escaped');
 
         tmhDynamicLocaleProvider.localeLocationPattern('node_modules/angular-i18n/angular-locale_{{locale}}.js');
