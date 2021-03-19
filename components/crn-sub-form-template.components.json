@@ -1,0 +1,9 @@
+{
+  "name": "crn-sub-form",
+  "text_pt_BR": "Sub Formulário",
+  "text_en_US": "SubForm",
+  "order": 2,
+  "class": "adjust-icon mdi mdi-format-align-justify",
+  "designTimeSelector": "div[data-component='crn-sub-form']",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/sub-form.template.html"
+}
