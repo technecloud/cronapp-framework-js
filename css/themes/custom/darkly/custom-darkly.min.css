@@ -1386,10 +1386,6 @@ button.list-group-item-danger.active:focus {
     margin-bottom: 13px;
 }
 
-.navbar-nav {
-    margin: 9.75px -15px;
-}
-
 .navbar-nav>li>a {
     line-height: 21px;
 }
@@ -2424,13 +2420,13 @@ blockquote.pull-right {
 
 .k-grid-header .k-header:hover,
 .k-grid-header .k-header:hover a {
-    color: #317eac !important;
+    color: #317eac;
 }
 
 table a:not(.btn),
 .table a:not(.btn),
 .k-command-cell button {
-    color: #333 !important;
+    color: #333;
     text-decoration: none;
     font-size: 0.8em;
 }
