@@ -25,16 +25,7 @@
 }
 
 .form-control::-moz-placeholder {
-    color: #999999;
     opacity: 1;
-}
-
-.form-control:-ms-input-placeholder {
-    color: #999999;
-}
-
-.form-control::-webkit-input-placeholder {
-    color: #999999;
 }
 
 .form-control::-ms-expand {
