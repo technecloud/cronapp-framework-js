@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
@@ -10,6 +11,9 @@
 =======
 =======
 @import "../_bootswatch-css/import_bootswatch.css";
+=======
+@import "../_bootswatch-v3.3.3/import_bootswatch.css";
+>>>>>>> be37438d (Merge remote-tracking branch 'origin/feature/CRONAPP-3477' into feature/CRONAPP-3478)
 
 /* -- Fonts -- */
 
