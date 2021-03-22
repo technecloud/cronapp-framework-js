@@ -52,9 +52,6 @@
 .pagination>.active>a:focus,
 .pagination>.active>span:focus {
     z-index: 3;
-    color: #ffffff;
-    background-color: #158cba;
-    border-color: #127ba3;
     cursor: default;
 }
 
@@ -64,9 +61,6 @@
 .pagination>.disabled>a,
 .pagination>.disabled>a:hover,
 .pagination>.disabled>a:focus {
-    color: #999999;
-    background-color: #eeeeee;
-    border-color: #e2e2e2;
     cursor: not-allowed;
 }
 
