@@ -156,26 +156,6 @@
     border: 0;
 }
 
-.dropdown-item:hover,
-.dropdown-item:focus {
-    color: #151515;
-    text-decoration: none;
-    background-color: #f8f9fa;
-}
-
-.dropdown-item.active,
-.dropdown-item:active {
-    color: #fff;
-    text-decoration: none;
-    background-color: #EB6864;
-}
-
-.dropdown-item.disabled,
-.dropdown-item:disabled {
-    color: #777;
-    background-color: transparent;
-}
-
 .dropdown-menu.show {
     display: block;
 }

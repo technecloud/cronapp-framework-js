@@ -91,11 +91,6 @@
     background-color: #000;
 }
 
-
-/* .modal-backdrop.fade {
-    opacity: 0;
-} */
-
 .modal-backdrop.show {
     opacity: 0.5;
 }
