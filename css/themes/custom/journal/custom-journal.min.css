@@ -849,18 +849,6 @@ input[type="button"].btn-block {
     width: 100%;
 }
 
-.fade {
-    -webkit-transition: opacity 0.15s linear;
-    transition: opacity 0.15s linear;
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-    .fade {
-        -webkit-transition: none;
-        transition: none;
-    }
-}
-
 .collapsing {
     position: relative;
     height: 0;
@@ -1194,31 +1182,31 @@ button.close {
 }
 
 .align-baseline {
-    vertical-align: baseline !important;
+    vertical-align: baseline;
 }
 
 .align-top {
-    vertical-align: top !important;
+    vertical-align: top;
 }
 
 .align-middle {
-    vertical-align: middle !important;
+    vertical-align: middle;
 }
 
 .align-bottom {
-    vertical-align: bottom !important;
+    vertical-align: bottom;
 }
 
 .align-text-bottom {
-    vertical-align: text-bottom !important;
+    vertical-align: text-bottom;
 }
 
 .align-text-top {
-    vertical-align: text-top !important;
+    vertical-align: text-top;
 }
 
 .bg-primary {
-    background-color: #EB6864 !important;
+    background-color: #EB6864;
 }
 
 a.bg-primary:hover,
@@ -4245,16 +4233,6 @@ a.text-dark:focus {
     border-width: 1px 0 0 0;
 }
 
-.btn {
-    font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
-    font-weight: 700;
-}
-
-.btn-secondary,
-.btn-warning {
-    color: #fff;
-}
-
 #navbar>.nav li a,
 #navbar2>.nav li a {
     font-size: 14px;
@@ -4317,8 +4295,33 @@ body {
 
 /* -- .btn -- */
 
+.btn {
+    font-family: "News Cycle", "Arial Narrow Bold", sans-serif;
+    font-weight: 700;
+}
+
+.btn-secondary,
+.btn-warning {
+    color: #fff;
+}
+
 
 /* -- color background -- */
+
+
+/* -- fade -- */
+
+.fade {
+    -webkit-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    .fade {
+        -webkit-transition: none;
+        transition: none;
+    }
+}
 
 
 /* -- animations -- */
