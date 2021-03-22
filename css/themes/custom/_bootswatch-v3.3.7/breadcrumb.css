@@ -1,0 +1,27 @@
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.breadcrumb>li {
+    display: inline-block;
+}
+
+.breadcrumb>li+li:before {
+    content: ">\00a0";
+    padding: 0 5px;
+    color: #999999;
+}
+
+.breadcrumb>.active {
+    color: #999999;
+}
+
+.breadcrumb {
+    border-color: #ededed;
+    border-style: solid;
+    border-width: 0 1px 4px 1px;
+}
