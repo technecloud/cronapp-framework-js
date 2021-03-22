@@ -1,3 +1,10 @@
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
 .label {
     display: inline;
     padding: .2em .6em .3em;
@@ -79,4 +86,12 @@ a.label:focus {
 .label-danger[href]:hover,
 .label-danger[href]:focus {
     background-color: #ff1103;
+}
+
+label {
+    font-weight: normal;
+}
+
+.label {
+    font-weight: normal;
 }

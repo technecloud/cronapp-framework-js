@@ -107,3 +107,36 @@
     border-bottom-right-radius: 2px;
     border-top-right-radius: 2px;
 }
+
+.pagination>li>a,
+.pagination>li>span {
+    position: relative;
+    top: 0;
+    border-width: 0 1px 4px 1px;
+    color: #555555;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.pagination>li>a:hover,
+.pagination>li>span:hover {
+    top: 1px;
+    border-bottom-width: 3px;
+}
+
+.pagination>li>a:active,
+.pagination>li>span:active {
+    top: 2px;
+    border-bottom-width: 2px;
+}
+
+.pagination>.disabled>a:hover .pagination>.disabled>span:hover {
+    top: 0;
+    border-width: 0 1px 4px 1px;
+}
+
+.pagination>.disabled>a:active .pagination>.disabled>span:active {
+    top: 0;
+    border-width: 0 1px 4px 1px;
+}
