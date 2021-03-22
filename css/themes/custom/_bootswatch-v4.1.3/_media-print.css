@@ -2,9 +2,9 @@
     *,
     *::before,
     *::after {
-        text-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
+        text-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
     a:not(.btn) {
         text-decoration: underline;
@@ -13,7 +13,7 @@
         content: " (" attr(title) ")";
     }
     pre {
-        white-space: pre-wrap !important;
+        white-space: pre-wrap;
     }
     pre,
     blockquote {
@@ -41,10 +41,10 @@
         size: a3;
     }
     body {
-        min-width: 992px !important;
+        min-width: 992px;
     }
     .container {
-        min-width: 992px !important;
+        min-width: 992px;
     }
     .navbar {
         display: none;
@@ -53,15 +53,15 @@
         border: 1px solid #000;
     }
     .table {
-        border-collapse: collapse !important;
+        border-collapse: collapse;
     }
     .table td,
     .table th {
-        background-color: #fff !important;
+        background-color: #fff;
     }
     .table-bordered th,
     .table-bordered td {
-        border: 1px solid #dee2e6 !important;
+        border: 1px solid #dee2e6;
     }
     .table-dark {
         color: inherit;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*!
  * Bootswatch v4.1.3
  * Homepage: https://bootswatch.com
@@ -4082,165 +4083,9 @@ button.bg-dark:focus {
 .text-lowercase {
     text-transform: lowercase !important;
 }
-
-.text-uppercase {
-    text-transform: uppercase !important;
-}
-
-.text-capitalize {
-    text-transform: capitalize !important;
-}
-
-.font-weight-light {
-    font-weight: 300 !important;
-}
-
-.font-weight-normal {
-    font-weight: 400 !important;
-}
-
-.font-weight-bold {
-    font-weight: 700 !important;
-}
-
-.font-italic {
-    font-style: italic !important;
-}
-
-.text-white {
-    color: #fff !important;
-}
-
-.text-primary {
-    color: #EB6864 !important;
-}
-
-a.text-primary:hover,
-a.text-primary:focus {
-    color: #e53c37 !important;
-}
-
-.text-secondary {
-    color: #aaa !important;
-}
-
-a.text-secondary:hover,
-a.text-secondary:focus {
-    color: #919090 !important;
-}
-
-.text-success {
-    color: #22B24C !important;
-}
-
-a.text-success:hover,
-a.text-success:focus {
-    color: #1a873a !important;
-}
-
-.text-info {
-    color: #369 !important;
-}
-
-a.text-info:hover,
-a.text-info:focus {
-    color: #264d73 !important;
-}
-
-.text-warning {
-    color: #F5E625 !important;
-}
-
-a.text-warning:hover,
-a.text-warning:focus {
-    color: #ddce0a !important;
-}
-
-.text-danger {
-    color: #F57A00 !important;
-}
-
-a.text-danger:hover,
-a.text-danger:focus {
-    color: #c26100 !important;
-}
-
-.text-light {
-    color: #f8f9fa !important;
-}
-
-a.text-light:hover,
-a.text-light:focus {
-    color: #dae0e5 !important;
-}
-
-.text-dark {
-    color: #222 !important;
-}
-
-a.text-dark:hover,
-a.text-dark:focus {
-    color: #090808 !important;
-}
-
-.text-body {
-    color: #222 !important;
-}
-
-.text-muted {
-    color: #777 !important;
-}
-
-.text-black-50 {
-    color: rgba(0, 0, 0, 0.5) !important;
-}
-
-.text-white-50 {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-.text-hide {
-    font: 0/0 a;
-    color: transparent;
-    text-shadow: none;
-    background-color: transparent;
-    border: 0;
-}
-
-.visible {
-    visibility: visible !important;
-}
-
-.invisible {
-    visibility: hidden !important;
-}
-
-.bg-dark {
-    background-color: #000 !important;
-}
-
-.bg-light {
-    background-color: #fff !important;
-    color: #000;
-    border: 1px solid #eee;
-}
-
-.bg-light.navbar-fixed-top {
-    border-width: 0 0 1px 0;
-}
-
-.bg-light.navbar-fixed-bottom {
-    border-width: 1px 0 0 0;
-}
-
-#navbar>.nav li a,
-#navbar2>.nav li a {
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-
+=======
 /* ----------      --------------        ---------- */
+>>>>>>> 49452846 (finalização das organização do código)
 
 @import "../_bootswatch-v4.1.3/import_bootswatch.css";
 
@@ -4290,7 +4135,99 @@ body {
 }
 
 
-/* -- component badge -- */
+/* -- text -- */
+
+.text-monospace {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-primary {
+    color: #EB6864;
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #e53c37;
+}
+
+.text-secondary {
+    color: #aaa;
+}
+
+a.text-secondary:hover,
+a.text-secondary:focus {
+    color: #919090;
+}
+
+.text-success {
+    color: #22B24C;
+}
+
+a.text-success:hover,
+a.text-success:focus {
+    color: #1a873a;
+}
+
+.text-info {
+    color: #369;
+}
+
+a.text-info:hover,
+a.text-info:focus {
+    color: #264d73;
+}
+
+.text-warning {
+    color: #F5E625;
+}
+
+a.text-warning:hover,
+a.text-warning:focus {
+    color: #ddce0a;
+}
+
+.text-danger {
+    color: #F57A00;
+}
+
+a.text-danger:hover,
+a.text-danger:focus {
+    color: #c26100;
+}
+
+.text-light {
+    color: #f8f9fa;
+}
+
+a.text-light:hover,
+a.text-light:focus {
+    color: #dae0e5;
+}
+
+.text-dark {
+    color: #222;
+}
+
+a.text-dark:hover,
+a.text-dark:focus {
+    color: #090808;
+}
+
+.text-body {
+    color: #222;
+}
+
+.text-muted {
+    color: #777;
+}
+
+.text-black-50 {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.5);
+}
 
 
 /* -- .btn -- */
@@ -5550,6 +5487,105 @@ body {
 }
 
 
+/* -- background -- */
+
+.bg-primary {
+    background-color: #EB6864;
+}
+
+a.bg-primary:hover,
+a.bg-primary:focus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+    background-color: #e53c37;
+}
+
+.bg-secondary {
+    background-color: #aaa;
+}
+
+a.bg-secondary:hover,
+a.bg-secondary:focus,
+button.bg-secondary:hover,
+button.bg-secondary:focus {
+    background-color: #919090;
+}
+
+.bg-success {
+    background-color: #22B24C;
+}
+
+a.bg-success:hover,
+a.bg-success:focus,
+button.bg-success:hover,
+button.bg-success:focus {
+    background-color: #1a873a;
+}
+
+.bg-info {
+    background-color: #369;
+}
+
+a.bg-info:hover,
+a.bg-info:focus,
+button.bg-info:hover,
+button.bg-info:focus {
+    background-color: #264d73;
+}
+
+.bg-warning {
+    background-color: #F5E625;
+}
+
+a.bg-warning:hover,
+a.bg-warning:focus,
+button.bg-warning:hover,
+button.bg-warning:focus {
+    background-color: #ddce0a;
+}
+
+.bg-danger {
+    background-color: #F57A00;
+}
+
+a.bg-danger:hover,
+a.bg-danger:focus,
+button.bg-danger:hover,
+button.bg-danger:focus {
+    background-color: #c26100;
+}
+
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+a.bg-light:hover,
+a.bg-light:focus,
+button.bg-light:hover,
+button.bg-light:focus {
+    background-color: #dae0e5;
+}
+
+.bg-dark {
+    background-color: #222;
+}
+
+a.bg-dark:hover,
+a.bg-dark:focus,
+button.bg-dark:hover,
+button.bg-dark:focus {
+    background-color: #090808;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+
 /* -- animations -- */
 
 @-webkit-keyframes progress-bar-stripes {
@@ -5572,3 +5608,9 @@ body {
 
 
 /* -- others -- */
+
+code {
+    font-size: 87.5%;
+    color: #e83e8c;
+    word-break: break-word;
+}
