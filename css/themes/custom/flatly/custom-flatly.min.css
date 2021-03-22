@@ -2552,22 +2552,6 @@ a.list-group-item-danger.active:focus {
 }
 
 
-/* -- Customizations for kendo -- */
-
-.k-grid-header .k-header:hover,
-.k-grid-header .k-header:hover a {
-    color: #317eac !important;
-}
-
-table a:not(.btn),
-.table a:not(.btn),
-.k-command-cell button {
-    color: #333;
-    text-decoration: none;
-    font-size: 0.8em;
-}
-
-
 /* -- tooltip -- */
 
 .tooltip {
@@ -2958,4 +2942,20 @@ input:focus {
 .nav .open>a:hover,
 .nav .open>a:focus {
     border-color: transparent;
+}
+
+
+/* -- Customizations for kendo -- */
+
+.k-grid-header .k-header:hover,
+.k-grid-header .k-header:hover a {
+    color: #317eac;
+}
+
+table a:not(.btn),
+.table a:not(.btn),
+.k-command-cell button {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.8em;
 }
