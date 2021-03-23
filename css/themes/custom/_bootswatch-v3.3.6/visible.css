@@ -1,9 +1,17 @@
 .hide {
+<<<<<<< HEAD
     display: none
 }
 
 .show {
     display: block
+=======
+    display: none !important
+}
+
+.show {
+    display: block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 .invisible {
@@ -19,7 +27,11 @@
 }
 
 .hidden {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 .affix {
@@ -34,7 +46,11 @@
 .visible-sm,
 .visible-md,
 .visible-lg {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 .visible-xs-block,
@@ -49,11 +65,16 @@
 .visible-lg-block,
 .visible-lg-inline,
 .visible-lg-inline-block {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 @media (max-width:767px) {
     .visible-xs {
+<<<<<<< HEAD
         display: block
     }
     table.visible-xs {
@@ -65,29 +86,55 @@
     th.visible-xs,
     td.visible-xs {
         display: table-cell
+=======
+        display: block !important
+    }
+    table.visible-xs {
+        display: table !important
+    }
+    tr.visible-xs {
+        display: table-row !important
+    }
+    th.visible-xs,
+    td.visible-xs {
+        display: table-cell !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (max-width:767px) {
     .visible-xs-block {
+<<<<<<< HEAD
         display: block
+=======
+        display: block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (max-width:767px) {
     .visible-xs-inline {
+<<<<<<< HEAD
         display: inline
+=======
+        display: inline !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (max-width:767px) {
     .visible-xs-inline-block {
+<<<<<<< HEAD
         display: inline-block
+=======
+        display: inline-block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm {
+<<<<<<< HEAD
         display: block
     }
     table.visible-sm {
@@ -99,29 +146,55 @@
     th.visible-sm,
     td.visible-sm {
         display: table-cell
+=======
+        display: block !important
+    }
+    table.visible-sm {
+        display: table !important
+    }
+    tr.visible-sm {
+        display: table-row !important
+    }
+    th.visible-sm,
+    td.visible-sm {
+        display: table-cell !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm-block {
+<<<<<<< HEAD
         display: block
+=======
+        display: block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm-inline {
+<<<<<<< HEAD
         display: inline
+=======
+        display: inline !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm-inline-block {
+<<<<<<< HEAD
         display: inline-block
+=======
+        display: inline-block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md {
+<<<<<<< HEAD
         display: block
     }
     table.visible-md {
@@ -133,29 +206,55 @@
     th.visible-md,
     td.visible-md {
         display: table-cell
+=======
+        display: block !important
+    }
+    table.visible-md {
+        display: table !important
+    }
+    tr.visible-md {
+        display: table-row !important
+    }
+    th.visible-md,
+    td.visible-md {
+        display: table-cell !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md-block {
+<<<<<<< HEAD
         display: block
+=======
+        display: block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md-inline {
+<<<<<<< HEAD
         display: inline
+=======
+        display: inline !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md-inline-block {
+<<<<<<< HEAD
         display: inline-block
+=======
+        display: inline-block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg {
+<<<<<<< HEAD
         display: block
     }
     table.visible-lg {
@@ -167,57 +266,103 @@
     th.visible-lg,
     td.visible-lg {
         display: table-cell
+=======
+        display: block !important
+    }
+    table.visible-lg {
+        display: table !important
+    }
+    tr.visible-lg {
+        display: table-row !important
+    }
+    th.visible-lg,
+    td.visible-lg {
+        display: table-cell !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg-block {
+<<<<<<< HEAD
         display: block
+=======
+        display: block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg-inline {
+<<<<<<< HEAD
         display: inline
+=======
+        display: inline !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg-inline-block {
+<<<<<<< HEAD
         display: inline-block
+=======
+        display: inline-block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (max-width:767px) {
     .hidden-xs {
+<<<<<<< HEAD
         display: none
+=======
+        display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .hidden-sm {
+<<<<<<< HEAD
         display: none
+=======
+        display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .hidden-md {
+<<<<<<< HEAD
         display: none
+=======
+        display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media (min-width:1200px) {
     .hidden-lg {
+<<<<<<< HEAD
         display: none
+=======
+        display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 .visible-print {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 @media print {
     .visible-print {
+<<<<<<< HEAD
         display: block
     }
     table.visible-print {
@@ -229,41 +374,82 @@
     th.visible-print,
     td.visible-print {
         display: table-cell
+=======
+        display: block !important
+    }
+    table.visible-print {
+        display: table !important
+    }
+    tr.visible-print {
+        display: table-row !important
+    }
+    th.visible-print,
+    td.visible-print {
+        display: table-cell !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 .visible-print-block {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 @media print {
     .visible-print-block {
+<<<<<<< HEAD
         display: block
+=======
+        display: block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 .visible-print-inline {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 @media print {
     .visible-print-inline {
+<<<<<<< HEAD
         display: inline
+=======
+        display: inline !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 .visible-print-inline-block {
+<<<<<<< HEAD
     display: none
+=======
+    display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 @media print {
     .visible-print-inline-block {
+<<<<<<< HEAD
         display: inline-block
+=======
+        display: inline-block !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }
 
 @media print {
     .hidden-print {
+<<<<<<< HEAD
         display: none
+=======
+        display: none !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
 }

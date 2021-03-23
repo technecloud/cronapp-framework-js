@@ -1,4 +1,5 @@
 @import "../_bootswatch-v3.3.6/import_bootswatch.css";
+<<<<<<< HEAD
 
 /* -- Fonts -- */
 
@@ -1460,6 +1461,213 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
 }
 
+=======
+
+/* -- Fonts -- */
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+body {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.846;
+    color: #666666;
+    background-color: #ffffff
+}
+
+
+/* -- text -- */
+
+.text-muted {
+    color: #bbbbbb
+}
+
+.text-primary {
+    color: #2196f3
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #0c7cd5
+}
+
+.text-success {
+    color: #4caf50
+}
+
+a.text-success:hover,
+a.text-success:focus {
+    color: #3d8b40
+}
+
+.text-info {
+    color: #9c27b0
+}
+
+a.text-info:hover,
+a.text-info:focus {
+    color: #771e86
+}
+
+.text-warning {
+    color: #ff9800
+}
+
+a.text-warning:hover,
+a.text-warning:focus {
+    color: #cc7a00
+}
+
+.text-danger {
+    color: #e51c23
+}
+
+a.text-danger:hover,
+a.text-danger:focus {
+    color: #b9151b
+}
+
+
+/* -- background -- */
+
+.bg-primary {
+    color: #fff;
+    background-color: #2196f3
+}
+
+a.bg-primary:hover,
+a.bg-primary:focus {
+    background-color: #0c7cd5
+}
+
+.bg-success {
+    background-color: #dff0d8
+}
+
+a.bg-success:hover,
+a.bg-success:focus {
+    background-color: #c1e2b3
+}
+
+.bg-info {
+    background-color: #e1bee7
+}
+
+a.bg-info:hover,
+a.bg-info:focus {
+    background-color: #d099d9
+}
+
+.bg-warning {
+    background-color: #ffe0b2
+}
+
+a.bg-warning:hover,
+a.bg-warning:focus {
+    background-color: #ffcb7f
+}
+
+.bg-danger {
+    background-color: #f9bdbb
+}
+
+a.bg-danger:hover,
+a.bg-danger:focus {
+    background-color: #f5908c
+}
+
+
+/* -- .has -- */
+
+.has-success .help-block,
+.has-success .control-label,
+.has-success .radio,
+.has-success .checkbox,
+.has-success .radio-inline,
+.has-success .checkbox-inline,
+.has-success.radio label,
+.has-success.checkbox label,
+.has-success.radio-inline label,
+.has-success.checkbox-inline label {
+    color: #4caf50
+}
+
+.has-success .form-control {
+    border-color: #4caf50;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+}
+
+.has-success .form-control:focus {
+    border-color: #3d8b40;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #92cf94;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #92cf94
+}
+
+.has-success .input-group-addon {
+    color: #4caf50;
+    border-color: #4caf50;
+    background-color: #dff0d8
+}
+
+.has-success .form-control-feedback {
+    color: #4caf50
+}
+
+.has-warning .help-block,
+.has-warning .control-label,
+.has-warning .radio,
+.has-warning .checkbox,
+.has-warning .radio-inline,
+.has-warning .checkbox-inline,
+.has-warning.radio label,
+.has-warning.checkbox label,
+.has-warning.radio-inline label,
+.has-warning.checkbox-inline label {
+    color: #ff9800
+}
+
+.has-warning .form-control {
+    border-color: #ff9800;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+}
+
+.has-warning .form-control:focus {
+    border-color: #cc7a00;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ffc166;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ffc166
+}
+
+.has-warning .input-group-addon {
+    color: #ff9800;
+    border-color: #ff9800;
+    background-color: #ffe0b2
+}
+
+.has-warning .form-control-feedback {
+    color: #ff9800
+}
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline,
+.has-error.radio label,
+.has-error.checkbox label,
+.has-error.radio-inline label,
+.has-error.checkbox-inline label {
+    color: #e51c23
+}
+
+.has-error .form-control {
+    border-color: #e51c23;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+}
+
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 .has-error .form-control:focus {
     border-color: #b9151b;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ef787c;

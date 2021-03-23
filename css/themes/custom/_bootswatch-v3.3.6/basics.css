@@ -523,6 +523,11 @@ samp {
 code {
     padding: 2px 4px;
     font-size: 90%;
+<<<<<<< HEAD
+=======
+    color: #c7254e;
+    background-color: #f9f2f4;
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     border-radius: 3px
 }
 
@@ -692,6 +697,7 @@ output {
 .center-block {
     display: block;
     margin-left: auto;
+<<<<<<< HEAD
     margin-right: auto;
 }
 
@@ -701,6 +707,17 @@ output {
 
 .pull-left {
     float: left;
+=======
+    margin-right: auto
+}
+
+.pull-right {
+    float: right !important
+}
+
+.pull-left {
+    float: left !important
+>>>>>>> 773fe59d (organização inicial do código em pastas)
 }
 
 body {

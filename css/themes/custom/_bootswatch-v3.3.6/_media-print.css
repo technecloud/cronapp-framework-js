@@ -35,7 +35,11 @@
         page-break-inside: avoid;
     }
     img {
+<<<<<<< HEAD
         max-width: 100%;
+=======
+        max-width: 100% !important;
+>>>>>>> 773fe59d (organização inicial do código em pastas)
     }
     p,
     h2,
