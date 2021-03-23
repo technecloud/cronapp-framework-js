@@ -79,6 +79,7 @@
     }
     .navbar-collapse.collapse {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block;
         height: auto;
         padding-bottom: 0;
@@ -89,6 +90,12 @@
         padding-bottom: 0;
         overflow: visible !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: block;
+        height: auto;
+        padding-bottom: 0;
+        overflow: visible
+>>>>>>> 598e041c (removendo o !important)
     }
     .navbar-collapse.in {
         overflow-y: visible
@@ -404,6 +411,7 @@
 @media (min-width:768px) {
     .navbar-left {
 <<<<<<< HEAD
+<<<<<<< HEAD
         float: left
     }
     .navbar-right {
@@ -414,6 +422,12 @@
     .navbar-right {
         float: right !important;
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        float: left
+    }
+    .navbar-right {
+        float: right;
+>>>>>>> 598e041c (removendo o !important)
         margin-right: -15px
     }
     .navbar-right~.navbar-right {

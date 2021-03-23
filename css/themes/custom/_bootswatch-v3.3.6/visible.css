@@ -1,5 +1,6 @@
 .hide {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 }
 
@@ -12,6 +13,13 @@
 .show {
     display: block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+}
+
+.show {
+    display: block
+>>>>>>> 598e041c (removendo o !important)
 }
 
 .invisible {
@@ -28,10 +36,14 @@
 
 .hidden {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 .affix {
@@ -47,10 +59,14 @@
 .visible-md,
 .visible-lg {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 .visible-xs-block,
@@ -66,14 +82,19 @@
 .visible-lg-inline,
 .visible-lg-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 @media (max-width:767px) {
     .visible-xs {
+<<<<<<< HEAD
 <<<<<<< HEAD
         display: block
     }
@@ -88,53 +109,73 @@
         display: table-cell
 =======
         display: block !important
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
     table.visible-xs {
-        display: table !important
+        display: table
     }
     tr.visible-xs {
-        display: table-row !important
+        display: table-row
     }
     th.visible-xs,
     td.visible-xs {
+<<<<<<< HEAD
         display: table-cell !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: table-cell
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (max-width:767px) {
     .visible-xs-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
 =======
         display: block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (max-width:767px) {
     .visible-xs-inline {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline
 =======
         display: inline !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (max-width:767px) {
     .visible-xs-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline-block
 =======
         display: inline-block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline-block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
     }
     table.visible-sm {
@@ -148,53 +189,73 @@
         display: table-cell
 =======
         display: block !important
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
     table.visible-sm {
-        display: table !important
+        display: table
     }
     tr.visible-sm {
-        display: table-row !important
+        display: table-row
     }
     th.visible-sm,
     td.visible-sm {
+<<<<<<< HEAD
         display: table-cell !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: table-cell
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
 =======
         display: block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm-inline {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline
 =======
         display: inline !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .visible-sm-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline-block
 =======
         display: inline-block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline-block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
     }
     table.visible-md {
@@ -208,53 +269,73 @@
         display: table-cell
 =======
         display: block !important
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
     table.visible-md {
-        display: table !important
+        display: table
     }
     tr.visible-md {
-        display: table-row !important
+        display: table-row
     }
     th.visible-md,
     td.visible-md {
+<<<<<<< HEAD
         display: table-cell !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: table-cell
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
 =======
         display: block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md-inline {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline
 =======
         display: inline !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .visible-md-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline-block
 =======
         display: inline-block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline-block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
     }
     table.visible-lg {
@@ -268,100 +349,140 @@
         display: table-cell
 =======
         display: block !important
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
     table.visible-lg {
-        display: table !important
+        display: table
     }
     tr.visible-lg {
-        display: table-row !important
+        display: table-row
     }
     th.visible-lg,
     td.visible-lg {
+<<<<<<< HEAD
         display: table-cell !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: table-cell
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
 =======
         display: block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg-inline {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline
 =======
         display: inline !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:1200px) {
     .visible-lg-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline-block
 =======
         display: inline-block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline-block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (max-width:767px) {
     .hidden-xs {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: none
 =======
         display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: none
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:768px) and (max-width:991px) {
     .hidden-sm {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: none
 =======
         display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: none
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:992px) and (max-width:1199px) {
     .hidden-md {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: none
 =======
         display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: none
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media (min-width:1200px) {
     .hidden-lg {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: none
 =======
         display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: none
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 .visible-print {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 @media print {
     .visible-print {
+<<<<<<< HEAD
 <<<<<<< HEAD
         display: block
     }
@@ -376,80 +497,115 @@
         display: table-cell
 =======
         display: block !important
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
     table.visible-print {
-        display: table !important
+        display: table
     }
     tr.visible-print {
-        display: table-row !important
+        display: table-row
     }
     th.visible-print,
     td.visible-print {
+<<<<<<< HEAD
         display: table-cell !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: table-cell
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 .visible-print-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 @media print {
     .visible-print-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: block
 =======
         display: block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 .visible-print-inline {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 @media print {
     .visible-print-inline {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline
 =======
         display: inline !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 .visible-print-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
     display: none
 =======
     display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    display: none
+>>>>>>> 598e041c (removendo o !important)
 }
 
 @media print {
     .visible-print-inline-block {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: inline-block
 =======
         display: inline-block !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: inline-block
+>>>>>>> 598e041c (removendo o !important)
     }
 }
 
 @media print {
     .hidden-print {
 <<<<<<< HEAD
+<<<<<<< HEAD
         display: none
 =======
         display: none !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        display: none
+>>>>>>> 598e041c (removendo o !important)
     }
 }

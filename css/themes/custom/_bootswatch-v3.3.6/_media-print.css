@@ -36,10 +36,14 @@
     }
     img {
 <<<<<<< HEAD
+<<<<<<< HEAD
         max-width: 100%;
 =======
         max-width: 100% !important;
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+        max-width: 100%;
+>>>>>>> 598e041c (removendo o !important)
     }
     p,
     h2,

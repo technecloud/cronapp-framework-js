@@ -698,6 +698,7 @@ output {
     display: block;
     margin-left: auto;
 <<<<<<< HEAD
+<<<<<<< HEAD
     margin-right: auto;
 }
 
@@ -709,15 +710,22 @@ output {
     float: left;
 =======
     margin-right: auto
+=======
+    margin-right: auto;
+>>>>>>> 598e041c (removendo o !important)
 }
 
 .pull-right {
-    float: right !important
+    float: right;
 }
 
 .pull-left {
+<<<<<<< HEAD
     float: left !important
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    float: left;
+>>>>>>> 598e041c (removendo o !important)
 }
 
 body {
