@@ -4010,7 +4010,9 @@
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
 
             combobox.bind("open", (_e) => {
-              combobox.dataSource.data(options.dataSource.transport.options.cronappDatasource.data);
+              if (combobox.dataSource) {
+                combobox.dataSource.data(options.dataSource.transport.options.cronappDatasource.data);
+              }
               if (attrs.ngOpen) {
                 _scope.$eval(attrs.ngOpen);
               }
