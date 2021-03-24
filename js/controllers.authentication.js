@@ -263,7 +263,12 @@
       valor : 1
     };
 
-
+    if ($scope.$state.get().filter(f => f.controller === "LoginController").length === 0) {
+      //TO THE NON-PEOPLE:
+      //Do not assign the condition directly to the "ignoreAuth" variable,
+      //as there may be a login controller and still want to bypass authentication
+      $scope.ignoreAuth = true;
+    }
 
     $rootScope.session = (localStorage.getItem('_u') !== undefined) ? JSON.parse(localStorage.getItem('_u')) : null;
 
