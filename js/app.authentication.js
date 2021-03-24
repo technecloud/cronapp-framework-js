@@ -95,12 +95,6 @@ var app = (function() {
                 templateUrl: 'views/login.view.html'
               })
 
-              .state('reset-password', {
-                url: "/public/reset-password",
-                controller: 'ResetPasswordController',
-                templateUrl: 'views/public/reset-password.view.html'
-              })
-
               .state('social', {
                 url: "/connected",
                 controller: 'SocialController',
