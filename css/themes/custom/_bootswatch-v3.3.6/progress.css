@@ -40,18 +40,10 @@
     animation: progress-bar-stripes 2s linear infinite
 }
 
-.progress-bar-success {
-    background-color: #4caf50
-}
-
 .progress-striped .progress-bar-success {
     background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent)
-}
-
-.progress-bar-info {
-    background-color: #9c27b0
 }
 
 .progress-striped .progress-bar-info {
@@ -60,18 +52,10 @@
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent)
 }
 
-.progress-bar-warning {
-    background-color: #ff9800
-}
-
 .progress-striped .progress-bar-warning {
     background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent)
-}
-
-.progress-bar-danger {
-    background-color: #e51c23
 }
 
 .progress-striped .progress-bar-danger {
@@ -108,20 +92,4 @@
     right: 0;
     z-index: -1;
     background-color: #cae6fc
-}
-
-.progress-bar-success:last-child.progress-bar:before {
-    background-color: #c7e7c8
-}
-
-.progress-bar-info:last-child.progress-bar:before {
-    background-color: #edc9f3
-}
-
-.progress-bar-warning:last-child.progress-bar:before {
-    background-color: #ffe0b3
-}
-
-.progress-bar-danger:last-child.progress-bar:before {
-    background-color: #f28e92
 }
