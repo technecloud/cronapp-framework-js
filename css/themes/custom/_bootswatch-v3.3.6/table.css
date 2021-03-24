@@ -102,6 +102,7 @@ table th[class*="col-"] {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .table>thead>tr>td.active,
 .table>tbody>tr>td.active,
@@ -219,6 +220,8 @@ table th[class*="col-"] {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .table-responsive {
     overflow-x: auto;
     min-height: 0.01%

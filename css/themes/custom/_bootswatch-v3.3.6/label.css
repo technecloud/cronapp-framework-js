@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 label {
     display: inline-block;
     max-width: 100%;
@@ -6,8 +9,11 @@ label {
     font-weight: normal
 }
 
+<<<<<<< HEAD
 =======
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .label {
     display: inline;
     padding: .2em .6em .3em;
@@ -35,6 +41,7 @@ a.label:focus {
 .btn .label {
     position: relative;
     top: -1px
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 }
@@ -103,4 +110,6 @@ label {
     margin-bottom: 5px;
     font-weight: bold
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 }
