@@ -62,6 +62,7 @@ fieldset[disabled] a.btn {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .btn-default {
     color: #444444;
@@ -105,12 +106,15 @@ fieldset[disabled] a.btn {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-default:active,
 .btn-default.active,
 .open>.dropdown-toggle.btn-default {
     background-image: none
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-default.disabled:hover,
@@ -173,12 +177,15 @@ fieldset[disabled] .btn-default.focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-primary:active,
 .btn-primary.active,
 .open>.dropdown-toggle.btn-primary {
     background-image: none
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-primary.disabled:hover,
@@ -241,12 +248,15 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-success:active,
 .btn-success.active,
 .open>.dropdown-toggle.btn-success {
     background-image: none
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-success.disabled:hover,
@@ -309,12 +319,15 @@ fieldset[disabled] .btn-success.focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-info:active,
 .btn-info.active,
 .open>.dropdown-toggle.btn-info {
     background-image: none
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-info.disabled:hover,
@@ -377,12 +390,15 @@ fieldset[disabled] .btn-info.focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-warning:active,
 .btn-warning.active,
 .open>.dropdown-toggle.btn-warning {
     background-image: none
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-warning.disabled:hover,
@@ -445,12 +461,15 @@ fieldset[disabled] .btn-warning.focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-danger:active,
 .btn-danger.active,
 .open>.dropdown-toggle.btn-danger {
     background-image: none
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-danger.disabled:hover,
@@ -472,6 +491,8 @@ fieldset[disabled] .btn-danger.focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-link {
     color: #2196f3;
     font-weight: normal;
@@ -791,6 +812,7 @@ input[type="button"].btn-block {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .btn-primary:focus {
     background-color: #2196f3
@@ -814,12 +836,15 @@ input[type="button"].btn-block {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-success {
     -webkit-background-size: 200% 200%;
     background-size: 200% 200%;
     background-position: 50%
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-success:focus {
@@ -844,12 +869,15 @@ input[type="button"].btn-block {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-info {
     -webkit-background-size: 200% 200%;
     background-size: 200% 200%;
     background-position: 50%
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-info:focus {
@@ -874,12 +902,15 @@ input[type="button"].btn-block {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-warning {
     -webkit-background-size: 200% 200%;
     background-size: 200% 200%;
     background-position: 50%
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-warning:focus {
@@ -904,12 +935,15 @@ input[type="button"].btn-block {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-danger {
     -webkit-background-size: 200% 200%;
     background-size: 200% 200%;
     background-position: 50%
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-danger:focus {
@@ -934,12 +968,15 @@ input[type="button"].btn-block {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn-link {
     -webkit-background-size: 200% 200%;
     background-size: 200% 200%;
     background-position: 50%
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .btn-link:focus {
@@ -964,6 +1001,8 @@ input[type="button"].btn-block {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .btn {
     text-transform: uppercase;
     border: none;

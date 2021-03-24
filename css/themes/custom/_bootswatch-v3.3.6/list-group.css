@@ -95,6 +95,7 @@ button.list-group-item {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 .list-group-item-success {
     color: #4caf50;
@@ -107,11 +108,14 @@ button.list-group-item-success {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 a.list-group-item-success .list-group-item-heading,
 button.list-group-item-success .list-group-item-heading {
     color: inherit
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 a.list-group-item-success:hover,
@@ -144,11 +148,14 @@ button.list-group-item-info {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 a.list-group-item-info .list-group-item-heading,
 button.list-group-item-info .list-group-item-heading {
     color: inherit
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 a.list-group-item-info:hover,
@@ -181,11 +188,14 @@ button.list-group-item-warning {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 a.list-group-item-warning .list-group-item-heading,
 button.list-group-item-warning .list-group-item-heading {
     color: inherit
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 a.list-group-item-warning:hover,
@@ -218,11 +228,14 @@ button.list-group-item-danger {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 a.list-group-item-danger .list-group-item-heading,
 button.list-group-item-danger .list-group-item-heading {
     color: inherit
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 a.list-group-item-danger:hover,
@@ -245,6 +258,8 @@ button.list-group-item-danger.active:focus {
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .list-group-item-heading {
     margin-top: 0;
     margin-bottom: 5px

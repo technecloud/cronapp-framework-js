@@ -2,6 +2,7 @@
     padding: 15px;
     margin-bottom: 23px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     border-radius: 3px;
     border: none;
     color: #fff
@@ -9,6 +10,11 @@
     border: 1px solid transparent;
     border-radius: 3px
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+    border-radius: 3px;
+    border: none;
+    color: #fff
+>>>>>>> 354145ca (sepração das cores do código css)
 }
 
 .alert h4 {
@@ -42,6 +48,7 @@
     color: inherit
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 .alert-success {
@@ -122,6 +129,8 @@
 }
 
 >>>>>>> 773fe59d (organização inicial do código em pastas)
+=======
+>>>>>>> 354145ca (sepração das cores do código css)
 .alert a:not(.close):not(.btn),
 .alert .alert-link {
     color: #fff;
