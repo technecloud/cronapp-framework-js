@@ -3,6 +3,14 @@
     margin: 20px 0;
     list-style: none;
     text-align: center;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.pager li>a {
+    color: #98978b;
 }
 
 .pager li {
@@ -41,15 +49,4 @@
     color: #dfd7ca;
     background-color: #f8f5f0;
     cursor: not-allowed;
-}
-
-.pager {
-    font-size: 11px;
-    line-height: 22px;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.pager li>a {
-    color: #98978b;
 }

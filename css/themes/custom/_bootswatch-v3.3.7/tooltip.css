@@ -4,22 +4,22 @@
     display: block;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: normal;
     letter-spacing: normal;
     line-break: auto;
-    line-height: 1.42857143;
     text-align: left;
     text-align: start;
     text-decoration: none;
     text-shadow: none;
-    text-transform: none;
     white-space: normal;
     word-break: normal;
     word-spacing: normal;
     word-wrap: normal;
-    font-size: 12px;
     opacity: 0;
     filter: alpha(opacity=0);
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .tooltip.in {
@@ -126,11 +126,4 @@
     margin-top: -5px;
     border-width: 0 5px 5px;
     border-bottom-color: #3e3f3a;
-}
-
-.tooltip {
-    font-size: 11px;
-    line-height: 22px;
-    font-weight: 500;
-    text-transform: uppercase;
 }
