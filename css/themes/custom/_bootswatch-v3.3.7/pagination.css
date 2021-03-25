@@ -3,6 +3,10 @@
     padding-left: 0;
     margin: 20px 0;
     border-radius: 4px;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .pagination>li {
@@ -106,11 +110,4 @@
 .pagination-sm>li:last-child>span {
     border-bottom-right-radius: 3px;
     border-top-right-radius: 3px;
-}
-
-.pagination {
-    font-size: 11px;
-    line-height: 22px;
-    font-weight: 500;
-    text-transform: uppercase;
 }
