@@ -1,8 +1,6 @@
-
 var cronappModules = [
   'ui.router',
   'ui-select-infinity',
-  'ui.select',
   'ngResource',
   'ngSanitize',
   'custom.controllers',
@@ -15,30 +13,22 @@ var cronappModules = [
   'ui.bootstrap',
   'ngFileUpload',
   'report.services',
-  'upload.services',
-  'ui.tinymce',
-  'ngCookies'
+  'upload.services'
 ];
 
 if (window.customModules) {
   cronappModules = cronappModules.concat(window.customModules);
 }
 
-var onloadCallback = function() {
-  window.grecaptcha.render('loginRecaptcha');
-  window.grecaptcha.reset();
-};
-
 var app = (function() {
-
   return angular.module('MyApp', cronappModules)
+
       .constant('LOCALES', {
         'locales': {
           'pt_br': 'Portugues (Brasil)',
           'en_us': 'English'
         },
-        'preferredLocale': 'pt_br',
-        'urlPrefix': ''
+        'preferredLocale': 'pt_br'
       })
       .config([
         '$httpProvider',
@@ -64,11 +54,11 @@ var app = (function() {
         }
       ])
       .config( [
-        '$compileProvider',
-        function( $compileProvider )
-        {
-          $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|javascript|chrome-extension):/);
-        }
+          '$compileProvider',
+          function( $compileProvider )
+          {
+              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|javascript|chrome-extension):/);
+          }
       ])
       .config(function($stateProvider, $urlRouterProvider, NotificationProvider) {
         NotificationProvider.setOptions({
@@ -81,24 +71,56 @@ var app = (function() {
           positionY: 'top',
           templateUrl: 'node_modules/cronapp-framework-js/components/templates/angular-ui-notification.template.html'
         });
-        window.NotificationProviderOptions = NotificationProvider.options;
-        window.stateProviderDefine.handle($stateProvider);
+
+        // Set up the states
+        $stateProvider
+
+            .state('index', {
+              url: "",
+              controller: 'HomeController',
+              templateUrl: 'views/home.view.html'
+            })
+
+            .state('main', {
+              url: "/",
+              controller: 'HomeController',
+              templateUrl: 'views/home.view.html'
+            })
+
+            .state('home', {
+              url: "/home",
+              controller: 'HomeController',
+              templateUrl: 'views/home.view.html'
+            })
+
+            .state('home.pages', {
+              url: "/{name:.*}",
+              controller: 'PageController',
+              templateUrl: function(urlattr) {
+                return 'views/' + urlattr.name + '.view.html';
+              }
+            })
+
+            .state('404', {
+              url: "/error/404",
+              controller: 'PageController',
+              templateUrl: function(urlattr) {
+                return 'views/error/404.view.html';
+              }
+            })
+
+            .state('403', {
+              url: "/error/403",
+              controller: 'PageController',
+              templateUrl: function(urlattr) {
+                return 'views/error/403.view.html';
+              }
+            });
 
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/error/404");
       })
-      .factory('originPath', ['$location', function($location) {
-        var originPath = {
-          request: function(config) {
-            config.headers['origin-path'] = $location.path();
-            return config;
-          }
-        };
-        return originPath;
-      }])
-      .config(['$httpProvider', function($httpProvider) {
-        $httpProvider.interceptors.push('originPath');
-      }])
+
       .config(function($translateProvider, tmhDynamicLocaleProvider) {
 
         $translateProvider.uniformLanguageTag('bcp47');
@@ -134,9 +156,6 @@ var app = (function() {
         if (moment)
           moment.locale(locale);
       })
-      .config(function($sceProvider) {
-        $sceProvider.enabled(false);
-      })
 
       .directive('crnValue', ['$parse', function($parse) {
         return {
@@ -164,18 +183,18 @@ var app = (function() {
                 var changed = $(element).data('changed');
                 $(element).data('changed', false);
                 if (!changed) {
-                  if (value && JSON.stringify(''+value) === dataEvaluated) {
+                  if (value && JSON.stringify(''+value) == dataEvaluated) {
                     $(element)[0].checked = true
                   } else {
                     $(element)[0].checked = false;
                   }
                 }
               }
-            });
+            });           
           }
         };
       }])
-
+	  
       .decorator("$xhrFactory", [
         "$delegate", "$injector",
         function($delegate, $injector) {
@@ -190,19 +209,29 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state, ReportService) {
+    .controller('PageController', function($scope, $stateParams, $location, $http, $rootScope) {
+
+      for (var x in app.userEvents)
+          $scope[x] = app.userEvents[x].bind($scope);
+
+        try {
+          if (cronapi)
+            $scope['cronapi'] = cronapi;
+        } catch (e) {
+          console.info('Not loaded cronapi functions');
+          console.info(e);
+        }
+        try {
+          if (blockly)
+            $scope['blockly'] = blockly;
+        } catch (e) {
+          console.info('Not loaded blockly functions');
+          console.info(e);
+        }
+
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
-        $scope.Notification = Notification;
-        $scope.UploadService = UploadService;
-        $scope.$state = $state;
-
-        app.registerEventsCronapi($scope, $translate);
-
-        $rootScope.getReport = function(reportName, params, config) {
-          ReportService.openReport(reportName, params, config);
-        };
 
         // Query string params
         var queryStringParams = $location.search();
@@ -211,31 +240,10 @@ var app = (function() {
             $scope.params[key] = queryStringParams[key];
           }
         }
+        registerComponentScripts();
 
-        //Components personalization jquery
-        $scope.registerComponentScripts = function() {
-          //carousel slider
-          $('.carousel-indicators li').on('click', function() {
-            var currentCarousel = '#' + $(this).parent().parent().parent().attr('id');
-            var index = $(currentCarousel + ' .carousel-indicators li').index(this);
-            $(currentCarousel + ' #carousel-example-generic').carousel(index);
-          });
-        };
-
-        $scope.registerComponentScripts();
-
-        try {
-          var contextAfterPageController = $controller('AfterPageController', { $scope: $scope });
-          app.copyContext(contextAfterPageController, this, 'AfterPageController');
-        } catch(e) {}
-
-        $timeout(function () {
-          // Verify if the 'afterPageRender' event is defined and it is a function (it can be a string pointing to a non project blockly) and run it.
-          if ($scope.blockly && $scope.blockly.events && $scope.blockly.events.afterPageRender && $scope.blockly.events.afterPageRender instanceof Function) {
-            $scope.blockly.events.afterPageRender();
-          }
-        });
-
+        try { $controller('AfterPageController', { $scope: $scope }); } catch(e) {};
+        try { if ($scope.blockly.events.afterPageRender) $scope.blockly.events.afterPageRender(); } catch(e) {};
       })
 
       .run(function($rootScope, $state, $stateParams, $timeout) {
@@ -245,65 +253,44 @@ var app = (function() {
         // to active whenever 'contacts.list' or one of its decendents is active.
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
-
         $rootScope.$on('$stateChangeError', function() {
           if (arguments.length >= 6) {
             var requestObj = arguments[5];
-            if (requestObj.status === 404 || requestObj.status === 403 || requestObj.status === 401) {
-              localStorage.removeItem('_u');
-              $state.go('login');
+            if (requestObj.status === 404 || requestObj.status === 403) {
+              $state.go(requestObj.status.toString());
             }
           } else {
             $state.go('404');
           }
         });
+
         $rootScope.$on('$stateChangeSuccess', function(event, currentRoute, previousRoute) {
           $timeout(() => {
-            let systemName = $('#projectName').length ? $('#projectName').val() : $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
+              let systemName = $('h1:first').length && $('h1:first').text().trim().length ? $('h1:first').text().trim() : '';
+              let splitedHash = window.location.hash ? window.location.hash.split('\/') : null;
+              let pageName = splitedHash?splitedHash[splitedHash.length-1] : null;
+              let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName));
 
-            const urlPattern = /\/(?:.(?!\/))+$/gm;
-            let currentWindow = window.location.hash;
-            let pageName;
+              let title = '';
 
-            if ((m = urlPattern.exec(currentWindow)) !== null) {
-              m.forEach(match => pageName = match);
-            } else {
-              pageName = currentRoute.name
-            }
+              if ($('h2.title').length)
+                  title = $('h2.title').text() + (systemName.length ? ' - ' + systemName : ''  );
+              else if (prettyPageName)
+                  title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
 
-            let prettyPageName = window.camelCaseToSentenceCase(window.toCamelCase(pageName.replace("/", "")));
-            // Get the H1 or H2 text to concat with the App name to set the title page
-            if ($('h1.title').length){
-              prettyPageName = $('h1.title').text();
-            } else if ($('h2.title').length){
-              prettyPageName = $('h2.title').text();
-            }
-
-            let title = '';
-
-            title = prettyPageName + (systemName.length ? ' - ' + systemName : ''  );
-
-            $rootScope.viewTitle = title || currentRoute.name;
-            $rootScope.viewTitleOnly = prettyPageName || currentRoute.name;
-            $rootScope.systemName = systemName;
-            let $mainLinks = $('.main-nav-link');
-            if ($mainLinks && $mainLinks.length && $($('.main-nav-link').get(0)).is(":visible")) {
-              $(".main-access").focus();
-              // $($('.main-nav-link').get(0)).focus();
-              // $($('.main-nav-link').get(0)).blur();
-            } else {
+              $rootScope.viewTitle = title || currentRoute.name;
               let $inputsMain = $('[role=main]').find('input');
               if ($inputsMain && $inputsMain.length) {
-                let cantFocus = ['date', 'datetime', 'time'];
                 let $firstInput = $($inputsMain[0]);
-                if ( !cantFocus.includes($firstInput.data('type')) ) {
-                  $firstInput.focus();
+                if ($inputsMain && $inputsMain.length) {
+                  let cantFocus = ['date', 'datetime', 'time'];
+                  let $firstInput = $($inputsMain[0]);
+                  if ( !cantFocus.includes($firstInput.data('type')) ) {
+                      $firstInput.focus();
+                  }
                 }
               }
-            }
-
-            $rootScope.renderFinished = true;
-          });
+            });
         });
       });
 
@@ -319,6 +306,8 @@ app.bindScope = function($scope, obj) {
   var newObj = {};
 
   for (var x in obj) {
+    // var name = parentName+'.'+x;
+    // console.log(name);
     if (typeof obj[x] == 'string' || typeof obj[x] == 'boolean')
       newObj[x] = obj[x];
     else if (typeof obj[x] == 'function')
@@ -336,7 +325,6 @@ app.registerEventsCronapi = function($scope, $translate) {
     $scope[x] = app.userEvents[x].bind($scope);
 
   $scope.vars = {};
-  $scope.$evt = $evt;
 
   try {
     if (cronapi) {
@@ -362,92 +350,9 @@ app.registerEventsCronapi = function($scope, $translate) {
   }
 };
 
-app.copyContext = function(fromContext, toContext, controllerName) {
-  if (fromContext) {
-    for (var item in fromContext) {
-      if (!toContext[item])
-        toContext[item] = fromContext[item];
-      else
-        toContext[item+controllerName] = fromContext[item];
-    }
-  }
-};
-
-app.factory('customTranslateLoader', function ($http, $q) {
-
-  return function (options) {
-
-    if (!options || (!angular.isArray(options.files) && (!angular.isString(options.prefix) || !angular.isString(options.suffix)))) {
-      throw new Error('Couldn\'t load static files, no files and prefix or suffix specified!');
-    }
-
-    if (!options.files) {
-      options.files = [{
-        prefix: options.prefix,
-        suffix: options.suffix
-      }];
-    }
-
-    var load = function (file) {
-      if (!file || (!angular.isString(file.prefix) || !angular.isString(file.suffix))) {
-        throw new Error('Couldn\'t load static file, no prefix or suffix specified!');
-      }
-
-      var deferred = $q.defer();
-
-      $http(angular.extend({
-        url: [
-          file.prefix,
-          options.key,
-          file.suffix
-        ].join(''),
-        method: 'GET',
-        params: ''
-      }, options.$http)).success(function (data) {
-        deferred.resolve(data);
-      }).error(function () {
-        deferred.resolve({});
-      });
-
-      return deferred.promise;
-    };
-
-    var deferred = $q.defer(),
-        promises = [],
-        length = options.files.length;
-
-    for (var i = 0; i < length; i++) {
-      promises.push(load({
-        prefix: options.files[i].prefix,
-        key: options.key,
-        suffix: options.files[i].suffix
-      }));
-    }
-
-    $q.all(promises).then(function (data) {
-      var length = data.length,
-          mergedData = {};
-
-      for (var i = 0; i < length; i++) {
-        for (var key in data[i]) {
-          mergedData[key] = data[i][key];
-        }
-      }
-
-      deferred.resolve(mergedData);
-
-    }, function (data) {
-      deferred.reject(data);
-    });
-
-    return deferred.promise;
-  };
-
-});
-
 window.safeApply = function(fn) {
   var phase = this.$root.$$phase;
-  if (phase === '$apply' || phase === '$digest') {
+  if (phase == '$apply' || phase == '$digest') {
     if (fn && (typeof(fn) === 'function')) {
       fn();
     }
@@ -456,34 +361,37 @@ window.safeApply = function(fn) {
   }
 };
 
+//Components personalization jquery
+var registerComponentScripts = function() {
+  //carousel slider
+  $('.carousel-indicators li').on('click', function() {
+    var currentCarousel = '#' + $(this).parent().parent().parent().attr('id');
+    var index = $(currentCarousel + ' .carousel-indicators li').index(this);
+    $(currentCarousel + ' #carousel-example-generic').carousel(index);
+  });
+}
+
 window.toCamelCase = function(str) {
-  if (str !== null) {
-    // Lower cases the string
-    return str.toLowerCase()
-    // Replaces any - or _ or . characters with a space
-        .replace( /[-_\.]+/g, ' ')
-        // Removes any non alphanumeric characters
-        .replace( /[^\w\s]/g, '')
-        // Uppercases the first character in each group immediately following a space
-        // (delimited by spaces)
-        .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
-        // Removes spaces
-        .replace( / /g, '' );
-  }
-  return str;
+    if (str !== null) {
+        // Lower cases the string
+        return str.toLowerCase()
+        // Replaces any - or _ or . characters with a space
+            .replace( /[-_\.]+/g, ' ')
+            // Removes any non alphanumeric characters
+            .replace( /[^\w\s]/g, '')
+            // Uppercases the first character in each group immediately following a space
+            // (delimited by spaces)
+            .replace( / (.)/g, function($1) { return $1.toUpperCase(); })
+            // Removes spaces
+            .replace( / /g, '' );
+    }
+    return str;
 };
 
 window.camelCaseToSentenceCase = function(str){
-  if (str !== null) {
-    let result = str.replace( /([A-Z])/g, " $1" );
-    return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
-  }
-  return str;
+    if (str !== null) {
+        let result = str.replace( /([A-Z])/g, " $1" );
+        return result.charAt(0).toUpperCase() + result.slice(1); // capitalize the first letter - as an example.
+    }
+    return str;
 };
-
-const keyCodeFormActions = {
-  initialize: () => $(document).on("keypress", "form[crn-datasource]", keyCodeFormActions.handle),
-  handle: (e) => !keyCodeFormActions[e.keyCode || e.which] || keyCodeFormActions[e.keyCode || e.which](e),
-  13: (e) => e.preventDefault()
-};
-keyCodeFormActions.initialize();
