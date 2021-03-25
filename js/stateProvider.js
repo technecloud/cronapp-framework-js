@@ -4,7 +4,7 @@ window.stateProviderDefine = {
       window.customStateProvider(s);
     }
     else {
-      let type = $('script[src*=app\\.js]')[0].src.split("type=")[1];
+      let type = $('script[src*=app\\.js]')[0].src.split("type=")[1] === "withAut" ? "withAut" : "withoutAuth";
       !window.stateProviderDefine[type] || window.stateProviderDefine[type](s);
     }
   },
