@@ -649,12 +649,14 @@ input[type="radio"]:focus,
     outline: none
 }
 
+
+/* input[type="radio"]:after,
+.radio input[type="radio"]:after,
+.radio-inline input[type="radio"]:after  */
+
 input[type="radio"]:before,
 .radio input[type="radio"]:before,
-.radio-inline input[type="radio"]:before,
-input[type="radio"]:after,
-.radio input[type="radio"]:after,
-.radio-inline input[type="radio"]:after {
+.radio-inline input[type="radio"]:before {
     content: "";
     display: block;
     width: 18px;
