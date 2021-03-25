@@ -1,20 +1,9 @@
 .alert {
     padding: 15px;
     margin-bottom: 23px;
-<<<<<<< HEAD
-<<<<<<< HEAD
     border-radius: 3px;
     border: none;
     color: #fff
-=======
-    border: 1px solid transparent;
-    border-radius: 3px
->>>>>>> 773fe59d (organização inicial do código em pastas)
-=======
-    border-radius: 3px;
-    border: none;
-    color: #fff
->>>>>>> 354145ca (sepração das cores do código css)
 }
 
 .alert h4 {
@@ -48,89 +37,6 @@
     color: inherit
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-.alert-success {
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-    color: #4caf50
-}
-
-.alert-success hr {
-    border-top-color: #c9e2b3
-}
-
-.alert-success .alert-link {
-    color: #3d8b40
-}
-
-.alert-info {
-    background-color: #e1bee7;
-    border-color: #cba4dd;
-    color: #9c27b0
-}
-
-.alert-info hr {
-    border-top-color: #c191d6
-}
-
-.alert-info .alert-link {
-    color: #771e86
-}
-
-.alert-warning {
-    background-color: #ffe0b2;
-    border-color: #ffc599;
-    color: #ff9800
-}
-
-.alert-warning hr {
-    border-top-color: #ffb67f
-}
-
-.alert-warning .alert-link {
-    color: #cc7a00
-}
-
-.alert-danger {
-    background-color: #f9bdbb;
-    border-color: #f7a4af;
-    color: #e51c23
-}
-
-.alert-danger hr {
-    border-top-color: #f58c9a
-}
-
-.alert-danger .alert-link {
-    color: #b9151b
-}
-
-.alert {
-    border: none;
-    color: #fff
-}
-
-.alert-success {
-    background-color: #4caf50
-}
-
-.alert-info {
-    background-color: #9c27b0
-}
-
-.alert-warning {
-    background-color: #ff9800
-}
-
-.alert-danger {
-    background-color: #e51c23
-}
-
->>>>>>> 773fe59d (organização inicial do código em pastas)
-=======
->>>>>>> 354145ca (sepração das cores do código css)
 .alert a:not(.close):not(.btn),
 .alert .alert-link {
     color: #fff;
