@@ -1,23 +1,24 @@
 .btn {
     display: inline-block;
     margin-bottom: 0;
-    font-weight: normal;
     text-align: center;
     vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
     white-space: nowrap;
     padding: 12px 16px;
-    font-size: 14px;
-    line-height: 1.42857143;
     border-radius: 4px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border: none;
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
 .btn:focus,
@@ -35,6 +36,7 @@
 .btn.focus {
     color: #ffffff;
     text-decoration: none;
+    border-color: transparent;
 }
 
 .btn:active,
@@ -378,18 +380,6 @@ input[type="button"].btn-block {
     position: absolute;
     clip: rect(0, 0, 0, 0);
     pointer-events: none;
-}
-
-.btn {
-    border: none;
-    font-size: 11px;
-    line-height: 22px;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-
-.btn:hover {
-    border-color: transparent;
 }
 
 .btn-lg {

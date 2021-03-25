@@ -3,8 +3,8 @@
     background-color: #ffffff;
     border: 1px solid transparent;
     border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 .panel-body {
@@ -270,11 +270,6 @@
 
 .panel-group .panel-footer+.panel-collapse .panel-body {
     border-bottom: 1px solid #dfd7ca;
-}
-
-.panel {
-    -webkit-box-shadow: none;
-    box-shadow: none;
 }
 
 .panel .panel-heading,
