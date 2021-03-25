@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
@@ -10,6 +11,9 @@
 =======
 =======
 @import "../_bootswatch-css/import_bootswatch.css";
+=======
+@import "../_bootswatch-v3.3.3/import_bootswatch.css";
+>>>>>>> 70c80102 (Merge branch 'feature/CRONAPP-3477' into feature/CRONAPP-3502)
 
 /* -- Fonts -- */
 
