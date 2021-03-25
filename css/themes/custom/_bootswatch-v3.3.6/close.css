@@ -9,6 +9,16 @@
     filter: alpha(opacity=20)
 }
 
+.close {
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 24px;
+    opacity: 0.6;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s
+}
+
 .close:hover,
 .close:focus {
     color: #000000;
@@ -24,18 +34,4 @@ button.close {
     background: transparent;
     border: 0;
     -webkit-appearance: none
-}
-
-.close {
-    font-size: 34px;
-    font-weight: 300;
-    line-height: 24px;
-    opacity: 0.6;
-    -webkit-transition: all 0.2s;
-    -o-transition: all 0.2s;
-    transition: all 0.2s
-}
-
-.close:hover {
-    opacity: 1
 }

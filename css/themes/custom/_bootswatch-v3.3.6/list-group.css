@@ -104,15 +104,18 @@ button.list-group-item-info .list-group-item-heading {
     color: inherit
 }
 
+
 a.list-group-item-warning .list-group-item-heading,
 button.list-group-item-warning .list-group-item-heading {
     color: inherit
 }
 
+
 a.list-group-item-danger .list-group-item-heading,
 button.list-group-item-danger .list-group-item-heading {
     color: inherit
 }
+
 
 .list-group-item-heading {
     margin-top: 0;

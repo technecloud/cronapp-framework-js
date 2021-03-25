@@ -61,11 +61,13 @@ fieldset[disabled] a.btn {
     pointer-events: none
 }
 
+
 .btn-default:active,
 .btn-default.active,
 .open>.dropdown-toggle.btn-default {
     background-image: none
 }
+
 
 .btn-primary:active,
 .btn-primary.active,
@@ -73,11 +75,13 @@ fieldset[disabled] a.btn {
     background-image: none
 }
 
+
 .btn-success:active,
 .btn-success.active,
 .open>.dropdown-toggle.btn-success {
     background-image: none
 }
+
 
 .btn-info:active,
 .btn-info.active,
@@ -85,17 +89,20 @@ fieldset[disabled] a.btn {
     background-image: none
 }
 
+
 .btn-warning:active,
 .btn-warning.active,
 .open>.dropdown-toggle.btn-warning {
     background-image: none
 }
 
+
 .btn-danger:active,
 .btn-danger.active,
 .open>.dropdown-toggle.btn-danger {
     background-image: none
 }
+
 
 .btn-link {
     color: #2196f3;
