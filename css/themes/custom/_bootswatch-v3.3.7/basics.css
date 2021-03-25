@@ -719,11 +719,11 @@ output {
 }
 
 .pull-right {
-    float: right !important;
+    float: right;
 }
 
 .pull-left {
-    float: left !important;
+    float: left;
 }
 
 .sandstone {
