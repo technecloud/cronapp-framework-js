@@ -35,12 +35,6 @@ a.badge:focus {
     cursor: pointer;
 }
 
-.list-group-item.active>.badge,
-.nav-pills>.active>a>.badge {
-    color: #ffffff;
-    background-color: #93c54b;
-}
-
 .list-group-item>.badge {
     float: right;
 }
