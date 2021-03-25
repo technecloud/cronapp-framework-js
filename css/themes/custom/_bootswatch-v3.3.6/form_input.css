@@ -739,7 +739,8 @@ input[type="checkbox"]:focus:after,
     border-color: #2196f3
 }
 
-input[type="checkbox"]:after,
+
+/* input[type="checkbox"]:after,
 .checkbox input[type="checkbox"]:after,
 .checkbox-inline input[type="checkbox"]:after {
     content: "";
@@ -753,7 +754,7 @@ input[type="checkbox"]:after,
     -webkit-transition: 240ms;
     -o-transition: 240ms;
     transition: 240ms
-}
+} */
 
 input[type="checkbox"]:checked:before,
 .checkbox input[type="checkbox"]:checked:before,
