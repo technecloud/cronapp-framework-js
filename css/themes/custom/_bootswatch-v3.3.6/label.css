@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 354145ca (sepração das cores do código css)
 label {
     display: inline-block;
     max-width: 100%;
@@ -9,11 +5,6 @@ label {
     font-weight: normal
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> 773fe59d (organização inicial do código em pastas)
-=======
->>>>>>> 354145ca (sepração das cores do código css)
 .label {
     display: inline;
     padding: .2em .6em .3em;
@@ -41,75 +32,4 @@ a.label:focus {
 .btn .label {
     position: relative;
     top: -1px
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-}
-
-.label-default {
-    background-color: #bbbbbb
-}
-
-.label-default[href]:hover,
-.label-default[href]:focus {
-    background-color: #a2a2a2
-}
-
-.label-primary {
-    background-color: #2196f3
-}
-
-.label-primary[href]:hover,
-.label-primary[href]:focus {
-    background-color: #0c7cd5
-}
-
-.label-success {
-    background-color: #4caf50
-}
-
-.label-success[href]:hover,
-.label-success[href]:focus {
-    background-color: #3d8b40
-}
-
-.label-info {
-    background-color: #9c27b0
-}
-
-.label-info[href]:hover,
-.label-info[href]:focus {
-    background-color: #771e86
-}
-
-.label-warning {
-    background-color: #ff9800
-}
-
-.label-warning[href]:hover,
-.label-warning[href]:focus {
-    background-color: #cc7a00
-}
-
-.label-danger {
-    background-color: #e51c23
-}
-
-.label-danger[href]:hover,
-.label-danger[href]:focus {
-    background-color: #b9151b
-}
-
-label {
-    font-weight: normal
-}
-
-label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: bold
->>>>>>> 773fe59d (organização inicial do código em pastas)
-=======
->>>>>>> 354145ca (sepração das cores do código css)
 }
