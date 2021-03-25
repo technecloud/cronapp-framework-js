@@ -2237,7 +2237,8 @@ a.thumbnail.active {
 .panel-default>.panel-heading {
     color: #333333;
     background-color: #f5f5f5;
-    border-color: #dddddd
+    border: 1px solid #dddddd;
+    border-bottom: none;
 }
 
 .panel-default>.panel-heading .badge {
