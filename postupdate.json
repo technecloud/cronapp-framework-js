@@ -522,10 +522,6 @@
       "new" : "node_modules/cronapp-framework-js/dist/js/app.js?type=withAuth"
     },
     {
-      "old" : "node_modules/cronapp-framework-js/dist/js/app.js",
-      "new" : "node_modules/cronapp-framework-js/dist/js/app.js?type=withoutAuth"
-    },
-    {
       "old" : "node_modules/cronapp-framework-js/dist/js/controllers.authentication.js",
       "new" : "node_modules/cronapp-framework-js/dist/js/controllers.js"
     }
