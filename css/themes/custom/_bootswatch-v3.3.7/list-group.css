@@ -94,48 +94,9 @@ button.list-group-item {
     color: #3e3f3a;
 }
 
-.list-group-item-success {
-    color: #93c54b;
-    background-color: #dff0d8;
-}
-
-a.list-group-item-success,
-button.list-group-item-success {
-    color: #93c54b;
-}
-
 a.list-group-item-success .list-group-item-heading,
 button.list-group-item-success .list-group-item-heading {
     color: inherit;
-}
-
-a.list-group-item-success:hover,
-button.list-group-item-success:hover,
-a.list-group-item-success:focus,
-button.list-group-item-success:focus {
-    color: #93c54b;
-    background-color: #d0e9c6;
-}
-
-a.list-group-item-success.active,
-button.list-group-item-success.active,
-a.list-group-item-success.active:hover,
-button.list-group-item-success.active:hover,
-a.list-group-item-success.active:focus,
-button.list-group-item-success.active:focus {
-    color: #fff;
-    background-color: #93c54b;
-    border-color: #93c54b;
-}
-
-.list-group-item-info {
-    color: #29abe0;
-    background-color: #d9edf7;
-}
-
-a.list-group-item-info,
-button.list-group-item-info {
-    color: #29abe0;
 }
 
 a.list-group-item-info .list-group-item-heading,
@@ -143,91 +104,14 @@ button.list-group-item-info .list-group-item-heading {
     color: inherit;
 }
 
-a.list-group-item-info:hover,
-button.list-group-item-info:hover,
-a.list-group-item-info:focus,
-button.list-group-item-info:focus {
-    color: #29abe0;
-    background-color: #c4e3f3;
-}
-
-a.list-group-item-info.active,
-button.list-group-item-info.active,
-a.list-group-item-info.active:hover,
-button.list-group-item-info.active:hover,
-a.list-group-item-info.active:focus,
-button.list-group-item-info.active:focus {
-    color: #fff;
-    background-color: #29abe0;
-    border-color: #29abe0;
-}
-
-.list-group-item-warning {
-    color: #f47c3c;
-    background-color: #fcf8e3;
-}
-
-a.list-group-item-warning,
-button.list-group-item-warning {
-    color: #f47c3c;
-}
-
 a.list-group-item-warning .list-group-item-heading,
 button.list-group-item-warning .list-group-item-heading {
     color: inherit;
 }
 
-a.list-group-item-warning:hover,
-button.list-group-item-warning:hover,
-a.list-group-item-warning:focus,
-button.list-group-item-warning:focus {
-    color: #f47c3c;
-    background-color: #faf2cc;
-}
-
-a.list-group-item-warning.active,
-button.list-group-item-warning.active,
-a.list-group-item-warning.active:hover,
-button.list-group-item-warning.active:hover,
-a.list-group-item-warning.active:focus,
-button.list-group-item-warning.active:focus {
-    color: #fff;
-    background-color: #f47c3c;
-    border-color: #f47c3c;
-}
-
-.list-group-item-danger {
-    color: #d9534f;
-    background-color: #f2dede;
-}
-
-a.list-group-item-danger,
-button.list-group-item-danger {
-    color: #d9534f;
-}
-
 a.list-group-item-danger .list-group-item-heading,
 button.list-group-item-danger .list-group-item-heading {
     color: inherit;
-}
-
-a.list-group-item-danger:hover,
-button.list-group-item-danger:hover,
-a.list-group-item-danger:focus,
-button.list-group-item-danger:focus {
-    color: #d9534f;
-    background-color: #ebcccc;
-}
-
-a.list-group-item-danger.active,
-button.list-group-item-danger.active,
-a.list-group-item-danger.active:hover,
-button.list-group-item-danger.active:hover,
-a.list-group-item-danger.active:focus,
-button.list-group-item-danger.active:focus {
-    color: #fff;
-    background-color: #d9534f;
-    border-color: #d9534f;
 }
 
 .list-group-item-heading {
