@@ -2224,6 +2224,7 @@ a.thumbnail.active {
 .panel-group .panel-heading+.panel-collapse>.panel-body,
 .panel-group .panel-heading+.panel-collapse>.list-group {
     border: 1px solid #dddddd;
+    border-top: none;
 }
 
 .panel-group .panel-footer+.panel-collapse .panel-body {
