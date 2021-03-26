@@ -1581,10 +1581,6 @@ a.list-group-item-danger.active:focus {
     margin-bottom: 8px;
 }
 
-.navbar-nav {
-    margin: 7.5px -15px;
-}
-
 @media (min-width: 768px) {
     .navbar-nav>li>a {
         padding-top: 15px;
