@@ -1803,7 +1803,7 @@ blockquote.pull-right {
 
 .k-grid-header .k-header:hover,
 .k-grid-header .k-header:hover a {
-    color: #317eac !important;
+    color: #317eac;
 }
 
 
@@ -2344,11 +2344,11 @@ output {
 }
 
 .pull-right {
-    float: right !important;
+    float: right;
 }
 
 .pull-left {
-    float: left !important;
+    float: left;
 }
 
 .affix {
