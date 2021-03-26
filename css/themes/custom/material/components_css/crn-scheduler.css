@@ -16,6 +16,7 @@ cron-scheduler a.k-link {
     font-weight: normal;
     text-transform: uppercase;
 }
+
 cron-scheduler .k-link:link {
     color: #000000;
 }
@@ -60,7 +61,6 @@ cron-scheduler a.k-link {
 }
 
 .k-scheduler-views * {
-    /* background-color: #3b448e !important; */
     background-color: #3b448e;
 }
 
@@ -68,11 +68,11 @@ cron-scheduler a.k-link {
     display: block;
 }
 
-.k-scheduler-views > li {
+.k-scheduler-views>li {
     display: none;
 }
 
-.k-state-expanded.k-scheduler-views > li {
+.k-state-expanded.k-scheduler-views>li {
     display: block;
 }
 
