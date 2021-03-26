@@ -75,7 +75,7 @@ body {
 
 .k-grid-header .k-header:hover,
 .k-grid-header .k-header:hover a {
-    color: #317eac !important;
+    color: #317eac;
 }
 
 table a:not(.btn),
