@@ -357,10 +357,10 @@
 
 @media (min-width: 768px) {
     .navbar-left {
-        float: left !important;
+        float: left;
     }
     .navbar-right {
-        float: right !important;
+        float: right;
         margin-right: -15px;
     }
     .navbar-right~.navbar-right {
