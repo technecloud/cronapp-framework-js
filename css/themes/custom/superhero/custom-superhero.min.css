@@ -12,22 +12,6 @@ body {
 }
 
 
-/* -- Customizations for kendo -- */
-
-.k-grid-header .k-header:hover,
-.k-grid-header .k-header:hover a {
-    color: #317eac;
-}
-
-table a:not(.btn),
-.table a:not(.btn),
-.k-command-cell button {
-    text-decoration: none;
-    font-size: 0.8em;
-    color: #333;
-}
-
-
 /* -- alert -- */
 
 .alert {
@@ -3076,4 +3060,20 @@ output {
     background-color: #485563;
     border: none;
     border-radius: 0;
+}
+
+
+/* -- Customizations for kendo -- */
+
+.k-grid-header .k-header:hover,
+.k-grid-header .k-header:hover a {
+    color: #317eac;
+}
+
+table a:not(.btn),
+.table a:not(.btn),
+.k-command-cell button {
+    text-decoration: none;
+    font-size: 0.8em;
+    color: #333;
 }
