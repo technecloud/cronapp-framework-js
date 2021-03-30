@@ -1568,6 +1568,8 @@ a.list-group-item-danger.active:focus {
 
 .nav-tabs>li>a {
     color: #ebebeb;
+    border-color: transparent;
+    background-color: transparent;
 }
 
 .nav-pills>li>a {
@@ -1602,10 +1604,6 @@ a.list-group-item-danger.active:focus {
     margin-top: 3px;
     margin-bottom: 3px;
     border-radius: 0;
-}
-
-.navbar-nav {
-    margin: 4.75px -15px;
 }
 
 .navbar-nav>li>a {
