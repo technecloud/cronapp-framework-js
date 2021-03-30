@@ -95,6 +95,12 @@
       "file": "index.html",
       "script": "node_modules/cronapp-framework-js/dist/components/js/jquery.inputmask.bundle.js",
       "type": "script"
+    },
+    {
+      "file": "index.html",
+      "script": "node_modules/cronapp-framework-js/dist/js/stateProvider.js",
+      "type": "script",
+      "onTop": true
     }
   ],
   "removes": [
@@ -373,7 +379,7 @@
     },
     {
       "old" : "plugins/ngMask/dist/ngMask.min.js",
-      "new" : "node_modules/ngMask/dist/ngMask.min.js"
+      "new" : "node_modules/ng-mask/dist/ngMask.min.js"
     },
     {
       "old" : "plugins/raphael/raphael-min.js",
@@ -510,6 +516,14 @@
     {
       "old": "plugins/cronapp-framework-js/dist/components/js/qrcode.js",
       "new": "node_modules/cronapp-framework-js/dist/components/js/qrcode.js"
+    },
+    {
+      "old" : "node_modules/cronapp-framework-js/dist/js/app.authentication.js",
+      "new" : "node_modules/cronapp-framework-js/dist/js/app.js?type=withAuth"
+    },
+    {
+      "old" : "node_modules/cronapp-framework-js/dist/js/controllers.authentication.js",
+      "new" : "node_modules/cronapp-framework-js/dist/js/controllers.js"
     }
   ]
 }
