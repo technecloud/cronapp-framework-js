@@ -63,9 +63,9 @@ window.stateProviderDefine = {
       controller: 'HomeController',
       templateUrl: 'views/logged/home.view.html',
       resolve: {
-        data: function ($translate) {
+        data: ["$translate", function($translate) {
           $translate.refresh();
-        }
+        }]
       }
     })
 
