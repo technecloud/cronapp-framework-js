@@ -12,6 +12,7 @@
     text-transform: capitalize;
     transition: 200ms;
     font-weight: normal;
+    border-radius: 4px;
 }
 
 .k-button[disabled] {
@@ -31,19 +32,53 @@
 
 .btn-primary {
     color: #fff;
-    background-color: #3f51b5;
-    border-color: #3f51b5;
+    background-color: #3B448E;
+    border-color: #3B448E;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+    color: #fff;
+    background-color: #767CB0;
+    border-color: #767CB0;
 }
 
 .btn-success {
     color: #fff;
-    background-color: #257d25;
-    border-color: #257d25;
+    background-color: #00820C;
+    border-color: #00820C;
 }
 
 .btn-success:focus,
 .btn-success:hover {
-    background-color: #195419;
+    background-color: #4DA855;
+    border-color: #4DA855;
+    color: #fff;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #FF9600;
+    border-color: #FF9600;
+}
+
+.btn-warning:focus,
+.btn-warning:hover {
+    color: #fff;
+    background-color: #FFB64D;
+    border-color: #FFB64D;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #C40000;
+    border-color: #C40000;
+}
+
+.btn-danger:focus,
+.btn-danger:hover {
+    background-color: #D64D4D;
+    border-color: #D64D4D;
     color: #fff;
 }
 
@@ -59,29 +94,6 @@
 .btn-default:focus,
 .btn-default:hover {
     background-color: #232853;
-    color: #fff;
-}
-
-.btn-warning {
-    color: #fff;
-    background-color: #f0ad4e;
-    border-color: #f0ad4e;
-}
-
-.btn-warning:focus,
-.btn-warning:hover {
-    color: #fff;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #ce3a36;
-    border-color: #ce3a36;
-}
-
-.btn-danger:focus,
-.btn-danger:hover {
-    background-color: #c94642;
     color: #fff;
 }
 
