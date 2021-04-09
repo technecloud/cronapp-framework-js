@@ -16,6 +16,12 @@ window.stateProviderDefine = {
       templateUrl: 'views/login.view.html'
     })
 
+    .state('signup', {
+      url: "/public/signup",
+      controller: 'SignupController',
+      templateUrl: 'views/public/signup.view.html'
+    })
+
     .state('reset-password', {
       url: "/public/reset-password",
       controller: 'ResetPasswordController',
