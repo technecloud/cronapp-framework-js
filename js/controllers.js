@@ -61,6 +61,23 @@
     }
   });
 
+  app.controller('SignupController' , [
+    '$scope',
+    '$translate',
+    '$ionicModal',
+    '$ionicLoading',
+
+    function($scope, $translate, $ionicModal, $ionicLoading) {
+
+        app.registerEventsCronapi($scope, $translate,$ionicModal,$ionicLoading);
+
+        $scope.cronapi.screen.changeValueOfField('vars.signupEmail','');
+        $scope.cronapi.screen.changeValueOfField('vars.signupUsername','');
+        $scope.cronapi.screen.changeValueOfField('vars.signupPassword','');
+        $scope.cronapi.screen.changeValueOfField('vars.signupConfirmPassword','');
+
+  }]);
+
   app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies, $templateCache) {
 
     $http.get(window.NotificationProviderOptions.templateUrl, {cache: true})

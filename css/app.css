@@ -229,3 +229,5 @@ a {
     background-color: #eee;
     opacity: 1;
 }
+
+@import url("signup.css");

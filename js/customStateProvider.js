@@ -9,6 +9,12 @@ To add your route in the angular, uncomment the code and use this structure
 //       templateUrl: 'views/login.view.html'
 //     })
 
+//     .state('signup', {
+//       url: "/public/signup",
+//       controller: 'SignupController',
+//       templateUrl: 'views/public/signup.view.html'
+//     })
+
 //     .state('social', {
 //       url: "/connected",
 //       controller: 'SocialController',
