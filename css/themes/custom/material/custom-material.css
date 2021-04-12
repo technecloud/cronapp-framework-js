@@ -311,3 +311,34 @@ div .messages {
 .k-content {
     background-color: transparent;
 }
+
+
+/* Ajustes no acordeão */
+
+.panel-body,
+.panel-group .panel-heading,
+.panel-group .panel-default,
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border: none;
+}
+
+.panel-group .panel-default {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.panel-group .panel-heading {
+    background-color: transparent;
+    color: #212121;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+}
+
+.panel-group h1 {
+    background-image: url();
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 28px;
+    font-weight: bold;
+}
