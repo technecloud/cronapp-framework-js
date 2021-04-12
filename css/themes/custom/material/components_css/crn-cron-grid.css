@@ -163,15 +163,30 @@ k-grid-header .k-header > .k-link {
     padding: 0;
     margin: 0px 5px -2px 0px;
     border-radius: 100%;
-    background-color: #fff;
-    color: #000;
+    background-color: transparent;
+    color: #AAAAAA;
 }
 
-.k-grid tbody .k-button:hover,
+.k-grid tbody .k-grid-edit:hover,
+.k-grid tbody .k-grid-edit:focus,
+.k-grid tbody .k-grid-update:hover,
+.k-grid tbody .k-grid-update:focus {
+    color: #FF9600;
+}
+
+.k-grid tbody .k-grid-delete:hover,
+.k-grid tbody .k-grid-delete:focus,
+.k-grid tbody .k-grid-cancel:hover,
+.k-grid tbody .k-grid-cancel:focus {
+    color: #C40000;
+}
+
+
+/* .k-grid tbody .k-button:hover,
 .k-grid tbody .k-button:focus {
     background-color: #0470a0;
     color: #ffffff;
-}
+} */
 
 /* k-grid-edit */
 .k-grid-edit-row > td > .k-input.k-textbox,

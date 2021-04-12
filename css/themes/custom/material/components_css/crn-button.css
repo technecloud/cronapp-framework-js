@@ -98,15 +98,15 @@
 .btn-info,
 .btn-default {
     color: #fff;
-    background-color: #3b448e;
-    border-color: #3b448e;
+    background-color: #3B448E;
+    border-color: #3B448E;
 }
 
 .btn-info:focus,
 .btn-info:hover,
 .btn-default:focus,
 .btn-default:hover {
-    background-color: #232853;
+    background-color: #767CB0;
     color: #fff;
 }
 
