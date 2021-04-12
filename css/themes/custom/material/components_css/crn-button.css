@@ -82,6 +82,19 @@
     color: #fff;
 }
 
+.btn-light {
+    color: #666666;
+    background-color: #E9E9E9;
+    border-color: #E9E9E9;
+}
+
+.btn-light:focus,
+.btn-light:hover {
+    color: #666666;
+    background-color: #F0F0F0;
+    border-color: #F0F0F0;
+}
+
 .btn-info,
 .btn-default {
     color: #fff;

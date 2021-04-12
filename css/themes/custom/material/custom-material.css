@@ -257,3 +257,57 @@ div .messages {
 .k-dropdown-wrap.ng-invalid-required {
     border-color: #f31700;
 }
+
+
+/* ajustes no inputs */
+
+.k-combobox .k-state-default,
+.input-group .k-textbox.form-control,
+.k-textbox.form-control {
+    border: 1px solid #999999;
+    border-radius: 5px;
+    padding: 1.5rem;
+    color: #212121;
+}
+
+.k-combobox .k-state-default {
+    padding: .4rem .9rem;
+}
+
+.k-textbox.form-control:focus {
+    border: 1px solid #3B448E;
+    color: #212121;
+}
+
+.k-textbox.form-control::placeholder {
+    color: #999999;
+}
+
+
+/* ajustes checkbox */
+
+.k-checkbox:checked+.k-checkbox-label:before,
+.k-checkbox:indeterminate+.k-checkbox-label:before,
+.k-checkbox:checked+.k-checkbox-label:after,
+.k-checkbox:indeterminate+.k-checkbox-label:after {
+    border-radius: 2px;
+}
+
+.k-checkbox:checked+.k-checkbox-label:before,
+.k-checkbox:indeterminate+.k-checkbox-label:before {
+    background-color: #fff;
+    border-color: rgba(0, 0, 0, .54);
+}
+
+.k-checkbox:checked+.k-checkbox-label:after,
+.k-checkbox:indeterminate+.k-checkbox-label:after {
+    background-color: #3B448E;
+    border-color: #3B448E;
+}
+
+
+/* ajuste radio */
+
+.k-content {
+    background-color: transparent;
+}
