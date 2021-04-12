@@ -32,15 +32,15 @@
 
 .btn-primary {
     color: #fff;
-    background-color: #3B448E;
-    border-color: #3B448E;
+    background-color: #005AC0;
+    border-color: #005AC0;
 }
 
 .btn-primary:focus,
 .btn-primary:hover {
     color: #fff;
-    background-color: #767CB0;
-    border-color: #767CB0;
+    background-color: #4D8CD3;
+    border-color: #4D8CD3;
 }
 
 .btn-success {
