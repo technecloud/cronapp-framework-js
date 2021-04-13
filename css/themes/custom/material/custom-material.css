@@ -342,3 +342,26 @@ div .messages {
     padding-right: 28px;
     font-weight: bold;
 }
+
+
+/* ajustes tabela */
+
+.table-bordered,
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: none;
+}
+
+.table-bordered {
+    border-collapse: collapse;
+}
+
+.table-bordered>thead>tr,
+.table-bordered>tbody>tr,
+.table-bordered>tfoot>tr {
+    border: 1px solid #DDDDDD;
+}
