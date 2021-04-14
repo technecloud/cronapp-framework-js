@@ -1,3 +1,5 @@
+@import 'signup.css';
+
 .table.table-borderless>thead>tr>td,
 .table.table-borderless>thead>tr>th,
 .table.table-borderless>tfoot>tr>td,
@@ -228,21 +230,4 @@ a {
 .form-control[ng-readonly=true] {
     background-color: #eee;
     opacity: 1;
-}
-
-.siginPanel{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-.button__state--link button{
-    box-shadow: none;
-}
-
-.titulo_card{
-    font-weight: 500;
-    margin-top: 0;
-    margin-bottom: 25px;
 }
