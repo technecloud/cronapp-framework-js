@@ -61,22 +61,16 @@
     }
   });
 
-  app.controller('SignupController' , [
-    '$scope',
-    '$translate',
-    '$ionicModal',
-    '$ionicLoading',
+  app.controller('SignupController' , function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state, ReportService) {
+    
+    app.registerEventsCronapi($scope, $translate);
 
-    function($scope, $translate, $ionicModal, $ionicLoading) {
-
-        app.registerEventsCronapi($scope, $translate,$ionicModal,$ionicLoading);
-
-        $scope.cronapi.screen.changeValueOfField('vars.signupEmail','');
-        $scope.cronapi.screen.changeValueOfField('vars.signupUsername','');
-        $scope.cronapi.screen.changeValueOfField('vars.signupPassword','');
-        $scope.cronapi.screen.changeValueOfField('vars.signupConfirmPassword','');
-
-  }]);
+    $scope.cronapi.screen.changeValueOfField('vars.signupEmail','');
+    $scope.cronapi.screen.changeValueOfField('vars.signupUsername','');
+    $scope.cronapi.screen.changeValueOfField('vars.signupPassword','');
+    $scope.cronapi.screen.changeValueOfField('vars.signupConfirmPassword','');
+    
+  });
 
   app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies, $templateCache) {
 
