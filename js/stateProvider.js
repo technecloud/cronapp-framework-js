@@ -11,7 +11,7 @@ window.stateProviderDefine = {
   withAuth: (s) => {
     s
     .state('login', {
-      url: "",
+      url: "?:returnUrl",
       controller: 'LoginController',
       templateUrl: 'views/login.view.html'
     })
