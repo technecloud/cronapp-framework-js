@@ -250,8 +250,16 @@ var app = (function() {
           if (arguments.length >= 6) {
             var requestObj = arguments[5];
             if (requestObj.status === 404 || requestObj.status === 403 || requestObj.status === 401) {
-              localStorage.removeItem('_u');
-              $state.go('login');
+              if (requestObj.status === 404) {
+                $state.go('404');
+              }
+              else if (requestObj.status === 403) {
+                $state.go('403');
+              }
+              else {
+                localStorage.removeItem('_u');
+                $state.go('login',{ "returnUrl": window.location.hash });
+              }
             }
           } else {
             $state.go('404');
