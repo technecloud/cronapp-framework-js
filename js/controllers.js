@@ -78,7 +78,13 @@
         .then((response) => $templateCache.put(window.NotificationProviderOptions.templateUrl, response.data));
 
     $scope.goHome = () => {
-      $state.go('home');
+      let returnUrl = cronapi.screen.getParam('returnUrl');
+      if (returnUrl) {
+        window.location.hash = returnUrl;
+      }
+      else {
+        $state.go('home');
+      }
       $scope.cronapi.forceCloseAllModal();
     };
 
