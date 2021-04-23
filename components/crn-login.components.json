@@ -14,41 +14,130 @@
         },
         "id": {
             "order": 1
-        },
-        "logo": {
-            "order": 2
-        },
-        "legendaLogo": {
-            "order": 2
-        },
-        "username": {
-            "order": 2
-        },
-        "placeholderUsername": {
-            "order": 2
-        },
-        "password": {
-            "order": 2
-        },
-        "placeholderPassword": {
-            "order": 2
-        },
-        "resetpassword": {
-            "order": 2
-        },
-        "nameResetPassword": {
-            "order": 2
-        },
-        "botaoLogin": {
-            "order": 2
-        },
-        "goCadastro": {
-            "order": 2
-        },
-        "botaoCadastro": {
-            "order": 2
         }
     },
-    "childrenProperties": [],
+    "childrenProperties": [
+        {
+            "name": "logo",
+            "displayName_pt_BR": "Logotipo",
+            "displayName_en_US": "Logo",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "boolean",
+            "order": 1,
+            "mandatory": false
+        },
+        {
+            "name": "logocaption",
+            "displayName_pt_BR": "Legenda do logotipo",
+            "displayName_en_US": "Logo Caption",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "username",
+            "displayName_pt_BR": "Usuário",
+            "displayName_en_US": "Username",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "placeholderusername",
+            "displayName_pt_BR": "Legenda do usuário",
+            "displayName_en_US": "User caption",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": false
+        },
+        {
+            "name": "password",
+            "displayName_pt_BR": "Senha",
+            "displayName_en_US": "Password",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "placeholderpassword",
+            "displayName_pt_BR": "Legenda da senha",
+            "displayName_en_US": "Password caption",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": false
+        },
+        {
+            "name": "resetpassword",
+            "displayName_pt_BR": "Campo resetar senha",
+            "displayName_en_US": "Reset password field",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "boolean",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "nameresetpassword",
+            "displayName_pt_BR": "Botão resetar senha",
+            "displayName_en_US": "Reset password button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": false
+        },
+        {
+            "name": "buttonlogin",
+            "displayName_pt_BR": "Botão Login",
+            "displayName_en_US": "Login button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "goregister",
+            "displayName_pt_BR": "Campo cadastro",
+            "displayName_en_US": "Register field",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "boolean",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "buttonregister",
+            "displayName_pt_BR": "Botão cadastro",
+            "displayName_en_US": "Register button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 1,
+            "mandatory": false
+        }
+    ],
     "styles": []
 }

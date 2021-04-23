@@ -1,4 +1,5 @@
 <div class="row component-holder siginPanel" id="component-holder">
+
     <div class="login-view col-sm-7 col-xs-10 col-lg-4 col-md-4">
 
         <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form" role="form">
@@ -7,8 +8,8 @@
             <div class="text-danger wrapper text-center col-md-12" ng-show="authError"></div>
             <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-image" id="crn-image-login">
                 <h1>
-                    <img alt="Login" src="{{attrs.logo}}"
-                         class="" style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;" aria-label="{{attrs.legendaLogo}}"
+                    <img alt="{{attrs.logocaption}}" src="{{attrs.logo}}"
+                         class="" style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;" aria-label="{{attrs.logocaption}}"
                          xattr-position="margin-left:auto; margin-right:auto;" data-component="crn-image">
                 </h1>
             </div>
@@ -23,8 +24,8 @@
                     <div class="form-group">
                         <label for="input-login-username">{{attrs.username}}</label>
                         <input type="text" mask="" mask-placeholder="" ng-required="false"
-                               ng-model="username.value" class="form-control k-textbox" id="input-login-username" aria-label="{{attrs.placeholderUsername}}"
-                               placeholder="{{attrs.placeholderUsername}}" autocomplete="username" autocorrect="off" autocapitalize="off">
+                               ng-model="username.value" class="form-control k-textbox" id="input-login-username" aria-label="{{attrs.placeholderusername}}"
+                               placeholder="{{attrs.placeholderusername}}" autocomplete="username" autocorrect="off" autocapitalize="off">
                     </div>
                 </div>
 
@@ -32,15 +33,15 @@
                     <div class="form-group">
                         <label for="input-login-password">{{attrs.password}}</label>
                         <input type="password" mask="" mask-placeholder="" ng-required="false"
-                               ng-model="password.value" class="form-control k-textbox" id="input-login-password" aria-label="{{attrs.placeholderPassword}}"
-                               autocomplete="current-password" placeholder="{{attrs.placeholderPassword}}">
+                               ng-model="password.value" class="form-control k-textbox" id="input-login-password" aria-label="{{attrs.placeholderpassword}}"
+                               autocomplete="current-password" placeholder="{{attrs.placeholderpassword}}">
                     </div>
                 </div>
 
 
-            <a ng-if="attrs.resetpassword == 'true'" class="cron-link component-holder col-xs-12  col-md-12" target="_self" aria-label="{{attrs.nameResetPassword}}"
+            <a ng-if="attrs.resetpassword == 'true'" class="cron-link component-holder col-xs-12  col-md-12" target="_self" aria-label="{{attrs.nameresetpassword}}"
                data-replace="true" data-component="crn-anchor" id="crn-botao-cadastre"
-               style="text-align: right;">{{attrs.nameResetPassword}}
+               style="text-align: right;">{{attrs.nameresetpassword}}
             </a>
 
             <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12"
@@ -53,15 +54,15 @@
                         {{message.error}}
                     </div>
                 </div>
-                    <button role="button" aria-label="{{attrs.botaoLogin}}"
+                    <button role="button" aria-label="{{attrs.buttonlogin}}"
                         class="btn btn-default col-md-12 col-xs-12 k-button btn-primary" type="submit"
                         ng-disabled="form.$invalid || vm.dataLoading" ng-click="" xattr-size=""
                         xattr-fullsize="" xattr-theme="btn-default" xattr-disabled=""
-                        data-component="crn-button"><span>{{attrs.botaoLogin}} </span>
+                        data-component="crn-button"><span>{{attrs.buttonlogin}} </span>
                     </button>
-                <a ng-if="attrs.goCadastro == 'true'" href="#/public/signup" class="cron-link component-holder col-md-12 col-xs-12" aria-label="{{attrs.botaoCadastro}}"
+                <a ng-if="attrs.goregister == 'true'" href="#/public/signup" class="cron-link component-holder col-md-12 col-xs-12" aria-label="{{attrs.buttonregister}}"
                    target="_self" data-replace="true" data-component="crn-anchor" id="crn-anchor-login-signup"
-                   style="text-align: center; margin: 10px 0px;">{{attrs.botaoCadastro}}
+                   style="text-align: center; margin: 10px 0px;">{{attrs.buttonregister}}
                 </a>
             </div>
 
