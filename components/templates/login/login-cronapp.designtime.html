@@ -2,7 +2,7 @@
 
     <div class="login-view col-sm-7 col-xs-10 col-lg-4 col-md-4">
 
-        <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form" role="form">
+        <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form" ng-submit="attrs.actionlogin" role="form">
 
             <input type="hidden" name="csrf_token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" class="col-md-12">
             <div class="text-danger wrapper text-center col-md-12" ng-show="authError"></div>
@@ -60,14 +60,11 @@
                         xattr-fullsize="" xattr-theme="btn-default" xattr-disabled=""
                         data-component="crn-button"><span>{{attrs.buttonlogin}} </span>
                     </button>
-                <a ng-if="attrs.goregister == 'true'" href="#/public/signup" class="cron-link component-holder col-md-12 col-xs-12" aria-label="{{attrs.buttonregister}}"
+                <a ng-if="attrs.goregister == 'true'" href="attrs.actionregister" class="cron-link component-holder col-md-12 col-xs-12" aria-label="{{attrs.buttonregister}}"
                    target="_self" data-replace="true" data-component="crn-anchor" id="crn-anchor-login-signup"
                    style="text-align: center; margin: 10px 0px;">{{attrs.buttonregister}}
                 </a>
             </div>
-
         </form>
-
-
     </div>
 </div>

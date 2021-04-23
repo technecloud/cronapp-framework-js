@@ -24,7 +24,7 @@
             "removable": false,
             "global": "true",
             "selector": "crn-login",
-            "type": "boolean",
+            "type": "text",
             "order": 1,
             "mandatory": false
         },
@@ -36,7 +36,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 2,
             "mandatory": true
         },
         {
@@ -47,7 +47,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 3,
             "mandatory": true
         },
         {
@@ -58,7 +58,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 4,
             "mandatory": false
         },
         {
@@ -69,7 +69,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 5,
             "mandatory": true
         },
         {
@@ -80,7 +80,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 6,
             "mandatory": false
         },
         {
@@ -90,8 +90,8 @@
             "removable": false,
             "global": "true",
             "selector": "crn-login",
-            "type": "boolean",
-            "order": 1,
+            "type": "logic",
+            "order": 7,
             "mandatory": true
         },
         {
@@ -102,7 +102,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 8,
             "mandatory": false
         },
         {
@@ -113,7 +113,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
-            "order": 1,
+            "order": 9,
             "mandatory": true
         },
         {
@@ -123,8 +123,8 @@
             "removable": false,
             "global": "true",
             "selector": "crn-login",
-            "type": "boolean",
-            "order": 1,
+            "type": "logic",
+            "order": 10,
             "mandatory": true
         },
         {
@@ -135,9 +135,33 @@
             "global": "true",
             "selector": "crn-login",
             "type": "text",
+            "order": 11,
+            "mandatory": false
+        },
+
+        {
+            "name": "actionlogin",
+            "displayName_pt_BR": "Ação botão login",
+            "displayName_en_US": "Login button action",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "event",
             "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "actionregister",
+            "displayName_pt_BR": "Ação botão cadastro",
+            "displayName_en_US": "Register button action",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "event",
+            "order": 2,
             "mandatory": false
         }
+
     ],
     "styles": []
 }
