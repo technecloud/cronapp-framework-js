@@ -138,7 +138,6 @@
             "order": 11,
             "mandatory": false
         },
-
         {
             "name": "actionlogin",
             "displayName_pt_BR": "Ação botão login",
@@ -161,7 +160,6 @@
             "order": 2,
             "mandatory": false
         }
-
     ],
     "styles": []
 }
