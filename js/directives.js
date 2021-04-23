@@ -72,6 +72,13 @@
     return result;
   };
 
+  app.directive('cronLogin', [function ($timeout) {
+    return {
+      restrict: 'E'     
+    }
+  }]);
+
+  
   app.directive('cronCalendar', ['$timeout', function ($timeout) {
     return {
       restrict: 'E',

@@ -1,0 +1,54 @@
+{
+    "name": "crn-login",
+    "text_pt_BR": "Login",
+    "text_en_US": "Login",
+    "order": 0,
+    "class": "adjust-icon mdi mdi-view-list",
+    "designTimeDynamic": true,
+    "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/login/login-cronapp.designtime.html",
+    "designTimeSelector": "crn-login",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/login/login-cronapp.template.html",
+    "properties": {
+        "class": {
+            "order": 9999
+        },
+        "id": {
+            "order": 1
+        },
+        "logo": {
+            "order": 2
+        },
+        "legendaLogo": {
+            "order": 2
+        },
+        "username": {
+            "order": 2
+        },
+        "placeholderUsername": {
+            "order": 2
+        },
+        "password": {
+            "order": 2
+        },
+        "placeholderPassword": {
+            "order": 2
+        },
+        "resetpassword": {
+            "order": 2
+        },
+        "nameResetPassword": {
+            "order": 2
+        },
+        "botaoLogin": {
+            "order": 2
+        },
+        "goCadastro": {
+            "order": 2
+        },
+        "botaoCadastro": {
+            "order": 2
+        }
+    },
+    "childrenProperties": [],
+    "styles": []
+}
