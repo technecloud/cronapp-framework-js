@@ -72,11 +72,15 @@
     return result;
   };
 
-  app.directive('cronLogin', [function ($timeout) {
+  app.directive('crnLogin', function () {    
     return {
-      restrict: 'E'     
+      replace: true,
+      restrict: "E" ,  
+      link: async function (scope, element, attrs, ngModelCtrl) {
+        scope.attrs = attrs;
+      }
     }
-  }]);
+  });
 
   
   app.directive('cronCalendar', ['$timeout', function ($timeout) {

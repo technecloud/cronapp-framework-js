@@ -1,20 +1,88 @@
 <crn-login 
+    logo="https://hackajudiciarioexponencial.com.br/wp-content/themes/juridicoexponencial/img/logo/cronapp.png"
+    logocaption="Logotipo do Cronapp" 
+    username="{{'Login.view.Username' | translate}}"
+    placeholderusername="{{'Login.view.Username' | translate}}" 
+    password="{{'Login.view.Password' | translate}}"
+    placeholderpassword="{{'Login.view.Password' | translate}}" 
+    resetpassword="true"
+    nameresetpassword="{{'ResetPassword' | translate}}" 
+    buttonlogin="{{'Login.view.Login' | translate}}"
+    goregister="true" 
+    buttonregister="{{'Signup.view.Signup' | translate}}" 
+    actionlogin="login()"
+    actionregister="#/public/signup" 
+    class="siginPanel">
 
-logo="node_modules/cronapp-framework-js/img/cronapp-logo-login.png"
-logocaption="Logotipo do Cronapp"
-username="{{'Login.view.Username' | translate}}"
-placeholderusername="{{'Login.view.Username' | translate}}"
-password="{{'Login.view.Password' | translate}}"
-placeholderpassword="{{'Login.view.Password' | translate}}"
+    <form class="form-validation ng-pristine ng-valid ng-valid-required login-view" autocomplete="off" name="form"
+        ng-submit="attrs.actionlogin" role="form">
 
-resetpassword="true"
-nameresetpassword="{{'ResetPassword' | translate}}"
+        <!-- <input type="hidden" name="csrf_token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" class="col-md-12">
+        <div class="text-danger wrapper text-center col-md-12" ng-show="authError"></div> -->
+        <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-image"
+            id="crn-image-login">
+            <img alt="{{attrs.logocaption}}" src="{{attrs.logo}}" class=""
+                style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;"
+                aria-label="{{attrs.logocaption}}" xattr-position="margin-left:auto; margin-right:auto;"
+                data-component="crn-image">
+        </div>
 
-buttonlogin="{{'Login.view.Login' | translate}}"
+        <!-- <div class="col-xs-10 col-md-8 col-md-push-2 col-xs-push-1" data-container="true">
+            <ul class="list-inline center-block text-center">
+            </ul>
+        </div> -->
 
-goregister="true"
-buttonregister="{{'Signup.view.Signup' | translate}}"
 
-actionlogin="login()"
-actionregister="#/public/signup"
-></crn-login>
+        <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
+            id="crn-textinput-loginusername">
+            <div class="form-group">
+                <label for="input-login-username">{{attrs.username}}</label>
+                <input type="text" mask="" mask-placeholder="" ng-required="false" ng-model="username.value"
+                    class="form-control k-textbox" id="input-login-username" aria-label="{{attrs.placeholderusername}}"
+                    placeholder="{{attrs.placeholderusername}}" autocomplete="username" autocorrect="off"
+                    autocapitalize="off">
+            </div>
+        </div>
+
+        <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
+            id="crn-textinput-loginpassword" style="margin-bottom: 1px;">
+            <div class="form-group">
+                <label for="input-login-password">{{attrs.password}}</label>
+                <input type="password" mask="" mask-placeholder="" ng-required="false" ng-model="password.value"
+                    class="form-control k-textbox" id="input-login-password" aria-label="{{attrs.placeholderpassword}}"
+                    autocomplete="current-password" placeholder="{{attrs.placeholderpassword}}">
+            </div>
+        </div>
+
+
+        <a ng-if="attrs.resetpassword == 'true'" ng-click="cronapi.screen.showModal('forgotPasswordModal')"
+            class="cron-link component-holder col-xs-12  col-md-12" target="_self" data-replace="true"
+            data-component="crn-anchor" id="crn-botao-cadastre" aria-label="{{attrs.nameresetpassword}}"
+            style="text-align: right;">{{attrs.nameresetpassword}}
+        </a>
+
+        <!-- <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12"
+            data-component="crn-enterprise-checkbox" id="crn-enterprise-checkbox-login">
+        </div> -->
+
+        <div class="component-holder ng-binding ng-scope col-md-12" data-component="crn-button">
+            <div class="messages">
+                <div ng-show="message.error" class="help-block" data-container="true">
+                    {{message.error}}
+                </div>
+            </div>
+            <button role="button" aria-label="{{attrs.buttonlogin}}"
+                class="btn btn-default col-md-12 col-xs-12 k-button btn-primary" type="submit"
+                ng-disabled="form.$invalid || vm.dataLoading" ng-click="" xattr-size="" xattr-fullsize=""
+                xattr-theme="btn-default" xattr-disabled=""
+                data-component="crn-button"><span>{{attrs.buttonlogin}}</span>
+            </button>
+            <a ng-if="attrs.goregister == 'true'" href="attrs.actionregister"
+                class="cron-link component-holder col-md-12 col-xs-12" target="_self" data-replace="true"
+                data-component="crn-anchor" id="crn-anchor-login-signup"
+                style="text-align: center; margin: 10px 0px;">>{{attrs.buttonregister}}
+            </a>
+        </div>
+
+    </form>
+</crn-login>
