@@ -1,1 +1,27 @@
-signup template
+<div id="background-login" class="siginPanel">
+
+    <crn-signup class="login-view"
+        logo="https://hackajudiciarioexponencial.com.br/wp-content/themes/juridicoexponencial/img/logo/cronapp.png"
+        logocaption="Logotipo do Cronapp" 
+        username="{{'Login.view.Username' | translate}}"
+        placeholderusername="{{'Login.view.Username' | translate}}" 
+        password="{{'Login.view.Password' | translate}}"
+        placeholderpassword="{{'Login.view.Password' | translate}}" 
+        resetpassword="true"
+        nameresetpassword="{{'ResetPassword' | translate}}" 
+        buttonlogin="{{'Login.view.Login' | translate}}"
+        goregister="true" 
+        buttonregister="{{'Signup.view.Signup' | translate}}" 
+        actionlogin="login()"
+        actionregister="#/public/signup">
+
+        <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form"
+            ng-submit="attrs.actionlogin" role="form">
+
+
+
+        signup template
+
+        </form>
+    </crn-signup>
+</div>
