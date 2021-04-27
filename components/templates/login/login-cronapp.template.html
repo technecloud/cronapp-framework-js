@@ -1,15 +1,15 @@
-<div class="siginPanel">
+<div id="background-login" class="siginPanel">
 
-    <crn-login
+    <crn-login class="login-view"
         logo="https://hackajudiciarioexponencial.com.br/wp-content/themes/juridicoexponencial/img/logo/cronapp.png"
         logocaption="Logotipo do Cronapp" username="{{'Login.view.Username' | translate}}"
         placeholderusername="{{'Login.view.Username' | translate}}" password="{{'Login.view.Password' | translate}}"
         placeholderpassword="{{'Login.view.Password' | translate}}" resetpassword="true"
         nameresetpassword="{{'ResetPassword' | translate}}" buttonlogin="{{'Login.view.Login' | translate}}"
         goregister="true" buttonregister="{{'Signup.view.Signup' | translate}}" actionlogin="login()"
-        actionregister="#/public/signup" class="login-view">
+        actionregister="#/public/signup">
 
-        <form class="form-validation ng-pristine ng-valid ng-valid-required login-view" autocomplete="off" name="form"
+        <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form"
             ng-submit="attrs.actionlogin" role="form">
 
             <input type="hidden" name="csrf_token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" class="col-md-12">
@@ -17,10 +17,12 @@
 
             <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-image"
                 id="crn-image-login">
-                <img alt="{{attrs.logocaption}}" src="{{attrs.logo}}" class=""
-                    style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;"
-                    aria-label="{{attrs.logocaption}}" xattr-position="margin-left:auto; margin-right:auto;"
-                    data-component="crn-image">
+                <h1>
+                    <img alt="{{attrs.logocaption}}" src="{{attrs.logo}}" class=""
+                        style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;"
+                        aria-label="{{attrs.logocaption}}" xattr-position="margin-left:auto; margin-right:auto;"
+                        data-component="crn-image">
+                </h1>
             </div>
 
             <div class="col-xs-10 col-md-8 col-md-push-2 col-xs-push-1" data-container="true">
