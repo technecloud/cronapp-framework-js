@@ -1,14 +1,13 @@
 <div class="siginPanel">
 
-    <form class="form-validation ng-pristine ng-valid ng-valid-required login-view" autocomplete="off" name="form"
-        ng-submit="attrs.actionlogin" role="form">
+    <form class="form-validation ng-pristine ng-valid ng-valid-required login-view" autocomplete="off" name="form" role="form">
 
         <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-image"
             id="crn-image-login">
             <h1>
-                <img alt="{{$scope.vars.logocaption}}" src="{{attrs.logo}}" class=""
-                    style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;"
-                    aria-label="{{attrs.logocaption}}" xattr-position="margin-left:auto; margin-right:auto;"
+                <img alt="Logotipo do Cronapp" src="node_modules/cronapp-framework-js/img/cronapp-logo-login.png"
+                    class="" style="display:block; width:60%; height:auto; margin-left:auto; margin-right:auto;"
+                    aria-label="Logotipo do Cronapp" xattr-position="margin-left:auto; margin-right:auto;"
                     data-component="crn-image">
             </h1>
         </div>
@@ -16,10 +15,11 @@
         <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
             id="crn-textinput-loginusername">
             <div class="form-group">
-                <label for="input-login-username">{{attrs.username}}</label>
+                <label for="input-login-username">{{'Login.view.Username' | translate}}</label>
                 <input type="text" mask="" mask-placeholder="" ng-required="false" ng-model="username.value"
-                    class="form-control k-textbox" id="input-login-username" aria-label="{{attrs.placeholderusername}}"
-                    placeholder="{{attrs.placeholderusername}}" autocomplete="username" autocorrect="off"
+                    class="form-control k-textbox" id="input-login-username"
+                    aria-label="{{'Login.view.Username' | translate}}"
+                    placeholder="{{'Login.view.Username' | translate}}" autocomplete="username" autocorrect="off"
                     autocapitalize="off">
             </div>
         </div>
@@ -27,35 +27,30 @@
         <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
             id="crn-textinput-loginpassword" style="margin-bottom: 1px;">
             <div class="form-group">
-                <label for="input-login-password">{{attrs.password}}</label>
+                <label for="input-login-password">{{'Login.view.Password' | translate}}</label>
                 <input type="password" mask="" mask-placeholder="" ng-required="false" ng-model="password.value"
-                    class="form-control k-textbox" id="input-login-password" aria-label="{{attrs.placeholderpassword}}"
-                    autocomplete="current-password" placeholder="{{attrs.placeholderpassword}}">
+                    class="form-control k-textbox" id="input-login-password"
+                    aria-label="{{'Login.view.Password' | translate}}" autocomplete="current-password"
+                    placeholder="{{'Login.view.Password' | translate}}">
             </div>
         </div>
 
-        <a ng-if="attrs.resetpassword == 'true'" class="cron-link component-holder col-xs-12  col-md-12" target="_self"
-            aria-label="{{attrs.nameresetpassword}}" data-replace="true" data-component="crn-anchor"
-            id="crn-botao-cadastre" style="text-align: right;">{{attrs.nameresetpassword}}
+        <a ng-if="attrs.resetpassword == 'true'" class="cron-link component-holder col-xs-12  col-md-12" target="_self" aria-label="{{'ResetPassword' | translate}}" data-replace="true" data-component="crn-anchor" id="crn-botao-cadastre" style="text-align: right;">{{'ResetPassword' | translate}}
         </a>
 
         <div class="component-holder ng-binding ng-scope col-md-12" data-component="crn-button">
-            <div class="messages">
-                <div ng-show="message.error" class="help-block" data-container="true">
-                    {{message.error}}
-                </div>
-            </div>
-            <button role="button" aria-label="{{attrs.buttonlogin}}"
+            <button role="button" aria-label="{{'Login.view.Login' | translate}}"
                 class="btn btn-default col-md-12 col-xs-12 k-button btn-primary" type="submit"
-                ng-disabled="form.$invalid || vm.dataLoading" ng-click="" xattr-size="" xattr-fullsize=""
-                xattr-theme="btn-default" xattr-disabled="" data-component="crn-button"><span>{{attrs.buttonlogin}}
+                ng-disabled="form.$invalid || vm.dataLoading" xattr-size="" xattr-fullsize=""
+                xattr-theme="btn-default" xattr-disabled="" data-component="crn-button"><span>{{'Login.view.Login' |
+                    translate}}
                 </span>
             </button>
-            <a ng-if="attrs.goregister == 'true'" href="attrs.actionregister"
-                class="cron-link component-holder col-md-12 col-xs-12" aria-label="{{attrs.buttonregister}}"
-                target="_self" data-replace="true" data-component="crn-anchor" id="crn-anchor-login-signup"
-                style="text-align: center; margin: 10px 0px;">{{attrs.buttonregister}}
-            </a>
         </div>
+        <a ng-if="attrs.goregister == 'true'" class="cron-link component-holder col-md-12 col-xs-12"
+            aria-label="{{Signup.view.Signup' | translate}}" target="_self" data-replace="true"
+            data-component="crn-anchor" id="crn-anchor-login-signup"
+            style="text-align: center; margin: 10px 0px;">{{Signup.view.Signup' | translate}}
+        </a>
     </form>
 </div>
