@@ -1,0 +1,21 @@
+{
+    "name": "crn-signup",
+    "text_pt_BR": "Cadastro",
+    "text_en_US": "Sign-up",
+    "order": 0,
+    "class": "adjust-icon mdi mdi-view-list",
+    "designTimeDynamic": false,
+    "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/signup/signup.designtime.html",
+    "designTimeSelector": "crn-signup",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/signup/signup.template.html",
+    "properties": {
+        "class": {
+            "order": 9999
+        },
+        "id": {
+            "order": 1
+        }
+    },
+    "childrenProperties": [],
+    "styles": []
+}
