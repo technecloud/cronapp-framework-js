@@ -1,0 +1,110 @@
+{
+    "name": "crn-signup",
+    "text_pt_BR": "Cadastro",
+    "text_en_US": "Sign-up",
+    "order": 0,
+    "class": "adjust-icon mdi mdi-view-list",
+    "designTimeDynamic": true,
+    "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/signup/signup.designtime.html",
+    "designTimeSelector": "crn-signup",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/signup/signup.template.html",
+    "properties": {
+        "class": {
+            "order": 9999
+        },
+        "id": {
+            "order": 1
+        }
+    },
+    "childrenProperties": [
+        {
+            "name": "titlesignup",
+            "displayName_pt_BR": "Título",
+            "displayName_en_US": "Title",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-signup",
+            "type": "text",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "email",
+            "displayName_pt_BR": "E-mail",
+            "displayName_en_US": "Email",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-signup",
+            "type": "text",
+            "order": 1,
+            "mandatory": true
+        },
+        {
+            "name": "username",
+            "displayName_pt_BR": "Usuário",
+            "displayName_en_US": "Username",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-signup",
+            "type": "text",
+            "order": 3,
+            "mandatory": true
+        },
+        {
+            "name": "password",
+            "displayName_pt_BR": "Senha",
+            "displayName_en_US": "Password",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 5,
+            "mandatory": true
+        },
+        {
+            "name": "confirmpassword",
+            "displayName_pt_BR": "Campo confirme sua senha",
+            "displayName_en_US": "Confirm your password field",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "logic",
+            "order": 7,
+            "mandatory": true
+        },
+        {
+            "name": "buttonsignup",
+            "displayName_pt_BR": "Botão cadastro",
+            "displayName_en_US": "Register button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 8,
+            "mandatory": false
+        },
+        {
+            "name": "buttonback",
+            "displayName_pt_BR": "Botão Voltar",
+            "displayName_en_US": "Back button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 9,
+            "mandatory": true
+        },
+        {
+            "name": "actionbackup",
+            "displayName_pt_BR": "Ação botão voltar",
+            "displayName_en_US": "Back button action",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-signup",
+            "type": "event",
+            "order": 1,
+            "mandatory": false
+        }
+    ],
+    "styles": []
+}
