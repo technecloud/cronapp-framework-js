@@ -76,7 +76,7 @@
     return {
        replace: true,
        restrict: "E" ,  
-       link: async function (scope, attrs) {
+       link: async function (scope, element, attrs, ngModelCtrl) {
           scope.attrs = attrs;
        }
      }
