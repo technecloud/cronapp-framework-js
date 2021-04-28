@@ -1,16 +1,14 @@
-<div id="background-login" class="siginPanel">
+<div id="background-login" class="siginPanel col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
-    <crn-login class="login-view"
+    <crn-login class="login-view col-lg-5 col-md-5 col-sm-8 col-xs-10" id="background-card-login"
         logo="https://hackajudiciarioexponencial.com.br/wp-content/themes/juridicoexponencial/img/logo/cronapp.png"
         logocaption="Logotipo do Cronapp" username="{{'Login.view.Username' | translate}}"
-        placeholderusername="{{'Login.view.Username' | translate}}" password="{{'Login.view.Password' | translate}}"
-        placeholderpassword="{{'Login.view.Password' | translate}}" resetpassword="true"
+        password="{{'Login.view.Password' | translate}}" resetpassword="true"
         nameresetpassword="{{'ResetPassword' | translate}}" buttonlogin="{{'Login.view.Login' | translate}}"
-        goregister="true" buttonregister="{{'Signup.view.Signup' | translate}}" actionlogin="login()"
-        actionregister="#/public/signup">
+        goregister="true" buttonregister="{{'Signup.view.Signup' | translate}}" actionregister="$evt('cronapi.screen.changeView(\'#/public/signup\', [])')">
 
         <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form"
-            ng-submit="attrs.actionlogin" role="form">
+            ng-submit="login()" role="form">
 
             <input type="hidden" name="csrf_token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" class="col-md-12">
             <div class="text-danger wrapper text-center col-md-12" ng-show="authError"></div>
@@ -35,9 +33,8 @@
                 <div class="form-group">
                     <label for="input-login-username">{{attrs.username}}</label>
                     <input type="text" mask="" mask-placeholder="" ng-required="false" ng-model="username.value"
-                        class="form-control k-textbox" id="input-login-username"
-                        aria-label="{{attrs.placeholderusername}}" placeholder="{{attrs.placeholderusername}}"
-                        autocomplete="username" autocorrect="off" autocapitalize="off">
+                        class="form-control k-textbox" id="input-login-username" aria-label="{{attrs.username}}"
+                        placeholder="{{attrs.username}}" autocomplete="username" autocorrect="off" autocapitalize="off">
                 </div>
             </div>
 
@@ -46,9 +43,8 @@
                 <div class="form-group">
                     <label for="input-login-password">{{attrs.password}}</label>
                     <input type="password" mask="" mask-placeholder="" ng-required="false" ng-model="password.value"
-                        class="form-control k-textbox" id="input-login-password"
-                        aria-label="{{attrs.placeholderpassword}}" autocomplete="current-password"
-                        placeholder="{{attrs.placeholderpassword}}">
+                        class="form-control k-textbox" id="input-login-password" aria-label="{{attrs.password}}"
+                        autocomplete="current-password" placeholder="{{attrs.password}}">
                 </div>
             </div>
 
@@ -71,11 +67,11 @@
                 </div>
                 <button role="button" aria-label="{{attrs.buttonlogin}}"
                     class="btn btn-default col-md-12 col-xs-12 k-button btn-primary" type="submit"
-                    ng-disabled="form.$invalid || vm.dataLoading" ng-click="" xattr-size="" xattr-fullsize=""
+                    ng-disabled="form.$invalid || vm.dataLoading" ng-click="{{attrs.actionlogin}}" xattr-size="" xattr-fullsize=""
                     xattr-theme="btn-default" xattr-disabled=""
                     data-component="crn-button"><span>{{attrs.buttonlogin}}</span>
                 </button>
-                <a ng-if="attrs.goregister == 'true'" href="attrs.actionregister"
+                <a ng-if="attrs.goregister == 'true'" ng-href="{{attrs.actionregister}}"
                     class="cron-link component-holder col-md-12 col-xs-12" target="_self" data-replace="true"
                     data-component="crn-anchor" id="crn-anchor-login-signup"
                     style="text-align: center; margin: 10px 0px;">{{attrs.buttonregister}}

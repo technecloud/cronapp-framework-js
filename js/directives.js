@@ -72,7 +72,7 @@
     return result;
   };
 
-  app.directive('crnLogin', function () {    
+  app.directive('crnLogin', function () {   
     return {
       replace: true,
       restrict: "E" ,  

@@ -51,17 +51,6 @@
             "mandatory": true
         },
         {
-            "name": "placeholderusername",
-            "displayName_pt_BR": "Legenda do usuário",
-            "displayName_en_US": "User caption",
-            "removable": false,
-            "global": "true",
-            "selector": "crn-login",
-            "type": "text",
-            "order": 4,
-            "mandatory": false
-        },
-        {
             "name": "password",
             "displayName_pt_BR": "Senha",
             "displayName_en_US": "Password",
@@ -71,17 +60,6 @@
             "type": "text",
             "order": 5,
             "mandatory": true
-        },
-        {
-            "name": "placeholderpassword",
-            "displayName_pt_BR": "Legenda da senha",
-            "displayName_en_US": "Password caption",
-            "removable": false,
-            "global": "true",
-            "selector": "crn-login",
-            "type": "text",
-            "order": 6,
-            "mandatory": false
         },
         {
             "name": "resetpassword",
@@ -139,17 +117,6 @@
             "mandatory": false
         },
         {
-            "name": "actionlogin",
-            "displayName_pt_BR": "Ação botão login",
-            "displayName_en_US": "Login button action",
-            "removable": false,
-            "global": "true",
-            "selector": "crn-login",
-            "type": "event",
-            "order": 1,
-            "mandatory": true
-        },
-        {
             "name": "actionregister",
             "displayName_pt_BR": "Ação botão cadastro",
             "displayName_en_US": "Register button action",
@@ -157,7 +124,7 @@
             "global": "true",
             "selector": "crn-login",
             "type": "event",
-            "order": 2,
+            "order": 1,
             "mandatory": false
         }
     ],
