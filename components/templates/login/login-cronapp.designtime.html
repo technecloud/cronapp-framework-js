@@ -1,8 +1,7 @@
 <div id="background-card-login" class="login-view col-lg-5 col-md-5 col-sm-8 col-xs-10">
     <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form" ng-submit=""
         role="form">
-
-    
+   
         <input type="hidden" name="csrf_token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" class="col-md-12">
         <div class="text-danger wrapper text-center col-md-12" ng-show="authError"></div>
 
@@ -60,7 +59,7 @@
             </div>
             <button role="button" aria-label="{{attrs.buttonlogin}}"
                 class="btn btn-default col-md-12 col-xs-12 k-button btn-primary" type="submit"
-                ng-disabled="form.$invalid || vm.dataLoading" ng-click="{{attrs.actionlogin}}" xattr-size="" xattr-fullsize=""
+                ng-disabled="form.$invalid || vm.dataLoading" xattr-size="" xattr-fullsize=""
                 xattr-theme="btn-default" xattr-disabled=""
                 data-component="crn-button"><span>{{attrs.buttonlogin}}</span>
             </button>
