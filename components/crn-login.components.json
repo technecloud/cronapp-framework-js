@@ -4,7 +4,7 @@
     "text_en_US": "Login",
     "order": 0,
     "class": "adjust-icon mdi mdi-view-list",
-    "designTimeDynamic": false,
+    "designTimeDynamic": true,
     "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/login/login-cronapp.designtime.html",
     "designTimeSelector": "crn-login",
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/login/login-cronapp.template.html",
