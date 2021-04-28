@@ -1,6 +1,6 @@
-<div id="background-login" class="siginPanel">
+<div id="background-signup" class="siginPanel col-md-12 col-sm-12 col-xs-12 col-lg-12">
 
-    <crn-signup class="login-view"
+    <crn-signup id="background-card-signup" class="login-view col-lg-5 col-md-5 col-sm-7 col-xs-10"
        
         titlesignup="{{'Signup.view.Signup' | translate}}" 
         email="{{'Signup.view.Email' | translate}}"
@@ -28,7 +28,7 @@
                     <input type="email" mask="" mask-placeholder="" ng-required="false"
                            ng-model="signupEmail" id="signupEmail"
                            class="form-control k-textbox ng-pristine ng-untouched ng-valid ng-empty ng-valid-required"
-                           placeholder="{{attrs.email}}" autocomplete="email" autocorrect="off" autocapitalize="off">
+                           placeholder="{{attrs.email}}" aria-label="{{attrs.email}}" autocomplete="email" autocorrect="off" autocapitalize="off">
                 </div>
             </div>
         
@@ -40,7 +40,7 @@
                     <input type="text" mask="" mask-placeholder="" ng-required="false"
                            ng-model="signupUsername" id="signupUsername"
                            class="form-control k-textbox ng-pristine ng-untouched ng-valid ng-empty ng-valid-required"
-                           placeholder="" autocomplete="username" autocorrect="off" autocapitalize="off">
+                           placeholder="{{attrs.username}}" aria-label="{{attrs.username}}" autocomplete="username" autocorrect="off" autocapitalize="off">
                 </div>
             </div>
         
@@ -52,7 +52,7 @@
                     <input type="password" mask="" mask-placeholder="" ng-required="false"
                            ng-model="signupPassword" id="signupPassword"
                            class="form-control k-textbox ng-pristine ng-untouched ng-valid ng-empty ng-valid-required"
-                           placeholder="{{attrs.password}}" autocomplete="password" autocorrect="off" autocapitalize="off">
+                           placeholder="{{attrs.password}}"  aria-label="{{attrs.password}}" autocomplete="password" autocorrect="off" autocapitalize="off">
                 </div>
             </div>
         
@@ -64,7 +64,7 @@
                     <input type="password" mask="" mask-placeholder="" ng-required="false"
                            ng-model="signupConfirmPassword" id="signupConfirmPassword"
                            class="form-control k-textbox ng-pristine ng-untouched ng-valid ng-empty ng-valid-required"
-                           placeholder="{{attrs.confirmpassword}}" autocomplete="confirm-password" autocorrect="off"
+                           placeholder="{{attrs.confirmpassword}}" aria-label="{{attrs.confirmpassword}}"  autocomplete="confirm-password" autocorrect="off"
                            autocapitalize="off">
                 </div>
             </div>
@@ -83,7 +83,7 @@
                         {{attrs.buttonsignup}}
                     </span>
                 </button>
-                <a href="{{attrs.actionbackup}}" class="cron-link component-holder col-md-12 col-xs-12 crn-anchor-signup-back" target="_self"
+                <a href="{{attrs.actionbackup}}" class="cron-link component-holder col-md-12 col-xs-12 crn-anchor-signup-back" target="_self" aria-label="{{attrs.buttonback}}"
                    data-replace="true" data-component="crn-anchor" id="crn-anchor-signupback" style="text-align: center;">
                     {{attrs.buttonback}}
                 </a>

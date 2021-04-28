@@ -36,7 +36,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "text",
-            "order": 1,
+            "order": 2,
             "mandatory": true
         },
         {
@@ -56,9 +56,9 @@
             "displayName_en_US": "Password",
             "removable": false,
             "global": "true",
-            "selector": "crn-login",
+            "selector": "crn-signup",
             "type": "text",
-            "order": 5,
+            "order": 4,
             "mandatory": true
         },
         {
@@ -67,9 +67,9 @@
             "displayName_en_US": "Confirm your password field",
             "removable": false,
             "global": "true",
-            "selector": "crn-login",
+            "selector": "crn-signup",
             "type": "logic",
-            "order": 7,
+            "order": 5,
             "mandatory": true
         },
         {
@@ -78,9 +78,9 @@
             "displayName_en_US": "Register button",
             "removable": false,
             "global": "true",
-            "selector": "crn-login",
+            "selector": "crn-signup",
             "type": "text",
-            "order": 8,
+            "order": 6,
             "mandatory": false
         },
         {
@@ -89,9 +89,9 @@
             "displayName_en_US": "Back button",
             "removable": false,
             "global": "true",
-            "selector": "crn-login",
+            "selector": "crn-signup",
             "type": "text",
-            "order": 9,
+            "order": 7,
             "mandatory": true
         },
         {
