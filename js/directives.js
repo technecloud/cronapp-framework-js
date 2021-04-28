@@ -72,8 +72,8 @@
     return result;
   };
 
-  app.directive('crnLogin', function () {   
-    return {
+  app.directive('crnLogin', function() {
+   return {
       replace: true,
       restrict: "E" ,  
       link: async function (scope, element, attrs, ngModelCtrl) {

@@ -21,10 +21,11 @@
             "name": "logo",
             "displayName_pt_BR": "Logotipo",
             "displayName_en_US": "Logo",
+            "type": "projectResource",
+            "resourceType": "image/jpeg,image/gif,image/png,image/svg+xml",
             "removable": false,
             "global": "true",
             "selector": "crn-login",
-            "type": "text",
             "order": 1,
             "mandatory": false
         },
