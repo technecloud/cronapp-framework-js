@@ -95,7 +95,7 @@
             "mandatory": true
         },
         {
-            "name": "actionbackup",
+            "name": "actionback",
             "displayName_pt_BR": "Ação botão voltar",
             "displayName_en_US": "Back button action",
             "removable": false,

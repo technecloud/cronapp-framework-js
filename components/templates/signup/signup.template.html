@@ -8,8 +8,8 @@
         password="{{'Users.view.Senha' | translate}}"
         confirmpassword="{{'Users.view.ConfirmeSuaSenha' | translate}}"       
         buttonsignup="{{'Signup.view.Register' | translate}}"
-        buttonback="{{'Signup.view.Signup' | translate}}" 
-        actionbackup="#/">
+        buttonback="{{'back' | translate}}" 
+        actionback="#/">
 
         <form class="form-validation ng-pristine ng-valid ng-valid-required" autocomplete="off" name="form" ng-submit="signup()" role="form">
 
@@ -83,7 +83,7 @@
                         {{attrs.buttonsignup}}
                     </span>
                 </button>
-                <a href="{{attrs.actionbackup}}" class="cron-link component-holder col-md-12 col-xs-12 crn-anchor-signup-back" target="_self" aria-label="{{attrs.buttonback}}"
+                <a href="{{attrs.actionback}}" class="cron-link component-holder col-md-12 col-xs-12 crn-anchor-signup-back" target="_self" aria-label="{{attrs.buttonback}}"
                    data-replace="true" data-component="crn-anchor" id="crn-anchor-signupback" style="text-align: center;">
                     {{attrs.buttonback}}
                 </a>
