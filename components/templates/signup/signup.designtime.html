@@ -10,6 +10,19 @@
         </div>
 
         <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
+            id="crn-textinput-signupName">
+            <div class="form-group">
+                <label for="signupName" class="ng-binding">
+                    {{attrs.name}}
+                </label>
+                <input type="text" mask="" mask-placeholder="" ng-required="false" ng-model="signupName" id="signupName"
+                    class="form-control k-textbox ng-pristine ng-untouched ng-valid ng-empty ng-valid-required"
+                    placeholder="{{attrs.name}}" aria-label="{{attrs.name}}" autocomplete="name" autocorrect="off"
+                    autocapitalize="off">
+            </div>
+        </div>
+
+        <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
             id="crn-textinput-signupemail">
             <div class="form-group">
                 <label for="signupEmail" class="ng-binding">
@@ -74,9 +87,8 @@
                     {{attrs.buttonsignup}}
                 </span>
             </button>
-            <a href="{{attrs.actionback}}"
-                class="cron-link component-holder col-md-12 col-xs-12 crn-anchor-signup-back" target="_self"
-                aria-label="{{attrs.buttonback}}" data-replace="true" data-component="crn-anchor"
+            <a href="{{attrs.actionback}}" class="cron-link component-holder col-md-12 col-xs-12 crn-anchor-signup-back"
+                target="_self" aria-label="{{attrs.buttonback}}" data-replace="true" data-component="crn-anchor"
                 id="crn-anchor-signupback" style="text-align: center;">
                 {{attrs.buttonback}}
             </a>

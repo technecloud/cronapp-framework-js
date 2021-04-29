@@ -147,5 +147,6 @@
   "PasswordCanNotBeEmpty": "The new password cannot be empty",
   "PasswordConfirmationCanNotBeEmpty": "The confirm password cannot be empty",
   "PasswordDoesNotMatch": "The new password and confirm password doesn't match",
-  "Signup.view.goback": "return"
+  "Signup.view.goback": "return",
+  "Signup.view.name": "Name"
 }

@@ -29,6 +29,17 @@
             "mandatory": true
         },
         {
+            "name": "name",
+            "displayName_pt_BR": "Nome",
+            "displayName_en_US": "Name",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-signup",
+            "type": "text",
+            "order": 2,
+            "mandatory": true
+        },
+        {
             "name": "email",
             "displayName_pt_BR": "E-mail",
             "displayName_en_US": "Email",
@@ -36,7 +47,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "text",
-            "order": 2,
+            "order": 3,
             "mandatory": true
         },
         {
@@ -47,7 +58,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "text",
-            "order": 3,
+            "order": 4,
             "mandatory": true
         },
         {
@@ -58,7 +69,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "text",
-            "order": 4,
+            "order": 5,
             "mandatory": true
         },
         {
@@ -69,7 +80,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "logic",
-            "order": 5,
+            "order": 6,
             "mandatory": true
         },
         {
@@ -80,7 +91,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "text",
-            "order": 6,
+            "order": 7,
             "mandatory": false
         },
         {
@@ -91,7 +102,7 @@
             "global": "true",
             "selector": "crn-signup",
             "type": "text",
-            "order": 7,
+            "order": 8,
             "mandatory": true
         },
         {

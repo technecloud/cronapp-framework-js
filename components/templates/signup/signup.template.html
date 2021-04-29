@@ -2,6 +2,7 @@
 
     <crn-signup id="background-card-signup" class="login-view col-lg-5 col-md-5 col-sm-7 col-xs-10"
         titlesignup="{{'Signup.view.Signup' | translate}}" email="{{'Signup.view.Email' | translate}}"
+        name="{{'Signup.view.name' | translate}}"
         username="{{'Login.view.Username' | translate}}" password="{{'Users.view.Senha' | translate}}"
         confirmpassword="{{'Users.view.ConfirmeSuaSenha' | translate}}"
         buttonsignup="{{'Signup.view.Register' | translate}}" buttonback="{{'Signup.view.goback' | translate}}"
@@ -16,6 +17,20 @@
                     {{attrs.titlesignup}}
                 </h1>
             </div>
+
+            <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
+            id="crn-textinput-signupName">
+            <div class="form-group">
+                <label for="signupName" class="ng-binding">
+                    {{attrs.name}}
+                </label>
+                <input type="text" mask="" mask-placeholder="" ng-required="false" ng-model="signupName"
+                    id="signupName"
+                    class="form-control k-textbox ng-pristine ng-untouched ng-valid ng-empty ng-valid-required"
+                    placeholder="{{attrs.name}}" aria-label="{{attrs.name}}" autocomplete="name" autocorrect="off"
+                    autocapitalize="off">
+            </div>
+        </div>
 
             <div class="component-holder ng-binding ng-scope col-xs-12 col-md-12" data-component="crn-textinput"
                 id="crn-textinput-signupemail">
