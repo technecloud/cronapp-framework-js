@@ -29,18 +29,6 @@ var onloadCallback = function() {
   window.grecaptcha.reset();
 };
 
-// OAuth 2 / SSO Handler:
-window.onmessage = function (e) {
-  if(e.data && e.data.type === 'sso_user'){
-    // close sso window
-    if(window.ssoWindow) {
-      window.ssoWindow.close();
-    }
-    // reload mobileapp
-    window.location.reload();
-  }
-};
-
 var app = (function() {
 
   return angular.module('MyApp', cronappModules)
