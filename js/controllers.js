@@ -108,7 +108,7 @@
       }
     }
     $scope.redirectToLogin = function() {
-      $window.location.href = '/login';
+      $scope.cronapi.social.ssoLogin();
     };
     $scope.autoLogin = function(){
       if(localStorage.getItem('_u') && JSON.parse(localStorage.getItem('_u')).token ){
