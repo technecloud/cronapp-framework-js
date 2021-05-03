@@ -76,6 +76,7 @@
    return {
       replace: true,
       restrict: "E" ,  
+      templateUrl: "components/templates/login/login-cronapp.template.html",
       link: async function (scope, element, attrs, ngModelCtrl) {
         scope.attrs = attrs;
       }
