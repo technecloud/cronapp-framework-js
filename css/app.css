@@ -140,7 +140,7 @@
 
 .left-block {
     display: block;
-    magin-right: auto;
+    margin-right: auto;
 }
 
 li[data-component="crn-menu-item"] ul li a.bg-primary{
