@@ -1,5 +1,9 @@
 @import 'signup.css';
 
+/* Directive crn-input-password */
+@import '../components/css/crn-input-password.css';
+/* END - Directive crn-input-password */
+
 .table.table-borderless>thead>tr>td,
 .table.table-borderless>thead>tr>th,
 .table.table-borderless>tfoot>tr>td,
@@ -140,7 +144,7 @@
 
 .left-block {
     display: block;
-    magin-right: auto;
+    margin-right: auto;
 }
 
 li[data-component="crn-menu-item"] ul li a.bg-primary{
