@@ -3385,10 +3385,9 @@
             $(element).remove();
 
             let internalInput;
-            let waitRenderInput = setInterval(()=> {
+            let initializeAttrAndEvents = () => {
               internalInput = $(parent).find('.k-input.cronSelect');
               if (internalInput.length) {
-                clearInterval(waitRenderInput);
                 internalInput.attr("ng-required", attrs.ngRequired);
                 if (attrs.ngRequired === 'true')
                   internalInput.attr("required", "required");
@@ -3408,7 +3407,11 @@
                   }
                 });
               }
-            },200);
+              else {
+                $timeout(initializeAttrAndEvents());
+              }
+            };
+            initializeAttrAndEvents();
             combobox.enable(true);
 
             var _scope = scope;
