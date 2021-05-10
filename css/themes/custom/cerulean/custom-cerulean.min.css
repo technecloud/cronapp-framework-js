@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 /*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
@@ -7,22 +5,19 @@
  * Licensed under MIT
  * Based on Bootstrap
 */
-=======
-=======
 @import "../_bootswatch-css/import_bootswatch.css";
 
 /* -- Fonts -- */
 
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700");
->>>>>>> 8b001c3d (organização do codigo)
+
+
 html {
     font-size: 10px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
->>>>>>> 06892c4e (ajuste no padrao + feito novamente a sepração do código)
 
 
-<<<<<<< HEAD
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -1134,7 +1129,6 @@ a.label:focus {
     background-color: #ffffff;
 }
 
-<<<<<<< HEAD
 .list-group-item>.badge {
     float: right;
 }
@@ -1390,16 +1384,14 @@ a.label:focus {
     }
 }
 
-=======
 .text-muted {
     color: #999999;
-=======
+}
 code,
 kbd,
 pre,
 samp {
     font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
->>>>>>> 8b001c3d (organização do codigo)
 }
 
 
@@ -3091,33 +3083,26 @@ a.thumbnail.active {
     border-color: #b94a48;
     background-color: #f2dede;
 }
->>>>>>> 06892c4e (ajuste no padrao + feito novamente a sepração do código)
-
-<<<<<<< HEAD
-/* blockquote */
-
-<<<<<<< HEAD
 .pull-right {
     float: right;
 }
 
 .pull-left {
     float: left;
-=======
+}
 .list-group-item.disabled,
 .list-group-item.disabled:hover,
 .list-group-item.disabled:focus {
     background-color: #eeeeee;
     color: #999999;
     cursor: not-allowed;
-=======
+}
 .has-error .form-control-feedback {
     color: #b94a48;
 }
 
 .has-feedback label~.form-control-feedback {
     top: 25px;
->>>>>>> 8b001c3d (organização do codigo)
 }
 
 .has-feedback label.sr-only~.form-control-feedback {
@@ -3653,9 +3638,6 @@ h6,
 mark,
 .mark {
     background-color: #fcf8e3;
-<<<<<<< HEAD
->>>>>>> 06892c4e (ajuste no padrao + feito novamente a sepração do código)
-=======
 }
 
 .page-header {
@@ -3772,5 +3754,4 @@ output {
 .panel-danger .panel-title,
 .panel-info .panel-title {
     color: #fff;
->>>>>>> 8b001c3d (organização do codigo)
 }
