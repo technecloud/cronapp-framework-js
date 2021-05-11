@@ -258,7 +258,7 @@ var app = (function() {
               }
               else {
                 localStorage.removeItem('_u');
-                $state.go('login',{ "returnUrl": window.location.hash });
+                $state.go('loginReturnUrl', { "returnUrl" : window.location.hash });
               }
             }
           } else {
