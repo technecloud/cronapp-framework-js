@@ -87,6 +87,89 @@ var app = (function() {
         // For any unmatched url, redirect to /state1
         $urlRouterProvider.otherwise("/error/404");
       })
+
+      .config(function() {
+        window.loadClientConfig = async function loadClientConfig() {
+          let res = await window.fetch("/config.json");
+          let result = res.json();
+          return result;
+        }
+
+        window.getClientConfig = async function getClientConfig() {
+          return window.CronappConfig ? window.CronappConfig : window.loadClientConfig();
+        }
+        class NotificationHandler {
+
+          notify = async function notify(message, status, ...options) {
+            if (options.length) {
+              this.customNotification(message, status, ...options);
+            } else {
+              this.defaultNotification(message, status);
+            }
+          }
+
+
+          defaultNotification = async function defaultNotification(message, status) {
+            let clientConfig = await getClientConfig();
+            if (!this.isNotificationInitialized(clientConfig.id)) {
+              this.initializeNotification(clientConfig.id, clientConfig.options);
+            }
+            this.showNotification(clientConfig.id, message, status);
+
+          }
+
+          customNotification = async function customNotification(message, status, ...options) {
+            console.log(options);
+          }
+
+
+          getClientConfig = async function getClientConfig() {
+            return window.getClientConfig();
+          }
+
+          isNotificationInitialized = function isNotificationInitialized(id) {
+            return $(this.formatJqueryID(id)).getKendoNotification();
+          }
+
+          showNotification = function showNotification(id, message, status) {
+            $(this.formatJqueryID(id)).getKendoNotification().show(message, status);
+          }
+
+
+          initializeNotification = function initializeNotification(id, options) {
+            if (!this.hasHTMLElement(id)) {
+              this.createAndIncludeHTMLElement();
+            }
+            $(this.formatJqueryID(id)).kendoNotification(options);
+          }
+
+          formatJqueryID = function formatJqueryID(id) {
+            return `#${id}`;
+          }
+
+          createAndIncludeHTMLElement = function createAndIncludeHTMLElement(id) {
+            let span = this.createSpan(id);
+            this.appendSpanIntoBody(span);
+          }
+
+          hasHTMLElement = function hasHTMLElement(id) {
+            return document.getElementById(id);
+          }
+
+          createSpan = function createSpan(id) {
+            let span = document.createElement("SPAN");
+            span.id = id;
+            return span;
+          }
+
+          appendSpanIntoBody = function appendSpanIntoBody(span) {
+            document.querySelector('body').appendChild(span);
+          }
+
+        }
+
+      })
+
       .factory('originPath', ['$location', function($location) {
         var originPath = {
           request: function(config) {
