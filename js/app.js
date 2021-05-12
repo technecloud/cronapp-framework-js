@@ -90,7 +90,7 @@ var app = (function() {
 
       .config(function() {
         window.loadClientConfig = async function loadClientConfig() {
-          let res = await window.fetch("/config.json");
+          let res = await window.fetch("/js/config.json");
           let result = res.json();
           return result;
         }

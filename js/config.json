@@ -1,0 +1,11 @@
+{
+    "notification": {
+        "id": "CronappNotification",
+        "options": {
+            "stacking": "default",
+            "position": {
+                "pinned": true
+            }
+        }
+    }
+}
