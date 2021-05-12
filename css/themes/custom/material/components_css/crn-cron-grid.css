@@ -29,6 +29,7 @@ div.k-grid-header {
     padding-right: 17px;
 }
 
+
 /* Cabeçalho da grade */
 
 .k-grid-toolbar {
@@ -47,6 +48,7 @@ div.k-grid-header {
     color: #fff;
     transition: 200ms;
 }
+
 
 /* Cabeçalho da tabela - thead */
 
@@ -116,7 +118,7 @@ div.k-grid-header {
     background-color: transparent;
 }
 
-k-grid-header .k-header > .k-link {
+k-grid-header .k-header>.k-link {
     margin: 0;
     padding: 0px 0px;
     line-height: inherit;
@@ -125,6 +127,7 @@ k-grid-header .k-header > .k-link {
     text-overflow: ellipsis;
     outline: 0;
 }
+
 
 /* Paginação da tabela */
 
@@ -152,6 +155,7 @@ k-grid-header .k-header > .k-link {
     color: #000;
 }
 
+
 /* Corpo da tabela - tbody */
 
 .k-grid tbody .k-grid-edit,
@@ -163,19 +167,31 @@ k-grid-header .k-header > .k-link {
     padding: 0;
     margin: 0px 5px -2px 0px;
     border-radius: 100%;
-    background-color: #fff;
-    color: #000;
+    background-color: transparent;
+    color: #AAAAAA;
 }
 
-.k-grid tbody .k-button:hover,
-.k-grid tbody .k-button:focus {
-    background-color: #0470a0;
-    color: #ffffff;
+.k-grid tbody .k-grid-edit:hover,
+.k-grid tbody .k-grid-edit:focus{
+    color: #FF9600;
+}
+
+.k-grid tbody .k-grid-update:hover,
+.k-grid tbody .k-grid-update:focus {
+    color: #00A311;
+}
+
+.k-grid tbody .k-grid-delete:hover,
+.k-grid tbody .k-grid-delete:focus,
+.k-grid tbody .k-grid-cancel:hover,
+.k-grid tbody .k-grid-cancel:focus {
+    color: #C40000;
 }
 
 /* k-grid-edit */
-.k-grid-edit-row > td > .k-input.k-textbox,
-.k-grid-edit-row > td > .k-textbox {
+
+.k-grid-edit-row>td>.k-input.k-textbox,
+.k-grid-edit-row>td>.k-textbox {
     background-color: transparent;
     border-radius: 0px;
     margin-left: -16px;
@@ -187,7 +203,9 @@ k-grid-header .k-header > .k-link {
     padding-left: 0;
 }
 
+
 /* k-grid-footer */
+
 .k-grid-footer,
 .k-grid-footer-locked,
 .k-grid-footer-wrap {
@@ -219,45 +237,7 @@ div.k-grid-footer {
     color: #000;
 }
 
-.k-animation-container > .k-list-container > .k-list-scroller > .k-list {
+.k-animation-container>.k-list-container>.k-list-scroller>.k-list {
     box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.02), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
     font-weight: 400;
 }
-
-/* CÓDIGO PARA ELIMINAR
-
-.k-grid-header .k-header a.k-link {
-    color: white !important;
-}
-
-.k-grid-header .k-grid-filter {
-    padding: 8px;
-    width: calc(16px + 1.42857143em);
-    height: calc(16px + 1.42857143em);
-    box-sizing: border-box;
-    outline: 0;
-    line-height: 2;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-line-pack: center;
-    align-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    position: absolute;
-    top: 27px;
-    right: 14px;
-    bottom: calc(8px + .28571429em);
-    z-index: 1;
-}
-
-/*.k-grid-content::-webkit-scrollbar {*/
-/*border-radius: 8px;*/
-/*width: 17px;*/
-/*background-color: transparent;*/
-/*border: 1px solid #c1c1c1;*/
-/*}
-
-
-*/
