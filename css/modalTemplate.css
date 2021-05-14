@@ -17,10 +17,6 @@
     margin: 0px;
 }
 
-#confirmDialogTemplate .modal-footer .btn+.btn{
-    text-transform: uppercase;
-}
-
 #confirmDialogTemplate .modal-footer{
     text-align: center;
     border: none;
@@ -28,8 +24,7 @@
 }
 
 #confirmDialogTemplate .modal-subtitle{
-    margin: 0;
-    margin-bottom: 4px;
+    margin: 10px 0px;
     font-size: 20px;
     font-weight: 300;
 }
@@ -37,4 +32,5 @@
 #confirmDialogTemplate .modal-subtitle,
 #confirmDialogTemplate .modal-title{
     color: #606060;
+    line-height: 1;
 }
