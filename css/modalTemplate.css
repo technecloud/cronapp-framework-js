@@ -1,9 +1,36 @@
-#confirmDialogTemplate .modal-content{
-    background-color: green;
+#confirmDialogTemplate .modal-dialog{
+    transform: translateY(50%) !important;
+    width: 352px;
 }
 
-#confirmDialogTemplate .modal-content .modal-header{
-    padding: 15px;
-    padding-bottom: 0;
+#confirmDialogTemplate .modal-body{
+    text-align: center;
+}
+
+#confirmDialogTemplate .modal-icon{
+    width: auto;
+    height: 90px;
+    margin-bottom: 27px;
+}
+
+#confirmDialogTemplate .modal-footer .btn+.btn{
+    text-transform: uppercase;
+}
+
+#confirmDialogTemplate .modal-footer{
+    text-align: center;
     border: none;
+    padding-top: 0;
+}
+
+#confirmDialogTemplate .modal-subtitle{
+    margin: 0;
+    margin-bottom: 4px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+#confirmDialogTemplate .modal-subtitle,
+#confirmDialogTemplate .modal-title{
+    color: #606060;
 }
