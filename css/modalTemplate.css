@@ -1,16 +1,20 @@
 #confirmDialogTemplate .modal-dialog{
     transform: translateY(50%) !important;
-    width: 352px;
+    justify-content: center;
+    display: flex;
+    width: auto;
 }
 
 #confirmDialogTemplate .modal-body{
     text-align: center;
 }
 
+#confirmDialogTemplate .modal-content{
+    width: 352px;
+}
+
 #confirmDialogTemplate .modal-icon{
-    width: auto;
-    height: 90px;
-    margin-bottom: 27px;
+    margin: 0px;
 }
 
 #confirmDialogTemplate .modal-footer .btn+.btn{

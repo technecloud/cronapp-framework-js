@@ -17,14 +17,15 @@
     user-select: none;
 }
 
+/* Error */
 .cronapp-icon.cronapp-error {
     border-color: #f27474;
-    color: #f27474
+    color: #f27474;
 }
 
 .cronapp-icon.cronapp-error .cronapp-x-mark {
     position: relative;
-    flex-grow: 1
+    flex-grow: 1;
 }
 
 .cronapp-icon.cronapp-error [class^=cronapp-x-mark-line] {
@@ -34,27 +35,139 @@
     width: 2.9375em;
     height: .3125em;
     border-radius: .125em;
-    background-color: #f27474
+    background-color: #f27474;
 }
 
 .cronapp-icon.cronapp-error [class^=cronapp-x-mark-line][class$=left] {
     left: 1.0625em;
-    transform: rotate(45deg)
+    transform: rotate(45deg);
 }
 
 .cronapp-icon.cronapp-error [class^=cronapp-x-mark-line][class$=right] {
     right: 1em;
-    transform: rotate(-45deg)
+    transform: rotate(-45deg);
 }
 
-.cronapp-icon.cronapp-error.cronapp-icon-show {
+.cronapp-icon.cronapp-error {
     -webkit-animation: cronapp-animate-error-icon .5s;
-    animation: cronapp-animate-error-icon .5s
+    animation: cronapp-animate-error-icon .5s;
 }
 
-.cronapp-icon.cronapp-error.cronapp-icon-show .cronapp-x-mark {
+.cronapp-icon.cronapp-error .cronapp-x-mark {
     -webkit-animation: cronapp-animate-error-x-mark .5s;
-    animation: cronapp-animate-error-x-mark .5s
+    animation: cronapp-animate-error-x-mark .5s;
+}
+
+/* Success */
+.cronapp-icon.cronapp-success {
+    border-color: #a5dc86;
+    color: #a5dc86;
+}
+
+.cronapp-icon.cronapp-success [class^=cronapp-success-circular-line] {
+    position: absolute;
+    width: 3.75em;
+    height: 7.5em;
+    transform: rotate(45deg);
+    border-radius: 50%;
+}
+
+.cronapp-icon.cronapp-success [class^=cronapp-success-circular-line][class$=left] {
+    top: -.4375em;
+    left: -2.0635em;
+    transform: rotate(-45deg);
+    transform-origin: 3.75em 3.75em;
+    border-radius: 7.5em 0 0 7.5em;
+}
+
+.cronapp-icon.cronapp-success [class^=cronapp-success-circular-line][class$=right] {
+    top: -.6875em;
+    left: 1.875em;
+    transform: rotate(-45deg);
+    transform-origin: 0 3.75em;
+    border-radius: 0 7.5em 7.5em 0;
+}
+
+.cronapp-icon.cronapp-success .cronapp-success-ring {
+    position: absolute;
+    z-index: 2;
+    top: -.25em;
+    left: -.25em;
+    box-sizing: content-box;
+    width: 100%;
+    height: 100%;
+    border: .25em solid rgba(165, 220, 134, .3);
+    border-radius: 50%;
+}
+
+.cronapp-icon.cronapp-success .cronapp-success-fix {
+    position: absolute;
+    z-index: 1;
+    top: .5em;
+    left: 1.625em;
+    width: .4375em;
+    height: 5.625em;
+    transform: rotate(-45deg);
+}
+
+.cronapp-icon.cronapp-success [class^=cronapp-success-line] {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    height: .3125em;
+    border-radius: .125em;
+    background-color: #a5dc86;
+}
+
+.cronapp-icon.cronapp-success [class^=cronapp-success-line][class$=tip] {
+    top: 2.875em;
+    left: .8125em;
+    width: 1.5625em;
+    transform: rotate(45deg);
+}
+
+.cronapp-icon.cronapp-success [class^=cronapp-success-line][class$=long] {
+    top: 2.375em;
+    right: .5em;
+    width: 2.9375em;
+    transform: rotate(-45deg);
+}
+
+.cronapp-icon.cronapp-success .cronapp-success-line-tip {
+    -webkit-animation: cronapp-animate-success-line-tip .75s;
+    animation: cronapp-animate-success-line-tip .75s;
+}
+
+.cronapp-icon.cronapp-success .cronapp-success-line-long {
+    -webkit-animation: cronapp-animate-success-line-long .75s;
+    animation: cronapp-animate-success-line-long .75s;
+}
+
+.cronapp-icon.cronapp-success .cronapp-success-circular-line-right {
+    -webkit-animation: cronapp-rotate-success-circular-line 4.25s ease-in;
+    animation: cronapp-rotate-success-circular-line 4.25s ease-in;
+}
+
+/* Warning */
+.cronapp-icon.cronapp-warning {
+    border-color: #ffed6b;
+    color: #ffc038;
+}
+
+/* Info */
+.cronapp-icon.cronapp-info {
+    border-color: #9de0f6;
+    color: #3fc3ee;
+}
+
+.cronapp-icon .cronapp-icon-content {
+    display: flex;
+    align-items: center;
+    font-size: 3.75em;
+    justify-content: center;
+
+    -webkit-animation: cronapp-hide .75s;
+    animation: cronapp-hide .75s
 }
 
 
