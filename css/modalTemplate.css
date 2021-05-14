@@ -1,0 +1,9 @@
+#confirmDialogTemplate .modal-content{
+    background-color: green;
+}
+
+#confirmDialogTemplate .modal-content .modal-header{
+    padding: 15px;
+    padding-bottom: 0;
+    border: none;
+}
