@@ -1,8 +1,11 @@
 @import 'signup.css';
 @import 'modalTemplate.css';
+@import 'animate.css';
 
 /* Directive crn-input-password */
+
 @import '../components/css/crn-input-password.css';
+
 /* END - Directive crn-input-password */
 
 .table.table-borderless>thead>tr>td,
@@ -27,17 +30,17 @@
 }
 
 .login-panel {
-    margin: 11% auto  0 auto;
+    margin: 11% auto 0 auto;
 }
 
 .social-button-face:hover {
     background-color: #3b5998!important;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 .social-button-google:hover {
     background-color: #d81c1c!important;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 .upload-image-component {
@@ -148,15 +151,16 @@
     margin-right: auto;
 }
 
-li[data-component="crn-menu-item"] ul li a.bg-primary{
+li[data-component="crn-menu-item"] ul li a.bg-primary {
     color: white !important;
 }
 
-li[data-component="crn-menu-item"] ul li a.bg-primary:hover{
+li[data-component="crn-menu-item"] ul li a.bg-primary:hover {
     color: #333 !important;
 }
 
-.k-grid-header .k-header, .k-grid-header .k-header a.k-link {
+.k-grid-header .k-header,
+.k-grid-header .k-header a.k-link {
     text-transform: uppercase;
     font-weight: normal;
     font-size: 12px;
@@ -168,7 +172,7 @@ img.user-avatar {
     max-width: 1.572em !important;
 }
 
-.modal{
+.modal {
     z-index: 10020;
 }
 
@@ -195,7 +199,8 @@ a {
     border: 0;
 }
 
-.main-nav-link:focus, .main-nav-link:active {
+.main-nav-link:focus,
+.main-nav-link:active {
     width: auto;
     height: auto;
     overflow: visible;
@@ -214,7 +219,7 @@ a {
 }
 
 .float-left-desktop {
-    float:left;
+    float: left;
 }
 
 @media only screen and (max-width: 767px) {
@@ -222,11 +227,10 @@ a {
         margin: 7.5px 0;
         width: 100%;
     }
-    
-    .crn-navigator-horizontal #navbar, .float-left-desktop {
+    .crn-navigator-horizontal #navbar,
+    .float-left-desktop {
         float: none;
     }
-    
     img.user-avatar {
         margin-left: 0;
     }
