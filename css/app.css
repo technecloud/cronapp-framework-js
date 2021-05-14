@@ -1,4 +1,5 @@
 @import 'signup.css';
+@import 'modalTemplate.css';
 
 /* Directive crn-input-password */
 @import '../components/css/crn-input-password.css';
