@@ -4,13 +4,19 @@
     var body = $('body');
     var $scope = angular.element(body.get(0)).scope();
 
+    this.ensureProps = data => {
+      !data.filter || (data.filter = data.filter.replace(/%s/g, ''));
+      return data;
+    };
+
     this.upload = function(data) {
+      let treatedProps = this.ensureProps(data);
       $modal.open({
         templateUrl : 'node_modules/cronapp-framework-js/components/upload/upload.html',
         controller : 'UploadController',
         resolve : {
           data : function() {
-            return data;
+            return treatedProps;
           }
         }
       });
