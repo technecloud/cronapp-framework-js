@@ -116,10 +116,6 @@ label {
 }
 
 
-/* .k-link:link {
-    color: #ffffff;
-} */
-
 a.k-link {
     color: #fff;
     font-size: 12px;
@@ -256,4 +252,112 @@ div .messages {
 
 .k-dropdown-wrap.ng-invalid-required {
     border-color: #f31700;
+}
+
+
+/* ajustes no inputs */
+
+.k-combobox .k-state-default,
+.input-group .k-textbox.form-control,
+.k-textbox.form-control {
+    border: 1px solid #999999;
+    border-radius: 5px;
+    padding: 1.5rem;
+    color: #212121;
+}
+
+.k-combobox .k-state-default {
+    padding: .4rem .9rem;
+}
+
+.k-textbox.form-control:focus {
+    border: 1px solid #3B448E;
+    color: #212121;
+}
+
+.k-textbox.form-control::placeholder {
+    color: #999999;
+}
+
+
+/* ajustes checkbox */
+
+.k-checkbox:checked+.k-checkbox-label:before,
+.k-checkbox:indeterminate+.k-checkbox-label:before,
+.k-checkbox:checked+.k-checkbox-label:after,
+.k-checkbox:indeterminate+.k-checkbox-label:after {
+    border-radius: 2px;
+}
+
+.k-checkbox:checked+.k-checkbox-label:before,
+.k-checkbox:indeterminate+.k-checkbox-label:before {
+    background-color: #fff;
+    border-color: rgba(0, 0, 0, .54);
+}
+
+.k-checkbox:checked+.k-checkbox-label:after,
+.k-checkbox:indeterminate+.k-checkbox-label:after {
+    background-color: #3B448E;
+    border-color: #3B448E;
+}
+
+
+/* ajuste radio */
+
+.k-content {
+    background-color: transparent;
+}
+
+
+/* Ajustes no acordeão */
+
+.panel-body,
+.panel-group .panel-heading,
+.panel-group .panel-default,
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border: none;
+}
+
+.panel-group .panel-default {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.panel-group .panel-heading {
+    background-color: transparent;
+    color: #212121;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+}
+
+.panel-group h1 {
+    background-image: url();
+    background-size: 23px;
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 28px;
+    font-weight: bold;
+}
+
+
+/* ajustes tabela */
+
+.table-bordered,
+.table-bordered>tbody>tr>td,
+.table-bordered>tbody>tr>th,
+.table-bordered>tfoot>tr>td,
+.table-bordered>tfoot>tr>th,
+.table-bordered>thead>tr>td,
+.table-bordered>thead>tr>th {
+    border: none;
+}
+
+.table-bordered {
+    border-collapse: collapse;
+}
+
+.table-bordered>thead>tr,
+.table-bordered>tbody>tr,
+.table-bordered>tfoot>tr {
+    border: 1px solid #DDDDDD;
 }
