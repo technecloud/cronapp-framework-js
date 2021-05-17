@@ -3,8 +3,19 @@
         "id": "CronappNotification",
         "options": {
             "stacking": "default",
+            "autoHideAfter": 0,
             "position": {
-                "pinned": true
+                "pinned": true,
+                "top": 60,
+                "left": 20
+            },
+            "animation": {
+                "open": {
+                    "effects": "fadeIn"
+                },
+                "close": {
+                    "effects": "fadeOut"
+                }
             }
         }
     }
