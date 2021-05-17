@@ -1,4 +1,5 @@
 @import 'signup.css';
+@import 'reset_password.css';
 
 /* Directive crn-input-password */
 @import '../components/css/crn-input-password.css';
