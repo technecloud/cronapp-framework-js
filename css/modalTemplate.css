@@ -1,36 +1,25 @@
-#confirmDialogTemplate .modal-dialog{
-    transform: translateY(50%) !important;
-    justify-content: center;
-    display: flex;
-    width: auto;
-}
-
-#confirmDialogTemplate .modal-body{
+#modalBodyConfirmDialog{
     text-align: center;
 }
 
-#confirmDialogTemplate .modal-content{
-    width: 352px;
-}
-
-#confirmDialogTemplate .modal-icon{
+#modalBodyConfirmDialog .icon{
     margin: 0px;
 }
 
-#confirmDialogTemplate .modal-footer{
+#modalBodyConfirmDialog .footer{
     text-align: center;
     border: none;
     padding-top: 0;
 }
 
-#confirmDialogTemplate .modal-subtitle{
+#modalBodyConfirmDialog .subtitle{
     margin: 10px 0px;
     font-size: 20px;
     font-weight: 300;
 }
 
-#confirmDialogTemplate .modal-subtitle,
-#confirmDialogTemplate .modal-title{
+#modalBodyConfirmDialog .subtitle,
+#modalBodyConfirmDialog .title{
     color: #606060;
     line-height: 1;
 }
