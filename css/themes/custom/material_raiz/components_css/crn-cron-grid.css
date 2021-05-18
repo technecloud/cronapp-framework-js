@@ -172,13 +172,10 @@ k-grid-header .k-header>.k-link {
 }
 
 .k-grid tbody .k-grid-edit:hover,
-.k-grid tbody .k-grid-edit:focus{
-    color: #FF9600;
-}
-
+.k-grid tbody .k-grid-edit:focus,
 .k-grid tbody .k-grid-update:hover,
 .k-grid tbody .k-grid-update:focus {
-    color: #00A311;
+    color: #FF9600;
 }
 
 .k-grid tbody .k-grid-delete:hover,
@@ -187,6 +184,7 @@ k-grid-header .k-header>.k-link {
 .k-grid tbody .k-grid-cancel:focus {
     color: #C40000;
 }
+
 
 /* k-grid-edit */
 
