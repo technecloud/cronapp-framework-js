@@ -6,12 +6,6 @@
     margin: 0px;
 }
 
-#modalBodyConfirmDialog .footer{
-    text-align: center;
-    border: none;
-    padding-top: 0;
-}
-
 #modalBodyConfirmDialog .subtitle{
     margin: 10px 0px;
     font-size: 20px;
@@ -22,4 +16,10 @@
 #modalBodyConfirmDialog .title{
     color: #606060;
     line-height: 1;
+}
+
+.k-dialog .k-dialog-buttongroup.k-dialog-button-layout-normal{
+    border: none !important;
+    padding-top: 0 !important;
+    justify-content: center !important;
 }
