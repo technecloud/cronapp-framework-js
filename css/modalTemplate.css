@@ -1,0 +1,25 @@
+#modalBodyConfirmDialog {
+    text-align: center;
+}
+
+#modalBodyConfirmDialog .icon {
+    margin: 0px;
+}
+
+#modalBodyConfirmDialog .subtitle {
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+#modalBodyConfirmDialog .subtitle,
+#modalBodyConfirmDialog .title {
+    color: #606060;
+    line-height: 1;
+}
+
+.k-dialog .k-dialog-buttongroup.k-dialog-button-layout-normal {
+    border: none !important;
+    padding-top: 0 !important;
+    justify-content: center !important;
+}
