@@ -5,7 +5,7 @@
     var $scope = angular.element(body.get(0)).scope();
 
     this.ensureProps = data => {
-      !data.filter || (data.filter = data.filter.replace(/%s/g, ''));
+      !data.filter || (data.filter = data.filter.replace(/\s/g, ''));
       return data;
     };
 
