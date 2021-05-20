@@ -1839,7 +1839,7 @@
 
                 $('#' + buttonId).click(function() {
 
-                  var currentGrid = options.grid;
+                  var currentGrid = options.refComponent;
                   var selectedRows = [];
                   currentGrid.select().each(function() {
                     var gridRow = currentGrid.dataItem(this);
@@ -2456,7 +2456,7 @@
                         call = generateBlocklyCall(column.blocklyInfo);
 
                       var cronappDatasource = this.dataSource.transport.options.cronappDatasource;
-                      var currentGrid = options.grid;
+                      var currentGrid = options.refComponent;
                       var selectedRows = [];
                       currentGrid.select().each(function() {
                         var gridRow = currentGrid.dataItem(this);
@@ -2660,8 +2660,8 @@
 
                 var $gridDiv = $("<div/>");
                 var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
-                grid.dataSource.transport.options.grid = grid;
-                currentOptions.grid = grid;
+                app.kendoHelper.receivePushData(grid);
+                currentoptions.refComponent = grid;
                 //Resize da tela para ajustar obter o widthDevices correto
                 window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
@@ -2729,8 +2729,8 @@
                 //setTimeout apenas para sair da thread
                 setTimeout(()=> {
                   $compile(x)(scope);
-                  if (options.grid) {
-                    helperDirective.resizeGridUsingWidthForDevice(options.grid);
+                  if (options.refComponent) {
+                    helperDirective.resizeGridUsingWidthForDevice(options.refComponent);
                   }
                 },100);
               });
@@ -3025,8 +3025,8 @@
             kendoGridInit.scrollable = attrs.scrollable === "true";
 
             var grid = $templateDyn.kendoGrid(kendoGridInit).data('kendoGrid');
-            grid.dataSource.transport.options.grid = grid;
-            options.grid = grid;
+            app.kendoHelper.receivePushData(grid);
+            options.refComponent = grid;
 
             //Resize da tela para ajustar obter o widthDevices correto
             window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
@@ -4013,6 +4013,7 @@
 
             var combobox = $element.kendoMultiSelect(options).data('kendoMultiSelect');
             combobox.enable(true);
+            app.kendoHelper.receivePushData(combobox);
 
             $("[aria-describedby='" + `${attrs.id}_taglist` + "']").attr('id', `${attrs.id}-container`);
 
@@ -5229,6 +5230,7 @@ function transformText() {
 
 
 app.kendoHelper = {
+  receivePushData: comp => !comp || !comp.dataSource || (comp.dataSource.transport.options.refComponent = comp),
   getSchema: function(dataSource) {
     var parseAttribute = [
       { kendoType: "string", entityType: ["string", "character", "uuid", "guid"] },
@@ -5407,7 +5409,7 @@ app.kendoHelper = {
               function(data) {
                 this.options.enableAndSelect(e);
                 e.success(data);
-                this.options.grid.dataSource._pristineTotal = this.options.grid.dataSource._pristineData.push(data);
+                this.options.refComponent.dataSource._pristineTotal = this.options.refComponent.dataSource._pristineData.push(data);
               }.bind(this),
               function(data) {
                 this.options.enableAndSelect(e);
@@ -5415,67 +5417,36 @@ app.kendoHelper = {
               }.bind(this)
           );
         },
+        pushAction: function(type, callback) {
+          return (data) => {
+            if (this.options.isComponentInDocument(this.options.refComponent)) {
+              let current = this.options.getCurrentCallbackForPush(callback, this.options.refComponent);
+              let acceptedMethod = current[type];
+              
+              if (acceptedMethod) {
+                acceptedMethod(data);
+              }
+              else {
+                this.options.fromRead = type === "read";
+                this.options.refComponent.dataSource.read();
+              }
+            }
+            else {
+              this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
+            }
+          }
+        },
         push: function(callback) {
           if (!this.options.dataSourceEventsPush && this.options.cronappDatasource) {
             this.options.dataSourceEventsPush = {
-              create: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                  current.pushUpdate(data);
-                }
-                else
-                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-              }.bind(this),
-              update: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                  current.pushUpdate(data);
-                }
-                else
-                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-              }.bind(this),
-              delete: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                  current.pushDestroy(data);
-                }
-                else
-                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-              }.bind(this),
-              overRideRefresh: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  this.options.grid.dataSource.read();
-                }
-              }.bind(this),
-              read: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  this.options.fromRead = true;
-                  this.options.grid.dataSource.read();
-                }
-              }.bind(this),
-              memorycreate: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                  current.pushUpdate(data);
-                }
-                else
-                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-              }.bind(this),
-              memoryupdate: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                  current.pushUpdate(data);
-                }
-                else
-                  this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
-              }.bind(this),
-              memorydelete: function(data) {
-                if (this.options.isGridInDocument(this.options.grid)) {
-                  var current = this.options.getCurrentCallbackForPush(callback, this.options.grid);
-                  current.pushDestroy(data);
-                }
-
-              }.bind(this)
+              create: this.pushAction.bind(this)('pushUpdate', callback),
+              update: this.pushAction.bind(this)('pushUpdate', callback),
+              delete: this.pushAction.bind(this)('pushDestroy', callback),
+              overRideRefresh: this.pushAction.bind(this)('overRideRefresh', callback),
+              read: this.pushAction.bind(this)('read', callback),
+              memorycreate: this.pushAction.bind(this)('pushUpdate', callback),
+              memoryupdate: this.pushAction.bind(this)('pushUpdate', callback),
+              memorydelete: this.pushAction.bind(this)('pushDestroy', callback)
             };
 
             if (this.origin == 'combobox') {
@@ -5489,7 +5460,6 @@ app.kendoHelper = {
           var doFetch = false;
           try {
             var cronappDatasource = this.options.cronappDatasource;
-            var grid = this.options.grid;
 
             if (!this.options.kendoCallback) {
               this.options.kendoCallback = e;
@@ -5514,8 +5484,8 @@ app.kendoHelper = {
             var paramsOData = kendo.data.transports.odata.parameterMap(e.data, 'read');
             var orderBy = '';
 
-            if (this.options.grid) {
-              this.options.grid.dataSource.group().forEach(function(group) {
+            if (this.options.refComponent) {
+              this.options.refComponent.dataSource.group().forEach(function(group) {
                 orderBy += group.field +" " + group.dir + ",";
               });
             }
@@ -5535,10 +5505,10 @@ app.kendoHelper = {
             if (!e.data.pageSize) {
               cronappDatasource.offset = undefined
               delete paramsOData.$skip;
-              if (this.options.grid) {
+              if (this.options.refComponent) {
                 //Se houver grade associado, e a pagina não for a primeira, cancela a chamada atual, e faz novamente selecionando a pagina 1
-                if (this.options.grid.dataSource.page() != 1) {
-                  this.options.grid.dataSource.page(1);
+                if (this.options.refComponent.dataSource.page() != 1) {
+                  this.options.refComponent.dataSource.page(1);
                   e.error("canceled", "canceled", "canceled");
                   return;
                 }
@@ -5595,30 +5565,30 @@ app.kendoHelper = {
         options: {
           fromRead: false,
           disableAndSelect: function(e) {
-            if (this.isGridInDocument(this.grid)) {
-              this.grid.select(e.container);
-              this.grid.options.selectable = false;
-              if (this.grid.selectable && this.grid.selectable.element) {
-                this.grid.selectable.destroy();
-                this.grid.selectable = null;
+            if (this.isComponentInDocument(this.refComponent)) {
+              this.refComponent.select(e.container);
+              this.refComponent.options.selectable = false;
+              if (this.refComponent.selectable && this.refComponent.selectable.element) {
+                this.refComponent.selectable.destroy();
+                this.refComponent.selectable = null;
               }
             }
           },
           enableAndSelect: function(e) {
-            if (this.isGridInDocument(this.grid)) {
-              this.grid.options.selectable = this.grid.options.originalSelectable;
-              this.grid._selectable();
-              this.grid.select(e.container);
+            if (this.isComponentInDocument(this.refComponent)) {
+              this.refComponent.options.selectable = this.refComponent.options.originalSelectable;
+              this.refComponent._selectable();
+              this.refComponent.select(e.container);
             }
           },
           selectActiveInGrid: function(data) {
             //Verifica se já existe a grid
-            if (this.isGridInDocument(this.grid)) {
+            if (this.isComponentInDocument(this.refComponent)) {
               //Verifica se tem a opção selecionavel setada e se tem registros
-              if (this.grid.selectable && this.grid.dataItems().length > 0) {
+              if (this.refComponent.selectable && this.refComponent.dataItems().length > 0) {
                 //Se já existir o active setado, verifica se tem na grade
                 if (this.cronappDatasource.active && this.cronappDatasource.active.__$id) {
-                  var items = this.grid.dataItems();
+                  var items = this.refComponent.dataItems();
                   var idxSelected = -1;
                   for (var idx = 0; idx < items.length; idx++) {
                     if (this.cronappDatasource.active.__$id == items[idx].__$id) {
@@ -5626,22 +5596,20 @@ app.kendoHelper = {
                       break;
                     }
                   }
-                  if (idxSelected >-1 && !this.grid.selectable.options.multiple)
-                    this.grid.select(this.grid.table.find('tr')[idxSelected]);
+                  if (idxSelected >-1 && !this.refComponent.selectable.options.multiple)
+                    this.refComponent.select(this.refComponent.table.find('tr')[idxSelected]);
                 }
               }
             }
           },
-          isGridInDocument: function(grid) {
-            if (!grid) return false;
-            //Se não tiver element, significa que é
-            //Verifica se a grade ainda existe
-            return ($(document).has(grid.element[0]).length);
+          isComponentInDocument: function(component) {
+            if (!component) return false;
+            return ($(document).has(component.element[0]).length);
           },
-          getCurrentCallbackForPush: function(callback, grid) {
+          getCurrentCallbackForPush: function(callback, component) {
             if (callback)
               return callback;
-            return grid;
+            return component;
           },
           cronappDatasource: scope[dataSource.name]
         }
