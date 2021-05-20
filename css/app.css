@@ -1,5 +1,7 @@
 @import 'signup.css';
 @import 'reset_password.css';
+@import 'modalTemplate.css';
+@import 'animate.css';
 
 /* Directive crn-input-password */
 @import '../components/css/crn-input-password.css';
