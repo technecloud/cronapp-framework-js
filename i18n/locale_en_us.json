@@ -146,7 +146,5 @@
   "UsernameCanNotBeEmpty": "The username cannot be empty",
   "PasswordCanNotBeEmpty": "The new password cannot be empty",
   "PasswordConfirmationCanNotBeEmpty": "The confirm password cannot be empty",
-  "PasswordDoesNotMatch": "The new password and confirm password doesn't match",
-  "titleAccordion": "Ungroup and change the component",
-  "subtitleAccordion": "Ungroup and insert component"
+  "PasswordDoesNotMatch": "The new password and confirm password doesn't match"
 }
