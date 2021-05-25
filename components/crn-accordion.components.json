@@ -33,18 +33,13 @@
   "styles": [
     {
       "selector": "div#{id} .panel-default .panel-heading",
-      "text_pt_BR": "Acordeão Cabeçalho",
+      "text_pt_BR": "Título do acordeão",
       "text_en_US": "Accordion Heading"
     },
     {
       "selector": "div#{id} .panel-collapse .panel-body",
-      "text_pt_BR": "Acordeão Corpo",
+      "text_pt_BR": "Corpo do acordeão",
       "text_en_US": "Accordion Body"
-    },
-    {
-      "selector": "div#{id} .panel-collapse .panel-body h2",
-      "text_pt_BR": "Acordeão Título",
-      "text_en_US": "Accordion Title"
     }
   ],
   "childrenProperties": [
