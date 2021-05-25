@@ -9,17 +9,16 @@
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/button.template.html",
     "properties": {
         "xattr-fullsize": {
-            "displayName": "Width",
-            "order": 3
+            "displayName_en_US": "Width",
+            "displayName_pt_BR": "Largura"
         },
         "xattr-theme": {
             "displayName_en_US": "Theme",
-            "displayName_pt_BR": "Tema",
-            "order": 1
+            "displayName_pt_BR": "Tema"
         },
         "xattr-disabled": {
-            "displayName": "Disabled",
-            "order": 4
+            "displayName_en_US": "Disabled",
+            "displayName_pt_BR": "Desabilitado"
         },
         "class": {
             "order": 9999
@@ -30,19 +29,19 @@
     },
     "styles": [
         {
-            "selector": "button#{id}",
-            "text_pt_BR": "Botão",
-            "text_en_US": "Button"
+            "selector": "div#{id} button",
+            "text_pt_BR": "Plano de fundo do botão",
+            "text_en_US": "Button background"
         },
         {
-            "selector": "button#{id} i",
+            "selector": "div#{id} button i",
             "text_pt_BR": "Ícone",
             "text_en_US": "Icon"
         },
         {
-            "selector": "button#{id} span",
-            "text_pt_BR": "Descrição",
-            "text_en_US": "Description"
+            "selector": "div#{id} button span",
+            "text_pt_BR": "Texto",
+            "text_en_US": "Label"
         }
     ],
     "attributesForPreview": [
@@ -53,11 +52,15 @@
             "values": [
                 {
                     "key": "btn-block",
-                    "value": "Block"
+                    "value": "Block",
+                    "value_pt_BR": "Bloco",
+                    "value_en_US": "Block"
                 },
                 {
                     "key": "",
-                    "value": "Inline"
+                    "value": "Inline",
+                    "value_pt_BR": "Embutido",
+                    "value_en_US": "Inline"
                 }
             ]
         },
@@ -68,31 +71,45 @@
             "values": [
                 {
                     "key": "btn-default",
-                    "value": "Default"
+                    "value": "Default",
+                    "value_pt_BR": "Padrão",
+                    "value_en_US": "Default"
                 },
                 {
                     "key": "btn-primary",
-                    "value": "Primary"
+                    "value": "Primary",
+                    "value_pt_BR": "Primário",
+                    "value_en_US": "Primary"
                 },
                 {
                     "key": "btn-success",
-                    "value": "Success"
+                    "value": "Success",
+                    "value_pt_BR": "Sucesso",
+                    "value_en_US": "Success"
                 },
                 {
                     "key": "btn-info",
-                    "value": "Info"
+                    "value": "Info",
+                    "value_pt_BR": "Informação",
+                    "value_en_US": "Info"
                 },
                 {
                     "key": "btn-warning",
-                    "value": "Warning"
+                    "value": "Warning",
+                    "value_pt_BR": "Aviso",
+                    "value_en_US": "Warning"
                 },
                 {
                     "key": "btn-danger",
-                    "value": "Danger"
+                    "value": "Danger",
+                    "value_pt_BR": "Perigo",
+                    "value_en_US": "Danger"
                 },
                 {
                     "key": "btn-light",
-                    "value": "Light"
+                    "value": "Light",
+                    "value_pt_BR": "Claro",
+                    "value_en_US": "Light"
                 },
                 {
                     "key": "btn-link",
@@ -104,13 +121,18 @@
             "name": "xattr-disabled",
             "type": "options",
             "target": "class",
-            "values": [{
+            "values": [
+                {
                     "key": "",
-                    "value": "False"
+                    "value": "False",
+                    "value_pt_BR": "Falso",
+                    "value_en_US": "False"
                 },
                 {
                     "key": "disabled",
-                    "value": "True"
+                    "value": "True",
+                    "value_pt_BR": "Verdadeiro",
+                    "value_en_US": "True"
                 }
             ]
         }
@@ -121,24 +143,31 @@
             "selector": "i",
             "displayName_pt_BR": "Ícone",
             "displayName_en_US": "Icon",
-            "type": "icon"
+            "type": "icon",
+            "order": 1
         },
         {
             "name": "content",
             "selector": "span",
-            "type": "content"
+            "type": "text",
+            "displayName_pt_BR": "Texto",
+            "displayName_en_US": "Label",
+            "order": 2
         },
         {
             "name": "xattr-theme",
-            "selector": "button"
+            "selector": "button",
+            "order": 3
         },
         {
             "name": "xattr-fullsize",
-            "selector": "button"
+            "selector": "button",
+            "order": 4
         },
         {
             "name": "xattr-disabled",
-            "selector": "button"
+            "selector": "button",
+            "order": 5
         },
         {
             "name": "ng-init",
@@ -169,6 +198,6 @@
             "name": "ng-mousemove",
             "selector": "button",
             "type": "event"
-        }       
+        }
     ]
 }
