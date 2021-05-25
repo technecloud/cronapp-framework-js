@@ -12,19 +12,23 @@
       "options": [
         {
           "key": "_blank",
-          "value": "Nova janela"
+          "value_pt_BR": "Nova janela",
+          "value_en_US": "New window"
         },
         {
           "key": "_self",
-          "value": "Mesma janela"
+          "value_pt_BR": "Mesma janela",
+          "value_en_US": "Same window"
         },
         {
           "key": "_parent",
-          "value": "Janela pai"
+          "value_pt_BR": "Janela pai",
+          "value_en_US": "Parent window"
         },
         {
           "key": "_top",
-          "value": "Top"
+          "value_pt_BR": "Topo",
+          "value_en_US": "Top"
         }
       ],
       "order": 2
@@ -37,38 +41,54 @@
         "underViewsFolder": true
       }
     },
+    "data-replace": {
+      "order": 3
+    },
     "class": {
       "order": 9999
     },
-    "ng-init": {
-      "removable": true,
-      "type": "event"
-    },
-    "ng-click": {
-      "removable": true,
-      "type": "event"
-    },
-    "ng-dblclick": {
-      "removable": true,
-      "type": "event"
-    },
-    "ng-mouseenter": {
-      "removable": true,
-      "type": "event"
-    },
-    "ng-mouseleave": {
-      "removable": true,
-      "type": "event"
-    },
-    "ng-mousemove": {
-      "removable": true,
-      "type": "event"
-    },
     "id": {
       "order": 4
-    },
-    "data-replace": {
-      "order": 3
     }
-  }
+  },
+  "styles": [
+    {
+      "selector": "a#{id}",
+      "text_pt_BR": "Link",
+      "text_en_US": "Link"
+    }
+  ],
+  "attributesForPreview": [],
+  "childrenProperties": [
+    {
+      "name": "ng-init",
+      "selector": "a",
+      "type": "event"
+    },
+    {
+      "name": "ng-click",
+      "selector": "a",
+      "type": "event"
+    },
+    {
+      "name": "ng-dblclick",
+      "selector": "a",
+      "type": "event"
+    },
+    {
+      "name": "ng-mouseenter",
+      "selector": "a",
+      "type": "event"
+    },
+    {
+      "name": "ng-mouseleave",
+      "selector": "a",
+      "type": "event"
+    },
+    {
+      "name": "ng-mousemove",
+      "selector": "a",
+      "type": "event"
+    }
+  ]
 }
