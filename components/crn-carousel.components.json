@@ -3,8 +3,7 @@
   "text_pt_BR": "Carrossel",
   "text_en_US": "Carousel",
   "class": "adjust-icon mdi mdi-view-carousel",
-  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",  
-  "forcedGroup": true,
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",    
   "properties": {
     "class": {
       "order": 9999
@@ -13,6 +12,7 @@
       "order": 1
     }
   },
+  "forcedGroup": true,
   "handleRules": {
     "canOrder": true,
     "canActivate": true,
@@ -35,18 +35,23 @@
   "styles": [
     {
       "selector": "div#{id} .carousel-inner",
-      "text_pt_BR": "Geral",
-      "text_en_US": "General"
+      "text_pt_BR": "Plano de fundo do carousel",
+      "text_en_US": "Carousel background"
     },
     {
       "selector": "div#{id} .carousel-control.left",
       "text_pt_BR": "Seta Esquerda",
-      "text_en_US": "Left Arrow Style"
+      "text_en_US": "Left Arrow"
     },
     {
       "selector": "div#{id} .carousel-control.right",
       "text_pt_BR": "Seta Direita",
       "text_en_US": "Right Arrow"
+    },
+    {
+      "selector": "div#{id} .carousel-indicators",
+      "text_pt_BR": "Indicador Padrão",
+      "text_en_US": "Standard Indicator"
     },
     {
       "selector": "div#{id} .carousel-indicators .active",
