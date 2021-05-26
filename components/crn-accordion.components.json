@@ -19,8 +19,8 @@
         "accordionTabClicked": "panel-collapse.collapse",
         "activeSelector": "div.panel-collapse.collapse.in",
         "activeClass": "in",
-        "sourceHTML": "<div class=\"panel panel-default\"><div class=\"panel-heading\" role=\"tab\" id=\"heading${RANDOM}\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse${RANDOM}\" aria-expanded=\"false\" aria-controls=\"collapse${RANDOM}\" ><h1 class=\"lead text-center\" data-component=\"crn-title\" xattr-position=\"text-center\"> New Group Title </h1></div><div id=\"collapse${RANDOM}\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading${RANDOM}\"><div class=\"panel-body\" data-container=\"true\" > <h2 data-component=\"crn-subtitle\" class=\"lead text-center\" xattr-position=\"text-center\">  New Group Description   </h2>  </div></div></div>",
-        "targetSelector": "div.panel-group"
+        "sourceHTML": "<div class=\"panel panel-default\"> <div class=\"panel-heading\" role=\"tab\" id=\"heading${RANDOM}\" data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapse${RANDOM}\" aria-expanded=\"true\" aria-controls=\"collapse${RANDOM}\"> <div class=\"lead text-center\" data-component=\"crn-title\" xattr-position=\"text-center\"> <h1 class=\"text-center title component-holder h3\" xattr-position=\"h1 text-center\" xattr-type=\"h3\" data-component=\"crn-text-component\">Ungroup and change the component</h1> </div> </div> <div id=\"collapse${RANDOM}\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"heading${RANDOM}\"> <div class=\"panel-body\" data-container=\"true\"> <div class=\"lead text-center\" data-component=\"crn-subtitle\" xattr-position=\"text-center\"> <h1 class=\"text-center title component-holder h3\" xattr-position=\"h3 text-center\" xattr-type=\"h3\" data-component=\"crn-text-component\">Ungroup and insert component</h1> </div> </div> </div> </div>",
+          "targetSelector": "div.panel-group"
       },
       {
         "accordionTabClicked": "div.panel-collapse.collapse",
@@ -43,14 +43,6 @@
     }
   ],
   "childrenProperties": [
-    {
-      "name": "teste",
-      "selector": "div.panel-group",
-      "displayName_pt_BR": "Ícone",
-      "displayName_en_US": "Icon",
-      "type": "content",
-      "order": 1
-    },
     {
       "name": "ng-init",
       "selector": "div.panel-heading",
