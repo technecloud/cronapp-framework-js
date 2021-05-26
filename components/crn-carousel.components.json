@@ -3,7 +3,7 @@
   "text_pt_BR": "Carrossel",
   "text_en_US": "Carousel",
   "class": "adjust-icon mdi mdi-view-carousel",
-  "forcedGroup": true,
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",    
   "properties": {
     "class": {
       "order": 9999
@@ -12,21 +12,46 @@
       "order": 1
     }
   },
+  "forcedGroup": true,
+  "handleRules": {
+    "canOrder": true,
+    "canActivate": true,
+    "canIncrement": true,
+    "rules": [
+      {
+        "activeSelector": "ol.carousel-indicators li.active",
+        "activeClass": "active",
+        "sourceHTML": " <li></li>",
+        "targetSelector": "ol.carousel-indicators"
+      },
+      {
+        "activeSelector": "div.carousel-inner div.item.active",
+        "activeClass": "active",
+        "sourceHTML": "<div class=\"item\"><img data-component= \"crn-image\" alt=\"New slide\" style=\"margin: 0 auto;\" src = \"node_modules/cronapp-framework-js/img/placehold-900x500.png\"><div class = \"carousel-caption\"><h1  data-component=\"crn-title\">New Slide</h1><h2 data-component=\"crn-subtitle\"> Subtitle </h2></div></div>",
+        "targetSelector": "div.carousel-inner"
+      }
+    ]
+  },  
   "styles": [
     {
       "selector": "div#{id} .carousel-inner",
-      "text_pt_BR": "Geral",
-      "text_en_US": "General"
+      "text_pt_BR": "Plano de fundo do carousel",
+      "text_en_US": "Carousel background"
     },
     {
       "selector": "div#{id} .carousel-control.left",
       "text_pt_BR": "Seta Esquerda",
-      "text_en_US": "Left Arrow Style"
+      "text_en_US": "Left Arrow"
     },
     {
       "selector": "div#{id} .carousel-control.right",
       "text_pt_BR": "Seta Direita",
       "text_en_US": "Right Arrow"
+    },
+    {
+      "selector": "div#{id} .carousel-indicators",
+      "text_pt_BR": "Indicador Padrão",
+      "text_en_US": "Standard Indicator"
     },
     {
       "selector": "div#{id} .carousel-indicators .active",
@@ -44,26 +69,6 @@
       "text_en_US": "Subtitle"
     }
   ],
-  "handleRules": {
-    "canOrder": true,
-    "canActivate": true,
-    "canIncrement": true,
-    "rules": [
-      {
-        "activeSelector": "ol.carousel-indicators li.active",
-        "activeClass": "active",
-        "sourceHTML": " <li></li>",
-        "targetSelector": "ol.carousel-indicators"
-      },
-      {
-        "activeSelector": "div.carousel-inner div.item.active",
-        "activeClass": "active",
-        "sourceHTML": "<div class=\"item\"><img data-component= \"crn-image\" alt=\"New slide\" style=\"margin: 0 auto;\" src = \"http://placehold.it/900x500\"><div class = \"carousel-caption\"><h1  data-component=\"crn-title\">New Slide</h1><h2 data-component=\"crn-subtitle\"> Subtitle </h2></div></div>",
-        "targetSelector": "div.carousel-inner"
-      }
-    ]
-  },
-  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",
   "childrenProperties": [
     {
       "name": "ng-init",
