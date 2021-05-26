@@ -12,22 +12,25 @@
       "options": [
         {
           "key": "_blank",
-          "value": "Nova janela"
+          "value_pt_BR": "Nova janela",
+          "value_en_US": "New window"
         },
         {
           "key": "_self",
-          "value": "Mesma janela"
+          "value_pt_BR": "Mesma janela",
+          "value_en_US": "Same window"
         },
         {
           "key": "_parent",
-          "value": "Janela pai"
+          "value_pt_BR": "Janela pai",
+          "value_en_US": "Parent window"
         },
         {
           "key": "_top",
-          "value": "Top"
+          "value_pt_BR": "Topo",
+          "value_en_US": "Top"
         }
-      ],
-      "order": 2
+      ]
     },
     "href": {
       "removable": false,
@@ -70,5 +73,12 @@
     "data-replace": {
       "order": 3
     }
-  }
+  },
+  "styles": [
+    {
+      "selector": "a#{id}",
+      "text_pt_BR": "Link",
+      "text_en_US": "Link"
+    }
+  ]
 }
