@@ -13,14 +13,13 @@
     },
     "id": {
       "order": 1
-    }
-  },
-  "attributesForPreview": [
-    {
-      "name": "data-size",
-      "type": "options",
-      "target": "list",
-      "values": [
+    },
+    "data-size": {
+      "removable": false,
+      "displayName_pt_BR": "Tamanho",
+      "displayName_en_US": "Size",
+      "type": "list",
+      "options": [
         {
           "key": "normal",
           "value_pt_BR": "Normal",
@@ -36,13 +35,17 @@
           "value_pt_BR": "Invisível",
           "value_en_US": "Invisible "
         }
-      ]
+      ],
+      "selector": "div > div",
+      "childrenProperty": true,
+      "order": 2
     },
-    {
-      "name": "data-theme",
-      "type": "options",
-      "target": "list",
-      "values": [
+    "data-theme": {
+      "removable": false,
+      "displayName_pt_BR": "Tamanho",
+      "displayName_en_US": "Size",
+      "type": "list",
+      "options": [
         {
           "key": "dark",
           "value_pt_BR": "Escuro",
@@ -53,9 +56,13 @@
           "value_pt_BR": "Claro",
           "value_en_US": "Light"
         }
-      ]
+      ],
+      "selector": "div > div",
+      "childrenProperty": true,
+      "order": 3
     }
-  ],
+  },
+  "attributesForPreview": [ ],
   "childrenProperties": [
     {
       "name": "data-sitekey",
@@ -66,26 +73,6 @@
       "selector": "div > div",
       "type": "text",
       "order": 1
-    },
-    {
-      "name": "data-size",
-      "displayName_pt_BR": "Tamanho",
-      "displayName_en_US": "Size",
-      "removable": false,
-      "global": "true",
-      "selector": "div > div",
-      "type": "list",
-      "order": 2
-    },
-    {
-      "name": "data-theme",
-      "displayName_pt_BR": "Tema",
-      "displayName_en_US": "Theme",
-      "removable": false,
-      "global": "true",
-      "selector": "div > div",
-      "type": "text",
-      "order": 3
     }
   ]
 }
