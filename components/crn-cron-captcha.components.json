@@ -42,8 +42,8 @@
     },
     "data-theme": {
       "removable": false,
-      "displayName_pt_BR": "Tamanho",
-      "displayName_en_US": "Size",
+      "displayName_pt_BR": "Tema",
+      "displayName_en_US": "Theme",
       "type": "list",
       "options": [
         {
