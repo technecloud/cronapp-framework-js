@@ -136,13 +136,13 @@
     },
     {
       "selector": "div#{id} .k-grid .k-primary",
-      "text_pt_BR": "Botão Primário",
-      "text_en_US": "Primary Button"
+      "text_pt_BR": "Botão de Salvar Item",
+      "text_en_US": "Save Item Button"
     },
     {
       "selector": "div#{id} .k-grid .k-grid-cancel",
-      "text_pt_BR": "Botão de Cancelar",
-      "text_en_US": "Cancel Button"
+      "text_pt_BR": "Botão de Cancelar Item",
+      "text_en_US": "Cancel Item Button"
     },
     {
       "selector": "div#{id} .k-grid span.k-select",
