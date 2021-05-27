@@ -13,6 +13,12 @@
     },
     "id": {
       "order": 1
+    },
+    "data-size": {
+      "displayName_pt_BR": "Tamanho",
+      "displayName_en_US": "Size",
+      "removable": false,
+      "order": 1
     }
   },
   "attributesForPreview": [
@@ -30,6 +36,11 @@
           "key": "compact",
           "value_pt_BR": "Compacto",
           "value_en_US": "Compact"
+        },
+        {
+          "key": "invisible ",
+          "value_pt_BR": "Invisível",
+          "value_en_US": "Invisible "
         }
       ]
     }
@@ -39,16 +50,6 @@
       "name": "data-sitekey",
       "displayName_pt_BR": "Chave do Site",
       "displayName_en_US": "Site Key",
-      "removable": false,
-      "global": "true",
-      "selector": "div > div",
-      "type": "text",
-      "order": 1
-    },
-    {
-      "name": "data-size",
-      "displayName_pt_BR": "Tamanho",
-      "displayName_en_US": "Size",
       "removable": false,
       "global": "true",
       "selector": "div > div",
