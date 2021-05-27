@@ -13,12 +13,6 @@
     },
     "id": {
       "order": 1
-    },
-    "data-size": {
-      "displayName_pt_BR": "Tamanho",
-      "displayName_en_US": "Size",
-      "removable": false,
-      "order": 1
     }
   },
   "attributesForPreview": [
@@ -43,6 +37,23 @@
           "value_en_US": "Invisible "
         }
       ]
+    },
+    {
+      "name": "data-theme",
+      "type": "options",
+      "target": "list",
+      "values": [
+        {
+          "key": "dark",
+          "value_pt_BR": "Escuro",
+          "value_en_US": "Dark"
+        },
+        {
+          "key": "light",
+          "value_pt_BR": "Claro",
+          "value_en_US": "Light"
+        }
+      ]
     }
   ],
   "childrenProperties": [
@@ -55,6 +66,26 @@
       "selector": "div > div",
       "type": "text",
       "order": 1
+    },
+    {
+      "name": "data-size",
+      "displayName_pt_BR": "Tamanho",
+      "displayName_en_US": "Size",
+      "removable": false,
+      "global": "true",
+      "selector": "div > div",
+      "type": "list",
+      "order": 2
+    },
+    {
+      "name": "data-theme",
+      "displayName_pt_BR": "Tema",
+      "displayName_en_US": "Theme",
+      "removable": false,
+      "global": "true",
+      "selector": "div > div",
+      "type": "text",
+      "order": 3
     }
   ]
 }
