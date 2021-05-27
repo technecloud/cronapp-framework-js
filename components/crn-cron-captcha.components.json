@@ -15,6 +15,25 @@
       "order": 1
     }
   },
+  "attributesForPreview": [
+    {
+      "name": "data-size",
+      "type": "options",
+      "target": "list",
+      "values": [
+        {
+          "key": "normal",
+          "value_pt_BR": "Normal",
+          "value_en_US": "Normal"
+        },
+        {
+          "key": "compact",
+          "value_pt_BR": "Compacto",
+          "value_en_US": "Compact"
+        }
+      ]
+    }
+  ],
   "childrenProperties": [
     {
       "name": "data-sitekey",
