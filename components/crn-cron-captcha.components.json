@@ -13,23 +13,61 @@
     },
     "id": {
       "order": 1
+    },
+    "data-size": {
+      "removable": false,
+      "displayName_pt_BR": "Tamanho",
+      "displayName_en_US": "Size",
+      "type": "list",
+      "options": [
+        {
+          "key": "normal",
+          "value_pt_BR": "Normal",
+          "value_en_US": "Normal"
+        },
+        {
+          "key": "compact",
+          "value_pt_BR": "Compacto",
+          "value_en_US": "Compact"
+        },
+        {
+          "key": "invisible ",
+          "value_pt_BR": "Invisível",
+          "value_en_US": "Invisible "
+        }
+      ],
+      "selector": "div > div",
+      "childrenProperty": true,
+      "order": 2
+    },
+    "data-theme": {
+      "removable": false,
+      "displayName_pt_BR": "Tema",
+      "displayName_en_US": "Theme",
+      "type": "list",
+      "options": [
+        {
+          "key": "dark",
+          "value_pt_BR": "Escuro",
+          "value_en_US": "Dark"
+        },
+        {
+          "key": "light",
+          "value_pt_BR": "Claro",
+          "value_en_US": "Light"
+        }
+      ],
+      "selector": "div > div",
+      "childrenProperty": true,
+      "order": 3
     }
   },
+  "attributesForPreview": [ ],
   "childrenProperties": [
     {
       "name": "data-sitekey",
       "displayName_pt_BR": "Chave do Site",
       "displayName_en_US": "Site Key",
-      "removable": false,
-      "global": "true",
-      "selector": "div > div",
-      "type": "text",
-      "order": 1
-    },
-    {
-      "name": "data-size",
-      "displayName_pt_BR": "Tamanho",
-      "displayName_en_US": "Size",
       "removable": false,
       "global": "true",
       "selector": "div > div",
