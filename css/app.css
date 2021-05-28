@@ -2,6 +2,7 @@
 @import 'reset_password.css';
 @import 'modalTemplate.css';
 @import 'animate.css';
+@import './privacy/privacy.css';
 
 /* Directive crn-input-password */
 @import '../components/css/crn-input-password.css';
