@@ -18,101 +18,6 @@
       "order": 1
     }
   },
-  "childrenProperties": [
-    {
-      "name": "options",
-      "displayName_pt_BR": "Configurações",
-      "displayName_en_US": "Configuration",
-      "removable": false,
-      "global": "true",
-      "selector": "cron-grid",
-      "type": "text",
-      "order": 1,
-      "mandatory": true
-    },
-    {
-      "name": "ng-model",
-      "selector": "cron-grid",
-      "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
-      "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-      "type": "text",
-      "order": 2,
-      "mandatory": true
-    },
-    {
-      "name": "scrollable",
-      "displayName_pt_BR": "Fixar cabeçalho",
-      "displayName_en_US": "Pin header",
-      "selector": "cron-grid",
-      "type": "logic",
-      "mandatory": false,
-      "global": "false",
-      "removable": true
-    },
-    {
-      "name": "ng-edit",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Editar",
-      "displayName_en_US": "On Edit",
-      "type": "event"
-    },
-    {
-      "name": "ng-change",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Alterar",
-      "displayName_en_US": "On Change",
-      "type": "event"
-    },
-    {
-      "name": "ng-cancel",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Cancelar",
-      "displayName_en_US": "On Cancel",
-      "type": "event"
-    },
-    {
-      "name": "ng-data-bound",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Vincular Dados",
-      "displayName_en_US": "On Data Bound",
-      "type": "event"
-    },
-    {
-      "name": "ng-before-edit",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Antes de Editar",
-      "displayName_en_US": "Before Edit",
-      "type": "event"
-    },
-    {
-      "name": "ng-data-binding",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Ligar os dados",
-      "displayName_en_US": "On Data Binding",
-      "type": "event"
-    },
-    {
-      "name": "ng-save",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Salvar",
-      "displayName_en_US": "On Save",
-      "type": "event"
-    },
-    {
-      "name": "ng-save-changes",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Salvar Alterações",
-      "displayName_en_US": "On Save Changes",
-      "type": "event"
-    },
-    {
-      "name": "ng-remove",
-      "selector": "cron-grid",
-      "displayName_pt_BR": "Ao Remover",
-      "displayName_en_US": "On Remove",
-      "type": "event"
-    }
-  ],
   "styles": [
     {
       "selector": "div#{id} .k-grid .k-grid-toolbar",
@@ -231,13 +136,13 @@
     },
     {
       "selector": "div#{id} .k-grid .k-primary",
-      "text_pt_BR": "Botão Primário",
-      "text_en_US": "Primary Button"
+      "text_pt_BR": "Botão de Salvar Item",
+      "text_en_US": "Save Item Button"
     },
     {
       "selector": "div#{id} .k-grid .k-grid-cancel",
-      "text_pt_BR": "Botão de Cancelar",
-      "text_en_US": "Cancel Button"
+      "text_pt_BR": "Botão de Cancelar Item",
+      "text_en_US": "Cancel Item Button"
     },
     {
       "selector": "div#{id} .k-grid span.k-select",
@@ -245,19 +150,114 @@
       "text_en_US": "Filters Combo"
     },
     {
-      "selector": "div#{id} .k-grid .k-list-container",
-      "text_pt_BR": "Dropdown Container",
-      "text_en_US": "Dropdown Container"
+      "selector": ".k-animation-container .k-list-container",
+      "text_pt_BR": "Combo box da Paginação",
+      "text_en_US": "Pagination Combo Box"
     },
     {
-      "selector": "div#{id} .k-grid .k-list-scroller ",
-      "text_pt_BR": "Área de Rolagem do Dropdown",
-      "text_en_US": "Dropdown Roll Area"
+      "selector": ".k-animation-container .k-popup .k-list .k-item",
+      "text_pt_BR": "Números da Paginação",
+      "text_en_US": "Pagination Numbers"
     },
     {
-      "selector": "div#{id} .k-grid .k-list-scroller .k-item",
-      "text_pt_BR": "Item Dropdown",
-      "text_en_US": "Dropdown Item"
+      "selector": ".k-animation-container .k-list > .k-state-hover",
+      "text_pt_BR": "Mouse Hover da Paginação",
+      "text_en_US": "Mouse Hover the Pagination"
     }
-  ]
+  ],
+  "childrenProperties": [
+    {
+      "name": "options",
+      "displayName_pt_BR": "Configurações",
+      "displayName_en_US": "Configuration",
+      "removable": false,
+      "global": "true",
+      "selector": "cron-grid",
+      "type": "text",
+      "order": 1,
+      "mandatory": true
+    },
+    {
+      "name": "ng-model",
+      "selector": "cron-grid",
+      "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+      "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+      "type": "text",
+      "order": 2,
+      "mandatory": true
+    },
+    {
+      "name": "scrollable",
+      "displayName_pt_BR": "Fixar cabeçalho",
+      "displayName_en_US": "Pin header",
+      "selector": "cron-grid",
+      "type": "logic",
+      "mandatory": false,
+      "global": "false",
+      "removable": true
+    },
+    {
+      "name": "ng-edit",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Editar",
+      "displayName_en_US": "On Edit",
+      "type": "event"
+    },
+    {
+      "name": "ng-change",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Alterar",
+      "displayName_en_US": "On Change",
+      "type": "event"
+    },
+    {
+      "name": "ng-cancel",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Cancelar",
+      "displayName_en_US": "On Cancel",
+      "type": "event"
+    },
+    {
+      "name": "ng-data-bound",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Vincular Dados",
+      "displayName_en_US": "On Data Bound",
+      "type": "event"
+    },
+    {
+      "name": "ng-before-edit",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Antes de Editar",
+      "displayName_en_US": "Before Edit",
+      "type": "event"
+    },
+    {
+      "name": "ng-data-binding",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Ligar os dados",
+      "displayName_en_US": "On Data Binding",
+      "type": "event"
+    },
+    {
+      "name": "ng-save",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Salvar",
+      "displayName_en_US": "On Save",
+      "type": "event"
+    },
+    {
+      "name": "ng-save-changes",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Salvar Alterações",
+      "displayName_en_US": "On Save Changes",
+      "type": "event"
+    },
+    {
+      "name": "ng-remove",
+      "selector": "cron-grid",
+      "displayName_pt_BR": "Ao Remover",
+      "displayName_en_US": "On Remove",
+      "type": "event"
+    }
+  ]  
 }
