@@ -7,8 +7,13 @@
   "styles": [
     {
       "selector": "div#{id} input.form-control",
-      "text_pt_BR": "Estilo Entrada de Dados",
+      "text_pt_BR": "Entrada de Dados",
       "text_en_US": "Input Style"
+    },
+    {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Label",
+      "text_en_US": "Label"
     }
   ],
   "properties": {
