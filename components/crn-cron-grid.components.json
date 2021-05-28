@@ -161,8 +161,8 @@
     },
     {
       "selector": ".k-animation-container .k-list > .k-state-hover",
-      "text_pt_BR": "Hover da Paginação",
-      "text_en_US": "Pagination Item"
+      "text_pt_BR": "Mouse Hover da Paginação",
+      "text_en_US": "Mouse Hover the Pagination"
     }
   ],
   "childrenProperties": [
