@@ -150,19 +150,19 @@
       "text_en_US": "Filters Combo"
     },
     {
-      "selector": "div#{id} .k-grid .k-list-container",
-      "text_pt_BR": "Dropdown Container",
-      "text_en_US": "Dropdown Container"
+      "selector": ".k-animation-container .k-list-container",
+      "text_pt_BR": "Combo box da Paginação",
+      "text_en_US": "Pagination Combo Box"
     },
     {
-      "selector": "div#{id} .k-grid .k-list-scroller ",
-      "text_pt_BR": "Área de Rolagem do Dropdown",
-      "text_en_US": "Dropdown Roll Area"
+      "selector": ".k-animation-container .k-popup .k-list .k-item",
+      "text_pt_BR": "Números da Paginação",
+      "text_en_US": "Pagination Numbers"
     },
     {
-      "selector": "div#{id} .k-grid .k-list-scroller .k-item",
-      "text_pt_BR": "Item Dropdown",
-      "text_en_US": "Dropdown Item"
+      "selector": ".k-animation-container .k-list > .k-state-hover",
+      "text_pt_BR": "Hover da Paginação",
+      "text_en_US": "Pagination Item"
     }
   ],
   "childrenProperties": [
