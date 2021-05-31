@@ -233,3 +233,8 @@ a {
 #crn-button-846239{
 	display:none;
 }
+
+/* Dynamic file maintenance */
+.dynamic-image-container{
+    width: fit-content;
+}
