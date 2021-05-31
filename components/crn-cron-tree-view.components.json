@@ -52,5 +52,16 @@
       "type": "event"
     }
   ],
-  "styles": []
+  "styles": [
+    {
+      "selector": "div#{id} .k-treeview .k-top.k-bot",
+      "text_pt_BR": "Título do tópico",
+      "text_en_US": "Topic title"
+    },
+    {
+      "selector": "div#{id} .k-treeview .k-group .k-bot",
+      "text_pt_BR": "Subtítulo do tópico",
+      "text_en_US": "Topic subtitle"
+    }
+  ]
 }
