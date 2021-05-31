@@ -5,7 +5,7 @@
   "class": "adjust-icon mdi mdi-cloud-upload",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamicfile.template.html",
   "styles": [
-    {{
+    {
       "selector": "div#{id} label",
       "text_pt_BR": "Título",
       "text_en_US": "Title"
