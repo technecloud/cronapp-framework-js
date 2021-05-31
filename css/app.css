@@ -238,3 +238,8 @@ a {
     background-color: #eee;
     opacity: 1;
 }
+
+/* Treeview maintenance */
+.k-treeview .k-i-collapse, .k-treeview .k-i-expand{
+    height: auto;
+}
