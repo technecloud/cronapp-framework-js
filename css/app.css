@@ -238,3 +238,12 @@ a {
     background-color: #eee;
     opacity: 1;
 }
+
+#crn-button-846239{
+	display:none;
+}
+
+/* Dynamic file maintenance */
+.dynamic-image-container{
+    width: fit-content;
+}
