@@ -54,14 +54,24 @@
   ],
   "styles": [
     {
-      "selector": "div#{id} .k-treeview .k-top.k-bot",
-      "text_pt_BR": "Título do tópico",
-      "text_en_US": "Topic title"
+      "selector": "div#{id} .k-treeview .k-i-collapse, div#{id} .k-treeview .k-i-expand",
+      "text_pt_BR": "Ícone",
+      "text_en_US": "Icon"
     },
     {
-      "selector": "div#{id} .k-treeview .k-group .k-bot",
-      "text_pt_BR": "Subtítulo do tópico",
-      "text_en_US": "Topic subtitle"
+      "selector": "div#{id} .k-treeview .k-i-collapse .k-in, div#{id} .k-treeview .k-i-expand .k-in",
+      "text_pt_BR": "Item",
+      "text_en_US": "Item"
+    },
+    {
+      "selector": "div#{id} .k-treeview .k-item > .k-group .k-in",
+      "text_pt_BR": "SubItem",
+      "text_en_US": "SubItem"
+    },
+    {
+      "selector": "div#{id} .k-treeview .k-in.k-state-selected",
+      "text_pt_BR": "Item selecionado",
+      "text_en_US": "SubItem"
     }
   ]
 }
