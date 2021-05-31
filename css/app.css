@@ -242,3 +242,9 @@ a {
 .k-treeview .k-in{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+
+
+/* Dynamic file maintenance */
+.dynamic-image-container{
+    width: fit-content;
+}
