@@ -46,7 +46,7 @@
       "selector": "label",
       "displayName_pt_BR": "Conteúdo",
       "displayName_en_US": "Content",
-      "type": "content",
+      "type": "text",
       "order": 3
     },
     {
