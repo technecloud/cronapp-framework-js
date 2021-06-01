@@ -4573,6 +4573,8 @@
               }
 
               var main = $(TEMPLATE_MAIN);
+              main.attr('id', attrs.id);
+              
               var menus = this.populateMenu(options, isVertical);
               main.append(menus);
               if (isVertical) {

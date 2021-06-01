@@ -21,22 +21,22 @@
   },
   "styles": [
     {
-      "selector": "div#{id} .navbar-nav > li > a",
+      "selector": "#{id} .navbar-nav > li > a",
       "text_pt_BR": "Item principal",
       "text_en_US": "Main item"
     },
     {
-      "selector": "div#{id} .nav .open>a, div#{id} .nav .open > a:focus, div#{id} .nav .open> a:hover",
+      "selector": "#{id} .nav .open>a, #{id} .nav .open > a:focus, #{id} .nav .open> a:hover",
       "text_pt_BR": "Item principal aberto",
       "text_en_US": "Open main item"
     },
     {
-      "selector": "div#{id} .dropdown-menu > li > a",
+      "selector": "#{id} .dropdown-menu > li > a",
       "text_pt_BR": "Subitem",
       "text_en_US": "Subitem"
     },    
     {
-      "selector": "div#{id} .navbar-nav>li>.dropdown-menu",
+      "selector": "#{id} .navbar-nav>li>.dropdown-menu",
       "text_pt_BR": "Plano de fundo do Subitem",
       "text_en_US": "Subitem Background"
     }
