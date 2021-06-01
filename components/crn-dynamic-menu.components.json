@@ -21,7 +21,7 @@
   },
   "styles": [
     {
-      "selector": "#{id} .navbar-nav > li > a",
+      "selector": "#{id} .crn-menu-item > a",
       "text_pt_BR": "Item principal",
       "text_en_US": "Main item"
     },
@@ -36,7 +36,7 @@
       "text_en_US": "Subitem"
     },    
     {
-      "selector": "#{id} .navbar-nav>li>.dropdown-menu",
+      "selector": "#{id} .crn-menu-item > .dropdown-menu",
       "text_pt_BR": "Plano de fundo do Subitem",
       "text_en_US": "Subitem Background"
     }
