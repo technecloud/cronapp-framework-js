@@ -4,14 +4,11 @@
 @import "../components_css/blockquote.css";
 @import "../components_css/breadcrumb.css";
 @import "../components_css/btn.css";
-@import "../components_css/carousel.css";
 @import "../components_css/close.css";
-@import "../components_css/embed-responsive.css";
 @import "../components_css/form.css";
 @import "../components_css/glyphicon.css";
 @import "../components_css/hidden.css";
 @import "../components_css/list-group.css";
-@import "../components_css/media.css";
 @import "../components_css/modal.css";
 @import "../components_css/pager.css";
 @import "../components_css/pagination.css";
@@ -21,5 +18,4 @@
 @import "../components_css/table.css";
 @import "../components_css/thumbnail.css";
 @import "../components_css/tooltip.css";
-@import "../components_css/visible.css";
 @import "../components_css/well.css";
