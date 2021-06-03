@@ -2948,7 +2948,9 @@
               //Colocando tabindex para poder focar - acessibilidade
               let grid = this;
               setTimeout(function() {
-                grid.pager.element.find("a").not(".k-state-disabled").attr("tabindex", "0");
+                if (grid.pager) {
+                  grid.pager.element.find("a").not(".k-state-disabled").attr("tabindex", "0");
+                }
               });
 
               compileListing(e);
@@ -3408,7 +3410,7 @@
                 });
               }
               else {
-                $timeout(initializeAttrAndEvents());
+                setTimeout(() => initializeAttrAndEvents());
               }
             };
             initializeAttrAndEvents();
