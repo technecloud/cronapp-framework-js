@@ -5419,6 +5419,7 @@ app.kendoHelper = {
         },
         pushAction: function(type, callback) {
           return (data) => {
+            let cantRemoveDsEvents = ["read", "memorydelete", "overRideRefresh"];
             if (this.options.isComponentInDocument(this.options.refComponent)) {
               let current = this.options.getCurrentCallbackForPush(callback, this.options.refComponent);
               let acceptedMethod = current[type];
@@ -5431,7 +5432,7 @@ app.kendoHelper = {
                 this.options.refComponent.dataSource.read();
               }
             }
-            else {
+            else if (!cantRemoveDsEvents.includes(type)) {
               this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
             }
           }
