@@ -17,7 +17,8 @@
             "order": 1
         }
     },
-    "styles": [{
+    "styles": [
+        {
             "selector": "div#{id} .k-input",
             "text_pt_BR": "Entrada de Texto",
             "text_en_US": "Input"
@@ -43,7 +44,8 @@
             "text_en_US": "Item List Hover"
         }
     ],
-    "childrenProperties": [{
+    "childrenProperties": [
+        {
             "name": "options",
             "selector": "cron-auto-complete",
             "displayName_pt_BR": "Configuração",
