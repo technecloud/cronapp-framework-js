@@ -3349,12 +3349,7 @@ form.k-filter-menu .k-widget {
     border-color: rgba(0, 0, 0, 0.1);
 }
 
-.btn-default:hover {
-    color: #555555;
-    background-color: #e6e6e6;
-    border-color: rgba(0, 0, 0, 0.1);
-}
-
+.btn-default:hover,
 .btn-default:active,
 .btn-default.active,
 .open>.dropdown-toggle.btn-default {
@@ -3395,14 +3390,6 @@ fieldset[disabled] .btn-default.focus {
     background-color: #555555;
 }
 
-
-/* 
-.btn-primary {
-    color: #ffffff;
-    background-color: #2fa4e7;
-    border-color: #2fa4e7;
-} */
-
 .btn-primary:focus,
 .btn-primary.focus {
     color: #ffffff;
@@ -3410,12 +3397,7 @@ fieldset[disabled] .btn-default.focus {
     border-color: #105b87;
 }
 
-.btn-primary:hover {
-    color: #ffffff;
-    background-color: #178acc;
-    border-color: #1684c2;
-}
-
+.btn-primary:hover,
 .btn-primary:active,
 .btn-primary.active,
 .open>.dropdown-toggle.btn-primary {
@@ -3469,12 +3451,7 @@ fieldset[disabled] .btn-primary.focus {
     border-color: #324919;
 }
 
-.btn-success:hover {
-    color: #ffffff;
-    background-color: #59822c;
-    border-color: #547a29;
-}
-
+.btn-success:hover,
 .btn-success:active,
 .btn-success.active,
 .open>.dropdown-toggle.btn-success {
@@ -3528,12 +3505,7 @@ fieldset[disabled] .btn-success.focus {
     border-color: #000000;
 }
 
-.btn-info:hover {
-    color: #ffffff;
-    background-color: #022241;
-    border-color: #011d37;
-}
-
+.btn-info:hover,
 .btn-info:active,
 .btn-info.active,
 .open>.dropdown-toggle.btn-info {
@@ -3587,12 +3559,7 @@ fieldset[disabled] .btn-info.focus {
     border-color: #5e2400;
 }
 
-.btn-warning:hover {
-    color: #ffffff;
-    background-color: #aa4200;
-    border-color: #a03e00;
-}
-
+.btn-warning:hover,
 .btn-warning:active,
 .btn-warning.active,
 .open>.dropdown-toggle.btn-warning {
@@ -3646,12 +3613,7 @@ fieldset[disabled] .btn-warning.focus {
     border-color: #570c0f;
 }
 
-.btn-danger:hover {
-    color: #ffffff;
-    background-color: #9a161a;
-    border-color: #911419;
-}
-
+.btn-danger:hover,
 .btn-danger:active,
 .btn-danger.active,
 .open>.dropdown-toggle.btn-danger {
