@@ -15,6 +15,7 @@
 
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
   var ISO_PATTERN = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
+  Number.MAX_SAFE_INTEGER_32 = 2147483647;
 
   /**
    * Função que retorna o formato que será utilizado no componente
@@ -5506,8 +5507,9 @@ app.kendoHelper = {
 
             //Significa que quer exibir todos
             if (!e.data.pageSize) {
-              cronappDatasource.offset = undefined
-              delete paramsOData.$skip;
+              cronappDatasource.rowsPerPage = Number.MAX_SAFE_INTEGER_32;
+              cronappDatasource.offset = undefined;
+              paramsOData.$skip = 0;
               if (this.options.refComponent) {
                 //Se houver grade associado, e a pagina não for a primeira, cancela a chamada atual, e faz novamente selecionando a pagina 1
                 if (this.options.refComponent.dataSource.page() != 1) {
