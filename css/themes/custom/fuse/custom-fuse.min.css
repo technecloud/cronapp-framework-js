@@ -2550,7 +2550,10 @@ i.component-holder.fa.fa-star {
 .dynamic-image-container {
     border: 2px dashed;
     text-align: center;
-    padding: 40px;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .dynamic-image-container button.btn {
@@ -3210,7 +3213,6 @@ form.k-filter-menu .k-widget {
     color: #fff;
     border: 0;
     text-shadow: none;
-    outline: none;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -3219,12 +3221,14 @@ form.k-filter-menu .k-widget {
     margin-right: 8px;
 }
 
-.btn:hover,
-.btn:active,
-.btn:focus,
-.btn:active:focus {
-    background-color: #4b5462;
-    color: #fff;
+.btn.btn-primary,
+.btn.btn-success,
+.btn.btn-danger,
+.btn.btn-info,
+.btn.btn-light,
+.btn.btn-link,
+.btn.btn-default {
+    outline: none;
 }
 
 .btn.btn-primary {
@@ -3326,6 +3330,7 @@ form.k-filter-menu .k-widget {
 .btn-default:active,
 .btn-default.active,
 .btn-default:focus:active {
+    background-color: #4B5462;
     color: #fff;
     box-shadow: none;
 }
@@ -4122,4 +4127,107 @@ caption {
     color: #999999;
     background-color: #ffffff;
     cursor: not-allowed;
+}
+
+
+/* col's widht */
+
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
+    padding-right: 0;
+    padding-left: 0;
 }
