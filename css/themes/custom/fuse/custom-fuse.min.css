@@ -1,5 +1,5 @@
 @import "./components_css/import_components_css.css";
-@import "../_bootswatch-v3.3.7/import_bootswatch.css";
+@import "./_bootswatch-v3.3.7/import_bootswatch.css";
 @import "./font/font.css";
 html {
     font-size: 10px;
