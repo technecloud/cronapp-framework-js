@@ -13,6 +13,18 @@
       "order": 1
     }
   },
+  "styles": [
+    {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Texto",
+      "text_en_US": "Text"
+    },
+    {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Texto",
+      "text_en_US": "Text"
+    }
+  ],
   "childrenProperties": [
     {
       "name": "ng-initial-value",
@@ -89,12 +101,5 @@
       "onDisplay": "javascript:function() { return arguments[0].split('\\'').join('') }",
       "type": "text"
     }
-  ],
-  "styles": [
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
-    }
-  ]
+  ] 
 }
