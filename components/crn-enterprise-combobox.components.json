@@ -6,7 +6,6 @@
   "text_en_US": "Combobox",
   "class": "adjust-icon mdi mdi-equal-box",
   "order": 9,
-  "setRandomId": false,
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox.designtime.html",
   "designTimeSelector": "cron-select",
@@ -21,7 +20,7 @@
   },
   "styles": [
     {
-      "selector": "div#{id} .k-dropdown-wrap",
+      "selector": "div#{id} .k-dropdown-wrap, div#{id} .k-combobox .k-state-default .k-input",
       "text_pt_BR": "Geral",
       "text_en_US": "General"
     },
@@ -31,14 +30,14 @@
       "text_en_US": "Dropdown"
     },
     {
-      "selector": "div#{id} .cronSelect",
-      "text_pt_BR": "Campo da Caixa de Seleção",
-      "text_en_US": "Select Field"
+      "selector": "div#{id} label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     },
     {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "selector": "div#cron-{id}-list .k-list .k-state-selected",
+      "text_pt_BR": "Item Selecionado",
+      "text_en_US": "Selected Item"
     },
     {
       "selector": "div#comboBox{id}-select-list",
@@ -46,15 +45,10 @@
       "text_en_US": "Item List"
     },
     {
-      "selector": "div#cron-{id}-list>div>ul>li.k-state-hover",
+      "selector": "div#cron-{id}-list .k-list .k-state-hover",
       "text_pt_BR": "Item da Lista Hover",
       "text_en_US": "Item List Hover"
-    },
-    {
-      "selector": "div#cron-{id}-list>div>ul>li.k-state-focused",
-      "text_pt_BR": "Item Selecionado",
-      "text_en_US": "Selected Item"
-    }
+    }    
   ],
   "childrenProperties": [
     {
