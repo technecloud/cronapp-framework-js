@@ -18,11 +18,6 @@
       "selector": "div#{id} label",
       "text_pt_BR": "Texto",
       "text_en_US": "Text"
-    },
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Texto",
-      "text_en_US": "Text"
     }
   ],
   "childrenProperties": [
