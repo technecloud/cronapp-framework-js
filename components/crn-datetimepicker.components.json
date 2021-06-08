@@ -6,15 +6,15 @@
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/datetime.template.html",
   "styles": [
     {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
+    },
+    {
       "selector": "div#{id} input.form-control",
       "text_pt_BR": "Entrada de Dados",
       "text_en_US": "Input Style"
-    },
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
-    }
+    }   
   ],
   "properties": {
     "ng-model": {
@@ -33,12 +33,16 @@
     {
       "name": "content",
       "selector": "label",
-      "type": "content"
+      "type": "text",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title"
     },
     {
       "name": "ng-model",
       "selector": "input",
       "type": "text",
+      "displayName_pt_BR": "Valor",
+      "displayName_en_US": "Value",
       "mandatory": true
     },
     {
