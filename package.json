@@ -4,6 +4,7 @@
   "description": "Javascript library for CronApp's projects",
   "main": "cronapp.framework.js",
   "scripts": {
+    "build": "npm i && gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
