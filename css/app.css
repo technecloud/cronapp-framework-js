@@ -247,3 +247,8 @@ a {
 .k-treeview .k-in{
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+
+/* crn-enterprise-combobox-multiple maintenance */
+.k-multiselect-wrap .k-button{
+    font-size: 1em;
+}
