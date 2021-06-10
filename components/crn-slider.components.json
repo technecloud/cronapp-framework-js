@@ -19,28 +19,28 @@
   "styles": [
     {
       "selector": "div#{id} .k-slider .k-button-decrease",
-      "text_pt_BR": "Estilo Seta Esquerda",
+      "text_pt_BR": "Seta Esquerda",
       "text_en_US": "Arrow Left Style"
     },
     {
       "selector": "div#{id} .k-slider .k-button-increase",
-      "text_pt_BR": "Estilo Seta Direita",
+      "text_pt_BR": "Seta Direita",
       "text_en_US": "Arrow Right Style"
     },
     {
       "selector": "div#{id} .k-slider-track",
-      "text_pt_BR": "Estilo do Caminho",
+      "text_pt_BR": "Caminho",
       "text_en_US": "Track Style"
     },
     {
       "selector": "div#{id} .k-draghandle",
-      "text_pt_BR": "Estilo do Botão Arrastar",
+      "text_pt_BR": "Botão Arrastar",
       "text_en_US": "Drag Button Style"
     },
     {
       "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     }
   ],
   "childrenProperties": [
@@ -64,7 +64,9 @@
     {
       "name": "content",
       "selector": "label",
-      "type": "content",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
+      "type": "text",
       "order": 2
     },
     {
