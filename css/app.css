@@ -252,3 +252,9 @@ a {
 .k-multiselect-wrap .k-button{
     font-size: 1em;
 }
+
+.page-header{
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
