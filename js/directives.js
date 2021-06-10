@@ -2662,7 +2662,7 @@
                 var $gridDiv = $("<div/>");
                 var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
                 app.kendoHelper.receivePushData(grid);
-                currentoptions.refComponent = grid;
+                currentOptions.refComponent = grid;
                 //Resize da tela para ajustar obter o widthDevices correto
                 window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
