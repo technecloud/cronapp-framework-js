@@ -19,6 +19,15 @@
     border-color: #3f51b5;
 }
 
+.login-view .reset-password{
+    text-align: right;
+}
+
+.login-view .sign-up{
+    text-align: center;
+    margin: 10px 0px;
+}
+
 @media only screen and (max-width: 768px) {
     .login-panel {
         position: relative;
