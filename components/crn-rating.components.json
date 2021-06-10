@@ -11,7 +11,8 @@
       "order": 1
     },
     "xattr-theme": {
-      "displayName": "Theme",
+      "displayName_en_US": "Theme",
+      "displayName_pt_BR": "Tema",
       "order": 3
     },
     "class": {
@@ -33,11 +34,12 @@
       "values": [
         {
           "key": "",
-          "value": "null"
+          "value_pt_BR": "Nulo",
+          "value_en_US": "Null"
         },
         {
           "key": "0",
-          "value": "zero"
+          "value": "Zero"
         }
       ]
     },
@@ -48,27 +50,33 @@
       "values": [
         {
           "key": "text-primary",
-          "value": "Primary"
+          "value_pt_BR": "Primário",
+          "value_en_US": "Primary"
         },
         {
           "key": "text-success",
-          "value": "Success"
+          "value_pt_BR": "Sucesso",
+          "value_en_US": "Success"
         },
         {
           "key": "text-info",
-          "value": "Info"
+          "value_pt_BR": "Informação",
+          "value_en_US": "Info"
         },
         {
           "key": "text-warning",
-          "value": "Warning"
+          "value_pt_BR": "Aviso",
+          "value_en_US": "Warning"
         },
         {
           "key": "text-danger",
-          "value": "Danger"
+          "value_pt_BR": "Perigo",
+          "value_en_US": "Danger"
         },
         {
           "key": "text-muted",
-          "value": "Muted"
+          "value_pt_BR": "Silenciado",
+          "value_en_US": "Muted"
         }
       ]
     }
