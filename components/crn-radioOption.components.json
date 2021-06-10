@@ -6,19 +6,14 @@
   "properties": {
     "checked": {
       "removable": false,
-      "displayName_pt_BR": "Checked",
-      "displayName_en_US": "Checked",
+      "displayName_pt_BR": "Selecionado",
+      "displayName_en_US": "selected",
       "type": "list",
       "options": [
         {
-          "key": "false",
-          "value_pt_BR": "Falso",
-          "value_en_US": "False"
-        },
-        {
           "key": "true",
-          "value_pt_BR": "Verdadeiro",
-          "value_en_US": "True"
+          "value_pt_BR": "Sim",
+          "value_en_US": "Yes"
         }
       ],
       "selector": "input[ng-checked]",
