@@ -13,6 +13,13 @@
       "order": 1
     }
   },
+  "styles": [
+    {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Texto",
+      "text_en_US": "Text"
+    }
+  ],
   "childrenProperties": [
     {
       "name": "ng-initial-value",
@@ -88,13 +95,6 @@
       "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = '\\''+result+'\\'';  }  return result; }",
       "onDisplay": "javascript:function() { return arguments[0].split('\\'').join('') }",
       "type": "text"
-    }
-  ],
-  "styles": [
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
     }
   ]
 }
