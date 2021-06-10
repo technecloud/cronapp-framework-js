@@ -234,6 +234,11 @@ a {
 	display:none;
 }
 
+
+/* Dynamic file maintenance */
+.dynamic-image-container{
+    width: fit-content;
+}
 /* Treeview maintenance */
 .k-treeview .k-i-collapse, .k-treeview .k-i-expand{
     height: auto;
