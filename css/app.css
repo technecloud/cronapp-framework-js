@@ -258,3 +258,7 @@ a {
     display: flex;
     align-items: center;
 }
+
+.crn-radiogroup .k-content{
+    background-color: transparent;
+}
