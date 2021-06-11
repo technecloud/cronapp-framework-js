@@ -2,7 +2,7 @@
   "name": "crn-grid",
   "text_pt_BR": "Tabela",
   "text_en_US": "Table",
-  "class": "adjust-icon mdi mdi-apps",
+  "class": "adjust-icon mdi mdi-table",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/grid.template.html",
   "properties": {
     "class": {

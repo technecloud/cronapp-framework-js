@@ -4,7 +4,7 @@
   "wrapper": false,
   "text_pt_BR": "Tabela Simples",
   "text_en_US": "Simple Table",
-  "class": "adjust-icon mdi mdi-apps",
+  "class": "adjust-icon mdi-table-large",
   "template": "",
   "properties": {
     "class": {

@@ -2,7 +2,7 @@
   "name": "crn-list",
   "text_pt_BR": "Lista Simples",
   "text_en_US": "Lista Simples",
-  "class": "adjust-icon mdi mdi-login",
+  "class": "adjust-icon mdi-equal-box",
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/list.template.html",
   "properties": {
