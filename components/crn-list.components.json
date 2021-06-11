@@ -13,6 +13,23 @@
       "type": "pageDatasource"
     }
   },
+  "styles": [
+    {
+      "selector": "div#{id}",
+      "text_pt_BR": "Plano de fundo",
+      "text_en_US": "Background"
+    },
+    {
+      "selector": "div#{id} h1",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
+    },
+    {
+      "selector": "div#{id} h3",
+      "text_pt_BR": "Subtítulo",
+      "text_en_US": "Subtitle"
+    }
+  ],
   "childrenProperties": [
     {
       "editExpression": false,
