@@ -48,7 +48,7 @@
     {
       "selector": "div#{id} .navbar-default .navbar-brand",
       "text_pt_BR": "Menu Marca",
-      "text_en_US": "Menu Brand"
+      "text_en_US": "Brand Menu"
     },
     {
       "selector": "div#{id} .navbar-default .navbar-nav>li>a",
@@ -57,8 +57,13 @@
     },
     {
       "selector": "div#{id} .dropdown-menu",
-      "text_pt_BR": "Sub Item",
-      "text_en_US": "Sub Item"
+      "text_pt_BR": "Subitem",
+      "text_en_US": "Subitem"
+    },
+    {
+      "selector": "div#{id} .dropdown-menu > li > a:hover",
+      "text_pt_BR": "Subitem Hover",
+      "text_en_US": "Hover Subitem"
     }
   ],
   "handleRules": {
