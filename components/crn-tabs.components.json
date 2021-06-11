@@ -2,7 +2,7 @@
   "name": "crn-tabs",
   "text_pt_BR": "Abas",
   "text_en_US": "Tabs",
-  "class": "adjust-icon mdi mdi-window-maximize",
+  "class": "adjust-icon mdi mdi-monitor-multiple",
   "properties": {
     "class": {
       "order": 9999

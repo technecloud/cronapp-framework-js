@@ -2,7 +2,7 @@
   "name": "crn-textinputicon",
   "text_pt_BR": "Entrada de texto com ícone",
   "text_en_US": "Input with icon",
-  "class": "adjust-icon mdi mdi-label-outline",
+  "class": "adjust-icon mdi mdi-nest-protect",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinputicon.template.html",
   "forcedGroupd": true,
   "properties": {
