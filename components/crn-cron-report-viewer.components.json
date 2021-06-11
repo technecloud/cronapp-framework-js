@@ -5,7 +5,7 @@
   "text_pt_BR": "Visualizador de relatório",
   "text_en_US": "Report viewer",
   "order": 2,
-  "class": "adjust-icon mdi mdi-nutrition",
+  "class": "adjust-icon mdi mdi-view-week",
   "designTimeSelector": "cron-report-viewer",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-report-viewer.template.html",
   "designTimeDynamic": true,
