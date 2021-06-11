@@ -5,7 +5,7 @@
   "text_pt_BR": "Agendador",
   "text_en_US": "Scheduler",
   "order": 2,
-  "class": "adjust-icon mdi mdi-calendar-range",
+  "class": "adjust-icon mdi mdi-calendar-plus",
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-scheduler.designtime.html",
   "designTimeSelector": "cron-scheduler",
