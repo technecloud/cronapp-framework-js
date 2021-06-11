@@ -262,3 +262,7 @@ a {
 .crn-radiogroup .k-content{
     background-color: transparent;
 }
+
+img.crn-image{
+    width: 100%;
+}
