@@ -4,7 +4,7 @@
     "onDoubleClick": "openEditor",
     "text_pt_BR": "Auto Completar",
     "text_en_US": "Auto Complete",
-    "class": "adjust-icon mdi mdi-sort-variant",
+    "class": "adjust-icon mdi mdi-receipt",
     "designTimeDynamic": true,
     "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
     "designTimeSelector": "cron-auto-complete",

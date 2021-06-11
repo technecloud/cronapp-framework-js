@@ -4,7 +4,7 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Caixa de seleção múltipla",
   "text_en_US": "Combobox Multi Select",
-  "class": "adjust-icon mdi mdi-nutrition",
+  "class": "adjust-icon mdi mdi-checkbox-multiple-marked-outline",
   "order": 9,
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.designtime.html",

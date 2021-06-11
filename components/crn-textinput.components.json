@@ -3,7 +3,7 @@
   "text_pt_BR": "Entrada de texto",
   "text_en_US": "Input",
   "order": 6,
-  "class": "adjust-icon mdi mdi-label-outline",
+  "class": "adjust-icon mdi mdi-sort-variant",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinput.template.html",
   "properties": {
     "class": {
