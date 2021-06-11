@@ -34,6 +34,13 @@
       "type": "event"
     }
   },
+  "styles": [
+    {
+      "selector": "h1#{id}",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
+    }
+  ],
   "attributesForPreview": [
     {
       "name": "xattr-position",
