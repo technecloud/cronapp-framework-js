@@ -19,6 +19,8 @@
     {
       "name": "content",
       "selector": "label",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "content"
     },
     {
@@ -30,16 +32,22 @@
     {
       "name": "rows",
       "selector": "textarea",
+      "displayName_pt_BR": "Quantidade de Linhas",
+      "displayName_en_US": "Number of Lines",
       "type": "text"
     },
     {
       "name": "maxlength",
       "selector": "textarea",
+      "displayName_pt_BR": "Máximo de caracteres",
+      "displayName_en_US": "maximum characters",
       "type": "text"
     },
     {
       "name": "resize",
       "selector": "textarea",
+      "displayName_pt_BR": "Redimensionável",
+      "displayName_en_US": "Number of Lines",
       "type": "text"
     },
     {
@@ -111,8 +119,8 @@
     },
     {
       "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     }
   ],
   "attributesForPreview": [
@@ -123,7 +131,8 @@
       "values": [
         {
           "key": "resize:none;",
-          "value": "None"
+          "value_pt_BR": "Nenhum",
+          "value_en_US": "None"
         },
         {
           "key": "resize:horizontal;",
@@ -135,7 +144,8 @@
         },
         {
           "key": "resize:both;",
-          "value": "Both "
+          "value_pt_BR": "Ambos",
+          "value_en_US": "Both"
         }
       ]
     }
