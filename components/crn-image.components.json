@@ -41,6 +41,13 @@
       "displayName": "Position"
     }
   },
+  "styles": [
+    {
+      "selector": "img#{id}",
+      "text_pt_BR": "Imagem",
+      "text_en_US": "Image"
+    }
+  ],
   "attributesForPreview": [
     {
       "name": "xattr-position",
