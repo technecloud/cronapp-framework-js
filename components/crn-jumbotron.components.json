@@ -18,7 +18,7 @@
     },
     {
       "selector": "div#{id} h2",
-      "text_pt_BR": "Banner Sub-Título",
+      "text_pt_BR": "Banner Subtítulo",
       "text_en_US": "Jumbotron Subtitle"
     }
   ],
