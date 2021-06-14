@@ -3364,7 +3364,7 @@
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             var parent = element.parent();
-            $(parent).append('<input style="width: 100%;" ' + name + ' class="cronSelect"/>');
+            $(parent).append('<input style="width: 100%;" '+ id + name + ' class="cronSelect"/>');
             var $element = $(parent).find('input.cronSelect');
 
             var options = await app.kendoHelper.getConfigCombobox(select, scope);
