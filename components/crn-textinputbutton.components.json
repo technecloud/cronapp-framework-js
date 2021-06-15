@@ -15,26 +15,34 @@
   },
   "styles": [
     {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
+    },
+    {
       "selector": "div#{id} .input-group .form-control",
-      "text_pt_BR": "Geral",
-      "text_en_US": "General"
+      "text_pt_BR": "Entrada de texto",
+      "text_en_US": "Input"
+    },
+    {
+      "selector": "div#{id} .input-group .form-control::placeholder",
+      "text_pt_BR": "Sugestão",
+      "text_en_US": "Placeholder"
     },
     {
       "selector": "div#{id} button",
       "text_pt_BR": "Botão",
       "text_en_US": "Button"
-    },
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
     }
   ],
   "childrenProperties": [
     {
       "name": "content",
       "selector": "label",
-      "type": "content"
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
+      "type": "text",
+      "order": 1
     },
     {
       "name": "ng-model",
@@ -47,12 +55,14 @@
     {
       "name": "type",
       "selector": "input",
-      "type": "type"
+      "type": "type",
+      "order": 2
     },
     {
       "name": "mask",
       "selector": "input",
-      "type": "mask"
+      "type": "mask",
+      "order": 3
     },
     {
       "name": "ng-required",
@@ -62,12 +72,8 @@
     {
       "name": "placeholder",
       "selector": "input",
-      "type": "text"
-    },
-    {
-      "name": "mask-placeholder",
-      "selector": "input",
-      "type": "text"
+      "type": "text",
+      "order": 4
     },
     {
       "name": "ng-init",
