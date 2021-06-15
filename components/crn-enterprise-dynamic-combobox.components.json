@@ -19,6 +19,43 @@
       "order": 1
     }
   },
+  "styles": [   
+    {
+      "selector": ".cronDynamicSelect .k-dropdown-wrap",
+      "text_pt_BR": "Geral",
+      "text_en_US": "General"
+    },
+    {
+      "selector": ".cronDynamicSelect .k-dropdown-wrap .k-input",
+      "text_pt_BR": "Caixa de Seleção",
+      "text_en_US": "Combobox"
+    },
+    {
+      "selector": ".cronDynamicSelect .k-dropdown-wrap .k-select",
+      "text_pt_BR": "Seta",
+      "text_en_US": "Dropdown"
+    },
+    {
+      "selector": "label#{id}_label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
+    },
+    {
+      "selector": "#{id}-list, #{id}-list .k-list-optionlabel",
+      "text_pt_BR": "Lista de Itens",
+      "text_en_US": "Item List"
+    },
+    {
+      "selector": "#{id}_listbox .k-state-hover",
+      "text_pt_BR": "Item da Lista Hover",
+      "text_en_US": "Item List Hover"
+    },
+    {
+      "selector": "#{id}_listbox .k-state-focused",
+      "text_pt_BR": "Item Selecionado",
+      "text_en_US": "Selected Item"
+    }
+  ],
   "childrenProperties": [
     {
       "name": "ng-change",
@@ -74,7 +111,9 @@
     {
       "name": "content",
       "selector": "label",
-      "type": "content",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
+      "type": "text",
       "order": 2
     },
     {
@@ -88,42 +127,5 @@
       "type": "text",
       "onSave": "javascript:(value)=> {this.currentObject.parent().find('label').attr('for', arguments[0]); return arguments[0];}"
     }
-  ],
-  "styles": [
-    {
-      "selector": "div#{id} .k-select",
-      "text_pt_BR": "Seta",
-      "text_en_US": "Dropdown"
-    },
-    {
-      "selector": "div#{id} .k-dropdown-wrap",
-      "text_pt_BR": "Geral",
-      "text_en_US": "General"
-    },
-    {
-      "selector": "div#{id} .k-input",
-      "text_pt_BR": "Campo da Caixa de Seleção",
-      "text_en_US": "Select Field"
-    },
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
-    },
-    {
-      "selector": "div#combobox{id}-select-list",
-      "text_pt_BR": "Lista de Itens",
-      "text_en_US": "Item List"
-    },
-    {
-      "selector": "div#cron-{id}-list>div>div>ul>li.k-state-hover",
-      "text_pt_BR": "Item da Lista Hover",
-      "text_en_US": "Item List Hover"
-    },
-    {
-      "selector": "div#cron-{id}-list>div>div>ul>li.k-state-focused",
-      "text_pt_BR": "Item Selecionado",
-      "text_en_US": "Selected Item"
-    }
-  ]
+  ]  
 }
