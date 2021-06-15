@@ -35,7 +35,7 @@
     {
       "selector": "div#{id} .k-draghandle",
       "text_pt_BR": "Botão Arrastar",
-      "text_en_US": "Drag Button Style"
+      "text_en_US": "Drag Button"
     },
     {
       "selector": "div#{id} label",
