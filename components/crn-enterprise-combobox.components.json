@@ -49,7 +49,12 @@
       "selector": "#{id}_listbox .k-state-hover",
       "text_pt_BR": "Item da Lista Hover",
       "text_en_US": "Item List Hover"
-    }    
+    },
+    {
+      "selector": "#{id}_listbox .k-state-focused",
+      "text_pt_BR": "Item Selecionado",
+      "text_en_US": "Selected Item"
+    }
   ],
   "childrenProperties": [
     {
