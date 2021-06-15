@@ -37,6 +37,13 @@
       "order": 2
     }
   },
+  "styles": [
+    {
+      "selector": "div#{id} i",
+      "text_pt_BR": "Ícone",
+      "text_en_US": "Icon"
+    }
+  ],
   "childrenProperties": [
     {
       "name": "class",
