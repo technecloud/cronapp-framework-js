@@ -20,22 +20,22 @@
     {
       "selector": "div#{id} .k-slider .k-button-decrease",
       "text_pt_BR": "Seta Esquerda",
-      "text_en_US": "Arrow Left Style"
+      "text_en_US": "Arrow Left"
     },
     {
       "selector": "div#{id} .k-slider .k-button-increase",
       "text_pt_BR": "Seta Direita",
-      "text_en_US": "Arrow Right Style"
+      "text_en_US": "Arrow Right"
     },
     {
       "selector": "div#{id} .k-slider-track",
       "text_pt_BR": "Caminho",
-      "text_en_US": "Track Style"
+      "text_en_US": "Track"
     },
     {
       "selector": "div#{id} .k-draghandle",
       "text_pt_BR": "Botão Arrastar",
-      "text_en_US": "Drag Button Style"
+      "text_en_US": "Drag Button"
     },
     {
       "selector": "div#{id} label",
