@@ -3598,7 +3598,7 @@
                           }, function() {
                             options.success(null);
                             _combobox.isEvaluating = false;
-                          });
+                          }, [combobox.options.dataValueField]);
                         }
                       }
                     } else {
