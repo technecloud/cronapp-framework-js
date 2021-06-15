@@ -6,7 +6,6 @@
   "text_en_US": "Combobox",
   "class": "adjust-icon mdi mdi-equal-box",
   "order": 9,
-  "wrapper": true,
   "setRandomId": false,
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox.designtime.html",
