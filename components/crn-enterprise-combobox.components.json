@@ -21,37 +21,37 @@
   },
   "styles": [
     {
-      "selector": "div#{id} .k-dropdown-wrap",
-      "text_pt_BR": "Geral",
-      "text_en_US": "General"
+      "selector": "input#{id}",
+      "text_pt_BR": "Caixa de seleção",
+      "text_en_US": "Combobox"
     },
     {
-      "selector": "div#{id} .k-combobox .k-select",
+      "selector": ".cronSelect span .k-select",
       "text_pt_BR": "Seta",
       "text_en_US": "Dropdown"
     },
     {
-      "selector": "div#{id} .cronSelect",
-      "text_pt_BR": "Campo da Caixa de Seleção",
-      "text_en_US": "Select Field"
+      "selector": "#{id}_label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     },
     {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "selector": "#{id}_listbox .k-state-selected",
+      "text_pt_BR": "Item Selecionado", 
+      "text_en_US": "Selected Item"
     },
     {
-      "selector": "div#comboBox{id}-select-list",
+      "selector": "#{id}-list",
       "text_pt_BR": "Lista de Itens",
       "text_en_US": "Item List"
     },
     {
-      "selector": "div#cron-{id}-list>div>ul>li.k-state-hover",
+      "selector": "#{id}_listbox .k-state-hover",
       "text_pt_BR": "Item da Lista Hover",
       "text_en_US": "Item List Hover"
     },
     {
-      "selector": "div#cron-{id}-list>div>ul>li.k-state-focused",
+      "selector": "#{id}_listbox .k-state-focused",
       "text_pt_BR": "Item Selecionado",
       "text_en_US": "Selected Item"
     }
@@ -113,6 +113,8 @@
     {
       "name": "content",
       "selector": "label",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "text",
       "order": 2
     },
