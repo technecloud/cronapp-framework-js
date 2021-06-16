@@ -1,7 +1,7 @@
 {
     "name": "crn-image-menu",
-    "text_pt_BR": "Imagem",
-    "text_en_US": "Image",
+    "text_pt_BR": "Imagem do menu",
+    "text_en_US": "Menu image",
     "class": "adjust-icon mdi mdi-image",
     "wrapper": false,
     "autoWrapper": true,
@@ -12,8 +12,6 @@
             "removable": false,
             "type": "projectResource",
             "resourceType": "image/jpeg,image/gif,image/png,image/svg+xml",
-            "displayName_pt_BR": "Origem",
-            "displayName_en_US": "Origin",
             "mandatory": true,
             "order": 1
         },
