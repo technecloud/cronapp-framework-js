@@ -41,6 +41,13 @@
       "order": 9999
     }
   },
+  "styles": [
+    {
+      "selector": "div#{id} h1",
+      "text_pt_BR": "Cabeçalho",
+      "text_en_US": "Header"
+    }
+  ],
   "attributesForPreview": [
     {
       "name": "xattr-position",
