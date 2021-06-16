@@ -5,6 +5,7 @@
     "class": "adjust-icon mdi mdi-image",
     "wrapper": false,
     "autoWrapper": true,
+    "pallete": false,
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/image-menu.template.html",
     "properties": {
       "ng-src": {
