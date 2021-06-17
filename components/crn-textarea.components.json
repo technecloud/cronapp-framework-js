@@ -50,7 +50,7 @@
       "name": "resize",
       "selector": "textarea",
       "displayName_pt_BR": "Redimensionável",
-      "displayName_en_US": "Number of Lines",
+      "displayName_en_US": "Resize",
       "type": "text",
       "order": 5
     },
