@@ -1,6 +1,7 @@
 {
   "name": "crn-upload-file",
-  "text": "File Upload Button",
+  "text_pt_BR": "Botão de envio de arquivo",
+  "text_en_US": "File Upload Button",
   "wrapper": false,
   "pallete": false,
   "class": "adjust-icon mdi mdi-cloud-upload",
