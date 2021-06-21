@@ -1,0 +1,14 @@
+.thumbnail {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+    border-color: #2fa4e7;
+}
+
+.thumbnail .caption {
+    color: #555555;
+}

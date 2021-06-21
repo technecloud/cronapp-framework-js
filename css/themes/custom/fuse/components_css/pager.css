@@ -1,0 +1,18 @@
+.pager li>a,
+.pager li>span {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+}
+
+.pager li>a:hover,
+.pager li>a:focus {
+    background-color: #eeeeee;
+}
+
+.pager .disabled>a,
+.pager .disabled>a:hover,
+.pager .disabled>a:focus,
+.pager .disabled>span {
+    color: #999999;
+    background-color: #ffffff;
+}

@@ -1,0 +1,11 @@
+.breadcrumb {
+    background-color: #f5f5f5;
+}
+
+.breadcrumb>li+li:before {
+    color: #cccccc;
+}
+
+.breadcrumb>.active {
+    color: #999999;
+}

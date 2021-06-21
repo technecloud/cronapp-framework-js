@@ -1,0 +1,6 @@
+a.badge:hover,
+a.badge:focus {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}

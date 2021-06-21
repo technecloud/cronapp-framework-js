@@ -3,6 +3,24 @@
   "pallete": false,
   "text_pt_BR": "Item de opção",
   "text_en_US": "Radio Item",
+  "properties": {
+    "checked": {
+      "removable": false,
+      "displayName_pt_BR": "Selecionado",
+      "displayName_en_US": "selected",
+      "type": "list",
+      "options": [
+        {
+          "key": "true",
+          "value_pt_BR": "Sim",
+          "value_en_US": "Yes"
+        }
+      ],
+      "selector": "input[ng-checked]",
+      "childrenProperty": true,
+      "order": 2
+    }
+  },
   "childrenProperties": [
     {
       "name": "value",
@@ -15,18 +33,10 @@
     {
       "name": "content",
       "selector": "label",
-      "displayName_pt_BR": "Conteúdo",
-      "displayName_en_US": "Content",
+      "displayName_pt_BR": "Legenda",
+      "displayName_en_US": "Subtitle",
       "type": "content",
       "order": 2
-    },
-    {
-      "name": "ng-checked",
-      "selector": "input[ng-checked]",
-      "displayName_pt_BR": "Checked",
-      "displayName_en_US": "Checked",
-      "type": "content",
-      "order": 3
     },
     {
       "name": "ng-click",

@@ -4,6 +4,20 @@
   "text_en_US": "Panel",
   "class": "adjust-icon mdi mdi-file-presentation-box",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/panel.template.html",
+  "wrapper": false,
+  "properties": {
+    "xattr-theme": {
+      "displayName_en_US": "Theme",
+      "displayName_pt_BR": "Tema",
+      "order": 1
+    },
+    "class": {
+      "order": 9999
+    },
+    "id": {
+      "order": 2
+    }
+  },
   "styles": [
     {
       "selector": "div#{id} .panel-heading",
@@ -21,17 +35,6 @@
       "text_en_US": "Footer"
     }
   ],
-  "properties": {
-    "xattr-theme": {
-      "displayName": "Theme"
-    },
-    "class": {
-      "order": 9999
-    },
-    "id": {
-      "order": 2
-    }
-  },
   "attributesForPreview": [
     {
       "name": "xattr-theme",
@@ -40,31 +43,38 @@
       "values": [
         {
           "key": "panel-default",
-          "value": "Default"
+          "value_pt_BR": "Padrão",
+          "value_en_US": "Default"
         },
         {
           "key": "panel-primary",
-          "value": "Primary"
+          "value_pt_BR": "Primário",
+          "value_en_US": "Primary"
         },
         {
           "key": "panel-success",
-          "value": "Success"
+          "value_pt_BR": "Sucesso",
+          "value_en_US": "Success"
         },
         {
           "key": "panel-info",
-          "value": "Info"
+          "value_pt_BR": "Informação",
+          "value_en_US": "Info"
         },
         {
           "key": "panel-warning",
-          "value": "Warning"
+          "value_pt_BR": "Aviso",
+          "value_en_US": "Warning"
         },
         {
           "key": "panel-danger",
-          "value": "Danger"
+          "value_pt_BR": "Perigo",
+          "value_en_US": "Danger"
         },
         {
           "key": "panel-link",
-          "value": "Link"
+          "value_pt_BR": "Claro",
+          "value_en_US": "Light"
         }
       ]
     }

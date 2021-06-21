@@ -2,6 +2,7 @@
 @import 'reset_password.css';
 @import 'modalTemplate.css';
 @import 'animate.css';
+@import './privacy/privacy.css';
 
 /* Directive crn-input-password */
 @import '../components/css/crn-input-password.css';
@@ -237,4 +238,41 @@ a {
 .form-control[ng-readonly=true] {
     background-color: #eee;
     opacity: 1;
+}
+
+#crn-button-846239{
+	display:none;
+}
+
+/* Dynamic file maintenance */
+.dynamic-image-container{
+    width: fit-content;
+}
+
+/* Treeview maintenance */
+.k-treeview .k-i-collapse, .k-treeview .k-i-expand{
+    height: auto;
+}
+
+.k-treeview .k-in{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+/* crn-enterprise-combobox-multiple maintenance */
+.k-multiselect-wrap .k-button{
+    font-size: 1em;
+}
+
+.page-header{
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.crn-radiogroup .k-content{
+    background-color: transparent;
+}
+
+img.crn-image{
+    max-width: 100%;
 }

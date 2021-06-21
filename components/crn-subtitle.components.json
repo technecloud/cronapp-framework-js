@@ -41,6 +41,13 @@
       "order": 1
     }
   },
+  "styles": [
+    {
+      "selector": "div#{id} h2",
+      "text_pt_BR": "Subtítulo",
+      "text_en_US": "Subtitle"
+    }
+  ],
   "attributesForPreview": [
     {
       "name": "xattr-position",

@@ -15,6 +15,7 @@
 
   var isoDate = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))/;
   var ISO_PATTERN = new RegExp("(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))|(\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d([+-][0-2]\\d:[0-5]\\d|Z))");
+  Number.MAX_SAFE_INTEGER_32 = 2147483647;
 
   /**
    * Função que retorna o formato que será utilizado no componente
@@ -2693,7 +2694,7 @@
                 var $gridDiv = $("<div/>");
                 var grid = $gridDiv.appendTo(e.detailCell).kendoGrid(currentKendoGridInit).data('kendoGrid');
                 app.kendoHelper.receivePushData(grid);
-                currentoptions.refComponent = grid;
+                currentOptions.refComponent = grid;
                 //Resize da tela para ajustar obter o widthDevices correto
                 window.addEventListener("resize", () => { helperDirective.resizeGridUsingWidthForDevice(grid) });
 
@@ -2980,7 +2981,9 @@
               //Colocando tabindex para poder focar - acessibilidade
               let grid = this;
               setTimeout(function() {
-                grid.pager.element.find("a").not(".k-state-disabled").attr("tabindex", "0");
+                if (grid.pager) {
+                  grid.pager.element.find("a").not(".k-state-disabled").attr("tabindex", "0");
+                }
               });
 
               compileListing(e);
@@ -3393,7 +3396,7 @@
             var id = attrs.id ? ' id="' + attrs.id + '"' : '';
             var name = attrs.name ? ' name="' + attrs.name + '"' : '';
             var parent = element.parent();
-            $(parent).append('<input style="width: 100%;" ' + name + ' class="cronSelect"/>');
+            $(parent).append('<input style="width: 100%;" '+ id + name + ' class="cronSelect"/>');
             var $element = $(parent).find('input.cronSelect');
 
             var options = await app.kendoHelper.getConfigCombobox(select, scope);
@@ -3440,7 +3443,7 @@
                 });
               }
               else {
-                $timeout(initializeAttrAndEvents());
+                setTimeout(() => initializeAttrAndEvents());
               }
             };
             initializeAttrAndEvents();
@@ -3627,7 +3630,7 @@
                           }, function() {
                             options.success(null);
                             _combobox.isEvaluating = false;
-                          });
+                          }, [combobox.options.dataValueField]);
                         }
                       }
                     } else {
@@ -4605,6 +4608,8 @@
               }
 
               var main = $(TEMPLATE_MAIN);
+              main.attr('id', attrs.id);
+              
               var menus = this.populateMenu(options, isVertical);
               main.append(menus);
               if (isVertical) {
@@ -5451,6 +5456,7 @@ app.kendoHelper = {
         },
         pushAction: function(type, callback) {
           return (data) => {
+            let cantRemoveDsEvents = ["read", "memorydelete", "overRideRefresh"];
             if (this.options.isComponentInDocument(this.options.refComponent)) {
               let current = this.options.getCurrentCallbackForPush(callback, this.options.refComponent);
               let acceptedMethod = current[type];
@@ -5463,7 +5469,7 @@ app.kendoHelper = {
                 this.options.refComponent.dataSource.read();
               }
             }
-            else {
+            else if (!cantRemoveDsEvents.includes(type)) {
               this.options.cronappDatasource.removeDataSourceEvents(this.options.dataSourceEventsPush);
             }
           }
@@ -5535,8 +5541,9 @@ app.kendoHelper = {
 
             //Significa que quer exibir todos
             if (!e.data.pageSize) {
-              cronappDatasource.offset = undefined
-              delete paramsOData.$skip;
+              cronappDatasource.rowsPerPage = Number.MAX_SAFE_INTEGER_32;
+              cronappDatasource.offset = undefined;
+              paramsOData.$skip = 0;
               if (this.options.refComponent) {
                 //Se houver grade associado, e a pagina não for a primeira, cancela a chamada atual, e faz novamente selecionando a pagina 1
                 if (this.options.refComponent.dataSource.page() != 1) {

@@ -19,7 +19,10 @@
     {
       "name": "content",
       "selector": "label",
-      "type": "content"
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
+      "type": "content",
+      "order": 1
     },
     {
       "name": "ng-model",
@@ -30,17 +33,32 @@
     {
       "name": "rows",
       "selector": "textarea",
-      "type": "text"
+      "displayName_pt_BR": "Quantidade de Linhas",
+      "displayName_en_US": "Number of Lines",
+      "type": "text",
+      "order": 3
     },
     {
       "name": "maxlength",
       "selector": "textarea",
-      "type": "text"
+      "displayName_pt_BR": "Máximo de caracteres",
+      "displayName_en_US": "maximum characters",
+      "type": "text",
+      "order": 4
     },
     {
       "name": "resize",
       "selector": "textarea",
-      "type": "text"
+      "displayName_pt_BR": "Redimensionável",
+      "displayName_en_US": "Resize",
+      "type": "text",
+      "order": 5
+    },
+    {
+      "name": "placeholder",
+      "selector": "textarea",
+      "type": "text",
+      "order": 2
     },
     {
       "name": "ng-init",
@@ -105,14 +123,19 @@
   ],
   "styles": [
     {
+      "selector": "div#{id} label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
+    },
+    {
       "selector": "div#{id} textarea.form-control",
       "text_pt_BR": "Área de Texto Geral",
       "text_en_US": "Text Area General"
     },
     {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "selector": "div#{id} textarea.form-control::placeholder",
+      "text_pt_BR": "Sugestão",
+      "text_en_US": "Placeholder"
     }
   ],
   "attributesForPreview": [
@@ -123,7 +146,8 @@
       "values": [
         {
           "key": "resize:none;",
-          "value": "None"
+          "value_pt_BR": "Nenhum",
+          "value_en_US": "None"
         },
         {
           "key": "resize:horizontal;",
@@ -135,7 +159,8 @@
         },
         {
           "key": "resize:both;",
-          "value": "Both "
+          "value_pt_BR": "Ambos",
+          "value_en_US": "Both"
         }
       ]
     }
