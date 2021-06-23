@@ -44,10 +44,19 @@
     {
       "name": "content",
       "selector": "label",
-      "displayName_pt_BR": "Conteúdo",
-      "displayName_en_US": "Content",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Text",
       "type": "text",
       "order": 3
+    },
+    
+    {
+      "name": "content",
+      "displayName_pt_BR": "Texto interno",
+      "displayName_en_US": "Internal text",
+      "selector": "div[dynamic-image]",
+      "type": "text",
+      "order": 1
     },
     {
       "name": "img-alt-text",
@@ -66,12 +75,6 @@
       "name": "ng-required",
       "selector": "div[dynamic-image]",
       "type": "logic"
-    },
-    {
-      "name": "content",
-      "selector": "div[dynamic-image]",
-      "type": "text",
-      "order": 1
     },
     {
       "name": "ng-init",
