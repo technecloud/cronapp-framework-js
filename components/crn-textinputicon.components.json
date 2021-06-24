@@ -32,6 +32,13 @@
   ],
   "childrenProperties": [
     {
+      "name": "class",
+      "selector": "i",
+      "displayName_pt_BR": "Ícone",
+      "displayName_en_US": "Icon",
+      "type": "icon"
+    },
+    {
       "name": "content",
       "selector": "label",
       "displayName_pt_BR": "Título",

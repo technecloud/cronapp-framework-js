@@ -4273,7 +4273,7 @@
               var id = attrs.id ? ' id="input' + app.common.generateId() + '"' : '';
               var name = attrs.name ? ' name="input' + app.common.generateId() + '"' : '';
               var parent = element.parent();
-              $(parent).append('<input aria-label="slider" autocomplete="off" tabindex="-1" style="width: 100%;"' + id + name + ' required class="cronSlider cron-select-offscreen" ng-model="' + attrs.ngModel + '"/>');
+              $(parent).append('<input aria-label="slider" autocomplete="off" tabindex="-1"' + id + name + ' required class="cronSlider cron-select-offscreen" ng-model="' + attrs.ngModel + '"/>');
               var input = $(parent).find("input.cronSlider");
               $compile(input)(element.scope());
             }

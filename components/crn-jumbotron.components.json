@@ -13,12 +13,12 @@
     },
     {
       "selector": "div#{id} h1",
-      "text_pt_BR": "Banner Título",
-      "text_en_US": "Jumbotron Title"
+      "text_pt_BR": "Cabeçalho",
+      "text_en_US": "Header"
     },
     {
       "selector": "div#{id} h2",
-      "text_pt_BR": "Banner Subtítulo",
+      "text_pt_BR": "Subtítulo",
       "text_en_US": "Jumbotron Subtitle"
     }
   ],
