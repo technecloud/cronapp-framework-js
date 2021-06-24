@@ -16,7 +16,7 @@
   },
   "styles": [
     {
-      "selector": "div#{id} th",
+      "selector": "div#{id} thead th",
       "text_pt_BR": "Cabeçalho da tabela",
       "text_en_US": "Table header"
     },
@@ -34,6 +34,11 @@
       "selector": "div#{id} tbody tr:hover",
       "text_pt_BR": "Linha Hover",
       "text_en_US": "Hover Line"
+    },
+    {
+      "selector": "div#{id} tfoot th",
+      "text_pt_BR": "Rodapé da tabela",
+      "text_en_US": "Table footer"
     }
   ],
   "childrenProperties": [
