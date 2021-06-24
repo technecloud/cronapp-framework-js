@@ -1,6 +1,6 @@
 {
   "name": "crn-enterprise-checkbox",
-  "text_pt_BR": "Checkbox",
+  "text_pt_BR": "Caixa de checagem",
   "text_en_US": "Checkbox",
   "class": "adjust-icon mdi mdi-checkbox-marked-outline",
   "order": 7,
@@ -16,8 +16,8 @@
   "styles": [
     {
       "selector": "div#{id} label",
-      "text_pt_BR": "Texto",
-      "text_en_US": "Text"
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     }
   ],
   "childrenProperties": [
@@ -49,6 +49,8 @@
     {
       "name": "content",
       "selector": "label",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "content",
       "order": 1
     },

@@ -19,7 +19,7 @@
     {
       "selector": "div#{id} h2",
       "text_pt_BR": "Subtítulo",
-      "text_en_US": "Jumbotron Subtitle"
+      "text_en_US": "Subtitle"
     }
   ],
   "properties": {

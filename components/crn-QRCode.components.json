@@ -19,19 +19,7 @@
       "displayName_pt_BR": "Código QR",
       "displayName_en_US": "QR Code",
       "childrenProperty": true,  
-      "type": "list",     
-      "options": [
-        {
-          "key": "false",
-          "value_pt_BR": "Falso",
-          "value_en_US": "False"
-        },
-        {
-          "key": "true",
-          "value_pt_BR": "Verdadeiro",
-          "value_en_US": "True"
-        }
-      ],
+      "type": "logic",
       "order": 1
     },
     "class": {
