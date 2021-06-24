@@ -39,6 +39,8 @@
     {
       "name": "content",
       "selector": "div[dynamic-file]",
+      "displayName_pt_BR": "Texto interno",
+      "displayName_en_US": "Internal text",
       "type": "text",
       "order": 1
     },
@@ -58,8 +60,8 @@
     {
       "name": "content",
       "selector": "label",
-      "displayName_pt_BR": "Conteúdo",
-      "displayName_en_US": "Content",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "text",
       "order": 3
     },
