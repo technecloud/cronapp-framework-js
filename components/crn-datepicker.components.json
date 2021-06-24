@@ -20,14 +20,16 @@
     },
     {
       "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     }
   ],
   "childrenProperties": [
     {
       "name": "content",
       "selector": "label",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "content"
     },
     {
@@ -55,11 +57,15 @@
     },
     {
       "name": "placeholder",
+      "displayName_pt_BR": "Sugestão",
+      "displayName_en_US": "Placeholder",
       "selector": "input",
       "type": "text"
     },
     {
       "name": "mask-placeholder",
+      "displayName_pt_BR": "Máscara da sugestão",
+      "displayName_en_US": "Placeholder mask",
       "selector": "input",
       "type": "text"
     },

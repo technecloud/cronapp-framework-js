@@ -101,11 +101,13 @@
       "values": [
         {
           "key": "btn-block",
-          "value": "Block"
+          "value_pt_BR": "Bloco",
+          "value_en_US": "Block"
         },
         {
           "key": "",
-          "value": "Inline"
+          "value_pt_BR": "Embutido",
+          "value_en_US": "Inline"
         }
       ]
     },
@@ -116,31 +118,38 @@
       "values": [
         {
           "key": "btn-default",
-          "value": "Default"
+          "value_pt_BR": "Padrão",
+          "value_en_US": "Default"
         },
         {
           "key": "k-primary",
-          "value": "Primary"
+          "value_pt_BR": "Primário",
+          "value_en_US": "Primary"
         },
         {
           "key": "k-success",
-          "value": "Success"
+          "value_pt_BR": "Sucesso",
+          "value_en_US": "Success"
         },
         {
           "key": "k-info",
-          "value": "Info"
+          "value_pt_BR": "Informação",
+          "value_en_US": "Info"
         },
         {
           "key": "k-warning",
-          "value": "Warning"
+          "value_pt_BR": "Aviso",
+          "value_en_US": "Warning"
         },
         {
           "key": "k-danger",
-          "value": "Danger"
+          "value_pt_BR": "Perigo",
+          "value_en_US": "Danger"
         },
         {
           "key": "btn-link",
-          "value": "Link"
+          "value_pt_BR": "Link",
+          "value_en_US": "Link"
         }
       ]
     },
@@ -151,11 +160,13 @@
       "values": [
         {
           "key": "true",
-          "value": "Sim"
+          "value_pt_BR": "Sim",
+          "value_en_US": "Yes"
         },
         {
           "key": "false",
-          "value": "Não"
+          "value_pt_BR": "Não",
+          "value_en_US": "No"
         }
       ]
     }
@@ -164,6 +175,8 @@
     {
       "name": "content",
       "selector": "span",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "content",
       "order": 2
     },
