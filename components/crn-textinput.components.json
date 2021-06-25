@@ -5,6 +5,37 @@
   "order": 6,
   "class": "adjust-icon mdi mdi-label-outline",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinput.template.html",
+
+  "wrapper": true,
+
+  "classForPreview": {
+    "targetSelector": "input",
+    "condition": [
+      {
+        "name": "type",
+        "value": "text",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "color",
+        "class": " "
+      }
+    ]
+  },
+
+
+  "attributesForPreview": [
+    {
+      "name": "type"
+    }
+  ],
+
+  "type": {
+    "displayName": "Type"
+  },
+
+
   "properties": {
     "class": {
       "order": 9999
@@ -54,6 +85,12 @@
       "order": 2
     },
     {
+      "name": "mask",
+      "selector": "input",
+      "type": "mask",
+      "order": 3
+    },
+    {
       "name": "ng-required",
       "selector": "input",
       "type": "logic"
@@ -63,6 +100,11 @@
       "selector": "input",
       "type": "text",
       "order": 4
+    },
+    {
+      "name": "mask-placeholder",
+      "selector": "input",
+      "type": "text"
     },
     {
       "name": "ng-init",
@@ -129,8 +171,6 @@
       "selector": "input",
       "type": "event"
     }
-  ],
-  "type": {
-    "displayName": "Type"
-  }
+  ]
+
 }

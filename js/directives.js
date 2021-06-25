@@ -4788,7 +4788,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
       var type = $element.attr("type");
 
-      if (type == "checkbox" || type == "password" || type == "color" || type == "range")
+      if (type == "checkbox" || type == "password")
         return;
 
       $element.data("type", type);
@@ -5074,8 +5074,9 @@ function maskDirective($compile, $translate, $parse, attrName) {
             useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask);
           }
         }
-      }
-      else {
+      } else if(type == "color" || type == "range"){
+        return;
+      } else {
         if ($element.attr('from-grid')) {
           var unmaskedvalue = function() {
             $(this).data('rawvalue',$(this).val());
