@@ -43,8 +43,11 @@
       "displayName_en_US": "Image position",
       "order": 2
     },
-    "id":{
+    "alt":{
       "order": 3
+    },
+    "id":{
+      "order": 4
     }
   },
   "styles": [

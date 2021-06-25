@@ -42,13 +42,13 @@
       "displayName_pt_BR": "Texto interno",
       "displayName_en_US": "Internal text",
       "type": "text",
-      "order": 1
+      "order": 2
     },
     {
       "name": "ng-model",
       "selector": "div[dynamic-file]",
       "type": "text",
-      "order": 2,
+      "order": 3,
       "mandatory": true
     },
     {
@@ -63,7 +63,7 @@
       "displayName_pt_BR": "Título",
       "displayName_en_US": "Title",
       "type": "text",
-      "order": 3
+      "order": 1
     },
     {
       "name": "max-file-size",
@@ -77,6 +77,19 @@
       "type": "logic",
       "order": 5
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
     {
       "name": "ng-init",
       "selector": "div[dynamic-file]",
