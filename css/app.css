@@ -299,3 +299,7 @@ fieldset[disabled] .btn-default:hover {
     background-color: #d0d0d0;
     color: #454545;
 }
+
+.header{
+    background-color: rgb(209, 209, 209);
+}

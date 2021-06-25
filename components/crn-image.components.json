@@ -11,7 +11,8 @@
       "removable": false,
       "type": "projectResource",
       "resourceType": "image/jpeg,image/gif,image/png,image/svg+xml",
-      "mandatory": true
+      "mandatory": true,
+      "order": 1
     },
     "ng-init": {
       "removable": true,
@@ -39,7 +40,11 @@
     },
     "xattr-position": {
       "displayName_pt_BR": "Posição da imagem",
-      "displayName_en_US": "Image position"
+      "displayName_en_US": "Image position",
+      "order": 2
+    },
+    "id":{
+      "order": 3
     }
   },
   "styles": [

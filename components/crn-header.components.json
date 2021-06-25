@@ -4,5 +4,21 @@
   "text_en_US": "Header",
   "class": "adjust-icon mdi mdi-page-layout-header",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/header.template.html",
-  "wrapper": false
+  "wrapper": false,
+  "forcedGroup": true,
+  "properties": {
+    "class": {
+      "order": 9999
+    },
+    "id": {
+      "order": 3
+    }
+  },
+  "styles": [
+    {
+      "selector": "div#{id}",
+      "text_pt_BR": "Plano de fundo",
+      "text_en_US": "Background"
+    }
+  ]
 }
