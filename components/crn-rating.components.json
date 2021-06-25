@@ -153,6 +153,33 @@
           "value_en_US": "Green"
         }
       ]
+    },
+    {
+      "name": "icon-size",
+      "type": "options",
+      "target": "style",
+      "values": [
+        {
+          "key": "font-size: 20px;",
+          "value_pt_BR": "Padrão",
+          "value_en_US": "Default"
+        },
+        {
+          "key": "font-size: 47px;",
+          "value_pt_BR": "Grande",
+          "value_en_US": "Big"
+        },
+        {
+          "key": "font-size: 30px;",
+          "value_pt_BR": "Médio",
+          "value_en_US": "Medium"
+        },
+        {
+          "key": "font-size: 25px;",
+          "value_pt_BR": "Pequeno",
+          "value_en_US": "Small"
+        }
+      ]
     }
   ],
   "childrenProperties": [
@@ -177,6 +204,12 @@
       "name": "icon-theme",
       "displayName_pt_BR": "Cor do ícone",
       "displayName_en_US": "Icon color",
+      "selector": "i"
+    },
+    {
+      "name": "icon-size",
+      "displayName_pt_BR": "Tamanho do ícone",
+      "displayName_en_US": "Icon size",
       "selector": "i"
     },
     {

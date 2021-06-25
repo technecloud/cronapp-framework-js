@@ -19,7 +19,7 @@
       "selector": "div#{id} .btn",
       "text_pt_BR": "Botão",
       "text_en_US": "Button"
-    }    
+    }
   ],
   "properties": {
     "ng-model": {
@@ -77,19 +77,6 @@
       "type": "logic",
       "order": 5
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
     {
       "name": "ng-init",
       "selector": "div[dynamic-file]",
