@@ -61,11 +61,15 @@
     },
     {
       "name": "ng-false-value",
+      "displayName_pt_BR": "Se for falso",
+      "displayName_en_US": "if it's false",
       "selector": "input",
       "type": "text"
     },
     {
       "name": "ng-true-value",
+      "displayName_pt_BR": "Se for verdadeiro",
+      "displayName_en_US": "if it's true",
       "selector": "input",
       "type": "text"
     }

@@ -87,6 +87,8 @@
     {
       "name": "ng-false-value",
       "selector": "input",
+      "displayName_pt_BR": "Se for falso",
+      "displayName_en_US": "if it's false",
       "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = '\\''+result+'\\'';  }  return result; }",
       "onDisplay": "javascript:function() { return arguments[0].split('\\'').join('') }",
       "type": "text"
@@ -94,6 +96,8 @@
     {
       "name": "ng-true-value",
       "selector": "input",
+      "displayName_pt_BR": "Se for verdadeiro",
+      "displayName_en_US": "if it's true",
       "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = '\\''+result+'\\'';  }  return result; }",
       "onDisplay": "javascript:function() { return arguments[0].split('\\'').join('') }",
       "type": "text"

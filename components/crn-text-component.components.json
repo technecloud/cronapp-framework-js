@@ -6,10 +6,22 @@
   "class": "adjust-icon mdi mdi-format-header-pound",
   "order": 10,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamictitle.template.html",
+  "id": {
+    "order": 1
+  },
+  "content": {
+    "order": 2
+  },
   "properties": {
     "xattr-position": {
       "displayName_pt_BR": "Posição",
-      "displayName_en_US": "Position"
+      "displayName_en_US": "Position",
+      "order": 4
+    },
+    "xattr-type":{
+      "displayName_pt_BR": "Tamanho da letra",
+      "displayName_en_US": "Lettering size",
+      "order": 3
     },
     "class": {
       "order": 9999
