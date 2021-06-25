@@ -48,23 +48,9 @@
       "order": 2
     },
     {
-      "name": "mask",
-      "selector": "input",
-      "type": "mask",
-      "order": 3
-    },
-    {
       "name": "ng-required",
       "selector": "input",
       "type": "logic"
-    },
-    {
-      "name": "placeholder",
-      "displayName_pt_BR": "Sugestão",
-      "displayName_en_US": "Placeholder",
-      "selector": "input",
-      "type": "text",
-      "order": 4
     },
     {
       "name": "ng-init",

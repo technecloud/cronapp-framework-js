@@ -7,6 +7,8 @@
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/anchor.template.html",
   "properties": {
     "target": {
+      "displayName_pt_BR": "Ação pós clique",
+      "displayName_en_US": "Post click action",
       "removable": false,
       "type": "list",
       "options": [
@@ -30,7 +32,8 @@
           "value_pt_BR": "Topo",
           "value_en_US": "Top"
         }
-      ]
+      ],
+      "order": 2
     },
     "href": {
       "removable": false,
@@ -38,7 +41,13 @@
       "resourceType": "text/html",
       "extraOptions": {
         "underViewsFolder": true
-      }
+      },
+      "order": 3
+    },
+    "content": {
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
+      "order": 1
     },
     "class": {
       "order": 9999
