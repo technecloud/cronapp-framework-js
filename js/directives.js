@@ -4788,7 +4788,7 @@ function maskDirective($compile, $translate, $parse, attrName) {
 
       var type = $element.attr("type");
 
-      if (type == "checkbox" || type == "password")
+      if (type == "checkbox" || type == "password" || type == "color" || type == "range")
         return;
 
       $element.data("type", type);
