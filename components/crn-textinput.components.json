@@ -5,9 +5,7 @@
   "order": 6,
   "class": "adjust-icon mdi mdi-label-outline",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinput.template.html",
-
   "wrapper": true,
-
   "classForPreview": {
     "targetSelector": "input",
     "condition": [
@@ -18,24 +16,99 @@
       },
       {
         "name": "type",
+        "value": "number",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "integer",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "money",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "money-decimal",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "password",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "date",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "datetime-local",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
         "value": "color",
         "class": " "
+      },
+      {
+        "name": "type",
+        "value": "email",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "month",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "range",
+        "class": " "
+      },
+      {
+        "name": "type",
+        "value": "search",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "tel",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "time",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "time-local",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "url",
+        "class": "form-control k-textbox"
+      },
+      {
+        "name": "type",
+        "value": "week",
+        "class": "form-control k-textbox"
       }
     ]
   },
-
-
   "attributesForPreview": [
     {
       "name": "type"
     }
   ],
-
   "type": {
     "displayName": "Type"
   },
-
-
   "properties": {
     "class": {
       "order": 9999
@@ -172,5 +245,4 @@
       "type": "event"
     }
   ]
-
 }
