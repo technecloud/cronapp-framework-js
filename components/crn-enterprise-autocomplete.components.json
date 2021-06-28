@@ -2,8 +2,8 @@
     "name": "crn-enterprise-autocomplete",
     "onDrop": "openEditor",
     "onDoubleClick": "openEditor",
-    "text_pt_BR": "Auto Completar",
-    "text_en_US": "Auto Complete",
+    "text_pt_BR": "Auto completar",
+    "text_en_US": "Auto complete",
     "class": "adjust-icon mdi mdi-receipt",
     "designTimeDynamic": true,
     "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
@@ -17,7 +17,8 @@
             "order": 1
         }
     },
-    "styles": [{
+    "styles": [
+        {
             "selector": "div#{id} .k-input",
             "text_pt_BR": "Entrada de Texto",
             "text_en_US": "Input"
@@ -43,7 +44,8 @@
             "text_en_US": "Item List"
         }
     ],
-    "childrenProperties": [{
+    "childrenProperties": [
+        {
             "name": "options",
             "selector": "cron-auto-complete",
             "displayName_pt_BR": "Configuração",
@@ -64,6 +66,8 @@
         {
             "name": "content",
             "selector": "label",
+            "displayName_pt_BR": "Título",
+            "displayName_en_US": "Title",
             "type": "text",
             "order": 2
         },

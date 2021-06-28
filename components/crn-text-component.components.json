@@ -6,9 +6,22 @@
   "class": "adjust-icon mdi mdi-format-header-pound",
   "order": 10,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamictitle.template.html",
+  "id": {
+    "order": 1
+  },
+  "content": {
+    "order": 2
+  },
   "properties": {
     "xattr-position": {
-      "displayName": "Position"
+      "displayName_pt_BR": "Posição",
+      "displayName_en_US": "Position",
+      "order": 4
+    },
+    "xattr-type":{
+      "displayName_pt_BR": "Tamanho da letra",
+      "displayName_en_US": "Lettering size",
+      "order": 3
     },
     "class": {
       "order": 9999
@@ -49,17 +62,20 @@
       "values": [
         {
           "key": "text-left",
-          "value": "Standard",
+          "value_pt_BR": "Esquerda",
+          "value_en_US": "Left",
           "icon": "mdi mdi-ray-start"
         },
         {
           "key": "text-center",
-          "value": "Middle",
+          "value_pt_BR": "Centro",
+          "value_en_US": "Center",
           "icon": "mdi mdi-ray-vertex"
         },
         {
           "key": "text-right",
-          "value": "Right",
+          "value_pt_BR": "Direita",
+          "value_en_US": "Right",
           "icon": "mdi mdi-ray-end"
         }
       ]
@@ -71,15 +87,18 @@
       "values": [
         {
           "key": "h1",
-          "value": "Major Title"
+          "value_pt_BR": "Título maior",
+          "value_en_US": "Major Title"
         },
         {
           "key": "h3",
-          "value": "Medium Title"
+          "value_pt_BR": "Título médio",
+          "value_en_US": "Medium Title"
         },
         {
           "key": "h5",
-          "value": "Minor Title"
+          "value_pt_BR": "Título menor",
+          "value_en_US": "Minor Title"
         }
       ]
     }

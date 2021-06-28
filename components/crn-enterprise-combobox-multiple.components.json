@@ -112,6 +112,8 @@
     {
       "name": "content",
       "selector": "label",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "content",
       "order": 2
     },

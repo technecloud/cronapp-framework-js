@@ -2,7 +2,7 @@
   "name": "crn-enterprise-dynamic-autocomplete",
   "onDrop": "openEditor",
   "onDoubleClick": "openEditor",
-  "text_pt_BR": "Auto Completar Dinâmico",
+  "text_pt_BR": "Auto completar dinâmico",
   "text_en_US": "Dynamic Auto Complete",
   "class": "adjust-icon mdi mdi-receipt",
   "designTimeDynamic": true,
