@@ -11,7 +11,8 @@
       "removable": false,
       "type": "projectResource",
       "resourceType": "image/jpeg,image/gif,image/png,image/svg+xml",
-      "mandatory": true
+      "mandatory": true,
+      "order": 1
     },
     "ng-init": {
       "removable": true,
@@ -38,7 +39,15 @@
       "type": "event"
     },
     "xattr-position": {
-      "displayName": "Position"
+      "displayName_pt_BR": "Posição da imagem",
+      "displayName_en_US": "Image position",
+      "order": 2
+    },
+    "alt":{
+      "order": 3
+    },
+    "id":{
+      "order": 4
     }
   },
   "styles": [
@@ -56,17 +65,20 @@
       "values": [
         {
           "key": "left-block",
-          "value": "Standard",
+          "value_pt_BR": "Esquerda",
+          "value_en_US": "Left",
           "icon": "mdi mdi-ray-start"
         },
         {
           "key": "center-block",
-          "value": "Middle",
+          "value_pt_BR": "Centro",
+          "value_en_US": "Center",
           "icon": "mdi mdi-ray-vertex"
         },
         {
           "key": "right-block",
-          "value": "Right",
+          "value_pt_BR": "Direita",
+          "value_en_US": "Right",
           "icon": "mdi mdi-ray-end"
         }
       ]

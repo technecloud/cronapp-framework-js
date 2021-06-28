@@ -10,33 +10,33 @@
   "styles": [
     {
       "selector": "div#{id} .k-datepicker .k-picker-wrap input",
-      "text_pt_BR": "Estilo Campo Date Picker",
-      "text_en_US": "Field Date Picker Style"
+      "text_pt_BR": "Campo Date Picker",
+      "text_en_US": "Field Date Picker"
     },
     {
       "selector": "div#{id} .k-datepicker .k-picker-wrap .k-select",
-      "text_pt_BR": "Estilo Botão Date Picker",
-      "text_en_US": "Button Date Picker Styles"
+      "text_pt_BR": "Botão Date Picker",
+      "text_en_US": "Button Date Picker"
     },
     {
       "selector": "div#{id} .k-calendar .k-header .k-link.k-nav-prev",
-      "text_pt_BR": "Estilo Botão Anterior",
-      "text_en_US": "Style Prev Button"
+      "text_pt_BR": "Botão Anterior",
+      "text_en_US": "Prev Button"
     },
     {
       "selector": "div#{id} .k-calendar .k-header .k-link.k-nav-next",
-      "text_pt_BR": "Estilo Botão Próximo",
-      "text_en_US": "Style Next Button"
+      "text_pt_BR": "Botão Próximo",
+      "text_en_US": "Next Button"
     },
     {
       "selector": "div#{id} .k-widget.k-calendar .k-nav-fast",
-      "text_pt_BR": "Estilo Botão Mês",
-      "text_en_US": "Style Month Button"
+      "text_pt_BR": "Botão Mês",
+      "text_en_US": "Month Button"
     },
     {
       "selector": "div#{id} .k-calendar td.k-today",
-      "text_pt_BR": "Estilo Hoje",
-      "text_en_US": "Style Today"
+      "text_pt_BR": "Hoje",
+      "text_en_US": "Today"
     }
   ],
   "childrenProperties": [

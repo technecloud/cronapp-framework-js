@@ -20,7 +20,8 @@
   ],
   "properties": {
     "xattr-fullsize": {
-      "displayName": "Width"
+      "displayName_pt_BR": "Largura",
+      "displayName_en_US": "Width"
     }
   },
   "attributesForPreview": [
@@ -31,11 +32,13 @@
       "values": [
         {
           "key": "display:block;",
-          "value": "Block"
+          "value_pt_BR": "Bloco",
+          "value_en_US": "Block"
         },
         {
           "key": "display:inline;",
-          "value": "Inline"
+          "value_pt_BR": "Embutido",
+          "value_en_US": "Inline"
         }
       ]
     }
@@ -43,6 +46,8 @@
   "childrenProperties": [
     {
       "name": "content",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "selector": "span",
       "type": "content"
     },
@@ -56,11 +61,15 @@
     },
     {
       "name": "ng-false-value",
+      "displayName_pt_BR": "Valor para falso",
+      "displayName_en_US": "Value for false",
       "selector": "input",
       "type": "text"
     },
     {
       "name": "ng-true-value",
+      "displayName_pt_BR": "Valor para verdadeiro",
+      "displayName_en_US": "Value for true",
       "selector": "input",
       "type": "text"
     }

@@ -71,6 +71,8 @@
     },
     {
       "name": "placeholder",
+      "displayName_pt_BR": "Sugestão",
+      "displayName_en_US": "Placeholder",
       "selector": "input",
       "type": "text",
       "order": 4
