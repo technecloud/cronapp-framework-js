@@ -13,11 +13,24 @@
       "order": 1
     }
   },
-  "childrenProperties": [
+  "styles": [
     {
-      "name": "xattr-type",
-      "selector": "input"
+      "selector": "div#{id} label",
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     },
+    {
+      "selector": "div#{id} input.form-control",
+      "text_pt_BR": "Entrada de Texto",
+      "text_en_US": "Input"
+    },
+    {
+      "selector": "div#{id} input.form-control::placeholder",
+      "text_pt_BR": "Sugestão",
+      "text_en_US": "Placeholder"
+    }
+  ],
+  "childrenProperties": [
     {
       "name": "content",
       "selector": "label",
@@ -128,21 +141,7 @@
       "type": "event"
     }
   ],
-  "styles": [
-    {
-      "selector": "div#{id} label",
-      "text_pt_BR": "Título",
-      "text_en_US": "Title"
-    },
-    {
-      "selector": "div#{id} input.form-control",
-      "text_pt_BR": "Entrada de Texto",
-      "text_en_US": "Input"
-    },
-    {
-      "selector": "div#{id} input.form-control::placeholder",
-      "text_pt_BR": "Sugestão",
-      "text_en_US": "Placeholder"
-    }
-  ]
+  "type": {
+    "displayName": "Type"
+  }
 }
