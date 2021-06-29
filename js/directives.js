@@ -5074,9 +5074,8 @@ function maskDirective($compile, $translate, $parse, attrName) {
             useInputMaskPlugin(element, ngModelCtrl, scope, modelSetter, mask);
           }
         }
-      } else if(type == "color" || type == "range"){
-        return;
-      } else {
+      }      
+      else {
         if ($element.attr('from-grid')) {
           var unmaskedvalue = function() {
             $(this).data('rawvalue',$(this).val());
