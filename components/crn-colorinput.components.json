@@ -4,7 +4,7 @@
     "text_en_US": "Color input",
     "order": 6,
     "class": "adjust-icon mdi mdi-label-outline",
-    "template": "<div class=\"form-group\"> <label for=\"colorinput${RANDOM}\">Label</label> <input type=\"color\" value=\"#000\" ng-required=\"false\" ng-model=\"vars.input${RANDOM}\" id=\"colorinput${RANDOM}\" placeholder=\"Placeholder text\"> </div>",
+    "template": "<div class=\"form-group\"> <label for=\"colorinput${RANDOM}\">Label</label> <input type=\"color\" ng-required=\"false\" ng-model=\"vars.colorinput${RANDOM}\" id=\"colorinput${RANDOM}\"> </div>",
     "properties": {
         "class": {
             "order": 9999
@@ -13,127 +13,7 @@
             "order": 1
         }
     },
-    "attributesForPreview": [
-        {
-          "name": "value",
-          "type": "options",
-          "target": "value",
-          "values": [
-            {
-              "key": "#fff",
-              "value_pt_BR": "Branco",
-              "value_en_US": "White"
-            },
-            {
-              "key": "#3A3A3A",
-              "value_pt_BR": "Cinza",
-              "value_en_US": "Gray"
-            },
-            {
-              "key": "#000",
-              "value_pt_BR": "Preto",
-              "value_en_US": "Black"
-            },
-            {
-              "key": "#0247FE",
-              "value_pt_BR": "Azul",
-              "value_en_US": "Blue"
-            },
-            {
-              "key": "#85A5FF",
-              "value_pt_BR": "Azul claro",
-              "value_en_US": "Blue"
-            },
-            {
-              "key": "#00217A",
-              "value_pt_BR": "Azul escuro",
-              "value_en_US": "Blue"
-            },
-            {
-              "key": "#3D01A4",
-              "value_pt_BR": "Roxo",
-              "value_en_US": "Purple"
-            },
-            {
-              "key": "#B285FF",
-              "value_pt_BR": "Roxo claro",
-              "value_en_US": "Purple"
-            },
-            {
-              "key": "#2D007A",
-              "value_pt_BR": "Roxo escuro",
-              "value_en_US": "Purple"
-            },
-            {
-              "key": "#FE2712",
-              "value_pt_BR": "Vermelho",
-              "value_en_US": "Red"
-            },
-            {
-              "key": "#FE8F84",
-              "value_pt_BR": "Vermelho claro",
-              "value_en_US": "Red"
-            },
-            {
-              "key": "#7A0B00",
-              "value_pt_BR": "Vermelho escuro",
-              "value_en_US": "Red"
-            },
-            {
-              "key": "#FB9B02",
-              "value_pt_BR": "Laranja",
-              "value_en_US": "Orange"
-            },
-            {
-              "key": "#FFD085",
-              "value_pt_BR": "Laranja claro",
-              "value_en_US": "Orange"
-            },
-            {
-              "key": "#7A4B00",
-              "value_pt_BR": "Laranja escuro",
-              "value_en_US": "Orange"
-            },
-            {
-              "key": "#FFFF33",
-              "value_pt_BR": "Amarelo",
-              "value_en_US": "Yellow"
-            },
-            {
-              "key": "#FFFF85",
-              "value_pt_BR": "Amarelo claro",
-              "value_en_US": "Yellow"
-            },
-            {
-              "key": "#FFFF33",
-              "value_pt_BR": "Amarelo escuro",
-              "value_en_US": "7A7A00"
-            },
-            {
-              "key": "#66B032",
-              "value_pt_BR": "Verde",
-              "value_en_US": "Green"
-            },
-            {
-              "key": "#B7FF85",
-              "value_pt_BR": "Verde claro",
-              "value_en_US": "Green"
-            },
-            {
-              "key": "#337A00",
-              "value_pt_BR": "Verde escuro",
-              "value_en_US": "Green"
-            }
-          ]
-        }
-    ],
     "childrenProperties": [
-        {
-            "name": "value",
-            "displayName_pt_BR": "Cor inicial",
-            "displayName_en_US": "Initial color",
-            "selector": "input"
-          },
         {
             "name": "content",
             "selector": "label",

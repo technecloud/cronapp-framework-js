@@ -4,7 +4,7 @@
     "text_en_US": "Range input",
     "order": 6,
     "class": "adjust-icon mdi mdi-label-outline",
-    "template": "<div class=\"form-group\"> <label for=\"colorinput${RANDOM}\">Label</label> <input type=\"range\" value=\"5\" min=\"0\" max=\"10\" ng-required=\"false\" ng-model=\"vars.input${RANDOM}\" id=\"colorinput${RANDOM}\" placeholder=\"Placeholder text\"> </div>",
+    "template": "<div class=\"form-group\"> <label for=\"colorinput${RANDOM}\">Label</label> <input type=\"range\" value=\"5\" min=\"0\" max=\"10\" step=\"1\" ng-required=\"false\" ng-model=\"vars.input${RANDOM}\" id=\"colorinput${RANDOM}\" placeholder=\"Placeholder text\"> </div>",
     "properties": {
         "class": {
             "order": 9999
@@ -34,6 +34,13 @@
             "displayName_en_US": "Minimum value",
             "selector": "input",
             "order": 4
+        },
+        {
+            "name": "step",
+            "displayName_pt_BR": "Intervalo",
+            "displayName_en_US": "Step",
+            "selector": "input",
+            "order": 5
         },
         {
             "name": "content",
