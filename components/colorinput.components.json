@@ -1,0 +1,111 @@
+{
+    "name": "crn-textinput",
+    "text_pt_BR": "Entrada de cor",
+    "text_en_US": "Color input",
+    "order": 6,
+    "class": "adjust-icon mdi mdi-label-outline",
+    "template": "<div class=\"form-group\"> <label for=\"colorinput${RANDOM}\">Label</label> <input type=\"color\" ng-required=\"false\" ng-model=\"vars.input${RANDOM}\" id=\"colorinput${RANDOM}\" placeholder=\"Placeholder text\"> </div>",
+    "properties": {
+      "class": {
+        "order": 9999
+      },
+      "id": {
+        "order": 1
+      }
+    },
+    "childrenProperties": [
+      {
+        "name": "content",
+        "selector": "label",
+        "displayName_pt_BR": "Título",
+        "displayName_en_US": "Title",
+        "type": "text",
+        "order": 1
+      },
+      {
+        "name": "ng-model",
+        "selector": "input",
+        "type": "text",
+        "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') ==  -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+        "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+        "mandatory": true
+      },
+      {
+        "name": "ng-required",
+        "selector": "input",
+        "type": "logic"
+      },
+      {
+        "name": "ng-init",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-change",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-click",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-dblclick",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-keydown",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-keyup",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-focus",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-blur",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-mouseenter",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-mouseleave",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-mousemove",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-copy",
+        "selector": "input",
+        "type": "event"
+      },
+      {
+        "name": "ng-paste",
+        "selector": "input",
+        "type": "event"
+      }
+    ],
+    "styles": [
+      {
+        "selector": "div#{id} label",
+        "text_pt_BR": "Título",
+        "text_en_US": "Title"
+      }
+    ]
+  }
