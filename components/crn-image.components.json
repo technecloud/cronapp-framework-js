@@ -2,7 +2,7 @@
   "name": "crn-image",
   "text_pt_BR": "Imagem",
   "text_en_US": "Image",
-  "class": "adjust-icon mdi mdi-image",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-image.svg",
   "wrapper": false,
   "autoWrapper": true,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/image.default.template.html",

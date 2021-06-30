@@ -2,7 +2,7 @@
   "name": "crn-QRCode",
   "text_pt_BR": "Código QR",
   "text_en_US": "QR Code",
-  "class": "adjust-icon mdi mdi-qrcode",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-QRCode.svg",
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/qrcode.template.html",
   "designTimeHTML": "<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"node_modules/cronapp-framework-js/img/qrcode.png\"/>",

@@ -3,7 +3,7 @@
     "text_pt_BR": "Botão",
     "text_en_US": "Button",
     "order": 5,
-    "class": "adjust-icon mdi mdi-stop",
+    "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-button.svg",
     "wrapper": true,
     "autoWrapper": false,
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/button.template.html",

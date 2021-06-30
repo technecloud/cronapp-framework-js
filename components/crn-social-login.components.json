@@ -2,7 +2,7 @@
   "name": "crn-social-login",
   "text_pt_BR": "Login Social",
   "text_en_US": "Social Login",
-  "class": "adjust-icon mdi mdi-login",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-social-login.svg",
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/social-button-bar.template.html"
 }

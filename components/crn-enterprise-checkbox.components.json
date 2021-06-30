@@ -2,7 +2,7 @@
   "name": "crn-enterprise-checkbox",
   "text_pt_BR": "Caixa de checagem",
   "text_en_US": "Checkbox",
-  "class": "adjust-icon mdi mdi-checkbox-marked-outline",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-checkbox.svg",
   "order": 7,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-checkbox.template.html",
   "properties": {

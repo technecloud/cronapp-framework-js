@@ -3,7 +3,7 @@
   "text_pt_BR": "Título",
   "text_en_US": "Title",
   "wrapper": false,
-  "class": "adjust-icon mdi mdi-format-header-pound",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-text-component.svg",
   "order": 10,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamictitle.template.html",
   "id": {

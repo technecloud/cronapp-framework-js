@@ -5,7 +5,7 @@
   "text_pt_BR": "Calendário",
   "text_en_US": "Calendar",
   "order": 2,
-  "class": "adjust-icon mdi mdi-calendar-month",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-calendar.svg",
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-calendar.designtime.html",
   "designTimeSelector": "cron-calendar",
