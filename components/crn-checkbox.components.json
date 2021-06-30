@@ -4,7 +4,7 @@
   "text_pt_BR": "Caixa de checagem",
   "text_en_US": "Checkbox",
   "order": 0,
-  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-checkbox.svg",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-icon-checkbox.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/checkbox.template.html",
   "styles": [
     {
