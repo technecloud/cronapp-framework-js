@@ -4,7 +4,7 @@
   "text_en_US": "File Upload",
   "wrapper": false,
   "autoWrapper": true,
-  "class": "adjust-icon mdi mdi-cloud-upload",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-upload.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/fileupload.template.html",
   "styles": [
     {

@@ -2,7 +2,7 @@
   "name": "crn-accordion",
   "text_pt_BR": "Acordeão",
   "text_en_US": "Accordion",
-  "class": "adjust-icon mdi mdi-view-day",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-accordion.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/accordion.template.html",
   "properties": {
     "class": {

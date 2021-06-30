@@ -4,7 +4,7 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Slider",
   "text_en_US": "Slider",
-  "class": "adjust-icon mdi mdi-server-network",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-slider.svg",
   "designTimeHTML": "<input type='range' min='1' max='10' value='5' class='slider'/>",
   "designTimeSelector": "cron-slider",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-slider.template.html",

@@ -2,7 +2,7 @@
   "name": "crn-panel",
   "text_pt_BR": "Painel",
   "text_en_US": "Panel",
-  "class": "adjust-icon mdi mdi-file-presentation-box",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-panel.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/panel.template.html",
   "wrapper": false,
   "properties": {

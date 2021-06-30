@@ -2,7 +2,7 @@
   "name": "crn-datetimepicker",
   "text_pt_BR": "Data e hora",
   "text_en_US": "DateTime",
-  "class": "adjust-icon mdi mdi-calendar-clock",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-datetimepicker.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/datetime.template.html",
   "styles": [
     {
