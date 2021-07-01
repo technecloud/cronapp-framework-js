@@ -5,6 +5,9 @@
   "order": 6,
   "class": "adjust-icon mdi mdi-label-outline",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinput.template.html",
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinput.designtime.html",
+  "designTimeSelector": "input",
+  "designTimeDynamic": true,
   "properties": {
     "class": {
       "order": 9999
