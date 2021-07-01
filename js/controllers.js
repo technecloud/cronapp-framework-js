@@ -72,7 +72,7 @@
     
   });
 
-  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies, $templateCache) {
+  app.controller('LoginController', function($controller, $scope, $http, $rootScope, $window, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, $cookies, $templateCache, DashboardService) {
 
     $http.get(window.NotificationProviderOptions.templateUrl, {cache: true})
         .then((response) => $templateCache.put(window.NotificationProviderOptions.templateUrl, response.data));
@@ -99,6 +99,10 @@
 
     $rootScope.getReport = function(reportName, params, config) {
       ReportService.openReport(reportName, params, config);
+    };
+
+    $rootScope.getDashboard = function(dashboardName, params, config) {
+      DashboardService.openDashboard(dashboardName, params, config);
     };
 
     var queryStringParams = $location.search();
@@ -252,7 +256,7 @@
 
   });
 
-  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout) {
+  app.controller('HomeController', function($controller, $scope, $http, $rootScope, $state, $translate, Notification, ReportService, UploadService, $location, $stateParams, $timeout, DashboardService) {
 
     $scope.$http = $http;
     $scope.params = $stateParams;
@@ -265,6 +269,10 @@
 
     $rootScope.getReport = function(reportName, params, config) {
       ReportService.openReport(reportName, params, config);
+    };
+
+    $rootScope.getDashboard = function(dashboardName, params, config) {
+      DashboardService.openDashboard(dashboardName, params, config);
     };
 
     var queryStringParams = $location.search();
