@@ -4,7 +4,7 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Caixa de seleção múltipla",
   "text_en_US": "Combobox Multi Select",
-  "class": "adjust-icon mdi mdi-nutrition",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-combobox-multiple.svg",
   "order": 9,
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.designtime.html",
@@ -112,6 +112,8 @@
     {
       "name": "content",
       "selector": "label",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "type": "content",
       "order": 2
     },

@@ -2,7 +2,7 @@
   "name": "crn-jumbotron",
   "text_pt_BR": "Banner",
   "text_en_US": "Banner",
-  "class": "adjust-icon mdi mdi-page-layout-body",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-jumbotron.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/banner.template.html",
   "wrapper": false,
   "styles": [
@@ -13,13 +13,13 @@
     },
     {
       "selector": "div#{id} h1",
-      "text_pt_BR": "Banner Título",
-      "text_en_US": "Jumbotron Title"
+      "text_pt_BR": "Cabeçalho",
+      "text_en_US": "Header"
     },
     {
       "selector": "div#{id} h2",
-      "text_pt_BR": "Banner Subtítulo",
-      "text_en_US": "Jumbotron Subtitle"
+      "text_pt_BR": "Subtítulo",
+      "text_en_US": "Subtitle"
     }
   ],
   "properties": {

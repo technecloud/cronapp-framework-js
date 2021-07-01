@@ -5,7 +5,7 @@
   "text_pt_BR": "Grade",
   "text_en_US": "Grid",
   "order": 2,
-  "class": "adjust-icon mdi mdi-nutrition",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-grid.svg",
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-grid.designtime.html",
   "designTimeSelector": "cron-grid",
@@ -151,8 +151,8 @@
     },
     {
       "selector": ".k-animation-container .k-list-container",
-      "text_pt_BR": "Combo box da Paginação",
-      "text_en_US": "Pagination Combo Box"
+      "text_pt_BR": "Caixa de seleção da Paginação",
+      "text_en_US": "Pagination Combobox"
     },
     {
       "selector": ".k-animation-container .k-popup .k-list .k-item",
@@ -161,7 +161,7 @@
     },
     {
       "selector": ".k-animation-container .k-list > .k-state-hover",
-      "text_pt_BR": "Mouse Hover da Paginação",
+      "text_pt_BR": "Ao passar o mouse na Paginação",
       "text_en_US": "Mouse Hover the Pagination"
     }
   ],

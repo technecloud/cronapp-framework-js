@@ -2,7 +2,7 @@
   "name": "crn-cron-captcha",
   "text_pt_BR": "Captcha",
   "text_en_US": "Captcha",
-  "class": "adjust-icon mdi mdi-lock",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-captcha.svg",
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-captcha.designtime.html",
   "designTimeSelector": "div",

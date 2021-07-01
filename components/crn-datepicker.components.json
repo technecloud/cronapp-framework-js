@@ -2,7 +2,7 @@
   "name": "crn-datepicker",
   "text_pt_BR": "Data",
   "text_en_US": "Date",
-  "class": "adjust-icon mdi mdi-calendar",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-datepicker.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/date.template.html",
   "properties": {
     "class": {
@@ -20,15 +20,18 @@
     },
     {
       "selector": "div#{id} label",
-      "text_pt_BR": "Label",
-      "text_en_US": "Label"
+      "text_pt_BR": "Título",
+      "text_en_US": "Title"
     }
   ],
   "childrenProperties": [
     {
       "name": "content",
       "selector": "label",
-      "type": "content"
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
+      "type": "content",
+      "order": 1
     },
     {
       "name": "ng-model",
@@ -36,32 +39,19 @@
       "type": "text",
       "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
       "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
-      "mandatory": true
+      "mandatory": true,
+      "order": 3
     },
     {
       "name": "type",
       "selector": "input",
-      "type": "type"
-    },
-    {
-      "name": "mask",
-      "selector": "input",
-      "type": "mask"
+      "type": "type",
+      "order": 2
     },
     {
       "name": "ng-required",
       "selector": "input",
       "type": "logic"
-    },
-    {
-      "name": "placeholder",
-      "selector": "input",
-      "type": "text"
-    },
-    {
-      "name": "mask-placeholder",
-      "selector": "input",
-      "type": "text"
     },
     {
       "name": "ng-init",

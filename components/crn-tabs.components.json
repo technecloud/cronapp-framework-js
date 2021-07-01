@@ -2,7 +2,8 @@
   "name": "crn-tabs",
   "text_pt_BR": "Abas",
   "text_en_US": "Tabs",
-  "class": "adjust-icon mdi mdi-window-maximize",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-tabs.svg",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/tabs.template.html",
   "properties": {
     "class": {
       "order": 9999
@@ -41,8 +42,7 @@
       "text_pt_BR": "Aba Padrão",
       "text_en_US": "Default Tab"
     }
-  ],
-  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/tabs.template.html",
+  ],  
   "childrenProperties": [
     {
       "name": "ng-init",

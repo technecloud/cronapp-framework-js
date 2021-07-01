@@ -3,13 +3,13 @@
   "pallete": false,
   "text_pt_BR": "Caixa de seleção dinâmica",
   "text_en_US": "Dynamic Combobox",
-  "class": "adjust-icon mdi mdi-nutrition",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-combobox-dynamic.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/combobox-dynamic.template.html",
   "styles": [
     {
       "selector": "div#{id} .crn-select .btn-default",
-      "text_pt_BR": "Estilo Caixa de Seleção",
-      "text_en_US": "Select Style"
+      "text_pt_BR": "Caixa de Seleção",
+      "text_en_US": "Combobox"
     }
   ],
   "handleRules": {
@@ -61,6 +61,8 @@
     },
     {
       "name": "content",
+      "displayName_pt_BR": "Título",
+      "displayName_en_US": "Title",
       "selector": "label",
       "type": "content"
     },

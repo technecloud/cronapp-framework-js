@@ -2,7 +2,7 @@
   "name": "crn-vertical-container",
   "text_pt_BR": "Layout vertical",
   "text_en_US": "Vertical Layout",
-  "class": "adjust-icon mdi mdi-drag-vertical",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-vertical-container.svg",
   "properties": {
     "class": {
       "order": 9999

@@ -1,7 +1,8 @@
 {
   "name": "crn-icon",
-  "text": "Icon",
-  "class": "adjust-icon mdi mdi-star",
+  "text_pt_BR": "Ícone",
+  "text_en_US": "Icon",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-icon.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/icon.template.html",
   "wrapper": false,
   "autoWrapper": false,
@@ -51,6 +52,159 @@
       "displayName_pt_BR": "Ícone",
       "displayName_en_US": "Icon",
       "type": "icon"
+    },
+    {
+      "name": "icon-theme",
+      "displayName_pt_BR": "Cor do ícone",
+      "displayName_en_US": "Icon color",
+      "selector": "i"
+    },
+    {
+      "name": "icon-size",
+      "displayName_pt_BR": "Tamanho do ícone",
+      "displayName_en_US": "Icon size",
+      "selector": "i"
+    }
+  ],
+  "attributesForPreview": [
+    {
+      "name": "icon-theme",
+      "type": "options",
+      "target": "style",
+      "values": [
+        {
+          "key": "color: #fff;",
+          "value_pt_BR": "Branco",
+          "value_en_US": "White"
+        },
+        {
+          "key": "",
+          "value_pt_BR": "Cinza",
+          "value_en_US": "Gray"
+        },
+        {
+          "key": "color: #000;",
+          "value_pt_BR": "Preto",
+          "value_en_US": "Black"
+        },
+        {
+          "key": "color: #0247FE;",
+          "value_pt_BR": "Azul",
+          "value_en_US": "Blue"
+        },
+        {
+          "key": "color: #85A5FF;",
+          "value_pt_BR": "Azul claro",
+          "value_en_US": "Blue"
+        },
+        {
+          "key": "color: #00217A;",
+          "value_pt_BR": "Azul escuro",
+          "value_en_US": "Blue"
+        },
+        {
+          "key": "color: #3D01A4;",
+          "value_pt_BR": "Roxo",
+          "value_en_US": "Purple"
+        },
+        {
+          "key": "color: #B285FF;",
+          "value_pt_BR": "Roxo claro",
+          "value_en_US": "Purple"
+        },
+        {
+          "key": "color: #2D007A;",
+          "value_pt_BR": "Roxo escuro",
+          "value_en_US": "Purple"
+        },
+        {
+          "key": "color: #FE2712;",
+          "value_pt_BR": "Vermelho",
+          "value_en_US": "Red"
+        },
+        {
+          "key": "color: #FE8F84;",
+          "value_pt_BR": "Vermelho claro",
+          "value_en_US": "Red"
+        },
+        {
+          "key": "color: #7A0B00;",
+          "value_pt_BR": "Vermelho escuro",
+          "value_en_US": "Red"
+        },
+        {
+          "key": "color: #FB9B02;",
+          "value_pt_BR": "Laranja",
+          "value_en_US": "Orange"
+        },
+        {
+          "key": "color: #FFD085;",
+          "value_pt_BR": "Laranja claro",
+          "value_en_US": "Orange"
+        },
+        {
+          "key": "color: #7A4B00;",
+          "value_pt_BR": "Laranja escuro",
+          "value_en_US": "Orange"
+        },
+        {
+          "key": "color: #FFFF33;",
+          "value_pt_BR": "Amarelo",
+          "value_en_US": "Yellow"
+        },
+        {
+          "key": "color: #FFFF85;",
+          "value_pt_BR": "Amarelo claro",
+          "value_en_US": "Yellow"
+        },
+        {
+          "key": "color: #FFFF33;",
+          "value_pt_BR": "Amarelo escuro",
+          "value_en_US": "7A7A00"
+        },
+        {
+          "key": "color: #66B032;",
+          "value_pt_BR": "Verde",
+          "value_en_US": "Green"
+        },
+        {
+          "key": "color: #B7FF85;",
+          "value_pt_BR": "Verde claro",
+          "value_en_US": "Green"
+        },
+        {
+          "key": "color: #337A00;",
+          "value_pt_BR": "Verde escuro",
+          "value_en_US": "Green"
+        }
+      ]
+    },
+    {
+      "name": "icon-size",
+      "type": "options",
+      "target": "style",
+      "values": [
+        {
+          "key": "",
+          "value_pt_BR": "Padrão",
+          "value_en_US": "Default"
+        },
+        {
+          "key": "font-size: 47px;",
+          "value_pt_BR": "Grande",
+          "value_en_US": "Big"
+        },
+        {
+          "key": "font-size: 30px;",
+          "value_pt_BR": "Médio",
+          "value_en_US": "Medium"
+        },
+        {
+          "key": "font-size: 25px;",
+          "value_pt_BR": "Pequeno",
+          "value_en_US": "Small"
+        }
+      ]
     }
   ]
 }

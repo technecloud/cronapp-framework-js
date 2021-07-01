@@ -4,7 +4,7 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Caixa de seleção dinâmica",
   "text_en_US": "Dynamic Combobox",
-  "class": "adjust-icon mdi mdi-nutrition",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-dynamic-combobox.svg",
   "order": 3,
   "setRandomId": false,
   "designTimeDynamic": true,

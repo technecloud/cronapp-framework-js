@@ -2,7 +2,7 @@
   "name": "crn-textinputbutton",
   "text_pt_BR": "Entrada de texto com botão",
   "text_en_US": "Input with button",
-  "class": "adjust-icon mdi mdi-label-outline",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-textinputbutton.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textinputbutton.template.html",
   "forcedGroupd": true,
   "properties": {
@@ -71,6 +71,8 @@
     },
     {
       "name": "placeholder",
+      "displayName_pt_BR": "Sugestão",
+      "displayName_en_US": "Placeholder",
       "selector": "input",
       "type": "text",
       "order": 4

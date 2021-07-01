@@ -2,7 +2,7 @@
   "name": "crn-carousel",
   "text_pt_BR": "Carrossel",
   "text_en_US": "Carousel",
-  "class": "adjust-icon mdi mdi-view-carousel",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-carousel.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",    
   "properties": {
     "class": {

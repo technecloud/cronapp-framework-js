@@ -5,7 +5,7 @@
   "text_pt_BR": "Árvore",
   "text_en_US": "TreeView",
   "order": 2,
-  "class": "adjust-icon mdi mdi-file-tree",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-tree-view.svg",
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-tree-view.designtime.html",
   "designTimeSelector": "cron-tree-view",

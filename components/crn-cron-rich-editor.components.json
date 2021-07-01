@@ -4,7 +4,7 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Editor de Texto Rico",
   "text_en_US": "Rich Editor",
-  "class": "adjust-icon mdi mdi-text-shadow",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-rich-editor.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-rich-editor.template.html",
   "properties": {
     "class": {
@@ -21,7 +21,8 @@
       "global": "true",
       "selector": "cron-rich-editor",
       "type": "text",
-      "mandatory": true
+      "mandatory": true,
+      "order": 1
     },
     {
       "name": "ng-model",
@@ -29,7 +30,8 @@
       "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
       "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
       "type": "text",
-      "mandatory": true
+      "mandatory": true,
+      "order": 2
     },
     {
       "name": "ng-cron-init",

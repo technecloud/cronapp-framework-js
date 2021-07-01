@@ -2,7 +2,7 @@
   "name": "crn-textarea",
   "text_pt_BR": "Área de texto",
   "text_en_US": "Textarea",
-  "class": "adjust-icon mdi mdi-textbox",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-textarea.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/textarea.template.html",
   "properties": {
     "class": {
@@ -56,6 +56,8 @@
     },
     {
       "name": "placeholder",
+      "displayName_pt_BR": "Sugestão",
+      "displayName_en_US": "Placeholder",
       "selector": "textarea",
       "type": "text",
       "order": 2

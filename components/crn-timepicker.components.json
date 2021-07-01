@@ -2,7 +2,7 @@
   "name": "crn-timepicker",
   "text_pt_BR": "Hora",
   "text_en_US": "Time",
-  "class": "adjust-icon mdi mdi-timer",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-timepicker.svg",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/time.template.html",
   "properties": {
     "class": {
@@ -48,21 +48,9 @@
       "order": 2
     },
     {
-      "name": "mask",
-      "selector": "input",
-      "type": "mask",
-      "order": 3
-    },
-    {
       "name": "ng-required",
       "selector": "input",
       "type": "logic"
-    },
-    {
-      "name": "placeholder",
-      "selector": "input",
-      "type": "text",
-      "order": 4
     },
     {
       "name": "ng-init",
