@@ -3,6 +3,7 @@
     "text_pt_BR": "Lista não ordenada",
     "text_en_US": "Unordered list",
     "class": "adjust-icon mdi mdi-file-presentation-box",
+    "wrapper": true,
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/crn-unordered-list.template.html",
     "properties": {
         "class": {
