@@ -5,7 +5,7 @@
     "class": "adjust-icon mdi mdi-file-presentation-box",
     "wrapper": false,
     "autoWrapper": true,
-    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/crn-unordered-sub-list.template.html",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-unordered-sub-list.template.html",
     "properties": {
         "class": {
             "order": 9999
