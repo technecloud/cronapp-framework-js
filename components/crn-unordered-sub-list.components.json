@@ -13,7 +13,7 @@
         "id": {
             "order": 2
         },
-        "list-type": {
+        "listType": {
             "displayName_pt_BR": "Valor do atributo",
             "displayName_en_US": "Attribute value"
         }
@@ -34,7 +34,7 @@
     },
     "attributesForPreview": [
         {
-            "name": "list-type",
+            "name": "listType",
             "type": "options",
             "target": "style",
             "values": [
@@ -58,18 +58,18 @@
     ],
     "childrenProperties": [
         {
-            "name": "list-type",
+            "name": "listType",
             "selector": "ul.sub-list"
         }
     ],
     "styles": [
         {
-            "selector": "div#{id} ul.sub-list",
+            "selector": "div#{id} ul",
             "text_pt_BR": "Plano de fundo",
             "text_en_US": "Background"
         },
         {
-            "selector": "div#{id} ul.sub-list li",
+            "selector": "div#{id} ul li",
             "text_pt_BR": "Item da lista",
             "text_en_US": "List item"
         }
