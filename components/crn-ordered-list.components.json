@@ -26,8 +26,8 @@
             {
                 "activeSelector": "ol.list li.active",
                 "activeClass": "active",
-                "sourceHTML": "<li data-component=\"crn-list-item\" data-replace=\"true\">Item</li>",
-                "targetSelector": "ol"
+                "sourceHTML": "<li class=\"item-list\" data-component=\"crn-list-item\" data-replace=\"true\">Item</li>",
+                "targetSelector": "ol.list"
             }
         ]
     },
@@ -68,17 +68,17 @@
     "childrenProperties": [
         {
             "name": "type",
-            "selector": "ol"
+            "selector": "ol.list"
         }
     ],
     "styles": [
         {
-            "selector": "div#{id} ol",
+            "selector": "div#{id} ol.list",
             "text_pt_BR": "Plano de fundo",
             "text_en_US": "Background"
         },
         {
-            "selector": "div#{id} li",
+            "selector": "div#{id} ol.list li",
             "text_pt_BR": "Item da lista",
             "text_en_US": "List item"
         }
