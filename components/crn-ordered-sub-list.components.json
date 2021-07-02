@@ -4,7 +4,7 @@
     "text_en_US": "Ordered sub list",
     "wrapper": false,
     "autoWrapper": true,
-    "class": "adjust-icon mdi mdi-format-list-numbers",
+    "class": "adjust-icon mdi mdi-format-list-bulleted",
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-ordered-sub-list.template.html",
     "properties": {
         "class": {

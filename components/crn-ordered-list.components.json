@@ -3,7 +3,7 @@
     "text_pt_BR": "Lista ordenada",
     "text_en_US": "Ordered list",
     "wrapper": true,
-    "class": "adjust-icon mdi mdi-format-list-numbers",
+    "class": "adjust-icon mdi mdi-format-list-bulleted",
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-ordered-list.template.html",
     "properties": {
         "class": {
