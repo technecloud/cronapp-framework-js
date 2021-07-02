@@ -1379,6 +1379,38 @@
           }
         };
       })
+      .directive('cronDashboardViewer', function ($compile) {
+        return {
+          restrict: 'E',
+          replace: true,
+          require: 'ngModel',
+          link: function (scope, element, attrs, ngModelCtrl) {
+
+            function executeDashboard(attrsOptions) {
+              var config = JSON.parse(attrsOptions);
+              var contextVars = { 'element': element };
+              scope.$eval(config.dashboardCommand, contextVars);
+            }
+
+            executeDashboard(attrs.options);
+
+            var filterTimeout = null;
+            scope.$watch(function(){ return attrs.options }, function(value, old){
+              if (value !== old) {
+
+                if (filterTimeout) {
+                  clearInterval(filterTimeout);
+                  filterTimeout = null;
+                }
+
+                filterTimeout = setTimeout(function() {
+                  executeDashboard(value);
+                }.bind(this), 500);
+              }
+            });
+          }
+        };
+      })
       .directive('cronReportViewer', function ($compile) {
         return {
           restrict: 'E',

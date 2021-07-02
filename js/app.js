@@ -15,6 +15,7 @@ var cronappModules = [
   'ui.bootstrap',
   'ngFileUpload',
   'report.services',
+  'dashboard.services',
   'upload.services',
   'ui.tinymce',
   'ngCookies'
@@ -190,7 +191,7 @@ var app = (function() {
         }
       ])
       // General controller
-      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state, ReportService) {
+      .controller('PageController', function($controller, $scope, $stateParams, $location, $http, $rootScope, $translate, Notification, UploadService, $timeout, $state, ReportService, DashboardService) {
         // save state params into scope
         $scope.params = $stateParams;
         $scope.$http = $http;
@@ -202,6 +203,10 @@ var app = (function() {
 
         $rootScope.getReport = function(reportName, params, config) {
           ReportService.openReport(reportName, params, config);
+        };
+
+        $rootScope.getDashboard = function(dashboardName, params, config) {
+          DashboardService.getDashboard(dashboardName, params, config);
         };
 
         // Query string params
