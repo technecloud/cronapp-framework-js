@@ -3,6 +3,7 @@
     "text_pt_BR": "Sub lista não ordenada",
     "text_en_US": "Unordered sub list",
     "class": "adjust-icon mdi mdi-file-presentation-box",
+    "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-unordered-sub-list.svg",
     "wrapper": false,
     "autoWrapper": true,
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-unordered-sub-list.template.html",
