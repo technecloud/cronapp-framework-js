@@ -11,9 +11,66 @@
         },
         "id": {
             "order": 2
+        },
+        "list-type": {
+            "displayName_pt_BR": "Valor do atributo",
+            "displayName_en_US": "Attribute value"
         }
     },
-    "styles": [],
-    "attributesForPreview": [],
-    "childrenProperties": []
+    "forcedGroup": true,
+    "handleRules": {
+        "canOrder": true,
+        "canActivate": true,
+        "canIncrement": true,
+        "rules": [
+            {
+                "activeSelector": "ul li.active",
+                "activeClass": "active",
+                "sourceHTML": "<li data-component=\"crn-list-item\" data-replace=\"true\">Item</li>",
+                "targetSelector": "ul"
+            }
+        ]
+    },
+    "attributesForPreview": [
+        {
+            "name": "list-type",
+            "type": "options",
+            "target": "style",
+            "values": [
+                {
+                    "key": "list-style-type:circle;",
+                    "value_pt_BR": "Círculo vazio",
+                    "value_en_US": "Circle"
+                },
+                {
+                    "key": "list-style-type:disc;",
+                    "value_pt_BR": "Círculo preenchido",
+                    "value_en_US": "Disc"
+                },
+                {
+                    "key": "list-style-type:square;",
+                    "value_pt_BR": "Quadrado",
+                    "value_en_US": "Square"
+                }
+            ]
+        }
+    ],
+    "childrenProperties": [
+        {
+            "name": "list-type",
+            "selector": "ul"
+        }
+    ],
+    "styles": [
+        {
+            "selector": "div#{id} ul",
+            "text_pt_BR": "Plano de fundo",
+            "text_en_US": "Background"
+        },
+        {
+            "selector": "div#{id} li",
+            "text_pt_BR": "Item da lista",
+            "text_en_US": "List item"
+        }
+    ]
 }
