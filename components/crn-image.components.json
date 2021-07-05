@@ -59,10 +59,10 @@
       "order": 5
     },
     "alt":{
-      "order": 3
+      "order": 6
     },
-    "id":{
-      "order": 4
+    "id": {
+      "order": 7
     }
   },
   "styles": [
@@ -85,13 +85,13 @@
         },
         {
           "key": "object-fit: contain;",
-          "value_pt_BR": "Ajustado",
-          "value_en_US": "Adjusted"
+          "value_pt_BR": "Ajustado (padrão)",
+          "value_en_US": "Adjusted (default)"
         },
         {
           "key": "object-fit: fill;",
-          "value_pt_BR": "Preencher (padrão)",
-          "value_en_US": "Fill (default)"
+          "value_pt_BR": "Preencher",
+          "value_en_US": "Fill"
         },
         {
           "key": "object-fit: none;",
@@ -125,5 +125,6 @@
         }
       ]
     }
-  ]
+  ],
+  "childrenProperties": []
 }
