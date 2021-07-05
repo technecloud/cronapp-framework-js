@@ -25,9 +25,10 @@
         "targetSelector": "ol.carousel-indicators"
       },
       {
+        "accordionTabClicked": "carousel-indicators",
         "activeSelector": "div.carousel-inner div.item.active",
         "activeClass": "active",
-        "sourceHTML": "<div data-component=\"crn-carousel-item\" class=\"item\"><img data-component= \"crn-image\" alt=\"New slide\" style=\"margin: 0 auto;\" src = \"node_modules/cronapp-framework-js/img/placehold-900x500.png\"><div class = \"carousel-caption\"><h1  data-component=\"crn-title\">New Slide</h1><h2 data-component=\"crn-subtitle\"> Subtitle </h2></div></div>",
+        "sourceURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/crn-carousel-item.template.html",
         "targetSelector": "div.carousel-inner"
       }
     ]

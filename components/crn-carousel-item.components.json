@@ -3,7 +3,9 @@
     "text_pt_BR": "Item do Carrossel",
     "text_en_US": "Carousel item",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-carousel.svg",
-    "template": "<div data-component=\"crn-carousel-item\" class=\"item\"><img data-component= \"crn-image\" alt=\"New slide\" style=\"margin: 0 auto;\" src = \"node_modules/cronapp-framework-js/img/placehold-900x500.png\"><div class = \"carousel-caption\"><h1  data-component=\"crn-title\">New Slide</h1><h2 data-component=\"crn-subtitle\"> Subtitle </h2></div></div>",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/crn-carousel-item.template.html",
+    "wrapper": true,
+    "pallete": false,
     "properties": {
         "class": {
             "order": 9999
@@ -13,5 +15,6 @@
         }
     },
     "styles": [],
+    "attributesForPreview": [],
     "childrenProperties": []
 }
