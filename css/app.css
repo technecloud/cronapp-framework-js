@@ -303,3 +303,15 @@ fieldset[disabled] .btn-default:hover {
 .header{
     background-color: rgb(209, 209, 209);
 }
+
+.k-list .k-item.k-state-selected, 
+.k-list-container .k-button.k-state-active, 
+.k-list-container .k-button:active, 
+.k-list-optionlabel.k-state-selected, 
+.k-menu-group .k-item.k-state-selected, 
+.k-menu.k-context-menu .k-item.k-state-selected, 
+.k-spreadsheet-popup .k-button.k-state-active, 
+.k-spreadsheet-popup .k-button.k-state-selected, 
+.k-spreadsheet-popup .k-button:active{
+    color: #000;
+}
