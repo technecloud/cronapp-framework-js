@@ -315,3 +315,13 @@ fieldset[disabled] .btn-default:hover {
 .k-spreadsheet-popup .k-button:active{
     color: #000;
 }
+
+.carousel-caption{
+    right: 9%;
+    left: 9%;
+}
+
+.carousel-control.left,
+.carousel-control.right{
+    width: 8%;
+}

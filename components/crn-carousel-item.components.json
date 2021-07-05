@@ -3,7 +3,7 @@
     "text_pt_BR": "Item do Carrossel",
     "text_en_US": "Carousel item",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-carousel.svg",
-    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/crn-carousel-item.template.html",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-carousel-item.template.html",
     "wrapper": false,
     "pallete": false,
     "forcedGroup": true,
@@ -12,10 +12,31 @@
             "order": 9999
         },
         "id": {
+            "order": 3
+        },
+        "width": {
+            "displayName_pt_BR": "Largura da imagem",
+            "displayName_en_US": "Image width",
+            "order": 1
+        },
+        "height": {
+            "displayName_pt_BR": "Altura da imagem",
+            "displayName_en_US": "Image height",
             "order": 2
         }
     },
-    "styles": [],
+    "styles": [
+        {
+          "selector": "#{id} .carousel-caption h1",
+          "text_pt_BR": "Título",
+          "text_en_US": "Title"
+        },
+        {
+          "selector": "#{id} .carousel-caption h2",
+          "text_pt_BR": "Subtítulo",
+          "text_en_US": "Subtitle"
+        }
+    ],
     "attributesForPreview": [
         {
             "name": "object-fit",
@@ -112,14 +133,14 @@
             "displayName_pt_BR": "Título",
             "displayName_en_US": "Title",
             "type": "text",
-            "order": 2
+            "order": 5
         },
         {
             "name": "title-position",
             "selector": "h1",
             "displayName_pt_BR": "Posição do título",
             "displayName_en_US": "Title position",
-            "order": 3
+            "order": 6
         },
         {
             "name": "content",
@@ -127,14 +148,14 @@
             "displayName_pt_BR": "Subtítulo",
             "displayName_en_US": "SubtTitle",
             "type": "text",
-            "order": 4
+            "order": 7
         },
         {
             "name": "subtitle-position",
             "selector": "h2",
             "displayName_pt_BR": "Posição do subtìtulo",
             "displayName_en_US": "Subtitle position",
-            "order": 5
+            "order": 8
         }
     ]
 }
