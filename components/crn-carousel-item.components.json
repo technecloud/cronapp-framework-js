@@ -4,7 +4,7 @@
     "text_en_US": "Carousel item",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-carousel.svg",
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/crn-carousel-item.template.html",
-    "wrapper": true,
+    "wrapper": false,
     "pallete": false,
     "properties": {
         "class": {
