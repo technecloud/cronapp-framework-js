@@ -1,0 +1,71 @@
+{
+  "name": "crn-span",
+  "text_pt_BR": "Texto Simples",
+  "text_en_US": "Simple Text",
+  "wrapper": false,
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-simple-text.svg",
+  "order": 10,
+  "template": "<span>Text</span>",
+  "properties": {
+    "class": {
+      "order": 9999
+    },
+    "ng-click": {
+      "removable": true,
+      "type": "event"
+    },
+    "ng-dblclick": {
+      "removable": true,
+      "type": "event"
+    },
+    "ng-mouseenter": {
+      "removable": true,
+      "type": "event"
+    },
+    "ng-mouseleave": {
+      "removable": true,
+      "type": "event"
+    },
+    "ng-mousemove": {
+      "removable": true,
+      "type": "event"
+    },
+    "xattr-position": {
+      "displayName": "Position"
+    }
+  },
+  "attributesForPreview": [
+    {
+      "name": "xattr-position",
+      "type": "btngroup",
+      "target": "class",
+      "values": [
+        {
+          "key": "text-left",
+          "value": "Standard",
+          "icon": "mdi mdi-format-align-left"
+        },
+        {
+          "key": "text-center",
+          "value": "Middle",
+          "icon": "mdi mdi-format-align-center "
+        },
+        {
+          "key": "text-right",
+          "value": "Right",
+          "icon": "mdi mdi-format-align-right"
+        },
+        {
+          "key": "text-justify",
+          "value": "Justify",
+          "icon": "mdi mdi-format-align-justify"
+        },
+        {
+          "key": "none-block",
+          "value": "None",
+          "icon": "mdi mdi-delete"
+        }
+      ]
+    }
+  ]
+}

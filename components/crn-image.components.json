@@ -14,6 +14,53 @@
       "mandatory": true,
       "order": 1
     },
+    "loading": {
+      "displayName_pt_BR": "Carregamento",
+      "displayName_en_US": "Loading",
+      "removable": true,
+      "type": "list",
+      "options": [
+        {
+          "key": "eager",
+          "value": "Eager"
+        },
+        {
+          "key": "lazy",
+          "value": "Lazy"
+        }
+      ]
+    },
+    "align": {
+      "removable": true,
+      "type": "list",
+      "options": [
+        {
+          "key": "left",
+          "value_pt_BR": "Esquerda",
+          "value_en_US": "Left"
+        },
+        {
+          "key": "right",
+          "value_pt_BR": "Direita",
+          "value_en_US": "Right"
+        },
+        {
+          "key": "middle",
+          "value_pt_BR": "Meio",
+          "value_en_US": "Midle"
+        },
+        {
+          "key": "top",
+          "value_pt_BR": "Topo",
+          "value_en_US": "Top"
+        },
+        {
+          "key": "bottom",
+          "value_pt_BR": "Fundo",
+          "value_en_US": "Bottom"
+        }
+      ]
+    },
     "ng-init": {
       "removable": true,
       "type": "event"
@@ -122,6 +169,11 @@
           "value_pt_BR": "Direita",
           "value_en_US": "Right",
           "icon": "mdi mdi-ray-end"
+        },
+        {
+          "key": "none-block",
+          "value": "None",
+          "icon": "mdi mdi-delete"
         }
       ]
     }
