@@ -4,6 +4,8 @@
     "text_en_US": "Button",
     "order": 5,
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-button.svg",
+    "description": "Botão",
+    "description_en_US": "Button",
     "wrapper": true,
     "autoWrapper": false,
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/button.template.html",
