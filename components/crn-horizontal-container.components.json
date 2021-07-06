@@ -2,7 +2,7 @@
   "name": "crn-horizontal-container",
   "text_pt_BR": "Layout horizontal",
   "text_en_US": "Horizontal Layout",
-  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-horizontal-container.svg",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-vertical-container.svg",
   "properties": {
     "class": {
       "order": 9999
