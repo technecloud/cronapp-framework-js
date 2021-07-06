@@ -1,3 +1,13 @@
+@import 'signup.css';
+@import 'reset_password.css';
+@import 'modalTemplate.css';
+@import 'animate.css';
+@import './privacy/privacy.css';
+
+/* Directive crn-input-password */
+@import '../components/css/crn-input-password.css';
+/* END - Directive crn-input-password */
+
 .table.table-borderless>thead>tr>td,
 .table.table-borderless>thead>tr>th,
 .table.table-borderless>tfoot>tr>td,
@@ -138,7 +148,7 @@
 
 .left-block {
     display: block;
-    magin-right: auto;
+    margin-right: auto;
 }
 
 li[data-component="crn-menu-item"] ul li a.bg-primary{
@@ -234,11 +244,11 @@ a {
 	display:none;
 }
 
-
 /* Dynamic file maintenance */
 .dynamic-image-container{
     width: fit-content;
 }
+
 /* Treeview maintenance */
 .k-treeview .k-i-collapse, .k-treeview .k-i-expand{
     height: auto;
@@ -292,4 +302,26 @@ fieldset[disabled] .btn-default:hover {
 
 .header{
     background-color: rgb(209, 209, 209);
+}
+
+.k-list .k-item.k-state-selected, 
+.k-list-container .k-button.k-state-active, 
+.k-list-container .k-button:active, 
+.k-list-optionlabel.k-state-selected, 
+.k-menu-group .k-item.k-state-selected, 
+.k-menu.k-context-menu .k-item.k-state-selected, 
+.k-spreadsheet-popup .k-button.k-state-active, 
+.k-spreadsheet-popup .k-button.k-state-selected, 
+.k-spreadsheet-popup .k-button:active{
+    color: #000;
+}
+
+.carousel-caption{
+    right: 9%;
+    left: 9%;
+}
+
+.carousel-control.left,
+.carousel-control.right{
+    width: 8%;
 }

@@ -2,7 +2,7 @@
   "name": "crn-image",
   "text_pt_BR": "Imagem",
   "text_en_US": "Image",
-  "class": "adjust-icon mdi mdi-image",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-image.svg",
   "wrapper": false,
   "autoWrapper": true,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/image.default.template.html",
@@ -43,11 +43,26 @@
       "displayName_en_US": "Image position",
       "order": 2
     },
-    "alt":{
+    "object-fit": {
+      "displayName_pt_BR": "Preenchimento da imagem",
+      "displayName_en_US": "Image filling",
       "order": 3
     },
-    "id":{
+    "width": {
+      "displayName_pt_BR": "Largura da imagem",
+      "displayName_en_US": "Image width",
       "order": 4
+    },
+    "height": {
+      "displayName_pt_BR": "Altura da imagem",
+      "displayName_en_US": "Image height",
+      "order": 5
+    },
+    "alt":{
+      "order": 6
+    },
+    "id": {
+      "order": 7
     }
   },
   "styles": [
@@ -58,6 +73,33 @@
     }
   ],
   "attributesForPreview": [
+    {
+      "name": "object-fit",
+      "target": "style",
+      "type": "options",
+      "values": [
+        {
+          "key": "object-fit: cover;",
+          "value_pt_BR": "Proporcional",
+          "value_en_US": "Proportional"
+        },
+        {
+          "key": "object-fit: contain;",
+          "value_pt_BR": "Ajustado (padrão)",
+          "value_en_US": "Adjusted (default)"
+        },
+        {
+          "key": "object-fit: fill;",
+          "value_pt_BR": "Preencher",
+          "value_en_US": "Fill"
+        },
+        {
+          "key": "object-fit: none;",
+          "value_pt_BR": "Nenhum",
+          "value_en_US": "None"
+        }
+      ]
+    },
     {
       "name": "xattr-position",
       "type": "btngroup",
@@ -83,5 +125,6 @@
         }
       ]
     }
-  ]
+  ],
+  "childrenProperties": []
 }
