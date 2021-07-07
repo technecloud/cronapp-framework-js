@@ -11,13 +11,13 @@
   ],
   "order": 10,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamictitle.template.html",
-  "id": {
-    "order": 1
-  },
-  "content": {
-    "order": 2
-  },
   "properties": {
+    "id": {
+      "order": 1
+    },
+    "content": {
+      "order": 2
+    },
     "xattr-position": {
       "displayName_pt_BR": "Posição",
       "displayName_en_US": "Position",
