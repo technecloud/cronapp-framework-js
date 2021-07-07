@@ -5,6 +5,11 @@
     "text_pt_BR": "Auto completar",
     "text_en_US": "Auto complete",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-autocomplete.svg",
+    "description": "Botão",
+    "description_en_US": "Button",
+    "category": [
+        "INPUTS"
+    ],
     "designTimeDynamic": true,
     "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
     "designTimeSelector": "cron-auto-complete",

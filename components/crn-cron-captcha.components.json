@@ -3,8 +3,8 @@
   "text_pt_BR": "Captcha",
   "text_en_US": "Captcha",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-captcha.svg",
-  "description": "Botão",
-  "description_en_US": "Button",
+  "description": "Verificação do Google para detectar robôs",
+  "description_en_US": "Google scan for robot detection",
   "category": [
     "COMBOS"
   ],

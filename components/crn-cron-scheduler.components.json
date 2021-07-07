@@ -6,6 +6,11 @@
   "text_en_US": "Scheduler",
   "order": 2,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-scheduler.svg",
+  "description": "Botão",
+  "description_en_US": "Button",
+  "category": [
+    "COMBOS"
+  ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-scheduler.designtime.html",
   "designTimeSelector": "cron-scheduler",
