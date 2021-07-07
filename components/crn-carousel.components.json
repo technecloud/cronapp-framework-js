@@ -3,12 +3,12 @@
   "text_pt_BR": "Carrossel",
   "text_en_US": "Carousel",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-carousel.svg",
-  "description": "Botão",
-    "description_en_US": "Button",
-    "category": [
-        "LAYOUTS"
-    ],
-  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",    
+  "description": "Sequência de slides com botão de navegação",
+  "description_en_US": "Slide sequence with navigation button",
+  "category": [
+    "LAYOUTS"
+  ],
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/carousel.template.html",
   "properties": {
     "class": {
       "order": 9999
@@ -36,7 +36,7 @@
         "targetSelector": "div.carousel-inner"
       }
     ]
-  },  
+  },
   "styles": [
     {
       "selector": "div#{id} .carousel-inner",

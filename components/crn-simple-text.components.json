@@ -1,11 +1,11 @@
 {
   "name": "crn-simple-text",
   "text_pt_BR": "Texto Simples",
-  "text_en_US": "Simple Text",
+  "text_en_US": "Plain text",
   "wrapper": false,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-simple-text.svg",
-  "description": "Texto simples sem formatação",
-  "description_en_US": "Plain text without formatting",
+  "description": "Texto sem formatação",
+  "description_en_US": "Text without formatting",
   "category": [
     "TEXTS"
   ],
