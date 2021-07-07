@@ -3,6 +3,11 @@
   "text_pt_BR": "Acordeão",
   "text_en_US": "Accordion",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-accordion.svg",
+  "description": "Botão",
+    "description_en_US": "Button",
+    "category": [
+        "LAYOUTS"
+    ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/accordion.template.html",
   "properties": {
     "class": {

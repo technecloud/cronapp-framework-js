@@ -5,8 +5,8 @@
   "text_pt_BR": "Caixa de seleção dinâmica",
   "text_en_US": "Dynamic Combobox",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-dynamic-combobox.svg",
-  "description": "Campo de seleção com valores de uma fonte de dados",
-  "description_en_US": "Selection field with values from a data source",
+  "description": "Campo de seleção com valores da fonte de dados",
+  "description_en_US": "Selection field with data source values",
   "category": [
     "INPUTS"
   ],

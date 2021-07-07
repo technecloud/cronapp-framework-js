@@ -3,6 +3,11 @@
   "text_pt_BR": "Banner",
   "text_en_US": "Banner",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-jumbotron.svg",
+  "description": "Botão",
+    "description_en_US": "Button",
+    "category": [
+        "LAYOUTS"
+    ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/banner.template.html",
   "wrapper": false,
   "styles": [
