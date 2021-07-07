@@ -6,6 +6,11 @@
   "text_en_US": "Calendar",
   "order": 2,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-calendar.svg",
+  "description": "Calendário mensal",
+  "description_en_US": "Monthly calendar",
+  "category": [
+    "COMBOS"
+  ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-calendar.designtime.html",
   "designTimeSelector": "cron-calendar",
