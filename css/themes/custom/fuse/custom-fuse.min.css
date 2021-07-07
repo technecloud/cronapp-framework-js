@@ -2357,6 +2357,10 @@ div.main-view.main-view-horizontal {
     padding: 0;
 }
 
+div#view-canvas .main-view-vertical {
+    margin-top: 0;
+}
+
 /* Conteúdo Principal */
 
 div.main-view-vertical {
@@ -4196,13 +4200,13 @@ caption {
 }
 
 /* Div Principal */
-body>div.fill.ng-scope .crn-navigator-vertical+.main-view {
+div.main-view.main-view-vertical {
     margin-left: 17vw;
     width: calc(100% - 17vw);
 }
 
 @media (max-width: 768px) {
-    body>div.fill.ng-scope .crn-navigator-vertical+.main-view {
+    div.main-view.main-view-vertical {
         margin-left: 0;
         width: 100%;
     }
