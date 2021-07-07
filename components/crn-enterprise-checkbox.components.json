@@ -3,6 +3,11 @@
   "text_pt_BR": "Caixa de checagem",
   "text_en_US": "Checkbox",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-checkbox.svg",
+  "description": "Caixa de checagem padrão",
+  "description_en_US": "Standard checkbox",
+  "category": [
+    "INPUTS"
+  ],
   "order": 7,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-checkbox.template.html",
   "properties": {
