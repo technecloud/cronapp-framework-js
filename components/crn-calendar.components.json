@@ -9,7 +9,7 @@
   "description": "Calendário mensal",
   "description_en_US": "Monthly calendar",
   "category": [
-    "COMBOS"
+    "LAYOUTS"
   ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-calendar.designtime.html",

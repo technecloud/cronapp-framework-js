@@ -5,6 +5,11 @@
   "text_pt_BR": "Slider",
   "text_en_US": "Slider",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-slider.svg",
+  "description": "Campo para escolha de valores através de um sequência pré estabelecida",
+  "description_en_US": "Field for choosing values through a pre-established sequence",
+  "category": [
+    "INPUTS"
+  ],
   "designTimeHTML": "<input type='range' min='1' max='10' value='5' class='slider'/>",
   "designTimeSelector": "cron-slider",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-slider.template.html",

@@ -3,6 +3,8 @@
   "text_pt_BR": "Layout horizontal",
   "text_en_US": "Horizontal Layout",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-vertical-container.svg",
+  "description": "Dois recipiente ao lado para inserir componentes",
+  "description_en_US": "Two container on the side for inserting components",
   "properties": {
     "class": {
       "order": 9999

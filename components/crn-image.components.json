@@ -3,6 +3,8 @@
   "text_pt_BR": "Imagem",
   "text_en_US": "Image",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-image.svg",
+  "description": "Imagem",
+  "description_en_US": "Image",
   "wrapper": false,
   "autoWrapper": true,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/image.default.template.html",
