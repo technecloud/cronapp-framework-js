@@ -6,6 +6,11 @@
   "text_en_US": "Grid",
   "order": 2,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-grid.svg",
+  "description": "Tabela com repetidor de valores da fonte de dados",
+  "description_en_US": "Table with data source value repeater",
+  "category": [
+    "COMBOS"
+  ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-grid.designtime.html",
   "designTimeSelector": "cron-grid",
@@ -259,5 +264,5 @@
       "displayName_en_US": "On Remove",
       "type": "event"
     }
-  ]  
+  ]
 }
