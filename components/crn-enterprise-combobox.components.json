@@ -5,7 +5,7 @@
   "text_pt_BR": "Caixa de seleção fixa",
   "text_en_US": "Combobox",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-combobox-multiple.svg",
-  "description": "Campo de seleção com valores pré definido",
+  "description": "Campo de seleção com valores pré-definido",
   "description_en_US": "Selection field with predefined values",
   "category": [
     "INPUTS"

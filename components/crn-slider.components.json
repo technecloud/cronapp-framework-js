@@ -5,7 +5,7 @@
   "text_pt_BR": "Slider",
   "text_en_US": "Slider",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-slider.svg",
-  "description": "Campo para escolha de valores através de um sequência pré estabelecida",
+  "description": "Campo para escolha de valores através de uma sequência pré-estabelecida",
   "description_en_US": "Field for choosing values through a pre-established sequence",
   "category": [
     "INPUTS"
