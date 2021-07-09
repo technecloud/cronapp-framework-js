@@ -43,6 +43,11 @@
     },
     {
       "file": "index.html",
+      "script": "node_modules/cronapp-framework-js/dist/js/dashboard/dashboard.service.js",
+      "type": "script"
+    },
+    {
+      "file": "index.html",
       "script": "js/system-events.js",
       "type": "script"
     },
