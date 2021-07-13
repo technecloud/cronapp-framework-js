@@ -5,7 +5,12 @@
   "text_pt_BR": "Visualizador de dashboard",
   "text_en_US": "Dashboard viewer",
   "order": 2,
-  "class": "adjust-icon mdi mdi-view-dashboard",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-cron-dashboard-viewer.svg",
+  "description": "Estrutura para criar painel com gráficos",
+  "description_en_US": "Structure for creating dashboard with graphics",
+  "category": [
+      "COMBOS"
+  ],
   "designTimeSelector": "cron-dashboard-viewer",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-dashboard-viewer.template.html",
   "designTimeDynamic": true,
