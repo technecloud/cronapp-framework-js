@@ -4790,6 +4790,36 @@
               }
           };
       })
+      .directive('cronVisualComponent', function($compile) {
+        'use strict';
+        return {
+          restrict: 'AE',
+          replace: true,
+          link: function (scope, element, attrs, ngModelCtrl) {
+
+            var component = element.find('.cronVisualComponent')[0];
+            $compile(component)(element.scope());
+
+            var componentOptions = element.find('.cronVisualOption')[0];
+            $compile(componentOptions)(element.scope());
+
+            var options = JSON.parse(attrs.options || "{}");
+            if (options.typeVisualComponent) {
+              var $templateDyn = "";
+              if (options.typeVisualComponent == 'WEB') {
+                $templateDyn = $(`<div class="cronVisualOption" ng-include="'${options.content}'"></div>`);
+              } else if (options.typeVisualComponent == 'IFRAME') {
+                var url = scope.trustSrc(options.content);
+                $templateDyn = $(`<iframe class="cronVisualOption" ng-src="${scope.trustSrc(options.content)}" width="100%" height="100%" loading="lazy"></iframe>`);
+              }
+
+              element.html($templateDyn);
+              $compile($templateDyn)(element.scope());
+            }
+            
+          }
+        }
+      })
 }(app));
 
 function maskDirectiveAsDate($compile, $translate, $parse) {
