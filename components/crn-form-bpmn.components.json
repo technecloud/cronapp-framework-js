@@ -1,0 +1,17 @@
+{
+    "name": "crn-form-bpmn",
+    "text_pt_BR": "Formulário BPMN",
+    "text_en_US": "BPMN Form",
+    "class": "adjust-icon mdi mdi-format-align-justify",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/form-bpmn.template.html",
+    "properties": {
+      "cron-form-bpmn-api": {
+        "displayName_pt_BR": "Contexto da API",
+        "displayName_en_US": "Context API",
+        "removable": false,
+        "type": "text",
+        "order": 1
+      }
+    }
+}
+  

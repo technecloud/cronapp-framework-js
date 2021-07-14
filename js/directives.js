@@ -4790,6 +4790,86 @@
               }
           };
       })
+
+      .directive('cronFormBpmn',  ['$compile', '$translate', function($compile, $translate) {
+        return {
+          restrict: 'AE',
+          replace: true,
+          link: function (scope, element, attrs, ngModelCtrl) {
+            
+            var CamSDK = window.CamSDK;
+            var $element = $(element);
+            var $form = $($element.find('form'))
+            var apiUri = attrs.cronFormBpmnApi;
+
+            if (apiUri) {
+
+              var camClient = new CamSDK.Client({
+                mock: false,
+                apiUri: apiUri,
+                headers: { 'X-AUTH-TOKEN': cronapi.util.getUserToken() }
+              });
+
+              var taskService = new camClient.resource('task');
+              var taskId =  window.cronapi.screen.getParam('taskId');
+              var callbackUrl = window.cronapi.screen.getParam('callbackUrl'); 
+
+              if (taskId && callbackUrl && apiUri) {
+                this.parseCamVariable($form);
+                var callback = function (err, camForm) {
+                  if (err) {
+                      console.error(err)
+                  }
+                  var button = $('<button class="btn btn-primary btn-fab k-button" type="submit"><span class="k-icon k-i-check"></span></button>')
+                  button.on('click', function() {
+                    camForm.submit(function (err) {
+                      if (err) {
+                        throw err;
+                      }
+                      if (callbackUrl) window.location.href = callbackUrl;
+                    });
+                  });
+                  var buttonContainer = camForm.containerElement.find('.cron-form-bpmn-button')
+                  if (buttonContainer.length > 0) buttonContainer.append(button);
+                  else camForm.containerElement.append(button)
+                };
+
+                taskService.list({ }, function (err, results) {
+                  if (err) {
+                    throw err;
+                  }
+                  results._embedded.task.forEach((el) => {;
+                    if (el.id == taskId) {
+                      var title = $(element).find('.cron-form-bpmn-title');
+                      if (title.length > 0)
+                        $(title).html(el.name)
+                    }
+                  });
+                });
+
+                taskService.form(taskId, function(err, taskFormInfo) {
+                    var frm = new CamSDK.Form({
+                      client: camClient,
+                      taskId: taskId,
+                      formElement: $form,
+                      containerElement: $element,
+                      done: callback
+                    });
+                });
+              }
+
+            }
+          },
+          parseCamVariable: function(form) {
+            form.find('input').each((i, el) => {
+                var name = $(el).attr('ng-model')
+                $(el).attr('cam-variable-type', 'String');
+                $(el).attr('cam-variable-name', name);
+            });
+          }
+        };
+      }])
+
 }(app));
 
 function maskDirectiveAsDate($compile, $translate, $parse) {
