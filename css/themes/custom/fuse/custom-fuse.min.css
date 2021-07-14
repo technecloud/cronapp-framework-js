@@ -674,6 +674,7 @@ h1.component-holder {
     padding-bottom: 11px;
 }
 
+.navbar-default .navbar-nav a:hover,
 .navbar-default .navbar-nav>li>a:hover {
     background-color: #2c3344;
     color: #fff;
@@ -689,6 +690,7 @@ h1.component-holder {
     font-weight: bold;
 }
 
+.navbar-default .navbar-nav a:hover i,
 .navbar-default .navbar-nav>li>a:hover>i {
     color: #fff;
 }
@@ -706,6 +708,7 @@ h1.component-holder {
     margin-left: auto;
 }
 
+.navbar-default .navbar-nav a:hover span,
 .navbar-default .navbar-nav>li>a:hover>span {
     color: #fff;
 }

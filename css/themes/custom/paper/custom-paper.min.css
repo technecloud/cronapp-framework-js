@@ -861,6 +861,8 @@ a.bg-danger:focus {
     color: #666666
 }
 
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #212121;

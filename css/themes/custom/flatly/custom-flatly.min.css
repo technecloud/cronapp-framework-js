@@ -1398,6 +1398,8 @@ table-bordered>tfoot>tr>td,
     color: #ffffff;
 }
 
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #18bc9c;

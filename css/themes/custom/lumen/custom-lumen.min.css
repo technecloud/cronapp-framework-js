@@ -744,6 +744,8 @@ button.list-group-item-danger:focus {
     color: #999999;
 }
 
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #333333;

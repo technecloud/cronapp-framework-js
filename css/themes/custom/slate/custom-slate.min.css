@@ -1636,6 +1636,8 @@ a.list-group-item-danger.active:focus {
     color: #c8c8c8;
 }
 
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #ffffff;
@@ -1861,6 +1863,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
         border-right: 1px solid rgba(0, 0, 0, 0.2);
         border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
+
+    .navbar-default .navbar-nav a:hover,
     .navbar-default .navbar-nav>li>a:hover,
     .navbar-inverse .navbar-nav>li>a:hover {
         border-left-color: transparent;
@@ -1891,6 +1895,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     filter: none;
 }
 
+.navbar-default .navbar-nav a:hover,
 .navbar-default .navbar-nav>li>a:hover {
     background-image: -webkit-linear-gradient(#020202, #101112 40%, #141618);
     background-image: -o-linear-gradient(#020202, #101112 40%, #141618);

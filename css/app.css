@@ -30,17 +30,17 @@
 }
 
 .login-panel {
-    margin: 11% auto  0 auto;
+    margin: 11% auto 0 auto;
 }
 
 .social-button-face:hover {
-    background-color: #3b5998!important;
-    color:#ffffff;
+    background-color: #3b5998 !important;
+    color: #ffffff;
 }
 
 .social-button-google:hover {
-    background-color: #d81c1c!important;
-    color:#ffffff;
+    background-color: #d81c1c !important;
+    color: #ffffff;
 }
 
 .upload-image-component {
@@ -128,17 +128,17 @@
 }
 
 .cron-select-offscreen {
-    clip: rect(0 0 0 0)!important;
-    width: 1px!important;
-    height: 1px!important;
-    border: 0!important;
-    margin: 0!important;
-    padding: 0!important;
-    overflow: hidden!important;
-    position: absolute!important;
-    outline: 0!important;
-    left: 50%!important;
-    top: 100%!important;
+    clip: rect(0 0 0 0) !important;
+    width: 1px !important;
+    height: 1px !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    outline: 0 !important;
+    left: 50% !important;
+    top: 100% !important;
 }
 
 .right-block {
@@ -151,15 +151,16 @@
     margin-right: auto;
 }
 
-li[data-component="crn-menu-item"] ul li a.bg-primary{
+li[data-component="crn-menu-item"] ul li a.bg-primary {
     color: white !important;
 }
 
-li[data-component="crn-menu-item"] ul li a.bg-primary:hover{
+li[data-component="crn-menu-item"] ul li a.bg-primary:hover {
     color: #333 !important;
 }
 
-.k-grid-header .k-header, .k-grid-header .k-header a.k-link {
+.k-grid-header .k-header,
+.k-grid-header .k-header a.k-link {
     text-transform: uppercase;
     font-weight: normal;
     font-size: 12px;
@@ -171,7 +172,7 @@ img.user-avatar {
     max-width: 1.572em !important;
 }
 
-.modal{
+.modal {
     z-index: 10020;
 }
 
@@ -198,7 +199,8 @@ a {
     border: 0;
 }
 
-.main-nav-link:focus, .main-nav-link:active {
+.main-nav-link:focus,
+.main-nav-link:active {
     width: auto;
     height: auto;
     overflow: visible;
@@ -217,7 +219,7 @@ a {
 }
 
 .float-left-desktop {
-    float:left;
+    float: left;
 }
 
 @media only screen and (max-width: 767px) {
@@ -225,11 +227,12 @@ a {
         margin: 7.5px 0;
         width: 100%;
     }
-    
-    .crn-navigator-horizontal #navbar, .float-left-desktop {
+
+    .crn-navigator-horizontal #navbar,
+    .float-left-desktop {
         float: none;
     }
-    
+
     img.user-avatar {
         margin-left: 0;
     }
@@ -240,40 +243,41 @@ a {
     opacity: 1;
 }
 
-#crn-button-846239{
-	display:none;
+#crn-button-846239 {
+    display: none;
 }
 
 /* Dynamic file maintenance */
-.dynamic-image-container{
+.dynamic-image-container {
     width: fit-content;
 }
 
 /* Treeview maintenance */
-.k-treeview .k-i-collapse, .k-treeview .k-i-expand{
+.k-treeview .k-i-collapse,
+.k-treeview .k-i-expand {
     height: auto;
 }
 
-.k-treeview .k-in{
+.k-treeview .k-in {
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 /* crn-enterprise-combobox-multiple maintenance */
-.k-multiselect-wrap .k-button{
+.k-multiselect-wrap .k-button {
     font-size: 1em;
 }
 
-.page-header{
+.page-header {
     border-bottom: 1px solid #eee;
     display: flex;
     align-items: center;
 }
 
-.crn-radiogroup .k-content{
+.crn-radiogroup .k-content {
     background-color: transparent;
 }
 
-img.crn-image{
+img.crn-image {
     max-width: 100%;
 }
 
@@ -300,28 +304,56 @@ fieldset[disabled] .btn-default:hover {
     color: #454545;
 }
 
-.header{
+.header {
     background-color: rgb(209, 209, 209);
 }
 
-.k-list .k-item.k-state-selected, 
-.k-list-container .k-button.k-state-active, 
-.k-list-container .k-button:active, 
-.k-list-optionlabel.k-state-selected, 
-.k-menu-group .k-item.k-state-selected, 
-.k-menu.k-context-menu .k-item.k-state-selected, 
-.k-spreadsheet-popup .k-button.k-state-active, 
-.k-spreadsheet-popup .k-button.k-state-selected, 
-.k-spreadsheet-popup .k-button:active{
+.k-list .k-item.k-state-selected,
+.k-list-container .k-button.k-state-active,
+.k-list-container .k-button:active,
+.k-list-optionlabel.k-state-selected,
+.k-menu-group .k-item.k-state-selected,
+.k-menu.k-context-menu .k-item.k-state-selected,
+.k-spreadsheet-popup .k-button.k-state-active,
+.k-spreadsheet-popup .k-button.k-state-selected,
+.k-spreadsheet-popup .k-button:active {
     color: #000;
 }
 
-.carousel-caption{
+.carousel-caption {
     right: 9%;
     left: 9%;
 }
 
 .carousel-control.left,
-.carousel-control.right{
+.carousel-control.right {
     width: 8%;
+}
+
+
+
+/* Novo layout */
+.navbar-default .navbar-nav>a {
+    color: #cfd1d4;
+    font-size: 13px;
+    text-align: center;
+    padding: 11px;
+    margin-top: 4px;
+}
+
+.navbar-default .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px;
+}
+
+.navbar-default .navbar-nav a:hover {
+    color: #fff;
+    background-color: #2c3344;
+    border-radius: 6px;
+}
+
+.navbar-default .navbar-nav a i{
+    font-size: 21px;
 }
