@@ -1,0 +1,46 @@
+{
+  "name": "crn-cron-visual-component",
+  "onDrop": "openEditor",
+  "onDoubleClick": "openEditor",
+  "text_pt_BR": "Componente Visual",
+  "text_en_US": "Visual Component",
+  "order": 2,
+  "class": "adjust-icon mdi mdi-web",
+  "designTimeDynamic": true,
+  "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-visual-component.designtime.html",
+  "designTimeSelector": "cron-visual-component",
+  "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-visual-component.template.html",
+  "properties": {
+    "class": {
+      "order": 9999
+    },
+    "id": {
+      "order": 1
+    }
+  },
+  "childrenProperties": [
+    {
+      "name": "options",
+      "displayName_pt_BR": "Origem",
+      "displayName_en_US": "Origin",
+      "removable": false,
+      "global": "true",
+      "selector": "cron-visual-component",
+      "type": "text",
+      "order": 1,
+      "mandatory": true
+    },
+    {
+      "name": "ng-model",
+      "selector": "cron-visual-component",
+      "onSave": "javascript:function() { var result = arguments[0]; if (result.indexOf('.') == -1 && result.trim().length > 0 ) { result = 'vars.'+result;  }  return result; }",
+      "onDisplay": "javascript:function() { return arguments[0].replace('vars.',''); }",
+      "type": "text",
+      "order": 2,
+      "mandatory": true
+    }
+  ],
+  "styles": [
+    
+  ]
+}
