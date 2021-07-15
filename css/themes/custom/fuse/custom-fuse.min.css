@@ -1,5 +1,5 @@
 @import "./components_css/import_components_css.css";
-@import "./_bootswatch-v3.3.7/import_bootswatch.css";
+@import "../_bootswatch-v3.3.7/import_bootswatch.css";
 @import "./font/font.css";
 html {
     font-size: 10px;
@@ -259,10 +259,6 @@ legend {
     -webkit-transition: opacity 0.15s linear;
     -o-transition: opacity 0.15s linear;
     transition: opacity 0.15s linear;
-}
-
-.fade.in {
-    /* opacity: 1;*/
 }
 
 .caret {
@@ -734,7 +730,9 @@ samp {
 
 
 /* -- .navbar -- */
-
+.navbar {
+    min-height: auto;
+}
 .navbar-default {
     background-color: #2fa4e7;
     border-color: #1995dc;
@@ -1021,6 +1019,11 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .navbar.navbar-default .navbar-nav>li>a,
 .navbar-brand {
     color: #9fa2aa;
+    height: auto;
+}
+
+.navbar-brand {
+    padding: 18px 15px 0;
 }
 
 @media (max-width: 767px) {
@@ -1030,6 +1033,10 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     .navbar .dropdown-menu a {
         color: #fff;
     }
+}
+
+.navbar .nav > li > a {
+    text-transform: initial;
 }
 
 
@@ -2238,10 +2245,15 @@ ul.nav.navbar-nav {
 
 .crn-navigator-horizontal .navbar-default .navbar-nav .open .dropdown-menu {
     margin-top: 4px;
+    padding: 0;
 }
 
 #navbar2 ul.nav.navbar-nav {
     margin: 4px 10px;
+}
+
+.dropdown-menu > li > a {
+    text-transform: initial;
 }
 
 
@@ -2255,6 +2267,7 @@ ul.nav.navbar-nav {
     div.crn-navigator-vertical {
         width: 17vw;
         position: fixed;
+        left: 0;
     }
     div.crn-navigator-vertical ul.nav.navbar-nav {
         width: calc(100% - 10px);
@@ -2281,12 +2294,11 @@ ul.nav.navbar-nav {
     }
     div.main-view.main-view-vertical {
         display: inline-block;
-        margin-left: 17vw;
         margin-right: 0;
         margin-top: 0;
-        width: calc(100% - 17vw);
-        padding: 0 23px;
+        padding: 0;
     }
+
     /* Menu Horizontal */
     .crn-navigator-horizontal .navbar-default .navbar-nav .open .dropdown-menu>li>a>i {
         display: none;
@@ -2313,6 +2325,13 @@ ul.nav.navbar-nav {
     }
 }
 
+div.main-view.main-view-horizontal {
+    padding: 0;
+}
+
+div#view-canvas .main-view-vertical {
+    margin-top: 0;
+}
 
 /* Conteúdo Principal */
 
@@ -2321,7 +2340,7 @@ div.main-view-vertical {
     margin-left: 0;
     margin-top: 0;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
 }
 
 
@@ -4137,4 +4156,28 @@ caption {
     color: #999999;
     background-color: #ffffff;
     cursor: not-allowed;
+}
+
+/* -- starter --*/
+#starter {
+    padding: 0 20px;
+}
+
+#starter h1.component-holder {
+    margin-left: -20px;
+    width: calc(100% + 40px);
+    margin-bottom: 20px;
+}
+
+/* Div Principal */
+div.main-view.main-view-vertical {
+    margin-left: 17vw;
+    width: calc(100% - 17vw);
+}
+
+@media (max-width: 768px) {
+    div.main-view.main-view-vertical {
+        margin-left: 0;
+        width: 100%;
+    }
 }
