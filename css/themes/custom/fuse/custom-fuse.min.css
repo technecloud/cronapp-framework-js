@@ -664,11 +664,13 @@ h1.component-holder {
     font-size: 14px;
 }
 
+.navbar-default .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     display: flex;
     border-radius: 6px;
 }
 
+.navbar-default .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     padding-top: 11px;
     padding-bottom: 11px;
@@ -680,6 +682,7 @@ h1.component-holder {
     color: #fff;
 }
 
+.navbar-default .navbar-nav a i,
 .navbar-default .navbar-nav>li>a>i {
     font-size: 22px;
     display: inline-block;
@@ -695,6 +698,7 @@ h1.component-holder {
     color: #fff;
 }
 
+.navbar-default .navbar-nav a,
 .navbar-default .navbar-nav>li>a>span {
     color: #cfd1d4;
     margin-left: 5px;

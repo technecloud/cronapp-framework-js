@@ -167,11 +167,6 @@ li[data-component="crn-menu-item"] ul li a.bg-primary:hover {
     text-decoration: none !important;
 }
 
-img.user-avatar {
-    width: 1.572em !important;
-    max-width: 1.572em !important;
-}
-
 .modal {
     z-index: 10020;
 }
@@ -330,30 +325,56 @@ fieldset[disabled] .btn-default:hover {
     width: 8%;
 }
 
-
-
-/* Novo layout */
-.navbar-default .navbar-nav>a {
-    color: #cfd1d4;
-    font-size: 13px;
-    text-align: center;
-    padding: 11px;
-    margin-top: 4px;
+img.user-avatar {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
 }
 
-.navbar-default .nav-button {
+
+
+/* Horizontal menu - 3 */
+.crn-navigator-horizontal #navbar-3 .navbar-nav a {
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.crn-navigator-horizontal #navbar-3 .nav-button {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 11px;
+    gap: 5px;
 }
 
-.navbar-default .navbar-nav a:hover {
-    color: #fff;
-    background-color: #2c3344;
-    border-radius: 6px;
+.crn-navigator-horizontal #navbar-3 .navbar-nav a i {
+    font-size: 18px;
+    margin: 0;
+    width: auto;
 }
 
-.navbar-default .navbar-nav a i{
-    font-size: 21px;
+.crn-navigator-horizontal #navbar-3 img.user-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Vertical menu - 3 */
+.crn-navigator-vertical #navbar-3 .navbar-nav a {
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.crn-navigator-vertical #navbar-3 .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.crn-navigator-vertical #navbar-3 .navbar-nav a i {
+    font-size: 18px;
+    margin: 0;
+    width: auto;
+}
+
+.crn-navigator-vertical #navbar-3 img.user-avatar {
+    border-radius: 50%;
+    object-fit: cover;
 }

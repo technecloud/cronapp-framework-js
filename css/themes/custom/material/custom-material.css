@@ -257,3 +257,24 @@ div .messages {
 .k-dropdown-wrap.ng-invalid-required {
     border-color: #f31700;
 }
+
+
+.dropdown-menu li a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #393939 !important;
+    white-space: nowrap;
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
+}
+
