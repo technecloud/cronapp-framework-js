@@ -4790,7 +4790,7 @@
               }
           };
       })
-      .directive('cronVisualComponent', function($compile) {
+      .directive('cronVisualComponent', function($compile, $sce) {
         'use strict';
         return {
           restrict: 'AE',
@@ -4809,8 +4809,8 @@
               if (options.typeVisualComponent == 'WEB') {
                 $templateDyn = $(`<div class="cronVisualOption" ng-include="'${options.content}'"></div>`);
               } else if (options.typeVisualComponent == 'IFRAME') {
-                var url = scope.trustSrc(options.content);
-                $templateDyn = $(`<iframe class="cronVisualOption" ng-src="${scope.trustSrc(options.content)}" width="100%" height="100%" loading="lazy"></iframe>`);
+                var url = $sce.trustAsResourceUrl(options.content);
+                $templateDyn = $(`<iframe class="cronVisualOption" ng-src="${url}" width="100%" height="100%" loading="lazy"></iframe>`);
               }
 
               element.html($templateDyn);

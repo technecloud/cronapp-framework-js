@@ -4,7 +4,11 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Componente Visual",
   "text_en_US": "Visual Component",
-  "order": 2,
+  "description": "Componente visual que pode ser utilizado dentro de uma página",
+  "description_en_US": "Visual component that can be used within a page",
+  "category": [
+    "LAYOUTS"
+  ],
   "class": "adjust-icon mdi mdi-web",
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-visual-component.designtime.html",

@@ -487,14 +487,6 @@
     }));
   });
 
-  app.controller('VisualComponentController', function ($scope, $sce, $http) {
-  
-    $scope.trustSrc = function(src) {
-      return $sce.trustAsResourceUrl(src);
-    }  
-
-  });
-
   app.controller('SocialController', function($controller, $scope, $location) {
     $scope.checkSocial = true;
     angular.extend(this, $controller('LoginController', {
