@@ -3,6 +3,11 @@
   "text_pt_BR": "Código QR",
   "text_en_US": "QR Code",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-QRCode.svg",
+  "description": "Código de barras bidimensional lido por câmera",
+  "description_en_US": "Two-dimensional barcode read by camera",
+  "category": [
+    "COMBOS"
+  ],
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/qrcode.template.html",
   "designTimeHTML": "<img style=\"height: 100%;width:100%;min-height:100%; min-width:100%;\"  src=\"node_modules/cronapp-framework-js/img/qrcode.png\"/>",
@@ -18,7 +23,7 @@
       "removable": false,
       "displayName_pt_BR": "Código QR",
       "displayName_en_US": "QR Code",
-      "childrenProperty": true,  
+      "childrenProperty": true,
       "type": "logic",
       "order": 1
     },

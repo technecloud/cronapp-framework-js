@@ -6,6 +6,11 @@
   "text_en_US": "TreeView",
   "order": 2,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-tree-view.svg",
+  "description": "Lista que empilha dados iguais",
+  "description_en_US": "List that stacks equal data",
+  "category": [
+    "COMBOS"
+  ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/cron-tree-view.designtime.html",
   "designTimeSelector": "cron-tree-view",

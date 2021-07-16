@@ -3,6 +3,11 @@
   "text_pt_BR": "Captcha",
   "text_en_US": "Captcha",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-captcha.svg",
+  "description": "Verificação do Google para detectar robôs",
+  "description_en_US": "Google scan for robot detection",
+  "category": [
+    "COMBOS"
+  ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-captcha.designtime.html",
   "designTimeSelector": "div",
@@ -62,7 +67,7 @@
       "order": 3
     }
   },
-  "attributesForPreview": [ ],
+  "attributesForPreview": [],
   "childrenProperties": [
     {
       "name": "data-sitekey",

@@ -3,6 +3,11 @@
   "text_pt_BR": "Lista Simples",
   "text_en_US": "Lista Simples",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-list.svg",
+  "description": "Lista com título e subtítulo alinhados na vertical",
+  "description_en_US": "List with title and subtitle aligned vertically",
+  "category": [
+    "LISTS"
+  ],
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/list.template.html",
   "properties": {

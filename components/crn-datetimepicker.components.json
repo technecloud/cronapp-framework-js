@@ -3,6 +3,11 @@
   "text_pt_BR": "Data e hora",
   "text_en_US": "DateTime",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-datetimepicker.svg",
+  "description": "Campo para inserir data e hora",
+  "description_en_US": "Field to enter date and time",
+  "category": [
+    "INPUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/datetime.template.html",
   "styles": [
     {

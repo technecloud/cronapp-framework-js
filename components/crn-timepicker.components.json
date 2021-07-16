@@ -3,6 +3,11 @@
   "text_pt_BR": "Hora",
   "text_en_US": "Time",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-timepicker.svg",
+  "description": "Campo para inserir hora",
+  "description_en_US": "Hour input field",
+  "category": [
+    "INPUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/time.template.html",
   "properties": {
     "class": {

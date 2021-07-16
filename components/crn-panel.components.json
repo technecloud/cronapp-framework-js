@@ -3,6 +3,11 @@
   "text_pt_BR": "Painel",
   "text_en_US": "Panel",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-panel.svg",
+  "description": "Estrutura com cabeçalho, corpo e rodapé",
+  "description_en_US": "Structure with header, body and footer",
+  "category": [
+    "LAYOUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/panel.template.html",
   "wrapper": false,
   "properties": {

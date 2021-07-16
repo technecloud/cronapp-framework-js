@@ -2,8 +2,12 @@
     "name": "crn-unordered-list",
     "text_pt_BR": "Lista não ordenada",
     "text_en_US": "Unordered list",
-    "class": "adjust-icon mdi mdi-file-presentation-box",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-unordered-list.svg",
+    "description": "Lista em tópicos com indicadores redondos",
+    "description_en_US": "List on topics with round indicators",
+    "category": [
+        "LISTS"
+    ],
     "wrapper": true,
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-unordered-list.template.html",
     "properties": {

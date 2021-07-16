@@ -5,6 +5,11 @@
     "text_pt_BR": "Auto completar",
     "text_en_US": "Auto complete",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-autocomplete.svg",
+    "description": "Campo que apresenta valores fixos enquanto digita",
+    "description_en_US": "Field that displays fixed values as you type",
+    "category": [
+        "INPUTS"
+    ],
     "designTimeDynamic": true,
     "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
     "designTimeSelector": "cron-auto-complete",

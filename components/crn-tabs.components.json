@@ -3,6 +3,11 @@
   "text_pt_BR": "Abas",
   "text_en_US": "Tabs",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-tabs.svg",
+  "description": "Diferentes painéis separados por abas",
+  "description_en_US": "Different panels separated by tabs",
+  "category": [
+    "LAYOUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/tabs.template.html",
   "properties": {
     "class": {
@@ -42,7 +47,7 @@
       "text_pt_BR": "Aba Padrão",
       "text_en_US": "Default Tab"
     }
-  ],  
+  ],
   "childrenProperties": [
     {
       "name": "ng-init",

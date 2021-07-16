@@ -6,6 +6,11 @@
   "text_en_US": "Report viewer",
   "order": 2,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-report-viewer.svg",
+  "description": "Estrutura para criar relatórios com valores da fonte de dados",
+  "description_en_US": "Framework for creating reports with data source values",
+  "category": [
+      "COMBOS"
+  ],
   "designTimeSelector": "cron-report-viewer",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-report-viewer.template.html",
   "designTimeDynamic": true,

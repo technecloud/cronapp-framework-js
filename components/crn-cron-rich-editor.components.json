@@ -5,6 +5,11 @@
   "text_pt_BR": "Editor de Texto Rico",
   "text_en_US": "Rich Editor",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-rich-editor.svg",
+  "description": "Estrutura completa para inserção de texto longo",
+  "description_en_US": "Complete structure for inserting long text",
+  "category": [
+    "LAYOUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-rich-editor.template.html",
   "properties": {
     "class": {

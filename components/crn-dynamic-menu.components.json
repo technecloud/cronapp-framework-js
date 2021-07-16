@@ -5,6 +5,11 @@
   "text_pt_BR": "Menu Dinâmico",
   "text_en_US": "Dynamic Menu",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-dynamic-menu.svg",
+  "description": "Estrutura com botões de navegação",
+  "description_en_US": "Structure with navigation buttons",
+  "category": [
+    "COMBOS"
+  ],
   "order": 11,
   "wrapper": false,
   "designTimeDynamic": true,

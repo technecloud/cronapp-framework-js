@@ -4,8 +4,12 @@
     "text_en_US": "Ordered sub list",
     "wrapper": false,
     "autoWrapper": true,
-    "class": "adjust-icon mdi mdi-file-presentation-box",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-ordered-sub-list.svg",
+    "description": "Sublista de segundo grau com indicadores numerados",
+    "description_en_US": "Second degree sublist with numbered indicators",
+    "category": [
+        "LISTS"
+    ],
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-ordered-sub-list.template.html",
     "properties": {
         "class": {

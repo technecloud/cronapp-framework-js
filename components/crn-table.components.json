@@ -5,6 +5,11 @@
   "text_pt_BR": "Tabela Simples",
   "text_en_US": "Simple Table",
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-table.svg",
+  "description": "Tabela com cabeçalho e rodapé",
+  "description_en_US": "Table with header and footer",
+  "category": [
+    "LAYOUTS"
+  ],
   "template": "",
   "properties": {
     "class": {
