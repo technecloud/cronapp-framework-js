@@ -2289,10 +2289,14 @@ button.list-group-item-danger.active:focus {
     color: #ffffff;
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #ffffff;
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
 .navbar-default .navbar-nav a:hover,
 .navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
@@ -3332,4 +3336,20 @@ input[type="checkbox"] {
 .list-group {
     font-size: 12px;
     font-weight: 300;
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus{
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
 }

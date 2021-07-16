@@ -67,7 +67,7 @@ cron-calendar .k-calendar-monthview:after,
 
 .k-calendar-container .k-calendar:not(.k-scheduler-calendar) {
     border-width: 0;
-    background: #383838;
+    background-color: #383838;
 }
 
 .k-calendar:not(.k-scheduler-calendar) .k-state-hover {

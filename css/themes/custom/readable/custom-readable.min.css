@@ -1358,10 +1358,14 @@ select.input-group-sm>.input-group-btn>.btn {
     color: #333333
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #4582ec
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
 .navbar-default .navbar-nav a:hover,
 .navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
@@ -2617,4 +2621,20 @@ address {
 
 .modal .close {
     color: #333333
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus{
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
 }

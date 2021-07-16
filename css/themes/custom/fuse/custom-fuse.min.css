@@ -1,6 +1,7 @@
-@import "./components_css/import_components_css.css";
 @import "../_bootswatch-v3.3.7/import_bootswatch.css";
+@import "./components_css/import_components_css.css";
 @import "./font/font.css";
+
 html {
     font-size: 10px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -555,10 +556,6 @@ h1.component-holder {
     color: #333;
 }
 
-#modalPassword .btn-primary {
-    border: 1px solid #22c55e;
-}
-
 #modalPassword .btn-default {
     border: 1px solid #dc2626;
 }
@@ -614,42 +611,10 @@ h1.component-holder {
     display: none;
 }
 
-.crn-navigator-horizontal #navbar2>ul>li>a:before,
-.crn-navigator-vertical #navbar>ul>li>*>ul>li:last-child>a:before {
-    content: "\f007";
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: 22px;
-    width: 30px;
-    text-align: center;
-    margin-right: 9px;
-}
-
 .crn-navigator-horizontal .navbar-header,
 .crn-navigator-horizontal #navbar,
 .crn-navigator-horizontal #navbar2 {
     width: calc(100% + 30px);
-}
-
-.crn-navigator-vertical #navbar>ul>li>*>ul>li:last-child>ul>li>a:before {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: 14px;
-    width: 30px;
-    text-align: center;
-    margin-right: 13px;
-}
-
-.crn-navigator-vertical #navbar>ul>li>*>ul>li:last-child>ul>li>a:before:focus {
-    color: #fff;
-}
-
-.crn-navigator-vertical #navbar>ul>li>*>ul>li:last-child>ul>li:first-child>a:before {
-    content: "";
-}
-
-.crn-navigator-vertical #navbar>ul>li>*>ul>li:last-child>ul>li:nth-child(2)>a:before {
-    content: "";
 }
 
 .navbar-default {
@@ -698,6 +663,7 @@ h1.component-holder {
     color: #fff;
 }
 
+.crn-navigator-vertical #navbar-profile span,
 .navbar-default .navbar-nav a,
 .navbar-default .navbar-nav>li>a>span {
     color: #cfd1d4;
@@ -2303,13 +2269,13 @@ ul.nav.navbar-nav {
     }
     /* Logo */
     div.crn-navigator-vertical .navbar-header {
-        margin: 30px 0 20px;
-        text-align: center;
+        /* margin: 30px 0 20px;
+        text-align: center; */
     }
     div.crn-navigator-vertical .navbar-brand {
-        padding: 0;
+        /* padding: 0;
         float: none;
-        margin-top: 4px;
+        margin-top: 4px; */
     }
     div.crn-navigator-vertical .navbar-brand img {
         display: inline;
@@ -4144,4 +4110,21 @@ caption {
     color: #999999;
     background-color: #ffffff;
     cursor: not-allowed;
+}
+
+
+
+#modalPassword .btn-primary {
+    border: 1px solid #22c55e;
+    background: #fff;
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
 }
