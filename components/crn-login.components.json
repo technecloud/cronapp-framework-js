@@ -1,0 +1,133 @@
+{
+    "name": "crn-login",
+    "text_pt_BR": "Login",
+    "text_en_US": "Login",
+    "order": 0,
+    "class": "adjust-icon mdi mdi-view-list",
+    "designTimeDynamic": true,
+    "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/login/login-cronapp.designtime.html",
+    "designTimeSelector": "crn-login",
+    "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/components/templates/login/login-cronapp.template.html",
+    "properties": {
+        "class": {
+            "order": 9999
+        },
+        "id": {
+            "order": 1
+        }
+    },
+    "childrenProperties": [
+        {
+            "name": "logo",
+            "displayName_pt_BR": "Logotipo",
+            "displayName_en_US": "Logo",
+            "type": "projectResource",
+            "resourceType": "image/jpeg,image/gif,image/png,image/svg+xml",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "order": 1,
+            "mandatory": false
+        },
+        {
+            "name": "logocaption",
+            "displayName_pt_BR": "Legenda do logotipo",
+            "displayName_en_US": "Logo Caption",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 2,
+            "mandatory": true
+        },
+        {
+            "name": "username",
+            "displayName_pt_BR": "Usuário",
+            "displayName_en_US": "Username",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 3,
+            "mandatory": true
+        },
+        {
+            "name": "password",
+            "displayName_pt_BR": "Senha",
+            "displayName_en_US": "Password",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 5,
+            "mandatory": true
+        },
+        {
+            "name": "resetpassword",
+            "displayName_pt_BR": "Campo resetar senha",
+            "displayName_en_US": "Reset password field",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "logic",
+            "order": 7,
+            "mandatory": true
+        },
+        {
+            "name": "nameresetpassword",
+            "displayName_pt_BR": "Botão resetar senha",
+            "displayName_en_US": "Reset password button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 8,
+            "mandatory": false
+        },
+        {
+            "name": "buttonlogin",
+            "displayName_pt_BR": "Botão Login",
+            "displayName_en_US": "Login button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 9,
+            "mandatory": true
+        },
+        {
+            "name": "goregister",
+            "displayName_pt_BR": "Campo cadastro",
+            "displayName_en_US": "Register field",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "logic",
+            "order": 10,
+            "mandatory": true
+        },
+        {
+            "name": "buttonregister",
+            "displayName_pt_BR": "Botão cadastro",
+            "displayName_en_US": "Register button",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "text",
+            "order": 11,
+            "mandatory": false
+        },
+        {
+            "name": "actionregister",
+            "displayName_pt_BR": "Ação botão cadastro",
+            "displayName_en_US": "Register button action",
+            "removable": false,
+            "global": "true",
+            "selector": "crn-login",
+            "type": "event",
+            "order": 1,
+            "mandatory": false
+        }
+    ],
+    "styles": []
+}

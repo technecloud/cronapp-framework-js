@@ -73,6 +73,18 @@
     return result;
   };
 
+  app.directive('crnLogin', function() {
+   return {
+      replace: true,
+      restrict: "E" ,  
+      templateUrl: "components/templates/login/login-cronapp.template.html",
+      link: async function (scope, element, attrs, ngModelCtrl) {
+        scope.attrs = attrs;
+      }
+    }
+  });
+
+  
   app.directive('cronCalendar', ['$timeout', function ($timeout) {
     return {
       restrict: 'E',
