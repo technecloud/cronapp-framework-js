@@ -14,3 +14,13 @@
     margin-top: 0;
     margin-bottom: 25px;
 }
+
+.crn-button-signup-register {
+    padding-left: 41px;
+    padding-right: 41px;
+}
+
+.crn-anchor-signup-back {
+    color: rgb(112, 112, 112);
+    margin-top: 10px;
+}
