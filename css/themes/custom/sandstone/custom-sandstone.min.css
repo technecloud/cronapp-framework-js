@@ -1011,6 +1011,33 @@ a:focus {
     color: #79a736;
 }
 
+
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
+.navbar-default .navbar-nav>li>a {
+    color: #98978b;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: #ffffff;
+    background-color: transparent;
+}
+
+#navbar-profile span,
+#navbar-3 .navbar-nav a {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+
+
 /* Horizontal menu - 3 */
 #navbar-3 .navbar-nav a {
     padding: 15px;
@@ -1019,7 +1046,7 @@ a:focus {
 }
 
 #navbar-3 .navbar-nav a:hover,
-#navbar-3 .navbar-nav a:focus{
+#navbar-3 .navbar-nav a:focus {
     text-decoration: none;
 }
 

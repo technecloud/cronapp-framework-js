@@ -1525,3 +1525,37 @@ code {
     color: #e83e8c;
     word-break: break-word;
 }
+
+
+
+
+
+#navbar-profile span,
+#navbar-3 .navbar-nav a{
+    color: #777;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus {
+    color: #333;
+    background-color: transparent;
+}
+
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus{
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
+}

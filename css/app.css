@@ -338,7 +338,7 @@ img.user-avatar {
 
 /* Horizontal menu - 3 */
 .crn-navigator-horizontal #navbar-3 .navbar-nav .nav-button {
-    font-size: 13px;
+    /* font-size: 13px; */
     text-decoration: none;
 }
 
@@ -358,14 +358,6 @@ img.user-avatar {
     border-radius: 50%;
     object-fit: cover;
 }
-
-
-
-
-
-
-
-
 
 
 /* Vertical menu - 3 */

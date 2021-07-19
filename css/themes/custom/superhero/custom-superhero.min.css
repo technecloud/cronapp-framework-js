@@ -3084,9 +3084,17 @@ table a:not(.btn),
     color: #333;
 }
 
+#navbar-3 .navbar-nav a,
+#navbar-profile span {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
 /* Horizontal menu - 3 */
 #navbar-3 .navbar-nav a {
-    padding: 15px;
+    padding: 9.5px 15px;
     margin: 0;
     text-decoration: none;
 }

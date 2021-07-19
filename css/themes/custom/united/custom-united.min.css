@@ -2468,6 +2468,14 @@ select.input-group-lg>.input-group-btn>.btn {
     line-height: 54px;
 }
 
+#navbar-3 .navbar-nav a,
+#navbar-profile span {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
 /* Horizontal menu - 3 */
 #navbar-3 .navbar-nav a {
     padding: 15px;

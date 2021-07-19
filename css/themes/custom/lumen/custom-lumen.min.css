@@ -1548,6 +1548,16 @@ table a:not(.btn),
     font-size: 0.8em;
 }
 
+
+
+#navbar-profile span,
+#navbar-3 .navbar-nav a {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
 /* Horizontal menu - 3 */
 #navbar-3 .navbar-nav a {
     padding: 15px;
