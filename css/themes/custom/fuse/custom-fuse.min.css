@@ -471,7 +471,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 
 h1.component-holder {
-    font-size: 32px;
     font-weight: 800;
     margin: 0;
     padding: 50px 40px;
@@ -4127,4 +4126,24 @@ caption {
 
 #navbar-3 .nav-button {
     padding: 15px;
+}
+
+
+/* Login */
+.bg-login h1{
+    padding: 0;
+    background-color: transparent;
+    border: none;    
+}
+
+.bg-login #container-second h1 {
+    padding-left: 0;
+}
+
+.bg-login #container-first #crn-simple-text-login{
+    padding-left: 0;
+}
+
+.bg-login #container-first .img-login{
+    margin-bottom: 24px;
 }

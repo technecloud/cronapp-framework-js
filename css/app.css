@@ -412,3 +412,182 @@ img.user-avatar {
 .crn-navigator-vertical .navbar-default-vertical:before {
     content: none;
 }
+
+/* Login */
+.bg-login #crn-botao-cadastre {
+    margin-top: -4px;
+    margin-bottom: 20px;
+    color: rgb(138, 138, 138);
+}
+
+.bg-login #container-first h1 {
+    color: #0f172a;
+}
+
+.bg-login #container-second h1 {
+    line-height: 1.1;
+    font-weight: normal;
+    color: #f1f5f9;
+    margin: 0 0 20px 0;
+}
+
+.bg-login #container-second p {
+    line-height: 1.5;
+    font-weight: normal;
+    color: #94a3b8;
+}
+
+.bg-login #container-first,
+.bg-login #container-second {
+    display: flex;
+    align-items: center;
+    padding: 25px 10px;
+}
+
+.bg-login #container-second {
+    background-color: #0f172a;
+}
+
+.bg-login #container-first {
+    background-color: #fff;
+}
+
+.bg-login1 #container-first {
+    box-shadow: -1px 4px 9px 0px #e0e0e06e;
+}
+
+.bg-login #container-second .login-text,
+.bg-login #container-first .login-panel-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-login #container-first .img-login {
+    display: block;
+    width: 56%;
+    height: auto;
+    margin: auto;
+    margin-bottom: 8px;
+}
+
+.bg-login #container-first .btn-login {
+    margin: 17px 0px;
+    background-color: #0f172a;
+    color: #fff;
+    outline: none;
+}
+
+.bg-login #container-first .btn-login:focus,
+.bg-login #container-first .btn-login:hover {
+    background-color: #323b51;
+    color: #fff;
+}
+
+.bg-login #container-first #crn-simple-text-login {
+    width: auto;
+    padding-right: 4px;
+}
+
+.bg-login #container-first #crn-botao-signup {
+    width: auto;
+    text-align: left;
+    padding-left: 0;
+    color: #3B448E;
+}
+
+.bg-login #container-first .login-signup {
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.bg-login #container-first #social-login {
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 0;
+    padding-right: 13px;
+}
+
+.bg-login #container-first #social-login #crn-social-login-01 ul,
+.bg-login #container-first #social-login #crn-simple-text-login-social {
+    width: auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.bg-login #container-first #social-login #crn-simple-text-login-social,
+.bg-login #container-first #social-login #crn-social-login-01 ul li i {
+    color: rgb(138, 138, 138);
+    font-size: 16px;
+}
+
+.bg-login #crn-botao-cadastre:focus,
+.bg-login #crn-botao-cadastre:hover,
+.bg-login #container-first #social-login #crn-social-login-01 ul li:hover i {
+    color: #0f172a;
+}
+
+.bg-login2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100vh;
+}
+
+.bg-login1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 7% 6%;
+    border-radius: 36px;
+}
+
+.bg-login1 #container-first {
+    padding: 13% 0px;
+    border-radius: 14px 0px 0px 14px;
+}
+
+.bg-login1 #container-second {
+    border-radius: 0px 14px 14px 0px;
+}
+
+
+@media screen and (max-width: 540px) {
+
+    .bg-login2,
+    .bg-login1 {
+        grid-template-columns: repeat(1, 1fr);        
+    }
+
+    .bg-login #container-first{
+        border-radius: 14px;
+    }
+
+    .bg-login #container-second {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Solução cookies */
+#dialogCookies {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: 0;
+    background-color: #dfdfdf;
+    border: 0;
+    border-radius: 0;
+}
