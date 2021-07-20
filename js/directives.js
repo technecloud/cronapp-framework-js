@@ -2925,7 +2925,7 @@
               }.bind(this));
             },
             dataBound: function(e) {
-              this.dataSource.transport.options.selectActiveInGrid();
+              setTimeout(() => this.dataSource.transport.options.selectActiveInGrid(), 100);
 
               if (attrs && attrs.ngDataBound) {
                 scope.$eval(attrs.ngDataBound);
