@@ -3107,3 +3107,8 @@ table a:not(.btn),
 #navbar-3 .nav-button {
     padding: 15px;
 }
+
+/* Login */
+.bg-login1 #container-first {
+    box-shadow: none;
+}
