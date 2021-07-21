@@ -2957,7 +2957,7 @@
               }.bind(this));
             },
             dataBound: function(e) {
-              this.dataSource.transport.options.selectActiveInGrid();
+              setTimeout(() => this.dataSource.transport.options.selectActiveInGrid(), 100);
 
               if (attrs && attrs.ngDataBound) {
                 scope.$eval(attrs.ngDataBound);
@@ -4789,6 +4789,36 @@
                   $rootScope.$on('$translateChangeSuccess', listener);
               }
           };
+      })
+      .directive('cronVisualComponent', function($compile, $sce) {
+        'use strict';
+        return {
+          restrict: 'AE',
+          replace: true,
+          link: function (scope, element, attrs, ngModelCtrl) {
+
+            var component = element.find('.cronVisualComponent')[0];
+            $compile(component)(element.scope());
+
+            var componentOptions = element.find('.cronVisualOption')[0];
+            $compile(componentOptions)(element.scope());
+
+            var options = JSON.parse(attrs.options || "{}");
+            if (options.typeVisualComponent) {
+              var $templateDyn = "";
+              if (options.typeVisualComponent == 'WEB') {
+                $templateDyn = $(`<div class="cronVisualOption" ng-include="'${options.content}'"></div>`);
+              } else if (options.typeVisualComponent == 'IFRAME') {
+                var url = $sce.trustAsResourceUrl(options.content);
+                $templateDyn = $(`<iframe class="cronVisualOption" ng-src="${url}" width="100%" height="100%" loading="lazy"></iframe>`);
+              }
+
+              element.html($templateDyn);
+              $compile($templateDyn)(element.scope());
+            }
+            
+          }
+        }
       })
 }(app));
 
