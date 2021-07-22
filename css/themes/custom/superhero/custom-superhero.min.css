@@ -1659,10 +1659,16 @@ a.list-group-item-danger.active:focus {
     color: #ebebeb;
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #ebebeb;
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #ebebeb;
@@ -3076,4 +3082,33 @@ table a:not(.btn),
     text-decoration: none;
     font-size: 0.8em;
     color: #333;
+}
+
+#navbar-3 .navbar-nav a,
+#navbar-profile span {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 9.5px 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus{
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
+}
+
+/* Login */
+.bg-login1 #container-first {
+    box-shadow: none;
 }

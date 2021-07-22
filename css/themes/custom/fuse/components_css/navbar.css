@@ -82,16 +82,21 @@
     color: #dddddd;
 }
 
+.navbar-default .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #ffffff;
 }
 
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #ffffff;
     background-color: #178acc;
 }
 
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>.active>a,
 .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus {

@@ -2,9 +2,10 @@
   "name": "crn-menu-item",
   "text_pt_BR": "Item de menu",
   "text_en_US": "MenuItem",
-  "class": "adjust-icon mdi mdi-tab",
+  "class": "adjust-icon mdi mdi-tab-unselected",
   "template": "",
   "pallete": false,
+  "forcedGroup": true,
   "handleRules": {
     "canToggle": true,
     "canIncrement": true,

@@ -3,6 +3,7 @@
 /* -- Fonts -- */
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700");
+
 body {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -783,12 +784,14 @@ fieldset[disabled] .form-control {
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
+
     input[type="date"].form-control,
     input[type="time"].form-control,
     input[type="datetime-local"].form-control,
     input[type="month"].form-control {
         line-height: 38px;
     }
+
     input[type="date"].input-lg,
     input[type="time"].input-lg,
     input[type="datetime-local"].input-lg,
@@ -1313,10 +1316,16 @@ button.list-group-item-danger.active:focus {
     color: #777777;
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #777777;
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #3399f3;
@@ -1366,17 +1375,20 @@ button.list-group-item-danger.active:focus {
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
         color: #777777;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #3399f3;
         background-color: transparent;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a,
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
         color: #3399f3;
         background-color: transparent;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a,
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:focus {
@@ -1481,23 +1493,28 @@ fieldset[disabled] .navbar-default .btn-link:focus {
     .navbar-inverse .navbar-nav .open .dropdown-menu>.dropdown-header {
         border-color: #345578;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
         background-color: #345578;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
         color: #dddddd;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #ffffff;
         background-color: transparent;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:focus {
         color: #ffffff;
         background-color: transparent;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:focus {
@@ -2444,4 +2461,37 @@ output {
 
 .panel-primary .panel-title {
     color: #fff;
+}
+
+#navbar-3 .navbar-nav a {
+    margin: 15px;
+
+}
+
+#navbar-3 .navbar-nav a,
+#navbar-profile span {
+    font-size: 11px;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #777;
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus {
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
 }

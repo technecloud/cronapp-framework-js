@@ -3,6 +3,7 @@
 /* -- Fonts -- */
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
+
 body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -616,6 +617,7 @@ a.text-danger:focus {
         border-bottom: 1px solid #dddddd;
         border-radius: 4px 4px 0 0;
     }
+
     .nav-tabs.nav-justified>.active>a,
     .nav-tabs.nav-justified>.active>a:hover,
     .nav-tabs.nav-justified>.active>a:focus {
@@ -634,6 +636,7 @@ a.text-danger:focus {
         border-bottom: 1px solid #dddddd;
         border-radius: 4px 4px 0 0;
     }
+
     .nav-tabs-justified>.active>a,
     .nav-tabs-justified>.active>a:hover,
     .nav-tabs-justified>.active>a:focus {
@@ -946,10 +949,16 @@ table .text-muted,
     color: #888888;
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #888888;
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #ffffff;
@@ -999,17 +1008,20 @@ table .text-muted,
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
         color: #888888;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #ffffff;
         background-color: transparent;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a,
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
         color: #ffffff;
         background-color: transparent;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a,
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:focus {
@@ -1114,23 +1126,28 @@ fieldset[disabled] .navbar-default .btn-link:focus {
     .navbar-inverse .navbar-nav .open .dropdown-menu>.dropdown-header {
         border-color: #080808;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
         background-color: #080808;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
         color: #888888;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #ffffff;
         background-color: transparent;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:focus {
         color: #ffffff;
         background-color: transparent;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:focus {
@@ -1591,32 +1608,13 @@ a.thumbnail.active {
     transition: opacity 0.15s linear;
 }
 
-.fade.in {
-    opacity: 1;
-}
-
-
-/* -- Customizing Kendo -- */
-
-
-/* -- Customizing Kendo -- */
-
-
-/* -- Customizing Kendo -- */
-
-
-/* -- Customizing Kendo -- */
-
-
-/* -- Customizing Kendo -- */
-
-
 /* -- animations -- */
 
 @-webkit-keyframes progress-bar-stripes {
     from {
         background-position: 40px 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -1626,6 +1624,7 @@ a.thumbnail.active {
     from {
         background-position: 40px 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -1635,6 +1634,7 @@ a.thumbnail.active {
     from {
         background-position: 40px 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -1781,4 +1781,25 @@ legend {
 .breadcrumb a,
 .pager a {
     color: #fff;
+}
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus {
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
+}
+
+/* Login */
+.bg-login1 #container-first {
+    box-shadow: none;
 }

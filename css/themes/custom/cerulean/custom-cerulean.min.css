@@ -3,6 +3,7 @@
 /* -- Fonts -- */
 
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700");
+
 html {
     font-size: 10px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -608,6 +609,7 @@ a.bg-danger:focus {
         border-bottom: 1px solid #dddddd;
         border-radius: 4px 4px 0 0;
     }
+
     .nav-tabs-justified>.active>a,
     .nav-tabs-justified>.active>a:hover,
     .nav-tabs-justified>.active>a:focus {
@@ -689,6 +691,7 @@ a.bg-danger:focus {
         border-bottom: 1px solid #dddddd;
         border-radius: 4px 4px 0 0;
     }
+
     .nav-tabs.nav-justified>.active>a,
     .nav-tabs.nav-justified>.active>a:hover,
     .nav-tabs.nav-justified>.active>a:focus {
@@ -980,10 +983,16 @@ caption {
     color: #dddddd;
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #ffffff;
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #ffffff;
@@ -1033,17 +1042,20 @@ caption {
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
         color: #ffffff;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #ffffff;
         background-color: #178acc;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a,
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>.active>a:focus {
         color: #ffffff;
         background-color: #178acc;
     }
+
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a,
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu>.disabled>a:focus {
@@ -1148,23 +1160,28 @@ fieldset[disabled] .navbar-default .btn-link:focus {
     .navbar-inverse .navbar-nav .open .dropdown-menu>.dropdown-header {
         border-color: #022f5a;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
         background-color: #022f5a;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
         color: #ffffff;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus {
         color: #ffffff;
         background-color: #022f5a;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:focus {
         color: #ffffff;
         background-color: #022f5a;
     }
+
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:hover,
     .navbar-inverse .navbar-nav .open .dropdown-menu>.disabled>a:focus {
@@ -1242,6 +1259,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     .navbar .dropdown-header {
         color: #fff;
     }
+
     .navbar .dropdown-menu a {
         color: #fff;
     }
@@ -1906,6 +1924,7 @@ blockquote.pull-right {
     from {
         background-position: 40px 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -1915,6 +1934,7 @@ blockquote.pull-right {
     from {
         background-position: 40px 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -1924,6 +1944,7 @@ blockquote.pull-right {
     from {
         background-position: 40px 0;
     }
+
     to {
         background-position: 0 0;
     }
@@ -2370,4 +2391,21 @@ output {
 .panel-danger .panel-title,
 .panel-info .panel-title {
     color: #fff;
+}
+
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus{
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
 }

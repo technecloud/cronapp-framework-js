@@ -1442,10 +1442,16 @@ button.list-group-item-danger.active:focus {
     color: #ffffff;
 }
 
+#navbar-profile span,
+#navbar-3 .navbar-nav a,
 .navbar-default .navbar-nav>li>a {
     color: #ffffff;
 }
 
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus,
+.navbar-default .navbar-nav a:hover,
+.navbar-default .navbar-nav a:focus,
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
     color: #00bc8c;
@@ -2970,4 +2976,26 @@ a.list-group-item-danger.active:focus {
 
 .panel-default>.panel-heading {
     background-color: #464545;
+}
+
+
+/* Horizontal menu - 3 */
+#navbar-3 .navbar-nav a {
+    padding: 15px;
+    margin: 0;
+    text-decoration: none;
+}
+
+#navbar-3 .navbar-nav a:hover,
+#navbar-3 .navbar-nav a:focus{
+    text-decoration: none;
+}
+
+#navbar-3 .nav-button {
+    padding: 15px;
+}
+
+/* Login */
+.bg-login1 #container-first {
+    box-shadow: none;
 }
