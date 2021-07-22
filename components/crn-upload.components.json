@@ -4,7 +4,12 @@
   "text_en_US": "File Upload",
   "wrapper": false,
   "autoWrapper": true,
-  "class": "adjust-icon mdi mdi-cloud-upload",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-upload.svg",
+  "description": "Botão com estrutura para armazenar arquivo na fonte de dados",
+  "description_en_US": "Button with structure to store file in data source",
+  "category": [
+      "INPUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/fileupload.template.html",
   "styles": [
     {

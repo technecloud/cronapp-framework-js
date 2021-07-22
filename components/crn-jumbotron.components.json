@@ -2,7 +2,12 @@
   "name": "crn-jumbotron",
   "text_pt_BR": "Banner",
   "text_en_US": "Banner",
-  "class": "adjust-icon mdi mdi-page-layout-body",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-jumbotron.svg",
+  "description": "Estrutura com imagem de fundo, título e subtítulo",
+  "description_en_US": "Structure with background image, title and subtitle",
+  "category": [
+    "LAYOUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/banner.template.html",
   "wrapper": false,
   "styles": [

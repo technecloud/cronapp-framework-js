@@ -3,7 +3,7 @@
   "pallete": false,
   "text_pt_BR": "Caixa de seleção fixa",
   "text_en_US": "Fixed combobox",
-  "class": "adjust-icon mdi mdi-equal-box",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-combobox.svg",
   "order": 10,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/combobox.template.html",
   "styles": [

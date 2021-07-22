@@ -4,6 +4,11 @@
   "text_en_US": "Title",
   "wrapper": false,
   "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-text-component.svg",
+  "description": "Texto com letra grande",
+  "description_en_US": "Large font text",
+  "category": [
+    "TEXTS"
+  ],
   "order": 10,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamictitle.template.html",
   "properties": {

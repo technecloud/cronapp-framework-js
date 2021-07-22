@@ -4,7 +4,12 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Caixa de seleção múltipla",
   "text_en_US": "Combobox Multi Select",
-  "class": "adjust-icon mdi mdi-nutrition",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-combobox-multiple.svg",
+  "description": "Caixa de seleção para selecionar mais de um item",
+  "description_en_US": "Checkbox to select more than one item",
+  "category": [
+    "INPUTS"
+  ],
   "order": 9,
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-combobox-multiple.designtime.html",

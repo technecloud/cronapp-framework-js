@@ -2,9 +2,10 @@
   "name": "crn-menu-item",
   "text_pt_BR": "Item de menu",
   "text_en_US": "MenuItem",
-  "class": "cpn cpn-navbar",
+  "class": "adjust-icon mdi mdi-tab-unselected",
   "template": "",
   "pallete": false,
+  "forcedGroup": true,
   "handleRules": {
     "canToggle": true,
     "canIncrement": true,
@@ -22,15 +23,8 @@
       "name": "content",
       "selector": "a > span:first",
       "type": "content",
-      "displayName_pt_BR": "Conteúdo",
-      "displayName_en_US": "Content"
-    },
-    {
-      "name": "class",
-      "selector": "i",
-      "displayName_pt_BR": "Ícone",
-      "displayName_en_US": "Icon",
-      "type": "icon"
+      "displayName_pt_BR": "Título do item",
+      "displayName_en_US": "Item title"
     },
     {
       "name": "ng-click",

@@ -4,7 +4,6 @@
     "text_en_US": "list item",
     "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-list.svg",
     "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/crn-list-item.template.html",
-    "class": "adjust-icon mdi mdi-format-list-bulleted",
     "wrapper": true,
     "pallete": false,
     "properties": {
@@ -14,5 +13,8 @@
         "id": {
             "order": 2
         }
-    }
+    },
+    "styles": [],
+    "attributesForPreview": [],
+    "childrenProperties": []
 }

@@ -2,7 +2,12 @@
   "name": "crn-datepicker",
   "text_pt_BR": "Data",
   "text_en_US": "Date",
-  "class": "adjust-icon mdi mdi-calendar",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-datepicker.svg",
+  "description": "Campo para inserir data",
+  "description_en_US": "Field to insert date",
+  "category": [
+    "INPUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/date.template.html",
   "properties": {
     "class": {
