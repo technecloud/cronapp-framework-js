@@ -4,7 +4,12 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Barra de navegação",
   "text_en_US": "Navbar",
-  "class": "adjust-icon mdi mdi-tab",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-navbar.svg",
+  "description": "Menu com logo e botões de navegação",
+  "description_en_US": "Menu with logo and navigation buttons",
+  "category": [
+    "COMBOS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/navbar.template.html",
   "properties": {
     "class": {

@@ -2,7 +2,12 @@
   "name": "crn-grid",
   "text_pt_BR": "Tabela",
   "text_en_US": "Table",
-  "class": "adjust-icon mdi mdi-apps",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-grid-table.svg",
+  "description": "Tabela estilizada com cabeçalho e rodapé",
+  "description_en_US": "Stylized table with header and footer",
+  "category": [
+    "LAYOUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/grid.template.html",
   "properties": {
     "class": {

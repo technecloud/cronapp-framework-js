@@ -3,7 +3,12 @@
   "text_pt_BR": "Lista de opção",
   "text_en_US": "Radio Group",
   "forcedGroup": true,
-  "class": "adjust-icon mdi mdi-radiobox-marked",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-radiogroup.svg",
+  "description": "Caixa de seleção redonda com texto",
+  "description_en_US": "Round selection box with text",
+  "category": [
+    "LISTS"
+  ],
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/radiogroup.template.html",
   "styles": [

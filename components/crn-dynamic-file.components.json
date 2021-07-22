@@ -2,7 +2,12 @@
   "name": "crn-dynamic-file",
   "text_pt_BR": "Envio de Arquivo Dinâmico",
   "text_en_US": "Dynamic File Upload",
-  "class": "adjust-icon mdi mdi-cloud-upload",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-dynamic-file.svg",
+  "description": "Estrutura para armazenar arquivos na fonte de dados",
+  "description_en_US": "Structure for storing file in data source",
+  "category": [
+      "INPUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/dynamicfile.template.html",
   "styles": [
     {

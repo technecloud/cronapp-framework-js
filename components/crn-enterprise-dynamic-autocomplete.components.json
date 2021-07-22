@@ -4,7 +4,12 @@
   "onDoubleClick": "openEditor",
   "text_pt_BR": "Auto completar dinâmico",
   "text_en_US": "Dynamic Auto Complete",
-  "class": "adjust-icon mdi mdi-receipt",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-enterprise-dynamic-autocomplete.svg",
+  "description": "Campo que apresenta dados enquanto digita",
+  "description_en_US": "Field that displays data as you type",
+  "category": [
+    "INPUTS"
+  ],
   "designTimeDynamic": true,
   "designTimeHTMLURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/cron-autocomplete.designtime.html",
   "designTimeSelector": "cron-auto-complete",

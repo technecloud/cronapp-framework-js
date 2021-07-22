@@ -7,7 +7,9 @@
   "order": 1,
   "text_pt_BR": "Fonte de dados",
   "text_en_US": "Datasource",
-  "class": "adjust-icon mdi mdi-table-large",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-datasource.svg",
+  "description": "Estrutura que insere valores do banco de dados",
+  "description_en_US": "Database Value Insertion Structure",
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/datasource.template.html",
   "properties": {
     "name": {

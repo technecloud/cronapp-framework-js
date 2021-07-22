@@ -2,7 +2,12 @@
   "name": "crn-datetimepicker",
   "text_pt_BR": "Data e hora",
   "text_en_US": "DateTime",
-  "class": "adjust-icon mdi mdi-calendar-clock",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-datetimepicker.svg",
+  "description": "Campo para inserir data e hora",
+  "description_en_US": "Field to enter date and time",
+  "category": [
+    "INPUTS"
+  ],
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/datetime.template.html",
   "styles": [
     {
@@ -14,7 +19,7 @@
       "selector": "div#{id} input.form-control",
       "text_pt_BR": "Entrada de Dados",
       "text_en_US": "Input Style"
-    }
+    }   
   ],
   "properties": {
     "ng-model": {

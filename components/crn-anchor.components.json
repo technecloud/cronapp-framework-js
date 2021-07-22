@@ -2,7 +2,12 @@
   "name": "crn-anchor",
   "text_pt_BR": "Link",
   "text_en_US": "Link",
-  "class": "adjust-icon mdi mdi-link",
+  "image": "/node_modules/cronapp-framework-js/img/cron-icon/crn-anchor.svg",
+  "description": "Texto com vínculo a uma URL",
+  "description_en_US": "Text linked to a URL",
+  "category": [
+    "LAYOUTS"
+  ],
   "wrapper": false,
   "templateURL": "src/main/webapp/node_modules/cronapp-framework-js/dist/components/templates/anchor.template.html",
   "properties": {
